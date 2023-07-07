@@ -694,7 +694,7 @@ namespace Aig.Auditoria.Services
                                     tbl.Cell().AlignLeft().Text("orvdnfd@minsa.gob.pa");
 
                                     tbl.Cell().AlignLeft().Padding(3).Text("OR Chiriquí");
-                                    tbl.Cell().AlignLeft().Text("774-7410");
+                                    tbl.Cell().AlignLeft().Text("728-0154");
                                     tbl.Cell().AlignLeft().Text("fydchiriqui@minsa.gob.pa");
 
                                     tbl.Cell().AlignLeft().Text("OR Colón");
@@ -1776,7 +1776,7 @@ namespace Aig.Auditoria.Services
                                     tbl.Cell().AlignLeft().Text("orvdnfd@minsa.gob.pa");
 
                                     tbl.Cell().AlignLeft().Padding(3).Text("OR Chiriquí");
-                                    tbl.Cell().AlignLeft().Text("774-7410");
+                                    tbl.Cell().AlignLeft().Text("728-0154");
                                    tbl.Cell().AlignLeft().Text("fydchiriqui@minsa.gob.pa");
 
                                     tbl.Cell().AlignLeft().Text("OR Colón");
@@ -2535,7 +2535,7 @@ namespace Aig.Auditoria.Services
                                     tbl.Cell().AlignLeft().Text("orvdnfd@minsa.gob.pa");
 
                                     tbl.Cell().AlignLeft().Padding(3).Text("OR Chiriquí");
-                                    tbl.Cell().AlignLeft().Text("774-7410");
+                                    tbl.Cell().AlignLeft().Text("728-0154");
                                    tbl.Cell().AlignLeft().Text("fydchiriqui@minsa.gob.pa");
 
                                     tbl.Cell().AlignLeft().Text("OR Colón");
@@ -3699,7 +3699,7 @@ namespace Aig.Auditoria.Services
                                     tbl.Cell().AlignLeft().Text("orvdnfd@minsa.gob.pa");
 
                                     tbl.Cell().AlignLeft().Padding(3).Text("OR Chiriquí");
-                                    tbl.Cell().AlignLeft().Text("774-7410");
+                                    tbl.Cell().AlignLeft().Text("728-0154");
                                    tbl.Cell().AlignLeft().Text("fydchiriqui@minsa.gob.pa");
 
                                     tbl.Cell().AlignLeft().Text("OR Colón");
@@ -4056,7 +4056,7 @@ namespace Aig.Auditoria.Services
                                     tbl.Cell().AlignLeft().Text("orvdnfd@minsa.gob.pa");
 
                                     tbl.Cell().AlignLeft().Padding(3).Text("OR Chiriquí");
-                                    tbl.Cell().AlignLeft().Text("774-7410");
+                                    tbl.Cell().AlignLeft().Text("728-0154");
                                    tbl.Cell().AlignLeft().Text("fydchiriqui@minsa.gob.pa");
 
                                     tbl.Cell().AlignLeft().Text("OR Colón");
@@ -4364,7 +4364,7 @@ namespace Aig.Auditoria.Services
                                     tbl.Cell().AlignLeft().Text("orvdnfd@minsa.gob.pa");
 
                                     tbl.Cell().AlignLeft().Padding(3).Text("OR Chiriquí");
-                                    tbl.Cell().AlignLeft().Text("774-7410");
+                                    tbl.Cell().AlignLeft().Text("728-0154");
                                    tbl.Cell().AlignLeft().Text("fydchiriqui@minsa.gob.pa");
 
                                     tbl.Cell().AlignLeft().Text("OR Colón");
@@ -4606,7 +4606,7 @@ namespace Aig.Auditoria.Services
                                     tbl.Cell().AlignLeft().Text("orvdnfd@minsa.gob.pa");
 
                                     tbl.Cell().AlignLeft().Padding(3).Text("OR Chiriquí");
-                                    tbl.Cell().AlignLeft().Text("774-7410");
+                                    tbl.Cell().AlignLeft().Text("728-0154");
                                    tbl.Cell().AlignLeft().Text("fydchiriqui@minsa.gob.pa");
 
                                     tbl.Cell().AlignLeft().Text("OR Colón");
@@ -4718,7 +4718,7 @@ namespace Aig.Auditoria.Services
                             column.Item().AlignLeft().Text(string.Format("Actuando como colaboradores de la Dirección Nacional de Farmacia y Drogas del Ministerio de Salud, nos apersonamos al establecimiento denominado: {0}, ubicado en: {1}. \r\nCon la finalidad de realizar:", inspection.DatosEstablecimiento?.Nombre, inspection.DatosEstablecimiento?.Direccion));
                             column.Item().AlignLeft().Text(string.Format("Tipo de Inspección: {0}", DataModel.Helper.Helper.GetDescription(inspection?.InspDisposicionFinal?.DatosInspeccion?.TipoInspeccion ?? enum_TipoInspeccionDispFinal.VerifInventario)));
                             column.Item().AlignLeft().Text(string.Format("Tipo de Producto: {0}", DataModel.Helper.Helper.GetDescription(inspection?.InspDisposicionFinal?.DatosInspeccion?.TipoProduct ?? enum_TipoProductDispFinal.Controlado)));
-                            //column.Item().AlignLeft().Text(string.Format("Tipo de Verificación: {0}", DataModel.Helper.Helper.GetDescription(inspection?.InspDisposicionFinal?.DatosInspeccion?.TipoVerificacion ?? enum_TipoVerificacionDispFinal.NA)));
+                            column.Item().AlignLeft().Text(string.Format("Tipo de Verificación: {0}", DataModel.Helper.Helper.GetDescription(inspection?.InspDisposicionFinal?.DatosInspeccion?.TipoVerificacion ?? enum_TipoVerificacionDispFinal.NA)));
                             column.Item().AlignLeft().Text(string.Format("Disposición final solicitado por: {0}", inspection?.InspDisposicionFinal?.DatosInspeccion?.SolicitudCierre));
                             column.Item().AlignLeft().Text(string.Format("N° de nota de SDGSA: {0}", inspection?.InspDisposicionFinal?.DatosInspeccion?.NumNotaSDGSA));
 
@@ -4727,7 +4727,7 @@ namespace Aig.Auditoria.Services
                             column.Item().AlignLeft().Text(string.Format("La solicitud corresponde al expediente con recibo de pago N°: {0}", inspection?.InspDisposicionFinal?.DatosInspeccion?.NumReciboPago));
                             column.Item().AlignLeft().Text(string.Format("El peso de los productos a destruir es: {0} (Kg)", inspection?.InspDisposicionFinal?.DatosInspeccion?.PesoDestruir));
                             column.Item().AlignLeft().Text(string.Format("Adjunto lista de productos: {0}", inspection.InspDisposicionFinal.DatosInspeccion.Adjunta ? "Si" : "No"));
-                            column.Item().AlignLeft().Text(string.Format("Total: {0} cajas/tarimas/bultos", inspection?.InspDisposicionFinal?.DatosInspeccion?.Total));
+                            column.Item().AlignLeft().Text(string.Format("Total de cajas/tarimas/bultos: {0}", inspection?.InspDisposicionFinal?.DatosInspeccion?.Total));
 
                             column.Item().PaddingVertical(5).AlignCenter().Padding(3).Text(string.Format("Lista de Productos".ToUpper())).Bold();
 
@@ -4877,7 +4877,7 @@ namespace Aig.Auditoria.Services
                                     tbl.Cell().AlignLeft().Text("orvdnfd@minsa.gob.pa");
 
                                     tbl.Cell().AlignLeft().Padding(3).Text("OR Chiriquí");
-                                    tbl.Cell().AlignLeft().Text("774-7410");
+                                    tbl.Cell().AlignLeft().Text("728-0154");
                                    tbl.Cell().AlignLeft().Text("fydchiriqui@minsa.gob.pa");
 
                                     tbl.Cell().AlignLeft().Text("OR Colón");
@@ -5628,7 +5628,7 @@ namespace Aig.Auditoria.Services
                                     tbl.Cell().AlignLeft().Text("orvdnfd@minsa.gob.pa");
 
                                     tbl.Cell().AlignLeft().Padding(3).Text("OR Chiriquí");
-                                    tbl.Cell().AlignLeft().Text("774-7410");
+                                    tbl.Cell().AlignLeft().Text("728-0154");
                                    tbl.Cell().AlignLeft().Text("fydchiriqui@minsa.gob.pa");
 
                                     tbl.Cell().AlignLeft().Text("OR Colón");
@@ -6417,7 +6417,7 @@ namespace Aig.Auditoria.Services
                                     tbl.Cell().AlignLeft().Text("orvdnfd@minsa.gob.pa");
 
                                     tbl.Cell().AlignLeft().Padding(3).Text("OR Chiriquí");
-                                    tbl.Cell().AlignLeft().Text("774-7410");
+                                    tbl.Cell().AlignLeft().Text("728-0154");
                                    tbl.Cell().AlignLeft().Text("fydchiriqui@minsa.gob.pa");
 
                                     tbl.Cell().AlignLeft().Text("OR Colón");
@@ -8395,7 +8395,7 @@ namespace Aig.Auditoria.Services
                                     tbl.Cell().AlignLeft().Text("orvdnfd@minsa.gob.pa");
 
                                     tbl.Cell().AlignLeft().Padding(3).Text("OR Chiriquí");
-                                    tbl.Cell().AlignLeft().Text("774-7410");
+                                    tbl.Cell().AlignLeft().Text("728-0154");
                                    tbl.Cell().AlignLeft().Text("fydchiriqui@minsa.gob.pa");
 
                                     tbl.Cell().AlignLeft().Text("OR Colón");
@@ -9626,7 +9626,7 @@ namespace Aig.Auditoria.Services
                                     tbl.Cell().AlignLeft().Text("orvdnfd@minsa.gob.pa");
 
                                     tbl.Cell().AlignLeft().Padding(3).Text("OR Chiriquí");
-                                    tbl.Cell().AlignLeft().Text("774-7410");
+                                    tbl.Cell().AlignLeft().Text("728-0154");
                                    tbl.Cell().AlignLeft().Text("fydchiriqui@minsa.gob.pa");
 
                                     tbl.Cell().AlignLeft().Text("OR Colón");
@@ -12316,7 +12316,7 @@ namespace Aig.Auditoria.Services
                                     tbl.Cell().AlignLeft().Text("orvdnfd@minsa.gob.pa");
 
                                     tbl.Cell().AlignLeft().Padding(3).Text("OR Chiriquí");
-                                    tbl.Cell().AlignLeft().Text("774-7410");
+                                    tbl.Cell().AlignLeft().Text("728-0154");
                                    tbl.Cell().AlignLeft().Text("fydchiriqui@minsa.gob.pa");
 
                                     tbl.Cell().AlignLeft().Text("OR Colón");
@@ -15059,7 +15059,7 @@ namespace Aig.Auditoria.Services
                                     tbl.Cell().AlignLeft().Text("orvdnfd@minsa.gob.pa");
 
                                     tbl.Cell().AlignLeft().Padding(3).Text("OR Chiriquí");
-                                    tbl.Cell().AlignLeft().Text("774-7410");
+                                    tbl.Cell().AlignLeft().Text("728-0154");
                                    tbl.Cell().AlignLeft().Text("fydchiriqui@minsa.gob.pa");
 
                                     tbl.Cell().AlignLeft().Text("OR Colón");
@@ -15715,7 +15715,7 @@ namespace Aig.Auditoria.Services
                                     tbl.Cell().AlignLeft().Text("orvdnfd@minsa.gob.pa");
 
                                     tbl.Cell().AlignLeft().Padding(3).Text("OR Chiriquí");
-                                    tbl.Cell().AlignLeft().Text("774-7410");
+                                    tbl.Cell().AlignLeft().Text("728-0154");
                                    tbl.Cell().AlignLeft().Text("fydchiriqui@minsa.gob.pa");
 
                                     tbl.Cell().AlignLeft().Text("OR Colón");
@@ -16087,7 +16087,7 @@ namespace Aig.Auditoria.Services
                                     tbl.Cell().AlignLeft().Text("orvdnfd@minsa.gob.pa");
 
                                     tbl.Cell().AlignLeft().Padding(3).Text("OR Chiriquí");
-                                    tbl.Cell().AlignLeft().Text("774-7410");
+                                    tbl.Cell().AlignLeft().Text("728-0154");
                                     tbl.Cell().AlignLeft().Text("fydchiriqui@minsa.gob.pa");
 
                                     tbl.Cell().AlignLeft().Text("OR Colón");
@@ -16526,7 +16526,7 @@ namespace Aig.Auditoria.Services
                                     tbl.Cell().AlignLeft().Text("orvdnfd@minsa.gob.pa");
 
                                     tbl.Cell().AlignLeft().Padding(3).Text("OR Chiriquí");
-                                    tbl.Cell().AlignLeft().Text("774-7410");
+                                    tbl.Cell().AlignLeft().Text("728-0154");
                                     tbl.Cell().AlignLeft().Text("fydchiriqui@minsa.gob.pa");
 
                                     tbl.Cell().AlignLeft().Text("OR Colón");
@@ -16712,7 +16712,7 @@ namespace Aig.Auditoria.Services
                             tbl.Cell().AlignLeft().Text("orvdnfd@minsa.gob.pa");
 
                             tbl.Cell().AlignLeft().Text("orvdnfd@minsa.gob.pa");
-                            tbl.Cell().AlignLeft().Text("774-7410");
+                            tbl.Cell().AlignLeft().Text("728-0154");
                             tbl.Cell().AlignLeft().Text("fydchiriqui@minsa.gob.pa");
 
                             tbl.Cell().AlignLeft().Text("OR Colón");

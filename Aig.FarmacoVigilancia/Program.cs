@@ -113,6 +113,7 @@ builder.Services.AddBlazorDownloadFile(ServiceLifetime.Scoped);
 //Dependency Injection
 builder.Services.AddBlazoredLocalStorage();
 builder.Services.AddScoped<IDalService, DalService>();
+builder.Services.AddScoped<IEmailService, EmailService>();
 builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<ISystemUserService, SystemUserService>();
 builder.Services.AddScoped<IProfileService, ProfileService>();
@@ -121,7 +122,6 @@ builder.Services.AddScoped<IDistrictService, DistrictService>();
 builder.Services.AddScoped<IProvicesService, ProvicesService>();
 builder.Services.AddScoped<ICountriesService, CountriesService>();
 builder.Services.AddScoped<ISmtpCorreoService, SmtpCorreoService>();
-builder.Services.AddScoped<IEmailService, EmailService>();
 builder.Services.AddScoped<IAttachmentsService, AttachmentsService>();
 builder.Services.AddScoped<IPdfGenerationService, PdfGenerationService>();
 builder.Services.AddScoped<IWorkerPersonService, WorkerPersonService>();

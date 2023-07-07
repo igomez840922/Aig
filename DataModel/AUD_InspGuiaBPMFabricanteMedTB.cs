@@ -336,6 +336,7 @@ namespace DataModel
                         Titulo = "Tienen aprobadas por parte de la autoridad reguladora las condiciones para las siguientes áreas de producción:".ToUpper(),
                         Criterio = "Informativo",
                          LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
+                         IsHeader=true
                     },
                     new ContenidoPreguntas()
                     {

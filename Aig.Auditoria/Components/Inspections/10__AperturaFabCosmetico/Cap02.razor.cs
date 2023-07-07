@@ -29,11 +29,15 @@ namespace Aig.Auditoria.Components.Inspections._10__AperturaFabCosmetico
 
        
 
+        bool disabledBtns { get; set; }
         protected async override Task OnInitializedAsync()
         {
             timer.Elapsed += (sender, eventArgs) => {
                 _ = InvokeAsync(() =>
                 {
+                    if (disabledBtns)
+                        return;
+
                     SaveData();
                 });
             };
@@ -82,6 +86,14 @@ namespace Aig.Auditoria.Components.Inspections._10__AperturaFabCosmetico
             Inspeccion = await inspeccionService.Get(Id);
             if (Inspeccion != null)
             {
+                switch (Inspeccion.StatusInspecciones)
+                {
+                    case enum_StatusInspecciones.Completed:
+                        {
+                            disabledBtns = true;
+                            break;
+                        }
+                }
                 editContext = editContext != null ? editContext : new(Inspeccion);
 
                 Inspeccion.InspAperFabricanteCosmetMed.DatosRepresentLegal = Inspeccion.InspAperFabricanteCosmetMed.DatosRepresentLegal != null ? Inspeccion.InspAperFabricanteCosmetMed.DatosRepresentLegal : new AUD_DatosRepresentLegal();

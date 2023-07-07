@@ -212,10 +212,10 @@ namespace Aig.FarmacoVigilancia.Services
                         foreach (var attch in data.Adjunto.LAttachments)
                         {
                             FileInfo fi = new FileInfo(attch.AbsolutePath);
-                            var stream = await pdfGenerationService.GetStreamsFromFile(attch.AbsolutePath);
-                            if (stream != null)
+                            var byteArr = await pdfGenerationService.GetByteArrayFromFile(attch.AbsolutePath);
+                            if (byteArr != null)
                             {
-                                builder.Attachments.Add(fi.Name, stream);
+                                builder.Attachments.Add(fi.Name, byteArr);
                             }
                         }
                     }

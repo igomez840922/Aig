@@ -118,6 +118,13 @@ namespace DataAccess.Migrations
                     b.Property<int>("UserRoleType")
                         .HasColumnType("int");
 
+                    b.Property<DateTime?>("pinDateValid")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("pinNum")
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)");
+
                     b.HasKey("Id");
 
                     b.HasIndex("NormalizedEmail")

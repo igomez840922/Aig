@@ -290,3 +290,9 @@ Export: Export
 EmailSentSuccessfully: Email has been Sent Sucessfully
 EmailSentError: Email could not be Sent
 SaveExit: Save and Exit
+Back: Back
+SendPin: Send Pin
+PINNumber: PIN Number
+Submit: Submit
+#NewPassword: New Password
+#ConfirmPassword: Confirm Password

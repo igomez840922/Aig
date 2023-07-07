@@ -203,7 +203,7 @@ namespace Aig.Auditoria.Pages.Inspections
             try
             {
                 var data = await inspeccionService.Get(Id);
-                if (data != null && !string.IsNullOrEmpty(data.ParticEstablecimientoEmail))
+                if (!string.IsNullOrEmpty(data?.DatosEstablecimiento?.Correo))
                 {
                     var subject = data.NumActa + " - " + DataModel.Helper.Helper.GetDescription(data.TipoActa);
 
@@ -216,7 +216,7 @@ namespace Aig.Auditoria.Pages.Inspections
                     {
                         builder.Attachments.Add("inspeccion.pdf", stream);
                     }
-                    await emailService.SendEmailAsync(data.ParticEstablecimientoEmail, subject, builder);
+                    await emailService.SendEmailAsync(data.DatosEstablecimiento.Correo, subject, builder);
                 }
 
             }

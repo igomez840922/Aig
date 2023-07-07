@@ -61,7 +61,7 @@ namespace Aig.Auditoria.Components.RetiredProduct
         {
             if (lPaises == null || lPaises.Count < 1)
             {
-                lPaises = await countriesService.GetAll();
+                lPaises = (await countriesService.GetAll()).OrderBy(x=>x.Nombre).ToList();
             }
 
             Product = Product!=null? Product:new AUD_ProdRetiroRetencionTB();

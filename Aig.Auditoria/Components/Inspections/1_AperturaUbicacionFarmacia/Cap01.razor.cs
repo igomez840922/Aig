@@ -44,11 +44,15 @@ namespace Aig.Auditoria.Components.Inspections._1_AperturaUbicacionFarmacia
         List<DistritoTB> LDistritos { get; set; }
         List<CorregimientoTB> LCorregimiento { get; set; }
 
+        bool disabledBtns { get; set; }
         protected async override Task OnInitializedAsync()
-        {            
+        {
             timer.Elapsed += (sender, eventArgs) => {
                 _ = InvokeAsync(() =>
                 {
+                    if (disabledBtns)
+                        return;
+
                     SaveData();
                 });
             };
@@ -99,9 +103,17 @@ namespace Aig.Auditoria.Components.Inspections._1_AperturaUbicacionFarmacia
 
             Inspeccion = await inspeccionService.Get(Id);
             if (Inspeccion != null)
-            {
-                editContext = editContext!=null? editContext: new(Inspeccion);
+            {                
+                switch (Inspeccion.StatusInspecciones)
+                {
+                    case enum_StatusInspecciones.Completed:
+                        {
+                            disabledBtns = true;
+                            break;
+                        }
+                }
 
+                editContext = editContext!=null? editContext: new(Inspeccion);
             }
             else { Cancel(); }
             
@@ -112,7 +124,7 @@ namespace Aig.Auditoria.Components.Inspections._1_AperturaUbicacionFarmacia
         protected async Task SaveData()
         {
             try
-            {
+            {                
                 var result = await inspeccionService.Save_GeneralData(Inspeccion);
                 if (result != null)
                 {

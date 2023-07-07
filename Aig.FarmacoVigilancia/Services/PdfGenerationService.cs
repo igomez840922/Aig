@@ -572,6 +572,20 @@ namespace Aig.FarmacoVigilancia.Services
             return null;
         }
 
+        public async Task<byte[]> GetByteArrayFromFile(string filePath)
+        {
+            try
+            {
+                if (File.Exists(filePath))
+                {
+                    byte[] fileBytes = File.ReadAllBytes(filePath);
+                    return fileBytes;
+                }
+            }
+            catch { }
+            return null;
+        }
+
     }
 
 }

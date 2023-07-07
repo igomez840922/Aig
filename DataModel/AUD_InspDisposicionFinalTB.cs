@@ -64,8 +64,8 @@ namespace DataModel
         public decimal PesoDestruir { get => pesoDestruir; set => SetProperty(ref pesoDestruir, value); }
 
         //Total de cajas/tarimas/bultos a destruir: 
-        private int total;
-        public int Total { get => total; set => SetProperty(ref total, value); }
+        private string total;
+        public string Total { get => total; set => SetProperty(ref total, value); }
 
         //existencia fisica coincide con el registro en la lista que adjuntó el establecimiento a la solicitud. 
         private bool coincide;

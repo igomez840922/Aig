@@ -135,7 +135,7 @@ namespace DataModel
                     {
                         Titulo = "De la autorización de funcionamiento",
                         IsHeader = true,
-                        Articulo="6.1",
+                        Capitulo="6.1",
                      },new ContenidoPreguntas()
                         {
                             Titulo = "El laboratorio Acondicionador posee permiso sanitario de funcionamiento o licencia sanitaria, autorizada por la autoridad reguladora del país.",
@@ -3876,7 +3876,7 @@ namespace DataModel
                     },
                     new ContenidoPreguntas()
                     {
-                        Titulo = "a) Revisión general de los envases",
+                        Titulo = "a) Revisión general de los envases. Si aplica.",
                         Criterio = "MAYOR",
 
 

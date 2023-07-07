@@ -31,11 +31,15 @@ namespace Aig.Auditoria.Components.Inspections._3_RutinaVigilanciaFarmacia
         DataModel.AUD_InvProducto producto { get; set; } = null;
 
 
+        bool disabledBtns { get; set; }
         protected async override Task OnInitializedAsync()
         {
             timer.Elapsed += (sender, eventArgs) => {
                 _ = InvokeAsync(() =>
                 {
+                    if (disabledBtns)
+                        return;
+
                     SaveData();
                 });
             };
@@ -83,8 +87,16 @@ namespace Aig.Auditoria.Components.Inspections._3_RutinaVigilanciaFarmacia
             try
             {
                 Inspeccion = await inspeccionService.Get(Id);
-                if (Inspeccion != null)
+            if (Inspeccion != null)
+            {
+                switch (Inspeccion.StatusInspecciones)
                 {
+                    case enum_StatusInspecciones.Completed:
+                        {
+                            disabledBtns = true;
+                            break;
+                        }
+                }
                     editContext = editContext != null ? editContext : new(Inspeccion);
 
                     if (Inspeccion.InspRutinaVigFarmacia.InventarioMedicamento == null)

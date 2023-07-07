@@ -3000,7 +3000,7 @@ namespace DataModel
                 Criterio = "",
                 Articulo="",
                 PuntosMax = 0,
-                LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
+                LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion() { HideEvaluacion = true } }
                 },
                   new ContenidoPreguntas()
                 {
@@ -3008,7 +3008,7 @@ namespace DataModel
                 Criterio = "",
                 Articulo="",
                 PuntosMax = 0,
-                LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
+                LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion() { HideEvaluacion=true} }
                 },
                     new ContenidoPreguntas()
                 {
@@ -3236,7 +3236,7 @@ namespace DataModel
                 Criterio = "",
                 Articulo="",
                 PuntosMax = 0,
-                LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
+                LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion() { HideEvaluacion=true} }
                 },
                 new ContenidoPreguntas()
                 {

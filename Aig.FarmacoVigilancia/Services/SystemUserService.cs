@@ -163,7 +163,17 @@ namespace Aig.FarmacoVigilancia.Services
             return result;
         }
 
-        public async Task<IdentityResult> Save(DataModel.Models.RegisterModel data)
+		public async Task<ApplicationUser> GetUser(string name)
+		{
+			var result = DalService.DBContext.Set<ApplicationUser>().Where(x => x.UserName == name).FirstOrDefault();
+            if (result == null)
+            {
+                result = DalService.DBContext.Set<ApplicationUser>().Where(x => x.Email == name).FirstOrDefault();
+            }
+			return result;
+		}
+
+		public async Task<IdentityResult> Save(DataModel.Models.RegisterModel data)
         {
             //data.UserRoleType = enumUserRoleType.Admin;
             data.UserName = data.UserName;
@@ -237,7 +247,35 @@ namespace Aig.FarmacoVigilancia.Services
             return null;
         }
 
-        public async Task<bool> SetUserLanguaje(string id, string languaje)
+		public async Task<ApiResponse> ChangePswPIN(ChangePswPinModel data)
+		{
+			var user = await GetUser(data.UserName);
+			if (user != null)
+			{
+                if(string.Compare(user.pinNum, data.PinNumber,true) != 0)
+                {
+					return new ApiResponse() { Result = false, Message = "Número PIN inválido" };
+				}
+
+				if (user.pinDateValid< DateTime.Now)
+				{
+					return new ApiResponse() { Result = false, Message = "El número PIN ha caducado" };
+				}
+
+				await UserManager.RemovePasswordAsync(user);
+
+				var response = await UserManager.AddPasswordAsync(user, data.Password);
+                if(response.Succeeded)
+                {
+					return new ApiResponse() { Result = true, Message = "contraseña actualizada satisfactoriamente" };
+
+				}
+			}
+
+			return new ApiResponse() { Result=false, Message="error al cambiar su contraseña" };
+		}
+
+		public async Task<bool> SetUserLanguaje(string id, string languaje)
         {
             var result = DalService.DBContext.Set<ApplicationUser>().Find(id);
             if (result != null)

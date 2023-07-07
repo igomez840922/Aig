@@ -8,6 +8,7 @@ namespace DataAccess.Migrations
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            /*
             migrationBuilder.DropForeignKey(
                 name: "FK_FMV_Ram2_Provincia_ProvinciaTBId",
                 table: "FMV_Ram2");
@@ -58,10 +59,12 @@ namespace DataAccess.Migrations
                 name: "IX_FMV_Ram2_TipoInstitucionId",
                 table: "FMV_Ram2",
                 column: "TipoInstitucionId");
+            */
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            /*
             migrationBuilder.DropIndex(
                 name: "IX_FMV_Ram2_InstitucionId",
                 table: "FMV_Ram2");
@@ -130,6 +133,7 @@ namespace DataAccess.Migrations
                 column: "TipoInstitucionTBId",
                 principalTable: "TipoInstitucion",
                 principalColumn: "Id");
+            */
         }
     }
 }

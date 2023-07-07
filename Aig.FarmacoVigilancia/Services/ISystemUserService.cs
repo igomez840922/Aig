@@ -18,10 +18,14 @@ namespace Aig.FarmacoVigilancia.Services
         Task<List<ApplicationUser>> GetAll();
         Task<ApplicationUser> Get(string id);
         Task<ApplicationUser> GetByName(string name);
-        Task<IdentityResult> Save(DataModel.Models.RegisterModel data);
+        Task<ApplicationUser> GetUser(string name);
+
+		Task<IdentityResult> Save(DataModel.Models.RegisterModel data);
         Task<IdentityResult> Update(ApplicationUser data);
         Task<IdentityResult> Delete(string id);
         Task<IdentityResult> ChangePsw(ChangePswModel data);
         Task<bool> SetUserLanguaje(string id, string languaje);
-    }
+        Task<ApiResponse> ChangePswPIN(ChangePswPinModel data);
+
+	}
 }

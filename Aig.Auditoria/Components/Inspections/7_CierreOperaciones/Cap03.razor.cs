@@ -32,11 +32,15 @@ namespace Aig.Auditoria.Components.Inspections._7_CierreOperaciones
         List<PaisTB> LPaises { get; set; }
 
 
+        bool disabledBtns { get; set; }
         protected async override Task OnInitializedAsync()
         {
             timer.Elapsed += (sender, eventArgs) => {
                 _ = InvokeAsync(() =>
                 {
+                    if (disabledBtns)
+                        return;
+
                     SaveData();
                 });
             };
@@ -86,6 +90,14 @@ namespace Aig.Auditoria.Components.Inspections._7_CierreOperaciones
             Inspeccion = await inspeccionService.Get(Id);
             if (Inspeccion != null)
             {
+                switch (Inspeccion.StatusInspecciones)
+                {
+                    case enum_StatusInspecciones.Completed:
+                        {
+                            disabledBtns = true;
+                            break;
+                        }
+                }
                 editContext = editContext != null ? editContext : new(Inspeccion);
 
                 Inspeccion.InspCierreOperacion.DatosInspeccion = Inspeccion.InspCierreOperacion.DatosInspeccion != null ? Inspeccion.InspCierreOperacion.DatosInspeccion : new AUD_DatosInspeccion();

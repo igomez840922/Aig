@@ -32,11 +32,15 @@ namespace Aig.Auditoria.Components.Inspections._8_DisposicionFinal
         bool showProducts { get; set; } = false;
         AUD_InvProducto product { get; set; } = null;
 
+        bool disabledBtns { get; set; }
         protected async override Task OnInitializedAsync()
         {
             timer.Elapsed += (sender, eventArgs) => {
                 _ = InvokeAsync(() =>
                 {
+                    if (disabledBtns)
+                        return;
+
                     SaveData();
                 });
             };
@@ -85,6 +89,14 @@ namespace Aig.Auditoria.Components.Inspections._8_DisposicionFinal
             Inspeccion = await inspeccionService.Get(Id);
             if (Inspeccion != null)
             {
+                switch (Inspeccion.StatusInspecciones)
+                {
+                    case enum_StatusInspecciones.Completed:
+                        {
+                            disabledBtns = true;
+                            break;
+                        }
+                }
                 editContext = editContext != null ? editContext : new(Inspeccion);
 
                 Inspeccion.InspDisposicionFinal.InventarioMedicamento = Inspeccion.InspDisposicionFinal.InventarioMedicamento != null ? Inspeccion.InspDisposicionFinal.InventarioMedicamento : new AUD_InventarioMedicamento();

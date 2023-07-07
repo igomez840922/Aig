@@ -28,11 +28,15 @@ namespace Aig.Auditoria.Components.Inspections._11_BpmFabMedicamentos
         bool exit { get; set; } = false;
 
 
+        bool disabledBtns { get; set; }
         protected async override Task OnInitializedAsync()
         {
             timer.Elapsed += (sender, eventArgs) => {
                 _ = InvokeAsync(() =>
                 {
+                    if (disabledBtns)
+                        return;
+
                     SaveData();
                 });
             };
@@ -80,6 +84,14 @@ namespace Aig.Auditoria.Components.Inspections._11_BpmFabMedicamentos
             Inspeccion = await inspeccionService.Get(Id);
             if (Inspeccion != null)
             {
+                switch (Inspeccion.StatusInspecciones)
+                {
+                    case enum_StatusInspecciones.Completed:
+                        {
+                            disabledBtns = true;
+                            break;
+                        }
+                }
                 editContext = editContext != null ? editContext : new(Inspeccion);
 
                 Inspeccion.InspGuiaBPMFabricanteMed.DatosRegente = Inspeccion.InspGuiaBPMFabricanteMed.DatosRegente != null ? Inspeccion.InspGuiaBPMFabricanteMed.DatosRegente : new DataModel.DatosPersona(); 

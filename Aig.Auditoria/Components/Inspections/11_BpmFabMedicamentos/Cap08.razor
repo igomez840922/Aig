@@ -107,19 +107,18 @@
                                                                                         
                                             <br><br>
                                             <div class="kt-portlet__foot" style="text-align:right;">
-                                                <div class="kt-form__actions">
-                                                    
-                                                    <button type="submit" @onclick="(e)=>{exit=true;}"
-                                                        class="btn btn-success waves-effect">
-                                                        @languageContainerService.Keys["SaveExit"]
-                                                    </button>
+                                                <div class="kt-form__actions">@if (!disabledBtns)
+                                                    {
+                                                        <button type="submit" @onclick="(e)=>{exit=true;}"
+                                                                class="btn btn-success waves-effect">
+                                                            @languageContainerService.Keys["SaveExit"]
+                                                        </button>
 
-                                                    <button type="submit"
-                                                            class="btn btn-info waves-effect">
-                                                        @languageContainerService.Keys["Save"]
-                                                    </button>
-
-                                                    <button type="button" class="btn btn-danger waves-effect"
+                                                        <button type="submit"
+                                                                class="btn btn-info waves-effect">
+                                                            @languageContainerService.Keys["Save"]
+                                                        </button>                                                        
+                                                    }<button type="button" class="btn btn-danger waves-effect"
                                                     @onclick="(e)=>{Cancel();}">
                                                         @languageContainerService.Keys["Cerrar"]
                                                     </button>

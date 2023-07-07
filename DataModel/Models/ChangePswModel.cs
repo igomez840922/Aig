@@ -21,8 +21,7 @@ namespace DataModel.Models
         //    get { return userName; }
         //    set { userName = value; }
         //}
-
-
+                
         [System.ComponentModel.DataAnnotations.Schema.NotMapped]
         [Required(ErrorMessage = "requerido")]
         public string Password { get; set; }

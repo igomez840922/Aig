@@ -30,11 +30,15 @@ namespace Aig.Auditoria.Components.Inspections._12_BpmAcondMedicamentos
         bool showPersona { get; set; } = false;
         DataModel.DatosPersona datosPersona { get; set; } = null;
 
+        bool disabledBtns { get; set; }
         protected async override Task OnInitializedAsync()
         {
             timer.Elapsed += (sender, eventArgs) => {
                 _ = InvokeAsync(() =>
                 {
+                    if (disabledBtns)
+                        return;
+
                     SaveData();
                 });
             };
@@ -82,6 +86,14 @@ namespace Aig.Auditoria.Components.Inspections._12_BpmAcondMedicamentos
             Inspeccion = await inspeccionService.Get(Id);
             if (Inspeccion != null)
             {
+                switch (Inspeccion.StatusInspecciones)
+                {
+                    case enum_StatusInspecciones.Completed:
+                        {
+                            disabledBtns = true;
+                            break;
+                        }
+                }
                 editContext = editContext != null ? editContext : new(Inspeccion);
 
                 Inspeccion.InspGuiaBPMLabAcondicionador.OtrosFuncionarios = Inspeccion.InspGuiaBPMLabAcondicionador.OtrosFuncionarios != null ? Inspeccion.InspGuiaBPMLabAcondicionador.OtrosFuncionarios : new AUD_OtrosFuncionarios();

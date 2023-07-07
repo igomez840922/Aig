@@ -35,11 +35,15 @@ namespace Aig.Auditoria.Components.Inspections._1_AperturaUbicacionFarmacia
         List<PaisTB> LPaises { get; set; }
 
 
+        bool disabledBtns { get; set; }
         protected async override Task OnInitializedAsync()
         {
             timer.Elapsed += (sender, eventArgs) => {
                 _ = InvokeAsync(() =>
                 {
+                    if (disabledBtns)
+                        return;
+
                     SaveData();
                 });
             };
@@ -88,7 +92,15 @@ namespace Aig.Auditoria.Components.Inspections._1_AperturaUbicacionFarmacia
 
             Inspeccion = await inspeccionService.Get(Id);
             if (Inspeccion != null)
-            {
+            {               
+                switch (Inspeccion.StatusInspecciones)
+                {
+                    case enum_StatusInspecciones.Completed:
+                        {
+                            disabledBtns = true;
+                            break;
+                        }
+                }
                 editContext = editContext != null ? editContext : new(Inspeccion);
 
                 if(Inspeccion.InspAperCambUbicFarm.DatosEstructuraOrganizacional == null)

@@ -44,11 +44,15 @@ namespace Aig.Auditoria.Components.Inspections._17_AperturaUbicacionBotiquin
         List<DistritoTB> LDistritos { get; set; }
         List<CorregimientoTB> LCorregimiento { get; set; }
 
+        bool disabledBtns { get; set; }
         protected async override Task OnInitializedAsync()
-        {            
+        {
             timer.Elapsed += (sender, eventArgs) => {
                 _ = InvokeAsync(() =>
                 {
+                    if (disabledBtns)
+                        return;
+
                     SaveData();
                 });
             };
@@ -100,6 +104,14 @@ namespace Aig.Auditoria.Components.Inspections._17_AperturaUbicacionBotiquin
             Inspeccion = await inspeccionService.Get(Id);
             if (Inspeccion != null)
             {
+                switch (Inspeccion.StatusInspecciones)
+                {
+                    case enum_StatusInspecciones.Completed:
+                        {
+                            disabledBtns = true;
+                            break;
+                        }
+                }
                 editContext = editContext!=null? editContext: new(Inspeccion);
 
             }

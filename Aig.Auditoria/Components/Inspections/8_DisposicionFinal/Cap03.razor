@@ -61,7 +61,7 @@
                                                         <ValidationMessage For=@(() => Inspeccion.InspDisposicionFinal.DatosInspeccion.TipoProduct) />
                                                     </div>
                                                 </div>
-                                               @* <div class="col-sm-4">
+                                               <div class="col-sm-4">
                                                     <label>@languageContainerService.Keys["Tipo de Verificación"]</label>
                                                     <div class="form-group">
                                                         <InputSelect @bind-Value="Inspeccion.InspDisposicionFinal.DatosInspeccion.TipoVerificacion" class="form-control">
@@ -72,7 +72,7 @@
                                                         </InputSelect>
                                                         <ValidationMessage For=@(() => Inspeccion.InspDisposicionFinal.DatosInspeccion.TipoVerificacion) />
                                                     </div>
-                                                </div>*@
+                                                </div>
                                                 <div class="col-sm-12">
                                                     <label>@languageContainerService.Keys["Disposición final solicitado por"]</label>
                                                     <div class="form-group">
@@ -113,7 +113,7 @@
                                                     <label>@languageContainerService.Keys["Total de cajas/tarimas/bultos"]</label>
                                                     <div class="form-group">
                                                         <div class="form-line">
-                                                            <InputNumber class="form-control" @bind-Value="Inspeccion.InspDisposicionFinal.DatosInspeccion.Total" />
+                                                            <InputText class="form-control" @bind-Value="Inspeccion.InspDisposicionFinal.DatosInspeccion.Total" />
                                                             <ValidationMessage For=@(() => Inspeccion.InspDisposicionFinal.DatosInspeccion.Total) />
                                                         </div>
                                                     </div>
@@ -142,19 +142,18 @@
                                             <br><br>
 
                                             <div class="kt-portlet__foot" style="text-align:right;">
-                                                <div class="kt-form__actions">
+                                                <div class="kt-form__actions">@if (!disabledBtns)
+                                                    {
+                                                        <button type="submit" @onclick="(e)=>{exit=true;}"
+                                                                class="btn btn-success waves-effect">
+                                                            @languageContainerService.Keys["SaveExit"]
+                                                        </button>
 
-                                                    <button type="submit" @onclick="(e)=>{exit=true;}"
-                                                            class="btn btn-success waves-effect">
-                                                        @languageContainerService.Keys["SaveExit"]
-                                                    </button>
-
-                                                    <button type="submit"
-                                                            class="btn btn-info waves-effect">
-                                                        @languageContainerService.Keys["Save"]
-                                                    </button>
-
-                                                    <button type="button" class="btn btn-danger waves-effect"
+                                                        <button type="submit"
+                                                                class="btn btn-info waves-effect">
+                                                            @languageContainerService.Keys["Save"]
+                                                        </button>                                                        
+                                                    }<button type="button" class="btn btn-danger waves-effect"
                                                         @onclick="(e)=>{Cancel();}">
                                                         @languageContainerService.Keys["Cerrar"]
                                                     </button>

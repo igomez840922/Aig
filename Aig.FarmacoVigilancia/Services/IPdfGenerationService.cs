@@ -10,5 +10,6 @@ namespace Aig.FarmacoVigilancia.Services
         Task<Stream> GenerateNotePDF(long IdNote);
         Task<Stream> GenerateAlertPDF(long IdAlert);
         Task<Stream> GetStreamsFromFile(string filePath);
+        Task<byte[]> GetByteArrayFromFile(string filePath);
     }
 }

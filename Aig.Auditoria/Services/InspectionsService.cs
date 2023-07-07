@@ -184,7 +184,7 @@ namespace Aig.Auditoria.Services
             if(string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
             {
                 data.IntNumActa = GetMaxInspectionActNumber() + 1;
-                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"),DateTime.Now.ToString("yyyy"),data.TipoActa.ToString(),data.Establecimiento?.TipoEstablecimiento.ToString()??"NA",data.DatosEstablecimiento?.Provincia?.Codigo??"0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+                data.NumActa = GetInspectNum(data);// string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"),DateTime.Now.ToString("yyyy"),data.TipoActa.ToString(),data.Establecimiento?.TipoEstablecimiento.ToString()??"NA",data.DatosEstablecimiento?.Provincia?.Codigo??"0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
             }
 
             if(data.Id <=0)
@@ -486,7 +486,7 @@ namespace Aig.Auditoria.Services
             if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
             {
                 data.IntNumActa = GetMaxInspectionActNumber() + 1;
-                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+                data.NumActa = GetInspectNum(data);// //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
             }
 
             var result = DalService.Save(data);
@@ -517,7 +517,7 @@ namespace Aig.Auditoria.Services
             if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
             {
                 data.IntNumActa = GetMaxInspectionActNumber() + 1;
-                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+                data.NumActa = GetInspectNum(data);// //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
             }
 
             var result = DalService.Save(data);
@@ -542,7 +542,7 @@ namespace Aig.Auditoria.Services
             if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
             {
                 data.IntNumActa = GetMaxInspectionActNumber() + 1;
-                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+                data.NumActa = GetInspectNum(data);// //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
             }
 
             var result = DalService.Save(data);
@@ -568,7 +568,7 @@ namespace Aig.Auditoria.Services
             if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
             {
                 data.IntNumActa = GetMaxInspectionActNumber() + 1;
-                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+                data.NumActa = GetInspectNum(data);// //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
             }
 
             var result = DalService.Save(data);
@@ -595,7 +595,7 @@ namespace Aig.Auditoria.Services
             if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
             {
                 data.IntNumActa = GetMaxInspectionActNumber() + 1;
-                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+                data.NumActa = GetInspectNum(data);// //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
             }
 
             var result = DalService.Save(data);
@@ -622,7 +622,7 @@ namespace Aig.Auditoria.Services
             if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
             {
                 data.IntNumActa = GetMaxInspectionActNumber() + 1;
-                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+                data.NumActa = GetInspectNum(data);// //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
             }
 
             var result = DalService.Save(data);
@@ -648,7 +648,7 @@ namespace Aig.Auditoria.Services
             if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
             {
                 data.IntNumActa = GetMaxInspectionActNumber() + 1;
-                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+                data.NumActa = GetInspectNum(data);// //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
             }
 
             var result = DalService.Save(data);
@@ -674,7 +674,7 @@ namespace Aig.Auditoria.Services
             if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
             {
                 data.IntNumActa = GetMaxInspectionActNumber() + 1;
-                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+                data.NumActa = GetInspectNum(data);// //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
             }
 
             var result = DalService.Save(data);
@@ -700,7 +700,7 @@ namespace Aig.Auditoria.Services
             if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
             {
                 data.IntNumActa = GetMaxInspectionActNumber() + 1;
-                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+                data.NumActa = GetInspectNum(data);// //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
             }
 
             var result = DalService.Save(data);
@@ -726,7 +726,7 @@ namespace Aig.Auditoria.Services
             if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
             {
                 data.IntNumActa = GetMaxInspectionActNumber() + 1;
-                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+                data.NumActa = GetInspectNum(data);// //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
             }
 
             var result = DalService.Save(data);
@@ -754,7 +754,7 @@ namespace Aig.Auditoria.Services
             if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
             {
                 data.IntNumActa = GetMaxInspectionActNumber() + 1;
-                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+                data.NumActa = GetInspectNum(data);// //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
             }
 
             var result = DalService.Save(data);
@@ -785,7 +785,7 @@ namespace Aig.Auditoria.Services
             if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
             {
                 data.IntNumActa = GetMaxInspectionActNumber() + 1;
-                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+                data.NumActa = GetInspectNum(data);// //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
             }
 
             var result = DalService.Save(data);
@@ -811,7 +811,7 @@ namespace Aig.Auditoria.Services
             if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
             {
                 data.IntNumActa = GetMaxInspectionActNumber() + 1;
-                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+                data.NumActa = GetInspectNum(data);// //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
             }
 
             var result = DalService.Save(data);
@@ -837,7 +837,7 @@ namespace Aig.Auditoria.Services
             if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
             {
                 data.IntNumActa = GetMaxInspectionActNumber() + 1;
-                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+                data.NumActa = GetInspectNum(data);// //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
             }
 
             var result = DalService.Save(data);
@@ -863,7 +863,7 @@ namespace Aig.Auditoria.Services
             if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
             {
                 data.IntNumActa = GetMaxInspectionActNumber() + 1;
-                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+                data.NumActa = GetInspectNum(data);// //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
             }
 
             var result = DalService.Save(data);
@@ -889,7 +889,7 @@ namespace Aig.Auditoria.Services
             if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
             {
                 data.IntNumActa = GetMaxInspectionActNumber() + 1;
-                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+                data.NumActa = GetInspectNum(data);// //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
             }
 
             var result = DalService.Save(data);
@@ -915,7 +915,7 @@ namespace Aig.Auditoria.Services
             if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
             {
                 data.IntNumActa = GetMaxInspectionActNumber() + 1;
-                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+                data.NumActa = GetInspectNum(data);// //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
             }
 
             var result = DalService.Save(data);
@@ -941,7 +941,7 @@ namespace Aig.Auditoria.Services
             if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
             {
                 data.IntNumActa = GetMaxInspectionActNumber() + 1;
-                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+                data.NumActa = GetInspectNum(data);// //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
             }
 
             var result = DalService.Save(data);
@@ -967,7 +967,7 @@ namespace Aig.Auditoria.Services
             if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
             {
                 data.IntNumActa = GetMaxInspectionActNumber() + 1;
-                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+                data.NumActa = GetInspectNum(data);// //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
             }
 
             var result = DalService.Save(data);
@@ -993,7 +993,7 @@ namespace Aig.Auditoria.Services
             if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
             {
                 data.IntNumActa = GetMaxInspectionActNumber() + 1;
-                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+                data.NumActa = GetInspectNum(data);// //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
             }
 
             var result = DalService.Save(data);
@@ -1019,7 +1019,7 @@ namespace Aig.Auditoria.Services
             if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
             {
                 data.IntNumActa = GetMaxInspectionActNumber() + 1;
-                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+                data.NumActa = GetInspectNum(data);// //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
             }
 
             var result = DalService.Save(data);
@@ -1045,7 +1045,7 @@ namespace Aig.Auditoria.Services
             if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
             {
                 data.IntNumActa = GetMaxInspectionActNumber() + 1;
-                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+                data.NumActa = GetInspectNum(data);// //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
             }
 
             var result = DalService.Save(data);
@@ -1071,7 +1071,7 @@ namespace Aig.Auditoria.Services
             if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
             {
                 data.IntNumActa = GetMaxInspectionActNumber() + 1;
-                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+                data.NumActa = GetInspectNum(data);// //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
             }
 
             var result = DalService.Save(data);
@@ -1097,7 +1097,7 @@ namespace Aig.Auditoria.Services
             if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
             {
                 data.IntNumActa = GetMaxInspectionActNumber() + 1;
-                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+                data.NumActa = GetInspectNum(data);// //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
             }
 
             var result = DalService.Save(data);
@@ -1123,7 +1123,7 @@ namespace Aig.Auditoria.Services
             if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
             {
                 data.IntNumActa = GetMaxInspectionActNumber() + 1;
-                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+                data.NumActa = GetInspectNum(data);// //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
             }
 
             var result = DalService.Save(data);
@@ -1149,7 +1149,7 @@ namespace Aig.Auditoria.Services
             if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
             {
                 data.IntNumActa = GetMaxInspectionActNumber() + 1;
-                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+                data.NumActa = GetInspectNum(data);// //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
             }
 
             var result = DalService.Save(data);
@@ -1175,7 +1175,7 @@ namespace Aig.Auditoria.Services
             if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
             {
                 data.IntNumActa = GetMaxInspectionActNumber() + 1;
-                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+                data.NumActa = GetInspectNum(data);// //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
             }
 
             var result = DalService.Save(data);
@@ -1201,7 +1201,7 @@ namespace Aig.Auditoria.Services
             if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
             {
                 data.IntNumActa = GetMaxInspectionActNumber() + 1;
-                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+                data.NumActa = GetInspectNum(data);// //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
             }
 
             var result = DalService.Save(data);
@@ -1227,7 +1227,7 @@ namespace Aig.Auditoria.Services
             if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
             {
                 data.IntNumActa = GetMaxInspectionActNumber() + 1;
-                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+                data.NumActa = GetInspectNum(data);// //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
             }
 
             var result = DalService.Save(data);
@@ -1255,7 +1255,7 @@ namespace Aig.Auditoria.Services
             if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
             {
                 data.IntNumActa = GetMaxInspectionActNumber() + 1;
-                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+                data.NumActa = GetInspectNum(data);// //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
             }
 
             var result = DalService.Save(data);
@@ -1286,7 +1286,7 @@ namespace Aig.Auditoria.Services
             if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
             {
                 data.IntNumActa = GetMaxInspectionActNumber() + 1;
-                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+                data.NumActa = GetInspectNum(data);// //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
             }
 
             var result = DalService.Save(data);
@@ -1313,7 +1313,7 @@ namespace Aig.Auditoria.Services
             if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
             {
                 data.IntNumActa = GetMaxInspectionActNumber() + 1;
-                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+                data.NumActa = GetInspectNum(data);// //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
             }
 
             var result = DalService.Save(data);
@@ -1340,7 +1340,7 @@ namespace Aig.Auditoria.Services
             if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
             {
                 data.IntNumActa = GetMaxInspectionActNumber() + 1;
-                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+                data.NumActa = GetInspectNum(data);// //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
             }
 
             var result = DalService.Save(data);
@@ -1366,7 +1366,7 @@ namespace Aig.Auditoria.Services
             if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
             {
                 data.IntNumActa = GetMaxInspectionActNumber() + 1;
-                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+                data.NumActa = GetInspectNum(data);// //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
             }
 
             var result = DalService.Save(data);
@@ -1392,7 +1392,7 @@ namespace Aig.Auditoria.Services
             if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
             {
                 data.IntNumActa = GetMaxInspectionActNumber() + 1;
-                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+                data.NumActa = GetInspectNum(data);// //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
             }
 
             var result = DalService.Save(data);
@@ -1418,7 +1418,7 @@ namespace Aig.Auditoria.Services
             if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
             {
                 data.IntNumActa = GetMaxInspectionActNumber() + 1;
-                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+                data.NumActa = GetInspectNum(data);// //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
             }
 
             var result = DalService.Save(data);
@@ -1444,7 +1444,7 @@ namespace Aig.Auditoria.Services
             if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
             {
                 data.IntNumActa = GetMaxInspectionActNumber() + 1;
-                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+                data.NumActa = GetInspectNum(data);// //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
             }
 
             var result = DalService.Save(data);
@@ -1470,7 +1470,7 @@ namespace Aig.Auditoria.Services
             if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
             {
                 data.IntNumActa = GetMaxInspectionActNumber() + 1;
-                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+                data.NumActa = GetInspectNum(data);// //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
             }
 
             var result = DalService.Save(data);
@@ -1496,7 +1496,7 @@ namespace Aig.Auditoria.Services
             if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
             {
                 data.IntNumActa = GetMaxInspectionActNumber() + 1;
-                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+                data.NumActa = GetInspectNum(data);// //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
             }
 
             var result = DalService.Save(data);
@@ -1522,7 +1522,7 @@ namespace Aig.Auditoria.Services
             if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
             {
                 data.IntNumActa = GetMaxInspectionActNumber() + 1;
-                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+                data.NumActa = GetInspectNum(data);// //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
             }
 
             var result = DalService.Save(data);
@@ -1548,7 +1548,7 @@ namespace Aig.Auditoria.Services
             if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
             {
                 data.IntNumActa = GetMaxInspectionActNumber() + 1;
-                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+                data.NumActa = GetInspectNum(data);// //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
             }
 
             var result = DalService.Save(data);
@@ -1576,7 +1576,7 @@ namespace Aig.Auditoria.Services
             if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
             {
                 data.IntNumActa = GetMaxInspectionActNumber() + 1;
-                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+                data.NumActa = GetInspectNum(data);// //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
             }
 
             var result = DalService.Save(data);
@@ -1607,7 +1607,7 @@ namespace Aig.Auditoria.Services
             if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
             {
                 data.IntNumActa = GetMaxInspectionActNumber() + 1;
-                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+                data.NumActa = GetInspectNum(data);// //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
             }
 
             var result = DalService.Save(data);
@@ -1634,7 +1634,7 @@ namespace Aig.Auditoria.Services
             if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
             {
                 data.IntNumActa = GetMaxInspectionActNumber() + 1;
-                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+                data.NumActa = GetInspectNum(data);// //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
             }
 
             var result = DalService.Save(data);
@@ -1661,7 +1661,7 @@ namespace Aig.Auditoria.Services
             if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
             {
                 data.IntNumActa = GetMaxInspectionActNumber() + 1;
-                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+                data.NumActa = GetInspectNum(data);// //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
             }
 
             var result = DalService.Save(data);
@@ -1687,7 +1687,7 @@ namespace Aig.Auditoria.Services
             if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
             {
                 data.IntNumActa = GetMaxInspectionActNumber() + 1;
-                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+                data.NumActa = GetInspectNum(data);// //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
             }
 
             var result = DalService.Save(data);
@@ -1713,7 +1713,7 @@ namespace Aig.Auditoria.Services
             if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
             {
                 data.IntNumActa = GetMaxInspectionActNumber() + 1;
-                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+                data.NumActa = GetInspectNum(data);// //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
             }
 
             var result = DalService.Save(data);
@@ -1739,7 +1739,7 @@ namespace Aig.Auditoria.Services
             if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
             {
                 data.IntNumActa = GetMaxInspectionActNumber() + 1;
-                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+                data.NumActa = GetInspectNum(data);// //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
             }
 
             var result = DalService.Save(data);
@@ -1765,7 +1765,7 @@ namespace Aig.Auditoria.Services
             if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
             {
                 data.IntNumActa = GetMaxInspectionActNumber() + 1;
-                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+                data.NumActa = GetInspectNum(data);// //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
             }
 
             var result = DalService.Save(data);
@@ -1791,7 +1791,7 @@ namespace Aig.Auditoria.Services
             if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
             {
                 data.IntNumActa = GetMaxInspectionActNumber() + 1;
-                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+                data.NumActa = GetInspectNum(data);// //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
             }
 
             var result = DalService.Save(data);
@@ -1817,7 +1817,7 @@ namespace Aig.Auditoria.Services
             if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
             {
                 data.IntNumActa = GetMaxInspectionActNumber() + 1;
-                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+                data.NumActa = GetInspectNum(data);// //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
             }
 
             var result = DalService.Save(data);
@@ -1843,7 +1843,7 @@ namespace Aig.Auditoria.Services
             if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
             {
                 data.IntNumActa = GetMaxInspectionActNumber() + 1;
-                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+                data.NumActa = GetInspectNum(data);// //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
             }
 
             var result = DalService.Save(data);
@@ -1869,7 +1869,7 @@ namespace Aig.Auditoria.Services
             if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
             {
                 data.IntNumActa = GetMaxInspectionActNumber() + 1;
-                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+                data.NumActa = GetInspectNum(data);// //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
             }
 
             var result = DalService.Save(data);
@@ -1895,7 +1895,7 @@ namespace Aig.Auditoria.Services
             if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
             {
                 data.IntNumActa = GetMaxInspectionActNumber() + 1;
-                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+                data.NumActa = GetInspectNum(data);// //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
             }
 
             var result = DalService.Save(data);
@@ -1921,7 +1921,7 @@ namespace Aig.Auditoria.Services
             if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
             {
                 data.IntNumActa = GetMaxInspectionActNumber() + 1;
-                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+                data.NumActa = GetInspectNum(data);// //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
             }
 
             var result = DalService.Save(data);
@@ -1947,7 +1947,7 @@ namespace Aig.Auditoria.Services
             if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
             {
                 data.IntNumActa = GetMaxInspectionActNumber() + 1;
-                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+                data.NumActa = GetInspectNum(data);// //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
             }
 
             var result = DalService.Save(data);
@@ -1973,7 +1973,7 @@ namespace Aig.Auditoria.Services
             if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
             {
                 data.IntNumActa = GetMaxInspectionActNumber() + 1;
-                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+                data.NumActa = GetInspectNum(data);// //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
             }
 
             var result = DalService.Save(data);
@@ -1999,7 +1999,7 @@ namespace Aig.Auditoria.Services
             if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
             {
                 data.IntNumActa = GetMaxInspectionActNumber() + 1;
-                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+                data.NumActa = GetInspectNum(data);// //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
             }
 
             var result = DalService.Save(data);
@@ -2025,7 +2025,7 @@ namespace Aig.Auditoria.Services
             if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
             {
                 data.IntNumActa = GetMaxInspectionActNumber() + 1;
-                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+                data.NumActa = GetInspectNum(data);// //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
             }
 
             var result = DalService.Save(data);
@@ -2051,7 +2051,7 @@ namespace Aig.Auditoria.Services
             if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
             {
                 data.IntNumActa = GetMaxInspectionActNumber() + 1;
-                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+                data.NumActa = GetInspectNum(data);// //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
             }
 
             var result = DalService.Save(data);
@@ -2077,7 +2077,7 @@ namespace Aig.Auditoria.Services
             if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
             {
                 data.IntNumActa = GetMaxInspectionActNumber() + 1;
-                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+                data.NumActa = GetInspectNum(data);// //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
             }
 
             var result = DalService.Save(data);
@@ -2105,7 +2105,7 @@ namespace Aig.Auditoria.Services
             if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
             {
                 data.IntNumActa = GetMaxInspectionActNumber() + 1;
-                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+                data.NumActa = GetInspectNum(data);// //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
             }
 
             var result = DalService.Save(data);
@@ -2136,7 +2136,7 @@ namespace Aig.Auditoria.Services
             if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
             {
                 data.IntNumActa = GetMaxInspectionActNumber() + 1;
-                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+                data.NumActa = GetInspectNum(data);// //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
             }
 
             var result = DalService.Save(data);
@@ -2162,7 +2162,7 @@ namespace Aig.Auditoria.Services
             if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
             {
                 data.IntNumActa = GetMaxInspectionActNumber() + 1;
-                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+                data.NumActa = GetInspectNum(data);// //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
             }
 
             var result = DalService.Save(data);
@@ -2190,7 +2190,7 @@ namespace Aig.Auditoria.Services
             if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
             {
                 data.IntNumActa = GetMaxInspectionActNumber() + 1;
-                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+                data.NumActa = GetInspectNum(data);// //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
             }
 
             var result = DalService.Save(data);
@@ -2221,7 +2221,7 @@ namespace Aig.Auditoria.Services
             if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
             {
                 data.IntNumActa = GetMaxInspectionActNumber() + 1;
-                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+                data.NumActa = GetInspectNum(data);// //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
             }
 
             var result = DalService.Save(data);
@@ -2247,7 +2247,7 @@ namespace Aig.Auditoria.Services
             if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
             {
                 data.IntNumActa = GetMaxInspectionActNumber() + 1;
-                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+                data.NumActa = GetInspectNum(data);// //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
             }
 
             var result = DalService.Save(data);
@@ -2274,7 +2274,7 @@ namespace Aig.Auditoria.Services
             if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
             {
                 data.IntNumActa = GetMaxInspectionActNumber() + 1;
-                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+                data.NumActa = GetInspectNum(data);// //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
             }
 
             var result = DalService.Save(data);
@@ -2293,7 +2293,7 @@ namespace Aig.Auditoria.Services
             if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
             {
                 data.IntNumActa = GetMaxInspectionActNumber() + 1;
-                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+                data.NumActa = GetInspectNum(data);// //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
             }
 
             var result = DalService.Save(data);
@@ -2324,7 +2324,7 @@ namespace Aig.Auditoria.Services
             if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
             {
                 data.IntNumActa = GetMaxInspectionActNumber() + 1;
-                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+                data.NumActa = GetInspectNum(data);// //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
             }
 
             var result = DalService.Save(data);
@@ -2350,7 +2350,7 @@ namespace Aig.Auditoria.Services
             if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
             {
                 data.IntNumActa = GetMaxInspectionActNumber() + 1;
-                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+                data.NumActa = GetInspectNum(data);// //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
             }
 
             var result = DalService.Save(data);
@@ -2377,7 +2377,7 @@ namespace Aig.Auditoria.Services
             if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
             {
                 data.IntNumActa = GetMaxInspectionActNumber() + 1;
-                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+                data.NumActa = GetInspectNum(data);// //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
             }
 
             var result = DalService.Save(data);
@@ -2407,7 +2407,7 @@ namespace Aig.Auditoria.Services
             if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
             {
                 data.IntNumActa = GetMaxInspectionActNumber() + 1;
-                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+                data.NumActa = GetInspectNum(data);// //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
             }
 
             var result = DalService.Save(data);
@@ -2433,7 +2433,7 @@ namespace Aig.Auditoria.Services
             if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
             {
                 data.IntNumActa = GetMaxInspectionActNumber() + 1;
-                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+                data.NumActa = GetInspectNum(data);// //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
             }
 
             var result = DalService.Save(data);
@@ -2459,7 +2459,7 @@ namespace Aig.Auditoria.Services
             if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
             {
                 data.IntNumActa = GetMaxInspectionActNumber() + 1;
-                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+                data.NumActa = GetInspectNum(data);// //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
             }
 
             var result = DalService.Save(data);
@@ -2486,7 +2486,7 @@ namespace Aig.Auditoria.Services
             if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
             {
                 data.IntNumActa = GetMaxInspectionActNumber() + 1;
-                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+                data.NumActa = GetInspectNum(data);// //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
             }
 
             var result = DalService.Save(data);
@@ -2516,7 +2516,7 @@ namespace Aig.Auditoria.Services
             if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
             {
                 data.IntNumActa = GetMaxInspectionActNumber() + 1;
-                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+                data.NumActa = GetInspectNum(data);// //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
             }
 
             var result = DalService.Save(data);
@@ -2542,7 +2542,7 @@ namespace Aig.Auditoria.Services
             if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
             {
                 data.IntNumActa = GetMaxInspectionActNumber() + 1;
-                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+                data.NumActa = GetInspectNum(data);// //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
             }
 
             var result = DalService.Save(data);
@@ -2568,7 +2568,7 @@ namespace Aig.Auditoria.Services
             if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
             {
                 data.IntNumActa = GetMaxInspectionActNumber() + 1;
-                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+                data.NumActa = GetInspectNum(data);// //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
             }
 
             var result = DalService.Save(data);
@@ -2594,7 +2594,7 @@ namespace Aig.Auditoria.Services
             if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
             {
                 data.IntNumActa = GetMaxInspectionActNumber() + 1;
-                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+                data.NumActa = GetInspectNum(data);// //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
             }
 
             var result = DalService.Save(data);
@@ -2620,7 +2620,7 @@ namespace Aig.Auditoria.Services
             if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
             {
                 data.IntNumActa = GetMaxInspectionActNumber() + 1;
-                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+                data.NumActa = GetInspectNum(data);// //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
             }
 
             var result = DalService.Save(data);
@@ -2646,7 +2646,7 @@ namespace Aig.Auditoria.Services
             if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
             {
                 data.IntNumActa = GetMaxInspectionActNumber() + 1;
-                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+                data.NumActa = GetInspectNum(data);// //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
             }
 
             var result = DalService.Save(data);
@@ -2672,7 +2672,7 @@ namespace Aig.Auditoria.Services
             if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
             {
                 data.IntNumActa = GetMaxInspectionActNumber() + 1;
-                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+                data.NumActa = GetInspectNum(data);// //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
             }
 
             var result = DalService.Save(data);
@@ -2698,7 +2698,7 @@ namespace Aig.Auditoria.Services
             if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
             {
                 data.IntNumActa = GetMaxInspectionActNumber() + 1;
-                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+                data.NumActa = GetInspectNum(data);// //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
             }
 
             var result = DalService.Save(data);
@@ -2724,7 +2724,7 @@ namespace Aig.Auditoria.Services
             if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
             {
                 data.IntNumActa = GetMaxInspectionActNumber() + 1;
-                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+                data.NumActa = GetInspectNum(data);// //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
             }
 
             var result = DalService.Save(data);
@@ -2750,7 +2750,7 @@ namespace Aig.Auditoria.Services
             if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
             {
                 data.IntNumActa = GetMaxInspectionActNumber() + 1;
-                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+                data.NumActa = GetInspectNum(data);// //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
             }
 
             var result = DalService.Save(data);
@@ -2776,7 +2776,7 @@ namespace Aig.Auditoria.Services
             if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
             {
                 data.IntNumActa = GetMaxInspectionActNumber() + 1;
-                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+                data.NumActa = GetInspectNum(data);// //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
             }
 
             var result = DalService.Save(data);
@@ -2802,7 +2802,7 @@ namespace Aig.Auditoria.Services
             if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
             {
                 data.IntNumActa = GetMaxInspectionActNumber() + 1;
-                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+                data.NumActa = GetInspectNum(data);// //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
             }
 
             var result = DalService.Save(data);
@@ -2828,7 +2828,7 @@ namespace Aig.Auditoria.Services
             if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
             {
                 data.IntNumActa = GetMaxInspectionActNumber() + 1;
-                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+                data.NumActa = GetInspectNum(data);// //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
             }
 
             var result = DalService.Save(data);
@@ -2856,7 +2856,7 @@ namespace Aig.Auditoria.Services
             if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
             {
                 data.IntNumActa = GetMaxInspectionActNumber() + 1;
-                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+                data.NumActa = GetInspectNum(data);// //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
             }
 
             var result = DalService.Save(data);
@@ -2887,7 +2887,7 @@ namespace Aig.Auditoria.Services
             if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
             {
                 data.IntNumActa = GetMaxInspectionActNumber() + 1;
-                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+                data.NumActa = GetInspectNum(data);// //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
             }
 
             var result = DalService.Save(data);
@@ -2913,7 +2913,7 @@ namespace Aig.Auditoria.Services
             if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
             {
                 data.IntNumActa = GetMaxInspectionActNumber() + 1;
-                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+                data.NumActa = GetInspectNum(data);// //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
             }
 
             var result = DalService.Save(data);
@@ -2939,7 +2939,7 @@ namespace Aig.Auditoria.Services
             if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
             {
                 data.IntNumActa = GetMaxInspectionActNumber() + 1;
-                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+                data.NumActa = GetInspectNum(data);// //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
             }
 
             var result = DalService.Save(data);
@@ -2965,7 +2965,7 @@ namespace Aig.Auditoria.Services
             if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
             {
                 data.IntNumActa = GetMaxInspectionActNumber() + 1;
-                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+                data.NumActa = GetInspectNum(data);// //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
             }
 
             var result = DalService.Save(data);
@@ -2992,7 +2992,7 @@ namespace Aig.Auditoria.Services
             if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
             {
                 data.IntNumActa = GetMaxInspectionActNumber() + 1;
-                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+                data.NumActa = GetInspectNum(data);// //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
             }
 
             var result = DalService.Save(data);
@@ -3019,7 +3019,7 @@ namespace Aig.Auditoria.Services
             if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
             {
                 data.IntNumActa = GetMaxInspectionActNumber() + 1;
-                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+                data.NumActa = GetInspectNum(data);// //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
             }
 
             var result = DalService.Save(data);
@@ -3045,7 +3045,7 @@ namespace Aig.Auditoria.Services
             if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
             {
                 data.IntNumActa = GetMaxInspectionActNumber() + 1;
-                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+                data.NumActa = GetInspectNum(data);// //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
             }
 
             var result = DalService.Save(data);
@@ -3071,7 +3071,7 @@ namespace Aig.Auditoria.Services
             if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
             {
                 data.IntNumActa = GetMaxInspectionActNumber() + 1;
-                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+                data.NumActa = GetInspectNum(data);// //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
             }
 
             var result = DalService.Save(data);
@@ -3097,7 +3097,7 @@ namespace Aig.Auditoria.Services
             if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
             {
                 data.IntNumActa = GetMaxInspectionActNumber() + 1;
-                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+                data.NumActa = GetInspectNum(data);// //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
             }
 
             var result = DalService.Save(data);
@@ -3123,7 +3123,7 @@ namespace Aig.Auditoria.Services
             if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
             {
                 data.IntNumActa = GetMaxInspectionActNumber() + 1;
-                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+                data.NumActa = GetInspectNum(data);// //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
             }
 
             var result = DalService.Save(data);
@@ -3149,7 +3149,7 @@ namespace Aig.Auditoria.Services
             if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
             {
                 data.IntNumActa = GetMaxInspectionActNumber() + 1;
-                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+                data.NumActa = GetInspectNum(data);// //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
             }
 
             var result = DalService.Save(data);
@@ -3175,7 +3175,7 @@ namespace Aig.Auditoria.Services
             if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
             {
                 data.IntNumActa = GetMaxInspectionActNumber() + 1;
-                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+                data.NumActa = GetInspectNum(data);// //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
             }
 
             var result = DalService.Save(data);
@@ -3203,7 +3203,7 @@ namespace Aig.Auditoria.Services
             if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
             {
                 data.IntNumActa = GetMaxInspectionActNumber() + 1;
-                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+                data.NumActa = GetInspectNum(data);// //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
             }
 
             var result = DalService.Save(data);
@@ -3234,7 +3234,7 @@ namespace Aig.Auditoria.Services
             if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
             {
                 data.IntNumActa = GetMaxInspectionActNumber() + 1;
-                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+                data.NumActa = GetInspectNum(data);// //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
             }
 
             var result = DalService.Save(data);
@@ -3260,7 +3260,7 @@ namespace Aig.Auditoria.Services
             if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
             {
                 data.IntNumActa = GetMaxInspectionActNumber() + 1;
-                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+                data.NumActa = GetInspectNum(data);// //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
             }
 
             var result = DalService.Save(data);
@@ -3286,7 +3286,7 @@ namespace Aig.Auditoria.Services
             if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
             {
                 data.IntNumActa = GetMaxInspectionActNumber() + 1;
-                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+                data.NumActa = GetInspectNum(data);// //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
             }
 
             var result = DalService.Save(data);
@@ -3317,7 +3317,7 @@ namespace Aig.Auditoria.Services
             if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
             {
                 data.IntNumActa = GetMaxInspectionActNumber() + 1;
-                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+                data.NumActa = GetInspectNum(data);// //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
             }
 
             var result = DalService.Save(data);
@@ -3344,7 +3344,7 @@ namespace Aig.Auditoria.Services
             if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
             {
                 data.IntNumActa = GetMaxInspectionActNumber() + 1;
-                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+                data.NumActa = GetInspectNum(data);// //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
             }
 
             var result = DalService.Save(data);
@@ -3369,7 +3369,7 @@ namespace Aig.Auditoria.Services
             if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
             {
                 data.IntNumActa = GetMaxInspectionActNumber() + 1;
-                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+                data.NumActa = GetInspectNum(data);// //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
             }
 
             var result = DalService.Save(data);
@@ -3394,7 +3394,7 @@ namespace Aig.Auditoria.Services
             if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
             {
                 data.IntNumActa = GetMaxInspectionActNumber() + 1;
-                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+                data.NumActa = GetInspectNum(data);// //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
             }
 
             var result = DalService.Save(data);
@@ -3419,7 +3419,7 @@ namespace Aig.Auditoria.Services
             if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
             {
                 data.IntNumActa = GetMaxInspectionActNumber() + 1;
-                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+                data.NumActa = GetInspectNum(data);// //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
             }
 
             var result = DalService.Save(data);
@@ -3444,7 +3444,7 @@ namespace Aig.Auditoria.Services
             if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
             {
                 data.IntNumActa = GetMaxInspectionActNumber() + 1;
-                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+                data.NumActa = GetInspectNum(data);// //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
             }
 
             var result = DalService.Save(data);
@@ -3469,7 +3469,7 @@ namespace Aig.Auditoria.Services
             if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
             {
                 data.IntNumActa = GetMaxInspectionActNumber() + 1;
-                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+                data.NumActa = GetInspectNum(data);// //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
             }
 
             var result = DalService.Save(data);
@@ -3495,7 +3495,7 @@ namespace Aig.Auditoria.Services
             if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
             {
                 data.IntNumActa = GetMaxInspectionActNumber() + 1;
-                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+                data.NumActa = GetInspectNum(data);// //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
             }
 
             var result = DalService.Save(data);
@@ -3521,7 +3521,7 @@ namespace Aig.Auditoria.Services
             if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
             {
                 data.IntNumActa = GetMaxInspectionActNumber() + 1;
-                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+                data.NumActa = GetInspectNum(data);// //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
             }
 
             var result = DalService.Save(data);
@@ -3546,7 +3546,7 @@ namespace Aig.Auditoria.Services
             if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
             {
                 data.IntNumActa = GetMaxInspectionActNumber() + 1;
-                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+                data.NumActa = GetInspectNum(data);// //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
             }
 
             var result = DalService.Save(data);
@@ -3571,7 +3571,7 @@ namespace Aig.Auditoria.Services
             if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
             {
                 data.IntNumActa = GetMaxInspectionActNumber() + 1;
-                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+                data.NumActa = GetInspectNum(data);// //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
             }
 
             var result = DalService.Save(data);
@@ -3596,7 +3596,7 @@ namespace Aig.Auditoria.Services
             if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
             {
                 data.IntNumActa = GetMaxInspectionActNumber() + 1;
-                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+                data.NumActa = GetInspectNum(data);// //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
             }
 
             var result = DalService.Save(data);
@@ -3621,7 +3621,7 @@ namespace Aig.Auditoria.Services
             if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
             {
                 data.IntNumActa = GetMaxInspectionActNumber() + 1;
-                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+                data.NumActa = GetInspectNum(data);// //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
             }
 
             var result = DalService.Save(data);
@@ -3646,7 +3646,7 @@ namespace Aig.Auditoria.Services
             if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
             {
                 data.IntNumActa = GetMaxInspectionActNumber() + 1;
-                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+                data.NumActa = GetInspectNum(data);// //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
             }
 
             var result = DalService.Save(data);
@@ -3671,7 +3671,7 @@ namespace Aig.Auditoria.Services
             if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
             {
                 data.IntNumActa = GetMaxInspectionActNumber() + 1;
-                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+                data.NumActa = GetInspectNum(data);// //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
             }
 
             var result = DalService.Save(data);
@@ -3696,7 +3696,7 @@ namespace Aig.Auditoria.Services
             if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
             {
                 data.IntNumActa = GetMaxInspectionActNumber() + 1;
-                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+                data.NumActa = GetInspectNum(data);// //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
             }
 
             var result = DalService.Save(data);
@@ -3721,7 +3721,7 @@ namespace Aig.Auditoria.Services
             if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
             {
                 data.IntNumActa = GetMaxInspectionActNumber() + 1;
-                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+                data.NumActa = GetInspectNum(data);// //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
             }
 
             var result = DalService.Save(data);
@@ -3747,7 +3747,7 @@ namespace Aig.Auditoria.Services
             if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
             {
                 data.IntNumActa = GetMaxInspectionActNumber() + 1;
-                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+                data.NumActa = GetInspectNum(data);// //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
             }
 
             var result = DalService.Save(data);
@@ -3774,7 +3774,7 @@ namespace Aig.Auditoria.Services
             if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
             {
                 data.IntNumActa = GetMaxInspectionActNumber() + 1;
-                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+                data.NumActa = GetInspectNum(data);// //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
             }
 
             var result = DalService.Save(data);
@@ -3800,7 +3800,7 @@ namespace Aig.Auditoria.Services
             if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
             {
                 data.IntNumActa = GetMaxInspectionActNumber() + 1;
-                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+                data.NumActa = GetInspectNum(data);// //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
             }
 
             var result = DalService.Save(data);
@@ -3825,7 +3825,7 @@ namespace Aig.Auditoria.Services
             if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
             {
                 data.IntNumActa = GetMaxInspectionActNumber() + 1;
-                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+                data.NumActa = GetInspectNum(data);// //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
             }
 
             var result = DalService.Save(data);
@@ -3852,7 +3852,7 @@ namespace Aig.Auditoria.Services
             if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
             {
                 data.IntNumActa = GetMaxInspectionActNumber() + 1;
-                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+                data.NumActa = GetInspectNum(data);// //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
             }
 
             var result = DalService.Save(data);
@@ -3883,7 +3883,7 @@ namespace Aig.Auditoria.Services
             if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
             {
                 data.IntNumActa = GetMaxInspectionActNumber() + 1;
-                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+                data.NumActa = GetInspectNum(data);// //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
             }
 
             var result = DalService.Save(data);
@@ -3909,7 +3909,7 @@ namespace Aig.Auditoria.Services
             if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
             {
                 data.IntNumActa = GetMaxInspectionActNumber() + 1;
-                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+                data.NumActa = GetInspectNum(data);// //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
             }
 
             var result = DalService.Save(data);
@@ -3935,7 +3935,7 @@ namespace Aig.Auditoria.Services
             if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
             {
                 data.IntNumActa = GetMaxInspectionActNumber() + 1;
-                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+                data.NumActa = GetInspectNum(data);// //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
             }
 
             var result = DalService.Save(data);
@@ -3966,7 +3966,7 @@ namespace Aig.Auditoria.Services
             if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
             {
                 data.IntNumActa = GetMaxInspectionActNumber() + 1;
-                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+                data.NumActa = GetInspectNum(data);// //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
             }
 
             var result = DalService.Save(data);
@@ -3993,7 +3993,7 @@ namespace Aig.Auditoria.Services
             if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
             {
                 data.IntNumActa = GetMaxInspectionActNumber() + 1;
-                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+                data.NumActa = GetInspectNum(data);// //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
             }
 
             var result = DalService.Save(data);
@@ -4018,7 +4018,7 @@ namespace Aig.Auditoria.Services
             if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
             {
                 data.IntNumActa = GetMaxInspectionActNumber() + 1;
-                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+                data.NumActa = GetInspectNum(data);// //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
             }
 
             var result = DalService.Save(data);
@@ -4043,7 +4043,7 @@ namespace Aig.Auditoria.Services
             if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
             {
                 data.IntNumActa = GetMaxInspectionActNumber() + 1;
-                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+                data.NumActa = GetInspectNum(data);// //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
             }
 
             var result = DalService.Save(data);
@@ -4068,7 +4068,7 @@ namespace Aig.Auditoria.Services
             if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
             {
                 data.IntNumActa = GetMaxInspectionActNumber() + 1;
-                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+                data.NumActa = GetInspectNum(data);// //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
             }
 
             var result = DalService.Save(data);
@@ -4093,7 +4093,7 @@ namespace Aig.Auditoria.Services
             if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
             {
                 data.IntNumActa = GetMaxInspectionActNumber() + 1;
-                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+                data.NumActa = GetInspectNum(data);// //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
             }
 
             var result = DalService.Save(data);
@@ -4118,7 +4118,7 @@ namespace Aig.Auditoria.Services
             if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
             {
                 data.IntNumActa = GetMaxInspectionActNumber() + 1;
-                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+                data.NumActa = GetInspectNum(data);// //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
             }
 
             var result = DalService.Save(data);
@@ -4143,7 +4143,7 @@ namespace Aig.Auditoria.Services
             if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
             {
                 data.IntNumActa = GetMaxInspectionActNumber() + 1;
-                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+                data.NumActa = GetInspectNum(data);// //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
             }
 
             var result = DalService.Save(data);
@@ -4168,7 +4168,7 @@ namespace Aig.Auditoria.Services
             if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
             {
                 data.IntNumActa = GetMaxInspectionActNumber() + 1;
-                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+                data.NumActa = GetInspectNum(data);// //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
             }
 
             var result = DalService.Save(data);
@@ -4193,7 +4193,7 @@ namespace Aig.Auditoria.Services
             if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
             {
                 data.IntNumActa = GetMaxInspectionActNumber() + 1;
-                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+                data.NumActa = GetInspectNum(data);// //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
             }
 
             var result = DalService.Save(data);
@@ -4218,7 +4218,7 @@ namespace Aig.Auditoria.Services
             if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
             {
                 data.IntNumActa = GetMaxInspectionActNumber() + 1;
-                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+                data.NumActa = GetInspectNum(data);// //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
             }
 
             var result = DalService.Save(data);
@@ -4243,7 +4243,7 @@ namespace Aig.Auditoria.Services
             if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
             {
                 data.IntNumActa = GetMaxInspectionActNumber() + 1;
-                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+                data.NumActa = GetInspectNum(data);// //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
             }
 
             var result = DalService.Save(data);
@@ -4268,7 +4268,7 @@ namespace Aig.Auditoria.Services
             if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
             {
                 data.IntNumActa = GetMaxInspectionActNumber() + 1;
-                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+                data.NumActa = GetInspectNum(data);// //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
             }
 
             var result = DalService.Save(data);
@@ -4293,7 +4293,7 @@ namespace Aig.Auditoria.Services
             if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
             {
                 data.IntNumActa = GetMaxInspectionActNumber() + 1;
-                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+                data.NumActa = GetInspectNum(data);// //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
             }
 
             var result = DalService.Save(data);
@@ -4318,7 +4318,7 @@ namespace Aig.Auditoria.Services
             if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
             {
                 data.IntNumActa = GetMaxInspectionActNumber() + 1;
-                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+                data.NumActa = GetInspectNum(data);// //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
             }
 
             var result = DalService.Save(data);
@@ -4345,7 +4345,7 @@ namespace Aig.Auditoria.Services
             if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
             {
                 data.IntNumActa = GetMaxInspectionActNumber() + 1;
-                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+                data.NumActa = GetInspectNum(data);// //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
             }
 
             var result = DalService.Save(data);
@@ -4376,7 +4376,7 @@ namespace Aig.Auditoria.Services
             if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
             {
                 data.IntNumActa = GetMaxInspectionActNumber() + 1;
-                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+                data.NumActa = GetInspectNum(data);// //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
             }
 
             var result = DalService.Save(data);
@@ -4402,7 +4402,7 @@ namespace Aig.Auditoria.Services
             if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
             {
                 data.IntNumActa = GetMaxInspectionActNumber() + 1;
-                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+                data.NumActa = GetInspectNum(data);// //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
             }
 
             var result = DalService.Save(data);
@@ -4428,7 +4428,7 @@ namespace Aig.Auditoria.Services
             if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
             {
                 data.IntNumActa = GetMaxInspectionActNumber() + 1;
-                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+                data.NumActa = GetInspectNum(data);// //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
             }
 
             var result = DalService.Save(data);
@@ -4459,7 +4459,7 @@ namespace Aig.Auditoria.Services
             if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
             {
                 data.IntNumActa = GetMaxInspectionActNumber() + 1;
-                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+                data.NumActa = GetInspectNum(data);// //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
             }
 
             var result = DalService.Save(data);
@@ -4486,7 +4486,7 @@ namespace Aig.Auditoria.Services
             if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
             {
                 data.IntNumActa = GetMaxInspectionActNumber() + 1;
-                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+                data.NumActa = GetInspectNum(data);// //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
             }
 
             var result = DalService.Save(data);
@@ -4511,7 +4511,7 @@ namespace Aig.Auditoria.Services
             if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
             {
                 data.IntNumActa = GetMaxInspectionActNumber() + 1;
-                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+                data.NumActa = GetInspectNum(data);// //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
             }
 
             var result = DalService.Save(data);
@@ -4536,7 +4536,7 @@ namespace Aig.Auditoria.Services
             if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
             {
                 data.IntNumActa = GetMaxInspectionActNumber() + 1;
-                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+                data.NumActa = GetInspectNum(data);// //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
             }
 
             var result = DalService.Save(data);
@@ -4561,7 +4561,7 @@ namespace Aig.Auditoria.Services
             if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
             {
                 data.IntNumActa = GetMaxInspectionActNumber() + 1;
-                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+                data.NumActa = GetInspectNum(data);// //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
             }
 
             var result = DalService.Save(data);
@@ -4586,7 +4586,7 @@ namespace Aig.Auditoria.Services
             if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
             {
                 data.IntNumActa = GetMaxInspectionActNumber() + 1;
-                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+                data.NumActa = GetInspectNum(data);// //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
             }
 
             var result = DalService.Save(data);
@@ -4611,7 +4611,7 @@ namespace Aig.Auditoria.Services
             if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
             {
                 data.IntNumActa = GetMaxInspectionActNumber() + 1;
-                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+                data.NumActa = GetInspectNum(data);// //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
             }
 
             var result = DalService.Save(data);
@@ -4636,7 +4636,7 @@ namespace Aig.Auditoria.Services
             if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
             {
                 data.IntNumActa = GetMaxInspectionActNumber() + 1;
-                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+                data.NumActa = GetInspectNum(data);// //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
             }
 
             var result = DalService.Save(data);
@@ -4661,7 +4661,7 @@ namespace Aig.Auditoria.Services
             if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
             {
                 data.IntNumActa = GetMaxInspectionActNumber() + 1;
-                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+                data.NumActa = GetInspectNum(data);// //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
             }
 
             var result = DalService.Save(data);
@@ -4686,7 +4686,7 @@ namespace Aig.Auditoria.Services
             if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
             {
                 data.IntNumActa = GetMaxInspectionActNumber() + 1;
-                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+                data.NumActa = GetInspectNum(data);// //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
             }
 
             var result = DalService.Save(data);
@@ -4711,7 +4711,7 @@ namespace Aig.Auditoria.Services
             if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
             {
                 data.IntNumActa = GetMaxInspectionActNumber() + 1;
-                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+                data.NumActa = GetInspectNum(data);// //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
             }
 
             var result = DalService.Save(data);
@@ -4736,7 +4736,7 @@ namespace Aig.Auditoria.Services
             if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
             {
                 data.IntNumActa = GetMaxInspectionActNumber() + 1;
-                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+                data.NumActa = GetInspectNum(data);// //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
             }
 
             var result = DalService.Save(data);
@@ -4761,7 +4761,7 @@ namespace Aig.Auditoria.Services
             if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
             {
                 data.IntNumActa = GetMaxInspectionActNumber() + 1;
-                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+                data.NumActa = GetInspectNum(data);// //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
             }
 
             var result = DalService.Save(data);
@@ -4786,7 +4786,7 @@ namespace Aig.Auditoria.Services
             if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
             {
                 data.IntNumActa = GetMaxInspectionActNumber() + 1;
-                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+                data.NumActa = GetInspectNum(data);// //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
             }
 
             var result = DalService.Save(data);
@@ -4811,7 +4811,7 @@ namespace Aig.Auditoria.Services
             if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
             {
                 data.IntNumActa = GetMaxInspectionActNumber() + 1;
-                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+                data.NumActa = GetInspectNum(data);// //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
             }
 
             var result = DalService.Save(data);
@@ -4836,7 +4836,7 @@ namespace Aig.Auditoria.Services
             if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
             {
                 data.IntNumActa = GetMaxInspectionActNumber() + 1;
-                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+                data.NumActa = GetInspectNum(data);// //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
             }
 
             var result = DalService.Save(data);
@@ -4861,7 +4861,7 @@ namespace Aig.Auditoria.Services
             if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
             {
                 data.IntNumActa = GetMaxInspectionActNumber() + 1;
-                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+                data.NumActa = GetInspectNum(data);// //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
             }
 
             var result = DalService.Save(data);
@@ -4886,7 +4886,7 @@ namespace Aig.Auditoria.Services
             if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
             {
                 data.IntNumActa = GetMaxInspectionActNumber() + 1;
-                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+                data.NumActa = GetInspectNum(data);// //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
             }
 
             var result = DalService.Save(data);
@@ -4911,7 +4911,7 @@ namespace Aig.Auditoria.Services
             if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
             {
                 data.IntNumActa = GetMaxInspectionActNumber() + 1;
-                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+                data.NumActa = GetInspectNum(data);// //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
             }
 
             var result = DalService.Save(data);
@@ -4936,7 +4936,7 @@ namespace Aig.Auditoria.Services
             if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
             {
                 data.IntNumActa = GetMaxInspectionActNumber() + 1;
-                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+                data.NumActa = GetInspectNum(data);// //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
             }
 
             var result = DalService.Save(data);
@@ -4961,7 +4961,7 @@ namespace Aig.Auditoria.Services
             if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
             {
                 data.IntNumActa = GetMaxInspectionActNumber() + 1;
-                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+                data.NumActa = GetInspectNum(data);// //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
             }
 
             var result = DalService.Save(data);
@@ -4986,7 +4986,7 @@ namespace Aig.Auditoria.Services
             if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
             {
                 data.IntNumActa = GetMaxInspectionActNumber() + 1;
-                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+                data.NumActa = GetInspectNum(data);// //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
             }
 
             var result = DalService.Save(data);
@@ -5011,7 +5011,7 @@ namespace Aig.Auditoria.Services
             if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
             {
                 data.IntNumActa = GetMaxInspectionActNumber() + 1;
-                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+                data.NumActa = GetInspectNum(data);// //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
             }
 
             var result = DalService.Save(data);
@@ -5036,7 +5036,7 @@ namespace Aig.Auditoria.Services
             if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
             {
                 data.IntNumActa = GetMaxInspectionActNumber() + 1;
-                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+                data.NumActa = GetInspectNum(data);// //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
             }
 
             var result = DalService.Save(data);
@@ -5061,7 +5061,7 @@ namespace Aig.Auditoria.Services
             if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
             {
                 data.IntNumActa = GetMaxInspectionActNumber() + 1;
-                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+                data.NumActa = GetInspectNum(data);// //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
             }
 
             var result = DalService.Save(data);
@@ -5086,7 +5086,7 @@ namespace Aig.Auditoria.Services
             if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
             {
                 data.IntNumActa = GetMaxInspectionActNumber() + 1;
-                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+                data.NumActa = GetInspectNum(data);// //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
             }
 
             var result = DalService.Save(data);
@@ -5111,7 +5111,7 @@ namespace Aig.Auditoria.Services
             if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
             {
                 data.IntNumActa = GetMaxInspectionActNumber() + 1;
-                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+                data.NumActa = GetInspectNum(data);// //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
             }
 
             var result = DalService.Save(data);
@@ -5136,7 +5136,7 @@ namespace Aig.Auditoria.Services
             if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
             {
                 data.IntNumActa = GetMaxInspectionActNumber() + 1;
-                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+                data.NumActa = GetInspectNum(data);// //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
             }
 
             var result = DalService.Save(data);
@@ -5161,7 +5161,7 @@ namespace Aig.Auditoria.Services
             if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
             {
                 data.IntNumActa = GetMaxInspectionActNumber() + 1;
-                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+                data.NumActa = GetInspectNum(data);// //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
             }
 
             var result = DalService.Save(data);
@@ -5186,7 +5186,7 @@ namespace Aig.Auditoria.Services
             if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
             {
                 data.IntNumActa = GetMaxInspectionActNumber() + 1;
-                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+                data.NumActa = GetInspectNum(data);// //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
             }
 
             var result = DalService.Save(data);
@@ -5211,7 +5211,7 @@ namespace Aig.Auditoria.Services
             if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
             {
                 data.IntNumActa = GetMaxInspectionActNumber() + 1;
-                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+                data.NumActa = GetInspectNum(data);// //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
             }
 
             var result = DalService.Save(data);
@@ -5238,7 +5238,7 @@ namespace Aig.Auditoria.Services
             if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
             {
                 data.IntNumActa = GetMaxInspectionActNumber() + 1;
-                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+                data.NumActa = GetInspectNum(data);// //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
             }
 
             var result = DalService.Save(data);
@@ -5269,7 +5269,7 @@ namespace Aig.Auditoria.Services
             if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
             {
                 data.IntNumActa = GetMaxInspectionActNumber() + 1;
-                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+                data.NumActa = GetInspectNum(data);// //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
             }
 
             var result = DalService.Save(data);
@@ -5295,7 +5295,7 @@ namespace Aig.Auditoria.Services
             if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
             {
                 data.IntNumActa = GetMaxInspectionActNumber() + 1;
-                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+                data.NumActa = GetInspectNum(data);// //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
             }
 
             var result = DalService.Save(data);
@@ -5321,7 +5321,7 @@ namespace Aig.Auditoria.Services
             if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
             {
                 data.IntNumActa = GetMaxInspectionActNumber() + 1;
-                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+                data.NumActa = GetInspectNum(data);// //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
             }
 
             var result = DalService.Save(data);
@@ -5347,7 +5347,7 @@ namespace Aig.Auditoria.Services
             if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
             {
                 data.IntNumActa = GetMaxInspectionActNumber() + 1;
-                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+                data.NumActa = GetInspectNum(data);// //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
             }
 
             var result = DalService.Save(data);
@@ -5372,7 +5372,7 @@ namespace Aig.Auditoria.Services
             if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
             {
                 data.IntNumActa = GetMaxInspectionActNumber() + 1;
-                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+                data.NumActa = GetInspectNum(data);// //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
             }
 
             var result = DalService.Save(data);
@@ -5401,7 +5401,7 @@ namespace Aig.Auditoria.Services
             if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
             {
                 data.IntNumActa = GetMaxInspectionActNumber() + 1;
-                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+                data.NumActa = GetInspectNum(data);// //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
             }
 
             var result = DalService.Save(data);
@@ -5438,7 +5438,7 @@ namespace Aig.Auditoria.Services
             if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
             {
                 data.IntNumActa = GetMaxInspectionActNumber() + 1;
-                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+                data.NumActa = GetInspectNum(data);// //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
             }
 
             var result = DalService.Save(data);
@@ -5474,7 +5474,7 @@ namespace Aig.Auditoria.Services
             if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
             {
                 data.IntNumActa = GetMaxInspectionActNumber() + 1;
-                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+                data.NumActa = GetInspectNum(data);// //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
             }
 
             var result = DalService.Save(data);
@@ -5508,7 +5508,7 @@ namespace Aig.Auditoria.Services
             if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
             {
                 data.IntNumActa = GetMaxInspectionActNumber() + 1;
-                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+                data.NumActa = GetInspectNum(data);// //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
             }
 
             var result = DalService.Save(data);
@@ -5541,7 +5541,7 @@ namespace Aig.Auditoria.Services
             if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
             {
                 data.IntNumActa = GetMaxInspectionActNumber() + 1;
-                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+                data.NumActa = GetInspectNum(data);// //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
             }
 
             var result = DalService.Save(data);
@@ -5568,7 +5568,7 @@ namespace Aig.Auditoria.Services
             if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
             {
                 data.IntNumActa = GetMaxInspectionActNumber() + 1;
-                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+                data.NumActa = GetInspectNum(data);// //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
             }
 
             var result = DalService.Save(data);
@@ -5594,7 +5594,7 @@ namespace Aig.Auditoria.Services
             if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
             {
                 data.IntNumActa = GetMaxInspectionActNumber() + 1;
-                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+                data.NumActa = GetInspectNum(data);// //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
             }
 
             var result = DalService.Save(data);
@@ -5624,7 +5624,7 @@ namespace Aig.Auditoria.Services
             if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
             {
                 data.IntNumActa = GetMaxInspectionActNumber() + 1;
-                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+                data.NumActa = GetInspectNum(data);// //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
             }
 
             var result = DalService.Save(data);
@@ -5654,7 +5654,7 @@ namespace Aig.Auditoria.Services
             if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
             {
                 data.IntNumActa = GetMaxInspectionActNumber() + 1;
-                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+                data.NumActa = GetInspectNum(data);// //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
             }
 
             var result = DalService.Save(data);
@@ -5682,7 +5682,7 @@ namespace Aig.Auditoria.Services
             if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
             {
                 data.IntNumActa = GetMaxInspectionActNumber() + 1;
-                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+                data.NumActa = GetInspectNum(data);// //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
             }
 
             var result = DalService.Save(data);
@@ -5709,7 +5709,7 @@ namespace Aig.Auditoria.Services
             if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
             {
                 data.IntNumActa = GetMaxInspectionActNumber() + 1;
-                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+                data.NumActa = GetInspectNum(data);// //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
             }
 
             var result = DalService.Save(data);
@@ -5736,7 +5736,7 @@ namespace Aig.Auditoria.Services
             if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
             {
                 data.IntNumActa = GetMaxInspectionActNumber() + 1;
-                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+                data.NumActa = GetInspectNum(data);// //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
             }
 
             var result = DalService.Save(data);
@@ -5767,7 +5767,7 @@ namespace Aig.Auditoria.Services
             if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
             {
                 data.IntNumActa = GetMaxInspectionActNumber() + 1;
-                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+                data.NumActa = GetInspectNum(data);// //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
             }
 
             var result = DalService.Save(data);
@@ -5793,7 +5793,7 @@ namespace Aig.Auditoria.Services
             if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
             {
                 data.IntNumActa = GetMaxInspectionActNumber() + 1;
-                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+                data.NumActa = GetInspectNum(data);// //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
             }
 
             var result = DalService.Save(data);
@@ -5819,7 +5819,7 @@ namespace Aig.Auditoria.Services
             if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
             {
                 data.IntNumActa = GetMaxInspectionActNumber() + 1;
-                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+                data.NumActa = GetInspectNum(data);// //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
             }
 
             var result = DalService.Save(data);
@@ -5849,7 +5849,7 @@ namespace Aig.Auditoria.Services
             if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
             {
                 data.IntNumActa = GetMaxInspectionActNumber() + 1;
-                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+                data.NumActa = GetInspectNum(data);// //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
             }
 
             var result = DalService.Save(data);
@@ -5875,7 +5875,7 @@ namespace Aig.Auditoria.Services
             if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
             {
                 data.IntNumActa = GetMaxInspectionActNumber() + 1;
-                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+                data.NumActa = GetInspectNum(data);// //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
             }
 
             var result = DalService.Save(data);
@@ -5901,7 +5901,7 @@ namespace Aig.Auditoria.Services
             if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
             {
                 data.IntNumActa = GetMaxInspectionActNumber() + 1;
-                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+                data.NumActa = GetInspectNum(data);// //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
             }
 
             var result = DalService.Save(data);
@@ -5927,7 +5927,7 @@ namespace Aig.Auditoria.Services
             if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
             {
                 data.IntNumActa = GetMaxInspectionActNumber() + 1;
-                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+                data.NumActa = GetInspectNum(data);// //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
             }
 
             var result = DalService.Save(data);
@@ -5953,7 +5953,7 @@ namespace Aig.Auditoria.Services
             if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
             {
                 data.IntNumActa = GetMaxInspectionActNumber() + 1;
-                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+                data.NumActa = GetInspectNum(data);// //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
             }
 
             var result = DalService.Save(data);
@@ -5979,7 +5979,7 @@ namespace Aig.Auditoria.Services
             if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
             {
                 data.IntNumActa = GetMaxInspectionActNumber() + 1;
-                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+                data.NumActa = GetInspectNum(data);// //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
             }
 
             var result = DalService.Save(data);
@@ -6007,7 +6007,7 @@ namespace Aig.Auditoria.Services
             if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
             {
                 data.IntNumActa = GetMaxInspectionActNumber() + 1;
-                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+                data.NumActa = GetInspectNum(data);// //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
             }
 
             var result = DalService.Save(data);
@@ -6038,7 +6038,7 @@ namespace Aig.Auditoria.Services
             //generar el numero de acta
             if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa)) {
                 data.IntNumActa = GetMaxInspectionActNumber() + 1;
-                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+                data.NumActa = GetInspectNum(data);// //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
             }
 
             var result = DalService.Save(data);
@@ -6060,7 +6060,7 @@ namespace Aig.Auditoria.Services
             //generar el numero de acta
             if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa)) {
                 data.IntNumActa = GetMaxInspectionActNumber() + 1;
-                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+                data.NumActa = GetInspectNum(data);// //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
             }
 
             var result = DalService.Save(data);
@@ -6082,7 +6082,7 @@ namespace Aig.Auditoria.Services
             //generar el numero de acta
             if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa)) {
                 data.IntNumActa = GetMaxInspectionActNumber() + 1;
-                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+                data.NumActa = GetInspectNum(data);// string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
             }
 
             var result = DalService.Save(data);
@@ -6104,7 +6104,7 @@ namespace Aig.Auditoria.Services
             //generar el numero de acta
             if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa)) {
                 data.IntNumActa = GetMaxInspectionActNumber() + 1;
-                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+                data.NumActa = GetInspectNum(data);// //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
             }
 
             var result = DalService.Save(data);
@@ -6127,7 +6127,7 @@ namespace Aig.Auditoria.Services
             //generar el numero de acta
             if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa)) {
                 data.IntNumActa = GetMaxInspectionActNumber() + 1;
-                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+                data.NumActa = GetInspectNum(data);// //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
             }
 
             var result = DalService.Save(data);
@@ -6154,7 +6154,7 @@ namespace Aig.Auditoria.Services
             if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
             {
                 data.IntNumActa = GetMaxInspectionActNumber() + 1;
-                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+                data.NumActa = GetInspectNum(data);// //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
             }
 
             var result = DalService.Save(data);
@@ -6180,7 +6180,7 @@ namespace Aig.Auditoria.Services
             if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
             {
                 data.IntNumActa = GetMaxInspectionActNumber() + 1;
-                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+                data.NumActa = GetInspectNum(data);// //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
             }
 
             var result = DalService.Save(data);
@@ -6208,7 +6208,7 @@ namespace Aig.Auditoria.Services
             if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
             {
                 data.IntNumActa = GetMaxInspectionActNumber() + 1;
-                data.NumActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), data.TipoActa.ToString(), data.Establecimiento?.TipoEstablecimiento.ToString() ?? "NA", data.DatosEstablecimiento?.Provincia?.Codigo ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+                data.NumActa = GetInspectNum(data);// //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
             }
 
             var result = DalService.Save(data);
@@ -6227,6 +6227,41 @@ namespace Aig.Auditoria.Services
             return result;
         }
 
+
+        private string GetInspectNum(AUD_InspeccionTB data)
+        {
+            string tipoActa = data.TipoActa.ToString();
+            switch (data.TipoActa)
+            {
+                case enumAUD_TipoActa.BPMFM:
+                    {
+                        tipoActa = "BPM-FM";
+                        break;
+                    }
+                case enumAUD_TipoActa.BPMAM:
+                    {
+                        tipoActa = "BPM-AM";
+                        break;
+                    }
+                case enumAUD_TipoActa.BPMCD:
+                    {
+                        tipoActa = "BPM-CD";
+                        break;
+                    }
+                case enumAUD_TipoActa.BPMMN:
+                    {
+                        tipoActa = "BPM-MN";
+                        break;
+                    }
+            }
+
+            string tipoEstablecimiento = data.DatosEstablecimiento?.Establecimiento?.TipoEstablecimiento.ToString() ?? "";
+            string provincia = data.DatosEstablecimiento?.Provincia?.Codigo ?? "";
+
+            var numActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), tipoActa, tipoEstablecimiento, provincia ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");
+
+            return numActa;
+        }
 
     }
 

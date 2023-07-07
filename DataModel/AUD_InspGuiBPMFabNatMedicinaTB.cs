@@ -4089,7 +4089,7 @@ namespace DataModel
                     },
                     new ContenidoPreguntas()
                     {
-                        Titulo = "l) Procedimiento para el uso de instrumenta",
+                        Titulo = "l) Procedimiento para el uso de instrumental",
                         Criterio = "CALIFICABLE",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                     },

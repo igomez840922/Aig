@@ -105,6 +105,9 @@ namespace DataModel
         //[RegularExpression(@"^\d*$", ErrorMessage = "solo dígitos")]
         //[DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}", ApplyFormatInEditMode = true)]
 
+        [System.ComponentModel.DataAnnotations.StringLength(250)]
+        public string pinNum { get; set; }
+        public DateTime? pinDateValid { get; set; }
 
 
     }

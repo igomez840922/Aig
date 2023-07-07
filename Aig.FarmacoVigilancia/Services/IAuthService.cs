@@ -14,5 +14,7 @@ namespace Aig.FarmacoVigilancia.Services
         Task<ApiResponse> Register(RegisterModel registerRequest);
         Task<ApiResponse> Logout();
         Task<ApplicationUser> CurrentUserInfo(string username);
-    }
+        Task<ApiResponse> RequestPin(ReqPINModel request);
+
+	}
 }

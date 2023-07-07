@@ -33,11 +33,15 @@ namespace Aig.Auditoria.Components.Inspections._15_BpmBPA
         List<PropositoInspeccion> LPropositos { get; set; } = new List<PropositoInspeccion>();
 
 
+        bool disabledBtns { get; set; }
         protected async override Task OnInitializedAsync()
         {
             timer.Elapsed += (sender, eventArgs) => {
                 _ = InvokeAsync(() =>
                 {
+                    if (disabledBtns)
+                        return;
+
                     SaveData();
                 });
             };
@@ -93,6 +97,14 @@ namespace Aig.Auditoria.Components.Inspections._15_BpmBPA
             Inspeccion = await inspeccionService.Get(Id);
             if (Inspeccion != null)
             {
+                switch (Inspeccion.StatusInspecciones)
+                {
+                    case enum_StatusInspecciones.Completed:
+                        {
+                            disabledBtns = true;
+                            break;
+                        }
+                }
                 editContext = editContext != null ? editContext : new(Inspeccion);
 
                 Inspeccion.InspGuiaBPM_Bpa.PropositoInsp = Inspeccion.InspGuiaBPM_Bpa.PropositoInsp != null ? Inspeccion.InspGuiaBPM_Bpa.PropositoInsp : new AUD_PropositosInspeccion();
