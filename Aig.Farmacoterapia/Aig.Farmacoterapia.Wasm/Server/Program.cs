@@ -1,4 +1,5 @@
 using Aig.Farmacoterapia.Application.Features.Extensions;
+using Aig.Farmacoterapia.Domain.Interfaces;
 using Aig.Farmacoterapia.Infrastructure;
 using Aig.Farmacoterapia.Wasm.Server.Helpers;
 using Microsoft.Extensions.FileProviders;
@@ -10,6 +11,7 @@ context.LoadUnmanagedLibrary(Path.Combine(Directory.GetCurrentDirectory(), "Dink
 
 // Add services to the container.
 builder.Services.AddSharedInfrastructure(builder.Configuration);
+builder.Services.AddInfrastructureMappings();
 builder.Services.AddDatabase(builder.Configuration);
 builder.Services.AddIdentity();
 builder.Services.AddUserService();
@@ -18,6 +20,7 @@ builder.Services.AddRepositories();
 builder.Services.AddJwtAuthentication(builder.Configuration);
 builder.Services.RegisterSwagger();
 builder.Services.AddApplicationLayer();
+builder.Services.AddQuartz();
 // Add services to the container.
 
 //builder.Services.AddControllersWithViews();

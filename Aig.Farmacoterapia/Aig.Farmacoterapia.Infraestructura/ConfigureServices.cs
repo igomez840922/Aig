@@ -30,6 +30,12 @@ using System.Security.Claims;
 using System.Text;
 using DinkToPdf.Contracts;
 using DinkToPdf;
+using Quartz;
+using Aig.Farmacoterapia.Infrastructure.Jobs;
+using Aig.Farmacoterapia.Domain.Interfaces.Integration;
+using Aig.Farmacoterapia.Infrastructure.Services.Integration;
+using Aig.Farmacoterapia.Infrastructure.Resiliency;
+using Aig.Farmacoterapia.Infrastructure.Helpers.ApiClient;
 
 namespace Aig.Farmacoterapia.Infrastructure
 {
@@ -266,6 +272,9 @@ namespace Aig.Farmacoterapia.Infrastructure
             services.Configure<SysFarmConfiguration>(configuration.GetSection("SysFarmConfiguration"));
             services.Configure<DNFDConfiguration>(configuration.GetSection("DNFDConfiguration"));
             services.AddTransient<IMailService, SMTPMailService>();
+            services.AddTransient<ISqlRetryPolicy, SqlRetryPolicy>();
+            services.AddTransient<IRestApiClient, RestApiClient>();
+            services.AddTransient<ISysFarmService, SysFarmService>();
             services.AddSingleton(typeof(IConverter), new SynchronizedConverter(new PdfTools()));
 
             return services;
@@ -285,6 +294,38 @@ namespace Aig.Farmacoterapia.Infrastructure
             });
             return services;
         }
+        public static void AddJob<T>(this IServiceCollectionQuartzConfigurator configurator, string key, string cron) where T : IJob
+        {
+            var jobKey = new JobKey($"{Guid.NewGuid().GetHashCode():x}-{key}");
+            configurator.AddJob<T>(opts => opts.WithIdentity(jobKey));
+            configurator.AddTrigger(opts => opts
+                .ForJob(jobKey)
+                .WithIdentity($"{jobKey}-trigger")
+                .WithCronSchedule(cron)
+            );
+        }
+
+        public static IServiceCollection AddQuartz(this IServiceCollection services)
+        {
+            services.AddQuartz(q =>
+            {
+                q.UseMicrosoftDependencyInjectionJobFactory();
+                q.AddJob<RecordUpdateJob>("RecordUpdateJob", "0/5 * * * * ?"); // run every 5 seconds
+
+                //var tramitesProcessJob = new JobKey("TramitesProcessJob");
+                //q.AddJob<RecordUpdateJob>(opts => opts.WithIdentity(tramitesProcessJob));
+                //q.AddTrigger(opts => opts
+                //    .ForJob(tramitesProcessJob)
+                //    .WithIdentity("TramitesProcessJob-trigger")
+                //    .WithSimpleSchedule(x => x
+                //        .WithIntervalInHours(24)
+                //        .RepeatForever()));
+
+            });
+            services.AddQuartzHostedService(q => q.WaitForJobsToComplete = true);
+
+            return services;
+        }
         public static IServiceCollection RegisterInfrastructureServices(this IServiceCollection services, IConfiguration configuration)
         {
             AddSharedInfrastructure(services, configuration);
@@ -297,7 +338,7 @@ namespace Aig.Farmacoterapia.Infrastructure
             RegisterSwagger(services);
             AddInfrastructureMappings(services);
             AddHttpClient(services, configuration);
-
+            AddQuartz(services);
             return services;
         }
     }

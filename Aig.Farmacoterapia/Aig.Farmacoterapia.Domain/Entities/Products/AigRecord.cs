@@ -13,14 +13,14 @@ namespace Aig.Farmacoterapia.Domain.Entities.Products
         [JsonPropertyName("Id")]
         public int RecordId { get; set; }
 
-        [JsonPropertyName("IdTipoTabla")]
-        public int IdTipoTabla { get; set; }
+        //[JsonPropertyName("IdTipoTabla")]
+        //public int IdTipoTabla { get; set; }
 
-        [JsonPropertyName("TipoTabla")]
-        public object TipoTabla { get; set; }
+        //[JsonPropertyName("TipoTabla")]
+        //public object TipoTabla { get; set; }
 
-        [JsonPropertyName("IdEvaluacion")]
-        public int IdEvaluacion { get; set; }
+        //[JsonPropertyName("IdEvaluacion")]
+        //public int IdEvaluacion { get; set; }
 
         [JsonPropertyName("IdProducto")]
         public int IdProducto { get; set; }
@@ -64,8 +64,8 @@ namespace Aig.Farmacoterapia.Domain.Entities.Products
         [JsonPropertyName("FechaUltimaActualizacion")]
         public string FechaUltimaActualizacion { get; set; }
 
-        [JsonPropertyName("IdEstado")]
-        public int IdEstado { get; set; }
+        //[JsonPropertyName("IdEstado")]
+        //public int IdEstado { get; set; }
 
         [JsonPropertyName("Estado")]
         public string Estado { get; set; }

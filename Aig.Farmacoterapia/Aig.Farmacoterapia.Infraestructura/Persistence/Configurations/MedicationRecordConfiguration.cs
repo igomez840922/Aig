@@ -21,8 +21,6 @@ namespace Aig.Farmacoterapia.Infrastructure.Persistence.Configurations
             builder.Property(e => e.Presentaciones).HasJsonConversion();
             builder.Property(e => e.Excipientes).HasJsonConversion();
             builder.Ignore(c => c.ShowDetails);
-
- 
         }
       
     }

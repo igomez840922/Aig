@@ -7,6 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Integration\**" />
+    <EmbeddedResource Remove="Integration\**" />
+    <None Remove="Integration\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Compile Remove="Persistence\KeyApiAuthorizationDbContext.cs" />
   </ItemGroup>
 
@@ -65,9 +71,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Integration\DNFD\" />
     <Folder Include="Migrations\" />
-    <Folder Include="Services\Integration\" />
   </ItemGroup>
 
 </Project>
