@@ -192,6 +192,7 @@ namespace Aig.Farmacoterapia.Infrastructure
                 });
                 c.DocumentFilter<SwaggerOrderingFilter>();
                 c.SchemaFilter<SwaggerIgnoreFilter>();
+                c.CustomSchemaIds(type => type.ToString());
             });
         }
         public static void ConfigureSwagger(this IApplicationBuilder app)
@@ -262,6 +263,8 @@ namespace Aig.Farmacoterapia.Infrastructure
             services.AddScoped<AppState>();
             services.Configure<AppConfiguration>(configuration.GetSection("AppConfiguration"));
             services.Configure<MailConfiguration>(configuration.GetSection("MailConfiguration"));
+            services.Configure<SysFarmConfiguration>(configuration.GetSection("SysFarmConfiguration"));
+            services.Configure<DNFDConfiguration>(configuration.GetSection("DNFDConfiguration"));
             services.AddTransient<IMailService, SMTPMailService>();
             services.AddSingleton(typeof(IConverter), new SynchronizedConverter(new PdfTools()));
 
