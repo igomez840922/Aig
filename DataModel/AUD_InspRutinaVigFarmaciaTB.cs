@@ -60,15 +60,26 @@ namespace DataModel
         [System.ComponentModel.DataAnnotations.Schema.NotMapped]
         public AUD_ContenidoGenerico RegMovimientoExistencia { get => regMovimientoExistencia; set => SetProperty(ref regMovimientoExistencia, value); }
 
+        //REGISTRO DE MOVIMIENTO DE EXISTENCIA
+        private AUD_ContenidoGenerico regMovimientoExistencia2;
+        [System.ComponentModel.DataAnnotations.Schema.NotMapped]
+        public AUD_ContenidoGenerico RegMovimientoExistencia2 { get => regMovimientoExistencia2; set => SetProperty(ref regMovimientoExistencia2, value); }
+
         //ÁREA DE ALMACEN DE MEDICAMENTOS Y OTROS PRODUCTOS PARA LA SALUD HUMANA. (CUANDO APLIQUE).
         private AUD_ContenidoGenerico areaAlmacenMedicamentos;
         [System.ComponentModel.DataAnnotations.Schema.NotMapped]
         public AUD_ContenidoGenerico AreaAlmacenMedicamentos { get => areaAlmacenMedicamentos; set => SetProperty(ref areaAlmacenMedicamentos, value); }
 
-        //PROCEDIMIENTOS
-        private AUD_ContenidoGenerico procedimientos;
+        ////PROCEDIMIENTOS
+        //private AUD_ContenidoGenerico procedimientos;
+        //[System.ComponentModel.DataAnnotations.Schema.NotMapped]
+        //public AUD_ContenidoGenerico Procedimientos { get => procedimientos; set => SetProperty(ref procedimientos, value); }
+
+        //Datos Area Almacenamiento
+        private AUD_ContenidoGenerico datosAreaAlmacenamientoAlcohol;
         [System.ComponentModel.DataAnnotations.Schema.NotMapped]
-        public AUD_ContenidoGenerico Procedimientos { get => procedimientos; set => SetProperty(ref procedimientos, value); }
+        public AUD_ContenidoGenerico DatosAreaAlmacenamientoAlcohol { get => datosAreaAlmacenamientoAlcohol; set => SetProperty(ref datosAreaAlmacenamientoAlcohol, value); }
+
 
         //REPORTE DE INVENTARIO DE MEDICAMENTOS DE USO CONTROLADO
         private AUD_InventarioMedicamento inventarioMedicamento;
@@ -155,11 +166,11 @@ namespace DataModel
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
-                        Titulo = "Muebles separados de las paredes, pisos y techos",
+                        Titulo = "Tipo de mobiliario y Estado",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
-                        Titulo = "Tipo de mobiliario y Estado",
+                        Titulo = "Muebles separados de las paredes, pisos y techos",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
@@ -171,35 +182,51 @@ namespace DataModel
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
-                        Titulo = "Anuncio visible y legible frente al recetario con la siguiente instrucción: “El usuario que adquiera un medicamento de los regulados que se venden sin receta médica lo hace bajo su responsabilidad”. Artículo 151 de la Ley 1 de 10 de enero de 2001",
+                        Titulo = "Anuncio visible y legible frente al recetario con la siguiente instrucción: “El usuario que adquiera un medicamento de los regulados que se venden sin receta médica lo hace bajo su responsabilidad”. Art. 151 de la Ley 1 de 10 de enero de 2001 y Art. 625 del Decreto Ejecutivo 13 del 1 de marzo de 2023",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
-                        Titulo = "Farmacia Privada: Anuncio visible y legible Artículo 655 y Artículo 656 del Decreto Ejecutivo 115 de 16 de agosto de 2022.Artículo 655. Las farmacias privadas están obligadas a colocar, en sitio visible, un letrero que indique que el farmacéutico está facultado y obligado a ofrecer losmedicamentos intercambiables y al hacer la sustitución genérica, deberá constancia del producto dispensado con su firma y código de registro al reverso de la receta.A su vez, el paciente al momento de aceptar la sustitución genérica también dejará constancia mediante su firma o huella digital al reverso de la prescripción médica.Artículo 656. Las farmacias privadas están obligadas a colocar, en sitio visible, un letrero que indique “por su salud, consulte al farmacéutico sobre el uso adecuado delos medicamentos, especialmente los que presenta la leyenda venta bajo receta médica o frase similar”.",
-                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
-                    },
-                    //    new ContenidoPreguntas(){
-                    //    Titulo = "Farmacia Privada: Anuncio visible y legible Artículo 655 y Artículo 656 del Decreto Ejecutivo 115 de 16 de agosto de 2022. Artículo 655. Las farmacias privadas están obligadas a colocar, en sitio visible, un letrero que indique que el farmacéutico está facultado y obligado a ofrecer los medicamentos intercambiables y al hacer la sustitución genérica, deberá constancia del producto dispensado con su firma y código de registro al reverso de la receta. A su vez, el paciente al momento de aceptar la sustitución genérica también dejará constancia mediante su firma o huella digital al reverso de la prescripción médica.Artículo 656. Las farmacias privadas están obligadas a colocar, en sitio visible, un letrero que indique “por su salud, consulte al farmacéutico sobre el uso adecuado de los medicamentos, especialmente los que presenta la leyenda venta bajo receta médica o frase similar”.",
-                    //    LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
-                    //},
-                        new ContenidoPreguntas(){
-                        Titulo = "Higrotermómetro y formato de registro de temperatura y humedad relativa. El registro y control de los parámetros debe ser como mínimo dos veces al día de preferencia en horas de la mañana y mediodía",
+                        Titulo = "Anuncio visible y legible de Tabla de Promedio y Precio Mínimo Unitario de la Canasta básica de Medicamentos (De Referencia y Genéricos), según monitoreo de precios realizado en las principales farmacias. Resolución No. 774 de lunes 7 de octubre de 2019. Por medio de la cual se amplía la Canasta Básica de Medicamentos (CABAMED) DE 40 A 153 Productos Farmacéuticos",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
-                        Titulo = "Cuenta con programa de calibración de equipos como equipo para la medición de temperatura y humedad relativa",
+                        Titulo = "Anuncio visible y legible frente al recetario con la siguiente información: “Por su salud, consulte al farmacéutico sobre el uso adecuado de los medicamentos, especialmente los que presenta la leyenda venta bajo receta médica o frase similar”. Art. 625 del Decreto Ejecutivo 13 del 1 de marzo de 2023.",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
-                        Titulo = "El espacio físico es de un mínimo de 20 metros cuadrados. Esto incluye la ubicación de los medicamentos y otros productos para la salud humana, el área de consulta farmacéutica, el área de asesoría bibliográfica, el área administrativa del farmacéutico. Que permita adecuada y cómodamente las labores al personal. \r\nNo incluye el área de Almacén de Medicamentos y Otros Productos para la Salud Humana. (No aplican farmacias existentes antes de 18 de marzo de 2019)\r\n",
+                        Titulo = "Anuncio visible de Prohibido el ingreso de animales",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
-                        Titulo = "Área separada para la alimentación del personal",
+                        Titulo = "Anuncio visible de Prohibido Fumar",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
-                        Titulo = "Sanitario para el personal. En caso de que la farmacia esté ubicada en locales comerciales o similares y el mismo posea baños comunes (para compartir entre los locales comerciales), será permitido siempre y cuando el personal de la farmacia mantenga los debidos cuidados de higiene",
+                        Titulo = "La farmacia cuenta con equipos para llevar el control de temperatura y humedad relativa.",
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
+                    },
+                        new ContenidoPreguntas(){
+                        Titulo = "Cuenta con formato para el registro diario de temperatura y humedad relativa. El registro y control diario de los parámetros debe ser como mínimo dos veces al día, de preferencia en horas de la mañana y medio día.",
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
+                    },
+                        new ContenidoPreguntas(){
+                        Titulo = "Temperatura",
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion() { HideEvaluacion=true} },
+                    },
+                        new ContenidoPreguntas(){
+                        Titulo = "Humedad Relativa",
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion() { HideEvaluacion=true} },
+                    },
+                        new ContenidoPreguntas(){
+                        Titulo = "El establecimiento cuenta con espacio que permita realizar adecuada y cómodamente las labores al personal según aspectos biopsicosocial",
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
+                    },
+                        new ContenidoPreguntas(){
+                        Titulo = "Área separada para la ingesta de alimentos del personal. Si la farmacia está ubicada en locales comerciales o similares será permitido el uso de estos en áreas comunes",
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
+                    },
+                        new ContenidoPreguntas(){
+                        Titulo = "Cuenta con baño higiénico adecuado para uso del personal. Si la farmacia está ubicada en locales comerciales o similares será permitido el uso de estos en áreas comunes.",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
@@ -207,7 +234,7 @@ namespace DataModel
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
-                        Titulo = "Extintores contra incendios (vigentes y aprobados por el Cuerpo de Bomberos)",
+                        Titulo = "Extintores contra incendios",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
@@ -215,17 +242,44 @@ namespace DataModel
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
-                        Titulo = "Luces de emergencia",
+                        Titulo = "Lámpara de emergencia en lugares adecuados para la seguridad del personal y clientes",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
-                        Titulo = "Cuenta con un programa de mantenimiento preventivo que incluya cualquier desperfecto o condiciones no adecuadas de las estructuras",
+                        Titulo = "Existe un sistema para el control de fauna nociva y documento que respalde esta",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
-                        new ContenidoPreguntas(){
-                        Titulo = "Existe un sistema para el control de fauna nociva (Cebadera y certificado de fumigación)",
-                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
-                    },
+
+
+
+                    ////    new ContenidoPreguntas(){
+                    ////    Titulo = "Farmacia Privada: Anuncio visible y legible Artículo 655 y Artículo 656 del Decreto Ejecutivo 115 de 16 de agosto de 2022. Artículo 655. Las farmacias privadas están obligadas a colocar, en sitio visible, un letrero que indique que el farmacéutico está facultado y obligado a ofrecer los medicamentos intercambiables y al hacer la sustitución genérica, deberá constancia del producto dispensado con su firma y código de registro al reverso de la receta. A su vez, el paciente al momento de aceptar la sustitución genérica también dejará constancia mediante su firma o huella digital al reverso de la prescripción médica.Artículo 656. Las farmacias privadas están obligadas a colocar, en sitio visible, un letrero que indique “por su salud, consulte al farmacéutico sobre el uso adecuado de los medicamentos, especialmente los que presenta la leyenda venta bajo receta médica o frase similar”.",
+                    ////    LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
+                    ////},
+                    //    new ContenidoPreguntas(){
+                    //    Titulo = "Higrotermómetro y formato de registro de temperatura y humedad relativa. El registro y control de los parámetros debe ser como mínimo dos veces al día de preferencia en horas de la mañana y mediodía",
+                    //    LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
+                    //},
+                    //    new ContenidoPreguntas(){
+                    //    Titulo = "Cuenta con programa de calibración de equipos como equipo para la medición de temperatura y humedad relativa",
+                    //    LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
+                    //},
+                    //    new ContenidoPreguntas(){
+                    //    Titulo = "El espacio físico es de un mínimo de 20 metros cuadrados. Esto incluye la ubicación de los medicamentos y otros productos para la salud humana, el área de consulta farmacéutica, el área de asesoría bibliográfica, el área administrativa del farmacéutico. Que permita adecuada y cómodamente las labores al personal. \r\nNo incluye el área de Almacén de Medicamentos y Otros Productos para la Salud Humana. (No aplican farmacias existentes antes de 18 de marzo de 2019)\r\n",
+                    //    LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
+                    //},
+                    //    new ContenidoPreguntas(){
+                    //    Titulo = "Área separada para la alimentación del personal",
+                    //    LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
+                    //},
+                    //    new ContenidoPreguntas(){
+                    //    Titulo = "Sanitario para el personal. En caso de que la farmacia esté ubicada en locales comerciales o similares y el mismo posea baños comunes (para compartir entre los locales comerciales), será permitido siempre y cuando el personal de la farmacia mantenga los debidos cuidados de higiene",
+                    //    LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
+                    //},
+                    //    new ContenidoPreguntas(){
+                    //    Titulo = "Cuenta con un programa de mantenimiento preventivo que incluya cualquier desperfecto o condiciones no adecuadas de las estructuras",
+                    //    LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
+                    //},
                         new ContenidoPreguntas(){
                         Titulo = "Área de Asesoría Farmacéutica delimitada e identificada que permita la interacción privada entre farmacéutico y paciente",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
@@ -239,31 +293,31 @@ namespace DataModel
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
-                        Titulo = "Área delimitada, segregada e identificada de productos vencidos (devolución).",
+                        Titulo = "Área identificada, separada y delimitada para los productos vencidos o deteriorados, con el objetivo de evitar el riesgo de confusión entre medicamentos vencidos y medicamentos con fecha de expiración vigente.",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
-                        Titulo = "Refrigeradora para productos que requieren condiciones especiales de temperatura",
+                        Titulo = "Refrigeradora para productos que requieren condiciones especiales de temperatura. (si aplica).",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
-                        Titulo = "Termómetro para el refrigerador y registro de temperatura debidamente identificado",
+                        Titulo = "Termómetro para el refrigerador y formato de registro de temperatura. El registro y control diario de los parámetros debe ser como mínimo dos veces al día, de preferencia en horas de la mañana y medio día. (si aplica).",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
-                        new ContenidoPreguntas(){
-                        Titulo = "Existe un sistema de registro cronológico que permite documentar la frecuencia con que se realiza la limpieza en las áreas de farmacias",
-                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
-                    },
-                        new ContenidoPreguntas(){
-                        Titulo = "Las áreas de la farmacia están libres de polvo",
-                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
-                    },
+                    //    new ContenidoPreguntas(){
+                    //    Titulo = "Existe un sistema de registro cronológico que permite documentar la frecuencia con que se realiza la limpieza en las áreas de farmacias",
+                    //    LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
+                    //},
+                    //    new ContenidoPreguntas(){
+                    //    Titulo = "Las áreas de la farmacia están libres de polvo",
+                    //    LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
+                    //},
                         new ContenidoPreguntas(){
                         Titulo = "La farmacia estructuralmente tiene relación directa o conexión con clínica",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
-                        Titulo = "Valor informativo: \r\n\r\n1.Prohibiciones: no comer, no guardar plantas, ni comida, no fumar. \r\n2.“Que adiciona disposiciones a la Ley 1 de 2001, sobre medicamentos y otros productos para la salud humana, para prohibir la venta o cobro de bebidas alcohólicas en los establecimientos farmacéuticos”.\r\n3.La información dada por el paciente será manejada de manera confidencial.\r\n4.La venta de muestra médica al consumidor sea en establecimientos farmacéuticos o no farmacéuticos, en instalaciones de salud, en clínicas medicas públicas o privadas, es considerada una infracción a las normas de publicidad establecidas en la ley objeto de reglamentación, y como tal, acarreará la sanción respectiva. \r\n5.Las muestras médicas solo serán almacenadas en agencias distribuidoras que posean licencias de operación vigente. Las casas farmacéuticas que deseen importar, almacenar, manejar y distribuir las muestras médicas de sus productos deben obtener licencia de operación como distribuidora\r\n6. Se prohíbe la aplicación de medicamentos parenterales en la farmacia o que esta mantenga relación directa con clínicas. \r\n7.La farmacia desechará los empaques secundarios vacíos de medicamentos y no deberá guardarlos, las cajas vacías de medicamentos deben ser debidamente cortadas para evitar prácticas de incentivos monetarios por parte de las agencias distribuidoras o laboratorios fabricantes para su promoción, también aplica para cualquier otra forma de incentivo. tampoco podrán mantener material promocional visible, ni accesible al público de medicamentos de venta bajo receta médica para evitar el uso y abuso de medicamentos. \r\n8.La farmacia no debe comercializar medicamentos sin registro sanitario.",
+                        Titulo = "Valor informativo: \r\n1.Prohibiciones: no comer, no guardar plantas, ni comida, no fumar. \r\n2. Ley 17 de 12 de septiembre de 2014. “Que adiciona disposiciones a la Ley 1 de 2001, sobre medicamentos y otros productos para la salud humana, para prohibir la venta o cobro de bebidas alcohólicas en los establecimientos farmacéuticos”.\r\n3.La información dada por el paciente será manejada de manera confidencial.\r\n4.La venta de muestra médica al consumidor sea en establecimientos farmacéuticos o no farmacéuticos, en instalaciones de salud, en clínicas medicas públicas o privadas, es considerada una infracción a las normas de publicidad establecidas en la ley objeto de reglamentación, y como tal, acarreará la sanción respectiva. \r\n5.Las muestras médicas solo serán almacenadas en agencias distribuidoras que posean licencias de operación vigente. Las casas farmacéuticas que deseen importar, almacenar, manejar y distribuir las muestras médicas de sus productos deben obtener licencia de operación como distribuidora\r\n6. Se prohíbe la aplicación de medicamentos parenterales en la farmacia o que esta mantenga relación directa con clínicas. \r\n7.La farmacia desechará los empaques secundarios vacíos de medicamentos y no deberá guardarlos, las cajas vacías de medicamentos deben ser debidamente cortadas para evitar prácticas de incentivos monetarios por parte de las agencias distribuidoras o laboratorios fabricantes para su promoción, también aplica para cualquier otra forma de incentivo. tampoco podrán mantener material promocional visible, ni accesible al público de medicamentos de venta bajo receta médica para evitar el uso y abuso de medicamentos. \r\n8.La farmacia no debe comercializar medicamentos sin registro sanitario.",
                         IsHeader = true,
                     },
              };
@@ -286,7 +340,7 @@ namespace DataModel
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                     new ContenidoPreguntas(){
-                        Titulo = "Asegurado bajo llave u otro sistema de seguridad comprobada",
+                        Titulo = "Esta área permanece bajo llave y la misma está bajo la responsabilidad del Regente Farmacéutico",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                     new ContenidoPreguntas(){
@@ -297,6 +351,15 @@ namespace DataModel
                         Titulo = "Independiente de otras áreas",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
+                    new ContenidoPreguntas(){
+                        Titulo = "Descripción del lugar donde se almacenan y las medidas de seguridad:",
+                        IsHeader = true,
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
+                    },
+                    new ContenidoPreguntas(){
+                        Titulo = "Todas las sustancias controladas están colocadas en el área destinada para tal fin",
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
+                    },
              };
         }
 
@@ -305,22 +368,88 @@ namespace DataModel
             RegMovimientoExistencia = new AUD_ContenidoGenerico();
             RegMovimientoExistencia.LContenido = new List<ContenidoPreguntas>() {
                         new ContenidoPreguntas(){
-                        Titulo = "Se encuentra el Libro Récord en el establecimiento a disposición del inspector",
+                        Titulo = "Se mantiene un registro para el manejo de las sustancias controladas",
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
+                        Observaciones = "__ Registro en libro\r\n__Sistema automatizado"
+                    },
+                new ContenidoPreguntas(){
+                        Titulo = "Se encuentra el Libro autorizado para el registro del movimiento de inventario en el establecimiento a disposición del inspector",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
-                    new ContenidoPreguntas(){
+                new ContenidoPreguntas(){
+                        Titulo = "Libro Record para el registro de recetas está actualizado",
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
+                    },
+                new ContenidoPreguntas(){
+                        Titulo = "Se lleva un registro de las sustancias controladas que se van a destruir",
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
+                    },
+                new ContenidoPreguntas(){
+                        Titulo = "Todas las recetas se encuentran archivadas en orden cronológico, mensual o trimestral",
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
+                    },
+                new ContenidoPreguntas(){
+                        Titulo = "Mantiene el sistema automatizado para los registros de sustancias controladas cumpliendo con toda la información (con excepción de la firma del regente farmacéutico). ",
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
+                    },
+                new ContenidoPreguntas(){
+                        Titulo = "Durante la inspección se observan vales de sustancias controladas, estos se encuentran o están totalmente en blanco, pero firmados por el regente.",
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
+                    },
+                new ContenidoPreguntas(){
+                        Titulo = "Las cantidades físicas de las sustancias controladas que se encuentran en el establecimiento en comparación con los registros (libros o sistemas automatizados), coinciden.",
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
+                    },
+                new ContenidoPreguntas(){
+                        Titulo = "Las sustancias controladas que se encuentran almacenadas poseen registro sanitario o en situaciones excepcionales han sido autorizadas por DNFD",
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
+                    },
+
+                //new ContenidoPreguntas(){
+                //        Titulo = "Se encuentra el Libro Récord en el establecimiento a disposición del inspector",
+                //        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
+                //    },
+                //    new ContenidoPreguntas(){
+                //        Titulo = "El establecimiento cuenta con Libro Récord numerado y foliado por la DNFD",
+                //        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
+                //    },
+                //    new ContenidoPreguntas(){
+                //        Titulo = "Libro Record para el registro de recetas corrientes está al día hasta el",
+                //        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
+                //    },
+                //    new ContenidoPreguntas(){
+                //        Titulo = "Esta anota las recetas corriente y Antibióticos dispensadas en este libro",
+                //        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
+                //    },
+                //    new ContenidoPreguntas(){
+                //        Titulo = "Todas las recetas se encuentran archivadas en orden cronológico, mensual o trimestral",
+                //        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
+                //    },
+             };
+        }
+
+        public void Inicializa_RegMovimientoExistencia2()
+        {
+            RegMovimientoExistencia2 = new AUD_ContenidoGenerico();
+            RegMovimientoExistencia2.LContenido = new List<ContenidoPreguntas>() {
+                        new ContenidoPreguntas(){
+                        Titulo = "Se encuentra el Libro Récord en el establecimiento a disposición del inspector",
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
+                        Observaciones = ""
+                    },
+                new ContenidoPreguntas(){
                         Titulo = "El establecimiento cuenta con Libro Récord numerado y foliado por la DNFD",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
-                    new ContenidoPreguntas(){
+                new ContenidoPreguntas(){
                         Titulo = "Libro Record para el registro de recetas corrientes está al día hasta el",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
-                    new ContenidoPreguntas(){
-                        Titulo = "Esta anota las recetas corriente y Antibióticos dispensadas en este libro",
+                new ContenidoPreguntas(){
+                        Titulo = "Esta anotada las recetas corriente y Antibióticos dispensadas en este libro",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
-                    new ContenidoPreguntas(){
+                new ContenidoPreguntas(){
                         Titulo = "Todas las recetas se encuentran archivadas en orden cronológico, mensual o trimestral",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
@@ -380,7 +509,7 @@ namespace DataModel
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                     new ContenidoPreguntas(){
-                        Titulo = "Existe un sistema para el control de fauna nociva (Cebadera y certificado de fumigación).",
+                        Titulo = "Existe un sistema para el control de fauna nociva.",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                     new ContenidoPreguntas(){
@@ -391,47 +520,79 @@ namespace DataModel
                         Titulo = "Área de productos controlados, delimitada y asegurada bajo llave",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
-                    new ContenidoPreguntas(){
-                        Titulo = "Área de almacenamiento de Alcohol o productos inflamables con ventilación adecuada que evite la exposición a los vapores.",
-                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
-                    },
-                    new ContenidoPreguntas(){
-                        Titulo = "Área de almacenamiento de un alto inventario o volumen de Alcohol o productos inflamables el cual cuenta con extintores, detectores de humo o alarma contra incendio, lámpara de emergencia en el área y kit de emergencia para el manejo de derrames de sustancias peligrosas o corrosivas",
-                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
-                    }
+                    //new ContenidoPreguntas(){
+                    //    Titulo = "Área de almacenamiento de Alcohol o productos inflamables con ventilación adecuada que evite la exposición a los vapores.",
+                    //    LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
+                    //},
+                    //new ContenidoPreguntas(){
+                    //    Titulo = "Área de almacenamiento de un alto inventario o volumen de Alcohol o productos inflamables el cual cuenta con extintores, detectores de humo o alarma contra incendio, lámpara de emergencia en el área y kit de emergencia para el manejo de derrames de sustancias peligrosas o corrosivas",
+                    //    LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
+                    //}
              };
         }
 
-        public void Inicializa_Procedimientos()
+        //public void Inicializa_Procedimientos()
+        //{
+        //    Procedimientos = new AUD_ContenidoGenerico();
+        //    Procedimientos.LContenido = new List<ContenidoPreguntas>() {
+        //                new ContenidoPreguntas(){
+        //                Titulo = "Cuenta con procedimientos para almacenamiento de los medicamentos y otros productos para la salud humana",
+        //                LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
+        //            },
+        //            new ContenidoPreguntas(){
+        //                Titulo = "Cuenta con procedimientos para retiro y remplazo de productos vencidos",
+        //                LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
+        //            },
+        //            new ContenidoPreguntas(){
+        //                Titulo = "Cuenta con procedimientos de limpieza del área",
+        //                LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
+        //            },
+        //            new ContenidoPreguntas(){
+        //                Titulo = "Cuenta con procedimientos para la capacitación continua del personal",
+        //                LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
+        //            },
+        //            new ContenidoPreguntas(){
+        //                Titulo = "Cuenta con procedimientos de manejo de medicamentos de cadena de frío",
+        //                LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
+        //            },
+        //            new ContenidoPreguntas(){
+        //                Titulo = "Existen procedimientos estándares de operación para la devolución de los medicamentos a los proveedores y se deben documentar las transacciones por devolución de los medicamentos permitiendo la trazabilidad de acuerdo con las políticas acordadas con cada proveedor",
+        //                LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
+        //            },
+        //     };
+        //}
+
+        public void Inicializa_DatosAreaAlmacenamientoAlcohol()
         {
-            Procedimientos = new AUD_ContenidoGenerico();
-            Procedimientos.LContenido = new List<ContenidoPreguntas>() {
+            DatosAreaAlmacenamientoAlcohol = new AUD_ContenidoGenerico();
+            DatosAreaAlmacenamientoAlcohol.LContenido = new List<ContenidoPreguntas>() {
                         new ContenidoPreguntas(){
-                        Titulo = "Cuenta con procedimientos para almacenamiento de los medicamentos y otros productos para la salud humana",
-                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
-                    },
-                    new ContenidoPreguntas(){
-                        Titulo = "Cuenta con procedimientos para retiro y remplazo de productos vencidos",
-                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
-                    },
-                    new ContenidoPreguntas(){
-                        Titulo = "Cuenta con procedimientos de limpieza del área",
-                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
-                    },
-                    new ContenidoPreguntas(){
-                        Titulo = "Cuenta con procedimientos para la capacitación continua del personal",
-                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
-                    },
-                    new ContenidoPreguntas(){
-                        Titulo = "Cuenta con procedimientos de manejo de medicamentos de cadena de frío",
-                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
-                    },
-                    new ContenidoPreguntas(){
-                        Titulo = "Existen procedimientos estándares de operación para la devolución de los medicamentos a los proveedores y se deben documentar las transacciones por devolución de los medicamentos permitiendo la trazabilidad de acuerdo con las políticas acordadas con cada proveedor",
-                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
-                    },
+                            Titulo = "Separado",
+                            LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
+                        },
+                        new ContenidoPreguntas(){
+                            Titulo = "Cuenta con ventilación adecuada que evite la exposición a los vapores",
+                            LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
+                        },
+                        new ContenidoPreguntas(){
+                            Titulo = "Extintores contra incendios",
+                            LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
+                        },
+                        new ContenidoPreguntas(){
+                            Titulo = "Alarmas contra incendios o detector de humo",
+                            LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
+                        },
+                        new ContenidoPreguntas(){
+                            Titulo = "Lámpara de emergencia en lugares adecuados para la seguridad del personal",
+                            LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
+                        },
+                        new ContenidoPreguntas(){
+                            Titulo = "Cuenta con Kit de emergencia para el manejo de sustancias peligrosas o corrosivas",
+                            LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
+                        },
              };
         }
-                
+
+
     }
 }

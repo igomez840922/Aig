@@ -71,13 +71,12 @@
                                                                     <!-- /btn-group -->
                                                                 </td>
                                                             </tr>
-                                                            <tr>
+                                                            @* <tr>
                                                                 <td scope="row">5. @languageContainerService.Keys["Área Administrativa"]</td>
                                                                 <td style="text-align:right">
                                                                     <button type="button" class="btn btn-info" @onclick="(e)=>{SelectChapter(DataModel.Helper.enumSelectedChapter.Cap05);}">@languageContainerService.Keys["Select"]</button>
-                                                                    <!-- /btn-group -->
                                                                 </td>
-                                                            </tr>
+                                                            </tr> *@
                                                             <tr>
                                                                 <td scope="row">6. @languageContainerService.Keys["Área de Recepción de Productos"]</td>
                                                                 <td style="text-align:right">
@@ -93,14 +92,14 @@
                                                                 </td>
                                                             </tr>
                                                             <tr>
-                                                                <td scope="row">8. @languageContainerService.Keys["Área de Productos Devueltos y Vencidos"]</td>
+                                                                <td scope="row">8. @languageContainerService.Keys["Área para Productos Devueltos y Vencidos"]</td>
                                                                 <td style="text-align:right">
                                                                     <button type="button" class="btn btn-info" @onclick="(e)=>{SelectChapter(DataModel.Helper.enumSelectedChapter.Cap08);}">@languageContainerService.Keys["Select"]</button>
                                                                     <!-- /btn-group -->
                                                                 </td>
                                                             </tr>
                                                             <tr>
-                                                                <td scope="row">9. @languageContainerService.Keys["Área de Productos Retirados del Mercado"]</td>
+                                                                <td scope="row">9. @languageContainerService.Keys["Área para Productos Retirados del Mercado"]</td>
                                                                 <td style="text-align:right">
                                                                     <button type="button" class="btn btn-info" @onclick="(e)=>{SelectChapter(DataModel.Helper.enumSelectedChapter.Cap09);}">@languageContainerService.Keys["Select"]</button>
                                                                     <!-- /btn-group -->
@@ -142,7 +141,7 @@
                                                                 </td>
                                                             </tr>
                                                             <tr>
-                                                                <td scope="row">15. @languageContainerService.Keys["Área de Almacenamiento de Productos Sujetos a Control (Cuando Aplique)"]</td>
+                                                                <td scope="row">15. @languageContainerService.Keys["Área de Productos Controlados"]</td>
                                                                 <td style="text-align:right">
                                                                     <button type="button" class="btn btn-info" @onclick="(e)=>{SelectChapter(DataModel.Helper.enumSelectedChapter.Cap15);}">@languageContainerService.Keys["Select"]</button>
                                                                     <!-- /btn-group -->

@@ -98,6 +98,10 @@ namespace Aig.Auditoria.Components.Inspections._1_AperturaUbicacionFarmacia
                 {
                     Inspeccion.InspAperCambUbicFarm.Inicializa_DatosAreaAlmacenamiento();
                 }
+                if (Inspeccion.InspAperCambUbicFarm.DatosAreaAlmacenamientoAlcohol == null)
+                {
+                    Inspeccion.InspAperCambUbicFarm.Inicializa_DatosAreaAlmacenamientoAlcohol();
+                }
 
             }
             else { Cancel(); }

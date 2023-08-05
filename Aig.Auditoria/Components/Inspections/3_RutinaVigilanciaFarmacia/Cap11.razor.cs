@@ -96,9 +96,9 @@ namespace Aig.Auditoria.Components.Inspections._3_RutinaVigilanciaFarmacia
                 }
                     editContext = editContext != null ? editContext : new(Inspeccion);
 
-                    if (Inspeccion.InspRutinaVigFarmacia.Procedimientos == null)
+                    if (Inspeccion.InspRutinaVigFarmacia.DatosAreaAlmacenamientoAlcohol == null)
                     {
-                        Inspeccion.InspRutinaVigFarmacia.Inicializa_Procedimientos();
+                        Inspeccion.InspRutinaVigFarmacia.Inicializa_DatosAreaAlmacenamientoAlcohol();
                     }
                 }
                 else { Cancel(); }

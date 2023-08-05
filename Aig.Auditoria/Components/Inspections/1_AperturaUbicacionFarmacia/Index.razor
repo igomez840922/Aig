@@ -80,7 +80,7 @@
                                                                 </td>
                                                             </tr>
                                                             <tr>
-                                                                <td scope="row">6. @languageContainerService.Keys["Área Física de Farmacia"]</td>
+                                                                <td scope="row">6. @languageContainerService.Keys["Recetario"]</td>
                                                                 <td style="text-align:right">
                                                                     <button type="button" class="btn btn-info" @onclick="(e)=>{SelectChapter(DataModel.Helper.enumSelectedChapter.Cap06);}">@languageContainerService.Keys["Select"]</button>
                                                                     <!-- /btn-group -->
@@ -108,16 +108,23 @@
                                                                 </td>
                                                             </tr>
                                                             <tr>
-                                                                <td scope="row">10. @languageContainerService.Keys["Conclusiones"]</td>
+                                                                <td scope="row">10. @languageContainerService.Keys["Área de Almacen de Alcohol u otros productos inflamables"]</td>
                                                                 <td style="text-align:right">
                                                                     <button type="button" class="btn btn-info" @onclick="(e)=>{SelectChapter(DataModel.Helper.enumSelectedChapter.Cap10);}">@languageContainerService.Keys["Select"]</button>
                                                                     <!-- /btn-group -->
                                                                 </td>
                                                             </tr>
                                                             <tr>
-                                                                <td scope="row">11. @languageContainerService.Keys["Firmas"]</td>
+                                                                <td scope="row">11. @languageContainerService.Keys["Conclusiones"]</td>
                                                                 <td style="text-align:right">
                                                                     <button type="button" class="btn btn-info" @onclick="(e)=>{SelectChapter(DataModel.Helper.enumSelectedChapter.Cap11);}">@languageContainerService.Keys["Select"]</button>
+                                                                    <!-- /btn-group -->
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td scope="row">12. @languageContainerService.Keys["Firmas"]</td>
+                                                                <td style="text-align:right">
+                                                                    <button type="button" class="btn btn-info" @onclick="(e)=>{SelectChapter(DataModel.Helper.enumSelectedChapter.Cap12);}">@languageContainerService.Keys["Select"]</button>
                                                                     <!-- /btn-group -->
                                                                 </td>
                                                             </tr>
@@ -183,10 +190,15 @@
         }
     case DataModel.Helper.enumSelectedChapter.Cap10:
         {
-            <Aig.Auditoria.Components.Inspections._1_AperturaUbicacionFarmacia.CapConclusion Id="@Inspeccion.Id"></Aig.Auditoria.Components.Inspections._1_AperturaUbicacionFarmacia.CapConclusion>
+            <Aig.Auditoria.Components.Inspections._1_AperturaUbicacionFarmacia.Cap10 Id="@Inspeccion.Id"></Aig.Auditoria.Components.Inspections._1_AperturaUbicacionFarmacia.Cap10>
             break;
         }
     case DataModel.Helper.enumSelectedChapter.Cap11:
+        {
+            <Aig.Auditoria.Components.Inspections._1_AperturaUbicacionFarmacia.CapConclusion Id="@Inspeccion.Id"></Aig.Auditoria.Components.Inspections._1_AperturaUbicacionFarmacia.CapConclusion>
+            break;
+        }
+    case DataModel.Helper.enumSelectedChapter.Cap12:
         {
             <Aig.Auditoria.Components.Inspections._1_AperturaUbicacionFarmacia.CapFirmas Id="@Inspeccion.Id"></Aig.Auditoria.Components.Inspections._1_AperturaUbicacionFarmacia.CapFirmas>
             break;

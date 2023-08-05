@@ -93,10 +93,10 @@ namespace Aig.Auditoria.Components.Inspections._4_RutinaVigilanciaAgencia
                         }
                 }
                 editContext = editContext != null ? editContext : new(Inspeccion);
-                if(Inspeccion.InspRutinaVigAgencia.AreaAdministrativa == null)
-                {
-                    Inspeccion.InspRutinaVigAgencia.Inicializa_AreaAdministrativa();
-                }                
+                //if(Inspeccion.InspRutinaVigAgencia.AreaAdministrativa == null)
+                //{
+                //    Inspeccion.InspRutinaVigAgencia.Inicializa_AreaAdministrativa();
+                //}                
             }
             else { Cancel(); }
 
@@ -106,28 +106,28 @@ namespace Aig.Auditoria.Components.Inspections._4_RutinaVigilanciaAgencia
         //Save Data and Close
         protected async Task SaveData()
         {
-            try
-            {
-                var result = await inspeccionService.Save_RutinaVigilanciaAgencia_Cap5(Inspeccion);
-                if (result != null)
-                {
-                    await jsRuntime.InvokeVoidAsync("ShowMessage", languageContainerService.Keys["DataSaveSuccessfully"]);
-                    Inspeccion = result;
+            //try
+            //{
+            //    var result = await inspeccionService.Save_RutinaVigilanciaAgencia_Cap5(Inspeccion);
+            //    if (result != null)
+            //    {
+            //        await jsRuntime.InvokeVoidAsync("ShowMessage", languageContainerService.Keys["DataSaveSuccessfully"]);
+            //        Inspeccion = result;
 
-                    if (exit)
-                        await bus.Publish(new Aig.Auditoria.Events.Inspections.ChapterChangeEvent { Inspeccion = Inspeccion });
-                }
-                else
-                    await jsRuntime.InvokeVoidAsync("ShowError", languageContainerService.Keys["DataSaveError"]);
-            }
-            catch (Exception ex)
-            {
-                await jsRuntime.InvokeVoidAsync("ShowError", ex.Message);
-            }
-            finally
-            {
-                await this.InvokeAsync(StateHasChanged);
-            }
+            //        if (exit)
+            //            await bus.Publish(new Aig.Auditoria.Events.Inspections.ChapterChangeEvent { Inspeccion = Inspeccion });
+            //    }
+            //    else
+            //        await jsRuntime.InvokeVoidAsync("ShowError", languageContainerService.Keys["DataSaveError"]);
+            //}
+            //catch (Exception ex)
+            //{
+            //    await jsRuntime.InvokeVoidAsync("ShowError", ex.Message);
+            //}
+            //finally
+            //{
+            //    await this.InvokeAsync(StateHasChanged);
+            //}
         }
 
         //Cancel and Close

@@ -4,6 +4,7 @@ using DataAccess;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230725194934_M162")]
+    partial class M162
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -2073,6 +2075,9 @@ namespace DataAccess.Migrations
                     b.Property<string>("Actividades")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("AreaAdministrativa")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("AreaAlmacenMateriaPrima")
                         .HasColumnType("nvarchar(max)");
 
@@ -2164,9 +2169,6 @@ namespace DataAccess.Migrations
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("DatosAreaAlmacenamientoAlcohol")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("DatosFarmaceutico")
                         .HasColumnType("nvarchar(max)");
 
@@ -2197,10 +2199,10 @@ namespace DataAccess.Migrations
                     b.Property<string>("InventarioMedicamento")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("RegMovimientoExistencia")
+                    b.Property<string>("Procedimientos")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("RegMovimientoExistencia2")
+                    b.Property<string>("RegMovimientoExistencia")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("UpdatedDate")

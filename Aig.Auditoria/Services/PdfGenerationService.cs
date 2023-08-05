@@ -159,7 +159,7 @@ namespace Aig.Auditoria.Services
 
                         page.Content().Column(column =>
                         {
-                            column.Item().AlignCenter().Text("GUíA PARA LA VERIFICACIÓN DE LOS REQUISITOS ESTRUCTURALES DE APERTURA O MODIFICACIÓN POR CAMBIO DE UBICACIÓN DE FARMACIA".ToUpper()).Bold();
+                            column.Item().AlignCenter().Text("ACTA PARA LA VERIFICACIÓN DE LOS REQUISITOS ESTRUCTURALES DE APERTURA O MODIFICACIÓN POR CAMBIO DE UBICACIÓN DE FARMACIA COMUNITARIA".ToUpper()).Bold();
 
                             column.Item().PaddingVertical(5).AlignLeft().Text(" ");
 
@@ -348,7 +348,7 @@ namespace Aig.Auditoria.Services
                             });
 
                             column.Item().PaddingVertical(5).AlignLeft().Text(" ");
-                            column.Item().AlignLeft().Text(string.Format("Área Física de Farmacia".ToUpper())).Bold();
+                            column.Item().AlignLeft().Text(string.Format("Recetario".ToUpper())).Bold();
                             column.Item().Table(table =>
                             {
                                 table.ColumnsDefinition(columns =>
@@ -511,6 +511,47 @@ namespace Aig.Auditoria.Services
                                 }
                             });
 
+                            column.Item().PaddingVertical(5).AlignLeft().Text(" ");
+                            column.Item().AlignLeft().Text(string.Format("ÁREA DE ALMACEN DE ALCOHOL U OTROS PRODUCTOS INFLAMABLES. (CUANDO APLIQUE)".ToUpper())).Bold();
+                            column.Item().Table(table =>
+                            {
+                                table.ColumnsDefinition(columns =>
+                                {
+                                    columns.RelativeColumn((float)1);
+                                    columns.RelativeColumn((float)3);
+                                    columns.RelativeColumn((float)4);
+                                });
+                                table.Header(header =>
+                                {
+                                    header.Cell().Border(1).BorderColor(Colors.Black).DefaultTextStyle(cellTextStyle).Background("#011E56").AlignCenter().Padding(3).Text("RESPUESTA".ToUpper());
+                                    header.Cell().Border(1).BorderColor(Colors.Black).DefaultTextStyle(cellTextStyle).Background("#011E56").AlignCenter().Padding(3).Text("PREGUNTA".ToUpper());
+                                    header.Cell().Border(1).BorderColor(Colors.Black).DefaultTextStyle(cellTextStyle).Background("#011E56").AlignCenter().Padding(3).Text("OBSERVACIóN".ToUpper());
+                                });
+                                if (inspection.InspAperCambUbicFarm?.DatosAreaAlmacenamientoAlcohol?.LContenido?.Count > 0)
+                                {
+                                    foreach (var dat in inspection.InspAperCambUbicFarm.DatosAreaAlmacenamientoAlcohol.LContenido)
+                                    {
+                                        if (dat.IsHeader)
+                                        {
+                                            table.Cell().ColumnSpan(3).Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
+                                        }
+                                        else
+                                        {
+                                            if (dat.LEvaluacion?.Count > 0)
+                                            {
+                                                foreach (var eva in dat.LEvaluacion)
+                                                {
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                }
+                                            }
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Observaciones);
+                                        }
+                                    }
+
+                                }
+                            });
+
                             column.Item().PaddingVertical(5).AlignTop().Table(table =>
                             {
                                 table.ColumnsDefinition(columns =>
@@ -557,7 +598,6 @@ namespace Aig.Auditoria.Services
                             column.Item().Text("El Acta original se mantendrá en el expediente del establecimiento que permanece en la Dirección Nacional de Farmacia y Drogas y se hace entrega de una copia al firmante de esta acta, al finalizar la inspección").Bold();
 
                             column.Item().PaddingVertical(5).Text("DE NO CUMPLIR CON LOS REQUISITOS MÍNIMOS ESTRUCTURALES EN ESTA ACTA, EL USUARIO DEBERÁ SUBSANAR TODOS LOS PUNTOS PENDIENTES, PARA SU DEBIDA VERIFICACIÓN EN UNA SEGUNDA INSPECCIÓN. SI EN ESTA SEGUNDA INPECCIÓN REINCIDE EN LAS DESVIACIONES IDENTIFICADAS EN LA PRIMERA INSPECCIÓN, SE PROCEDERÁ A LA DEVOLUCIÓN DE LA SOLICITUD Y EL INTERESADO DEBERÁ REINICIAR EL TRÁMITE CON TODOS LOS REQUISITOS ESTABLECIDOS PARA EL MISMO").Bold();
-
 
                             column.Item().PaddingVertical(5).Text(string.Format("Esta Acta se levanta en presencia de los abajo firmantes\r\n"));
                             column.Item().Table(table =>
@@ -681,33 +721,32 @@ namespace Aig.Auditoria.Services
                                         tbl.Cell().ColumnSpan(3).AlignLeft().Text("Contáctenos:").Bold();
                                     });
 
-                                    tbl.Cell().AlignLeft().Text("S. Inspecciones");
-                                    tbl.Cell().AlignLeft().Text("512-9168/62 (Ext. 1126)");
+                                    tbl.Cell().AlignLeft().Text("Sede:");
+                                    tbl.Cell().AlignLeft().Text("512-9168");
                                     tbl.Cell().AlignLeft().Text("inspeccionesfyd@minsa.gob.pa");
 
-                                    tbl.Cell().AlignLeft().Text("S. Auditorías");
-                                    tbl.Cell().AlignLeft().Text("512-9168/62");
-                                    tbl.Cell().AlignLeft().Text("auditoriafyd@minsa.gob.pa");
-
-                                    tbl.Cell().AlignLeft().Text("OR Veraguas");
-                                    tbl.Cell().AlignLeft().Text("935-0316/18");
+                                    tbl.Cell().AlignLeft().Text("Provincias Centrales");
+                                    tbl.Cell().AlignLeft().Text("935-0316 ");
                                     tbl.Cell().AlignLeft().Text("orvdnfd@minsa.gob.pa");
 
-                                    tbl.Cell().AlignLeft().Padding(3).Text("OR Chiriquí");
-                                    tbl.Cell().AlignLeft().Text("728-0154");
+                                    tbl.Cell().AlignLeft().Text("Chiriquí y Bocas del Toro");
+                                    tbl.Cell().AlignLeft().Text("774-7410");
                                     tbl.Cell().AlignLeft().Text("fydchiriqui@minsa.gob.pa");
 
-                                    tbl.Cell().AlignLeft().Text("OR Colón");
+                                    tbl.Cell().AlignLeft().Text("Colón");
                                     tbl.Cell().AlignLeft().Text("475-2060 Ext. 5021");
-                                    tbl.Cell().AlignLeft().Text("mbramwell@minsa.gob.pa");
+                                    tbl.Cell().AlignLeft().Text("");
 
-                                    tbl.Cell().AlignLeft().Text("OR Panamá Pacífico");
+                                    tbl.Cell().AlignLeft().Text("Panamá Pacífico");
                                     tbl.Cell().AlignLeft().Text("504-2565");
-                                    tbl.Cell().AlignLeft().Text("rlquiros@minsa.gob.pa");
+                                    tbl.Cell().AlignLeft().Text("");
                                 });
 
                                 table.Cell().ColumnSpan(2).AlignRight().Padding(3).AlignBottom().Text(string.Format("Confeccionado: {0}", DateTime.Now.ToString("dd/MM/yyyy")));
                             });
+
+                            column.Item().AlignLeft().PaddingVertical(5).Text(string.Format("El establecimiento se compromete al fiel cumplimiento del Artículo 346 del Decreto Ejecutivo 13 de 1 de marzo de 2023:\r\nAl establecimiento farmacéutico que no cuente con un regente farmacéutico, por despido, se le suspenderá la licencia de operación, hasta que cubra la falta del regente farmacéutico, si es por otras causas, el establecimiento tiene un plazo de hasta treinta días hábiles para cubrir la regencia.\r\n\r\nEl establecimiento se compromete al fiel cumplimiento del Artículo 347 del Decreto Ejecutivo 13 de 1 de marzo de 2023:\r\nEn el caso de los establecimientos que no cuenten con farmacéuticos idóneos durante todo el horario de atención al público del local, el técnico en farmacia exigirá la presentación de la receta o prescripción médica en los turnos que no cuenten con la presencia de un farmacéutico. Para los efectos de la dispensación de medicamentos para enfermedades crónicas, de no contarse con la receta o prescripción, el establecimiento farmacéutico debe contar con un sistema de control informático que detalle de manera mínima los elementos de un perfil farmacoterapéutico, bajo la tutela del farmacéutico, en ambos casos. De igual forma, el establecimiento tiene la obligación de informar al consumidor sobre esa condición particular, informando el horario de los farmacéuticos mediante avisos colocados frente al dispensario de los productos farmacéuticos.\r\n\r\nEl establecimiento se compromete al fiel cumplimiento del Artículo 349 del Decreto Ejecutivo 13 de 1 de marzo de 2023:\r\nLa Dirección Nacional de Farmacia y Drogas podrá realizar una inspección en cualquier momento a fin de verificar lo indicado en la declaración, de no coincidir con lo declarado se tomarán las medidas legales pertinentes.\r\n\r\nEl establecimiento se compromete al fiel cumplimiento del Artículo 351 del Decreto Ejecutivo 13 de 1 de marzo de 2023:\r\nLos establecimientos dispondrán de un periodo de hasta veinte días hábiles, contados a partir de la fecha de notificación de los resultados de la evaluación de las solicitudes de licencias, para subsanar las observaciones realizadas. De no subsanarse lo señalado en el término indicado, se procederá a la devolución de la solicitud y el interesado deberá iniciar un nuevo trámite.\r\n\r\nEl establecimiento se compromete al fiel cumplimiento del Artículo 355 del Decreto Ejecutivo 13 de 1 de marzo de 2023:\r\nTodos los establecimientos farmacéuticos están obligados a permitir el acceso de manera inmediata a la autoridad de salud, a fin de que se realicen las funciones de vigilancia y fiscalización.\r\n\r\nEl establecimiento se compromete al fiel cumplimiento del Artículo 363 del Decreto Ejecutivo 13 de 1 de marzo de 2023:\r\nLa Dirección Nacional de Farmacia y Drogas, como ente regulador de todo lo referente a los productos farmacéuticos, incluyendo su uso y manejo, podrá inspeccionar en cualquier momento durante las horas declaradas como horario de operación, todos los establecimientos públicos o privados, donde se maneje o utilicen productos farmacéuticos y los productos regulados por la Ley a fin de velar por la calidad y seguridad del producto y el cumplimento de las normas vigentes. Todos los establecimientos que comercialicen medicamentos y Otros productos para la salud humana están obligados a permitir el acceso de manera inmediata a la autoridad de salud, de tal forma que se realicen las funciones de vigilancia y fiscalización.\r\n\r\nEl establecimiento se compromete al fiel cumplimiento del Artículo 369 del Decreto Ejecutivo 13 de 1 de marzo de 2023:\r\nEl representante legal o propietario de la farmacia debe gestionar el mantenimiento preventivo que incluya cualquier desperfecto o condiciones no adecuadas de las estructuras. La farmacia debe contar con equipo para la medición de temperatura y humedad relativa.\r\n\r\nEl establecimiento se compromete al fiel cumplimiento del Artículo 376 del Decreto Ejecutivo 13 de 1 de marzo de 2023:\r\nAl momento de la recepción se prohíbe colocar las cajas de medicamentos directamente sobre el piso, y se mantendrán los medicamentos separados de paredes y techo.\r\n\r\nEl establecimiento se compromete al fiel cumplimiento del Artículo 381 del Decreto Ejecutivo 13 de 1 de marzo de 2023:\r\nEl área de almacenamiento contará con procedimientos estándares de operación para los procesos que se desarrollan en el almacén.\r\n\r\nEl establecimiento se compromete al fiel cumplimiento del Artículo 385 del Decreto Ejecutivo 13 de 1 de marzo de 2023:\r\nLos medicamentos deben colocarse a distancia adecuada de paredes, piso y techo, y las condiciones de estos deben ser adecuadas para evitar posibles contaminaciones de los medicamentos. Además, las cajas donde se disponen los medicamentos próximos a ubicación en el recetario no deben obstruir el libre tránsito del personal.\r\n\r\n\r\nFirma de Regente Farmacéutico:\r\n"));
+
 
                         });
 
@@ -768,7 +807,7 @@ namespace Aig.Auditoria.Services
                         });
 
                         page.Content().Column(column => {
-                            column.Item().AlignCenter().Text("GUíA PARA LA VERIFICACIÓN DE LOS REQUISITOS ESTRUCTURALES DE APERTURA O MODIFICACIÓN POR CAMBIO DE UBICACIÓN DE AGENCIA DISTRIBUIDORA".ToUpper()).Bold();
+                            column.Item().AlignCenter().Text("ACTA PARA LA VERIFICACIÓN DE LOS REQUISITOS ESTRUCTURALES DE APERTURA O MODIFICACIÓN POR CAMBIO DE UBICACIÓN DE AGENCIA DISTRIBUIDORA".ToUpper()).Bold();
 
                             column.Item().PaddingVertical(5).AlignLeft().Text(" ");
 
@@ -882,8 +921,8 @@ namespace Aig.Auditoria.Services
                                     table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("Teléfono / Celular");
                                     table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(string.Format("{0} / {1}", inspection.InspAperCambUbicAgen.DatosRegente.TelefonoOfic, inspection.InspAperCambUbicAgen.DatosRegente?.TelefonoMovil));
 
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("Se encontraba presente al momento de la inspección");
-                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperCambUbicAgen.DatosRegente.PresenteEnInspeccion));
+                                    //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("Se encontraba presente al momento de la inspección");
+                                    //table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperCambUbicAgen.DatosRegente.PresenteEnInspeccion));
 
                                     table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text("El Regente Farmacéutico realiza otras funciones del dentro de la empresa?");
                                     table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(inspection.InspAperCambUbicAgen.DatosRegente.RealizaOtraFuncion));
@@ -1419,49 +1458,49 @@ namespace Aig.Auditoria.Services
                                 });
                             }
 
-                            if (inspection.InspAperCambUbicAgen.AreaDesperdicio != null)
-                            {
-                                column.Item().PaddingVertical(5).AlignLeft().Text(" ");
-                                column.Item().AlignLeft().Text(string.Format("ÁREA DE DESPERDICIOS QUE SE GENERAN Y NO PUEDEN SER COLOCADOS EN EL ÁREA DE ALMACENAMIENTO".ToUpper())).Bold();
-                                column.Item().Table(table =>
-                                {
-                                    table.ColumnsDefinition(columns =>
-                                    {
-                                        columns.RelativeColumn((float)3);
-                                        columns.RelativeColumn((float)1);
-                                        columns.RelativeColumn((float)4);
-                                    });
-                                    table.Header(header =>
-                                    {
-                                        header.Cell().Border(1).BorderColor(Colors.Black).DefaultTextStyle(cellTextStyle).Background("#011E56").AlignCenter().Padding(3).Text("PREGUNTA".ToUpper());
-                                        header.Cell().Border(1).BorderColor(Colors.Black).DefaultTextStyle(cellTextStyle).Background("#011E56").AlignCenter().Padding(3).Text("EVALUACIÓN".ToUpper());
-                                        header.Cell().Border(1).BorderColor(Colors.Black).DefaultTextStyle(cellTextStyle).Background("#011E56").AlignCenter().Padding(3).Text("OBSERVACIóN".ToUpper());
-                                    });
-                                    if (inspection.InspAperCambUbicAgen?.AreaDesperdicio?.LContenido?.Count > 0)
-                                    {
-                                        foreach (var dat in inspection.InspAperCambUbicAgen.AreaDesperdicio.LContenido)
-                                        {
-                                            if (dat.IsHeader)
-                                            {
-                                                table.Cell().ColumnSpan(3).Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
-                                            }
-                                            else
-                                            {
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
-                                                if (dat.LEvaluacion?.Count > 0)
-                                                {
-                                                    foreach (var eva in dat.LEvaluacion)
-                                                    {
-                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
-                                                    }
-                                                }
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Observaciones);
-                                            }
-                                        }
+                            //if (inspection.InspAperCambUbicAgen.AreaDesperdicio != null)
+                            //{
+                            //    column.Item().PaddingVertical(5).AlignLeft().Text(" ");
+                            //    column.Item().AlignLeft().Text(string.Format("ÁREA DE DESPERDICIOS QUE SE GENERAN Y NO PUEDEN SER COLOCADOS EN EL ÁREA DE ALMACENAMIENTO".ToUpper())).Bold();
+                            //    column.Item().Table(table =>
+                            //    {
+                            //        table.ColumnsDefinition(columns =>
+                            //        {
+                            //            columns.RelativeColumn((float)3);
+                            //            columns.RelativeColumn((float)1);
+                            //            columns.RelativeColumn((float)4);
+                            //        });
+                            //        table.Header(header =>
+                            //        {
+                            //            header.Cell().Border(1).BorderColor(Colors.Black).DefaultTextStyle(cellTextStyle).Background("#011E56").AlignCenter().Padding(3).Text("PREGUNTA".ToUpper());
+                            //            header.Cell().Border(1).BorderColor(Colors.Black).DefaultTextStyle(cellTextStyle).Background("#011E56").AlignCenter().Padding(3).Text("EVALUACIÓN".ToUpper());
+                            //            header.Cell().Border(1).BorderColor(Colors.Black).DefaultTextStyle(cellTextStyle).Background("#011E56").AlignCenter().Padding(3).Text("OBSERVACIóN".ToUpper());
+                            //        });
+                            //        if (inspection.InspAperCambUbicAgen?.AreaDesperdicio?.LContenido?.Count > 0)
+                            //        {
+                            //            foreach (var dat in inspection.InspAperCambUbicAgen.AreaDesperdicio.LContenido)
+                            //            {
+                            //                if (dat.IsHeader)
+                            //                {
+                            //                    table.Cell().ColumnSpan(3).Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
+                            //                }
+                            //                else
+                            //                {
+                            //                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
+                            //                    if (dat.LEvaluacion?.Count > 0)
+                            //                    {
+                            //                        foreach (var eva in dat.LEvaluacion)
+                            //                        {
+                            //                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                            //                        }
+                            //                    }
+                            //                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Observaciones);
+                            //                }
+                            //            }
 
-                                    }
-                                });
-                            }
+                            //        }
+                            //    });
+                            //}
 
                             if (inspection.InspAperCambUbicAgen.Requisitos != null)
                             {
@@ -1615,7 +1654,7 @@ namespace Aig.Auditoria.Services
                             column.Item().PaddingVertical(5).Text("OBSERVACIÓN:").Bold();
                             column.Item().Text("El Acta original se mantendrá en el expediente del establecimiento que permanece en la Dirección Nacional de Farmacia y Drogas y se hace entrega de una copia al firmante de esta acta, al finalizar la inspección").Bold();
 
-                            column.Item().PaddingVertical(5).Text("COMO PARTE DE LOS REQUISITOS PARA LA EMISIÓN DE LA LICENCIA DE OPERACIÓN, LAS DESVIACIONES OBSERVADAS EN LA INSPECCIÓN, DEBERÁNM SER SUBSANADAS EN UN TERMINO NO MAYOR A 20 DÍAS, DENTRO DE LOS CUALES DEBEN NOTIFICAR A LA DIRECCIÓN NACIONAL DE FARMACIA Y DROGAS. PARA REALIZAR LA INSPECCIÓN DEFINITIVA").Bold();
+                            column.Item().PaddingVertical(5).Text("COMO PARTE DE LOS REQUISITOS PARA LA EMISIÓN DE LA LICENCIA DE OPERACIÓN, LAS DESVIACIONES OBSERVADAS EN LA INSPECCIÓN, DEBERÁN SER SUBSANADAS EN UN TERMINO NO MAYOR A 20 DÍAS, DENTRO DE LOS CUALES DEBEN NOTIFICAR A LA DIRECCIÓN NACIONAL DE FARMACIA Y DROGAS. PARA REALIZAR LA INSPECCIÓN DEFINITIVA.").Bold();
 
                             if (inspection.DatosConclusiones != null)
                             {
@@ -1747,7 +1786,7 @@ namespace Aig.Auditoria.Services
                                     tbl.Cell().AlignLeft().Text("Ley 1 de 10 de enero de 2001");
                                     tbl.Cell().AlignLeft().Text("Ley 17 de 12 de septiembre de 2014");
                                     tbl.Cell().AlignLeft().Text("Ley 24 de 29 de enero de 1963");
-                                    tbl.Cell().AlignLeft().Text("Decreto Ejecutivo 115 de 16 de agosto de 2022");
+                                    tbl.Cell().AlignLeft().Text("Decreto Ejecutivo 13 de 1 de marzo de 2023.");
                                 });
 
                                 table.Cell().Table(tbl => {
@@ -1764,28 +1803,28 @@ namespace Aig.Auditoria.Services
                                     });
 
                                     tbl.Cell().AlignLeft().Text("S. Inspecciones");
-                                    tbl.Cell().AlignLeft().Text("512-9168/62 (Ext. 1126)");
+                                    tbl.Cell().AlignLeft().Text("Sede: 512 -9168 ");
                                     tbl.Cell().AlignLeft().Text("inspeccionesfyd@minsa.gob.pa");
 
-                                    tbl.Cell().AlignLeft().Text("S. Auditorías");
-                                    tbl.Cell().AlignLeft().Text("512-9168/62");
-                                    tbl.Cell().AlignLeft().Text("auditoriafyd@minsa.gob.pa");
-
-                                    tbl.Cell().AlignLeft().Text("OR Veraguas");
-                                    tbl.Cell().AlignLeft().Text("935-0316/18");
+                                    tbl.Cell().AlignLeft().Text("Provincias Centrales");
+                                    tbl.Cell().AlignLeft().Text("935-0316 ");
                                     tbl.Cell().AlignLeft().Text("orvdnfd@minsa.gob.pa");
 
-                                    tbl.Cell().AlignLeft().Padding(3).Text("OR Chiriquí");
-                                    tbl.Cell().AlignLeft().Text("728-0154");
-                                   tbl.Cell().AlignLeft().Text("fydchiriqui@minsa.gob.pa");
+                                    tbl.Cell().AlignLeft().Text("Chiriquí y Bocas del Toro");
+                                    tbl.Cell().AlignLeft().Text("774-7410");
+                                    tbl.Cell().AlignLeft().Text("fydchiriqui@minsa.gob.pa");
+
+                                    tbl.Cell().AlignLeft().Padding(3).Text("Colón");
+                                    tbl.Cell().AlignLeft().Text("475-2060 Ext. 5021");
+                                   tbl.Cell().AlignLeft().Text("");
 
                                     tbl.Cell().AlignLeft().Text("OR Colón");
                                     tbl.Cell().AlignLeft().Text("475-2060 Ext. 5021");
-                                    tbl.Cell().AlignLeft().Text("mbramwell@minsa.gob.pa");
+                                    tbl.Cell().AlignLeft().Text("");
 
-                                    tbl.Cell().AlignLeft().Text("OR Panamá Pacífico");
+                                    tbl.Cell().AlignLeft().Text("Panamá Pacífico");
                                     tbl.Cell().AlignLeft().Text("504-2565");
-                                    tbl.Cell().AlignLeft().Text("rlquiros@minsa.gob.pa");
+                                    tbl.Cell().AlignLeft().Text("");
                                 });
 
                                 //table.Cell().ColumnSpan(2).AlignRight().Padding(3).AlignBottom().Text(string.Format("Confeccionado: {0}", DateTime.Now.ToString("dd/MM/yyyy")));
@@ -2139,7 +2178,7 @@ namespace Aig.Auditoria.Services
                                     });
                                     table.Header(header =>
                                     {
-                                        header.Cell().ColumnSpan(3).Border(1).BorderColor(Colors.Black).DefaultTextStyle(cellTextStyle).Background("#011E56").AlignLeft().Padding(3).Text("ÁREA FÍSICA DE LA FARMACIA".ToUpper());
+                                        header.Cell().ColumnSpan(3).Border(1).BorderColor(Colors.Black).DefaultTextStyle(cellTextStyle).Background("#011E56").AlignLeft().Padding(3).Text("Recetario".ToUpper());
                                         header.Cell().Border(1).BorderColor(Colors.Black).DefaultTextStyle(cellTextStyle).Background("#011E56").AlignCenter().Padding(3).Text("PREGUNTA".ToUpper());
                                         header.Cell().Border(1).BorderColor(Colors.Black).DefaultTextStyle(cellTextStyle).Background("#011E56").AlignCenter().Padding(3).Text("EVALUACIÓN".ToUpper());
                                         header.Cell().Border(1).BorderColor(Colors.Black).DefaultTextStyle(cellTextStyle).Background("#011E56").AlignCenter().Padding(3).Text("OBSERVACIóN".ToUpper());
@@ -2260,6 +2299,51 @@ namespace Aig.Auditoria.Services
                                 });
                             }
 
+                            if (inspection.InspRutinaVigFarmacia.RegMovimientoExistencia2 != null)
+                            {
+                                column.Item().PaddingVertical(5).AlignLeft().Text(" ");
+                                //column.Item().AlignLeft().Text(string.Format("REGISTRO DE MOVIMIENTO DE EXISTENCIA".ToUpper())).Bold();
+                                column.Item().Table(table =>
+                                {
+                                    table.ColumnsDefinition(columns =>
+                                    {
+                                        columns.RelativeColumn((float)3);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)4);
+                                    });
+                                    table.Header(header =>
+                                    {
+                                        header.Cell().ColumnSpan(3).Border(1).BorderColor(Colors.Black).DefaultTextStyle(cellTextStyle).Background("#011E56").AlignLeft().Padding(3).Text("REGISTRO DE MOVIMIENTO DE EXISTENCIA".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).DefaultTextStyle(cellTextStyle).Background("#011E56").AlignCenter().Padding(3).Text("PREGUNTA".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).DefaultTextStyle(cellTextStyle).Background("#011E56").AlignCenter().Padding(3).Text("EVALUACIÓN".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).DefaultTextStyle(cellTextStyle).Background("#011E56").AlignCenter().Padding(3).Text("OBSERVACIóN".ToUpper());
+                                    });
+                                    if (inspection.InspRutinaVigFarmacia?.RegMovimientoExistencia2?.LContenido?.Count > 0)
+                                    {
+                                        foreach (var dat in inspection.InspRutinaVigFarmacia.RegMovimientoExistencia2.LContenido)
+                                        {
+                                            if (dat.IsHeader)
+                                            {
+                                                table.Cell().ColumnSpan(3).Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
+                                            }
+                                            else
+                                            {
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
+                                                if (dat.LEvaluacion?.Count > 0)
+                                                {
+                                                    foreach (var eva in dat.LEvaluacion)
+                                                    {
+                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    }
+                                                }
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Observaciones);
+                                            }
+                                        }
+
+                                    }
+                                });
+                            }
+
                             if (inspection.InspRutinaVigFarmacia.AreaAlmacenMedicamentos != null)
                             {
                                 column.Item().PaddingVertical(5).AlignLeft().Text(" ");
@@ -2305,7 +2389,51 @@ namespace Aig.Auditoria.Services
                                 });
                             }
 
-                            if (inspection.InspRutinaVigFarmacia.Procedimientos != null)
+                            //if (inspection.InspRutinaVigFarmacia.Procedimientos != null)
+                            //{
+                            //    column.Item().PaddingVertical(5).AlignLeft().Text(" ");
+                            //    //column.Item().AlignLeft().Text(string.Format("PROCEDIMIENTOS".ToUpper())).Bold();
+                            //    column.Item().Table(table =>
+                            //    {
+                            //        table.ColumnsDefinition(columns =>
+                            //        {
+                            //            columns.RelativeColumn((float)3);
+                            //            columns.RelativeColumn((float)1);
+                            //            columns.RelativeColumn((float)4);
+                            //        });
+                            //        table.Header(header =>
+                            //        {
+                            //            header.Cell().ColumnSpan(3).Border(1).BorderColor(Colors.Black).DefaultTextStyle(cellTextStyle).Background("#011E56").AlignLeft().Padding(3).Text("G) PROCEDIMIENTOS".ToUpper());
+                            //            header.Cell().Border(1).BorderColor(Colors.Black).DefaultTextStyle(cellTextStyle).Background("#011E56").AlignCenter().Padding(3).Text("PREGUNTA".ToUpper());
+                            //            header.Cell().Border(1).BorderColor(Colors.Black).DefaultTextStyle(cellTextStyle).Background("#011E56").AlignCenter().Padding(3).Text("EVALUACIÓN".ToUpper());
+                            //            header.Cell().Border(1).BorderColor(Colors.Black).DefaultTextStyle(cellTextStyle).Background("#011E56").AlignCenter().Padding(3).Text("OBSERVACIóN".ToUpper());
+                            //        });
+                            //        if (inspection.InspRutinaVigFarmacia?.Procedimientos?.LContenido?.Count > 0)
+                            //        {
+                            //            foreach (var dat in inspection.InspRutinaVigFarmacia.Procedimientos.LContenido)
+                            //            {
+                            //                if (dat.IsHeader)
+                            //                {
+                            //                    table.Cell().ColumnSpan(3).Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
+                            //                }
+                            //                else
+                            //                {
+                            //                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
+                            //                    if (dat.LEvaluacion?.Count > 0)
+                            //                    {
+                            //                        foreach (var eva in dat.LEvaluacion)
+                            //                        {
+                            //                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                            //                        }
+                            //                    }
+                            //                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Observaciones);
+                            //                }
+                            //            }
+
+                            //        }
+                            //    });
+                            //}
+                            if (inspection.InspRutinaVigFarmacia.DatosAreaAlmacenamientoAlcohol != null)
                             {
                                 column.Item().PaddingVertical(5).AlignLeft().Text(" ");
                                 //column.Item().AlignLeft().Text(string.Format("PROCEDIMIENTOS".ToUpper())).Bold();
@@ -2319,14 +2447,14 @@ namespace Aig.Auditoria.Services
                                     });
                                     table.Header(header =>
                                     {
-                                        header.Cell().ColumnSpan(3).Border(1).BorderColor(Colors.Black).DefaultTextStyle(cellTextStyle).Background("#011E56").AlignLeft().Padding(3).Text("G) PROCEDIMIENTOS".ToUpper());
+                                        header.Cell().ColumnSpan(3).Border(1).BorderColor(Colors.Black).DefaultTextStyle(cellTextStyle).Background("#011E56").AlignLeft().Padding(3).Text("G) Área de Almacen de Alcohol u otros productos Inflamables".ToUpper());
                                         header.Cell().Border(1).BorderColor(Colors.Black).DefaultTextStyle(cellTextStyle).Background("#011E56").AlignCenter().Padding(3).Text("PREGUNTA".ToUpper());
                                         header.Cell().Border(1).BorderColor(Colors.Black).DefaultTextStyle(cellTextStyle).Background("#011E56").AlignCenter().Padding(3).Text("EVALUACIÓN".ToUpper());
                                         header.Cell().Border(1).BorderColor(Colors.Black).DefaultTextStyle(cellTextStyle).Background("#011E56").AlignCenter().Padding(3).Text("OBSERVACIóN".ToUpper());
                                     });
-                                    if (inspection.InspRutinaVigFarmacia?.Procedimientos?.LContenido?.Count > 0)
+                                    if (inspection.InspRutinaVigFarmacia?.DatosAreaAlmacenamientoAlcohol?.LContenido?.Count > 0)
                                     {
-                                        foreach (var dat in inspection.InspRutinaVigFarmacia.Procedimientos.LContenido)
+                                        foreach (var dat in inspection.InspRutinaVigFarmacia.DatosAreaAlmacenamientoAlcohol.LContenido)
                                         {
                                             if (dat.IsHeader)
                                             {
@@ -2350,7 +2478,7 @@ namespace Aig.Auditoria.Services
                                 });
                             }
 
-                            
+
                             column.Item().PaddingVertical(5).AlignTop().Table(table =>
                             {
                                 table.ColumnsDefinition(columns =>
@@ -2559,14 +2687,16 @@ namespace Aig.Auditoria.Services
                                         columns.RelativeColumn((float)2);
                                         columns.RelativeColumn((float)1);
                                         columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)3);
                                     });
                                     table.Header(header => {
                                         header.Cell().Border(1).BorderColor(Colors.Black).DefaultTextStyle(cellTextStyle).Background("#011E56").AlignCenter().Padding(3).Text("Nombre del Producto".ToUpper());
-                                        header.Cell().Border(1).BorderColor(Colors.Black).DefaultTextStyle(cellTextStyle).Background("#011E56").AlignCenter().Padding(3).Text("Laboratorio Fabricante".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).DefaultTextStyle(cellTextStyle).Background("#011E56").AlignCenter().Padding(3).Text("Fabricante".ToUpper());
                                         header.Cell().Border(1).BorderColor(Colors.Black).DefaultTextStyle(cellTextStyle).Background("#011E56").AlignCenter().Padding(3).Text("Nº de Lote".ToUpper());
                                         header.Cell().Border(1).BorderColor(Colors.Black).DefaultTextStyle(cellTextStyle).Background("#011E56").AlignCenter().Padding(3).Text("Vencimiento".ToUpper());
-                                        header.Cell().Border(1).BorderColor(Colors.Black).DefaultTextStyle(cellTextStyle).Background("#011E56").AlignCenter().Padding(3).Text("Inventario Realizado".ToUpper());
-                                        header.Cell().Border(1).BorderColor(Colors.Black).DefaultTextStyle(cellTextStyle).Background("#011E56").AlignCenter().Padding(3).Text("Cant. Registrada en Libro o Sistema".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).DefaultTextStyle(cellTextStyle).Background("#011E56").AlignCenter().Padding(3).Text("Existencia Física".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).DefaultTextStyle(cellTextStyle).Background("#011E56").AlignCenter().Padding(3).Text("Reg. en Libro o Sistema".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).DefaultTextStyle(cellTextStyle).Background("#011E56").AlignCenter().Padding(3).Text("Observaciones".ToUpper());
                                     });
                                     if (inspection.InspRutinaVigFarmacia?.InventarioMedicamento?.LProductos?.Count > 0) {
                                         foreach (var dat in inspection.InspRutinaVigFarmacia.InventarioMedicamento.LProductos) {
@@ -2576,6 +2706,7 @@ namespace Aig.Auditoria.Services
                                             table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.FechaVencimiento?.ToString("dd/MM/yyyy" ?? ""));
                                             table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Existencia);
                                             table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.RegistroSistema);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Motivos);
                                         }
 
                                     }
@@ -2840,50 +2971,50 @@ namespace Aig.Auditoria.Services
                                 });
                             }
 
-                            if (inspection.InspRutinaVigAgencia.AreaAdministrativa != null)
-                            {
-                                column.Item().PaddingVertical(5).AlignLeft().Text(" ");
-                                //column.Item().AlignLeft().Text(string.Format("ÁREA ADMINSITRATIVA".ToUpper())).Bold();
-                                column.Item().Table(table =>
-                                {
-                                    table.ColumnsDefinition(columns =>
-                                    {
-                                        columns.RelativeColumn((float)3);
-                                        columns.RelativeColumn((float)1);
-                                        columns.RelativeColumn((float)4);
-                                    });
-                                    table.Header(header =>
-                                    {
-                                        header.Cell().ColumnSpan(3).Border(1).BorderColor(Colors.Black).DefaultTextStyle(cellTextStyle).Background("#011E56").AlignLeft().Padding(3).Text("D) ÁREA ADMINSITRATIVA").Bold();
-                                        header.Cell().Border(1).BorderColor(Colors.Black).DefaultTextStyle(cellTextStyle).Background("#011E56").AlignCenter().Padding(3).Text("PREGUNTA".ToUpper());
-                                        header.Cell().Border(1).BorderColor(Colors.Black).DefaultTextStyle(cellTextStyle).Background("#011E56").AlignCenter().Padding(3).Text("EVALUACIÓN".ToUpper());
-                                        header.Cell().Border(1).BorderColor(Colors.Black).DefaultTextStyle(cellTextStyle).Background("#011E56").AlignCenter().Padding(3).Text("OBSERVACIóN".ToUpper());
-                                    });
-                                    if (inspection.InspRutinaVigAgencia?.AreaAdministrativa?.LContenido?.Count > 0)
-                                    {
-                                        foreach (var dat in inspection.InspRutinaVigAgencia.AreaAdministrativa.LContenido)
-                                        {
-                                            if (dat.IsHeader)
-                                            {
-                                                table.Cell().ColumnSpan(3).Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
-                                            }
-                                            else
-                                            {
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
-                                                if (dat.LEvaluacion?.Count > 0)
-                                                {
-                                                    foreach (var eva in dat.LEvaluacion)
-                                                    {
-                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
-                                                    }
-                                                }
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Observaciones);
-                                            }
-                                        }
+                            //if (inspection.InspRutinaVigAgencia.AreaAdministrativa != null)
+                            //{
+                            //    column.Item().PaddingVertical(5).AlignLeft().Text(" ");
+                            //    //column.Item().AlignLeft().Text(string.Format("ÁREA ADMINSITRATIVA".ToUpper())).Bold();
+                            //    column.Item().Table(table =>
+                            //    {
+                            //        table.ColumnsDefinition(columns =>
+                            //        {
+                            //            columns.RelativeColumn((float)3);
+                            //            columns.RelativeColumn((float)1);
+                            //            columns.RelativeColumn((float)4);
+                            //        });
+                            //        table.Header(header =>
+                            //        {
+                            //            header.Cell().ColumnSpan(3).Border(1).BorderColor(Colors.Black).DefaultTextStyle(cellTextStyle).Background("#011E56").AlignLeft().Padding(3).Text("D) ÁREA ADMINSITRATIVA").Bold();
+                            //            header.Cell().Border(1).BorderColor(Colors.Black).DefaultTextStyle(cellTextStyle).Background("#011E56").AlignCenter().Padding(3).Text("PREGUNTA".ToUpper());
+                            //            header.Cell().Border(1).BorderColor(Colors.Black).DefaultTextStyle(cellTextStyle).Background("#011E56").AlignCenter().Padding(3).Text("EVALUACIÓN".ToUpper());
+                            //            header.Cell().Border(1).BorderColor(Colors.Black).DefaultTextStyle(cellTextStyle).Background("#011E56").AlignCenter().Padding(3).Text("OBSERVACIóN".ToUpper());
+                            //        });
+                            //        if (inspection.InspRutinaVigAgencia?.AreaAdministrativa?.LContenido?.Count > 0)
+                            //        {
+                            //            foreach (var dat in inspection.InspRutinaVigAgencia.AreaAdministrativa.LContenido)
+                            //            {
+                            //                if (dat.IsHeader)
+                            //                {
+                            //                    table.Cell().ColumnSpan(3).Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
+                            //                }
+                            //                else
+                            //                {
+                            //                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
+                            //                    if (dat.LEvaluacion?.Count > 0)
+                            //                    {
+                            //                        foreach (var eva in dat.LEvaluacion)
+                            //                        {
+                            //                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                            //                        }
+                            //                    }
+                            //                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Observaciones);
+                            //                }
+                            //            }
 
-                                    }
-                                });
-                            }
+                            //        }
+                            //    });
+                            //}
 
                             if (inspection.InspRutinaVigAgencia.AreaRecepcionProducto != null)
                             {
@@ -3724,14 +3855,16 @@ namespace Aig.Auditoria.Services
                                         columns.RelativeColumn((float)2);
                                         columns.RelativeColumn((float)1);
                                         columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)3);
                                     });
                                     table.Header(header => {
                                         header.Cell().Border(1).BorderColor(Colors.Black).DefaultTextStyle(cellTextStyle).Background("#011E56").AlignCenter().Padding(3).Text("Nombre del Producto".ToUpper());
-                                        header.Cell().Border(1).BorderColor(Colors.Black).DefaultTextStyle(cellTextStyle).Background("#011E56").AlignCenter().Padding(3).Text("Laboratorio Fabricante".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).DefaultTextStyle(cellTextStyle).Background("#011E56").AlignCenter().Padding(3).Text("Fabricante".ToUpper());
                                         header.Cell().Border(1).BorderColor(Colors.Black).DefaultTextStyle(cellTextStyle).Background("#011E56").AlignCenter().Padding(3).Text("Nº de Lote".ToUpper());
                                         header.Cell().Border(1).BorderColor(Colors.Black).DefaultTextStyle(cellTextStyle).Background("#011E56").AlignCenter().Padding(3).Text("Vencimiento".ToUpper());
                                         header.Cell().Border(1).BorderColor(Colors.Black).DefaultTextStyle(cellTextStyle).Background("#011E56").AlignCenter().Padding(3).Text("Existencia Física".ToUpper());
                                         header.Cell().Border(1).BorderColor(Colors.Black).DefaultTextStyle(cellTextStyle).Background("#011E56").AlignCenter().Padding(3).Text("Registro en Libro o sistema".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).DefaultTextStyle(cellTextStyle).Background("#011E56").AlignCenter().Padding(3).Text("Observaciones".ToUpper());
                                     });
                                     if (inspection.InspRutinaVigAgencia?.InventarioMedicamento?.LProductos?.Count > 0) {
                                         foreach (var dat in inspection.InspRutinaVigAgencia.InventarioMedicamento.LProductos) {
@@ -3741,6 +3874,7 @@ namespace Aig.Auditoria.Services
                                             table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.FechaVencimiento?.ToString("dd/MM/yyyy" ?? ""));
                                             table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Existencia);
                                             table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.RegistroSistema);
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Motivos);
                                         }
 
                                     }
@@ -5715,7 +5849,7 @@ namespace Aig.Auditoria.Services
                         });
 
                         page.Content().Column(column => {
-                            column.Item().AlignCenter().Text("Evaluación Técnica para Fabricante\r\n(Cosméticos, Antisépticos, Desinfectantes y Plaguicidas de uso doméstico)".ToUpper()).Bold();
+                            column.Item().AlignCenter().Text("Evaluación Técnica para Apertura de Fabricante\r\n(Cosméticos, Antisépticos, Desinfectantes y Plaguicidas de uso doméstico)".ToUpper()).Bold();
                             column.Item().PaddingVertical(5).AlignLeft().Text(" ");
 
 
@@ -6270,7 +6404,7 @@ namespace Aig.Auditoria.Services
                             //column.Item().AlignLeft().Text("El establecimiento se compromete a que los procedimientos operativos estandarizados (POE’S) y documentación relacionada a estos, estén completos y acorde con la Normativa vigente y según las actividades a las que se dedicará el establecimiento.  De igual forma el establecimiento deberá tener a disposición de la Autoridad Reguladora los procedimientos operativos estandarizados (POE’S) y documentación relacionada a estos cuando esta lo solicite y al momento de Auditoría de Buenas prácticas de Fabricación.");
 
                             column.Item().PaddingVertical(5).AlignCenter().Padding(3).Text(string.Format("CRITERIO TÉCNICO")).Bold();
-                            column.Item().AlignLeft().Text(string.Format("Una vez evaluado el cumplimiento de los requerimientos previstos en el Decreto Ejecutivo 115 del 16 de agosto de 2022, por el cual se reglamentan las Buenas Prácticas de Fabricación de Productos Farmacéuticos.  Inspectores Farmacéuticos de la Dirección Nacional de Farmacia y Drogas del Ministerio de Salud de Panamá concluyen que el establecimiento denominado {0}, ubicado en {1}, {2} con los requisitos mínimos para operar como Laboratorio Farmacéutico dedicado a {3}. \r\nDado en la ciudad de Panamá a los {4} días del mes de {5} de {6}.", 
+                            column.Item().AlignLeft().Text(string.Format("Una vez evaluado el cumplimiento de los requerimientos previstos en el Decreto Ejecutivo N° 13 del 1 de marzo de 2023, por el cual se reglamentan las Buenas Prácticas de Fabricación de Productos Farmacéuticos.  Inspectores Farmacéuticos de la Dirección Nacional de Farmacia y Drogas del Ministerio de Salud de Panamá concluyen que el establecimiento denominado {0}, ubicado en {1}, {2} con los requisitos mínimos para operar como Laboratorio Farmacéutico dedicado a {3}. \r\nDado en la ciudad de Panamá a los {4} días del mes de {5} de {6}.", 
                                 inspection.DatosEstablecimiento?.Nombre, 
                                 inspection.DatosEstablecimiento?.Direccion, 
                                 (inspection.DatosConclusiones.CumpleRequisitosMinOperacion ? "SÍ CUMPLE" : "NO CUMPLE"),
@@ -15143,7 +15277,7 @@ namespace Aig.Auditoria.Services
                             column.Item().PaddingVertical(5).AlignLeft().Text(string.Format(" ".ToUpper())).Bold();
                             column.Item().AlignLeft().Text(string.Format("I. INTRODUCCIÓN".ToUpper())).Bold();
                             column.Item().AlignLeft().Text(string.Format("Con el propósito de establecer un documento oficial utilizado como apoyo en la realización de las inspecciones por parte de la Autoridad Reguladora y en el proceso de autoinspección en cada establecimiento farmacéutico que se dedica al Almacenamiento, Distribución y Transporte de Medicamentos y otros Productos para la Salud Humana, la Dirección Nacional de Farmacia y Drogas presenta el documento denominado Guía de Buenas Prácticas de Almacenamiento, Distribución y Transporte de Medicamentos y Otros Productos para la Salud Humana."));
-                            column.Item().AlignLeft().Text(string.Format("Los ítems contemplados en la presente Guía se sustentan en la Ley No. 1 de 10 de enero de 2001 sobre Medicamentos y Otros Productos para la Salud Humana, en el Título III de la Comercialización, Capítulo I, artículo 67 y su Reglamentación contempladas en el Decreto Ejecutivo N° 115 de 16 de agosto de 2022 que reglamenta la Ley N° 1 sobre Medicamentos y Otros Productos para la Salud Humana."));
+                            column.Item().AlignLeft().Text(string.Format("Los ítems contemplados en la presente Guía se sustentan en la Ley No. 1 de 10 de enero de 2001 sobre Medicamentos y Otros Productos para la Salud Humana, en el Título III de la Comercialización, Capítulo I, artículo 67 y su Reglamentación contempladas en el Decreto Ejecutivo N° 13 del 1 de marzo de 2023 que reglamenta la Ley N° 1 sobre Medicamentos y Otros Productos para la Salud Humana."));
                             column.Item().AlignLeft().Text(string.Format("La Autoridad de Salud, realizará inspecciones para la evaluación de las Buenas Prácticas de Almacenamiento, Distribución y Transporte de Medicamentos y otros Productos para la Salud Humana, y al final levanta un acta de lo actuado.  Según los resultados se procederá a emitir la certificación correspondiente o en su defecto podrá amonestar, sancionar, retener o decomisar mediante resolución motivada lo que corresponda.  Por tanto, todo establecimiento farmacéutico que se dedica al Almacenamiento, Distribución y Transporte de Medicamentos y otros productos competencia de la Dirección Nacional de Farmacia y Drogas queda sujeto a inspecciones periódicas por parte de la Autoridad Reguladora."));
 
                             column.Item().PaddingVertical(5).AlignLeft().Text(string.Format(" ".ToUpper())).Bold();
@@ -15154,7 +15288,7 @@ namespace Aig.Auditoria.Services
 
                             column.Item().PaddingVertical(5).AlignLeft().Text(string.Format(" ".ToUpper())).Bold();
                             column.Item().AlignLeft().Text(string.Format("III. CRITERIO DE APROBACIÓN".ToUpper())).Bold();
-                            column.Item().AlignLeft().Text(string.Format("Para aprobar el cumplimiento de las Buenas Prácticas de Almacenamiento y distribución establecidas en el Decreto Ejecutivo Nº 115 del 16 de agosto de 2022, la Agencia Distribuidora debe cumplir con los porcentajes mínimos establecidos en la normativa vigente"));
+                            column.Item().AlignLeft().Text(string.Format("Para aprobar el cumplimiento de las Buenas Prácticas de Almacenamiento y distribución establecidas en el Decreto Ejecutivo Nº 13 del 1 de marzo de 2023, la Agencia Distribuidora debe cumplir con los porcentajes mínimos establecidos en la normativa vigente"));
 
                             column.Item().PaddingVertical(5).AlignLeft().Text(string.Format(" ".ToUpper())).Bold();
                             column.Item().AlignLeft().Text(string.Format("IV. SOLICITUD PARA OBTENCIÓN DEL CERTIFICADO DE BUENAS PRÁCTICAS DE ALMACENAMIENTO Y DISTRIBUCIÓN".ToUpper())).Bold();
@@ -15299,7 +15433,7 @@ namespace Aig.Auditoria.Services
                                         header.Cell().Border(1).BorderColor(Colors.Black).DefaultTextStyle(cellTextStyle).Background("#011E56").AlignCenter().Padding(3).Text("No.".ToUpper());
                                         header.Cell().Border(1).BorderColor(Colors.Black).DefaultTextStyle(cellTextStyle).Background("#011E56").AlignCenter().Padding(3).Text("Título".ToUpper());
                                         header.Cell().Border(1).BorderColor(Colors.Black).DefaultTextStyle(cellTextStyle).Background("#011E56").AlignCenter().Padding(3).Text("Criterio".ToUpper());
-                                        header.Cell().Border(1).BorderColor(Colors.Black).DefaultTextStyle(cellTextStyle).Background("#011E56").AlignCenter().Padding(3).Text("D.E. 115".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).DefaultTextStyle(cellTextStyle).Background("#011E56").AlignCenter().Padding(3).Text("D.E. 13".ToUpper());
                                         header.Cell().Border(1).BorderColor(Colors.Black).DefaultTextStyle(cellTextStyle).Background("#011E56").AlignCenter().Padding(3).Text("Otros".ToUpper());
                                         header.Cell().Border(1).BorderColor(Colors.Black).DefaultTextStyle(cellTextStyle).Background("#011E56").AlignCenter().Padding(3).Text("Evaluación".ToUpper());
                                         header.Cell().Border(1).BorderColor(Colors.Black).DefaultTextStyle(cellTextStyle).Background("#011E56").AlignCenter().Padding(3).Text("EVIDENCIAS / OBSERVACIONes".ToUpper());
@@ -15355,7 +15489,7 @@ namespace Aig.Auditoria.Services
                                         header.Cell().Border(1).BorderColor(Colors.Black).DefaultTextStyle(cellTextStyle).Background("#011E56").AlignCenter().Padding(3).Text("No.".ToUpper());
                                         header.Cell().Border(1).BorderColor(Colors.Black).DefaultTextStyle(cellTextStyle).Background("#011E56").AlignCenter().Padding(3).Text("Título".ToUpper());
                                         header.Cell().Border(1).BorderColor(Colors.Black).DefaultTextStyle(cellTextStyle).Background("#011E56").AlignCenter().Padding(3).Text("Criterio".ToUpper());
-                                        header.Cell().Border(1).BorderColor(Colors.Black).DefaultTextStyle(cellTextStyle).Background("#011E56").AlignCenter().Padding(3).Text("D.E. 115".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).DefaultTextStyle(cellTextStyle).Background("#011E56").AlignCenter().Padding(3).Text("D.E. 13".ToUpper());
                                         header.Cell().Border(1).BorderColor(Colors.Black).DefaultTextStyle(cellTextStyle).Background("#011E56").AlignCenter().Padding(3).Text("Otros".ToUpper());
                                         header.Cell().Border(1).BorderColor(Colors.Black).DefaultTextStyle(cellTextStyle).Background("#011E56").AlignCenter().Padding(3).Text("Evaluación".ToUpper());
                                         header.Cell().Border(1).BorderColor(Colors.Black).DefaultTextStyle(cellTextStyle).Background("#011E56").AlignCenter().Padding(3).Text("EVIDENCIAS / OBSERVACIONes".ToUpper());
@@ -15411,7 +15545,7 @@ namespace Aig.Auditoria.Services
                                         header.Cell().Border(1).BorderColor(Colors.Black).DefaultTextStyle(cellTextStyle).Background("#011E56").AlignCenter().Padding(3).Text("No.".ToUpper());
                                         header.Cell().Border(1).BorderColor(Colors.Black).DefaultTextStyle(cellTextStyle).Background("#011E56").AlignCenter().Padding(3).Text("Título".ToUpper());
                                         header.Cell().Border(1).BorderColor(Colors.Black).DefaultTextStyle(cellTextStyle).Background("#011E56").AlignCenter().Padding(3).Text("Criterio".ToUpper());
-                                        header.Cell().Border(1).BorderColor(Colors.Black).DefaultTextStyle(cellTextStyle).Background("#011E56").AlignCenter().Padding(3).Text("D.E. 115".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).DefaultTextStyle(cellTextStyle).Background("#011E56").AlignCenter().Padding(3).Text("D.E. 13".ToUpper());
                                         header.Cell().Border(1).BorderColor(Colors.Black).DefaultTextStyle(cellTextStyle).Background("#011E56").AlignCenter().Padding(3).Text("Otros".ToUpper());
                                         header.Cell().Border(1).BorderColor(Colors.Black).DefaultTextStyle(cellTextStyle).Background("#011E56").AlignCenter().Padding(3).Text("Evaluación".ToUpper());
                                         header.Cell().Border(1).BorderColor(Colors.Black).DefaultTextStyle(cellTextStyle).Background("#011E56").AlignCenter().Padding(3).Text("EVIDENCIAS / OBSERVACIONes".ToUpper());
@@ -15467,7 +15601,7 @@ namespace Aig.Auditoria.Services
                                         header.Cell().Border(1).BorderColor(Colors.Black).DefaultTextStyle(cellTextStyle).Background("#011E56").AlignCenter().Padding(3).Text("No.".ToUpper());
                                         header.Cell().Border(1).BorderColor(Colors.Black).DefaultTextStyle(cellTextStyle).Background("#011E56").AlignCenter().Padding(3).Text("Título".ToUpper());
                                         header.Cell().Border(1).BorderColor(Colors.Black).DefaultTextStyle(cellTextStyle).Background("#011E56").AlignCenter().Padding(3).Text("Criterio".ToUpper());
-                                        header.Cell().Border(1).BorderColor(Colors.Black).DefaultTextStyle(cellTextStyle).Background("#011E56").AlignCenter().Padding(3).Text("D.E. 115".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).DefaultTextStyle(cellTextStyle).Background("#011E56").AlignCenter().Padding(3).Text("D.E. 13".ToUpper());
                                         header.Cell().Border(1).BorderColor(Colors.Black).DefaultTextStyle(cellTextStyle).Background("#011E56").AlignCenter().Padding(3).Text("Otros".ToUpper());
                                         header.Cell().Border(1).BorderColor(Colors.Black).DefaultTextStyle(cellTextStyle).Background("#011E56").AlignCenter().Padding(3).Text("Evaluación".ToUpper());
                                         header.Cell().Border(1).BorderColor(Colors.Black).DefaultTextStyle(cellTextStyle).Background("#011E56").AlignCenter().Padding(3).Text("EVIDENCIAS / OBSERVACIONes".ToUpper());
@@ -15523,7 +15657,7 @@ namespace Aig.Auditoria.Services
                                         header.Cell().Border(1).BorderColor(Colors.Black).DefaultTextStyle(cellTextStyle).Background("#011E56").AlignCenter().Padding(3).Text("No.".ToUpper());
                                         header.Cell().Border(1).BorderColor(Colors.Black).DefaultTextStyle(cellTextStyle).Background("#011E56").AlignCenter().Padding(3).Text("Título".ToUpper());
                                         header.Cell().Border(1).BorderColor(Colors.Black).DefaultTextStyle(cellTextStyle).Background("#011E56").AlignCenter().Padding(3).Text("Criterio".ToUpper());
-                                        header.Cell().Border(1).BorderColor(Colors.Black).DefaultTextStyle(cellTextStyle).Background("#011E56").AlignCenter().Padding(3).Text("D.E. 115".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).DefaultTextStyle(cellTextStyle).Background("#011E56").AlignCenter().Padding(3).Text("D.E. 13".ToUpper());
                                         header.Cell().Border(1).BorderColor(Colors.Black).DefaultTextStyle(cellTextStyle).Background("#011E56").AlignCenter().Padding(3).Text("Otros".ToUpper());
                                         header.Cell().Border(1).BorderColor(Colors.Black).DefaultTextStyle(cellTextStyle).Background("#011E56").AlignCenter().Padding(3).Text("Evaluación".ToUpper());
                                         header.Cell().Border(1).BorderColor(Colors.Black).DefaultTextStyle(cellTextStyle).Background("#011E56").AlignCenter().Padding(3).Text("EVIDENCIAS / OBSERVACIONes".ToUpper());

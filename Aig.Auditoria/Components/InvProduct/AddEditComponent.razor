@@ -69,6 +69,7 @@
                                     </div>
                                 </div>
                             </div>
+                            
                             <div class="col-sm-4">
                                 <label>
                                     @languageContainerService.Keys["Cant. Registrada en Libro o Sistema"]
@@ -91,6 +92,17 @@
                                     </div>
                                 </div>*@
                             </div>
+                        
+                            <div class="col-sm-12">
+                                <label>@languageContainerService.Keys["Observaciones"]</label>
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <InputText class="form-control" @bind-Value="Product.Motivos" />
+                                        <ValidationMessage For=@(() => Product.Motivos) />
+                                    </div>
+                                </div>
+                            </div>
+
                         </div>
 
 

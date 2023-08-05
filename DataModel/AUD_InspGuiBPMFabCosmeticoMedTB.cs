@@ -405,9 +405,9 @@ namespace DataModel
             },
                     new ContenidoPreguntas()
             {
-                Titulo = "El Regente Farmacéutico tiene el cargo de Jefe de Control de Calidad o de Producción? Especifique el cargo",
+                Titulo = "El Regente Farmacéutico tiene el cargo de Jefe de Aseguramiento de la Calidad?",
                 Criterio = "C",
-                Articulo="399",
+                Articulo="474",
                 PuntosMax = (decimal)2.0,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
             },
@@ -415,7 +415,7 @@ namespace DataModel
             {
                 Titulo = "El Regente Farmacéutico está presente al momento de la Auditoria?",
                 Criterio = "C",
-                Articulo="398",
+                Articulo="473",
                 PuntosMax = (decimal)2.0,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
             },
@@ -423,7 +423,7 @@ namespace DataModel
             {
                 Titulo = "La empresa dispone de un organigrama general? (Anexar Copia)",
                 Criterio = "INF",
-                Articulo="397",
+                Articulo="472",
                 PuntosMax = (decimal)0.5,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
             },
@@ -431,7 +431,7 @@ namespace DataModel
             {
                 Titulo = "Existen organigramas específicos para las áreas de? (Anexar Copia)",
                 Criterio = "INF",
-                Articulo="397",
+                Articulo="472",
                 PuntosMax = (decimal)0.5,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                 LSubPreguntas = new List<ContenidoSubPreguntas>(){
@@ -470,7 +470,7 @@ namespace DataModel
             {
                 Titulo = "El personal conoce los organigramas describiendo las líneas de Autoridad?",
                 Criterio = "R",
-                Articulo="397",
+                Articulo="",
                 PuntosMax = (decimal)1.0,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
             },
@@ -478,7 +478,7 @@ namespace DataModel
             {
                 Titulo = "Existen manuales que describan las funciones y responsabilidades del personal, según su área específica de labores?",
                 Criterio = "R",
-                Articulo="400",
+                Articulo="475",
                 PuntosMax = (decimal)1.0,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
             },
@@ -486,7 +486,7 @@ namespace DataModel
             {
                 Titulo = "Existen manuales de procedimientos que describan las normas de higiene y comportamiento del personal según cada área?",
                 Criterio = "R",
-                Articulo="357, 407, 409",
+                Articulo="482",
                 PuntosMax = (decimal)1.0,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
             },
@@ -494,7 +494,7 @@ namespace DataModel
             {
                 Titulo = "Son del conocimiento del personal? (Verifique con la Capacitación)",
                 Criterio = "R",
-                Articulo = "409",
+                Articulo = "482",
                 PuntosMax = (decimal)1.0,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
             },
@@ -502,7 +502,7 @@ namespace DataModel
             {
                 Titulo = "Existen programas de capacitación continua para el personal?",
                 Criterio = "INF",
-                Articulo="401",
+                Articulo="476",
                 PuntosMax = (decimal)0.5,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
             },
@@ -510,7 +510,7 @@ namespace DataModel
             {
                 Titulo = "Existe evidencia escrita de la capacitación adquirida por el personal?",
                 Criterio = "INF",
-                Articulo="401",
+                Articulo="476",
                 PuntosMax = (decimal)0.5,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
             },
@@ -518,7 +518,7 @@ namespace DataModel
             {
                 Titulo = "Existe evidencia escrita de capacitación específica para el personal que trabaja en áreas de riesgo de contaminación?",
                 Criterio = "INF",
-                Articulo="401",
+                Articulo="476",
                 PuntosMax = (decimal)0.5,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                 LSubPreguntas = new List<ContenidoSubPreguntas>(){
@@ -535,7 +535,7 @@ namespace DataModel
             {
                 Titulo = "Se encuentran las áreas técnicas (Producción, Control de Calidad y demás) separadas?",
                 Criterio = "C",
-                Articulo="413",
+                Articulo="488",
                 PuntosMax = (decimal)2.0,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
             },
@@ -543,7 +543,7 @@ namespace DataModel
             {
                 Titulo = "La empresa dota de uniformes de trabajo a su personal según el área y función que desempeña?",
                 Criterio = "C",
-                Articulo="403",
+                Articulo="478",
                 PuntosMax = (decimal)2.0,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
             },
@@ -551,7 +551,7 @@ namespace DataModel
             {
                 Titulo = "Existen áreas controladas en la empresa que requieren que el ingreso del personal lo efectúe con condiciones específicas de uniformes y otros implementos?",
                 Criterio = "C",
-                Articulo="404",
+                Articulo="481, 479",
                 PuntosMax = (decimal)2.0,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
             },
@@ -559,7 +559,7 @@ namespace DataModel
             {
                 Titulo = "El personal de Producción y Control de Calidad cumplen con las medidas higiénicas y la ropa protectora para ingresar a las áreas?",
                 Criterio = "INF",
-                Articulo="404, 407",
+                Articulo="482",
                 PuntosMax = (decimal)0.5,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
             },
@@ -567,7 +567,7 @@ namespace DataModel
             {
                 Titulo = "Los uniformes se conservan en adecuadas condiciones y estado de limpieza?",
                 Criterio = "R",
-                Articulo="403",
+                Articulo="478",
                 PuntosMax = (decimal)1.0,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
             },
@@ -591,7 +591,7 @@ namespace DataModel
             {
                 Titulo = "La empresa dispone de un Programa de Calificación de Proveedores? (Anexar Evidencia)",
                 Criterio = "INF",
-                Articulo="515",
+                Articulo="592",
                 PuntosMax = (decimal)0.5,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
             }
@@ -618,7 +618,7 @@ namespace DataModel
             {
                 Titulo = "Son adecuadas las condiciones externas del local? (Ausencia de rajaduras, pintura descascarillada, filtraciones, crecimiento de moho) ",
                 Criterio = "R",
-                Articulo="360",
+                Articulo="486 412",
                 PuntosMax = (decimal)1.0,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
             },
@@ -626,7 +626,7 @@ namespace DataModel
             {
                 Titulo = "El área externa del local presenta riesgo mínimo de contaminación? (Terrenos limpios, Jardines tratados)",
                 Criterio = "R",
-                Articulo="361",
+                Articulo="486 413",
                 PuntosMax = (decimal)1.0,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
             },
@@ -634,7 +634,7 @@ namespace DataModel
             {
                 Titulo = "Existe un sistema de control de Fauna nociva? Anexe registro de control, Listado de Productos empleados (Concentración del principio activo, número de registro sanitario, clasificación para la industria)",
                 Criterio = "R",
-                Articulo="362",
+                Articulo="486 414",
                 PuntosMax = (decimal)1.0,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
             }, 
@@ -656,7 +656,7 @@ namespace DataModel
             {
                 Titulo = "El piso cumple con la característica de ser liso?",
                 Criterio = "R",
-                Articulo="415",
+                Articulo="490",
                 PuntosMax = (decimal)1.0,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                     },
@@ -664,7 +664,7 @@ namespace DataModel
             {
                 Titulo = "El piso presenta rajaduras, agujeros, roturas, depresiones o desprendimiento de partículas?",
                 Criterio = "R",
-                Articulo="415",
+                Articulo="490",
                 PuntosMax = (decimal)1.0,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
             },
@@ -672,7 +672,7 @@ namespace DataModel
             {
                 Titulo = "El piso puede limpiarse fácilmente?",
                 Criterio = "R",
-                Articulo="415",
+                Articulo="490",
                 PuntosMax = (decimal)1.0,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
             },
@@ -680,7 +680,7 @@ namespace DataModel
             {
                 Titulo = "Las paredes son lisas y de fácil limpieza?",
                 Criterio = "R",
-                Articulo="415",
+                Articulo="490",
                 PuntosMax = (decimal)1.0,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
             },
@@ -688,7 +688,7 @@ namespace DataModel
             {
                 Titulo = "Presentan las paredes desprendimiento de pintura?",
                 Criterio = "R",
-                Articulo="415",
+                Articulo="490",
                 PuntosMax = (decimal)1.0,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
             },
@@ -696,7 +696,7 @@ namespace DataModel
             {
                 Titulo = "El techo es liso, está limpio y en buen estado?",
                 Criterio = "R",
-                Articulo="415",
+                Articulo="490",
                 PuntosMax = (decimal)1.0,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
             },
@@ -704,7 +704,7 @@ namespace DataModel
             {
                 Titulo = "El drenaje es de tamaño adecuado, limpio y no permite contracorriente?",
                 Criterio = "R",
-                Articulo="416",
+                Articulo="491",
                 PuntosMax = (decimal)1.0,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
             },
@@ -712,7 +712,7 @@ namespace DataModel
             {
                 Titulo = "El drenaje tiene tapa sanitaria?",
                 Criterio = "R",
-                Articulo="416",
+                Articulo="491",
                 PuntosMax = (decimal)1.0,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
             },
@@ -734,7 +734,7 @@ namespace DataModel
             {
                 Titulo = "Se encuentra Identificada con letrero, diseñada y equipada de forma que permita la limpieza de los productos antes de su almacenamiento?",
                 Criterio = "R",
-                Articulo="369, 370",
+                Articulo="496, 418",
                 PuntosMax = (decimal)1.0,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
             },
@@ -742,7 +742,7 @@ namespace DataModel
             {
                 Titulo = "Es adecuada la iluminación?",
                 Criterio = "R",
-                Articulo="363",
+                Articulo="490",
                 PuntosMax = (decimal)1.0,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
             },
@@ -750,7 +750,7 @@ namespace DataModel
             {
                 Titulo = "Es adecuada la ventilación?",
                 Criterio = "R",
-                Articulo="363",
+                Articulo="490",
                 PuntosMax = (decimal)1.0,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
             },
@@ -758,7 +758,7 @@ namespace DataModel
             {
                 Titulo = "Se observa limpia y ordenada?",
                 Criterio = "N",
-                Articulo="366",
+                Articulo="419",
                 PuntosMax = (decimal)1.5,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
             },
@@ -766,7 +766,7 @@ namespace DataModel
             {
                 Titulo = "Existen procedimientos escritos para la recepción de materia prima?",
                 Criterio = "C",
-                Articulo="470",
+                Articulo="544",
                 PuntosMax = (decimal)2.0,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
             },
@@ -774,7 +774,7 @@ namespace DataModel
             {
                 Titulo = "Existen registros de entrada de la materia prima? (Verifique) ?",
                 Criterio = "C",
-                Articulo="470",
+                Articulo="544",
                 PuntosMax = (decimal)2.0,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
             },
@@ -782,7 +782,7 @@ namespace DataModel
             {
                 Titulo = "Son adecuados los documentos y formatos empleados para la recepción?",
                 Criterio = "R",
-                Articulo="470",
+                Articulo="544",
                 PuntosMax = (decimal)1.0,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
             },
@@ -790,7 +790,7 @@ namespace DataModel
             {
                 Titulo = "El área está protegida de las inclemencias del tiempo?",
                 Criterio = "R",
-                Articulo="421",
+                Articulo="418",
                 PuntosMax = (decimal)1.0,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
             },
@@ -798,7 +798,7 @@ namespace DataModel
             {
                 Titulo = "La materia prima está etiquetada con la siguiente información?",
                 Criterio = "N",
-                Articulo="442",
+                Articulo="517",
                 PuntosMax = (decimal)1.5,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                 LSubPreguntas = new List<ContenidoSubPreguntas>(){
@@ -812,7 +812,7 @@ namespace DataModel
             {
                 Titulo = "Existen criterios de aceptación o rechazo de la materia prima?",
                 Criterio = "N",
-                Articulo="470",
+                Articulo="544",
                 PuntosMax = (decimal)1.5,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
             },
@@ -820,7 +820,7 @@ namespace DataModel
             {
                 Titulo = "La empresa cuenta con base de datos sistematizada?",
                 Criterio = "N",
-                Articulo="442",
+                Articulo="517",
                 PuntosMax = (decimal)1.5,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
             },
@@ -828,7 +828,7 @@ namespace DataModel
             {
                 Titulo = "Al momento de la recepción, la empresa cuenta con un sistema interno de codificación de la materia prima?",
                 Criterio = "N",
-                Articulo="366",
+                Articulo="422",
                 PuntosMax = (decimal)1.5,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
             },
@@ -836,7 +836,7 @@ namespace DataModel
             {
                 Titulo = "El empleo de esta numeración permite la identificación de la materia prima durante toda su utilización? (Trazabilidad) ",
                 Criterio = "N",
-                Articulo="442",
+                Articulo="422",
                 PuntosMax = (decimal)1.5,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
             },
@@ -844,7 +844,7 @@ namespace DataModel
             {
                 Titulo = "Todas las materias primas son sometidas a análisis de control de calidad de acuerdo con métodos de análisis apropiados?",
                 Criterio = "N",
-                Articulo="444",
+                Articulo="519",
                 PuntosMax = (decimal)1.5,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
             },
@@ -852,7 +852,7 @@ namespace DataModel
             {
                 Titulo = "Cuentan con procedimiento para el muestreo de Materia Prima?",
                 Criterio = "C",
-                Articulo="471",
+                Articulo="544",
                 PuntosMax = (decimal)2.0,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
             },
@@ -860,7 +860,7 @@ namespace DataModel
             {
                 Titulo = "Existe área especial, identificada para el muestreo de la Materia Prima?",
                 Criterio = "N",
-                Articulo="423",
+                Articulo="498",
                 PuntosMax = (decimal)1.5,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
             },
@@ -868,7 +868,7 @@ namespace DataModel
             {
                 Titulo = "La persona encargada del muestreo de la Materia Prima pertenece al Laboratorio de Control de Calidad?",
                 Criterio = "N",
-                Articulo="491",
+                Articulo="519",
                 PuntosMax = (decimal)1.5,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
             },
@@ -876,7 +876,7 @@ namespace DataModel
             {
                 Titulo = "Todos los productos en estatus de cuarentena están colocados sobre tarimas?",
                 Criterio = "N",
-                Articulo="371",
+                Articulo="497-420",
                 PuntosMax = (decimal)1.5,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
             },
@@ -897,7 +897,7 @@ namespace DataModel
             {
                 Titulo = "El almacén de Materia Prima se encuentra identificado y delimitado?",
                 Criterio = "N",
-                Articulo="366",
+                Articulo="416",
                 PuntosMax = (decimal)1.5,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
             },
@@ -905,7 +905,7 @@ namespace DataModel
             {
                 Titulo = "Solo el personal autorizado puede ingresar a esta área?",
                 Criterio = "R",
-                Articulo="406",
+                Articulo="481",
                 PuntosMax = (decimal)1.0,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
             },
@@ -913,7 +913,7 @@ namespace DataModel
             {
                 Titulo = "Todas las Materias Primas se almacenan sobre tarimas, arma rápidos o andamios?",
                 Criterio = "N",
-                Articulo="371",
+                Articulo="420",
                 PuntosMax = (decimal)1.5,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
             },
@@ -921,7 +921,7 @@ namespace DataModel
             {
                 Titulo = "Las Materias Primas en estatus de cuarentena son identificadas con su correspondiente etiqueta?",
                 Criterio = "N",
-                Articulo="442, 467",
+                Articulo="570",
                 PuntosMax = (decimal)1.5,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
             },
@@ -929,7 +929,7 @@ namespace DataModel
             {
                 Titulo = "Cuenta con un área destinada para el almacenamiento de Materias Primas Inflamables (Alcohol, Esencias) separada, debidamente delimitada, identificada, ventilada; con equipos necesarios para sofocar siniestros o accidentes tales como:",
                 Criterio = "C",
-                Articulo="420, 422",
+                Articulo="497",
                 PuntosMax = (decimal)2.0,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                 LSubPreguntas = new List<ContenidoSubPreguntas>(){
@@ -943,7 +943,7 @@ namespace DataModel
             {
                 Titulo = "De tratarse de Alcohol, Los tanques son colocados sobre estructuras separados del piso?",
                 Criterio = "N",
-                Articulo="420",
+                Articulo="497",
                 PuntosMax = (decimal)1.5,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
             },
@@ -951,7 +951,7 @@ namespace DataModel
             {
                 Titulo = "Existe solo Materia Prima inflamable en esta área?",
                 Criterio = "R",
-                Articulo="420",
+                Articulo="497",
                 PuntosMax = (decimal)1.0,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
             },
@@ -966,7 +966,7 @@ namespace DataModel
             {
                 Titulo = "Existen reactivos del Laboratorio de Control de Calidad en esta área?",
                 Criterio = "N",
-                Articulo="419",
+                Articulo="497",
                 PuntosMax = (decimal)1.5,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
             },
@@ -974,7 +974,7 @@ namespace DataModel
             {
                 Titulo = "Se dispone de procedimiento escrito para el almacenamiento de la materia prima?",
                 Criterio = "C",
-                Articulo="470",
+                Articulo="546",
                 PuntosMax = (decimal)2.0,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
             },
@@ -982,7 +982,7 @@ namespace DataModel
             {
                 Titulo = "Existen ductos o tuberías expuestas en el almacén?",
                 Criterio = "INF",
-                Articulo="430",
+                Articulo="490",
                 PuntosMax = (decimal)0.5,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
             },
@@ -990,7 +990,7 @@ namespace DataModel
             {
                 Titulo = "En la Etiqueta de identificación de Materia Prima Aprobada, se detalla:",
                 Criterio = "C",
-                Articulo="442, 467",
+                Articulo="519",
                 PuntosMax = (decimal)2.0,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                 LSubPreguntas = new List<ContenidoSubPreguntas>(){
@@ -1066,19 +1066,19 @@ namespace DataModel
             //    PuntosMax = (decimal)0.2,
             //    LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
             //},
-            new ContenidoPreguntas()
-            {
-                Titulo = "Están identificados los ductos o tuberías expuestas?",
-                Criterio = "INF",
-                Articulo="430",
-                PuntosMax = (decimal)0.5,
-                LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
-            },
+            //new ContenidoPreguntas()
+            //{
+            //    Titulo = "Están identificados los ductos o tuberías expuestas?",
+            //    Criterio = "INF",
+            //    Articulo="430",
+            //    PuntosMax = (decimal)0.5,
+            //    LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
+            //},
             new ContenidoPreguntas()
             {
                 Titulo = "Las Materias Primas almacenadas se localizan e inspeccionan fácilmente, ya que el almacén está organizado y codificado por áreas?",
                 Criterio = "R",
-                Articulo="366",
+                Articulo="500",
                 PuntosMax = (decimal)1.0,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
             },
@@ -1086,7 +1086,7 @@ namespace DataModel
             {
                 Titulo = "Existe un programa que garantice la integridad de los productos almacenados mediante: (Verifique)?",
                 Criterio = "R",
-                Articulo="491",
+                Articulo="568",
                 PuntosMax = (decimal)1.0,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                 LSubPreguntas = new List<ContenidoSubPreguntas>(){
@@ -1098,7 +1098,7 @@ namespace DataModel
             {
                 Titulo = "Las Materias Primas Rechazadas:",
                 Criterio = "C",
-                Articulo="454",
+                Articulo="497",
                 PuntosMax = (decimal)2.0,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                 LSubPreguntas = new List<ContenidoSubPreguntas>(){
@@ -1111,7 +1111,7 @@ namespace DataModel
             {
                 Titulo = "En el almacén de Materia Prima aprobada, existen otros materiales no relacionados con el área? (Materiales en Desuso o Equipos Dañados). Descríbalos:",
                 Criterio = "R",
-                Articulo="420",
+                Articulo="422",
                 PuntosMax = (decimal)1.0,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
             },
@@ -1119,7 +1119,7 @@ namespace DataModel
             {
                 Titulo = "La Materia Prima que se emplea en la fabricación, se despacha respetándose el Sistema (FIFO) primera que entra, primera que sale? Primera que sale o primera fecha de expiración primera en salir (FEFO)",
                 Criterio = "C",
-                Articulo="366",
+                Articulo="514",
                 PuntosMax = (decimal)2.0,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
             },
@@ -1127,7 +1127,7 @@ namespace DataModel
             {
                 Titulo = "Existen recipientes para la recolección de basura?",
                 Criterio = "R",
-                Articulo="374-457",
+                Articulo="457, 477",
                 PuntosMax = (decimal)1.0,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
             },
@@ -1135,7 +1135,7 @@ namespace DataModel
             {
                 Titulo = "Los recipientes para la recolección de la basura, se encuentran tapados?",
                 Criterio = "R",
-                Articulo="374-457",
+                Articulo="457, 477",
                 PuntosMax = (decimal)1.0,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
             },
@@ -1143,7 +1143,7 @@ namespace DataModel
             {
                 Titulo = "Estos recipientes, están ubicados en lugares apropiados?",
                 Criterio = "R",
-                Articulo="374-457",
+                Articulo="457, 477",
                 PuntosMax = (decimal)1.0,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
             },
@@ -1151,7 +1151,7 @@ namespace DataModel
             {
                 Titulo = "Los recipientes de recolección de la basura se vacían a intervalos frecuentes?",
                 Criterio = "R",
-                Articulo="374-457",
+                Articulo="457, 477",
                 PuntosMax = (decimal)1.0,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
             },
@@ -1172,7 +1172,7 @@ namespace DataModel
             {
                 Titulo = "Está el área Identificada, delimitada o separada?",
                 Criterio = "R",
-                Articulo="425",
+                Articulo="500",
                 PuntosMax = (decimal)1.0,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
             },
@@ -1180,7 +1180,7 @@ namespace DataModel
             {
                 Titulo = "La calidad de la iluminación es adecuada en esta área?",
                 Criterio = "R",
-                Articulo="363",
+                Articulo="500",
                 PuntosMax = (decimal)1.0,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
             },
@@ -1188,7 +1188,7 @@ namespace DataModel
             {
                 Titulo = "La ventilación es adecuada?",
                 Criterio = "R",
-                Articulo="363",
+                Articulo="500",
                 PuntosMax = (decimal)1.0,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
             },
@@ -1196,7 +1196,7 @@ namespace DataModel
             {
                 Titulo = "El área se observa limpia y ordenada?",
                 Criterio = "N",
-                Articulo="363",
+                Articulo="500",
                 PuntosMax = (decimal)1.5,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
             },
@@ -1204,7 +1204,7 @@ namespace DataModel
             {
                 Titulo = "Existe procedimiento para la recepción de los materiales de acondicionamiento, empaque y envase? Cuentan con criterios de aceptación o rechazo de los mismos?",
                 Criterio = "R",
-                Articulo="438, 470",
+                Articulo="546",
                 PuntosMax = (decimal)1.0,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
             },
@@ -1212,7 +1212,7 @@ namespace DataModel
             {
                 Titulo = "Todos los materiales sin excepción son sometidos a verificación por Control de Calidad?",
                 Criterio = "N",
-                Articulo="438, 444",
+                Articulo="521",
                 PuntosMax = (decimal)1.5,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
             },
@@ -1220,7 +1220,7 @@ namespace DataModel
             {
                 Titulo = "Son adecuados los documentos o formatos empleados para la recepción? (Nombre, Número de Lote y Fecha de Expiración)",
                 Criterio = "R",
-                Articulo="470",
+                Articulo="546",
                 PuntosMax = (decimal)1.0,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
             },
@@ -1228,7 +1228,7 @@ namespace DataModel
             {
                 Titulo = "Todos los materiales tienen adherida la etiqueta definiendo el estatus de Cuarentena?",
                 Criterio = "N",
-                Articulo="438, 467",
+                Articulo="497",
                 PuntosMax = (decimal)1.5,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
             },
@@ -1236,7 +1236,7 @@ namespace DataModel
             {
                 Titulo = "Al momento de la recepción de los materiales se les asigna un número de registro de entrada?",
                 Criterio = "N",
-                Articulo="442",
+                Articulo="422",
                 PuntosMax = (decimal)1.5,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
             },
@@ -1244,7 +1244,7 @@ namespace DataModel
             {
                 Titulo = "Con el número asignado, se pueden identificar los materiales durante su utilización? (Trazabilidad)",
                 Criterio = "N",
-                Articulo="442",
+                Articulo="422",
                 PuntosMax = (decimal)1.5,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
             },
@@ -1252,7 +1252,7 @@ namespace DataModel
             {
                 Titulo = "Existe un área delimitada e identificada para el muestreo del material de acondicionamiento, empaque y envase?",
                 Criterio = "N",
-                Articulo="423",
+                Articulo="525",
                 PuntosMax = (decimal)1.5,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
             },
@@ -1260,7 +1260,7 @@ namespace DataModel
             {
                 Titulo = "El personal destinado al muestreo de materiales labora en Control de Calidad?",
                 Criterio = "N",
-                Articulo="491",
+                Articulo="525",
                 PuntosMax = (decimal)1.5,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
             },
@@ -1268,7 +1268,7 @@ namespace DataModel
             {
                 Titulo = "Todos los productos en estatus de cuarentena están colocados sobre tarimas? ",
                 Criterio = "N",
-                Articulo="371",
+                Articulo="420",
                 PuntosMax = (decimal)1.5,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
             },
@@ -1276,7 +1276,7 @@ namespace DataModel
             {
                 Titulo = "El almacén de materiales de acondicionamiento, envase y empaque está construido con materiales adecuados (Que faciliten la Limpieza), en:" ,
                 Criterio = "C",
-                Articulo="425",
+                Articulo="490",
                 PuntosMax = (decimal)2.0,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                 LSubPreguntas = new List<ContenidoSubPreguntas>(){
@@ -1307,7 +1307,7 @@ namespace DataModel
             {
                 Titulo = "Se observan almacenados otros enseres diferentes a los materiales de acondicionamiento, empaque y envase (Materiales que no pertenecen al área o que se encuentran en desuso? Descríbalos",
                 Criterio = "R",
-                Articulo="425",
+                Articulo="412",
                 PuntosMax = (decimal)1.0,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
             },
@@ -1315,7 +1315,7 @@ namespace DataModel
             {
                 Titulo = "Todos los materiales que salen de este almacén cumplen con el sistema FIFO o FEFO?",
                 Criterio = "C",
-                Articulo="366",
+                Articulo="514",
                 PuntosMax = (decimal)2.0,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
             },
@@ -1323,7 +1323,7 @@ namespace DataModel
             {
                 Titulo = "Existen recipientes para la recolección de la basura?",
                 Criterio = "R",
-                Articulo="457",
+                Articulo="477",
                 PuntosMax = (decimal)1.0,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
             },
@@ -1331,7 +1331,7 @@ namespace DataModel
             {
                 Titulo = "Los recipientes de la recolección de la basura se vacían frecuentemente?",
                 Criterio = "R",
-                Articulo="457",
+                Articulo="477",
                 PuntosMax = (decimal)1.0,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
             },
@@ -1339,7 +1339,7 @@ namespace DataModel
             {
                 Titulo = "Los materiales de acondicionamiento, envase y empaque, detallan en su etiqueta de identificación lo siguiente?" ,
                 Criterio = "C",
-                Articulo="442, 448",
+                Articulo="523",
                 PuntosMax = (decimal)2.0,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                 LSubPreguntas = new List<ContenidoSubPreguntas>(){
@@ -1354,7 +1354,7 @@ namespace DataModel
             {
                 Titulo = "Existe procedimiento escrito para el almacenamiento de los Materiales de Acondicionamiento, envase y empaque? (Verifique cumplimiento)",
                 Criterio = "C",
-                Articulo="470",
+                Articulo=" ",
                 PuntosMax = (decimal)2.0,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
             },
@@ -1362,7 +1362,7 @@ namespace DataModel
             {
                 Titulo = "Existen ductos o tuberías expuestas en este almacén?",
                 Criterio = "INF",
-                Articulo="430",
+                Articulo="490",
                 PuntosMax = (decimal)0.5,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
             },
@@ -1370,7 +1370,7 @@ namespace DataModel
             {
                 Titulo = "Se identifican los ductos y tuberías expuestas?",
                 Criterio = "INF",
-                Articulo="430",
+                Articulo="490",
                 PuntosMax = (decimal)0.5,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
             },
@@ -1378,7 +1378,7 @@ namespace DataModel
             {
                 Titulo = "Todos los materiales de acondicionamiento, envase y empaque se encuentran colocados sobre tarimas, armarrápidos o andamios?",
                 Criterio = "N",
-                Articulo="371",
+                Articulo="420",
                 PuntosMax = (decimal)1.5,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
             },
@@ -1386,7 +1386,7 @@ namespace DataModel
             {
                 Titulo = "Los materiales de acondicionamiento, envase y empaque en estatus de cuarentena se identifican con la respectiva etiqueta?",
                 Criterio = "N",
-                Articulo="442, 448",
+                Articulo=" ",
                 PuntosMax = (decimal)1.5,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
             },
@@ -1394,7 +1394,7 @@ namespace DataModel
             {
                 Titulo = "El almacén de material de acondicionamiento, envase y empaque dispone de un área delimitada e identificada para almacenar las etiquetas?",
                 Criterio = "N",
-                Articulo="425",
+                Articulo="500",
                 PuntosMax = (decimal)1.5,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
             },
@@ -1402,7 +1402,7 @@ namespace DataModel
             {
                 Titulo = "El área donde se almacenan las etiquetas, permanece bajo llave?",
                 Criterio = "N",
-                Articulo="425",
+                Articulo="500",
                 PuntosMax = (decimal)1.5,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
             },
@@ -1410,7 +1410,7 @@ namespace DataModel
             {
                 Titulo = "Control de Calidad es el encargado de liberar de estatus (Cuarentena, aprobado o rechazado) los materiales de Acondicionamiento, envase y empaque?",
                 Criterio = "C",
-                Articulo="444",
+                Articulo="522",
                 PuntosMax = (decimal)2.0,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
             },
@@ -1418,7 +1418,7 @@ namespace DataModel
             {
                 Titulo = "Todo el material de acondicionamiento, envase y empaque aprobado posee etiqueta indicando su estatus?",
                 Criterio = "C",
-                Articulo="442",
+                Articulo="525",
                 PuntosMax = (decimal)2.0,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
             },
@@ -1426,7 +1426,7 @@ namespace DataModel
             {
                 Titulo = "Los bultos de material de acondicionamiento, envase y empaque se encuentran estibados de manera segura en tarimas, separadas del techo, de manera que facilite la limpieza del área?",
                 Criterio = "R",
-                Articulo="371",
+                Articulo="514",
                 PuntosMax = (decimal)1.0,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
             },
@@ -1447,7 +1447,7 @@ namespace DataModel
             {
                 Titulo = "El área está identificada y delimitada?",
                 Criterio = "R",
-                Articulo="366",
+                Articulo="492",
                 PuntosMax = (decimal)1.0,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
             },
@@ -1455,7 +1455,7 @@ namespace DataModel
             {
                 Titulo = "La calidad de la iluminación es adecuada?",
                 Criterio = "R",
-                Articulo="363",
+                Articulo="492",
                 PuntosMax = (decimal)1.0,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
             },
@@ -1463,7 +1463,7 @@ namespace DataModel
             {
                 Titulo = "La ventilación es adecuada?",
                 Criterio = "R",
-                Articulo="412",
+                Articulo="492",
                 PuntosMax = (decimal)1.0,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
             },
@@ -1471,7 +1471,7 @@ namespace DataModel
             {
                 Titulo = "Son adecuadas las condiciones de?",
                 Criterio = "C",
-                Articulo="371, 415",
+                Articulo="490",
                 PuntosMax = (decimal)2.0,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                 LSubPreguntas = new List<ContenidoSubPreguntas>(){
@@ -1509,7 +1509,7 @@ namespace DataModel
             {
                 Titulo = "Existen procedimientos escritos para el recibo de productos terminados?",
                 Criterio = "C",
-                Articulo="470",
+                Articulo="546",
                 PuntosMax = (decimal)2.0,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
             },
@@ -1517,7 +1517,7 @@ namespace DataModel
             {
                 Titulo = "Existen criterios para la aceptación o rechazo de los productos terminados?",
                 Criterio = "R",
-                Articulo="470",
+                Articulo="546",
                 PuntosMax = (decimal)1.0,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
             },
@@ -1525,7 +1525,7 @@ namespace DataModel
             {
                 Titulo = "Son adecuados los documentos o formatos empleados para la recepción? (Nombre, Número de Lote y Fecha de Expiración)",
                 Criterio = "R",
-                Articulo="468",
+                Articulo="546",
                 PuntosMax = (decimal)1.0,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
             },
@@ -1533,7 +1533,7 @@ namespace DataModel
             {
                 Titulo = "Todos los productos terminados tienen su etiqueta de cuarentena?",
                 Criterio = "N",
-                Articulo="438, 452",
+                Articulo="452, 497",
                 PuntosMax = (decimal)1.5,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
             },
@@ -1541,7 +1541,7 @@ namespace DataModel
             {
                 Titulo = "Se emplea algún número diferente al número de lote, como registro de recepción? ",
                 Criterio = "N",
-                Articulo="366",
+                Articulo="422",
                 PuntosMax = (decimal)1.5,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
             },
@@ -1549,7 +1549,7 @@ namespace DataModel
             {
                 Titulo = "El producto terminado en estatus de cuarentena, es liberado sólo por Control de Calidad?",
                 Criterio = "N",
-                Articulo="438",
+                Articulo="527",
                 PuntosMax = (decimal)1.5,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
             },
@@ -1557,7 +1557,7 @@ namespace DataModel
             {
                 Titulo = "El producto terminado es colocado sobre tarimas?",
                 Criterio = "N",
-                Articulo="371",
+                Articulo="420",
                 PuntosMax = (decimal)1.5,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
             },      
@@ -1597,7 +1597,7 @@ namespace DataModel
                 {
                 Titulo = "El almacén de producto terminado está debidamente identificado y delimitado?",
                 Criterio = "C",
-                Articulo="413",
+                Articulo="497",
                 PuntosMax = (decimal)2.0,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
@@ -1605,7 +1605,7 @@ namespace DataModel
                 {
                 Titulo = "Se Observa limpio y ordenado?",
                 Criterio = "R",
-                Articulo="420",
+                Articulo="485",
                 PuntosMax = (decimal)1.0,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
@@ -1613,7 +1613,7 @@ namespace DataModel
                 {
                 Titulo = "Se encuentran identificados los rangos de la Temperatura y Humedad Relativa?",
                 Criterio = "C",
-                Articulo="367",
+                Articulo="487",
                 PuntosMax = (decimal)2.0,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
@@ -1621,7 +1621,7 @@ namespace DataModel
                 {
                 Titulo = "Se lleva registro cronológico de la temperatura y Humedad Relativa? (Verifique)",
                 Criterio = "R",
-                Articulo="367",
+                Articulo="487",
                 PuntosMax = (decimal)1.0,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
@@ -1629,7 +1629,7 @@ namespace DataModel
                 {
                 Titulo = "Se mantiene un sistema de registro de ingreso y control de existencias del producto terminado?",
                 Criterio = "R",
-                Articulo="470",
+                Articulo="546",
                 PuntosMax = (decimal)1.0,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
@@ -1637,7 +1637,7 @@ namespace DataModel
                 {
                 Titulo = "Se incluye en el sistema de registro y control de los despachos, la correlación entre la fecha de ingreso / fecha de egreso y la observación de la fecha de vencimiento?",
                 Criterio = "R",
-                Articulo="469",
+                Articulo="545",
                 PuntosMax = (decimal)1.0,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
@@ -1645,7 +1645,7 @@ namespace DataModel
                 {
                 Titulo = "Todo Producto terminado se encuentra almacenado sobre tarimas o estanterías separadas de la pared (que permita la limpieza y circulación del personal)? ",
                 Criterio = "C",
-                Articulo="371",
+                Articulo="420",
                 PuntosMax = (decimal)2.0,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
@@ -1661,7 +1661,7 @@ namespace DataModel
                 {
                 Titulo = "Los Productos Terminados se observan estibados con seguridad?",
                 Criterio = "C",
-                Articulo="371",
+                Articulo="420",
                 PuntosMax = (decimal)2.0,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
@@ -1676,7 +1676,7 @@ namespace DataModel
                 {
                 Titulo = "El almacén está protegido contra la entrada de aves, insectos, roedores u otros animales?",
                 Criterio = "N",
-                Articulo="411",
+                Articulo="486",
                 PuntosMax = (decimal)1.5,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
@@ -1684,7 +1684,7 @@ namespace DataModel
                 {
                 Titulo = "Existen procedimientos para el control o eliminación de la fauna nociva?",
                 Criterio = "N",
-                Articulo="470, 411",
+                Articulo="546",
                 PuntosMax = (decimal)1.5,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
@@ -1692,7 +1692,7 @@ namespace DataModel
                 {
                 Titulo = "Existe un programa de control contra la proliferación de fauna nociva?",
                 Criterio = "R",
-                Articulo="411",
+                Articulo="546",
                 PuntosMax = (decimal)1.0,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
@@ -1700,7 +1700,7 @@ namespace DataModel
                 {
                 Titulo = "Existe suficiente equipo (Extintores cargados, mangueras, otros) para combatir incendios o un sistema automático contra incendios?",
                 Criterio = "N",
-                Articulo="411",
+                Articulo="409",
                 PuntosMax = (decimal)1.5,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
@@ -1708,7 +1708,7 @@ namespace DataModel
                 {
                 Titulo = "Existen indicaciones en las áreas para el personal que requiere evacuar el almacén en caso de emergencia? (Rutas de evacuación)",
                 Criterio = "N",
-                Articulo="358",
+                Articulo="409",
                 PuntosMax = (decimal)1.5,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
@@ -1716,7 +1716,7 @@ namespace DataModel
                 {
                 Titulo = "Los implementos necesarios para atender una emergencia están?",
                 Criterio = "R",
-                Articulo="358",
+                Articulo="409",
                 PuntosMax = (decimal)1.0,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                 LSubPreguntas = new List<ContenidoSubPreguntas>(){
@@ -1743,7 +1743,7 @@ namespace DataModel
                 {
                 Titulo = "Los productos devueltos o rechazados se encuentran en un área identificada y asegurada?",
                 Criterio = "N",
-                Articulo="454",
+                Articulo="529",
                 PuntosMax = (decimal)1.5,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
@@ -1751,7 +1751,7 @@ namespace DataModel
                 {
                 Titulo = "Cuentan con procedimiento escrito para el manejo de devoluciones y/o rechazo de productos?",
                 Criterio = "C",
-                Articulo="470",
+                Articulo="546",
                 PuntosMax = (decimal)2.0,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
@@ -1759,7 +1759,7 @@ namespace DataModel
                 {
                 Titulo = "Se identifican los productos con su correspondiente etiqueta, indicando el estatus de rechazo o devolución?",
                 Criterio = "C",
-                Articulo="467",
+                Articulo="543",
                 PuntosMax = (decimal)2.0,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
@@ -1767,7 +1767,7 @@ namespace DataModel
                 {
                 Titulo = "Se registran las causas de las devoluciones y rechazos?",
                 Criterio = "N",
-                Articulo="455",
+                Articulo="531",
                 PuntosMax = (decimal)1.5,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
@@ -1775,7 +1775,7 @@ namespace DataModel
                 {
                 Titulo = "Control de Calidad participa activamente en las decisiones adoptadas en las Devoluciones y Rechazos?",
                 Criterio = "C",
-                Articulo="454",
+                Articulo="531",
                 PuntosMax = (decimal)2.0,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
@@ -1797,7 +1797,7 @@ namespace DataModel
                 {
                 Titulo = "Solo los productos aprobados por el Laboratorio de Control de Calidad son autorizados para su distribución?",
                 Criterio = "C",
-                Articulo="491",
+                Articulo="568",
                 PuntosMax = (decimal)2.0,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
@@ -1805,7 +1805,7 @@ namespace DataModel
                 {
                 Titulo = "Existen procedimientos escritos que regulen la distribución primaria de los productos?",
                 Criterio = "C",
-                Articulo="470",
+                Articulo="547",
                 PuntosMax = (decimal)2.0,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
@@ -1813,7 +1813,7 @@ namespace DataModel
                 {
                 Titulo = "El registro de distribución primaria del producto se conserva hasta un año después de la fecha de vencimiento del lote?",
                 Criterio = "R",
-                Articulo="469",
+                Articulo="545",
                 PuntosMax = (decimal)1.0,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
@@ -1821,7 +1821,7 @@ namespace DataModel
                 {
                 Titulo = "Contiene el registro de distribución la información siguiente?",
                 Criterio = "N",
-                Articulo="469",
+                Articulo="545",
                 PuntosMax = (decimal)1.5,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                 LSubPreguntas = new List<ContenidoSubPreguntas>(){
@@ -1851,7 +1851,7 @@ namespace DataModel
                 {
                 Titulo = "Existen procedimientos escritos en los cuales la empresa plasme la política de manejo de quejas y reclamos de productos comercializados?",
                 Criterio = "N",
-                Articulo="384",
+                Articulo="458",
                 PuntosMax = (decimal)1.5,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
@@ -1859,7 +1859,7 @@ namespace DataModel
                 {
                 Titulo = "Se registran y archivan las decisiones y medidas adoptadas por la empresa como resultado de una queja o reclamo?",
                 Criterio = "R",
-                Articulo="384",
+                Articulo="458",
                 PuntosMax = (decimal)1.0,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
@@ -1867,7 +1867,7 @@ namespace DataModel
                 {
                 Titulo = "Participa activamente el laboratorio de Control de Calidad en las investigaciones de una queja o reclamo?",
                 Criterio = "C",
-                Articulo="384, 508",
+                Articulo="458, 585",
                 PuntosMax = (decimal)2.0,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
@@ -1875,7 +1875,7 @@ namespace DataModel
                 {
                 Titulo = "Se comunica al Regente Farmacéutico y Gerente de la empresa sobre los resultados de la investigación de una queja o reclamo?",
                 Criterio = "C",
-                Articulo="506",
+                Articulo="583",
                 PuntosMax = (decimal)2.0,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
@@ -1897,7 +1897,7 @@ namespace DataModel
                 {
                 Titulo = "Existen procedimientos escritos para el retiro de los productos del mercado?",
                 Criterio = "R",
-                Articulo="507",
+                Articulo="584",
                 PuntosMax = (decimal)1.0,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
@@ -1905,7 +1905,7 @@ namespace DataModel
                 {
                 Titulo = "Se incluye la comunicación inmediata a la Autoridad Sanitaria correspondiente sobre la causa del retiro del producto?",
                 Criterio = "C",
-                Articulo="510",
+                Articulo="587",
                 PuntosMax = (decimal)2.0,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
@@ -1913,7 +1913,7 @@ namespace DataModel
                 {
                 Titulo = "Hay personas responsables designadas para la coordinación y ejecución del procedimiento del retiro?",
                 Criterio = "R",
-                Articulo="381",
+                Articulo="455",
                 PuntosMax = (decimal)1.0,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
@@ -1921,7 +1921,7 @@ namespace DataModel
                 {
                 Titulo = "Los registros de distribución primarios quedan disponibles para la pronta acción de retiro del mercado?",
                 Criterio = "R",
-                Articulo="511",
+                Articulo="588",
                 PuntosMax = (decimal)1.0,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
@@ -1929,7 +1929,7 @@ namespace DataModel
                 {
                 Titulo = "Contienen estos registros la información necesaria que permita el rastreo y determinación de los destinatarios resultantes de la distribución primaria?",
                 Criterio = "N",
-                Articulo="511",
+                Articulo="588",
                 PuntosMax = (decimal)1.5,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
@@ -1937,7 +1937,7 @@ namespace DataModel
                 {
                 Titulo = "Es adecuada y segura el área para el almacenamiento de los productos retirados del mercado mientras aguardan su destino?",
                 Criterio = "C",
-                Articulo="373",
+                Articulo="431",
                 PuntosMax = (decimal)2.0,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
@@ -1945,7 +1945,7 @@ namespace DataModel
                 {
                 Titulo = "Existen informes finales sobre el balance entre cantidades entregadas y cantidades recuperadas del producto?",
                 Criterio = "C",
-                Articulo="512",
+                Articulo="589",
                 PuntosMax = (decimal)2.0,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
@@ -1953,7 +1953,7 @@ namespace DataModel
                 {
                 Titulo = "Existen Informes de los retiros de productos del mercado y sus causas? (Verifique)",
                 Criterio = "INF",
-                Articulo="386",
+                Articulo="460",
                 PuntosMax = (decimal)0.5,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
@@ -1961,7 +1961,7 @@ namespace DataModel
                 {
                 Titulo = "En el informe final se contempla el destino de los productos retirados del mercado?",
                 Criterio = "R",
-                Articulo="512",
+                Articulo="589",
                 PuntosMax = (decimal)1.0,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
@@ -2086,8 +2086,8 @@ namespace DataModel
                 },
                 new ContenidoPreguntas()
                 {
-                Titulo = "Las tuberías que conducen el agua potable, externamente se observan en buen estado? De qué material están construidas?",
-                Criterio = "R",
+                Titulo = "Las tuberías que conducen el agua potable, externamente se observan en buen estado? ¿De qué material están construidas?",
+                Criterio = "N",
                 Articulo="436",
                 PuntosMax = (decimal)1.5,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
@@ -2613,7 +2613,7 @@ namespace DataModel
                 {
                 Titulo = "Existe una sección encargada del mantenimiento de las áreas y los equipos? ",
                 Criterio = "R",
-                Articulo="427",
+                Articulo="",
                 PuntosMax = (decimal)1.0,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
@@ -2621,7 +2621,7 @@ namespace DataModel
                 {
                 Titulo = "Existe un procedimiento escrito para el mantenimiento programado de edificios e instalaciones? ",
                 Criterio = "R",
-                Articulo="410",
+                Articulo="",
                 PuntosMax = (decimal)1.0,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
@@ -2629,7 +2629,7 @@ namespace DataModel
                 {
                 Titulo = "Existen programas para el mantenimiento de las áreas?",
                 Criterio = "INF",
-                Articulo="410",
+                Articulo="",
                 PuntosMax = (decimal)0.5,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
@@ -2637,7 +2637,7 @@ namespace DataModel
                 {
                 Titulo = "Existe un almacén de herramientas y partes de equipos?",
                 Criterio = "N",
-                Articulo="427",
+                Articulo="",
                 PuntosMax = (decimal)1.5,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
@@ -2645,7 +2645,7 @@ namespace DataModel
                 {
                 Titulo = "El almacén de herramientas o área de mantenimiento está alejado de las áreas de producción?",
                 Criterio = "N",
-                Articulo="427",
+                Articulo="",
                 PuntosMax = (decimal)1.5,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
@@ -2653,7 +2653,7 @@ namespace DataModel
                 {
                 Titulo = "Las tuberías están identificadas?",
                 Criterio = "R",
-                Articulo = "430",
+                Articulo = "",
                 PuntosMax = (decimal)1.0,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
@@ -2661,7 +2661,7 @@ namespace DataModel
                 {
                 Titulo = "Existen extractores de polvo en la empresa? (Cuando aplique) ",
                 Criterio = "INF",
-                Articulo = "102",
+                Articulo = "",
                 PuntosMax = (decimal)0.5,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 }
@@ -2824,7 +2824,7 @@ namespace DataModel
                 },
                 new ContenidoPreguntas()
                 {
-                Titulo = "Se prohíbe el ingreso a las áreas de producción a personas vestidas inadecuadamente? ",
+                Titulo = "Se prohíbe el ingreso a las áreas de producción a personas vestidas inadecuadamente?",
                 Criterio = "N",
                 Articulo="406",
                 PuntosMax = (decimal)1.5,
@@ -3115,8 +3115,8 @@ namespace DataModel
                     new ContenidoSubPreguntas(){ Nombre="Anteojos de seguridad" },
                     new ContenidoSubPreguntas(){ Nombre="Máscaras de protección" },
                     new ContenidoSubPreguntas(){ Nombre="Cubre cabellos o cofias" },
-                    new ContenidoSubPreguntas(){ Nombre="Guantes" },
                     new ContenidoSubPreguntas(){ Nombre="Protección auditiva (Cuando aplique)" },
+                    new ContenidoSubPreguntas(){ Nombre="Guantes" },
                     new ContenidoSubPreguntas(){ Nombre="Zapatos especiales" },
                 },
                 },
@@ -3242,15 +3242,15 @@ namespace DataModel
                 {
                 Titulo = "El área esta físicamente delimitada e identificada? Cuenta con esclusa?",
                 Criterio = "INF",
-                Articulo="413",
-                PuntosMax = (decimal)0.5,
+                Articulo="488",
+                PuntosMax = (decimal)1.0,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
                 new ContenidoPreguntas()
                 {
                 Titulo = "Son adecuadas las condiciones de?",
                 Criterio = "C",
-                Articulo="415, 416, 417",
+                Articulo="490, 491, 492",
                 PuntosMax = (decimal)2.0,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                 LSubPreguntas = new List<ContenidoSubPreguntas>(){
@@ -3309,7 +3309,7 @@ namespace DataModel
                 {
                 Titulo = "Existe un sistema de suministro de aire que permita una adecuada ventilación?",
                 Criterio = "R",
-                Articulo="417",
+                Articulo="492",
                 PuntosMax = (decimal)1.0,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
@@ -3317,7 +3317,7 @@ namespace DataModel
                 {
                 Titulo = "Existe un sistema de extracción de aire que permita la adecuada ventilación?",
                 Criterio = "N",
-                Articulo="417",
+                Articulo="492",
                 PuntosMax = (decimal)1.5,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
@@ -3325,7 +3325,7 @@ namespace DataModel
                 {
                 Titulo = "El área cuenta con",
                 Criterio = "C",
-                Articulo="422",
+                Articulo="490",
                 PuntosMax = (decimal)2.0,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                 LSubPreguntas = new List<ContenidoSubPreguntas>(){
@@ -3356,7 +3356,7 @@ namespace DataModel
                 {
                 Titulo = "El sistema de tuberías de servicio (agua, electricidad, gases, etc.…) se observa limpio e identificado?",
                 Criterio = "R",
-                Articulo="430",
+                Articulo="505",
                 PuntosMax = (decimal)1.0,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
@@ -3364,7 +3364,7 @@ namespace DataModel
                 {
                 Titulo = "Se observa el área limpia?",
                 Criterio = "N",
-                Articulo="402",
+                Articulo="477",
                 PuntosMax = (decimal)1.5,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
@@ -3372,7 +3372,7 @@ namespace DataModel
                 {
                 Titulo = "Existe un programa escrito de limpieza? Existen registros cronológicos de esta actividad?",
                 Criterio = "N",
-                Articulo="402",
+                Articulo="546",
                 PuntosMax = (decimal)1.5,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
@@ -3380,7 +3380,7 @@ namespace DataModel
                 {
                 Titulo = "Se prohíbe en el área de fabricación comer, fumar o ingerir bebidas?",
                 Criterio = "C",
-                Articulo="404",
+                Articulo="479",
                 PuntosMax = (decimal)2.0,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
@@ -3388,7 +3388,7 @@ namespace DataModel
                 {
                 Titulo = "Existen vestidores y servicios sanitarios suficientes para damas y caballeros?",
                 Criterio = "INF",
-                Articulo="426",
+                Articulo="501",
                 PuntosMax = (decimal)0.5,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
@@ -3396,7 +3396,7 @@ namespace DataModel
                 {
                 Titulo = "Existen suficientes lavamanos con dispensadores de jabón, toalla, papel toalla o secadores de aire?",
                 Criterio = "N",
-                Articulo="426",
+                Articulo="480",
                 PuntosMax = (decimal)1.5,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
@@ -3404,7 +3404,7 @@ namespace DataModel
                 {
                 Titulo = "Existen carteles alusivos al lavado de manos?",
                 Criterio = "R",
-                Articulo="405",
+                Articulo="480",
                 PuntosMax = (decimal)1.0,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
@@ -3412,7 +3412,7 @@ namespace DataModel
                 {
                 Titulo = "El personal utiliza uniformes especiales para esta área?",
                 Criterio = "N",
-                Articulo="403",
+                Articulo="478",
                 PuntosMax = (decimal)1.5,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
@@ -3420,7 +3420,7 @@ namespace DataModel
                 {
                 Titulo = "Los operarios al momento de la Auditoría, se encuentran debidamente uniformados?:",
                 Criterio = "C",
-                Articulo="403",
+                Articulo="478",
                 PuntosMax = (decimal)2.0,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                 LSubPreguntas = new List<ContenidoSubPreguntas>(){
@@ -3479,7 +3479,7 @@ namespace DataModel
                 {
                 Titulo = "Los uniformes se encuentran en buenas condiciones?",
                 Criterio = "N",
-                Articulo="403",
+                Articulo="478",
                 PuntosMax = (decimal)1.5,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
@@ -3487,7 +3487,7 @@ namespace DataModel
                 {
                 Titulo = "Se considera que el área física es adecuada para el volumen de operaciones que se desarrollan?",
                 Criterio = "N",
-                Articulo="417",
+                Articulo="485",
                 PuntosMax = (decimal)1.5,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
@@ -3495,7 +3495,7 @@ namespace DataModel
                 {
                 Titulo = "Los equipos y materiales se identifican adecuadamente?",
                 Criterio = "N",
-                Articulo="473",
+                Articulo="504",
                 PuntosMax = (decimal)1.5,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
@@ -3503,7 +3503,7 @@ namespace DataModel
                 {
                 Titulo = "Existen recipientes de basura adecuados?",
                 Criterio = "INF",
-                Articulo="457",
+                Articulo="532",
                 PuntosMax = (decimal)0.5,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
@@ -3511,7 +3511,7 @@ namespace DataModel
                 {
                 Titulo = "Se vacían con frecuencia?",
                 Criterio = "R",
-                Articulo="457",
+                Articulo="532",
                 PuntosMax = (decimal)1.0,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
@@ -3519,7 +3519,7 @@ namespace DataModel
                 {
                 Titulo = "Existe un procedimiento escrito para controlar el ingreso de personal ajeno a esta área?",
                 Criterio = "R",
-                Articulo="474",
+                Articulo="550",
                 PuntosMax = (decimal)1.0,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
@@ -3527,7 +3527,7 @@ namespace DataModel
                 {
                 Titulo = "Se observan prohibiciones al personal que ingresa al área de producción sobre uso de maquillaje, relojes, joyas, teléfonos celulares, radio localizadores e instrumentos ajenos al proceso?",
                 Criterio = "R",
-                Articulo="404",
+                Articulo="479",
                 PuntosMax = (decimal)1.0,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
@@ -3535,7 +3535,7 @@ namespace DataModel
                 {
                 Titulo = "El área de circulación está libre de obstáculos?",
                 Criterio = "R",
-                Articulo="484",
+                Articulo="561",
                 PuntosMax = (decimal)1.0,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
@@ -3543,7 +3543,7 @@ namespace DataModel
                 {
                 Titulo = "Existe una fórmula de elaboración que sea fiel copia de la fórmula maestra?",
                 Criterio = "C",
-                Articulo="464",
+                Articulo="540",
                 PuntosMax = (decimal)2.0,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
@@ -3551,7 +3551,7 @@ namespace DataModel
                 {
                 Titulo = "La fórmula maestra contiene",
                 Criterio = "C",
-                Articulo="464",
+                Articulo="540",
                 PuntosMax = (decimal)2.0,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                 LSubPreguntas = new List<ContenidoSubPreguntas>(){
@@ -3575,7 +3575,7 @@ namespace DataModel
                 {
                 Titulo = "Cada etapa de elaboración es ejecutada y firmada por el operario y aprobado por su superior inmediato?",
                 Criterio = "N",
-                Articulo="465",
+                Articulo="541",
                 PuntosMax = (decimal)1.5,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
@@ -3583,7 +3583,7 @@ namespace DataModel
                 {
                 Titulo = "Existen normas escritas de limpieza de los recipientes utilizados en la elaboración?",
                 Criterio = "N",
-                Articulo="402",
+                Articulo="477",
                 PuntosMax = (decimal)1.5,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
@@ -3591,7 +3591,7 @@ namespace DataModel
                 {
                 Titulo = "Se identifica el área con el nombre y número de lote del producto a fabricar?",
                 Criterio = "N",
-                Articulo="473",
+                Articulo="549",
                 PuntosMax = (decimal)1.5,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
@@ -3599,7 +3599,7 @@ namespace DataModel
                 {
                 Titulo = "Cuándo los recipientes están limpios son identificados y reubicados en un lugar destinado para tal fin?",
                 Criterio = "N",
-                Articulo="418",
+                Articulo="493",
                 PuntosMax = (decimal)1.5,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
@@ -3607,7 +3607,7 @@ namespace DataModel
                 {
                 Titulo = "Los recipientes conteniendo el producto envasado, están debidamente identificadoscon los siguientes datos?",
                 Criterio = "N",
-                Articulo="463",
+                Articulo="539",
                 PuntosMax = (decimal)1.5,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                 LSubPreguntas = new List<ContenidoSubPreguntas>(){
@@ -3622,7 +3622,7 @@ namespace DataModel
                 {
                 Titulo = "Están en buen estado?",
                 Criterio = "N",
-                Articulo="435",
+                Articulo="510",
                 PuntosMax = (decimal)1.5,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                 LSubPreguntas = new List<ContenidoSubPreguntas>(){
@@ -3642,7 +3642,7 @@ namespace DataModel
                 {
                 Titulo = "Las balanzas se calibran periódicamente?",
                 Criterio = "N",
-                Articulo="431",
+                Articulo="506",
                 PuntosMax = (decimal)1.5,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
@@ -3650,7 +3650,7 @@ namespace DataModel
                 {
                 Titulo = "Existe registro de las calibraciones? (Verifique) ",
                 Criterio = "N",
-                Articulo="431",
+                Articulo="506",
                 PuntosMax = (decimal)1.5,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
@@ -3658,7 +3658,7 @@ namespace DataModel
                 {
                 Titulo = "Se verifica la relación entre el rendimiento real y teórico? ",
                 Criterio = "R",
-                Articulo="472",
+                Articulo="548",
                 PuntosMax = (decimal)1.0,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
@@ -3666,7 +3666,7 @@ namespace DataModel
                 {
                 Titulo = "Se explica por escrito cualquier discrepancia que exista?",
                 Criterio = "R",
-                Articulo="465",
+                Articulo="541",
                 PuntosMax = (decimal)1.0,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
@@ -3674,7 +3674,7 @@ namespace DataModel
                 {
                 Titulo = "Se efectúan controles en proceso, a fin de garantizar la uniformidad del lote?",
                 Criterio = "N",
-                Articulo="465",
+                Articulo="541",
                 PuntosMax = (decimal)1.5,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
@@ -3682,7 +3682,7 @@ namespace DataModel
                 {
                 Titulo = "Control de Calidad libera el lote o granel, para ser envasado?",
                 Criterio = "N",
-                Articulo="491",
+                Articulo="568",
                 PuntosMax = (decimal)1.5,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
@@ -3690,7 +3690,7 @@ namespace DataModel
                 {
                 Titulo = "Existe un área destinada e identificada para el envasado final de los productos?",
                 Criterio = "N",
-                Articulo="486",
+                Articulo="563",
                 PuntosMax = (decimal)1.5,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
@@ -3714,7 +3714,7 @@ namespace DataModel
                 {
                 Titulo = "Es ordenada y racional la distribución de los equipos?",
                 Criterio = "INF",
-                Articulo="414",
+                Articulo="489",
                 PuntosMax = (decimal)0.5,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
@@ -3722,7 +3722,7 @@ namespace DataModel
                 {
                 Titulo = "Se efectúa despeje de líneas antes de comenzar las operaciones para eliminar la presencia de material remanente de productos anteriores?",
                 Criterio = "N",
-                Articulo="466, 485",
+                Articulo="542, 562",
                 PuntosMax = (decimal)1.5,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
@@ -3730,7 +3730,7 @@ namespace DataModel
                 {
                 Titulo = "Existen procedimientos escritos para la entrada de materias primas, materiales y equipos al área de fabricación?",
                 Criterio = "N",
-                Articulo="470",
+                Articulo="546",
                 PuntosMax = (decimal)1.5,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
@@ -3738,7 +3738,7 @@ namespace DataModel
                 {
                 Titulo = "Los equipos están construidos de material no reactivo? Afectan la calidad y seguridad del producto?",
                 Criterio = "C",
-                Articulo="428",
+                Articulo="503",
                 PuntosMax = (decimal)2.0,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
@@ -3746,7 +3746,7 @@ namespace DataModel
                 {
                 Titulo = "La ubicación de los equipos obstaculiza el flujo de procesos y movimientos del personal?",
                 Criterio = "R",
-                Articulo="429",
+                Articulo="504",
                 PuntosMax = (decimal)1.0,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
@@ -3754,7 +3754,7 @@ namespace DataModel
                 {
                 Titulo = "Existe en el área de producción equipo en desuso u obsoleto? Está identificado?",
                 Criterio = "N",
-                Articulo="434",
+                Articulo="509",
                 PuntosMax = (decimal)1.5,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
@@ -3762,7 +3762,7 @@ namespace DataModel
                 {
                 Titulo = "El Registro de Producción de Lote (Batch Record) contiene la siguiente información?",
                 Criterio = "C",
-                Articulo="465",
+                Articulo="541",
                 PuntosMax = (decimal)2.0,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                 LSubPreguntas = new List<ContenidoSubPreguntas>(){
@@ -3801,7 +3801,7 @@ namespace DataModel
                 {
                 Titulo = "Esta área esta físicamente delimitada e identificada? Cuenta con esclusa?",
                 Criterio = "INF",
-                Articulo="413",
+                Articulo="488",
                 PuntosMax = (decimal)0.5,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
@@ -3809,7 +3809,7 @@ namespace DataModel
                 {
                 Titulo = "Son adecuadas las condiciones de?",
                 Criterio = "C",
-                Articulo="415, 416, 417",
+                Articulo="490, 491, 492",
                 PuntosMax = (decimal)2.0,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                 LSubPreguntas = new List<ContenidoSubPreguntas>(){
@@ -3824,9 +3824,9 @@ namespace DataModel
                 },
                 new ContenidoPreguntas()
                 {
-                Titulo = "Existe un sistema de suministro y renovación de aire en el area?",
+                Titulo = "Existe un sistema de suministro de aire que permita una adecuada ventilación?",
                 Criterio = "N",
-                Articulo="417",
+                Articulo="492",
                 PuntosMax = (decimal)1.5,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
@@ -3834,7 +3834,7 @@ namespace DataModel
                 {
                 Titulo = "Existe un sistema de extracción de aire que permita la adecuada ventilación?",
                 Criterio = "N",
-                Articulo="417",
+                Articulo="492",
                 PuntosMax = (decimal)1.5,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
@@ -3842,7 +3842,7 @@ namespace DataModel
                 {
                 Titulo = "El área cuenta con",
                 Criterio = "C",
-                Articulo="422",
+                Articulo="490",
                 PuntosMax = (decimal)2.0,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                 LSubPreguntas = new List<ContenidoSubPreguntas>(){
@@ -3855,7 +3855,7 @@ namespace DataModel
                 {
                 Titulo = "El sistema de tuberías de servicio (agua, electricidad, gases) se encuentran limpias e identificadas según códigos oficiales?",
                 Criterio = "R",
-                Articulo="430",
+                Articulo="505",
                 PuntosMax = (decimal)1.0,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
@@ -3863,7 +3863,7 @@ namespace DataModel
                 {
                 Titulo = "Se observa el área limpia?",
                 Criterio = "N",
-                Articulo="402",
+                Articulo="477",
                 PuntosMax = (decimal)1.5,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
@@ -3871,7 +3871,7 @@ namespace DataModel
                 {
                 Titulo = "Existe un programa escrito de limpieza? Existen registros cronológicos de esta actividad?",
                 Criterio = "N",
-                Articulo="426",
+                Articulo="546",
                 PuntosMax = (decimal)1.5,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
@@ -3879,7 +3879,7 @@ namespace DataModel
                 {
                 Titulo = "Se prohíbe en el área de fabricación comer, fumar o ingerir bebidas?",
                 Criterio = "C",
-                Articulo="404",
+                Articulo="479",
                 PuntosMax = (decimal)2.0,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
@@ -3887,7 +3887,7 @@ namespace DataModel
                 {
                 Titulo = "Existen vestidores y servicios sanitarios suficientes para damas y caballeros?",
                 Criterio = "INF",
-                Articulo="426",
+                Articulo="501",
                 PuntosMax = (decimal)0.5,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
@@ -3895,7 +3895,7 @@ namespace DataModel
                 {
                 Titulo = "Existen suficientes lavamanos con dispensadores de jabón, toalla, papel toalla o secadores de aire?",
                 Criterio = "N",
-                Articulo="426",
+                Articulo="480",
                 PuntosMax = (decimal)1.5,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 }
@@ -3903,7 +3903,7 @@ namespace DataModel
                 {
                 Titulo = "Existen carteles alusivos al lavado de manos? ",
                 Criterio = "R",
-                Articulo="405",
+                Articulo="480",
                 PuntosMax = (decimal)1.0,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
@@ -3919,7 +3919,7 @@ namespace DataModel
                 {
                 Titulo = "El personal utiliza uniformes especiales para esta área?",
                 Criterio = "N",
-                Articulo="403",
+                Articulo="478",
                 PuntosMax = (decimal)1.5,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
@@ -3927,7 +3927,7 @@ namespace DataModel
                 {
                 Titulo = "Se observa que estos uniformes se encuentran en buenas condiciones?",
                 Criterio = "N",
-                Articulo="403",
+                Articulo="478",
                 PuntosMax = (decimal)1.5,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
@@ -3935,7 +3935,7 @@ namespace DataModel
                 {
                 Titulo = "Los operarios al momento de la Auditoría, se encuentran debidamente uniformados?:",
                 Criterio = "C",
-                Articulo="403",
+                Articulo="478",
                 PuntosMax = (decimal)2.0,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                 LSubPreguntas = new List<ContenidoSubPreguntas>(){
@@ -3952,7 +3952,7 @@ namespace DataModel
                 {
                 Titulo = "Se considera que el área física es adecuada para el volumen de operaciones que se desarrollan?",
                 Criterio = "N",
-                Articulo="417",
+                Articulo="485",
                 PuntosMax = (decimal)1.5,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
@@ -3960,7 +3960,7 @@ namespace DataModel
                 {
                 Titulo = "Los equipos y materiales se identifican adecuadamente?",
                 Criterio = "N",
-                Articulo="473",
+                Articulo="504",
                 PuntosMax = (decimal)1.5,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
@@ -3968,7 +3968,7 @@ namespace DataModel
                 {
                 Titulo = "Existen suficientes recipientes recolectores de basura?",
                 Criterio = "INF",
-                Articulo="457",
+                Articulo="532",
                 PuntosMax = (decimal)0.5,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
@@ -3976,7 +3976,7 @@ namespace DataModel
                 {
                 Titulo = "Los desperdicios se vacían con frecuencia?",
                 Criterio = "R",
-                Articulo="457",
+                Articulo="532",
                 PuntosMax = (decimal)1.0,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
@@ -3984,7 +3984,7 @@ namespace DataModel
                 {
                 Titulo = "Existe un procedimiento escrito para controlar el ingreso de personal ajeno a esta área?",
                 Criterio = "R",
-                Articulo="404",
+                Articulo="550",
                 PuntosMax = (decimal)1.0,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
@@ -3992,7 +3992,7 @@ namespace DataModel
                 {
                 Titulo = "Se observan prohibiciones al personal que ingresa al área de producción sobre uso de maquillaje, relojes, joyas, teléfonos celulares, radio localizadores e instrumentos ajenos al proceso?",
                 Criterio = "R",
-                Articulo="404",
+                Articulo="479",
                 PuntosMax = (decimal)1.0,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
@@ -4000,7 +4000,7 @@ namespace DataModel
                 {
                 Titulo = "El área de circulación está libre de obstáculos?",
                 Criterio = "R",
-                Articulo="484",
+                Articulo="561",
                 PuntosMax = (decimal)1.0,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
@@ -4008,7 +4008,7 @@ namespace DataModel
                 {
                 Titulo = "Existe una fórmula de elaboración que sea fiel copia de la fórmula maestra?",
                 Criterio = "C",
-                Articulo="464",
+                Articulo="540",
                 PuntosMax = (decimal)2.0,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
@@ -4016,7 +4016,7 @@ namespace DataModel
                 {
                 Titulo = "La fórmula maestra contiene",
                 Criterio = "C",
-                Articulo="464",
+                Articulo="540",
                 PuntosMax = (decimal)2.0,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                 LSubPreguntas = new List<ContenidoSubPreguntas>(){
@@ -4041,7 +4041,7 @@ namespace DataModel
                 {
                 Titulo = "Cada etapa de elaboración es ejecutada y firmada por el operario y aprobado por su superior inmediato?",
                 Criterio = "N",
-                Articulo="465",
+                Articulo="541",
                 PuntosMax = (decimal)1.5,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
@@ -4049,7 +4049,7 @@ namespace DataModel
                 {
                 Titulo = "Existen un programa para la limpieza de los recipientes utilizados en la elaboración?",
                 Criterio = "N",
-                Articulo="402",
+                Articulo="477",
                 PuntosMax = (decimal)1.5,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
@@ -4057,7 +4057,7 @@ namespace DataModel
                 {
                 Titulo = "Cuándo los recipientes están limpios son identificados y reubicados en un lugar destinado para tal fin?",
                 Criterio = "N",
-                Articulo="462",
+                Articulo="493",
                 PuntosMax = (decimal)1.5,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
@@ -4065,7 +4065,7 @@ namespace DataModel
                 {
                 Titulo = "Los recipientes conteniendo el producto envasado, están debidamente identificadoscon los siguientes datos?",
                 Criterio = "N",
-                Articulo="463",
+                Articulo="539",
                 PuntosMax = (decimal)1.5,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                 LSubPreguntas = new List<ContenidoSubPreguntas>(){
@@ -4080,7 +4080,7 @@ namespace DataModel
                 {
                 Titulo = "Se observa que están en buen estado?",
                 Criterio = "N",
-                Articulo="435",
+                Articulo="510",
                 PuntosMax = (decimal)1.5,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                 LSubPreguntas = new List<ContenidoSubPreguntas>(){
@@ -4095,7 +4095,7 @@ namespace DataModel
                 {
                 Titulo = "Las balanzas se calibran periódicamente?",
                 Criterio = "N",
-                Articulo="431",
+                Articulo="506",
                 PuntosMax = (decimal)1.5,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
@@ -4103,7 +4103,7 @@ namespace DataModel
                 {
                 Titulo = "Existe registro de las calibraciones? (Verifique) ",
                 Criterio = "R",
-                Articulo="431",
+                Articulo="506",
                 PuntosMax = (decimal)1.0,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
@@ -4111,7 +4111,7 @@ namespace DataModel
                 {
                 Titulo = "Se verifica la relación entre el rendimiento real y teórico? ",
                 Criterio = "R",
-                Articulo="472",
+                Articulo="548",
                 PuntosMax = (decimal)1.0,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
@@ -4119,7 +4119,7 @@ namespace DataModel
                 {
                 Titulo = "Se explica por escrito cualquier discrepancia que exista?",
                 Criterio = "R",
-                Articulo="465",
+                Articulo="541",
                 PuntosMax = (decimal)1.0,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
@@ -4127,7 +4127,7 @@ namespace DataModel
                 {
                 Titulo = "Control de Calidad libera el lote o granel, para ser envasado?",
                 Criterio = "N",
-                Articulo="491",
+                Articulo="568",
                 PuntosMax = (decimal)1.5,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
@@ -4143,7 +4143,7 @@ namespace DataModel
                 {
                 Titulo = "Se efectúa despeje de líneas antes de comenzar las operaciones para eliminar la presencia de material remanente de productos anteriores?",
                 Criterio = "N",
-                Articulo="485",
+                Articulo="542, 562",
                 PuntosMax = (decimal)1.5,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
@@ -4151,7 +4151,7 @@ namespace DataModel
                 {
                 Titulo = "Existen procedimientos escritos para la entrada de materias primas, materiales y equipos al área de fabricación de Químicos, Agroquímicos e Insecticidas?",
                 Criterio = "N",
-                Articulo="470",
+                Articulo="562",
                 PuntosMax = (decimal)1.5,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
@@ -4159,7 +4159,7 @@ namespace DataModel
                 {
                 Titulo = "Los equipos están construidos de material no reactivo? No afectan la calidad y seguridad del producto?",
                 Criterio = "C",
-                Articulo="428",
+                Articulo="503",
                 PuntosMax = (decimal)2.0,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
@@ -4167,7 +4167,7 @@ namespace DataModel
                 {
                 Titulo = "La ubicación de los equipos obstaculiza el flujo de procesos y movimientos del personal?",
                 Criterio = "R",
-                Articulo="429",
+                Articulo="504",
                 PuntosMax = (decimal)1.0,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
@@ -4175,7 +4175,7 @@ namespace DataModel
                 {
                 Titulo = "Existe en el área de producción equipo en desuso u obsoleto? Está identificado?",
                 Criterio = "N",
-                Articulo="434",
+                Articulo="509",
                 PuntosMax = (decimal)1.5,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
@@ -4183,7 +4183,7 @@ namespace DataModel
                 {
                 Titulo = "El Registro de Producción de Lote (Batch Record) contiene la siguiente información?",
                 Criterio = "C",
-                Articulo="464",
+                Articulo="541",
                 PuntosMax = (decimal)2.0,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                 LSubPreguntas = new List<ContenidoSubPreguntas>(){
@@ -4236,17 +4236,17 @@ namespace DataModel
                 },
                     new ContenidoPreguntas()
                 {
-                Titulo = "Esta área esta físicamente delimitada e identificada? Cuenta con esclusa?",
-                Criterio = "C",
-                Articulo="413",
-                PuntosMax = (decimal)2.0,
+                Titulo = "Esta área está físicamente delimitada e identificada? Cuenta con esclusa?",
+                Criterio = "R",
+                Articulo="488",
+                PuntosMax = (decimal)1.0,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
                 new ContenidoPreguntas()
                 {
                 Titulo = "Son adecuadas las condiciones de?",
                 Criterio = "C",
-                Articulo="415, 416, 417",
+                Articulo="490, 491, 492",
                 PuntosMax = (decimal)2.0,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                 LSubPreguntas = new List<ContenidoSubPreguntas>(){
@@ -4262,7 +4262,7 @@ namespace DataModel
                 {
                 Titulo = "Existe un sistema de suministro y renovación de aire en el área?",
                 Criterio = "N",
-                Articulo="417",
+                Articulo="492",
                 PuntosMax = (decimal)1.5,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
@@ -4270,7 +4270,7 @@ namespace DataModel
                 {
                 Titulo = "Existe un sistema de extracción de aire que permita la adecuada ventilación?",
                 Criterio = "N",
-                Articulo="417",
+                Articulo="492",
                 PuntosMax = (decimal)1.5,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
@@ -4278,7 +4278,7 @@ namespace DataModel
                 {
                 Titulo = "El área cuenta con",
                 Criterio = "C",
-                Articulo="422",
+                Articulo="490",
                 PuntosMax = (decimal)2.0,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                 LSubPreguntas = new List<ContenidoSubPreguntas>(){
@@ -4291,7 +4291,7 @@ namespace DataModel
                 {
                 Titulo = "El sistema de tuberías de servicio (agua, electricidad, gases) se encuentran limpias e identificadas según cádigos oficiales?",
                 Criterio = "R",
-                Articulo="430",
+                Articulo="505",
                 PuntosMax = (decimal)1.0,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
@@ -4299,7 +4299,7 @@ namespace DataModel
                 {
                 Titulo = "Se observa el área limpia?",
                 Criterio = "N",
-                Articulo="402",
+                Articulo="477",
                 PuntosMax = (decimal)1.5,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
@@ -4307,7 +4307,7 @@ namespace DataModel
                 {
                 Titulo = "Existe un programa escrito de limpieza? Existen registros cronológicos de esta actividad?",
                 Criterio = "N",
-                Articulo="402",
+                Articulo="546",
                 PuntosMax = (decimal)1.5,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
@@ -4315,7 +4315,7 @@ namespace DataModel
                 {
                 Titulo = "Se prohíbe en el área de fabricación comer, fumar o ingerir bebidas?",
                 Criterio = "C",
-                Articulo="404",
+                Articulo="479",
                 PuntosMax = (decimal)2.0,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
@@ -4323,7 +4323,7 @@ namespace DataModel
                 {
                 Titulo = "Existen vestidores y servicios sanitarios suficientes para damas y caballeros?",
                 Criterio = "INF",
-                Articulo="426",
+                Articulo="501",
                 PuntosMax = (decimal)0.5,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
@@ -4331,7 +4331,7 @@ namespace DataModel
                 {
                 Titulo = "Existen suficientes lavamanos con dispensadores de jabón, toalla, papel toalla o secadores de aire?",
                 Criterio = "N",
-                Articulo="426",
+                Articulo="480",
                 PuntosMax = (decimal)1.5,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
@@ -4339,7 +4339,7 @@ namespace DataModel
                 {
                 Titulo = "Existen carteles alusivos al lavado de manos?",
                 Criterio = "R",
-                Articulo="405",
+                Articulo="480",
                 PuntosMax = (decimal)1.0,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
@@ -4347,7 +4347,7 @@ namespace DataModel
                 {
                 Titulo = "El personal utiliza uniformes especiales para esta área?",
                 Criterio = "N",
-                Articulo="403",
+                Articulo="478",
                 PuntosMax = (decimal)1.5,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
@@ -4355,7 +4355,7 @@ namespace DataModel
                 {
                 Titulo = "Al momento de la Auditoría los operarios se encuentran debidamente uniformados:",
                 Criterio = "C",
-                Articulo="403",
+                Articulo="478",
                 PuntosMax = (decimal)2.0,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                 LSubPreguntas = new List<ContenidoSubPreguntas>(){
@@ -4372,7 +4372,7 @@ namespace DataModel
                 {
                 Titulo = "Los uniformes se encuentran limpios y en buenas condiciones?",
                 Criterio = "N",
-                Articulo="403",
+                Articulo="478",
                 PuntosMax = (decimal)1.5,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
@@ -4381,7 +4381,7 @@ namespace DataModel
                 {
                 Titulo = "Se considera que el área física es adecuada para el volumen de operaciones que se desarrollan?",
                 Criterio = "N",
-                Articulo="417",
+                Articulo="485",
                 PuntosMax = (decimal)1.5,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
@@ -4389,7 +4389,7 @@ namespace DataModel
                 {
                 Titulo = "Los equipos y materiales se identifican adecuadamente?",
                 Criterio = "N",
-                Articulo="473",
+                Articulo="504",
                 PuntosMax = (decimal)1.5,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
@@ -4397,7 +4397,7 @@ namespace DataModel
                 {
                 Titulo = "Existen suficientes recipientes recolectores de basuras?",
                 Criterio = "INF",
-                Articulo="457",
+                Articulo="532",
                 PuntosMax = (decimal)0.5,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
@@ -4405,7 +4405,7 @@ namespace DataModel
                 {
                 Titulo = "Los desperdicios se vacían con frecuencia?",
                 Criterio = "R",
-                Articulo="457",
+                Articulo="532",
                 PuntosMax = (decimal)1.0,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
@@ -4413,7 +4413,7 @@ namespace DataModel
                 {
                 Titulo = "Existe un procedimiento escrito para controlar el ingreso de personal ajeno a esta área?",
                 Criterio = "R",
-                Articulo="404",
+                Articulo="550",
                 PuntosMax = (decimal)1.0,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
@@ -4421,7 +4421,7 @@ namespace DataModel
                 {
                 Titulo = "Se observan prohibiciones al personal que ingresa al área de producción sobre uso de maquillaje, relojes, joyas, teléfonos celulares, radio localizadores e instrumentos ajenos al proceso?",
                 Criterio = "R",
-                Articulo="404",
+                Articulo="479",
                 PuntosMax = (decimal)1.0,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
@@ -4429,7 +4429,7 @@ namespace DataModel
                 {
                 Titulo = "El área de circulación está libre de obstáculos?",
                 Criterio = "R",
-                Articulo="484",
+                Articulo="561",
                 PuntosMax = (decimal)1.0,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
@@ -4437,7 +4437,7 @@ namespace DataModel
                 {
                 Titulo = "Existe una fórmula de elaboración que sea fiel copia de la fórmula maestra?",
                 Criterio = "C",
-                Articulo="464",
+                Articulo="540",
                 PuntosMax = (decimal)2.0,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
@@ -4445,7 +4445,7 @@ namespace DataModel
                 {
                 Titulo = "La fórmula maestra contiene",
                 Criterio = "C",
-                Articulo="464",
+                Articulo="540",
                 PuntosMax = (decimal)2.0,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                 LSubPreguntas = new List<ContenidoSubPreguntas>(){
@@ -4470,7 +4470,7 @@ namespace DataModel
                 {
                 Titulo = "Cada etapa de elaboración es ejecutada y firmada por el operario y aprobado por su superior inmediato?",
                 Criterio = "N",
-                Articulo="465",
+                Articulo="541",
                 PuntosMax = (decimal)1.5,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
@@ -4478,7 +4478,7 @@ namespace DataModel
                 {
                 Titulo = "Existen un programa para la limpieza de los recipientes utilizados en la elaboración?",
                 Criterio = "N",
-                Articulo="402",
+                Articulo="477",
                 PuntosMax = (decimal)1.5,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
@@ -4486,7 +4486,7 @@ namespace DataModel
                 {
                 Titulo = "Cuándo los recipientes están limpios son identificados y reubicados en un lugar destinado para tal fin?",
                 Criterio = "N",
-                Articulo="462",
+                Articulo="493",
                 PuntosMax = (decimal)1.5,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
@@ -4494,7 +4494,7 @@ namespace DataModel
                 {
                 Titulo = "Los recipientes conteniendo el producto envasado, están debidamente identificadoscon los siguientes datos?",
                 Criterio = "N",
-                Articulo="463",
+                Articulo="539",
                 PuntosMax = (decimal)1.5,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                 LSubPreguntas = new List<ContenidoSubPreguntas>(){
@@ -4510,7 +4510,7 @@ namespace DataModel
                 {
                 Titulo = "Se observa que están en buen estado?",
                 Criterio = "N",
-                Articulo="435",
+                Articulo="510",
                 PuntosMax = (decimal)1.5,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                 LSubPreguntas = new List<ContenidoSubPreguntas>(){
@@ -4525,7 +4525,7 @@ namespace DataModel
                 {
                 Titulo = "Las balanzas se calibran periódicamente?",
                 Criterio = "N",
-                Articulo="431",
+                Articulo="506",
                 PuntosMax = (decimal)1.5,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
@@ -4533,7 +4533,7 @@ namespace DataModel
                 {
                 Titulo = "Existe registro de las calibraciones? (Verifique) ",
                 Criterio = "R",
-                Articulo="431",
+                Articulo="506",
                 PuntosMax = (decimal)1.0,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
@@ -4541,7 +4541,7 @@ namespace DataModel
                 {
                 Titulo = "Se verifica la relación entre el rendimiento real y teórico? ",
                 Criterio = "R",
-                Articulo="472",
+                Articulo="548",
                 PuntosMax = (decimal)1.0,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
@@ -4549,7 +4549,7 @@ namespace DataModel
                 {
                 Titulo = "Se explica por escrito cualquier discrepancia que exista?",
                 Criterio = "R",
-                Articulo="465",
+                Articulo="541",
                 PuntosMax = (decimal)1.0,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
@@ -4557,7 +4557,7 @@ namespace DataModel
                 {
                 Titulo = "Control de Calidad libera el lote o granel, para ser envasado?",
                 Criterio = "N",
-                Articulo="491",
+                Articulo="568",
                 PuntosMax = (decimal)1.5,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
@@ -4571,17 +4571,17 @@ namespace DataModel
                 },
                 new ContenidoPreguntas()
                 {
-                Titulo = "Se efectúa despeje de líneas antes de comenzar las operaciones para eliminar la presencia de material remanente de productos anteriores?",
+                Titulo = "Existen procedimientos escritos para la entrada de materias primas, materiales y equipos al área de fabricación de Químicos, Agroquímicos e Insecticidas?",
                 Criterio = "N",
-                Articulo="485",
+                Articulo="546",
                 PuntosMax = (decimal)1.5,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
                 new ContenidoPreguntas()
                 {
-                Titulo = "Existen procedimientos escritos para la entrada de materias primas, materiales y equipos al área de fabricación de Químicos, Agroquímicos e Insecticidas?",
+                Titulo = "Se efectúa despeje de líneas antes de comenzar las operaciones para eliminar la presencia de material remanente de productos anteriores?",
                 Criterio = "N",
-                Articulo="470",
+                Articulo="542, 562",
                 PuntosMax = (decimal)1.5,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
@@ -4589,7 +4589,7 @@ namespace DataModel
                 {
                 Titulo = "Los equipos están construidos de material no reactivo? No afectan la calidad y seguridad del producto?",
                 Criterio = "C",
-                Articulo="428",
+                Articulo="503",
                 PuntosMax = (decimal)2.0,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
@@ -4597,7 +4597,7 @@ namespace DataModel
                 {
                 Titulo = "La ubicación de los equipos obstaculiza el flujo de procesos y movimientos del personal?",
                 Criterio = "R",
-                Articulo="429",
+                Articulo="504",
                 PuntosMax = (decimal)1.0,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
@@ -4605,7 +4605,7 @@ namespace DataModel
                 {
                 Titulo = "Existe en el área de producción equipo en desuso u obsoleto? Está identificado?",
                 Criterio = "N",
-                Articulo="434",
+                Articulo="509",
                 PuntosMax = (decimal)1.5,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
@@ -4613,7 +4613,7 @@ namespace DataModel
                 {
                 Titulo = "El Registro de Producción de Lote (Batch Record) contiene la siguiente información?",
                 Criterio = "C",
-                Articulo="464",
+                Articulo="541",
                 PuntosMax = (decimal)2.0,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                 LSubPreguntas = new List<ContenidoSubPreguntas>(){
@@ -4986,7 +4986,7 @@ namespace DataModel
                 {
                 Titulo = "La empresa dentro de su organización tiene incluido el Laboratorio de Control de Calidad? ",
                 Criterio = "C",
-                Articulo="397",
+                Articulo="472",
                 PuntosMax = (decimal)2.0,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
@@ -4994,7 +4994,7 @@ namespace DataModel
                 {
                 Titulo = "Control de Calidad es un departamento independiente de las áreas de producción?",
                 Criterio = "N",
-                Articulo="399",
+                Articulo="474",
                 PuntosMax = (decimal)1.5,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
@@ -5002,7 +5002,7 @@ namespace DataModel
                 {
                 Titulo = "Indique la escolaridad del encargado del laboratorio de Control de Calidad? ",
                 Criterio = "INF",
-                Articulo="399",
+                Articulo="474",
                 PuntosMax = (decimal)0.5,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
@@ -5010,7 +5010,7 @@ namespace DataModel
                 {
                 Titulo = "Existe descripción de puestos y funciones para estos cargos? ",
                 Criterio = "R",
-                Articulo="400",
+                Articulo="475",
                 PuntosMax = (decimal)1.0,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
@@ -5018,7 +5018,7 @@ namespace DataModel
                 {
                 Titulo = "Las instalaciones físicas del laboratorio de Control de Calidad son adecuadas al volumen de operaciones que desarrollan? ",
                 Criterio = "INF",
-                Articulo="419",
+                Articulo="494",
                 PuntosMax = (decimal)0.5,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
@@ -5026,7 +5026,7 @@ namespace DataModel
                 {
                 Titulo = "Cuentan con equipos e implementos de seguridad de acuerdo con las actividades desarrolladas. Describa? ",
                 Criterio = "N",
-                Articulo="419",
+                Articulo="494",
                 PuntosMax = (decimal)1.5,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
@@ -5034,7 +5034,7 @@ namespace DataModel
                 {
                 Titulo = "El laboratorio de Control de Calidad cuenta con el equipo y materiales adecuados para desarrollar los controles que efectúan? Anexe listado de equipos ",
                 Criterio = "C",
-                Articulo="419",
+                Articulo="494",
                 PuntosMax = (decimal)2.0,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
@@ -5042,7 +5042,7 @@ namespace DataModel
                 {
                 Titulo = "Existen programas de verificación del funcionamiento de estos equipos? Existen registros de su cumplimiento?",
                 Criterio = "R",
-                Articulo="435",
+                Articulo="510",
                 PuntosMax = (decimal)1.0,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
@@ -5050,7 +5050,7 @@ namespace DataModel
                 {
                 Titulo = "Se observa que los equipos y materiales están ubicados de manera que permitan su correcto funcionamiento?",
                 Criterio = "R",
-                Articulo="432",
+                Articulo="507",
                 PuntosMax = (decimal)1.0,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
@@ -5058,7 +5058,7 @@ namespace DataModel
                 {
                 Titulo = "Existe un programa de mantenimiento preventivo y calibraciones, claramente definido? Hay registros de cumplimiento del programa?",
                 Criterio = "R",
-                Articulo="431, 435",
+                Articulo="506, 510",
                 PuntosMax = (decimal)1.0,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
@@ -5066,7 +5066,7 @@ namespace DataModel
                 {
                 Titulo = "El laboratorio de Control de Calidad es responsable de aprobar o rechazar:",
                 Criterio = "C",
-                Articulo="444, 438",
+                Articulo="519, 513",
                 PuntosMax = (decimal)2.0,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                 LSubPreguntas = new List<ContenidoSubPreguntas>(){
@@ -5081,7 +5081,7 @@ namespace DataModel
                 {
                 Titulo = "El Departamento de Control de Calidad cuenta con procedimientos escritos para?",
                 Criterio = "N",
-                Articulo="444, 491",
+                Articulo="519, 568",
                 PuntosMax = (decimal)1.5,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                 LSubPreguntas = new List<ContenidoSubPreguntas>(){
@@ -5096,7 +5096,7 @@ namespace DataModel
                 {
                 Titulo = "Control de Calidad tiene escrita las especificaciones y métodos analíticos para el control de?",
                 Criterio = "N",
-                Articulo="461, 462, 463",
+                Articulo="537, 538, 539",
                 PuntosMax = (decimal)1.5,
                  LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                 LSubPreguntas = new List<ContenidoSubPreguntas>(){
@@ -5110,7 +5110,7 @@ namespace DataModel
                 {
                 Titulo = "Son consultados los métodos analíticos para proceder con su ejecución?",
                 Criterio = "N",
-                Articulo="492, 494",
+                Articulo="569, 571",
                 PuntosMax = (decimal)1.5,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
@@ -5118,7 +5118,7 @@ namespace DataModel
                 {
                 Titulo = "El Departamento de Control de Calidad mantiene los registros de los análisis efectuados?",
                 Criterio = "C",
-                Articulo="419",
+                Articulo="494",
                 PuntosMax = (decimal)2.0,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
@@ -5126,7 +5126,7 @@ namespace DataModel
                 {
                 Titulo = "Se mantienen muestras de reservas de las materias primas empleadas?",
                 Criterio = "N",
-                Articulo="497",
+                Articulo="574",
                 PuntosMax = (decimal)1.5,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
@@ -5134,7 +5134,7 @@ namespace DataModel
                 {
                 Titulo = "Se define el tiempo de conservación?",
                 Criterio = "R",
-                Articulo="497",
+                Articulo="574",
                 PuntosMax = (decimal)1.0,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
@@ -5142,7 +5142,7 @@ namespace DataModel
                 {
                 Titulo = "Se almacenan muestras de cada lote de producto terminado?",
                 Criterio = "C",
-                Articulo="497",
+                Articulo="574",
                 PuntosMax = (decimal)2.0,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
@@ -5150,7 +5150,7 @@ namespace DataModel
                 {
                 Titulo = "Cuenta el laboratorio con área para el lavado de cristalería y utensilios?",
                 Criterio = "N",
-                Articulo="419",
+                Articulo="494",
                 PuntosMax = (decimal)1.5,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
@@ -5158,7 +5158,7 @@ namespace DataModel
                 {
                 Titulo = "Las muestras de retención de productos terminados se mantienen en su acondicionamiento final y almacenadas bajo condiciones estipuladas por el fabricante?",
                 Criterio = "N",
-                Articulo="497",
+                Articulo="574",
                 PuntosMax = (decimal)1.5,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
@@ -5166,7 +5166,7 @@ namespace DataModel
                 {
                 Titulo = "Por cuánto tiempo se conservan las muestras de retención?",
                 Criterio = "R",
-                Articulo="497",
+                Articulo="574",
                 PuntosMax = (decimal)1.0,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
@@ -5174,7 +5174,7 @@ namespace DataModel
                 {
                 Titulo = "Existe un procedimiento escrito detallando el plazo de re-control de materias primas? Se sigue este procedimiento? (Verifique) ?",
                 Criterio = "R",
-                Articulo="460",
+                Articulo="536",
                 PuntosMax = (decimal)1.0,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
@@ -5182,7 +5182,7 @@ namespace DataModel
                 {
                 Titulo = "Existen patrones y materiales de referencia?",
                 Criterio = "N",
-                Articulo="419",
+                Articulo="494",
                 PuntosMax = (decimal)1.5,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
@@ -5190,7 +5190,7 @@ namespace DataModel
                 {
                 Titulo = "El Departamento de Control de Calidad asigna a una persona que verifica toda la documentación que se genera en el proceso de fabricación para cada producto, y así certifica la correcta ejecución de este o efectúa la correcta investigación de cualquier desvío del proceso?",
                 Criterio = "C",
-                Articulo="471",
+                Articulo="547",
                 PuntosMax = (decimal)2.0,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
@@ -5198,7 +5198,7 @@ namespace DataModel
                 {
                 Titulo = "El encargado del Dpto. De Control de Calidad verifica si cada lote elaborado cumple con las especificaciones establecidas antes de liberarlo? Existen registros? (Verifique)?",
                 Criterio = "C",
-                Articulo="492",
+                Articulo="569",
                 PuntosMax = (decimal)2.0,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
@@ -5206,7 +5206,7 @@ namespace DataModel
                 {
                 Titulo = "Se efectúan análisis microbiológicos?",
                 Criterio = "R",
-                Articulo="478",
+                Articulo="554",
                 PuntosMax = (decimal)1.0,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
@@ -5214,7 +5214,7 @@ namespace DataModel
                 {
                 Titulo = "Existen registros cronológicos?",
                 Criterio = "N",
-                Articulo="480",
+                Articulo="557",
                 PuntosMax = (decimal)1.5,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
@@ -5222,7 +5222,7 @@ namespace DataModel
                 {
                 Titulo = "Existen protocolos de ingreso para el personal que labora en estas áreas?",
                 Criterio = "N",
-                Articulo="407, 409",
+                Articulo="409, 484",
                 PuntosMax = (decimal)1.5,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
@@ -5238,7 +5238,7 @@ namespace DataModel
                 {
                 Titulo = "Al momento de la Auditoría, los operarios se encuentran debidamente uniformados?:",
                 Criterio = "N",
-                Articulo="403",
+                Articulo="478",
                 PuntosMax = (decimal)1.5,
                  LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                 LSubPreguntas = new List<ContenidoSubPreguntas>(){
@@ -5271,7 +5271,7 @@ namespace DataModel
                 {
                 Titulo = "Laboratorios de Control de Calidad ajenos a la empresa, son contratados para que desarrollen los controles de calidad a los productos?",
                 Criterio = "INF",
-                Articulo="498",
+                Articulo="575",
                 PuntosMax = (decimal)0.5,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
@@ -5279,7 +5279,7 @@ namespace DataModel
                 {
                 Titulo = "Cuenta con contrato? (Verifique)",
                 Criterio = "C",
-                Articulo="498",
+                Articulo="575",
                 PuntosMax = (decimal)2.0,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
@@ -5287,7 +5287,7 @@ namespace DataModel
                 {
                 Titulo = "Qué tipo de controles desarrollan? (Detalle Brevemente) ",
                 Criterio = "INF",
-                Articulo="498",
+                Articulo="575",
                 PuntosMax = (decimal)0.5,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
@@ -5295,7 +5295,7 @@ namespace DataModel
                 {
                 Titulo = "El Departamento de Control de Calidad es el responsable de aprobar o rechazar productos elaborados, acondicionados o mantenidos bajo contratos por terceros? ",
                 Criterio = "C",
-                Articulo="498",
+                Articulo="575",
                 PuntosMax = (decimal)2.0,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
@@ -5303,7 +5303,7 @@ namespace DataModel
                 {
                 Titulo = "El contrato establece claramente las funciones y responsabilidades de cada parte?  ",
                 Criterio = "N",
-                Articulo="498",
+                Articulo="575",
                 PuntosMax = (decimal)1.5,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
@@ -5311,7 +5311,7 @@ namespace DataModel
                 {
                 Titulo = "El contrato establece que la aprobación final del producto la dará el contratante a través del responsable de Control de Calidad?",
                 Criterio = "C",
-                Articulo="500",
+                Articulo="577",
                 PuntosMax = (decimal)2.0,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
@@ -5319,7 +5319,7 @@ namespace DataModel
                 {
                 Titulo = "El contrato establece si el contratista debe o no tomar las muestras en los locales del fabricante?",
                 Criterio = "C",
-                Articulo="503",
+                Articulo="580",
                 PuntosMax = (decimal)2.0,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
@@ -5342,7 +5342,7 @@ namespace DataModel
                 {
                 Titulo = "Cuenta con un procedimiento de autoinspección?",
                 Criterio = "C",
-                Articulo="513",
+                Articulo="590",
                 PuntosMax = (decimal)2.0,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
@@ -5350,7 +5350,7 @@ namespace DataModel
                 {
                 Titulo = "Elaboran el informe luego de una autoinspección?",
                 Criterio = "C",
-                Articulo="513",
+                Articulo="590",
                 PuntosMax = (decimal)2.0,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
@@ -5358,7 +5358,7 @@ namespace DataModel
                 {
                 Titulo = "Existe evidencia escrita de que la empresa es sometida a Inspecciones o Auditorías de Calidad por entidades oficiales y externas del País?",
                 Criterio = "N",
-                Articulo="514",
+                Articulo="591",
                 PuntosMax = (decimal)1.5,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
@@ -5366,7 +5366,7 @@ namespace DataModel
                 {
                 Titulo = "Cuándo fue la última visita oficial? ",
                 Criterio = "INF",
-                Articulo="514",
+                Articulo="591",
                 PuntosMax = (decimal)0.5,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
@@ -5374,7 +5374,7 @@ namespace DataModel
                 {
                 Titulo = "Se indican en estas Inspecciones o Auditorías de Calidad las desviaciones detalladas? ",
                 Criterio = "N",
-                Articulo="514",
+                Articulo="591",
                 PuntosMax = (decimal)1.5,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },
@@ -5382,7 +5382,7 @@ namespace DataModel
                 {
                 Titulo = "La empresa en base a estas desviaciones, diseña un Plan de Acciones correctivas?",
                 Criterio = "N",
-                Articulo="514",
+                Articulo="591",
                 PuntosMax = (decimal)1.5,
                 LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()}
                 },

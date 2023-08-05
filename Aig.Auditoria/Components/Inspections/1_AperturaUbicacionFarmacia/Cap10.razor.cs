@@ -9,9 +9,9 @@ using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.JSInterop;
 using Mobsites.Blazor;
 
-namespace Aig.Auditoria.Components.Inspections._2_AperturaUbicacionAgencia
+namespace Aig.Auditoria.Components.Inspections._1_AperturaUbicacionFarmacia
 {
-    public partial class Cap16
+    public partial class Cap10
     {
         [Inject]
         IInspectionsService inspeccionService { get; set; }
@@ -93,11 +93,12 @@ namespace Aig.Auditoria.Components.Inspections._2_AperturaUbicacionAgencia
                         }
                 }
                 editContext = editContext != null ? editContext : new(Inspeccion);
+               
+                if (Inspeccion.InspAperCambUbicFarm.DatosAreaAlmacenamientoAlcohol == null)
+                {
+                    Inspeccion.InspAperCambUbicFarm.Inicializa_DatosAreaAlmacenamientoAlcohol();
+                }
 
-                //if (Inspeccion.InspAperCambUbicAgen.AreaDesperdicio == null)
-                //{
-                //    Inspeccion.InspAperCambUbicAgen.Inicializa_AreaDesperdicio();
-                //}
             }
             else { Cancel(); }
 
@@ -109,7 +110,7 @@ namespace Aig.Auditoria.Components.Inspections._2_AperturaUbicacionAgencia
         {
             try
             {
-                var result = await inspeccionService.Save_AperCamUbicAgencia_Cap16(Inspeccion);
+                var result = await inspeccionService.Save_AperCamUbicFarmacia_Cap10(Inspeccion);
                 if (result != null)
                 {
                     await jsRuntime.InvokeVoidAsync("ShowMessage", languageContainerService.Keys["DataSaveSuccessfully"]);
@@ -137,6 +138,7 @@ namespace Aig.Auditoria.Components.Inspections._2_AperturaUbicacionAgencia
             await bus.Publish(new Aig.Auditoria.Events.Inspections.ChapterChangeEvent { Inspeccion = null });
             await this.InvokeAsync(StateHasChanged);
         }
+
 
 
     }

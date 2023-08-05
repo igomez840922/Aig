@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace DataModel
@@ -21,6 +22,7 @@ namespace DataModel
 		public string Descripcion { get => descripcion; set => SetProperty(ref descripcion, value); }
 
 		private List<FMV_AlertaTB> lAlertas;
+        [JsonIgnore]
         public virtual List<FMV_AlertaTB> LAlertas { get => lAlertas; set => SetProperty(ref lAlertas, value); }
 
     }

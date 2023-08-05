@@ -55,6 +55,8 @@ namespace Aig.Auditoria.Services
             if (result != null)
             {
                 DalService.DBContext.Entry(result).Property(b => b.FarmaceuticoTablas).IsModified = true;
+                DalService.DBContext.Entry(result).Property(b => b.Regente).IsModified = true;
+                DalService.DBContext.Entry(result).Property(b => b.RepresentanteLegal).IsModified = true;
 
                 DalService.DBContext.SaveChanges();
             }

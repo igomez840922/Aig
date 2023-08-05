@@ -149,13 +149,13 @@
                                                                     <!-- /btn-group -->
                                                                 </td>
                                                             </tr>
-                                                            <tr>
+                                                            @* <tr>
                                                                 <td scope="row">16. @languageContainerService.Keys["Área de Desperdicios que se Generan y no pueden ser colocados en el Área de Almacenamiento"]</td>
                                                                 <td style="text-align:right">
                                                                     <button type="button" class="btn btn-info" @onclick="(e)=>{SelectChapter(DataModel.Helper.enumSelectedChapter.Cap16);}">@languageContainerService.Keys["Select"]</button>
                                                                     <!-- /btn-group -->
                                                                 </td>
-                                                            </tr>
+                                                            </tr> *@
                                                             <tr>
                                                                 <td scope="row">17. @languageContainerService.Keys["Procedimientos"]</td>
                                                                 <td style="text-align:right">
@@ -281,11 +281,11 @@
             <Aig.Auditoria.Components.Inspections._2_AperturaUbicacionAgencia.Cap15 Id="@Inspeccion.Id"></Aig.Auditoria.Components.Inspections._2_AperturaUbicacionAgencia.Cap15>
             break;
         }
-    case DataModel.Helper.enumSelectedChapter.Cap16:
+    @* case DataModel.Helper.enumSelectedChapter.Cap16:
         {
             <Aig.Auditoria.Components.Inspections._2_AperturaUbicacionAgencia.Cap16 Id="@Inspeccion.Id"></Aig.Auditoria.Components.Inspections._2_AperturaUbicacionAgencia.Cap16>
             break;
-        }
+        } *@
     case DataModel.Helper.enumSelectedChapter.Cap17:
         {
             <Aig.Auditoria.Components.Inspections._2_AperturaUbicacionAgencia.Cap17 Id="@Inspeccion.Id"></Aig.Auditoria.Components.Inspections._2_AperturaUbicacionAgencia.Cap17>

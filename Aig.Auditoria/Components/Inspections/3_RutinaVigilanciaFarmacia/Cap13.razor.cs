@@ -9,9 +9,9 @@ using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.JSInterop;
 using Mobsites.Blazor;
 
-namespace Aig.Auditoria.Components.Inspections._2_AperturaUbicacionAgencia
+namespace Aig.Auditoria.Components.Inspections._3_RutinaVigilanciaFarmacia
 {
-    public partial class Cap16
+    public partial class Cap13
     {
         [Inject]
         IInspectionsService inspeccionService { get; set; }
@@ -81,7 +81,9 @@ namespace Aig.Auditoria.Components.Inspections._2_AperturaUbicacionAgencia
         //Fill Data
         protected async Task FetchData()
         {
-            Inspeccion = await inspeccionService.Get(Id);
+            try
+            {
+                Inspeccion = await inspeccionService.Get(Id);
             if (Inspeccion != null)
             {
                 switch (Inspeccion.StatusInspecciones)
@@ -92,14 +94,16 @@ namespace Aig.Auditoria.Components.Inspections._2_AperturaUbicacionAgencia
                             break;
                         }
                 }
-                editContext = editContext != null ? editContext : new(Inspeccion);
+                    editContext = editContext != null ? editContext : new(Inspeccion);
 
-                //if (Inspeccion.InspAperCambUbicAgen.AreaDesperdicio == null)
-                //{
-                //    Inspeccion.InspAperCambUbicAgen.Inicializa_AreaDesperdicio();
-                //}
+                    if (Inspeccion.InspRutinaVigFarmacia.RegMovimientoExistencia2 == null)
+                    {
+                        Inspeccion.InspRutinaVigFarmacia.Inicializa_RegMovimientoExistencia2();
+                    }
+                }
+                else { Cancel(); }
             }
-            else { Cancel(); }
+            catch (Exception ex) { await jsRuntime.InvokeVoidAsync("ShowError", ex.Message); }
 
             await this.InvokeAsync(StateHasChanged);
         }
@@ -109,7 +113,7 @@ namespace Aig.Auditoria.Components.Inspections._2_AperturaUbicacionAgencia
         {
             try
             {
-                var result = await inspeccionService.Save_AperCamUbicAgencia_Cap16(Inspeccion);
+                var result = await inspeccionService.Save_RutinaVigilanciaFarmacia_Cap13(Inspeccion);
                 if (result != null)
                 {
                     await jsRuntime.InvokeVoidAsync("ShowMessage", languageContainerService.Keys["DataSaveSuccessfully"]);

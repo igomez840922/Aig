@@ -253,6 +253,10 @@ namespace DataModel
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
+                        Titulo = "Sin incidencia de luz solar en forma directa sobre los medicamentos",
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
+                    },
+                        new ContenidoPreguntas(){
                         Titulo = "DISPONEN DE SUFICIENTE EQUIPO PARA EL CONTROL DE INCENDIOS",
                         IsHeader=true,
                     },
@@ -345,7 +349,7 @@ namespace DataModel
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
-                        Titulo = "Los registros se registran por lo menos tres veces al día",
+                        Titulo = "Los registros de temperatura deben ser verificados por personal responsable en intervalos definidos, como mínimo tres veces al día.",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
@@ -364,10 +368,10 @@ namespace DataModel
                         Titulo = "Existe flujo lógico de operaciones",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
-                        new ContenidoPreguntas(){
-                        Titulo = "Valor informativo:\r\nPrecauciones en el área de Almacenamiento. No se permite fumar, comer, guardar comidas o cualquier otro objeto que pudiera afectar la calidad de los productos. Art. 418. Decreto Ejecutivo 115 de 16 de agosto de 2022",
-                        IsHeader=true,
-                    },
+                    //    new ContenidoPreguntas(){
+                    //    Titulo = "Valor informativo:\r\nPrecauciones en el área de Almacenamiento. No se permite fumar, comer, guardar comidas o cualquier otro objeto que pudiera afectar la calidad de los productos. Art. 418. Decreto Ejecutivo 115 de 16 de agosto de 2022",
+                    //    IsHeader=true,
+                    //},
              };
         }
 
@@ -411,7 +415,7 @@ namespace DataModel
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
-                        Titulo = "Valor Informativo: \r\nLos productos retirados del mercado deben ser identificados y almacenados separadamente en un área segura e identificada, en espera de la orden de reexportación hacia el laboratorio fabricante o su destrucción en el país. Art. 435. Decreto Ejecutivo 115 de 16 de agosto de 2022.",
+                        Titulo = "Valor Informativo: \r\nTodo producto retirado debe almacenarse en un área de acceso restringido, delimitada e identificada hasta determinar su condición. Posteriormente debe notificar a la Dirección Nacional de Farmacia y Drogas del procedimiento de disposición final a realizar. Artículo 431 del Decreto Ejecutivo 13 de 1 de marzo de 2023.",
                         IsHeader = true,
                     }
              };
@@ -478,7 +482,15 @@ namespace DataModel
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
+                        Titulo = "Los registros de temperatura deben ser verificados por personal responsable en intervalos definidos, como mínimo tres veces al día.",
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
+                    },
+                        new ContenidoPreguntas(){
                         Titulo = "Cuentan con el equipo necesario para la conservación de la temperatura de este tipo de productos",
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
+                    },
+                        new ContenidoPreguntas(){
+                        Titulo = "Cuentan con el área y los materiales apropiados para la preparación de pedidos que requieran cadena de frío, para asegurar que las condiciones seas mantenidas en periodos definidos.",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
@@ -594,7 +606,10 @@ namespace DataModel
         {
             AreaAlmacenProdSujetosControl = new AUD_ContenidoGenerico();
             AreaAlmacenProdSujetosControl.LContenido = new List<ContenidoPreguntas>() {
-                    new ContenidoPreguntas(){
+                     new ContenidoPreguntas(){
+                        Titulo = "Cuentan con área para el almacenamiento de productos sujetos a control",
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
+                    },new ContenidoPreguntas(){
                         Titulo = "Aseada",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
@@ -639,6 +654,10 @@ namespace DataModel
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
+                        Titulo = "Los registros de temperatura deben ser verificados por personal responsable en intervalos definidos, como mínimo tres veces al día",
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
+                    },
+                        new ContenidoPreguntas(){
                         Titulo = "Responsable del Área",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
@@ -649,35 +668,35 @@ namespace DataModel
              };
         }
 
-        public void Inicializa_AreaDesperdicio()
-        {
-            AreaDesperdicio = new AUD_ContenidoGenerico();
-            AreaDesperdicio.LContenido = new List<ContenidoPreguntas>() {
-                    new ContenidoPreguntas(){
-                        Titulo = "Aseada",
-                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
-                    },
-                    new ContenidoPreguntas(){
-                        Titulo = "Delimitada",
-                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
-                    },
-                    new ContenidoPreguntas(){
-                        Titulo = "Identificada",
-                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
-                    },
-                        new ContenidoPreguntas(){
-                        Titulo = "Ordenada",
-                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
-                    },
-             };
-        }
+            //public void Inicializa_AreaDesperdicio()
+            //{
+            //    AreaDesperdicio = new AUD_ContenidoGenerico();
+            //    AreaDesperdicio.LContenido = new List<ContenidoPreguntas>() {
+            //            new ContenidoPreguntas(){
+            //                Titulo = "Aseada",
+            //                LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
+            //            },
+            //            new ContenidoPreguntas(){
+            //                Titulo = "Delimitada",
+            //                LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
+            //            },
+            //            new ContenidoPreguntas(){
+            //                Titulo = "Identificada",
+            //                LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
+            //            },
+            //                new ContenidoPreguntas(){
+            //                Titulo = "Ordenada",
+            //                LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
+            //            },
+            //     };
+            //}
 
         public void Inicializa_Requisitos()
         {
             Requisitos = new AUD_ContenidoGenerico();
             Requisitos.LContenido = new List<ContenidoPreguntas>() {
                     new ContenidoPreguntas(){
-                        Titulo = "EL ESTABLECIMIENTO SE COMPROMETE A QUE LOS PROCEDIMIENTOS OPERATIVOS ESTANDARIZADOS (POE’S) Y DOCUMENTACIÓN RELACIONADA A ESTOS, ESTÉN COMPLETOS Y ACORDE CON EL DECRETO EJECUTIVO 115 DEL 16 DE AGOSTO DE 2022, Y SEGÚN LAS ACTIVIDADES A LAS QUE SE DEDICARÁ EL ESTABLECIMIENTO. DE IGUAL FORMA EL ESTABLECIMIENTO DEBERÁ TENER A DISPOSICIÓN DE LA AUTORIDAD REGULADORA LOS PROCEDIMIENTOS OPERATIVOS ESTANDARIZADOS (POE’S) Y DOCUMENTACIÓN RELACIONADA A ESTOS CUANDO ESTA LO SOLICITE",
+                        Titulo = "La documentación integral que maneja el establecimiento farmacéutico forma parte del sistema de calidad y debe mantenerse en archivos físicos o digitales dentro del establecimiento y permanecer en custodia. Los establecimientos farmacéuticos que se dediquen al almacenamiento, distribución y transporte de medicamentos y otros productos para la salud humana, deben contar con Manual de Cargos y Funciones, disponer de organigrama y Manual de Procedimientos Operativos Estandarizados de sus operaciones y correspondientes registros, entre ellos recepción, almacenamiento, despacho, manejo de productos de cadena de frío (cuando aplique), transporte, mantenimiento preventivo del local, retiro, devolución y disposición final de productos o materia prima del mercado, control de fauna nociva y otros. Artículo 401 del Decreto Ejecutivo 13 de 1 de marzo de 2023.",
                         IsHeader =true,
                     },
                     new ContenidoPreguntas(){
@@ -704,19 +723,27 @@ namespace DataModel
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
-                        Titulo = "En los camiones se colocan los productos sobre tarimas",
+                        Titulo = "En los vehículos de transporte de los medicamentos y otros productos para la salud humana, los mismos se colocan sobre tarimas u otro mobiliario similar que brinde protección dentro de los vehículos.",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
+                    //    new ContenidoPreguntas(){
+                    //    Titulo = "Presenta formato de verificación de mantenimiento y condiciones del vehículo",
+                    //    LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
+                    //},
                         new ContenidoPreguntas(){
-                        Titulo = "Presenta formato de verificación de mantenimiento y condiciones del vehículo",
-                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
-                    },
-                        new ContenidoPreguntas(){
-                        Titulo = "En caso de tercerización del transporte presenta contrato con la empresa que brindará el servicio",
+                        Titulo = "En caso de tercerización del transporte presenta contrato con la empresa que brindará el servicio.",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
                         Titulo = "El transporte está identificado con el nombre de la empresa con licencia de operación vigente ante la Dirección Nacional de Farmacia y Drogas.  Si es tercerizado se permite coloque un letrero removible o en acrílico (colocar en la parte de enfrente del vidrio) o similar.",
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
+                    },
+                        new ContenidoPreguntas(){
+                        Titulo = "En caso de que el transporte sea realizado por terceros, existe un contrato que detalle los deberes y responsabilidades del contratista y el contratante. El l distribuidor debe informar a los transportistas de las condiciones de transporte. El contratante debe verificar que el mismo cumpla con los requisitos establecidos en el presente reglamento.",
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
+                    },
+                        new ContenidoPreguntas(){
+                        Titulo = "Deben existir procedimientos escritos para el funcionamiento y el mantenimiento de todos los vehículos y equipos utilizados en el proceso de distribución. Artículo 445 del Decreto Ejecutivo 13 de 1 de marzo de 2023.\r\nEl equipo utilizado para vigilar la temperatura durante el transporte en vehículos o en contenedores debe someterse a mantenimiento y calibrarse periódicamente, al menos una vez al año. Siempre que sea posible, deben utilizarse vehículos y equipos específicos para medicamentos. Artículo 446 del Decreto Ejecutivo 13 de 1 de marzo de 2023.",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
              };

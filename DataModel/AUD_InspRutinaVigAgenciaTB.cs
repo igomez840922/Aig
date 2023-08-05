@@ -32,10 +32,10 @@ namespace DataModel
         [System.ComponentModel.DataAnnotations.Schema.NotMapped]
         public AUD_ContenidoGenerico CondCaractEstablecimiento { get => condCaractEstablecimiento; set => SetProperty(ref condCaractEstablecimiento, value); }
 
-        //ÁREA ADMINSITRATIVA
-        private AUD_ContenidoGenerico areaAdministrativa;
-        [System.ComponentModel.DataAnnotations.Schema.NotMapped]
-        public AUD_ContenidoGenerico AreaAdministrativa { get => areaAdministrativa; set => SetProperty(ref areaAdministrativa, value); }
+        ////ÁREA ADMINSITRATIVA
+        //private AUD_ContenidoGenerico areaAdministrativa;
+        //[System.ComponentModel.DataAnnotations.Schema.NotMapped]
+        //public AUD_ContenidoGenerico AreaAdministrativa { get => areaAdministrativa; set => SetProperty(ref areaAdministrativa, value); }
 
         //ÁREA DE RECEPCIÓN DE PRODUCTOS
         private AUD_ContenidoGenerico areaRecepcionProducto;
@@ -137,21 +137,21 @@ namespace DataModel
         }
         public void Inicializa_AreaAdministrativa()
         {
-            AreaAdministrativa = new AUD_ContenidoGenerico();
-            AreaAdministrativa.LContenido = new List<ContenidoPreguntas>() {
-                        new ContenidoPreguntas(){
-                        Titulo = "Dispone de área administrativa?",
-                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
-                    },
-                        new ContenidoPreguntas(){
-                        Titulo = "Dirección del área administrativa",
-                        IsHeader = true,
-                    },
-                        new ContenidoPreguntas(){
-                        Titulo = "Mantiene almacenados productos o áreas de almacenamiento en el área descrita como área administrativa?",
-                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
-                    },
-             };
+            //AreaAdministrativa = new AUD_ContenidoGenerico();
+            //AreaAdministrativa.LContenido = new List<ContenidoPreguntas>() {
+            //            new ContenidoPreguntas(){
+            //            Titulo = "Dispone de área administrativa?",
+            //            LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
+            //        },
+            //            new ContenidoPreguntas(){
+            //            Titulo = "Dirección del área administrativa",
+            //            IsHeader = true,
+            //        },
+            //            new ContenidoPreguntas(){
+            //            Titulo = "Mantiene almacenados productos o áreas de almacenamiento en el área descrita como área administrativa?",
+            //            LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
+            //        },
+            // };
         }
         public void Inicializa_AreaRecepcionProducto()
         {
@@ -259,6 +259,10 @@ namespace DataModel
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
+                        Titulo = "Ventilación",
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
+                    },
+                        new ContenidoPreguntas(){
                         Titulo = "DISPONEN DE SUFICIENTE EQUIPO PARA EL CONTROL DE INCENDIOS",
                         IsHeader=true,
                     },
@@ -351,7 +355,7 @@ namespace DataModel
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
-                        Titulo = "Los registros se registran por lo menos tres veces al día",
+                        Titulo = "Los registros de temperatura deben ser verificados por personal responsable en intervalos definidos, como mínimo tres veces al día",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
@@ -363,7 +367,7 @@ namespace DataModel
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
-                        Titulo = "Existe un sistema para el control de fauna nociva (cebadera y certificado de fumigación)",
+                        Titulo = "Existe un sistema para el control de fauna nociva",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
@@ -371,17 +375,17 @@ namespace DataModel
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
-                        Titulo = "Disponen de un sistema interno de codificación que permita la localización de los productos en el mercado",
+                        Titulo = "Disponen de un sistema interno de codificación que permita la localización de los productos en el mercado.",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
-                        new ContenidoPreguntas(){
-                        Titulo = "Cuenta con un sistema para el almacenamiento de productos. Sistema FIFO/FEFO (Primera fecha de entrada, primera salida/ Primera fecha de expiración, primera salida",
-                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
-                    },
-                        new ContenidoPreguntas(){
-                        Titulo = "Valor informativo:\r\nPrecauciones en el área de Almacenamiento. No se permite fumar, comer, guardar comidas o cualquier otro objeto que pudiera afectar la calidad de los productos. Art. 418. Decreto Ejecutivo 115 de 16 de agosto de 2022",
-                        IsHeader=true,
-                    },
+                    //    new ContenidoPreguntas(){
+                    //    Titulo = "Cuenta con un sistema para el almacenamiento de productos. Sistema FIFO/FEFO (Primera fecha de entrada, primera salida/ Primera fecha de expiración, primera salida",
+                    //    LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
+                    //},
+                    //    new ContenidoPreguntas(){
+                    //    Titulo = "Valor informativo:\r\nPrecauciones en el área de Almacenamiento. No se permite fumar, comer, guardar comidas o cualquier otro objeto que pudiera afectar la calidad de los productos. Art. 418. Decreto Ejecutivo 115 de 16 de agosto de 2022",
+                    //    IsHeader=true,
+                    //},
              };
         }
         public void Inicializa_AreaProductosDevueltosVencidos()
@@ -422,10 +426,10 @@ namespace DataModel
                         Titulo = "En el área existen condiciones que pueden afectar los productos",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
-                        new ContenidoPreguntas(){
-                        Titulo = "Valor Informativo: \r\nLos productos retirados del mercado deben ser identificados y almacenados separadamente en un área segura e identificada, en espera de la orden de reexportación hacia el laboratorio fabricante o su destrucción en el país",
-                        IsHeader = true,
-                    }
+                    //    new ContenidoPreguntas(){
+                    //    Titulo = "Valor Informativo: \r\nLos productos retirados del mercado deben ser identificados y almacenados separadamente en un área segura e identificada, en espera de la orden de reexportación hacia el laboratorio fabricante o su destrucción en el país",
+                    //    IsHeader = true,
+                    //}
              };
         }
         public void Inicializa_AreaDespachoProductos()
@@ -487,7 +491,15 @@ namespace DataModel
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
+                        Titulo = "Los registros de temperatura deben ser verificados por personal responsable en intervalos definidos, como mínimo tres veces al día",
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
+                    },
+                        new ContenidoPreguntas(){
                         Titulo = "Cuentan con el equipo necesario para la conservación de la temperatura de este tipo de productos",
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
+                    },
+                        new ContenidoPreguntas(){
+                        Titulo = "Cuentan con el área y los materiales apropiados para la preparación de pedidos que requieran cadena de frío, para asegurar que las condiciones seas mantenidas en periodos definidos",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
@@ -600,95 +612,166 @@ namespace DataModel
             AreaAlmacenProdSujetosControl = new AUD_ContenidoGenerico();
             AreaAlmacenProdSujetosControl.LContenido = new List<ContenidoPreguntas>() {
                     new ContenidoPreguntas(){
-                        Titulo = "Aseada",
-                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
-                    },
-                    new ContenidoPreguntas(){
-                        Titulo = "Asegurada (llave y/o candado)",
-                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
-                    },
-                    new ContenidoPreguntas(){
-                        Titulo = "Delimitada",
-                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
-                    },
-                    new ContenidoPreguntas(){
                         Titulo = "Identificada",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
-                        new ContenidoPreguntas(){
-                        Titulo = "Independiente de otras áreas",
+                     new ContenidoPreguntas(){
+                        Titulo = "Limpia",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
-                        new ContenidoPreguntas(){
-                        Titulo = "Iluminación y Ventilación",
+                      new ContenidoPreguntas(){
+                        Titulo = "Delimitada",
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
+                    }, 
+                    new ContenidoPreguntas(){
+                        Titulo = "Esta área permanece bajo llave y la misma está bajo la responsabilidad del Regente Farmacéutico",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
-                        new ContenidoPreguntas(){
+                    new ContenidoPreguntas(){
                         Titulo = "Posee un área identificada de vencidos",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
-                        new ContenidoPreguntas(){
-                        Titulo = "Se mantiene monitoreo de la Temperatura y Humedad de esta área",
+                    new ContenidoPreguntas(){
+                        Titulo = "Independiente de otras áreas",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
-                        new ContenidoPreguntas(){
-                        Titulo = "Temperatura",
+                    new ContenidoPreguntas(){
+                        Titulo = "Descripción del lugar donde se almacenan y las medidas de seguridad",
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion() { HideEvaluacion = true} },
+                    },
+                    new ContenidoPreguntas(){
+                        Titulo = "Todas las sustancias controladas están colocadas en el área destinada para tal fin",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
-                        new ContenidoPreguntas(){
-                        Titulo = "Humedad Relativa",
+                    new ContenidoPreguntas(){
+                        Titulo = "REGISTRO DE MOVIMIENTO DE EXISTENCIA DE SUTANCIAS CONTROLADAS",
+                        IsHeader = true,
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
-                        new ContenidoPreguntas(){
-                        Titulo = "Se mantiene registro",
-                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
-                    },
-                        new ContenidoPreguntas(){
-                        Titulo = "Responsable del Área",
-                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
-                    },
-                        new ContenidoPreguntas(){
-                        Titulo = "Describa el lugar donde se almacenan y las medidas de seguridad",
-                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
-                    },
-                        new ContenidoPreguntas(){
-                        Titulo = "Codificación interna de ubicación en el almacén",
-                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
-                    },
-                        new ContenidoPreguntas(){
+                    new ContenidoPreguntas(){
                         Titulo = "Se mantiene un registro para el manejo de las sustancias controladas",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
+                        Observaciones=string.Format("___{0}\r\n___{1}","Registro en libro","Sistema automatizado"),
                     },
-                        new ContenidoPreguntas(){
-                        Titulo = "Se lleva un registro de las sustancias a distribuir",
+                    new ContenidoPreguntas(){
+                        Titulo = "Se encuentra el Libro autorizado para el registro del movimiento de inventario en el establecimiento a disposición del inspector",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
-                        new ContenidoPreguntas(){
-                        Titulo = "Los vales están con copia de la factura, pre declaración y archivados en orden cronológico",
+                    new ContenidoPreguntas(){
+                        Titulo = "Libro Record para el registro de recetas está actualizado",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
-                        new ContenidoPreguntas(){
-                        Titulo = "Los permisos de importación, exportación o reexportación están archivados por secuencia numérica y con toda la documentación de la transacción",
+                    new ContenidoPreguntas(){
+                        Titulo = "Se lleva un registro de las sustancias controladas que se van a destruir",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
-                        new ContenidoPreguntas(){
-                        Titulo = "El inventario físico de las sustancias controladas coinciden con los registros en el libro o sistema automatizado",
+                    new ContenidoPreguntas(){
+                        Titulo = "Todas las recetas se encuentran archivadas en orden cronológico, mensual o trimestral",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
-                        new ContenidoPreguntas(){
-                        Titulo = "El establecimiento cumple con la prohibición del manejo de muestras médicas",
+                    new ContenidoPreguntas(){
+                        Titulo = "Mantiene el sistema automatizado para los registros de sustancias controladas cumpliendo con toda la información (con excepción de la firma del regente farmacéutico). ",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
+                    new ContenidoPreguntas(){
+                        Titulo = "Durante la inspección se observan vales de sustancias controladas, estos se encuentran o están totalmente en blanco, pero firmados por el regente",
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
+                    },
+                    new ContenidoPreguntas(){
+                        Titulo = "Las cantidades físicas de las sustancias controladas que se encuentran en el establecimiento en comparación con los registros (libros o sistemas automatizados), coinciden",
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
+                    },
+                    new ContenidoPreguntas(){
+                        Titulo = "Las sustancias controladas que se encuentran almacenadas poseen registro sanitario o en situaciones excepcionales han sido autorizadas por DNFD",
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
+                    },
+                    //new ContenidoPreguntas(){
+                    //    Titulo = "Asegurada (llave y/o candado)",
+                    //    LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
+                    //},
+                    //new ContenidoPreguntas(){
+                    //    Titulo = "Delimitada",
+                    //    LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
+                    //},
+                    //new ContenidoPreguntas(){
+                    //    Titulo = "Identificada",
+                    //    LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
+                    //},
+                    //    new ContenidoPreguntas(){
+                    //    Titulo = "Independiente de otras áreas",
+                    //    LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
+                    //},
+                    //    new ContenidoPreguntas(){
+                    //    Titulo = "Iluminación y Ventilación",
+                    //    LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
+                    //},
+                    //    new ContenidoPreguntas(){
+                    //    Titulo = "Posee un área identificada de vencidos",
+                    //    LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
+                    //},
+                    //    new ContenidoPreguntas(){
+                    //    Titulo = "Se mantiene monitoreo de la Temperatura y Humedad de esta área",
+                    //    LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
+                    //},
+                    //    new ContenidoPreguntas(){
+                    //    Titulo = "Temperatura",
+                    //    LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
+                    //},
+                    //    new ContenidoPreguntas(){
+                    //    Titulo = "Humedad Relativa",
+                    //    LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
+                    //},
+                    //    new ContenidoPreguntas(){
+                    //    Titulo = "Se mantiene registro",
+                    //    LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
+                    //},
+                    //    new ContenidoPreguntas(){
+                    //    Titulo = "Responsable del Área",
+                    //    LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
+                    //},
+                    //    new ContenidoPreguntas(){
+                    //    Titulo = "Describa el lugar donde se almacenan y las medidas de seguridad",
+                    //    LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
+                    //},
+                    //    new ContenidoPreguntas(){
+                    //    Titulo = "Codificación interna de ubicación en el almacén",
+                    //    LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
+                    //},
+                    //    new ContenidoPreguntas(){
+                    //    Titulo = "Se mantiene un registro para el manejo de las sustancias controladas",
+                    //    LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
+                    //},
+                    //    new ContenidoPreguntas(){
+                    //    Titulo = "Se lleva un registro de las sustancias a distribuir",
+                    //    LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
+                    //},
+                    //    new ContenidoPreguntas(){
+                    //    Titulo = "Los vales están con copia de la factura, pre declaración y archivados en orden cronológico",
+                    //    LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
+                    //},
+                    //    new ContenidoPreguntas(){
+                    //    Titulo = "Los permisos de importación, exportación o reexportación están archivados por secuencia numérica y con toda la documentación de la transacción",
+                    //    LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
+                    //},
+                    //    new ContenidoPreguntas(){
+                    //    Titulo = "El inventario físico de las sustancias controladas coinciden con los registros en el libro o sistema automatizado",
+                    //    LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
+                    //},
+                    //    new ContenidoPreguntas(){
+                    //    Titulo = "El establecimiento cumple con la prohibición del manejo de muestras médicas",
+                    //    LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
+                    //},
              };
         }
         public void Inicializa_Procedimientos()
         {
             Procedimientos = new AUD_ContenidoGenerico();
             Procedimientos.LContenido = new List<ContenidoPreguntas>() {
-                     new ContenidoPreguntas(){
-                        Titulo = "La documentación integral que maneja el establecimiento farmacéutico forma parte del sistema de calidad y debe mantenerse en archivos físicos o digitales dentro del establecimiento y permanecer en custodia. Art. 403. Decreto Ejecutivo 115 de 16 de agosto de 2022",
-                        IsHeader = true,
-                    },new ContenidoPreguntas(){
+                    // new ContenidoPreguntas(){
+                    //    Titulo = "La documentación integral que maneja el establecimiento farmacéutico forma parte del sistema de calidad y debe mantenerse en archivos físicos o digitales dentro del establecimiento y permanecer en custodia. Art. 403. Decreto Ejecutivo 115 de 16 de agosto de 2022",
+                    //    IsHeader = true,
+                    //},
+                new ContenidoPreguntas(){
                         Titulo = "Cuenta con Manual de Cargos y Funciones",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },new ContenidoPreguntas(){
@@ -749,17 +832,34 @@ namespace DataModel
                         Titulo = "Los productos que requieren cadena de frío se trasladan en vehículos o envases que permiten mantener la temperatura requerida",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },new ContenidoPreguntas(){
-                        Titulo = "En los camiones se colocan los productos sobre tarimas",
+                        Titulo = "En los vehículos de transporte de los medicamentos y otros productos para la salud humana, los mismos se colocan sobre tarimas u otro mobiliario similar que brinde protección dentro de los vehículos",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
-                    },new ContenidoPreguntas(){
-                        Titulo = "Presenta formato de verificación de mantenimiento y condiciones del vehículo",
-                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
-                    },new ContenidoPreguntas(){
+                    },
+                //new ContenidoPreguntas(){
+                //        Titulo = "Presenta formato de verificación de mantenimiento y condiciones del vehículo",
+                //        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
+                //    },
+                new ContenidoPreguntas(){
                         Titulo = "En caso de tercerización del transporte presenta contrato con la empresa que brindará el servicio",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
-                    },new ContenidoPreguntas(){
+                    },
+                new ContenidoPreguntas(){
                         Titulo = "El transporte está identificado con el nombre de la empresa con licencia de operación vigente ante la Dirección Nacional de Farmacia y Drogas.  Si es tercerizado se permite coloque un letrero removible o en acrílico (colocar en la parte de enfrente del vidrio) o similar",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
+                    },
+                new ContenidoPreguntas(){
+                        Titulo = "En caso de que el transporte sea realizado por terceros, existe un contrato que detalle los deberes y responsabilidades del contratista y el contratante. El l distribuidor debe informar a los transportistas de las condiciones de transporte. El contratante debe verificar que el mismo cumpla con los requisitos establecidos en el presente reglamento",
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
+                    },
+                new ContenidoPreguntas(){
+                        Titulo = "En caso de que el transporte sea realizado por terceros, existe un contrato que detalle los deberes y responsabilidades del contratista y el contratante. El l distribuidor debe informar a los transportistas de las condiciones de transporte. El contratante debe verificar que el mismo cumpla con los requisitos establecidos en el presente reglamento",
+                        IsHeader = true,
+                        //LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
+                    },
+                new ContenidoPreguntas(){
+                        Titulo = "El equipo utilizado para vigilar la temperatura durante el transporte en vehículos o en contenedores debe someterse a mantenimiento y calibrarse periódicamente, al menos una vez al año. Siempre que sea posible, deben utilizarse vehículos y equipos específicos para medicamentos. Artículo 446 del Decreto Ejecutivo 13 de 1 de marzo de 2023",
+                        //IsHeader = true,
+                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion() { HideEvaluacion=true} },
                     },
              };
         }

@@ -129,7 +129,7 @@ namespace DataModel
                                  LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
-                        Titulo = "Procedimiento escrito para el ingreso de personas ajenas a las áreas de acondicionamiento y control de calidad",
+                        Titulo = "Procedimiento escrito para el ingreso de personas ajenas a las áreas de producción",
                                  LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
@@ -141,7 +141,7 @@ namespace DataModel
                                  LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
-                        Titulo = "Procedimiento escrito en donde el personal enfermo comunique de inmediato a su superior, cualquier estado de salud que influya negativamente en la producción (Acondicionamiento).",
+                        Titulo = "Procedimiento escrito en donde el personal enfermo comunique de inmediato a su superior, cualquier estado de salud que influya negativamente en la producción.",
                                  LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
@@ -149,7 +149,7 @@ namespace DataModel
                                  LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
-                        Titulo = "Procedimientos relacionados con la higiene del personal incluyendo el uso de ropas protectoras, que incluyan a todas las personas que ingresan a las áreas de acondicionamiento.",
+                        Titulo = "Procedimientos relacionados con la higiene del personal incluyendo el uso de ropas protectoras, que incluyan a todas las personas que ingresan a las áreas de producción.",
                                  LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
@@ -157,11 +157,11 @@ namespace DataModel
                                  LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
-                        Titulo = "Utiliza diariamente el personal dedicado a la producción (Acondicionamiento), que esté en contacto directo con el producto terminado, uniforme completo:\r\n- gorro que cubra la totalidad del cabello\r\n- mascarilla\r\n- guantes desechables\r\n- zapatos cerrados y suela antideslizante \r\n",
+                        Titulo = "Utiliza diariamente el personal dedicado a la producción, que esté en contacto directo con el producto:\r\n- gorro que cubra la totalidad del cabello\r\n- mascarilla\r\n- guantes desechables\r\n- zapatos cerrados y suela antideslizante \r\n",
                                  LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
-                        Titulo = "Procedimiento que instruya al personal a lavarse las manos antes de ingresar a las áreas de acondicionamiento.",
+                        Titulo = "Procedimiento que instruya al personal a lavarse las manos antes de ingresar a las áreas de producción.",
                                  LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
              };
@@ -405,7 +405,7 @@ namespace DataModel
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion(), new OpcionEvaluacion(), new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
-                        Titulo = "Las áreas de producción (acondicionamiento):",
+                        Titulo = "Las áreas de producción:",
                            LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion(), new OpcionEvaluacion(), new OpcionEvaluacion()},
                  },
                         new ContenidoPreguntas(){
@@ -856,11 +856,11 @@ namespace DataModel
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
-                        Titulo = "ACONDICIONAMIENTO / PRODUCCIÓN",
+                        Titulo = "PRODUCCIÓN",
                         IsHeader = true,
                     },
                         new ContenidoPreguntas(){
-                        Titulo = "Existen procedimientos o instrucciones escritas para el manejo de materiales, y productos en las operaciones de:\r\n-  Cuarentena.\r\n-  Etiquetado.\r\n-  Muestreo.\r\n-Acondicionamiento\r\n- Almacenamiento.\r\n-  Despacho.\r\n-  Distribución.\r\nSe llevan registro de la ejecución de estos?",
+                        Titulo = "Existen procedimientos o instrucciones escritas para el manejo de materiales, graneles y productos en las operaciones de:\r\n-  Cuarentena.\r\n-  Etiquetado.\r\n-  Muestreo.\r\n-Acondicionamiento\r\n- Almacenamiento.\r\n-  Despacho.\r\n-  Elaboración.\r\n-  Envasado.\r\n-  Distribución.\r\nSe llevan registro de la ejecución de estos?",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
@@ -868,7 +868,7 @@ namespace DataModel
                         IsHeader = true,
                     },
                         new ContenidoPreguntas(){
-                        Titulo = "Existen procedimientos escritos que indiquen medidas preventivas para evitar la contaminación cruzada en todas las fases de acondicionamiento, los productos y materiales?",
+                        Titulo = "Existen procedimientos escritos que indiquen medidas preventivas para evitar la contaminación cruzada en todas las fases de producción?",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
@@ -912,7 +912,7 @@ namespace DataModel
                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                      },
                         new ContenidoPreguntas(){
-                        Titulo = "a) Especificaciones escritas de los materiales y producto terminado.",
+                        Titulo = "a) Especificaciones escritas de los materiales, producto semielaborado y producto terminado.",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
@@ -936,7 +936,7 @@ namespace DataModel
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
-                        Titulo = "g) Procedimiento escrito para la aprobación y rechazo de materiales",
+                        Titulo = "g) Procedimiento escrito para la aprobación y rechazo de materiales y productos terminados",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
@@ -944,7 +944,7 @@ namespace DataModel
                         IsHeader = true,
                     },
                         new ContenidoPreguntas(){
-                        Titulo = "El laboratorio realiza actividades de acondicionamiento a terceros?",
+                        Titulo = "El laboratorio realiza actividades de producción o análisis a terceros?",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
@@ -956,11 +956,11 @@ namespace DataModel
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
-                        Titulo = "El contrato a terceros para el acondicionamiento está debidamente legalizado, definido y de mutuo consentimiento?",
+                        Titulo = "El contrato a terceros para la producción o análisis está debidamente legalizado, definido y de mutuo consentimiento?",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
-                        Titulo = "El contrato estipula las obligaciones de cada una de las partes con relación a:\r\na) Acondicionamiento \r\nb) Manejo.\r\nc) Almacenamiento.\r\nf) Liberación del producto.",
+                        Titulo = "El contrato estipula las obligaciones de cada una de las partes con relación a:\r\na) Fabricación y/o acondicionamiento \r\nb) Manejo.\r\nc) Almacenamiento.\r\nd) Control de Calidad.\r\ne) Análisis.\r\nf) Liberación del producto.",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
@@ -980,7 +980,7 @@ namespace DataModel
                         IsHeader = true,
                     },
                         new ContenidoPreguntas(){
-                        Titulo = "AUTOINSPECCIONES\r\nTiene el laboratorio acondicionador un procedimiento y programa de autoinspecciones que contempla todos   los aspectos de las buenas prácticas de manufactura (acondicionamiento)?",
+                        Titulo = "AUTOINSPECCIONES\r\nTiene el laboratorio fabricante y/o acondicionador un procedimiento y programa de autoinspecciones que contempla todos   los aspectos de las buenas prácticas de Manufactura?",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
              };

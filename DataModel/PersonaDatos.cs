@@ -33,5 +33,11 @@ namespace DataModel
                 return string.Join(" ", nameArray.Where(s => !string.IsNullOrEmpty(s)));
             }
         }
+
+        /////////////////////
+        ///
+       
+        public string Cargo { get; set; }
+        public string Departamento { get; set; }
     }
 }

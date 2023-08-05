@@ -1,7 +1,7 @@
 ﻿@using DataModel.Helper;
 @implements IDisposable
 
-@if (Inspeccion?.InspRutinaVigAgencia?.AreaProductosRetiradosMercado != null)
+@if (Inspeccion?.InspAperCambUbicFarm?.DatosAreaAlmacenamientoAlcohol != null)
 {
     <div class="kt-content  kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor" id="kt_content">
 
@@ -33,7 +33,7 @@
                                             <DataAnnotationsValidator />
                                             <div class="row clearfix">
                                                 <div class="col-12">
-                                                    <h5>@languageContainerService.Keys["Área para Productos Retirados del Mercado"]</h5>
+                                                    <h5>@languageContainerService.Keys["Área de Almacen de Alcohol u otros productos inflamables"]</h5>
                                                 </div>
                                             </div>
                                             <div class="row clearfix">
@@ -43,26 +43,25 @@
                                                         <table class="table rounded table-striped">
                                                             <thead class=thead-light>
                                                                 <tr>
-                                                                    <th width="40%">@languageContainerService.Keys["Título"]</th>
                                                                     <th width="5%">@languageContainerService.Keys["Seleccione"]</th>
+                                                                    <th width="40%">@languageContainerService.Keys["Título"]</th>
                                                                     <th>@languageContainerService.Keys["Observaciones"]</th>
                                                                 </tr>
                                                             </thead>
                                                             <tbody>
-                                                                @if (Inspeccion?.InspRutinaVigAgencia?.AreaProductosRetiradosMercado?.LContenido != null)
+                                                                @if (Inspeccion?.InspAperCambUbicFarm?.DatosAreaAlmacenamientoAlcohol?.LContenido != null)
                                                                 {
-                                                                    @foreach (var dt in Inspeccion.InspRutinaVigAgencia.AreaProductosRetiradosMercado.LContenido)
+                                                                    @foreach (var dt in Inspeccion.InspAperCambUbicFarm.DatosAreaAlmacenamientoAlcohol.LContenido)
                                                                     {
                                                                         @if (dt.IsHeader)
                                                                         {
                                                                             <tr>
-                                                                                <th colspan="3">@dt.Titulo</th>
+                                                                                <td colspan="3" style="white-space: pre-line;text-align:justify;">@dt.Titulo</td>
                                                                             </tr>
                                                                         }
                                                                         else
                                                                         {
                                                                             <tr>
-                                                                                <td>@dt.Titulo</td>
                                                                                 @foreach (var eva in dt.LEvaluacion)
                                                                                 {
                                                                                     <td>
@@ -74,6 +73,7 @@
                                                                                         </InputSelect>
                                                                                     </td>
                                                                                 }
+                                                                                <td>@dt.Titulo</td>
                                                                                 <td>
                                                                                     <InputTextArea rows="6" class="form-control" @bind-Value="dt.Observaciones" />
                                                                                 </td>
@@ -86,8 +86,6 @@
                                                     </div>
                                                 </div>
                                             </div>
-
-
                                             <br><br>
 
                                             <div class="kt-portlet__foot" style="text-align:right;">

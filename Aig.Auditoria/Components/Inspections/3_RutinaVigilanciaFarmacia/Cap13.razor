@@ -1,7 +1,7 @@
 ﻿@using DataModel.Helper;
 @implements IDisposable
 
-@if (Inspeccion?.InspRutinaVigAgencia?.AreaProductosRetiradosMercado != null)
+@if (Inspeccion?.InspRutinaVigFarmacia?.RegMovimientoExistencia2 != null)
 {
     <div class="kt-content  kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor" id="kt_content">
 
@@ -33,7 +33,7 @@
                                             <DataAnnotationsValidator />
                                             <div class="row clearfix">
                                                 <div class="col-12">
-                                                    <h5>@languageContainerService.Keys["Área para Productos Retirados del Mercado"]</h5>
+                                                    <h5>@languageContainerService.Keys["Registro de Movimiento de Existencia de Sustancias Controladas"]</h5>
                                                 </div>
                                             </div>
                                             <div class="row clearfix">
@@ -49,9 +49,9 @@
                                                                 </tr>
                                                             </thead>
                                                             <tbody>
-                                                                @if (Inspeccion?.InspRutinaVigAgencia?.AreaProductosRetiradosMercado?.LContenido != null)
+                                                                @if (Inspeccion?.InspRutinaVigFarmacia?.RegMovimientoExistencia2?.LContenido != null)
                                                                 {
-                                                                    @foreach (var dt in Inspeccion.InspRutinaVigAgencia.AreaProductosRetiradosMercado.LContenido)
+                                                                    @foreach (var dt in Inspeccion.InspRutinaVigFarmacia.RegMovimientoExistencia2.LContenido)
                                                                     {
                                                                         @if (dt.IsHeader)
                                                                         {

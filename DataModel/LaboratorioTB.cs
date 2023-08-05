@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace DataModel
@@ -50,24 +51,31 @@ namespace DataModel
 
 
         private List<FMV_PmrProductoTB> lProductos;
+        [JsonIgnore]
         public virtual List<FMV_PmrProductoTB> LProductos { get => lProductos; set => SetProperty(ref lProductos, value); }
 
         private List<FMV_IpsTB> lIps;
+        [JsonIgnore]
         public virtual List<FMV_IpsTB> LIps { get => lIps; set => SetProperty(ref lIps, value); }
 
         private List<FMV_RfvTB> lRfv;
+        [JsonIgnore]
         public virtual List<FMV_RfvTB> LRfv { get => lRfv; set => SetProperty(ref lRfv, value); }
 
         private List<FMV_EsaviNotificacionTB> lEsaviNotificacion;
+        [JsonIgnore]
         public virtual List<FMV_EsaviNotificacionTB> LEsaviNotificacion { get => lEsaviNotificacion; set => SetProperty(ref lEsaviNotificacion, value); }
 
         private List<FMV_FfTB> lFf;
+        [JsonIgnore]
         public virtual List<FMV_FfTB> LFf { get => lFf; set => SetProperty(ref lFf, value); }
 
         private List<FMV_FtTB> lFt;
+        [JsonIgnore]
         public virtual List<FMV_FtTB> LFt { get => lFt; set => SetProperty(ref lFt, value); }
 
         private List<FMV_IpsMedicamentoTB> lIpsMedicamento;
+        [JsonIgnore]
         public virtual List<FMV_IpsMedicamentoTB> LIpsMedicamento { get => lIpsMedicamento; set => SetProperty(ref lIpsMedicamento, value); }
 
     }

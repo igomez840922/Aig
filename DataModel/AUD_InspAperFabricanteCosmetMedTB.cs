@@ -478,7 +478,7 @@ namespace DataModel
                         Titulo = "Existe un manual de procedimiento escrito para la operación del sistema de agua.\r\n El operario dispone de copia autorizada de este manual",
                                  LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },new ContenidoPreguntas(){
-                        Titulo = "Existen procedimientos escritos para la sanitización de los medios filtrantes (describe la frecuencia) en Osmosis Inversa o Deionización.",
+                        Titulo = "Existen procedimientos escritos para la sanitización de los medios filtrantes (describe la frecuencia) en Osmosis Inversa o Deionización.\r\n- Formato de registro de sanitización de medios filtrantes.",
                                  LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },new ContenidoPreguntas(){
                         Titulo = "Se realiza mantenimiento preventivo a los equipos que forman parte del sistema. (Procedimiento) Cuál es la frecuencia.\r\n- Formatos de registros de mantenimiento preventivo",
@@ -586,7 +586,7 @@ namespace DataModel
                                  LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                                  Observaciones="Temperatura: ___________\r\nHumedad Relativa: ___________"
                     },new ContenidoPreguntas(){
-                        Titulo = "Existe un área separada e identificada para la dispensación de órdenes de fabricación\r\n- Paredes\r\n- Pisos\r\n- Techos\r\n- Curvas sanitarias\r\n- Sistemas de aire",
+                        Titulo = "Existe un área separada e identificada para la dispensación de órdenes de fabricación\r\n- Existe esclusa \r\n- Paredes\r\n- Pisos\r\n- Techos\r\n- Curvas sanitarias\r\n- Sistemas de aire",
                                    LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                    },new ContenidoPreguntas(){
                         Titulo = "El área se encuentra equipada con Equipo (balanzas) e utensilios",
