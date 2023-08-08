@@ -11,10 +11,10 @@ namespace Aig.Farmacoterapia.Infrastructure.Configuration
     {
         public string Host { get; set; }
         public int? Port { get; set; }
-        public string Token { get; set; }
+        public string? Token { get; set; }
         public bool Https { get; set; } = true;
-        public string User { get; set; } = string.Empty;
-        public string Password { get; set; } = string.Empty;
+        public string? User { get; set; } = string.Empty;
+        public string? Password { get; set; } = string.Empty;
     }
     public class DNFDConfiguration : SysFarmConfiguration
     {

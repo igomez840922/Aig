@@ -7,6 +7,7 @@ using Polly.Retry;
 using Polly;
 using RestSharp;
 using Aig.Farmacoterapia.Domain.Interfaces;
+using Duende.IdentityServer.Models;
 
 namespace Aig.Farmacoterapia.Infrastructure.Resiliency
 {
@@ -26,19 +27,21 @@ namespace Aig.Farmacoterapia.Infrastructure.Resiliency
         {
             _retries = retries;
             _logger = logger;
-            _retryPolicy=Policy.HandleResult<IRestResponse<T>>(message => _statusCodes.Contains(message.StatusCode))
+            _retryPolicy=Policy.HandleResult<IRestResponse<T>>(message => message.StatusCode == 0 || _statusCodes.Contains(message.StatusCode))
                 .WaitAndRetry(
                     retryCount: _retries,
                     sleepDurationProvider: attempt => TimeSpan.FromSeconds(Math.Pow(2, attempt)),
                     onRetry: LogRetryAction);
 
-            _retryPolicyAsync = Policy
-            .HandleResult<IRestResponse<T>>(message => _statusCodes.Contains(message.StatusCode))
-            .WaitAndRetryAsync(
-                retryCount: _retries,
-                sleepDurationProvider: attempt => TimeSpan.FromSeconds(Math.Pow(2, attempt)),
-                onRetry: LogRetryAction
-            );
+           _retryPolicyAsync = Policy
+            .HandleResult<IRestResponse<T>>(message => {
+                //the request did not complete or I throw an http status error.
+                return message.StatusCode==0 || _statusCodes.Contains(message.StatusCode);
+            }).WaitAndRetryAsync(
+              retryCount: _retries,
+              sleepDurationProvider: attempt => TimeSpan.FromSeconds(Math.Pow(2, attempt)),
+              onRetry: LogRetryAction
+          );
         }
 
         private void LogRetryAction(DelegateResult<IRestResponse<T>> result, TimeSpan sleepTime, int reattemptCount, Context context)

@@ -2,12 +2,12 @@
 using Aig.Farmacoterapia.Domain.Common;
 using Aig.Farmacoterapia.Domain.Interfaces;
 using Aig.Farmacoterapia.Domain.Specifications.Base;
+using LinqKit;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
 
 namespace Aig.Farmacoterapia.Infrastructure.Extensions
 {
-
     public static class QueryableExtensions
     {
         public static async Task<PaginatedResult<T>> PaginatedByAsync<T>(this IQueryable<T> source, int pageNumber, int pageSize) where T : class
@@ -33,7 +33,7 @@ namespace Aig.Farmacoterapia.Infrastructure.Extensions
                     (current, include) => current.Include(include));
             return secondaryResult.Where(spec.Criteria);
         }
-        public static IQueryable<T> WhereBy2<T>(this IQueryable<T> query, ISpecification<T> spec) where T : class, IEntity
+        public static IQueryable<T> WhereByExp<T>(this IQueryable<T> query, ISpecification<T> spec) where T : class, IEntity
         {
             var queryableResultWithIncludes = spec.Includes
                 .Aggregate(query,
@@ -45,7 +45,7 @@ namespace Aig.Farmacoterapia.Infrastructure.Extensions
         }
         public static async Task<List<T>> WhereByAsync<T>(this IQueryable<T> query, Expression<Func<T, object>> sort = null, ISpecification<T> spec = null) where T : class, IEntity
         {
-         
+
             if (spec is null)
                 return sort == null ? await query.ToListAsync() : await query.OrderBy(sort).ToListAsync();
             var queryableResultWithIncludes = spec.Includes
@@ -58,7 +58,30 @@ namespace Aig.Farmacoterapia.Infrastructure.Extensions
                             await secondaryResult.Where(spec.Criteria).ToListAsync() :
                             await secondaryResult.Where(spec.Criteria).OrderBy(sort).AsQueryable().ToListAsync();
         }
+        public static IQueryable<T> WhereAnd<T>(this IQueryable<T> query, List<Tuple<FilteringOption, Expression<Func<T, bool>>>> filterList)
+        {
+            if (filterList == null)
+                return query;
 
+            //foreach (var filter in filterList){query = query.Where(filter.Item2);}
+            var predicate = PredicateBuilder.New<T>();
+            foreach (var filter in filterList) { predicate = predicate.And(filter.Item2); }
+
+            if (filterList.Count > 0) { query = query.Where(predicate); }
+            return query;
+        }
+        public static IQueryable<T> WhereOr<T>(this IQueryable<T> query, List<Expression<Func<T, bool>>> filterList)
+        {
+            if (filterList == null)
+                return query;
+
+            //foreach (var filter in filterList){query = query.Where(filter.Item2);}
+            var predicate = PredicateBuilder.New<T>();
+            foreach (var filter in filterList) { predicate = predicate.Or(filter); }
+
+            if (filterList.Count > 0) { query = query.Where(predicate); }
+            return query;
+        }
         public static IQueryable<T> OrderBy<T>(this IQueryable<T> query, List<Tuple<SortingOption, Expression<Func<T, object>>>> orderByList)
         {
             if (orderByList == null)
@@ -72,6 +95,25 @@ namespace Aig.Farmacoterapia.Infrastructure.Extensions
                 else
                     orderedQuery = orderBy.Item1.Direction == SortingDirection.ASC ? orderedQuery.ThenBy(orderBy.Item2) : orderedQuery.ThenByDescending(orderBy.Item2);
             }
+            return orderedQuery ?? query;
+        }
+
+        public static IQueryable<T> WhereBy2<T>(this IQueryable<T> query, ISpecification<T> spec) where T : class, IEntity
+        {
+            var queryableResultWithIncludes = spec.Includes
+                .Aggregate(query,
+                    (current, include) => current.Include(include));
+            var secondaryResult = spec.IncludeStrings
+                .Aggregate(queryableResultWithIncludes,
+                    (current, include) => current.Include(include));
+            return secondaryResult.Where(spec.Expression);
+        }
+
+        public static IQueryable<T> OrderBy<T>(this IQueryable<T> query, Tuple<SortingOption, Expression<Func<T, object>>> order)
+        {
+            IOrderedQueryable<T> orderedQuery = null;
+            orderedQuery = order.Item1.Direction == SortingDirection.ASC ?
+                           query.OrderBy(order.Item2) : query.OrderByDescending(order.Item2);
             return orderedQuery ?? query;
         }
     }

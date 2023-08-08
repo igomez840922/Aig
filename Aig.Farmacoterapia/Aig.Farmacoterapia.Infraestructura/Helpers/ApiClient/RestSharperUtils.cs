@@ -18,7 +18,7 @@ namespace Aig.Farmacoterapia.Infrastructure.Helpers.ApiClient
             {
                 return JsonSerializer.Serialize(obj);
             }
-            catch
+            catch (Exception ex)
             {
                 return null;
             }
@@ -32,7 +32,7 @@ namespace Aig.Farmacoterapia.Infrastructure.Helpers.ApiClient
             {
                 return JsonSerializer.Deserialize<T>(response.Content);
             }
-            catch
+            catch(Exception ex)
             {
                 return default;
             }

@@ -1,6 +1,7 @@
 using Aig.Farmacoterapia.Application.Features.Extensions;
 using Aig.Farmacoterapia.Domain.Interfaces;
 using Aig.Farmacoterapia.Infrastructure;
+using Aig.Farmacoterapia.Infrastructure.SeedData;
 using Aig.Farmacoterapia.Wasm.Server.Helpers;
 using Microsoft.Extensions.FileProviders;
 
@@ -79,5 +80,8 @@ app.ConfigureSwagger();
 app.MapRazorPages();
 app.MapControllers();
 app.MapFallbackToFile("index.html");
+
+//Save initial data...
+SeedData.UpdateMigrations(app.Services).Wait();
 
 app.Run();

@@ -30,15 +30,14 @@ namespace Aig.Farmacoterapia.Infrastructure.Helpers.ApiClient
     public abstract class BaseRestService
     {
         protected readonly IRestApiClient _requester;
-        public readonly IApiConfiguration _config;
+        protected IApiConfiguration _config;
         protected readonly ISystemLogger _logger;
-        public BaseRestService(IOptions<IApiConfiguration> config, IRestApiClient requester, ISystemLogger logger)
+        public BaseRestService(IRestApiClient requester, ISystemLogger logger)
         {
-            _config = config.Value;
             _requester = requester;
             _logger = logger;
         }
-
+     
         public async Task<string> GetTokenAsync(CancellationToken cancellationToke = default)
         {
             var uri = BuildUri("api/identity/login");
@@ -62,11 +61,10 @@ namespace Aig.Farmacoterapia.Infrastructure.Helpers.ApiClient
             if (parameters?.Count > 0)
                 absoluteUri = QueryHelpers.AddQueryString(uri.AbsoluteUri, parameters);
             IRestRequest request = new RestRequest(absoluteUri, method);
-            var token = _config.Token;
-            if (string.IsNullOrEmpty(token))
-                token = GetToken();
-            //request.AddOrUpdateHeader("Authorization", $"Token token={_config.Token}");
-            request.AddOrUpdateHeader("Authorization",$"Bearer {token}");
+            //var token = _config.Token;
+            //if (string.IsNullOrEmpty(token))
+            //    token = GetToken();
+            //request.AddOrUpdateHeader("Authorization",$"Bearer {token}");
             return request;
         }
 

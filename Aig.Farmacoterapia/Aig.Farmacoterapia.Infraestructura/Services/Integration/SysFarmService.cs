@@ -1,11 +1,15 @@
-﻿using Aig.Farmacoterapia.Domain.Integration.SysFarm;
+﻿using Aig.Farmacoterapia.Domain.Common;
+using Aig.Farmacoterapia.Domain.Entities.Products;
+using Aig.Farmacoterapia.Domain.Integration.SysFarm;
 using Aig.Farmacoterapia.Domain.Interfaces;
 using Aig.Farmacoterapia.Domain.Interfaces.Integration;
 using Aig.Farmacoterapia.Infrastructure.Configuration;
 using Aig.Farmacoterapia.Infrastructure.Extensions;
 using Aig.Farmacoterapia.Infrastructure.Helpers.ApiClient;
+using Aig.Farmacoterapia.Infrastructure.Persistence;
 using AutoMapper;
 using Microsoft.Extensions.Options;
+using Org.BouncyCastle.Asn1.Ocsp;
 using RestSharp;
 using System;
 using System.Collections.Generic;
@@ -13,6 +17,8 @@ using System.Linq;
 using System.Text;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
+using static Humanizer.In;
+using static log4net.Appender.RollingFileAppender;
 
 namespace Aig.Farmacoterapia.Infrastructure.Services.Integration
 {
@@ -183,37 +189,70 @@ namespace Aig.Farmacoterapia.Infrastructure.Services.Integration
 
     public class SysFarmService : BaseRestService, ISysFarmService
     {
-        protected readonly IMapper _mapper;
-        public SysFarmService(IOptions<SysFarmConfiguration> config, IRestApiClient requester, IMapper mapper, ISystemLogger logger) : base(config, requester, logger) {
+        private readonly IUnitOfWork _unitOfWork;
+        private readonly IMapper _mapper;
+        private const string _code = "SYSFARM";
+        public SysFarmService(IRestApiClient requester, IUnitOfWork unitOfWork, IMapper mapper, ISystemLogger logger):base(requester, logger)
+        {    
             _mapper = mapper;
+            _unitOfWork = unitOfWork;
+            AigService? item;
+            if((item= _unitOfWork.Repository<AigService>().Entities.FirstOrDefault(p => p.Code == _code)) != null) {
+                _config = new SysFarmConfiguration(){
+                    Host = item.Host,
+                    Port = item.Port,
+                    Token = item.Token,
+                    User = item.User,
+                    Password = item.Password,
+                    Https = item.Https,
+                };
+            }           
         }
-        public async Task<SysFarmResponse?>GetRecordsAfterDate(string date, CancellationToken cancellationToke = default)
+        public async Task<SysFarmResponse?> GetRecords(CancellationToken cancellationToke = default)
         {
-            var request = CreateRequest("api/registros", Method.GET, new Dictionary<string, string> { { "fechaConsulta", date } });
-            var response = await _requester.ExecuteAsync<SysFarmResponse>(request, cancellationToke);
-            if (!response.IsSuccessful && !string.IsNullOrEmpty(response.Content))
-            {
-                _logger.Error(new Exception(response.Content).ToMessageAndCompleteStacktrace());
-                return null;
+            AigService? item;
+            if ((item = _unitOfWork.Repository<AigService>().Entities.FirstOrDefault(p => p.Code == _code)) != null) {
+                if (item.LastRun == null) return await GetAllRecords(cancellationToke);
+                var request = CreateRequest("api/registros", Method.GET, new Dictionary<string, string> { { "fechaConsulta", item.LastRun?.ToString("yyyy-MM-dd") } });
+                var response = await _requester.ExecuteAsync<Root>(request, cancellationToke);
+                if (!response.IsSuccessful || string.IsNullOrEmpty(response.Content) || response.Data == null){
+                    _logger.Error(new Exception(response.Content).ToMessageAndCompleteStacktrace());
+                    return null;
+                }
+                else
+                {
+                    item.LastRun = DateTime.Now;
+                    await _unitOfWork.Repository<AigService>().UpdateAsync(item);
+                    await _unitOfWork.CommitAsync(cancellationToke);
+                    return _mapper.Map<SysFarmResponse>(response.Data);
+                }
             }
-            return response.Data != null ? _mapper.Map<SysFarmResponse>(response.Data) : new SysFarmResponse();
+            return null;
         }
-        public async Task<SysFarmResponse> GetAllRecords(CancellationToken cancellationToke = default)
+        private async Task<SysFarmResponse?> GetAllRecords(CancellationToken cancellationToke = default)
         {
             try
             {
                 var request = CreateRequest("api/registros", Method.GET);
                 var response = await _requester.ExecuteAsync<Root>(request, cancellationToke);
-                if (!response.IsSuccessful && !string.IsNullOrEmpty(response.Content))
+                if (!response.IsSuccessful || string.IsNullOrEmpty(response.Content) || response.Data == null){
                     _logger.Error(new Exception(response.Content).ToMessageAndCompleteStacktrace());
-                return response.Data!=null? _mapper.Map<SysFarmResponse>(response.Data):new SysFarmResponse();
+                    return null;
+                }
+                else {
+                    AigService? item;
+                    if ((item = _unitOfWork.Repository<AigService>().Entities.FirstOrDefault(p => p.Code == _code)) != null) {
+                        item.LastRun = DateTime.Now;
+                        await _unitOfWork.Repository<AigService>().UpdateAsync(item);
+                        await _unitOfWork.CommitAsync(cancellationToke);
+                    }
+                    return _mapper.Map<SysFarmResponse>(response.Data);
+                }
             }
-            catch (Exception ex)
-            {
+            catch (Exception ex) {
                 _logger.Error(ex.ToMessageAndCompleteStacktrace());
                 return null;
             }
-           
         }
     }
 }

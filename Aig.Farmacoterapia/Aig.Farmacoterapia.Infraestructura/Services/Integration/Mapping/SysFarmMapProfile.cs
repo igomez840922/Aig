@@ -21,7 +21,7 @@ namespace Aig.Farmacoterapia.Infrastructure.Services.Integration.Mapping
             CreateMap<Presentacione, AigPresentation>();
             CreateMap<Registro, AigRecord>()
                 .ForMember(x => x.Id, opt => opt.Ignore())
-                .ForMember(p => p.RecordId, p=> p.MapFrom(s => s.Id));
+                .ForMember(p => p.RecordId, p => p.MapFrom(s => s.Id));
             CreateMap<Root, SysFarmResponse>();
         }
     }

@@ -36,6 +36,8 @@ using Aig.Farmacoterapia.Domain.Interfaces.Integration;
 using Aig.Farmacoterapia.Infrastructure.Services.Integration;
 using Aig.Farmacoterapia.Infrastructure.Resiliency;
 using Aig.Farmacoterapia.Infrastructure.Helpers.ApiClient;
+using Microsoft.AspNetCore.Mvc.ApplicationModels;
+using Aig.Farmacoterapia.Domain.Entities.Products;
 
 namespace Aig.Farmacoterapia.Infrastructure
 {
@@ -269,8 +271,6 @@ namespace Aig.Farmacoterapia.Infrastructure
             services.AddScoped<AppState>();
             services.Configure<AppConfiguration>(configuration.GetSection("AppConfiguration"));
             services.Configure<MailConfiguration>(configuration.GetSection("MailConfiguration"));
-            services.Configure<SysFarmConfiguration>(configuration.GetSection("SysFarmConfiguration"));
-            services.Configure<DNFDConfiguration>(configuration.GetSection("DNFDConfiguration"));
             services.AddTransient<IMailService, SMTPMailService>();
             services.AddTransient<ISqlRetryPolicy, SqlRetryPolicy>();
             services.AddTransient<IRestApiClient, RestApiClient>();
@@ -294,33 +294,38 @@ namespace Aig.Farmacoterapia.Infrastructure
             });
             return services;
         }
-        public static void AddJob<T>(this IServiceCollectionQuartzConfigurator configurator, string key, string cron) where T : IJob
+        public static void AddJob<T>(this IServiceCollectionQuartzConfigurator configurator, string key, int interval, string cron="") where T : IJob
         {
             var jobKey = new JobKey($"{Guid.NewGuid().GetHashCode():x}-{key}");
             configurator.AddJob<T>(opts => opts.WithIdentity(jobKey));
             configurator.AddTrigger(opts => opts
                 .ForJob(jobKey)
                 .WithIdentity($"{jobKey}-trigger")
-                .WithCronSchedule(cron)
+                .WithSimpleSchedule(x => x
+                    .WithIntervalInHours(24)
+                    .WithIntervalInSeconds(24)
+                    .RepeatForever())
+                //.WithCronSchedule(cron)
             );
         }
 
         public static IServiceCollection AddQuartz(this IServiceCollection services)
         {
+            var sysFarmInterval = 1;var sirFadInterval = 1;
+            var scopeFactory = services.BuildServiceProvider().GetRequiredService<IServiceScopeFactory>();
+            using (var scope = scopeFactory.CreateScope()){
+                var unitOfWork = scope.ServiceProvider.GetService<IUnitOfWork>();
+                AigService? item;
+                if ((item = unitOfWork?.Repository<AigService>().Entities.SingleOrDefault(p => p.Code == "SYSFARM")) != null)
+                    sysFarmInterval = item.UpdateTime;
+                if ((item = unitOfWork?.Repository<AigService>().Entities.SingleOrDefault(p => p.Code == "SIRFAD")) != null)
+                    sirFadInterval = item.UpdateTime;
+            }
             services.AddQuartz(q =>
             {
                 q.UseMicrosoftDependencyInjectionJobFactory();
-                q.AddJob<RecordUpdateJob>("RecordUpdateJob", "0/5 * * * * ?"); // run every 5 seconds
-
-                //var tramitesProcessJob = new JobKey("TramitesProcessJob");
-                //q.AddJob<RecordUpdateJob>(opts => opts.WithIdentity(tramitesProcessJob));
-                //q.AddTrigger(opts => opts
-                //    .ForJob(tramitesProcessJob)
-                //    .WithIdentity("TramitesProcessJob-trigger")
-                //    .WithSimpleSchedule(x => x
-                //        .WithIntervalInHours(24)
-                //        .RepeatForever()));
-
+                q.AddJob<SysFarmUpdateJob>("SysFarmUpdateJob", sysFarmInterval);
+                ///q.AddJob<RecordUpdateJob>("RecordUpdateJob", "0/5 * * * * ?"); // run every 5 seconds
             });
             services.AddQuartzHostedService(q => q.WaitForJobsToComplete = true);
 

@@ -1,0 +1,201 @@
+﻿@page "/services"
+@attribute [Authorize]
+@using Aig.Farmacoterapia.Domain.Entities.Enums
+@using Aig.Farmacoterapia.Domain.Entities.Products;
+@using Aig.Farmacoterapia.Domain.Entities.Studies
+@using Aig.Farmacoterapia.Domain.Entities.Studies.Enums
+@using Aig.Farmacoterapia.Domain.Extensions
+@using Aig.Farmacoterapia.Domain.Models
+@using Aig.Farmacoterapia.Wasm.Client.Components.AigService;
+@using Aig.Farmacoterapia.Wasm.Client.Components.Codes
+@using Aig.Farmacoterapia.Wasm.Client.Extensions
+@using Aig.Farmacoterapia.Wasm.Client.Infrastructure.Managers.Codes
+@using Aig.Farmacoterapia.Wasm.Client.Model
+@using Aig.Farmacoterapia.Domain.Common
+@using Aig.Farmacoterapia.Domain.Entities
+@using System.Globalization
+@using System.Security.Claims
+@inject IAigServiceManager _manager;
+
+<PageTitle>Medicaments</PageTitle>
+
+<style>
+    .table th, .table td {
+        vertical-align: middle !important;
+    }
+
+    .table-sm th {
+        padding: 0.8rem 0.3rem 0.8rem 1rem !important;
+    }
+
+    .table-sm td {
+        padding: 0.3rem 0.3rem 0.3rem 1rem !important;
+    }
+
+    .dropdown-item {
+        display: flow-root !important;
+    }
+
+    .mud-table-container {
+        min-height: 200px !important;
+        width: 100% !important;
+    }
+
+    .mud-table-empty-row {
+        padding-top: 60px !important;
+    }
+
+    .mud-table-head {
+        background-color: #f0f0f0 !important;
+        border-color: #f0f0f0 !important;
+        color: #594ae2 !important;
+    }
+
+    .mud-table-root .mud-table-head .mud-table-cell {
+        color: #594ae2 !important;
+    }
+
+    .mud-table-sort-label:hover {
+        color: #594ae2 !important;
+    }
+
+    .row-width {
+        width: 2000px !important;
+    }
+
+    td.table-row {
+        color: red;
+    }
+</style>
+
+<MudCard Elevation="25" Style="margin-bottom: 12px;">
+    <MudCardContent>
+
+        <MudGrid>
+            <MudItem xs="12" md="12">
+                <MudToolBar Style="height:25px !important;">
+                    <MudText Color="Color.Primary">
+                        <MudIcon Icon="@Icons.Material.Outlined.MiscellaneousServices" Color="Color.Default" Style="margin-bottom: 5px;"></MudIcon>
+                        Servicios
+                    </MudText>
+                    <MudSpacer />
+                    <MudTooltip Text="Actualizar" Arrow="true" Placement="Placement.Left" Color="Color.Default">
+                        <MudIconButton ButtonType="ButtonType.Button" Disabled="@(_loading)" Icon="@Icons.Material.Filled.Refresh" Variant="Variant.Outlined" Color="Color.Default" Size="Size.Small" @onclick="@(async () =>await Refresh())" />
+                    </MudTooltip>
+                </MudToolBar>
+            </MudItem>
+        </MudGrid>
+
+    </MudCardContent>
+
+</MudCard>
+
+<MudTable HorizontalScrollbar="false" FixedHeader="false" FixedFooter="false" Elevation="25" @ref="_table" Striped="true" SortLabel="name" LoadingProgressColor="Color.Primary" Dense="true" Hover="true" ServerData="@(new Func<TableState, Task<TableData<AigService>>>(DoFetchData))">
+    <HeaderContent>
+        <MudTh><MudInputLabel Style="width:40px !important">Servicio</MudInputLabel></MudTh>
+        <MudTh><MudInputLabel Style="width:100px !important">Host</MudInputLabel></MudTh>
+        <MudTh><MudInputLabel Style="width:40px !important">Https</MudInputLabel></MudTh>
+        <MudTh><MudInputLabel Style="width:250px !important">Última Ejecución</MudInputLabel></MudTh>
+        <MudTh><MudInputLabel Style="width:250px !important">Período de actualización</MudInputLabel></MudTh>
+        <MudTh></MudTh>
+    </HeaderContent>
+    <RowTemplate>
+
+        <MudTd DataLabel="Servicio">@context.Code</MudTd>
+        <MudTd DataLabel="Host">@context.Host</MudTd>
+        <MudTd DataLabel="Https">
+            @if (@context.Https)
+            {
+                <MudIcon style="font-size: 20px;color:#1BC5BD" Icon="@Icons.Material.Filled.CheckBox" />
+
+            }
+            else
+            {
+                <MudIcon style="font-size: 20px;color:#EE2D41" Icon="@Icons.Material.Filled.DisabledByDefault" />
+
+            }
+        </MudTd>
+        <MudTd DataLabel="Última Ejecución">
+            @if (context.LastRun == null)
+            {
+                @("-")
+            }
+            else
+            {
+                <MudBadge Content="@(string.Format("{0:dd/MM/yyyy hh:mm tt}", context.LastRun))" Color="Color.Tertiary" Overlap="true" Class="mx-2 my-2">
+                </MudBadge>
+            }
+        </MudTd>
+        <MudTd DataLabel="Período de actualización">@(context.UpdateTime == 1 ? $"1 hora" : $"{context.UpdateTime} horas")</MudTd>
+            <MudTd>
+                <MudMenu Icon="@Icons.Material.Filled.Settings" Color="Color.Default">
+                    <MudMenuItem Icon="@Icons.Material.Filled.Edit" OnClick="@(() => Edit(@context.Id))" OnTouch="@(() => Edit(@context.Id))">Editar</MudMenuItem>
+                </MudMenu>
+            </MudTd>
+        </RowTemplate>
+
+        <NoRecordsContent>
+            <MudText>No se encontraron elementos</MudText>
+        </NoRecordsContent>
+        <LoadingContent>
+            <MudText>Cargando...</MudText>
+        </LoadingContent>
+      
+    </MudTable>
+
+    @code {
+
+    private PaginatedResult<AigService> _paginatedResult;
+    private static IEnumerable<AigService> List { get; set; }
+    private MudTable<AigService> _table;
+    protected bool _loading = false;
+    protected async override Task OnInitializedAsync()
+    {
+        base.OnInitialized();
+    }
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender) { }
+    }
+
+    private async Task RefresView(bool state)
+    {
+        _loading = state;
+        await this.InvokeAsync(StateHasChanged);
+    }
+
+
+    private async Task<TableData<AigService>> DoFetchData(TableState state)
+    {
+        var result = new TableData<AigService>();
+        await RefresView(true);
+        var args = new PageArgs()
+            {
+                PageIndex = state.Page + 1,
+                PageSize = state.PageSize,
+            };
+        _paginatedResult = await _manager.SearchAsync(args);
+        List = _paginatedResult.Data.ToList();
+        result = new TableData<AigService>() { TotalItems = _paginatedResult.TotalCount, Items = _paginatedResult.Data };
+        await RefresView(false);
+        return result;
+    }
+
+    private async Task Edit(long id = 0)
+    {
+        var parameters = new DialogParameters { ["_id"] = id };
+        var options = new DialogOptions { CloseButton = true, MaxWidth = MaxWidth.Small, FullWidth = true, DisableBackdropClick = true };
+        var dialog = _dialogService.Show<Edit>("Editar ", parameters, options);
+        var result = await dialog.Result;
+        if (!result.Cancelled)
+        {
+            await _table.ReloadServerData();
+            await _bus.Publish(true);
+        }
+    }
+    private async Task Refresh()
+    {
+        await _table.ReloadServerData();
+    }
+
+}

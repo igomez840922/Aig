@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using Aig.Farmacoterapia.Domain.Common;
 using Aig.Farmacoterapia.Domain.Interfaces;
 using Aig.Farmacoterapia.Domain.Specifications.Base;
+using Aig.Farmacoterapia.Infrastructure.Extensions;
 using Microsoft.EntityFrameworkCore;
 
 namespace Aig.Farmacoterapia.Infrastructure.Persistence.Repositories
@@ -48,7 +50,7 @@ namespace Aig.Farmacoterapia.Infrastructure.Persistence.Repositories
         {
             return await _dbContext.Set<T>().FindAsync(id);
         }
-      
+
         public async Task<List<T>> GetPagedResponseAsync(int pageNumber, int pageSize)
         {
             return await _dbContext
@@ -59,12 +61,17 @@ namespace Aig.Farmacoterapia.Infrastructure.Persistence.Repositories
                 .ToListAsync();
         }
 
-        //public async Task<T> UpdateAsync(T entity)
-        //{
-        //    var exist = _dbContext.Set<T>().Find(entity.Id);
-        //    _dbContext.Entry(exist).CurrentValues.SetValues(entity);
-        //    return entity;
-        //}
+        public async Task<PaginatedResult<T>> GetPagedResponseAsync(PageArgs args, Tuple<SortingOption, Expression<Func<T, object>>> order)
+        {
+            var result = await _dbContext.Set<T>().OrderBy(order).PaginatedByAsync(args.PageIndex, args.PageSize);
+            return result;
+        }
+        public async Task<PaginatedResult<IEntity>> GetPagedResponseAsync(PageArgs args, Tuple<SortingOption, Expression<Func<T, object>>> order, ISpecification<IEntity> filter)
+        {
+            var result = await _dbContext.Set<T>().OrderBy(order).WhereBy(filter).PaginatedByAsync(args.PageIndex, args.PageSize);
+            return result;
+        }
+
         public async Task<T> UpdateAsync(T entity)
         {
             var result = _dbContext.Set<T>().Update(entity);

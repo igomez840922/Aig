@@ -9,7 +9,6 @@ namespace Aig.Farmacoterapia.Domain.Interfaces.Integration
 {
     public interface ISysFarmService
     {
-        Task<SysFarmResponse?> GetAllRecords(CancellationToken cancellationToke = default);
-        Task<SysFarmResponse> GetRecordsAfterDate(string date, CancellationToken cancellationToke = default);
+        Task<SysFarmResponse> GetRecords(CancellationToken cancellationToke = default);
     }
 }

@@ -1,0 +1,171 @@
+﻿@attribute [Authorize]
+@using Aig.Farmacoterapia.Domain.Entities.Studies
+@using Aig.Farmacoterapia.Domain.Entities.Studies.Enums
+@using Aig.Farmacoterapia.Wasm.Client.Extensions
+@using Aig.Farmacoterapia.Wasm.Client.Infrastructure.Managers.Codes
+@using Aig.Farmacoterapia.Wasm.Client.Validation
+@using Aig.Farmacoterapia.Domain.Common
+@using Aig.Farmacoterapia.Domain.Entities
+@using Aig.Farmacoterapia.Domain.Entities.Enums
+@using Aig.Farmacoterapia.Domain.Extensions
+@using Aig.Farmacoterapia.Domain.Identity
+@using Aig.Farmacoterapia.Domain.Interfaces
+@using Blazored.FluentValidation
+@using System.Globalization
+@using System.Security.Claims
+@using Aig.Farmacoterapia.Domain.Entities.Products;
+@inject IAigServiceManager _manager;
+<style>
+    .mud-dialog {
+        max-height: calc(107vh - var(--mud-appbar-height));
+        overflow-y: auto;
+    }
+    .mud-checkbox > .mud-icon-button {
+        padding: 12px 12px 12px 0 !important;
+    }
+</style>
+<EditForm Model="@_modelData" OnValidSubmit=@(async () => await SubmitAsync())>
+    <FluentValidationValidator @ref="_fluentValidation" Options="@(options => options.IncludeAllRuleSets())" />
+    <MudDialog>
+        <TitleContent>
+            <MudText Typo="Typo.h6">
+
+                <MudText Typo="Typo.h6">
+                    <MudIcon Icon="@Icons.Material.Filled.Edit" Class="mr-3 mb-n1" />
+                     Configuración
+                </MudText>
+
+            </MudText>
+        </TitleContent>
+        <DialogContent>
+            @if (_loading)
+            {
+                <div style="margin-left:45% !important;">
+                    <MudProgressCircular Size="Size.Large" Color="Color.Primary" Indeterminate="true" />
+                </div>
+            }
+            else
+            {
+                 
+                <MudGrid Style="margin-top:10px !important">
+                    <MudItem xs="12">
+                        <MudGrid>
+
+                            <MudItem xs="12" md="6" Style="padding:4px !important">
+                                <MudTextField Disabled="true" Variant="Variant.Outlined" Margin="Margin.Dense" For="@(() => _modelData.Code)" @bind-Value="_modelData.Code" Label="Código" />
+                            </MudItem>
+
+                            <MudItem xs="12" md="6" Style="padding:4px !important">
+                                <MudTextField Label="Host" Margin="Margin.Dense" Variant="Variant.Outlined" @bind-Value="_modelData.Host"/>
+                            </MudItem>
+                            
+                            <MudItem xs="12" md="6" Style="padding:4px !important">
+                                <MudDatePicker DisableToolbar="true" Culture="@CultureInfo.GetCultureInfo("es-Es")" DateFormat="dd/MM/yyyy" Style="border: 1px solid #bbbfc7;padding: 3px 8px 3px 8px;border-radius: 4px;" Label="Última Ejecución" @bind-Date="_modelData.LastRun" />
+                                <ValidationMessage For="@(() => _modelData.LastRun)" />
+                            </MudItem>
+
+                            <MudItem xs="12" md="6" Style="padding:4px !important">
+                                <MudTimePicker Label="Hora" AmPm="true" Style="border: 1px solid #bbbfc7;padding: 3px 8px 3px 8px;border-radius: 4px;" @bind-Time="_lastTimeRun" />
+                            </MudItem>
+
+                            <MudItem xs="12" md="6" Style="padding: 15px 4px 4px 4px !important;">
+                                <MudTextField Label="Período de actualización (Segundos)" Margin="Margin.Dense" Variant="Variant.Outlined" @bind-Value="_modelData.UpdateTime" />
+                            </MudItem>
+
+                            <MudItem xs="12" md="6" Style="padding: 15px 4px 4px 4px !important;">
+                                <MudCheckBox @bind-Checked="_modelData.Https" Label="Esquema HTTPS?" Color="Color.Primary"></MudCheckBox>
+                            </MudItem>
+
+                        </MudGrid>
+                    </MudItem>
+                </MudGrid>
+
+            }
+
+        </DialogContent>
+        <DialogActions>
+            <MudButton ButtonType="ButtonType.Button" Variant="Variant.Filled" Color="Color.Default" OnClick="()=>Cancel()">Cancel</MudButton>
+            <MudButton Disabled="@(!Validate())" ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Primary">Guardar</MudButton>
+        </DialogActions>
+    </MudDialog>
+</EditForm>
+
+@code {
+
+    [CascadingParameter] private MudDialogInstance MudDialog { get; set; }
+    private FluentValidationValidator _fluentValidation;
+    private AigService _modelData = new AigService();
+    public TimeSpan? _lastTimeRun { get; set; }
+    [Parameter] public long _id { get; set; } = 0;
+    private bool _validated => Validate();
+    bool _loading = false;
+    private ClaimsPrincipal _user;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadDataAsync();
+        base.OnInitialized();
+    }
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {    _user = await _authenticationManager.CurrentUser();
+            Validate();
+        }
+    }
+    private bool Validate() => _fluentValidation.Validate();
+
+    private async Task RefresView()
+    {
+        await this.InvokeAsync(StateHasChanged);
+    }
+
+    protected async Task SubmitAsync()
+    {
+        if (Validate())
+        {
+            _modelData.LastRun=_modelData.LastRun.Value.Add(_lastTimeRun.Value);
+            var response = await _manager.UpdateAsync(_modelData);
+            if (response.Succeeded)
+                MudDialog.Close();
+            foreach (var message in response.Messages){
+                _snackBar.Add(message, response.Succeeded ? Severity.Success : Severity.Error);
+            }
+        }
+    }
+
+    public void Cancel()
+    {
+        MudDialog.Cancel();
+    }
+
+    private async Task LoadDataAsync()
+    {
+        if (_id != 0)
+        {
+            _loading = true;
+            await this.InvokeAsync(StateHasChanged);
+            var response = await _manager.GetAsync(_id);
+            if (response.Succeeded)
+            {
+                _modelData = response.Data;
+                if (_modelData.LastRun == null){
+                    var dt = DateTime.Now;
+                    _modelData.LastRun = dt.Date;
+                    _lastTimeRun = dt.TimeOfDay;
+                }
+                else
+                {
+                    _lastTimeRun = TimeOnly.FromDateTime(_modelData.LastRun.Value).ToTimeSpan();
+                    _modelData.LastRun = _modelData.LastRun.Value.Date;
+                }
+               
+
+            }
+            _loading = false;
+            await this.InvokeAsync(StateHasChanged);
+        }
+
+    }
+
+}

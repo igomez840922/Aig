@@ -27,7 +27,8 @@ SOFTWARE.
     <title>Farmacoterapia</title>
     <base href="/" />
     <link href="css/bootstrap/bootstrap.min.css" rel="stylesheet" />
-    <link href="css/app.css" rel="stylesheet" />
+    <!--<link href="css/app.css" rel="stylesheet" />-->
+    <link href="css/loader-ball.css" rel="stylesheet" />
     <link href="css/loading.css" rel="stylesheet" />
     <link href="_content/MudBlazor/MudBlazor.min.css?v=6.1.4" rel="stylesheet" />
 
@@ -35,7 +36,7 @@ SOFTWARE.
 
 <body>
 
-    <div id="app">
+    <!--<div id="app">
         <div style="position:absolute; top: 45vh; width: 100%; text-align: center">
             <div align="center" class="cssload-fond">
                 <div class="cssload-container-general">
@@ -43,6 +44,18 @@ SOFTWARE.
                     <div class="cssload-internal"><div class="cssload-ballcolor cssload-ball_2"> </div></div>
                     <div class="cssload-internal"><div class="cssload-ballcolor cssload-ball_3"> </div></div>
                     <div class="cssload-internal"><div class="cssload-ballcolor cssload-ball_4"> </div></div>
+                </div>
+            </div>
+        </div>
+    </div>-->
+
+    <div id="app">
+        <div style="position: absolute; top: 45vh; width: 100%; text-align: center; z-index: 10000 !important">
+            <div class="center-body">
+                <div class="loader-ball-49">
+                    <div></div>
+                    <div></div>
+                    <div></div>
                 </div>
             </div>
         </div>
@@ -55,7 +68,7 @@ SOFTWARE.
     </div>
     <script src="_framework/blazor.webassembly.js" autostart="true"></script>
     <script src="_content/MudBlazor/MudBlazor.min.js?v=6.1.4"></script>
-   
+
 
 </body>
 

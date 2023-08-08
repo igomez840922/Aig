@@ -98,7 +98,6 @@ namespace Aig.Farmacoterapia.Wasm.Client.Infrastructure
             public static string DocumentURL(string file) => $"api/studies/documents/{file}";
 
         }
-
         public static class CodesEndpoints
         {
             public static string Search = "api/codes/search";
@@ -111,6 +110,11 @@ namespace Aig.Farmacoterapia.Wasm.Client.Infrastructure
         {
             public static string NoteReportURL(long studyId) => $"api/report/{studyId}";
         }
-
+        public static class AigServiceEndpoints
+        {
+            public static string Search = "api/services/search";
+            public static string Update = "api/services/update";
+            public static string Get(long id) => $"api/services/service/{id}";
+        }
     }
 }
