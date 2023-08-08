@@ -96,6 +96,7 @@
         <MudTh><MudInputLabel Style="width:100px !important">Host</MudInputLabel></MudTh>
         <MudTh><MudInputLabel Style="width:40px !important">Https</MudInputLabel></MudTh>
         <MudTh><MudInputLabel Style="width:250px !important">Última Ejecución</MudInputLabel></MudTh>
+        <MudTh><MudInputLabel Style="width:100px !important">Registros</MudInputLabel></MudTh>
         <MudTh><MudInputLabel Style="width:250px !important">Período de actualización</MudInputLabel></MudTh>
         <MudTh></MudTh>
     </HeaderContent>
@@ -122,11 +123,24 @@
             }
             else
             {
-                <MudBadge Content="@(string.Format("{0:dd/MM/yyyy hh:mm tt}", context.LastRun))" Color="Color.Tertiary" Overlap="true" Class="mx-2 my-2">
+                <MudBadge Content="@(string.Format("{0:dd/MM/yyyy hh:mm:ss tt}", context.LastRun))" Color="Color.Tertiary" Overlap="true" Class="mx-2 my-2">
                 </MudBadge>
             }
         </MudTd>
-        <MudTd DataLabel="Período de actualización">@(context.UpdateTime == 1 ? $"1 hora" : $"{context.UpdateTime} horas")</MudTd>
+        <MudTd DataLabel="Registros">
+            @if (context.LastRetrieved == 0)
+            {
+                <MudBadge Content="@context.LastRetrieved" Color="Color.Error" Overlap="true" Class="mx-2 my-2">
+                 </MudBadge>
+            }
+            else
+            {
+                <MudBadge Content="@context.LastRetrieved" Color="Color.Primary" Overlap="true" Class="mx-2 my-2">
+                </MudBadge>
+            }
+           
+        </MudTd>
+        <MudTd DataLabel="Período de actualización">@(context.UpdateTime == 1 ? $"1 segundo" : $"{context.UpdateTime} segundos")</MudTd>
             <MudTd>
                 <MudMenu Icon="@Icons.Material.Filled.Settings" Color="Color.Default">
                     <MudMenuItem Icon="@Icons.Material.Filled.Edit" OnClick="@(() => Edit(@context.Id))" OnTouch="@(() => Edit(@context.Id))">Editar</MudMenuItem>

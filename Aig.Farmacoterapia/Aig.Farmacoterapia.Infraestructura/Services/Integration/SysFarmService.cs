@@ -213,7 +213,8 @@ namespace Aig.Farmacoterapia.Infrastructure.Services.Integration
             AigService? item;
             if ((item = _unitOfWork.Repository<AigService>().Entities.FirstOrDefault(p => p.Code == _code)) != null) {
                 if (item.LastRun == null) return await GetAllRecords(cancellationToke);
-                var request = CreateRequest("api/registros", Method.GET, new Dictionary<string, string> { { "fechaConsulta", item.LastRun?.ToString("yyyy-MM-dd") } });
+                var date = item.LastRun?.ToString("yyyy-MM-dd");
+                var request = CreateRequest("api/registros", Method.GET, new Dictionary<string, string> { { "fechaConsulta", date } });
                 var response = await _requester.ExecuteAsync<Root>(request, cancellationToke);
                 if (!response.IsSuccessful || string.IsNullOrEmpty(response.Content) || response.Data == null){
                     _logger.Error(new Exception(response.Content).ToMessageAndCompleteStacktrace());
@@ -222,6 +223,7 @@ namespace Aig.Farmacoterapia.Infrastructure.Services.Integration
                 else
                 {
                     item.LastRun = DateTime.Now;
+                    item.LastRetrieved = response.Data.Cantidad;
                     await _unitOfWork.Repository<AigService>().UpdateAsync(item);
                     await _unitOfWork.CommitAsync(cancellationToke);
                     return _mapper.Map<SysFarmResponse>(response.Data);
@@ -243,6 +245,7 @@ namespace Aig.Farmacoterapia.Infrastructure.Services.Integration
                     AigService? item;
                     if ((item = _unitOfWork.Repository<AigService>().Entities.FirstOrDefault(p => p.Code == _code)) != null) {
                         item.LastRun = DateTime.Now;
+                        item.LastRetrieved = response.Data.Cantidad;
                         await _unitOfWork.Repository<AigService>().UpdateAsync(item);
                         await _unitOfWork.CommitAsync(cancellationToke);
                     }

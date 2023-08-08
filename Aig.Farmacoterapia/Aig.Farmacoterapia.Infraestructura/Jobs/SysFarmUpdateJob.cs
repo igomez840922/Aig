@@ -1,13 +1,7 @@
-﻿using Aig.Farmacoterapia.Domain.Interfaces;
+﻿using Aig.Farmacoterapia.Domain.Entities.Products;
+using Aig.Farmacoterapia.Domain.Interfaces;
 using Aig.Farmacoterapia.Domain.Interfaces.Integration;
-using Aig.Farmacoterapia.Infrastructure.Persistence;
-using Aig.Farmacoterapia.Infrastructure.Services.Integration;
 using Quartz;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Aig.Farmacoterapia.Infrastructure.Jobs
 {
@@ -29,27 +23,19 @@ namespace Aig.Farmacoterapia.Infrastructure.Jobs
         }
         public async Task Execute(IJobExecutionContext context)
         {
-            _logger.Debug($"Execute SendEmailJob {DateTime.Now}");
-            var result=await _sysFarmService.GetRecords();
-            if (result != null)
+            _logger.Debug($"Execute SYSFARM Update Job {string.Format("{0:dd/MM/yyyy hh:mm:ss tt}", DateTime.Now)}");
+            var result = await _sysFarmService.GetRecords();
+            if (result?.Status==true && result?.Registros.Count>0)
             {
                 await _unitOfWork.ExecuteInTransactionAsync(async (cc) => {
                     await _unitOfWork.BeginTransactionAsync(cc);
-                    //if (await _accountRepository.UpdateAsync(account, cc) &&
-                    //    await _remittanceApprovalEventRepository.DeleteEventByUserIdAsync(account.Id, cc))
-                    //{
-                    //    if (await _unitOfWork.CommitAsync(cc))
-                    //    {
-                    //        //Send push notification
-                    //        await SendPushNotificationAsync(account.Username, account.RemittanceApproval.Metadata.AcceptLanguage ?? "en", account.RemittanceApproval.Status, cc);
-                    //        //Send sms notification
-                    //        await SendSmsNotificationAsync(account.PhoneNumber, account.RemittanceApproval.Metadata.AcceptLanguage ?? "en", account.RemittanceApproval.Status, cc);
-                    //        //Send support notification
-                    //        await SendSupportNotificationAsync(account.Username, account.RemittanceApproval.Status, cc);
-                    //        //Send Log notification
-                    //        await _logger.LogAsync(this, LogType.Alert, $"Approved User Notification {account.Username}", cancellationToken: cc);
-                    //    }
-                    //}
+                    foreach (var item in result.Registros){
+                        AigRecord record;
+                        if ((record = _unitOfWork.Repository<AigRecord>().Entities.FirstOrDefault(p => p.IdProducto == item.IdProducto)) != null)
+                            item.Id = record.Id;
+                        await _unitOfWork.Repository<AigRecord>().UpdateAsync(item);
+                    }
+                    var commit = await _unitOfWork.CommitAsync(cc);
                 }, default);
             }
             return;

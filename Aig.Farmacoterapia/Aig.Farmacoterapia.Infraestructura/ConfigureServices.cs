@@ -302,8 +302,7 @@ namespace Aig.Farmacoterapia.Infrastructure
                 .ForJob(jobKey)
                 .WithIdentity($"{jobKey}-trigger")
                 .WithSimpleSchedule(x => x
-                    .WithIntervalInHours(24)
-                    .WithIntervalInSeconds(24)
+                    .WithIntervalInSeconds(interval)
                     .RepeatForever())
                 //.WithCronSchedule(cron)
             );
@@ -311,9 +310,10 @@ namespace Aig.Farmacoterapia.Infrastructure
 
         public static IServiceCollection AddQuartz(this IServiceCollection services)
         {
-            var sysFarmInterval = 1;var sirFadInterval = 1;
+            var sysFarmInterval = 5;var sirFadInterval = 5;
             var scopeFactory = services.BuildServiceProvider().GetRequiredService<IServiceScopeFactory>();
-            using (var scope = scopeFactory.CreateScope()){
+            using (var scope = scopeFactory.CreateScope())
+            {
                 var unitOfWork = scope.ServiceProvider.GetService<IUnitOfWork>();
                 AigService? item;
                 if ((item = unitOfWork?.Repository<AigService>().Entities.SingleOrDefault(p => p.Code == "SYSFARM")) != null)
