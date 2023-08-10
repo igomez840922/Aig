@@ -1,11 +1,12 @@
 ﻿using Aig.Farmacoterapia.Domain.Entities.Products;
 using Aig.Farmacoterapia.Domain.Interfaces;
 using Aig.Farmacoterapia.Domain.Interfaces.Integration;
+using Microsoft.EntityFrameworkCore;
 using Quartz;
 
 namespace Aig.Farmacoterapia.Infrastructure.Jobs
 {
-    [DisallowConcurrentExecution]
+    [Quartz.DisallowConcurrentExecutionAttribute()]
     public class SysFarmUpdateJob : IJob
     {
         private readonly IUnitOfWork _unitOfWork;
@@ -31,8 +32,13 @@ namespace Aig.Farmacoterapia.Infrastructure.Jobs
                     await _unitOfWork.BeginTransactionAsync(cc);
                     foreach (var item in result.Registros){
                         AigRecord record;
-                        if ((record = _unitOfWork.Repository<AigRecord>().Entities.FirstOrDefault(p => p.IdProducto == item.IdProducto)) != null)
+                        if ((record = _unitOfWork.Repository<AigRecord>().Entities.AsNoTracking().FirstOrDefault(p => p.RecordId == item.RecordId)) != null)
+                        {
                             item.Id = record.Id;
+                            item.DataSheetURL = record.DataSheetURL;
+                            item.ProspectusURL = record.ProspectusURL;
+                            item.PictureData = record.PictureData;
+                        }
                         await _unitOfWork.Repository<AigRecord>().UpdateAsync(item);
                     }
                     var commit = await _unitOfWork.CommitAsync(cc);

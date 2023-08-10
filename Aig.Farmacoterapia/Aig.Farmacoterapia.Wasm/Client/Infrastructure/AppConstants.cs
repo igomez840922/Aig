@@ -116,5 +116,15 @@ namespace Aig.Farmacoterapia.Wasm.Client.Infrastructure
             public static string Update = "api/services/update";
             public static string Get(long id) => $"api/services/service/{id}";
         }
+
+        public static class AigRecordManagerEndpoints
+        {
+            public static string AdminSearch = "api/record/adminsearch";
+            public static string Update = "api/record/update";
+            public static string Delete = $"api/record/delete";
+            public static string Get(long id)=> $"api/record/{id}";
+            public static string DataSheetURL(string file) => $"api/record/datasheet/{file}";
+            public static string ProspectusURL(string file) => $"api/record/prospectus/{file}";
+        }
     }
 }

@@ -6,6 +6,7 @@
 @using System.Globalization
 @using Aig.Farmacoterapia.Domain.Common
 @using Aig.Farmacoterapia.Domain.Entities
+@using Aig.Farmacoterapia.Domain.Entities.Products;
 @using Aig.Farmacoterapia.Domain.Interfaces
 @using Aig.Farmacoterapia.Infrastructure.Application
 @using Aig.Farmacoterapia.Infrastructure.Configuration
@@ -15,7 +16,6 @@
 @using Microsoft.AspNetCore.WebUtilities
 @using Microsoft.Extensions.Options
 @inject ISystemLogger _systemLogger;
-@inject IMedicamentRepository _repository;
 @inject IOptions<AppConfiguration> _config;
 @inject NavigationManager _navigation;
 @inject AppState _appState;
@@ -86,15 +86,15 @@
                                         <div class="product-text">
 
                                             <h4>
-                                                <a target="_blank" href="/details/@context.Id">@context.Nombre</a>
+                                                <a target="_blank" href="/details/@context.Id">@context.Producto?.Nombre</a>
                                             </h4>
 
                                             <span>
-                                                @context.Principio
+                                                @context.Producto.PrincipioActivo
                                             </span>
 
                                             <h5>
-                                                @(!string.IsNullOrEmpty(@context.FormaFarmaceutica?.Nombre) ? @context.FormaFarmaceutica?.Nombre : "-")
+                                                @(!string.IsNullOrEmpty(@context.Producto.FormaFarmaceutica) ? @context.Producto.FormaFarmaceutica : "-")
                                             </h5>
 
                                         </div>
@@ -116,13 +116,13 @@
 
     protected bool loading { get; set; } = true;
     private MudPagination _mudPagination;
-    private PaginatedResult<AigMedicamento> paginatedResult;
+    private PaginatedResult<AigRecord> paginatedResult;
     public string customstr { get; set; } = "OR";
     protected async override Task OnInitializedAsync()
     { 
         _appState.OnChange-= SerachTextHasChanged;
         _appState.OnChange+= SerachTextHasChanged;
-        paginatedResult = new PaginatedResult<AigMedicamento>(){PageSize=18};
+        paginatedResult = new PaginatedResult<AigRecord>() { PageSize = 18 };
         await DoFetchData();
         base.OnInitialized();
     }

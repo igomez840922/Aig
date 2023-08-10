@@ -7,6 +7,7 @@
 @using Aig.Farmacoterapia.Application.Medicament.Model
 @using Aig.Farmacoterapia.Domain.Common
 @using Aig.Farmacoterapia.Domain.Entities
+@using Aig.Farmacoterapia.Domain.Entities.Products;
 @using Aig.Farmacoterapia.Domain.Interfaces
 @using Aig.Farmacoterapia.Infrastructure.Configuration
 @using Aig.Farmacoterapia.Public.Extensions
@@ -19,8 +20,9 @@
 @inject NavigationManager _navigation;
 <style>
     .product-details-wrapper {
-    padding-left: 0px !important;
-}
+        padding-left: 0px !important;
+    }
+
     .product-details-img {
         border: none !important;
         padding: 20px !important;
@@ -32,7 +34,7 @@
     }
 
     .product-details-wrapper .product-text h4 {
-      font-size: 20px !important;
+        font-size: 20px !important;
     }
 
     .mud-dialog {
@@ -44,13 +46,13 @@
 
 @if (loading)
 {
-   <MudOverlay Visible="loading" LightBackground="true" Absolute="true">
-    <MudProgressCircular Size="Size.Large" Color="Color.Default" Indeterminate="true" />
-  </MudOverlay>
+    <MudOverlay Visible="loading" LightBackground="true" Absolute="true">
+        <MudProgressCircular Size="Size.Large" Color="Color.Default" Indeterminate="true" />
+    </MudOverlay>
 }
 else
 {
-   <div class="container" style="border: 1px solid #e4e4e4 !important; padding: 20px">
+    <div class="container" style="border: 1px solid #e4e4e4 !important; padding: 20px">
 
         <div class="col-xl-12 col-lg-12">
             <div class="pro-ful-tab">
@@ -79,6 +81,7 @@ else
                             </div>
                         </div>
                     </div>
+
                     <div class="col-xl-8 col-lg-8">
                         <div class="product-details-wrapper">
                             <div class="product-text">
@@ -86,27 +89,27 @@ else
                                 <div class="container">
                                     <div class="row">
 
-                                      
+
                                         <div class="col-12">
                                             <div class="f-right">
 
                                                 @if (!string.IsNullOrEmpty(item?.DataSheetURL))
-                                                    {
+                                                {
 
-                                                      <a style="padding: 10px;font-size: 16px;" target="_blank" title="Monografía" href="@($"{_config.Value?.BaseUrl}api/medicament/datasheet/{item.DataSheetURL}")">
-                                                            <i style="color: #4e97fd !important;font-size: 25px !important;" class="fa fa-file-pdf"></i>
-                                                            Monografía
-                                                        </a>
+                                                    <a style="padding: 10px;font-size: 16px;" target="_blank" title="Monografía" href="@($"{_config.Value?.BaseUrl}api/medicament/datasheet/{item.DataSheetURL}")">
+                                                        <i style="color: #4e97fd !important;font-size: 25px !important;" class="fa fa-file-pdf"></i>
+                                                        Monografía
+                                                    </a>
 
-                                                    }
-                                                    @if (!string.IsNullOrEmpty(item?.ProspectusURL))
-                                                    {
-                                                         <a style="padding: 10px;font-size: 16px;" target="_blank" title="Prospecto" href="@($"{_config.Value?.BaseUrl}api/medicament/prospectus/{item.ProspectusURL}")">
-                                                           <i  style="color: #4e97fd !important;font-size: 25px !important;" class="fa fa-file-powerpoint"></i>
-                                                            Prospecto
-                                                        </a>
-                                                    }
-   
+                                                }
+                                                @if (!string.IsNullOrEmpty(item?.ProspectusURL))
+                                                {
+                                                    <a style="padding: 10px;font-size: 16px;" target="_blank" title="Prospecto" href="@($"{_config.Value?.BaseUrl}api/medicament/prospectus/{item.ProspectusURL}")">
+                                                        <i style="color: #4e97fd !important;font-size: 25px !important;" class="fa fa-file-powerpoint"></i>
+                                                        Prospecto
+                                                    </a>
+                                                }
+
                                             </div>
                                         </div>
 
@@ -115,35 +118,35 @@ else
 
                                         <div class="col-12">
                                             <div class="pro-02-list-info f-left">
-                                                @if (!string.IsNullOrEmpty(item?.NumReg))
+                                                @if (!string.IsNullOrEmpty(item?.Numero))
                                                 {
                                                     <h5 style="color: #e4573d !important;">
-                                                        @($"Reg. {item.NumReg}")
+                                                        @($"Reg. {item.Numero}")
                                                     </h5>
                                                 }
                                                 <h4>
-                                                    @if (@item.Vigente)
-                                                    {
-                                                        <span title="Vigente" class="fa fa-check-circle" aria-hidden="true" style="cursor: pointer;font-size: 20px;margin-right:7px;">
-                                                        </span>
-                                                    }
-                                                    else
-                                                    {
-                                                        <span title="Caducado" class="fa fa-times-circle" aria-hidden="true" style="cursor: pointer;color: #e4573d !important;font-size: 20px;margin-right:7px">
-                                                        </span>
-                                                    }
-                                                    @item?.Nombre
+                                                    @* @if (@item.Vigente)
+                                                {
+                                                <span title="Vigente" class="fa fa-check-circle" aria-hidden="true" style="cursor: pointer;font-size: 20px;margin-right:7px;">
+                                                </span>
+                                                }
+                                                else
+                                                {
+                                                <span title="Caducado" class="fa fa-times-circle" aria-hidden="true" style="cursor: pointer;color: #e4573d !important;font-size: 20px;margin-right:7px">
+                                                </span>
+                                                }*@
+                                                    @item?.Producto?.Nombre
                                                 </h4>
-                                                @if (@item?.FechaExpiracion != null)
+                                                @if (@item?.FechaVencimiento != null)
                                                 {
                                                     <h5 style="font-size: 12px !important;color: #e4573d !important;">
-                                                        <span style="font-size: 12px !important;color: #e4573d !important;"> Vigencia:</span>
-                                                        @(string.Format("{0:dd/MM/yyyy}",item.FechaExpiracion))
+                                                        @* <span style="font-size: 12px !important;color: #e4573d !important;"> Vigencia:</span>*@
+                                                        @($"{string.Format("{0:dd/MM/yyyy}", item.FechaVencimiento)} ({item?.Estado})")
                                                     </h5>
                                                 }
                                             </div>
                                         </div>
-                                   
+
                                     </div>
                                 </div>
 
@@ -157,13 +160,13 @@ else
                             <div class="container">
 
                                 <div class="row">
-                                    @if (!string.IsNullOrEmpty(item.Principio))
+                                    @if (!string.IsNullOrEmpty(item.Producto?.PrincipioActivo))
                                     {
                                         <div class="col-12">
                                             <div class="pro-02-list-info f-left">
                                                 <span>Principio Activo</span>
                                                 <p>
-                                                    @item?.Principio
+                                                    @item.Producto?.PrincipioActivo
                                                 </p>
 
                                             </div>
@@ -171,7 +174,7 @@ else
                                     }
 
                                 </div>
-                              
+
                             </div>
 
                             <hr style="margin: 0 0 1rem 0 !important;" />
@@ -180,14 +183,14 @@ else
 
                                 <div class="container">
                                     <div class="row">
-                                      
-                                        @if (@item?.ViaAdministracion != null)
+
+                                        @if (!string.IsNullOrEmpty(item.Producto.ViaAdministracion))
                                         {
                                             <div class="col-6">
                                                 <div class="pro-02-list-info f-left">
                                                     <span>Vía de administración</span>
                                                     <p>
-                                                        @item.ViaAdministracion.Nombre
+                                                        @item.Producto.ViaAdministracion
                                                     </p>
                                                 </div>
                                             </div>
@@ -204,28 +207,16 @@ else
                                             <div class="pro-02-list-info f-left">
                                                 <span>Condición de Venta</span>
                                                 <p>
-                                                    @GetSaleCondition(item?.CondicionVenta)
+                                                    @item?.Producto.CondicionVenta
                                                 </p>
 
                                             </div>
                                         </div>
 
-                                      @*  @if (!string.IsNullOrEmpty(item?.TipoMedicamento))
-                                        {
-                                           <div class="col-4">
-                                            <div class="pro-02-list-info f-left">
-                                                <span>Clasificación Med.</span>
-                                                <p>
-                                                    @GetMedicationType(item?.TipoMedicamento)
-                                                </p>
-                                            </div>
-                                           </div>
-                                        }*@
-
                                     </div>
                                 </div>
 
-                              
+
                                 @if (@item?.Fabricante != null)
                                 {
                                     <hr style="margin: 0 0 1rem 0 !important;" />
@@ -239,33 +230,23 @@ else
                                                 <div class="pro-02-list-info f-left">
                                                     <span>Fabricante</span>
                                                     <p>
-                                                        @(!string.IsNullOrEmpty(item.Fabricante.Correo)?$"{item.Fabricante.Nombre} ({item.Fabricante.Correo})":item.Fabricante.Nombre)
+                                                        @(!string.IsNullOrEmpty(item.Fabricante.Correo) ? $"{item.Fabricante.Nombre} ({item.Fabricante.Correo})" : item.Fabricante.Nombre)
                                                     </p>
                                                 </div>
                                             </div>
                                         }
-                                       @* @if (@item?.Fabricante?.Pais != null)
-                                        {
-                                            <div class="col-3">
-                                                <div class="pro-02-list-info f-left">
-                                                    <span>País</span>
-                                                    <p>
-                                                        @item.Fabricante.Pais.Nombre
-                                                    </p>
-                                                </div>
-                                            </div>
-                                        }*@
+
 
                                     </div>
-                                     <div class="row">
-                                       
-                                        @if (@item?.Fabricante?.Pais != null)
+                                    <div class="row">
+
+                                        @if (!string.IsNullOrEmpty(@item?.Fabricante?.Pais))
                                         {
                                             <div class="col-3">
                                                 <div class="pro-02-list-info f-left">
                                                     <span>País</span>
                                                     <p>
-                                                        @item.Fabricante.Pais.Nombre
+                                                        @item.Fabricante.Pais
                                                     </p>
                                                 </div>
                                             </div>
@@ -276,35 +257,21 @@ else
 
 
 
-                                @if (!string.IsNullOrEmpty(item.Concentracion) || !string.IsNullOrEmpty(item.Envase) || !string.IsNullOrEmpty(item.Presentacion))
+                                @if (!string.IsNullOrEmpty(@item?.Producto?.DescripcionEnvase) || item.Presentaciones?.Count > 0 || item.Excipientes?.Count > 0)
                                 {
                                     <hr style="margin: 0 0 1rem 0 !important;" />
                                 }
 
                                 <div class="container">
-                                    <div class="row">
-                                        @if (!string.IsNullOrEmpty(item.Concentracion))
-                                        {
-                                            <div class="col-12">
-                                                <div class="pro-02-list-info f-left">
-                                                    <span>Concentración</span>
-                                                    <p>
-                                                        @item?.Concentracion
-                                                    </p>
 
-                                                </div>
-                                            </div>
-                                        }
-
-                                    </div>
                                     <div class="row">
-                                        @if (!string.IsNullOrEmpty(item.Envase))
+                                        @if (!string.IsNullOrEmpty(@item?.Producto?.DescripcionEnvase))
                                         {
                                             <div class="col-12">
                                                 <div class="pro-02-list-info f-left">
                                                     <span>Descripción del Envase</span>
                                                     <p>
-                                                        @item?.Envase
+                                                        @item?.Producto?.DescripcionEnvase
                                                     </p>
 
                                                 </div>
@@ -313,15 +280,37 @@ else
 
                                     </div>
 
-                                     <div class="row">
-                                        @if (!string.IsNullOrEmpty(item.Presentacion))
+                                    <div class="row">
+                                        @if (item.Presentaciones?.Count > 0)
                                         {
                                             <div class="col-12">
                                                 <div class="pro-02-list-info f-left">
                                                     <span>Presentación</span>
-                                                    <p>
-                                                        @item?.Presentacion
-                                                    </p>
+                                                    <ul>
+                                                        @foreach (var pre in item.Presentaciones)
+                                                        {
+                                                            <li>@($"{pre.Presentacion}({pre.Tipo})")</li>
+                                                        }
+                                                    </ul>
+
+                                                </div>
+                                            </div>
+                                        }
+
+                                    </div>
+
+                                    <div class="row">
+                                        @if (item.Excipientes?.Count > 0)
+                                        {
+                                            <div class="col-12" style="margin-top: 10px;">
+                                                <div class="pro-02-list-info f-left">
+                                                    <span>Excipientes</span>
+                                                    <ul>
+                                                        @foreach (var ex in item.Excipientes)
+                                                        {
+                                                            <li>@($"{ex.Descripcion}({ex.Concentracion})")</li>
+                                                        }
+                                                    </ul>
 
                                                 </div>
                                             </div>
@@ -348,25 +337,26 @@ else
     public int product { get; set; } = 0;
     protected bool loading { get; set; } = true;
     private MudPagination _mudPagination;
-    private AigMedicamento item;
-    private string DataSheetURL=string.Empty;
-    private string ProspectusURL=string.Empty;
+    private AigRecord item;
+    private string DataSheetURL = string.Empty;
+    private string ProspectusURL = string.Empty;
 
     protected async override Task OnInitializedAsync()
     {
         item = await DoFetchData();
-        if (item == null){
-            item = new AigMedicamento();
+        if (item == null)
+        {
+            item = new AigRecord();
             _navigation.NavigateTo("./NotFound");
         }
         base.OnInitialized();
     }
 
-    private async Task<AigMedicamento> DoFetchData()
+    private async Task<AigRecord> DoFetchData()
     {
         loading = true;
         //var result = await _unitOfWork.Repository<AigMedicamento>().GetByIdAsync(product);
-        var result = await _client.GetDetailsAsync(product,_config.Value);
+        var result = await _client.GetDetailsAsync(product, _config.Value);
         loading = false;
         return result.Data;
     }
@@ -379,7 +369,7 @@ else
             "CP" => "Con prescripción médica",
             "UH" => "Uso hospitalario exclusivo",
             "VP" => "Venta popular",
-             _ => string.Empty
+            _ => string.Empty
         };
     }
     private string GetEquivalence(string value)
@@ -390,7 +380,7 @@ else
             "R" => "Medicamento Intercambiable",
             "G" => "Medicamento Genérico",
             "M" => "Medicamento de Marca",
-              _ => string.Empty
+            _ => string.Empty
         };
     }
 
@@ -406,7 +396,7 @@ else
             "FF" => "Fitofármacos",
             "BT" => "Biotecnológicos",
             "BI" => "Biológicos",
-              _ => string.Empty
+            _ => string.Empty
         };
     }
 

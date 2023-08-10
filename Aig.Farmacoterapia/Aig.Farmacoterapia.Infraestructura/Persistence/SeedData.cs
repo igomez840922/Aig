@@ -87,7 +87,8 @@ namespace Aig.Farmacoterapia.Infrastructure.SeedData
                         User = string.Empty,
                         Password = string.Empty,
                         Token = string.Empty,
-                        UpdateTime=1,//3600
+                        UpdateTime=5,
+                        LastRun=null,
                     });
                     _ = await unitOfWork.CommitAsync(default);
                 }
@@ -102,7 +103,8 @@ namespace Aig.Farmacoterapia.Infrastructure.SeedData
                         User = string.Empty,
                         Password = string.Empty,
                         Token = string.Empty,
-                        UpdateTime = 1,//3600
+                        UpdateTime = 5,
+                        LastRun = null
                     });
                     _ = await unitOfWork.CommitAsync(default);
                 }

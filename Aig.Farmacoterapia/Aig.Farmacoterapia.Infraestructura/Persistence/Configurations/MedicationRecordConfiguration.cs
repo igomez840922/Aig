@@ -15,9 +15,11 @@ namespace Aig.Farmacoterapia.Infrastructure.Persistence.Configurations
         public void Configure(EntityTypeBuilder<AigRecord> builder)
         {
             builder.HasKey(k => new { k.Id });
-            builder.Property(e => e.Producto).HasJsonConversion();
-            builder.Property(e => e.Fabricante).HasJsonConversion();
-            builder.Property(e => e.Distribuidor).HasJsonConversion();
+            
+            builder.OwnsOne(o => o.Producto);
+            builder.OwnsOne(o => o.Fabricante);
+            builder.OwnsOne(o => o.Distribuidor);
+
             builder.Property(e => e.Presentaciones).HasJsonConversion();
             builder.Property(e => e.Excipientes).HasJsonConversion();
             builder.Ignore(c => c.ShowDetails);

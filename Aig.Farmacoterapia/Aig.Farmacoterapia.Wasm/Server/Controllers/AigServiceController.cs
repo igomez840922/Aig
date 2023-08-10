@@ -23,7 +23,7 @@ namespace Aig.Farmacoterapia.Api.Controllers
         public async Task<IActionResult> Search([FromBody] PageArgs model) => Ok(await _mediator.Send(new GetAllAigServiceQuery(model)));
 
         [HttpGet("service/{id}")]
-        public async Task<IActionResult> GetStudy(long id) => Ok(await _mediator.Send(new GetAigServiceQuery(id)));
+        public async Task<IActionResult> GetService(long id) => Ok(await _mediator.Send(new GetAigServiceQuery(id)));
         
         [HttpPost("update")]
         public async Task<IActionResult> Update([FromBody] AigService model) => Ok(await _mediator.Send(new EditAigServiceCommand(model)));

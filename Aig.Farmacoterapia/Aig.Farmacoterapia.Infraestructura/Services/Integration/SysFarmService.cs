@@ -8,6 +8,7 @@ using Aig.Farmacoterapia.Infrastructure.Extensions;
 using Aig.Farmacoterapia.Infrastructure.Helpers.ApiClient;
 using Aig.Farmacoterapia.Infrastructure.Persistence;
 using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using Org.BouncyCastle.Asn1.Ocsp;
 using RestSharp;
