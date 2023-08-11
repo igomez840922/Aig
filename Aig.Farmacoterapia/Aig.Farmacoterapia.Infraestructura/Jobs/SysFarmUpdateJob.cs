@@ -34,7 +34,7 @@ namespace Aig.Farmacoterapia.Infrastructure.Jobs
                     foreach (var item in result.Registros)
                     {
                         AigRecord record;
-                        if ((record = _unitOfWork.Repository<AigRecord>().Entities.AsNoTracking().FirstOrDefault(p => p.RecordId == item.RecordId)) != null)
+                        if ((record = _unitOfWork.Repository<AigRecord>().Entities.AsNoTracking().FirstOrDefault(p => p.Numero == item.Numero)) != null)
                         {
                             item.Id = record.Id;
                             item.DataSheetURL = record.DataSheetURL;

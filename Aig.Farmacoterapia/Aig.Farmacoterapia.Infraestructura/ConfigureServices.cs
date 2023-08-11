@@ -313,7 +313,7 @@ namespace Aig.Farmacoterapia.Infrastructure
 
         public static IServiceCollection AddQuartz(this IServiceCollection services)
         {
-            var sysFarmInterval = 5; var sirFadInterval = 5;
+            var sysFarmInterval = 60; var sirFadInterval = 60;
             //var scopeFactory = services.BuildServiceProvider().GetRequiredService<IServiceScopeFactory>();
             //using (var scope = scopeFactory.CreateScope())
             //{

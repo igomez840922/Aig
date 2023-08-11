@@ -26,8 +26,7 @@ namespace Aig.Farmacoterapia.Infrastructure.Jobs
         {
             _logger.Debug($"Execute SIRFAD Update Job {string.Format("{0:dd/MM/yyyy hh:mm:ss tt}", DateTime.Now)}");
             var result = await _service.GetRecords();
-            //if (result?.Status == true && result?.Registros.Count > 0)
-            if (result?.Registros.Count>0)
+            if (result?.Status == true && result?.Registros.Count > 0)
             {
                 await _unitOfWork.ExecuteInTransactionAsync(async (cc) => {
                     await _unitOfWork.BeginTransactionAsync(cc);
