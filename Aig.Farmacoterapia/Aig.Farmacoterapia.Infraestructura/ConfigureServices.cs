@@ -38,6 +38,8 @@ using Aig.Farmacoterapia.Infrastructure.Resiliency;
 using Aig.Farmacoterapia.Infrastructure.Helpers.ApiClient;
 using Microsoft.AspNetCore.Mvc.ApplicationModels;
 using Aig.Farmacoterapia.Domain.Entities.Products;
+using Aig.Farmacoterapia.Infrastructure.Services.Integration.SysFarm;
+using Aig.Farmacoterapia.Infrastructure.Services.Integration.SirFad;
 
 namespace Aig.Farmacoterapia.Infrastructure
 {
@@ -275,6 +277,7 @@ namespace Aig.Farmacoterapia.Infrastructure
             services.AddTransient<ISqlRetryPolicy, SqlRetryPolicy>();
             services.AddTransient<IRestApiClient, RestApiClient>();
             services.AddTransient<ISysFarmService, SysFarmService>();
+            services.AddTransient<ISirFadServices, SirFadServices>();
             services.AddSingleton(typeof(IConverter), new SynchronizedConverter(new PdfTools()));
 
             return services;
@@ -310,7 +313,7 @@ namespace Aig.Farmacoterapia.Infrastructure
 
         public static IServiceCollection AddQuartz(this IServiceCollection services)
         {
-            //var sysFarmInterval = 5;var sirFadInterval = 5;
+            var sysFarmInterval = 5; var sirFadInterval = 5;
             //var scopeFactory = services.BuildServiceProvider().GetRequiredService<IServiceScopeFactory>();
             //using (var scope = scopeFactory.CreateScope())
             //{
@@ -321,13 +324,14 @@ namespace Aig.Farmacoterapia.Infrastructure
             //    if ((item = unitOfWork?.Repository<AigService>().Entities.AsNoTracking().FirstOrDefault(p => p.Code == "SIRFAD")) != null)
             //        sirFadInterval = item.UpdateTime;
             //}
-            //services.AddQuartz(q =>
-            //{
-            //    q.UseMicrosoftDependencyInjectionJobFactory();
-            //    q.AddJob<SysFarmUpdateJob>("SysFarmUpdateJob", sysFarmInterval);
-            //    ///q.AddJob<RecordUpdateJob>("RecordUpdateJob", "0/5 * * * * ?"); // run every 5 seconds
-            //});
-            //services.AddQuartzHostedService(q => q.WaitForJobsToComplete = true);
+            services.AddQuartz(q =>
+            {
+                q.UseMicrosoftDependencyInjectionJobFactory();
+                q.AddJob<SysFarmUpdateJob>("SysFarmUpdateJob", sysFarmInterval);
+                q.AddJob<SirFadUpdateJob>("SirFadUpdateJob", sirFadInterval);
+                //q.AddJob<RecordUpdateJob>("RecordUpdateJob", "0/5 * * * * ?"); // run every 5 seconds
+            });
+            services.AddQuartzHostedService(q => q.WaitForJobsToComplete = true);
 
             return services;
         }

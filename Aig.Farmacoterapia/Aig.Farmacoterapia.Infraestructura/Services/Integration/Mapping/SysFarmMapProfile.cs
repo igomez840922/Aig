@@ -1,15 +1,8 @@
-﻿using Aig.Farmacoterapia.Domain.Common;
-using Aig.Farmacoterapia.Domain.Entities.Products;
+﻿using Aig.Farmacoterapia.Domain.Entities.Products;
 using Aig.Farmacoterapia.Domain.Integration.SysFarm;
 using Aig.Farmacoterapia.Infrastructure.Services.Integration.Mapping.MappingActions;
-using Aig.Farmacoterapia.Infrastructure.Services.Integration.Mapping.ValuesResolver;
+using Aig.Farmacoterapia.Infrastructure.Services.Integration.SysFarm;
 using AutoMapper;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Text.Json.Serialization;
-using System.Threading.Tasks;
 
 namespace Aig.Farmacoterapia.Infrastructure.Services.Integration.Mapping
 {
@@ -25,7 +18,6 @@ namespace Aig.Farmacoterapia.Infrastructure.Services.Integration.Mapping
             CreateMap<Registro, AigRecord>()
                 .ForMember(x => x.Id, opt => opt.Ignore())
                 .ForMember(p => p.RecordId, p => p.MapFrom(s => s.Id))
-                //.ForMember(dest => dest.FechaExpedicion, opt => opt.MapFrom<DateTimeResolver>())
                 .ForMember(dest => dest.Producto, opt => opt.MapFrom((source, destination, member, context) =>
                     new AigMedication()
                     {
@@ -40,8 +32,7 @@ namespace Aig.Farmacoterapia.Infrastructure.Services.Integration.Mapping
 
                     }))
                 .ForMember(dest => dest.Fabricante, opt => opt.MapFrom((source, destination, member, context) =>
-                        new AigMaker()
-                        {
+                        new AigMaker() {
                             Nombre = source.Fabricante?.Nombre,
                             Direccion = source.Fabricante?.Direccion,
                             Correo = source.Fabricante?.Correo,
@@ -50,13 +41,12 @@ namespace Aig.Farmacoterapia.Infrastructure.Services.Integration.Mapping
                             PaisISO3 = source.Fabricante?.PaisISO3,
                         }))
                 .ForMember(dest => dest.Distribuidor, opt => opt.MapFrom((source, destination, member, context) =>
-                        new Distribuidor()
-                        {
+                        new Distribuidor(){
                             NombreDistribuidorNacional = source.Distribuidor?.NombreDistribuidorNacional,
                             NombreTitular = source.Distribuidor?.NombreTitular,
                             NombreAcondicionadorPrimario = source.Distribuidor?.NombreAcondicionadorPrimario,
                             NombreAcondicionadorSecundario = source.Distribuidor?.NombreAcondicionadorSecundario,
-                        })).AfterMap<DateTimeMappingAction>();
+                        })).AfterMap<SysFarmMappingAction>();
             CreateMap<Root, SysFarmResponse>();
         }
     }

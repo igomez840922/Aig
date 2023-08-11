@@ -16,7 +16,7 @@ namespace Aig.Farmacoterapia.Infrastructure.Configuration
         public string? User { get; set; } = string.Empty;
         public string? Password { get; set; } = string.Empty;
     }
-    public class DNFDConfiguration : SysFarmConfiguration
+    public class SirFadConfiguration: SysFarmConfiguration
     {
        
     }

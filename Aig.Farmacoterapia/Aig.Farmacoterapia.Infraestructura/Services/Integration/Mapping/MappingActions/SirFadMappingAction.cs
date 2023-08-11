@@ -1,4 +1,5 @@
 ﻿using Aig.Farmacoterapia.Domain.Entities.Products;
+using Aig.Farmacoterapia.Infrastructure.Services.Integration.SirFad;
 using AutoMapper;
 using System;
 using System.Collections.Generic;
@@ -9,9 +10,9 @@ using System.Threading.Tasks;
 
 namespace Aig.Farmacoterapia.Infrastructure.Services.Integration.Mapping.MappingActions
 {
-    public class DateTimeMappingAction : IMappingAction<Registro, AigRecord>
+    public class SirFadMappingAction : IMappingAction<Registro, AigRecord>
     {
-        public DateTimeMappingAction() { }
+        public SirFadMappingAction() { }
         public void Process(Registro source, AigRecord destination, ResolutionContext context)
         {
             destination.FechaExpedicion = DateTime.ParseExact(source.FechaExpedicion, "yyyy-MM-dd", CultureInfo.InvariantCulture);

@@ -1,27 +1,15 @@
-﻿using Aig.Farmacoterapia.Domain.Common;
-using Aig.Farmacoterapia.Domain.Entities.Products;
+﻿using Aig.Farmacoterapia.Domain.Entities.Products;
 using Aig.Farmacoterapia.Domain.Integration.SysFarm;
 using Aig.Farmacoterapia.Domain.Interfaces;
 using Aig.Farmacoterapia.Domain.Interfaces.Integration;
 using Aig.Farmacoterapia.Infrastructure.Configuration;
 using Aig.Farmacoterapia.Infrastructure.Extensions;
 using Aig.Farmacoterapia.Infrastructure.Helpers.ApiClient;
-using Aig.Farmacoterapia.Infrastructure.Persistence;
 using AutoMapper;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Options;
-using Org.BouncyCastle.Asn1.Ocsp;
 using RestSharp;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Text.Json.Serialization;
-using System.Threading.Tasks;
-using static Humanizer.In;
-using static log4net.Appender.RollingFileAppender;
 
-namespace Aig.Farmacoterapia.Infrastructure.Services.Integration
+namespace Aig.Farmacoterapia.Infrastructure.Services.Integration.SysFarm
 {
     public class Distribuidor
     {
