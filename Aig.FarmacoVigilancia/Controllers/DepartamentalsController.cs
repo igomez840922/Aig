@@ -270,6 +270,7 @@ namespace Aig.FarmacoVigilancia.Controllers
 
                 data.Adjunto = data.Adjunto != null ? data.Adjunto : new AttachmentData() { };
                 data.Adjunto.LAttachments = data.Adjunto.LAttachments?.Count > 0 ? data.Adjunto.LAttachments : new List<AttachmentTB>();
+                data.Adjunto.LAttachments.Clear();
                 if (model.LAdjuntos?.Count > 0)
                 {
                     foreach (var item in model.LAdjuntos)

@@ -607,20 +607,24 @@ namespace Aig.Auditoria.Services
                                     columns.RelativeColumn(1);
                                     columns.RelativeColumn(1);
                                     columns.RelativeColumn(1);
+                                    columns.RelativeColumn(1);
                                 });
 
-                                table.Cell().ColumnSpan(3).AlignLeft().Text("Por el Establecimiento:").Bold();
+                                table.Cell().ColumnSpan(2).AlignLeft().Text("Solicitante:").Bold();
+                                
+                                table.Cell().ColumnSpan(2).AlignLeft().Text("Regente Farmaceutico:").Bold();
+                                
                                 if (!string.IsNullOrEmpty(inspection.InspAperCambUbicFarm.DatosSolicitante?.Firma))
                                 {
                                     //var bytes = Convert.FromBase64String(base64encodedstring);
                                     //var contents = new StreamContent(new MemoryStream(bytes));
                                     byte[] data = Convert.FromBase64String(inspection.InspAperCambUbicFarm.DatosSolicitante.Firma.Split("image/png;base64,")[1]);
                                     MemoryStream memoryStream = new MemoryStream(data);
-                                    table.Cell().AlignCenter().Image(memoryStream, ImageScaling.FitArea);
+                                    table.Cell().ColumnSpan(2).AlignCenter().Image(memoryStream, ImageScaling.FitArea);
                                 }
                                 else
                                 {
-                                    table.Cell().AlignLeft().Padding(3).Text("");
+                                    table.Cell().ColumnSpan(2).AlignLeft().Padding(3).Text("");
                                 }
 
 
@@ -630,18 +634,17 @@ namespace Aig.Auditoria.Services
                                     //var contents = new StreamContent(new MemoryStream(bytes));
                                     byte[] data = Convert.FromBase64String(inspection.InspAperCambUbicFarm.DatosRegente.Firma.Split("image/png;base64,")[1]);
                                     MemoryStream memoryStream = new MemoryStream(data);
-                                    table.Cell().AlignCenter().Image(memoryStream, ImageScaling.FitWidth);
+                                    table.Cell().ColumnSpan(2).AlignCenter().Image(memoryStream, ImageScaling.FitWidth);
                                 }
                                 else
                                 {
-                                    table.Cell().AlignLeft().Padding(3).Text("");
+                                    table.Cell().ColumnSpan(2).AlignLeft().Padding(3).Text("");
                                 }
 
 
-                                table.Cell().AlignLeft().Padding(3).Text("");
-
-                                table.Cell().AlignCenter().Text(string.Format("{0}\r\nCédula:{1} | Cargo:{2}", inspection.InspAperCambUbicFarm.DatosSolicitante?.Nombre, inspection.InspAperCambUbicFarm.DatosSolicitante?.Cedula, inspection.InspAperCambUbicFarm.DatosSolicitante?.Cargo));
-                                table.Cell().AlignCenter().Text(string.Format("{0}\r\nCédula:{1} | Cargo:{2} | Reg.:{3}", inspection.InspAperCambUbicFarm.DatosRegente?.Nombre, inspection.InspAperCambUbicFarm.DatosRegente?.Cedula, inspection.InspAperCambUbicFarm.DatosRegente?.Cargo, inspection.InspAperCambUbicFarm.DatosRegente?.NumRegistro));
+                                
+                                table.Cell().ColumnSpan(2).AlignCenter().Text(string.Format("{0}\r\nCédula:{1} | Cargo:{2}", inspection.InspAperCambUbicFarm.DatosSolicitante?.Nombre, inspection.InspAperCambUbicFarm.DatosSolicitante?.Cedula, inspection.InspAperCambUbicFarm.DatosSolicitante?.Cargo));
+                                table.Cell().ColumnSpan(2).AlignCenter().Text(string.Format("{0}\r\nCédula:{1} | Cargo:{2} | Reg.:{3}", inspection.InspAperCambUbicFarm.DatosRegente?.Nombre, inspection.InspAperCambUbicFarm.DatosRegente?.Cedula, inspection.InspAperCambUbicFarm.DatosRegente?.Cargo, inspection.InspAperCambUbicFarm.DatosRegente?.NumRegistro));
 
                                 table.Cell().AlignLeft().Padding(3).Text("");
 
@@ -745,7 +748,7 @@ namespace Aig.Auditoria.Services
                                 table.Cell().ColumnSpan(2).AlignRight().Padding(3).AlignBottom().Text(string.Format("Confeccionado: {0}", DateTime.Now.ToString("dd/MM/yyyy")));
                             });
 
-                            column.Item().AlignLeft().PaddingVertical(5).Text(string.Format("El establecimiento se compromete al fiel cumplimiento del Artículo 346 del Decreto Ejecutivo 13 de 1 de marzo de 2023:\r\nAl establecimiento farmacéutico que no cuente con un regente farmacéutico, por despido, se le suspenderá la licencia de operación, hasta que cubra la falta del regente farmacéutico, si es por otras causas, el establecimiento tiene un plazo de hasta treinta días hábiles para cubrir la regencia.\r\n\r\nEl establecimiento se compromete al fiel cumplimiento del Artículo 347 del Decreto Ejecutivo 13 de 1 de marzo de 2023:\r\nEn el caso de los establecimientos que no cuenten con farmacéuticos idóneos durante todo el horario de atención al público del local, el técnico en farmacia exigirá la presentación de la receta o prescripción médica en los turnos que no cuenten con la presencia de un farmacéutico. Para los efectos de la dispensación de medicamentos para enfermedades crónicas, de no contarse con la receta o prescripción, el establecimiento farmacéutico debe contar con un sistema de control informático que detalle de manera mínima los elementos de un perfil farmacoterapéutico, bajo la tutela del farmacéutico, en ambos casos. De igual forma, el establecimiento tiene la obligación de informar al consumidor sobre esa condición particular, informando el horario de los farmacéuticos mediante avisos colocados frente al dispensario de los productos farmacéuticos.\r\n\r\nEl establecimiento se compromete al fiel cumplimiento del Artículo 349 del Decreto Ejecutivo 13 de 1 de marzo de 2023:\r\nLa Dirección Nacional de Farmacia y Drogas podrá realizar una inspección en cualquier momento a fin de verificar lo indicado en la declaración, de no coincidir con lo declarado se tomarán las medidas legales pertinentes.\r\n\r\nEl establecimiento se compromete al fiel cumplimiento del Artículo 351 del Decreto Ejecutivo 13 de 1 de marzo de 2023:\r\nLos establecimientos dispondrán de un periodo de hasta veinte días hábiles, contados a partir de la fecha de notificación de los resultados de la evaluación de las solicitudes de licencias, para subsanar las observaciones realizadas. De no subsanarse lo señalado en el término indicado, se procederá a la devolución de la solicitud y el interesado deberá iniciar un nuevo trámite.\r\n\r\nEl establecimiento se compromete al fiel cumplimiento del Artículo 355 del Decreto Ejecutivo 13 de 1 de marzo de 2023:\r\nTodos los establecimientos farmacéuticos están obligados a permitir el acceso de manera inmediata a la autoridad de salud, a fin de que se realicen las funciones de vigilancia y fiscalización.\r\n\r\nEl establecimiento se compromete al fiel cumplimiento del Artículo 363 del Decreto Ejecutivo 13 de 1 de marzo de 2023:\r\nLa Dirección Nacional de Farmacia y Drogas, como ente regulador de todo lo referente a los productos farmacéuticos, incluyendo su uso y manejo, podrá inspeccionar en cualquier momento durante las horas declaradas como horario de operación, todos los establecimientos públicos o privados, donde se maneje o utilicen productos farmacéuticos y los productos regulados por la Ley a fin de velar por la calidad y seguridad del producto y el cumplimento de las normas vigentes. Todos los establecimientos que comercialicen medicamentos y Otros productos para la salud humana están obligados a permitir el acceso de manera inmediata a la autoridad de salud, de tal forma que se realicen las funciones de vigilancia y fiscalización.\r\n\r\nEl establecimiento se compromete al fiel cumplimiento del Artículo 369 del Decreto Ejecutivo 13 de 1 de marzo de 2023:\r\nEl representante legal o propietario de la farmacia debe gestionar el mantenimiento preventivo que incluya cualquier desperfecto o condiciones no adecuadas de las estructuras. La farmacia debe contar con equipo para la medición de temperatura y humedad relativa.\r\n\r\nEl establecimiento se compromete al fiel cumplimiento del Artículo 376 del Decreto Ejecutivo 13 de 1 de marzo de 2023:\r\nAl momento de la recepción se prohíbe colocar las cajas de medicamentos directamente sobre el piso, y se mantendrán los medicamentos separados de paredes y techo.\r\n\r\nEl establecimiento se compromete al fiel cumplimiento del Artículo 381 del Decreto Ejecutivo 13 de 1 de marzo de 2023:\r\nEl área de almacenamiento contará con procedimientos estándares de operación para los procesos que se desarrollan en el almacén.\r\n\r\nEl establecimiento se compromete al fiel cumplimiento del Artículo 385 del Decreto Ejecutivo 13 de 1 de marzo de 2023:\r\nLos medicamentos deben colocarse a distancia adecuada de paredes, piso y techo, y las condiciones de estos deben ser adecuadas para evitar posibles contaminaciones de los medicamentos. Además, las cajas donde se disponen los medicamentos próximos a ubicación en el recetario no deben obstruir el libre tránsito del personal.\r\n\r\n\r\nFirma de Regente Farmacéutico:\r\n"));
+                            column.Item().AlignLeft().PaddingVertical(5).Text(string.Format("El establecimiento se compromete al fiel cumplimiento del Artículo 346 del Decreto Ejecutivo 13 de 1 de marzo de 2023:\r\nAl establecimiento farmacéutico que no cuente con un regente farmacéutico, por despido, se le suspenderá la licencia de operación, hasta que cubra la falta del regente farmacéutico, si es por otras causas, el establecimiento tiene un plazo de hasta treinta días hábiles para cubrir la regencia.\r\n\r\nEl establecimiento se compromete al fiel cumplimiento del Artículo 347 del Decreto Ejecutivo 13 de 1 de marzo de 2023:\r\nEn el caso de los establecimientos que no cuenten con farmacéuticos idóneos durante todo el horario de atención al público del local, el técnico en farmacia exigirá la presentación de la receta o prescripción médica en los turnos que no cuenten con la presencia de un farmacéutico. Para los efectos de la dispensación de medicamentos para enfermedades crónicas, de no contarse con la receta o prescripción, el establecimiento farmacéutico debe contar con un sistema de control informático que detalle de manera mínima los elementos de un perfil farmacoterapéutico, bajo la tutela del farmacéutico, en ambos casos. De igual forma, el establecimiento tiene la obligación de informar al consumidor sobre esa condición particular, informando el horario de los farmacéuticos mediante avisos colocados frente al dispensario de los productos farmacéuticos.\r\n\r\nEl establecimiento se compromete al fiel cumplimiento del Artículo 349 del Decreto Ejecutivo 13 de 1 de marzo de 2023:\r\nLa Dirección Nacional de Farmacia y Drogas podrá realizar una inspección en cualquier momento a fin de verificar lo indicado en la declaración, de no coincidir con lo declarado se tomarán las medidas legales pertinentes.\r\n\r\nEl establecimiento se compromete al fiel cumplimiento del Artículo 351 del Decreto Ejecutivo 13 de 1 de marzo de 2023:\r\nLos establecimientos dispondrán de un periodo de hasta veinte días hábiles, contados a partir de la fecha de notificación de los resultados de la evaluación de las solicitudes de licencias, para subsanar las observaciones realizadas. De no subsanarse lo señalado en el término indicado, se procederá a la devolución de la solicitud y el interesado deberá iniciar un nuevo trámite.\r\n\r\nEl establecimiento se compromete al fiel cumplimiento del Artículo 355 del Decreto Ejecutivo 13 de 1 de marzo de 2023:\r\nTodos los establecimientos farmacéuticos están obligados a permitir el acceso de manera inmediata a la autoridad de salud, a fin de que se realicen las funciones de vigilancia y fiscalización.\r\n\r\nEl establecimiento se compromete al fiel cumplimiento del Artículo 363 del Decreto Ejecutivo 13 de 1 de marzo de 2023:\r\nLa Dirección Nacional de Farmacia y Drogas, como ente regulador de todo lo referente a los productos farmacéuticos, incluyendo su uso y manejo, podrá inspeccionar en cualquier momento durante las horas declaradas como horario de operación, todos los establecimientos públicos o privados, donde se maneje o utilicen productos farmacéuticos y los productos regulados por la Ley a fin de velar por la calidad y seguridad del producto y el cumplimento de las normas vigentes. Todos los establecimientos que comercialicen medicamentos y Otros productos para la salud humana están obligados a permitir el acceso de manera inmediata a la autoridad de salud, de tal forma que se realicen las funciones de vigilancia y fiscalización.\r\n\r\nEl establecimiento se compromete al fiel cumplimiento del Artículo 369 del Decreto Ejecutivo 13 de 1 de marzo de 2023:\r\nEl representante legal o propietario de la farmacia debe gestionar el mantenimiento preventivo que incluya cualquier desperfecto o condiciones no adecuadas de las estructuras. La farmacia debe contar con equipo para la medición de temperatura y humedad relativa.\r\n\r\nEl establecimiento se compromete al fiel cumplimiento del Artículo 376 del Decreto Ejecutivo 13 de 1 de marzo de 2023:\r\nAl momento de la recepción se prohíbe colocar las cajas de medicamentos directamente sobre el piso, y se mantendrán los medicamentos separados de paredes y techo.\r\n\r\nEl establecimiento se compromete al fiel cumplimiento del Artículo 381 del Decreto Ejecutivo 13 de 1 de marzo de 2023:\r\nEl área de almacenamiento contará con procedimientos estándares de operación para los procesos que se desarrollan en el almacén.\r\n\r\nEl establecimiento se compromete al fiel cumplimiento del Artículo 385 del Decreto Ejecutivo 13 de 1 de marzo de 2023:\r\nLos medicamentos deben colocarse a distancia adecuada de paredes, piso y techo, y las condiciones de estos deben ser adecuadas para evitar posibles contaminaciones de los medicamentos. Además, las cajas donde se disponen los medicamentos próximos a ubicación en el recetario no deben obstruir el libre tránsito del personal.\r\n\r\n"));
 
 
                         });
@@ -1522,7 +1525,47 @@ namespace Aig.Auditoria.Services
                                     });
                                     if (inspection.InspAperCambUbicAgen?.Requisitos?.LContenido?.Count > 0)
                                     {
-                                        foreach (var dat in inspection.InspAperCambUbicAgen.Requisitos.LContenido)
+                                        var dat = inspection.InspAperCambUbicAgen?.Requisitos?.LContenido[0];
+                                        if (dat.IsHeader)
+                                        {
+                                            table.Cell().ColumnSpan(3).Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
+                                        }
+                                        else
+                                        {
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
+                                            if (dat.LEvaluacion?.Count > 0)
+                                            {
+                                                foreach (var eva in dat.LEvaluacion)
+                                                {
+                                                    table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                }
+                                            }
+                                            table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Observaciones);
+                                        }
+
+
+                                    }
+                                });
+
+                                column.Item().PaddingVertical(5).AlignLeft().Text(" ");
+                                column.Item().AlignLeft().Text(string.Format("Transporte".ToUpper())).Bold();
+                                column.Item().Table(table =>
+                                {
+                                    table.ColumnsDefinition(columns =>
+                                    {
+                                        columns.RelativeColumn((float)3);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)4);
+                                    });
+                                    table.Header(header =>
+                                    {
+                                        header.Cell().Border(1).BorderColor(Colors.Black).DefaultTextStyle(cellTextStyle).Background("#011E56").AlignCenter().Padding(3).Text("PREGUNTA".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).DefaultTextStyle(cellTextStyle).Background("#011E56").AlignCenter().Padding(3).Text("EVALUACIÓN".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).DefaultTextStyle(cellTextStyle).Background("#011E56").AlignCenter().Padding(3).Text("OBSERVACIóN".ToUpper());
+                                    });
+                                    if (inspection.InspAperCambUbicAgen?.Requisitos?.LContenido?.Count > 0)
+                                    {
+                                        foreach (var dat in inspection.InspAperCambUbicAgen.Requisitos.LContenido.Skip(1))
                                         {
                                             if (dat.IsHeader)
                                             {
@@ -2313,7 +2356,7 @@ namespace Aig.Auditoria.Services
                                     });
                                     table.Header(header =>
                                     {
-                                        header.Cell().ColumnSpan(3).Border(1).BorderColor(Colors.Black).DefaultTextStyle(cellTextStyle).Background("#011E56").AlignLeft().Padding(3).Text("REGISTRO DE MOVIMIENTO DE EXISTENCIA".ToUpper());
+                                        header.Cell().ColumnSpan(3).Border(1).BorderColor(Colors.Black).DefaultTextStyle(cellTextStyle).Background("#011E56").AlignLeft().Padding(3).Text("REGISTRO DE MOVIMIENTO DE EXISTENCIA de Sustancias Controladas".ToUpper());
                                         header.Cell().Border(1).BorderColor(Colors.Black).DefaultTextStyle(cellTextStyle).Background("#011E56").AlignCenter().Padding(3).Text("PREGUNTA".ToUpper());
                                         header.Cell().Border(1).BorderColor(Colors.Black).DefaultTextStyle(cellTextStyle).Background("#011E56").AlignCenter().Padding(3).Text("EVALUACIÓN".ToUpper());
                                         header.Cell().Border(1).BorderColor(Colors.Black).DefaultTextStyle(cellTextStyle).Background("#011E56").AlignCenter().Padding(3).Text("OBSERVACIóN".ToUpper());

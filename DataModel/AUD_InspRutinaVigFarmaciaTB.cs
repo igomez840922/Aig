@@ -173,14 +173,14 @@ namespace DataModel
                         Titulo = "Muebles separados de las paredes, pisos y techos",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
-                        new ContenidoPreguntas(){
-                        Titulo = "Muebles ordenados, limpios y libres de polvo",
-                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
-                    },
-                        new ContenidoPreguntas(){
-                        Titulo = "Hay cajas donde se disponen los medicamentos próximos a la ubicación en el recetario que obstruyen el libre tránsito del personal por el área",
-                        LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
-                    },
+                    //    new ContenidoPreguntas(){
+                    //    Titulo = "Muebles ordenados, limpios y libres de polvo",
+                    //    LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
+                    //},
+                    //    new ContenidoPreguntas(){
+                    //    Titulo = "Hay cajas donde se disponen los medicamentos próximos a la ubicación en el recetario que obstruyen el libre tránsito del personal por el área",
+                    //    LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
+                    //},
                         new ContenidoPreguntas(){
                         Titulo = "Anuncio visible y legible frente al recetario con la siguiente instrucción: “El usuario que adquiera un medicamento de los regulados que se venden sin receta médica lo hace bajo su responsabilidad”. Art. 151 de la Ley 1 de 10 de enero de 2001 y Art. 625 del Decreto Ejecutivo 13 del 1 de marzo de 2023",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
