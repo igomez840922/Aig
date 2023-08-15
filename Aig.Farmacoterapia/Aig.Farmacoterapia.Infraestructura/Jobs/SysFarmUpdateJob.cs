@@ -25,28 +25,7 @@ namespace Aig.Farmacoterapia.Infrastructure.Jobs
         public async Task Execute(IJobExecutionContext context)
         {
             _logger.Debug($"Execute SYSFARM Update Job {string.Format("{0:dd/MM/yyyy hh:mm:ss tt}", DateTime.Now)}");
-            var result = await _sysFarmService.GetRecords();
-            if (result?.Status == true && result?.Registros.Count > 0)
-            {
-                await _unitOfWork.ExecuteInTransactionAsync(async (cc) =>
-                {
-                    await _unitOfWork.BeginTransactionAsync(cc);
-                    foreach (var item in result.Registros)
-                    {
-                        AigRecord record;
-                        if ((record = _unitOfWork.Repository<AigRecord>().Entities.AsNoTracking().FirstOrDefault(p => p.Numero == item.Numero)) != null)
-                        {
-                            item.Id = record.Id;
-                            item.DataSheetURL = record.DataSheetURL;
-                            item.ProspectusURL = record.ProspectusURL;
-                            item.PictureData = record.PictureData;
-                        }
-                        await _unitOfWork.Repository<AigRecord>().UpdateAsync(item);
-                    }
-                    var commit = await _unitOfWork.CommitAsync(cc);
-                }, default);
-            }
-            return;
+             await _sysFarmService.GetRecords();
         }
     }
 }

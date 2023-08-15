@@ -98,6 +98,7 @@
         <MudTh><MudInputLabel Style="width:250px !important">Última Ejecución</MudInputLabel></MudTh>
         <MudTh><MudInputLabel Style="width:100px !important">Registros</MudInputLabel></MudTh>
         <MudTh><MudInputLabel Style="width:250px !important">Período de actualización</MudInputLabel></MudTh>
+        <MudTh><MudInputLabel Style="width:40px !important">Activo</MudInputLabel></MudTh>
         <MudTh></MudTh>
     </HeaderContent>
     <RowTemplate>
@@ -128,20 +129,32 @@
             }
         </MudTd>
         <MudTd DataLabel="Registros">
+           
             @if (context.LastRetrieved == 0)
             {
-                <MudBadge Content="@context.LastRetrieved" Color="Color.Error" Overlap="true" Class="mx-2 my-2">
+                <MudBadge Content="@(context.LastRetrieved.ToString())" Color="Color.Error" Overlap="true" Class="mx-2 my-2">
                  </MudBadge>
             }
             else
             {
-                <MudBadge Content="@context.LastRetrieved" Color="Color.Primary" Overlap="true" Class="mx-2 my-2">
+                <MudBadge Content="@(context.LastRetrieved.ToString())" Color="Color.Primary" Overlap="true" Class="mx-2 my-2">
                 </MudBadge>
             }
-           
         </MudTd>
         <MudTd DataLabel="Período de actualización">@(context.UpdateTime == 1 ? $"1 segundo" : $"{context.UpdateTime} segundos")</MudTd>
-            <MudTd>
+          <MudTd DataLabel="Activo">
+            @if (@context.IsActive)
+            {
+                <MudIcon style="font-size: 20px;color:#1BC5BD" Icon="@Icons.Material.Filled.CheckBox" />
+            }
+            else
+            {
+                <MudIcon style="font-size: 20px;color:#EE2D41" Icon="@Icons.Material.Filled.DisabledByDefault" />
+
+            }
+        </MudTd>
+
+        <MudTd>
                 <MudMenu Icon="@Icons.Material.Filled.Settings" Color="Color.Default">
                     <MudMenuItem Icon="@Icons.Material.Filled.Edit" OnClick="@(() => Edit(@context.Id))" OnTouch="@(() => Edit(@context.Id))">Editar</MudMenuItem>
                 </MudMenu>

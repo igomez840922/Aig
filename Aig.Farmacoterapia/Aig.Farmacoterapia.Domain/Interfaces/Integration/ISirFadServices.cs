@@ -9,6 +9,6 @@ namespace Aig.Farmacoterapia.Domain.Interfaces.Integration
 {
     public interface ISirFadServices
     {
-        Task<SirFadResponse> GetRecords(CancellationToken cancellationToke = default);
+        Task GetRecords(CancellationToken cancellationToke = default);
     }
 }

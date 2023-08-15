@@ -30,11 +30,11 @@ namespace Aig.Farmacoterapia.Wasm.Client.Infrastructure.Managers.Studies
             return await response.ToResult<AigEstudio>();
         }
     
-        public async Task<IResult<bool>> UpdateAsync(AigEstudio request)
+        public async Task<IResult<AigEstudio>> UpdateAsync(AigEstudio request)
         {
 
             var response = await _httpClient.PostAsJsonAsync(AppConstants.EstudioEndpoints.Update, request);
-            return await response.ToResult<bool>();
+            return await response.ToResult<AigEstudio>();
 
         }
         public async Task<IResult> DeleteAsync(long id)

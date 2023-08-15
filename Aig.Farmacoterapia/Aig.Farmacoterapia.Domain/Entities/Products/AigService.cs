@@ -20,5 +20,6 @@ namespace Aig.Farmacoterapia.Domain.Entities.Products
         public int UpdateTime { get; set; }
         public DateTime? LastRun { get; set; }
         public int LastRetrieved { get; set; }
+        public bool IsActive { get; set; }
     }
 }

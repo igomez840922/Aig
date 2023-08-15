@@ -1,4 +1,4 @@
-﻿@page "/studiesdnfd"
+﻿@page "/studiesdnfd1"
 @attribute [Authorize]
 @using Aig.Farmacoterapia.Domain.Entities.Enums
 @using Aig.Farmacoterapia.Domain.Entities.Studies
@@ -168,28 +168,38 @@
 <MudTable  HorizontalScrollbar="true" FixedHeader="false" FixedFooter="false" Elevation="25" @ref="_table" Striped="true" SortLabel="name" LoadingProgressColor="Color.Primary" Dense="true" Hover="true" ServerData="@(new Func<TableState, Task<TableData<AigEstudioDNFD>>>(DoFetchData))">
       
     <HeaderContent>
-        <MudTh style="width:5px;"></MudTh>
-        <MudTh> <MudTableSortLabel Style="width:100px !important" SortLabel="admissionDate" T="AigEstudioDNFD">Fecha de Ingreso</MudTableSortLabel></MudTh>
-        <MudTh><MudInputLabel Style="width:150px !important">Código del protocolo de investigación</MudInputLabel></MudTh>
+        <MudTh></MudTh>
+        <MudTh> <MudTableSortLabel Style="width:200px !important" SortLabel="admissionDate" T="AigEstudioDNFD">Fecha de Ingreso</MudTableSortLabel></MudTh>
+        <MudTh><MudInputLabel Style="width:200px !important">Código del protocolo de investigación</MudInputLabel></MudTh>
         <MudTh><MudInputLabel Style="width:500px !important">Título del protocolo de investigación</MudInputLabel></MudTh>
-        @*<MudTh> <MudInputLabel Style="width:300px !important">Nota de Evaluación</MudInputLabel> </MudTh>
-        <MudTh><MudTableSortLabel Style="width:200px" SortLabel="evaluationDate" T="AigEstudioDNFD">Fecha de Evaluación</MudTableSortLabel></MudTh>*@
-        @*<MudTh><MudInputLabel Style="width:400px">Observaciones por el evaluador</MudInputLabel></MudTh>*@
-        @*<MudTh><MudInputLabel Style="width:200px">Constancia de registro del protocolo en DIGESA</MudInputLabel></MudTh>*@
-       @* <MudTh><MudInputLabel Style="width:200px">Investigador principal</MudInputLabel></MudTh>
-        <MudTh><MudInputLabel Style="width:200px">Patrocinador del estudio</MudInputLabel></MudTh>*@
-        <MudTh><MudInputLabel Style="width:100px">Duración del estudio</MudInputLabel></MudTh>
-        <MudTh><MudInputLabel Style="width:100px">Número de participantes en panamá</MudInputLabel></MudTh>
-        @*<MudTh><MudInputLabel Style="width:200px">Centro de investigación</MudInputLabel></MudTh>
-        <MudTh><MudInputLabel Style="width:200px">Comité de bioetica que aprobó el estudio</MudInputLabel></MudTh>*@
-        <MudTh><MudTableSortLabel Style="width:100px" InitialDirection="SortDirection.Descending" SortLabel="created" T="AigEstudioDNFD">Creado</MudTableSortLabel></MudTh>
+        <MudTh> <MudInputLabel Style="width:300px !important">Nota de Evaluación</MudInputLabel> </MudTh>
+        <MudTh><MudTableSortLabel Style="width:200px" SortLabel="evaluationDate" T="AigEstudioDNFD">Fecha de Evaluación</MudTableSortLabel></MudTh>
+        <MudTh><MudInputLabel Style="width:400px">Observaciones por el evaluador</MudInputLabel></MudTh>
+        <MudTh><MudInputLabel Style="width:200px">Constancia de registro del protocolo en DIGESA</MudInputLabel></MudTh>
+        <MudTh><MudInputLabel Style="width:200px">Investigador principal</MudInputLabel></MudTh>
+        <MudTh><MudInputLabel Style="width:200px">Patrocinador del estudio</MudInputLabel></MudTh>
+        <MudTh><MudInputLabel Style="width:200px">Duración del estudio</MudInputLabel></MudTh>
+        <MudTh><MudInputLabel Style="width:200px">Número de participantes en panamá</MudInputLabel></MudTh>
+        <MudTh><MudInputLabel Style="width:200px">Centro de investigación</MudInputLabel></MudTh>
+        <MudTh><MudInputLabel Style="width:200px">Comité de bioetica que aprobó el estudio</MudInputLabel></MudTh>
+        <MudTh><MudTableSortLabel Style="width:200px" InitialDirection="SortDirection.Descending" SortLabel="created" T="AigEstudioDNFD">Creado</MudTableSortLabel></MudTh>
         <MudTh></MudTh>
     </HeaderContent>
     <RowTemplate>
+
         <MudTd>
-            <MudIconButton Icon="@(!context.ShowDetails?Icons.Filled.ArrowCircleRight:@Icons.Filled.ArrowCircleDown)" Variant="Variant.Filled" Color="Color.Primary" Size="Size.Small" OnClick="@(() => context.ShowDetails=!context.ShowDetails)" />
+
+            <MudMenu Icon="@Icons.Material.Filled.Settings" Color="Color.Default">
+                <MudMenuItem Disabled=IsEdit() Icon="@Icons.Material.Filled.Edit" OnClick="@(() => AddEdit(@context.Id))" OnTouch="@(() => AddEdit(@context.Id))">Editar</MudMenuItem>
+                @*<MudMenuItem Style="border-bottom:1px solid #E4E6EF !important;" Disabled="@(context.Estado!=EstadoEstudioDNFD.Pending || IsEvaluate())" IconColor="Color.Primary" Icon="@Icons.Material.Outlined.PostAdd" OnClick="@(() => Evaluate(@context.Id))" OnTouch="@(() => Evaluate(@context.Id))">Generar Solicitud</MudMenuItem>*@
+                @if (IsDelete())
+                {
+                  <MudMenuItem  Style="border-bottom:1px solid #E4E6EF !important;" IconColor="Color.Error" Icon="@Icons.Material.Filled.Delete" OnClick="@(() => Delete(@context.Id))" OnTouch="@(() => Delete(@context.Id))">Eliminar</MudMenuItem>
+                }
+            </MudMenu>
+
         </MudTd>
-       
+
         <MudTd DataLabel="Fecha de Ingreso">@(string.Format("{0:dd/MM/yyyy}", context.FechaIngreso!))</MudTd>
         <MudTd DataLabel="Código del protocolo de investigación">
             @if (!string.IsNullOrEmpty(context.AigCodigo?.Codigo))
@@ -204,16 +214,16 @@
             }
         </MudTd>
         <MudTd DataLabel="Título del protocolo de investigación">@context.Titulo</MudTd>
-       @* <MudTd DataLabel="Nota de Evaluación">@context.NotaEvaluacion</MudTd>
-        <MudTd DataLabel="Fecha de Evaluación">@(string.Format("{0:dd/MM/yyyy}", context.FechaEvaluacion!))</MudTd>*@
-       @* <MudTd DataLabel="Observaciones por el evaluador">@context.ObservacionesEvaluador</MudTd>*@
-        @*<MudTd DataLabel="Constancia de registro del protocolo en DIGESA">@context.RegistroProtocoloDIGESA</MudTd>*@
-        @*<MudTd DataLabel="Investigador principal">@context.InvestigadorPrincipal</MudTd>
-        <MudTd DataLabel="Patrocinador del estudio">@context.Patrocinador</MudTd>*@
+        <MudTd DataLabel="Nota de Evaluación">@context.NotaEvaluacion</MudTd>
+        <MudTd DataLabel="Fecha de Evaluación">@(string.Format("{0:dd/MM/yyyy}", context.FechaEvaluacion!))</MudTd>
+        <MudTd DataLabel="Observaciones por el evaluador">@context.ObservacionesEvaluador</MudTd>
+        <MudTd DataLabel="Constancia de registro del protocolo en DIGESA">@context.RegistroProtocoloDIGESA</MudTd>
+        <MudTd DataLabel="Investigador principal">@context.InvestigadorPrincipal</MudTd>
+        <MudTd DataLabel="Patrocinador del estudio">@context.Patrocinador</MudTd>
         <MudTd DataLabel="Duración del estudio">@context.Duracion</MudTd>
         <MudTd DataLabel="Número de participantes en panamá">@context.Participantes</MudTd>
-@*        <MudTd DataLabel="Centro de investigación">@context.CentroInvestigacion</MudTd>
-        <MudTd DataLabel="Comité de bioetica que aprobó el estudio">@context.ComiteBioetica</MudTd>*@
+        <MudTd DataLabel="Centro de investigación">@context.CentroInvestigacion</MudTd>
+        <MudTd DataLabel="Comité de bioetica que aprobó el estudio">@context.ComiteBioetica</MudTd>
         <MudTd DataLabel="Creado">@(string.Format("{0:dd/MM/yyyy}", context.Created))</MudTd>
         <MudTd>
 
@@ -232,89 +242,7 @@
         @if (context.ShowDetails)
         {
             <MudTr>
-                <td colspan="9">
 
-                    <div style="background-color: #f2eefc;" _ngcontent-lil-c210="" class="py-4 d-flex ng-star-inserted">
-                       
-                        <div _ngcontent-lil-c210="" class="mx-4">
-
-                            <div _ngcontent-lil-c210="" class="d-flex mb-2">
-                                <span _ngcontent-lil-c210="" class="font-weight-bold font-size-sm" style="font-weight:bold; margin-right: 5px;">
-                                    Nota de Evaluación:
-                                </span>
-                                <span _ngcontent-lil-c210="" class="text-dark-50">
-                                    @(!string.IsNullOrEmpty(@context.NotaEvaluacion) ? @context.NotaEvaluacion : "-")
-                                </span>
-                            </div>
-
-                            <div _ngcontent-lil-c210="" class="d-flex mb-2">
-                                <span _ngcontent-lil-c210="" class="font-weight-bold font-size-sm" style="font-weight:bold; margin-right: 5px;">
-                                    Fecha de Evaluación:
-                                </span>
-                                <span _ngcontent-lil-c210="" class="text-dark-50">
-                                    @(string.Format("{0:dd/MM/yyyy}", context.FechaEvaluacion!))
-                                </span>
-                            </div>
-
-                            <div _ngcontent-lil-c210="" class="d-flex mb-2">
-                                <span _ngcontent-lil-c210="" class="font-weight-bold font-size-sm" style="font-weight:bold; margin-right: 5px;">
-                                    Observaciones por el evaluador:
-                                </span>
-                                <span _ngcontent-lil-c210="" class="text-dark-50">
-                                    @(!string.IsNullOrEmpty(@context.ObservacionesEvaluador) ? @context.ObservacionesEvaluador : "-")
-                                </span>
-                            </div>
-                            <hr/>
-                            <div _ngcontent-lil-c210="" class="d-flex mb-2">
-                                <span _ngcontent-lil-c210="" class="font-weight-bold font-size-sm" style="font-weight:bold; margin-right: 5px;">
-                                    Constancia de registro del protocolo en DIGESA:
-                                </span>
-                                <span _ngcontent-lil-c210="" class="text-dark-50">
-                                    @(!string.IsNullOrEmpty(@context.RegistroProtocoloDIGESA) ? @context.RegistroProtocoloDIGESA : "-")
-                                </span>
-                            </div>
-
-                            <div _ngcontent-lil-c210="" class="d-flex mb-2">
-                                <span _ngcontent-lil-c210="" class="font-weight-bold font-size-sm" style="font-weight:bold; margin-right: 5px;">
-                                    Investigador principal:
-                                </span>
-                                <span _ngcontent-lil-c210="" class="text-dark-50">
-                                    @(!string.IsNullOrEmpty(@context.InvestigadorPrincipal) ? @context.InvestigadorPrincipal : "-")
-                                </span>
-                            </div>
-
-                            <div _ngcontent-lil-c210="" class="d-flex mb-2">
-                                <span _ngcontent-lil-c210="" class="font-weight-bold font-size-sm" style="font-weight:bold; margin-right: 5px;">
-                                    Patrocinador del estudio:
-                                </span>
-                                <span _ngcontent-lil-c210="" class="text-dark-50">
-                                    @(!string.IsNullOrEmpty(@context.Patrocinador) ? @context.Patrocinador : "-")
-                                </span>
-                            </div>
-
-                            <div _ngcontent-lil-c210="" class="d-flex mb-2">
-                                <span _ngcontent-lil-c210="" class="font-weight-bold font-size-sm" style="font-weight:bold; margin-right: 5px;">
-                                    Centro de investigación:
-                                </span>
-                                <span _ngcontent-lil-c210="" class="text-dark-50">
-                                    @(!string.IsNullOrEmpty(@context.CentroInvestigacion) ? @context.CentroInvestigacion : "-")
-                                </span>
-                            </div>
-
-                             <div _ngcontent-lil-c210="" class="d-flex mb-2">
-                                <span _ngcontent-lil-c210="" class="font-weight-bold font-size-sm" style="font-weight:bold; margin-right: 5px;">
-                                    Comité de bioetica que aprobó el estudio:
-                                </span>
-                                <span _ngcontent-lil-c210="" class="text-dark-50">
-                                    @(!string.IsNullOrEmpty(@context.ComiteBioetica) ? @context.ComiteBioetica : "-")
-                                </span>
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                </td>
             </MudTr>
         }
     </ChildRowContent>
@@ -438,6 +366,12 @@
 
         await RefresView(false);
         return result;
+    }
+
+    private void ShowBtnPress(long nr)
+    {
+        var item = List.First(f => f.Id == nr);
+        item.ShowDetails = !item.ShowDetails;
     }
 
     private async void OnSearch()

@@ -13,7 +13,7 @@ namespace Aig.Farmacoterapia.Wasm.Client.Infrastructure.Managers.Studies
         Task<PaginatedResult<AigEstudio>> SearchAsync(PageSearchArgs request);
         Task<IResult<AigEstudio>> GetAsync(long id);
         Task<IResult> DeleteAsync(long id);
-        Task<IResult<bool>> UpdateAsync(AigEstudio request);
+        Task<IResult<AigEstudio>> UpdateAsync(AigEstudio request);
         Task<IResult<List<UserModelOutput>>> GetEvaluators(long id);
         Task<IResult> SetEvaluatorsAsync(long id, string[] evaluators);
         Task<IResult> CloneAsync(long id);

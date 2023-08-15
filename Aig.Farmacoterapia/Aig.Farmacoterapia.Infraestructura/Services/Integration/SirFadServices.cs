@@ -1,11 +1,13 @@
 ﻿using Aig.Farmacoterapia.Domain.Entities.Products;
 using Aig.Farmacoterapia.Domain.Integration.SirFad;
+using Aig.Farmacoterapia.Domain.Integration.SysFarm;
 using Aig.Farmacoterapia.Domain.Interfaces;
 using Aig.Farmacoterapia.Domain.Interfaces.Integration;
 using Aig.Farmacoterapia.Infrastructure.Configuration;
 using Aig.Farmacoterapia.Infrastructure.Extensions;
 using Aig.Farmacoterapia.Infrastructure.Helpers.ApiClient;
 using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json.Linq;
 using RestSharp;
 using System.Text.Json;
@@ -197,7 +199,6 @@ namespace Aig.Farmacoterapia.Infrastructure.Services.Integration.SirFad
         public List<Registro> Registros { get; set; }
     }
 
-
     public class SirFadServices : BaseRestService, ISirFadServices
     {
         private readonly IUnitOfWork _unitOfWork;
@@ -219,41 +220,71 @@ namespace Aig.Farmacoterapia.Infrastructure.Services.Integration.SirFad
                 };
             }           
         }
-        public async Task<SirFadResponse?> GetRecords(CancellationToken cancellationToke = default)
+        public async Task GetRecords(CancellationToken cancellationToke = default)
         {
-            //try
-            //{
-            //    var jsonString = "{\"status\":{\"status\":true,\"message\":\"Registroscargadosexitosamente.\",\"cantidad\":1152,\"registros\":[{\"Id\":2,\"NumeroRegistro\":\"200832\",\"NumeroRegistroCompleto\":\"---200832---\",\"Libro\":\"CC\",\"Folio\":\"1\",\"TitularNombre\":\"AlimentosHyH,S.A.\",\"TitularPais\":\"Guatemala\",\"Producto\":{\"Nombre\":\"VIUCOLÁGENO+TÉVERDE\",\"DescripcionEnvase\":\"Envasedehojalata,contapaquecierraapresión.recubiertointernamenteconepóxicomodificadogradoalimenticioysobresPlásticoflexiblerecubiertodepoliésterconpropiedadesantimicrobiana.\",\"ClasificacionMedica\":\"SuplementosAlimenticios\",\"CondicionVenta\":\"PrescripciónMédica\",\"PrincipioActivo\":\"ColágenoHidrolizado\",\"ViaAdministracion\":\"ORAL\",\"FormaFarmaceutica\":\"POLVOPARASOLUCIONORALENSOBRE\",\"VidaUtil\":\"24meses\"},\"Fabricante\":{\"Nombre\":\"AlimentosHyH,S.A.\",\"Direccion\":\"Kilometro6,5CarreteraalAtlántico,Zona18,Guatemala,Guatemala\",\"Correo\":\"calidad@alimentoshyh.com\",\"Pais\":\"Guatemala\",\"PaisISO2\":\"GT\",\"PaisISO3\":\"\"},\"Acondicionador\":{\"Version\":1,\"AconAntiguoTipo\":\"SE\",\"AconAntiguoTipoDetalle\":\"Primario/Secundario\",\"AconAntiguo\":\"AlimentosHyH,S.A.\",\"AconAntiguoPais\":\"Guatemala\",\"AconNuevoTipo\":-1,\"AconNuevoTipoDetalle\":\"\",\"AconNuevoPrimario\":\"\",\"AconNuevoPrimarioPais\":\"\",\"AconNuevoSecundario\":\"\",\"AconNuevoSecundarioPais\":\"\"},\"Presentaciones\":[{\"CodigoSolucion\":2,\"Id\":4124,\"Tipo\":\"Comercial\",\"Presentacion\":\"Envasecon300g\"},{\"CodigoSolucion\":2,\"Id\":4975,\"Tipo\":\"MuestraMédica\",\"Presentacion\":\"Carpetillaysachetcon2g\"}],\"Distribuidores\":[{\"CodigoSolucion\":2,\"Nombre\":\"DROGUERÍASARO,S.A.\",\"Licencia\":\"8-020A/DNFD\",\"Correo\":\"--\"}],\"FechaExpedicion\":\"2023-04-24\",\"FechaVencimiento\":\"2028-04-24\",\"FechaUltimaActualizacion\":\"2023-04-26\",\"Estado\":\"SF\",\"EstadoDetalles\":\"SOLICITUDFINALIZADA\"}]},\"message\":\"Registroscargadosexitosamente.\",\"cantidad\":1152,\"registros\":[{\"Id\":2,\"NumeroRegistro\":\"200832\",\"NumeroRegistroCompleto\":\"---200832---\",\"Libro\":\"CC\",\"Folio\":\"1\",\"TitularNombre\":\"AlimentosHyH,S.A.\",\"TitularPais\":\"Guatemala\",\"Producto\":{\"Nombre\":\"VIUCOLÁGENO+TÉVERDE\",\"DescripcionEnvase\":\"Envasedehojalata,contapaquecierraapresión.recubiertointernamenteconepóxicomodificadogradoalimenticioysobresPlásticoflexiblerecubiertodepoliésterconpropiedadesantimicrobiana.\",\"ClasificacionMedica\":\"SuplementosAlimenticios\",\"CondicionVenta\":\"PrescripciónMédica\",\"PrincipioActivo\":\"ColágenoHidrolizado\",\"ViaAdministracion\":\"ORAL\",\"FormaFarmaceutica\":\"POLVOPARASOLUCIONORALENSOBRE\",\"VidaUtil\":\"24meses\"},\"Fabricante\":{\"Nombre\":\"AlimentosHyH,S.A.\",\"Direccion\":\"Kilometro6,5CarreteraalAtlántico,Zona18,Guatemala,Guatemala\",\"Correo\":\"calidad@alimentoshyh.com\",\"Pais\":\"Guatemala\",\"PaisISO2\":\"GT\",\"PaisISO3\":\"\"},\"Acondicionador\":{\"Version\":1,\"AconAntiguoTipo\":\"SE\",\"AconAntiguoTipoDetalle\":\"Primario/Secundario\",\"AconAntiguo\":\"AlimentosHyH,S.A.\",\"AconAntiguoPais\":\"Guatemala\",\"AconNuevoTipo\":-1,\"AconNuevoTipoDetalle\":\"\",\"AconNuevoPrimario\":\"\",\"AconNuevoPrimarioPais\":\"\",\"AconNuevoSecundario\":\"\",\"AconNuevoSecundarioPais\":\"\"},\"Presentaciones\":[{\"CodigoSolucion\":2,\"Id\":4124,\"Tipo\":\"Comercial\",\"Presentacion\":\"Envasecon300g\"},{\"CodigoSolucion\":2,\"Id\":4975,\"Tipo\":\"MuestraMédica\",\"Presentacion\":\"Carpetillaysachetcon2g\"}],\"Distribuidores\":[{\"CodigoSolucion\":2,\"Nombre\":\"DROGUERÍASARO,S.A.\",\"Licencia\":\"8-020A/DNFD\",\"Correo\":\"--\"}],\"FechaExpedicion\":\"2023-04-24\",\"FechaVencimiento\":\"2028-04-24\",\"FechaUltimaActualizacion\":\"2023-04-26\",\"Estado\":\"SF\",\"EstadoDetalles\":\"SOLICITUDFINALIZADA\"}]}";
-            //    var dta = JsonSerializer.Deserialize<Root>(jsonString);
-            //    return _mapper.Map<SirFadResponse>(dta);
+            try
+            {
+                //    //try
+                //    //{
+                //    //    var jsonString = "{\"status\":{\"status\":true,\"message\":\"Registroscargadosexitosamente.\",\"cantidad\":1152,\"registros\":[{\"Id\":2,\"NumeroRegistro\":\"200832\",\"NumeroRegistroCompleto\":\"---200832---\",\"Libro\":\"CC\",\"Folio\":\"1\",\"TitularNombre\":\"AlimentosHyH,S.A.\",\"TitularPais\":\"Guatemala\",\"Producto\":{\"Nombre\":\"VIUCOLÁGENO+TÉVERDE\",\"DescripcionEnvase\":\"Envasedehojalata,contapaquecierraapresión.recubiertointernamenteconepóxicomodificadogradoalimenticioysobresPlásticoflexiblerecubiertodepoliésterconpropiedadesantimicrobiana.\",\"ClasificacionMedica\":\"SuplementosAlimenticios\",\"CondicionVenta\":\"PrescripciónMédica\",\"PrincipioActivo\":\"ColágenoHidrolizado\",\"ViaAdministracion\":\"ORAL\",\"FormaFarmaceutica\":\"POLVOPARASOLUCIONORALENSOBRE\",\"VidaUtil\":\"24meses\"},\"Fabricante\":{\"Nombre\":\"AlimentosHyH,S.A.\",\"Direccion\":\"Kilometro6,5CarreteraalAtlántico,Zona18,Guatemala,Guatemala\",\"Correo\":\"calidad@alimentoshyh.com\",\"Pais\":\"Guatemala\",\"PaisISO2\":\"GT\",\"PaisISO3\":\"\"},\"Acondicionador\":{\"Version\":1,\"AconAntiguoTipo\":\"SE\",\"AconAntiguoTipoDetalle\":\"Primario/Secundario\",\"AconAntiguo\":\"AlimentosHyH,S.A.\",\"AconAntiguoPais\":\"Guatemala\",\"AconNuevoTipo\":-1,\"AconNuevoTipoDetalle\":\"\",\"AconNuevoPrimario\":\"\",\"AconNuevoPrimarioPais\":\"\",\"AconNuevoSecundario\":\"\",\"AconNuevoSecundarioPais\":\"\"},\"Presentaciones\":[{\"CodigoSolucion\":2,\"Id\":4124,\"Tipo\":\"Comercial\",\"Presentacion\":\"Envasecon300g\"},{\"CodigoSolucion\":2,\"Id\":4975,\"Tipo\":\"MuestraMédica\",\"Presentacion\":\"Carpetillaysachetcon2g\"}],\"Distribuidores\":[{\"CodigoSolucion\":2,\"Nombre\":\"DROGUERÍASARO,S.A.\",\"Licencia\":\"8-020A/DNFD\",\"Correo\":\"--\"}],\"FechaExpedicion\":\"2023-04-24\",\"FechaVencimiento\":\"2028-04-24\",\"FechaUltimaActualizacion\":\"2023-04-26\",\"Estado\":\"SF\",\"EstadoDetalles\":\"SOLICITUDFINALIZADA\"}]},\"message\":\"Registroscargadosexitosamente.\",\"cantidad\":1152,\"registros\":[{\"Id\":2,\"NumeroRegistro\":\"200832\",\"NumeroRegistroCompleto\":\"---200832---\",\"Libro\":\"CC\",\"Folio\":\"1\",\"TitularNombre\":\"AlimentosHyH,S.A.\",\"TitularPais\":\"Guatemala\",\"Producto\":{\"Nombre\":\"VIUCOLÁGENO+TÉVERDE\",\"DescripcionEnvase\":\"Envasedehojalata,contapaquecierraapresión.recubiertointernamenteconepóxicomodificadogradoalimenticioysobresPlásticoflexiblerecubiertodepoliésterconpropiedadesantimicrobiana.\",\"ClasificacionMedica\":\"SuplementosAlimenticios\",\"CondicionVenta\":\"PrescripciónMédica\",\"PrincipioActivo\":\"ColágenoHidrolizado\",\"ViaAdministracion\":\"ORAL\",\"FormaFarmaceutica\":\"POLVOPARASOLUCIONORALENSOBRE\",\"VidaUtil\":\"24meses\"},\"Fabricante\":{\"Nombre\":\"AlimentosHyH,S.A.\",\"Direccion\":\"Kilometro6,5CarreteraalAtlántico,Zona18,Guatemala,Guatemala\",\"Correo\":\"calidad@alimentoshyh.com\",\"Pais\":\"Guatemala\",\"PaisISO2\":\"GT\",\"PaisISO3\":\"\"},\"Acondicionador\":{\"Version\":1,\"AconAntiguoTipo\":\"SE\",\"AconAntiguoTipoDetalle\":\"Primario/Secundario\",\"AconAntiguo\":\"AlimentosHyH,S.A.\",\"AconAntiguoPais\":\"Guatemala\",\"AconNuevoTipo\":-1,\"AconNuevoTipoDetalle\":\"\",\"AconNuevoPrimario\":\"\",\"AconNuevoPrimarioPais\":\"\",\"AconNuevoSecundario\":\"\",\"AconNuevoSecundarioPais\":\"\"},\"Presentaciones\":[{\"CodigoSolucion\":2,\"Id\":4124,\"Tipo\":\"Comercial\",\"Presentacion\":\"Envasecon300g\"},{\"CodigoSolucion\":2,\"Id\":4975,\"Tipo\":\"MuestraMédica\",\"Presentacion\":\"Carpetillaysachetcon2g\"}],\"Distribuidores\":[{\"CodigoSolucion\":2,\"Nombre\":\"DROGUERÍASARO,S.A.\",\"Licencia\":\"8-020A/DNFD\",\"Correo\":\"--\"}],\"FechaExpedicion\":\"2023-04-24\",\"FechaVencimiento\":\"2028-04-24\",\"FechaUltimaActualizacion\":\"2023-04-26\",\"Estado\":\"SF\",\"EstadoDetalles\":\"SOLICITUDFINALIZADA\"}]}";
+                //    //    var dta = JsonSerializer.Deserialize<Root>(jsonString);
+                //    //    return _mapper.Map<SirFadResponse>(dta);
 
-            //}
-            //catch (Exception ex)
-            //{
+                //    //}
+                //    //catch (Exception ex)
+                //    //{
 
-            //    return null;
-            //}
+                //    //    return null;
+                //    //}
 
-            AigService? item;
-            if ((item = _unitOfWork.Repository<AigService>().Entities.FirstOrDefault(p => p.Code == _code)) != null) {
-                if (item.LastRun == null) return await GetAllRecords(cancellationToke);
-                var date = item.LastRun?.ToString("yyyy-MM-dd");
-                var request = CreateRequest("sirfadwebapi/api/dnfdaig/GetRegistrosFarmacovigilancia", Method.GET, new Dictionary<string, string> { { "fechaConsulta", date } });
-                var response = await _requester.ExecuteAsync<Root>(request, cancellationToke);
-                if (!response.IsSuccessful || string.IsNullOrEmpty(response.Content) || response.Data == null){
-                    _logger.Error(new Exception(response.Content).ToMessageAndCompleteStacktrace());
-                    return null;
-                }
-                else
+                SirFadResponse? result = null;
+                AigService? service;
+                if ((service = _unitOfWork.Repository<AigService>().Entities.FirstOrDefault(p => p.IsActive && p.Code == _code)) != null)
                 {
-                    item.LastRun = DateTime.Now;
-                    item.LastRetrieved = response.Data.Cantidad;
-                    await _unitOfWork.Repository<AigService>().UpdateAsync(item);
-                    await _unitOfWork.CommitAsync(cancellationToke);
-                    return _mapper.Map<SirFadResponse>(response.Data);
+                    if (service.LastRun == null)
+                        result = await GetAllRecords(cancellationToke);
+                    else
+                    {
+                        var date = service.LastRun?.ToString("yyyy-MM-dd");
+                        var request = CreateRequest("sirfadwebapi/api/dnfdaig/GetRegistrosFarmacovigilancia", Method.GET, new Dictionary<string, string> { { "fechaConsulta", date } });
+                        var response = await _requester.ExecuteAsync<Root>(request, cancellationToke);
+                        if (!response.IsSuccessful || string.IsNullOrEmpty(response.Content) || response.Data == null)
+                            throw new Exception(response.Content);
+                        else
+                            result = _mapper.Map<SirFadResponse>(response.Data);
+                    }
+                }
+                if (result?.Status == true && result?.Cantidad > 0)
+                {
+                    await _unitOfWork.ExecuteInTransactionAsync(async (cc) =>
+                    {
+                        await _unitOfWork.BeginTransactionAsync(cc);
+
+                        foreach (var item in result.Registros)
+                        {
+                            AigRecord record;
+                            if ((record = _unitOfWork.Repository<AigRecord>().Entities.AsNoTracking().FirstOrDefault(p => p.Numero == item.Numero)) != null)
+                            {
+                                item.Id = record.Id;
+                                item.DataSheetURL = record.DataSheetURL;
+                                item.ProspectusURL = record.ProspectusURL;
+                                item.PictureData = record.PictureData;
+                            }
+                            await _unitOfWork.Repository<AigRecord>().UpdateAsync(item);
+                        }
+                        // updated last run
+                        service.LastRun = DateTime.Now;
+                        service.LastRetrieved = result.Cantidad;
+                        await _unitOfWork.Repository<AigService>().UpdateAsync(service);
+                        var commit = await _unitOfWork.CommitAsync(cc);
+                    }, default);
                 }
             }
-            return null;
+            catch (Exception ex)
+            {
+                _logger.Error(ex.ToMessageAndCompleteStacktrace());
+            }
+
         }
         private async Task<SirFadResponse?> GetAllRecords(CancellationToken cancellationToke = default)
         {
@@ -261,25 +292,17 @@ namespace Aig.Farmacoterapia.Infrastructure.Services.Integration.SirFad
             {
                 var request = CreateRequest("sirfadwebapi/api/dnfdaig/GetRegistrosFarmacovigilancia", Method.GET);
                 var response = await _requester.ExecuteAsync<Root>(request, cancellationToke);
-                if (!response.IsSuccessful || string.IsNullOrEmpty(response.Content) || response.Data == null){
-                    _logger.Error(new Exception(response.Content).ToMessageAndCompleteStacktrace());
-                    return null;
-                }
-                else {
-                    AigService? item;
-                    if ((item = _unitOfWork.Repository<AigService>().Entities.FirstOrDefault(p => p.Code == _code)) != null) {
-                        item.LastRun = DateTime.Now;
-                        item.LastRetrieved = response.Data.Cantidad;
-                        await _unitOfWork.Repository<AigService>().UpdateAsync(item);
-                        await _unitOfWork.CommitAsync(cancellationToke);
-                    }
+                if (!response.IsSuccessful || string.IsNullOrEmpty(response.Content) || response.Data == null)
+                    throw new Exception(response.Content);
+                else
                     return _mapper.Map<SirFadResponse>(response.Data);
-                }
             }
-            catch (Exception ex) {
+            catch (Exception ex)
+            {
                 _logger.Error(ex.ToMessageAndCompleteStacktrace());
                 return null;
             }
         }
+
     }
 }

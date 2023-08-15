@@ -6,6 +6,7 @@ using Aig.Farmacoterapia.Infrastructure.Configuration;
 using Aig.Farmacoterapia.Infrastructure.Extensions;
 using Aig.Farmacoterapia.Infrastructure.Helpers.ApiClient;
 using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using RestSharp;
 using System.Text.Json.Serialization;
 
@@ -197,51 +198,73 @@ namespace Aig.Farmacoterapia.Infrastructure.Services.Integration.SysFarm
                 };
             }           
         }
-        public async Task<SysFarmResponse?> GetRecords(CancellationToken cancellationToke = default)
+        public async Task GetRecords(CancellationToken cancellationToke = default)
         {
-            AigService? item;
-            if ((item = _unitOfWork.Repository<AigService>().Entities.FirstOrDefault(p => p.Code == _code)) != null) {
-                if (item.LastRun == null) return await GetAllRecords(cancellationToke);
-                var date = item.LastRun?.ToString("yyyy-MM-dd");
-                var request = CreateRequest("api/registros", Method.GET, new Dictionary<string, string> { { "fechaConsulta", date } });
-                var response = await _requester.ExecuteAsync<Root>(request, cancellationToke);
-                if (!response.IsSuccessful || string.IsNullOrEmpty(response.Content) || response.Data == null){
-                    _logger.Error(new Exception(response.Content).ToMessageAndCompleteStacktrace());
-                    return null;
-                }
-                else
+            try
+            {
+                SysFarmResponse? result = null;
+                AigService? service;
+                if ((service = _unitOfWork.Repository<AigService>().Entities.FirstOrDefault(p => p.IsActive && p.Code == _code)) != null)
                 {
-                    item.LastRun = DateTime.Now;
-                    item.LastRetrieved = response.Data.Cantidad;
-                    await _unitOfWork.Repository<AigService>().UpdateAsync(item);
-                    await _unitOfWork.CommitAsync(cancellationToke);
-                    return _mapper.Map<SysFarmResponse>(response.Data);
+                    if (service.LastRun == null)
+                        result = await GetAllRecords(cancellationToke);
+                    else
+                    {
+                        var date = service.LastRun?.ToString("yyyy-MM-dd");
+                        var request = CreateRequest("api/registros", Method.GET, new Dictionary<string, string> { { "fechaConsulta", date } });
+                        var response = await _requester.ExecuteAsync<Root>(request, cancellationToke);
+                        if (!response.IsSuccessful || string.IsNullOrEmpty(response.Content) || response.Data == null)
+                            throw new Exception(response.Content);
+                        else
+                            result = _mapper.Map<SysFarmResponse>(response.Data);
+                    }
+                }
+                if (result?.Status == true && result?.Cantidad > 0)
+                {
+                    await _unitOfWork.ExecuteInTransactionAsync(async (cc) =>
+                    {
+                        await _unitOfWork.BeginTransactionAsync(cc);
+
+                        foreach (var item in result.Registros)
+                        {
+                            AigRecord record;
+                            if ((record = _unitOfWork.Repository<AigRecord>().Entities.AsNoTracking().FirstOrDefault(p => p.Numero == item.Numero)) != null)
+                            {
+                                item.Id = record.Id;
+                                item.DataSheetURL = record.DataSheetURL;
+                                item.ProspectusURL = record.ProspectusURL;
+                                item.PictureData = record.PictureData;
+                            }
+                            await _unitOfWork.Repository<AigRecord>().UpdateAsync(item);
+                        }
+                        // updated last run
+                        service.LastRun = DateTime.Now;
+                        service.LastRetrieved = result.Cantidad;
+                        await _unitOfWork.Repository<AigService>().UpdateAsync(service);
+                        var commit = await _unitOfWork.CommitAsync(cc);
+                    }, default);
                 }
             }
-            return null;
+            catch (Exception ex)
+            {
+                _logger.Error(ex.ToMessageAndCompleteStacktrace());
+            }
+
         }
+
         private async Task<SysFarmResponse?> GetAllRecords(CancellationToken cancellationToke = default)
         {
             try
             {
                 var request = CreateRequest("api/registros", Method.GET);
                 var response = await _requester.ExecuteAsync<Root>(request, cancellationToke);
-                if (!response.IsSuccessful || string.IsNullOrEmpty(response.Content) || response.Data == null){
-                    _logger.Error(new Exception(response.Content).ToMessageAndCompleteStacktrace());
-                    return null;
-                }
-                else {
-                    AigService? item;
-                    if ((item = _unitOfWork.Repository<AigService>().Entities.FirstOrDefault(p => p.Code == _code)) != null) {
-                        item.LastRun = DateTime.Now;
-                        item.LastRetrieved = response.Data.Cantidad;
-                        await _unitOfWork.Repository<AigService>().UpdateAsync(item);
-                        await _unitOfWork.CommitAsync(cancellationToke);
-                    }
+                if (!response.IsSuccessful || string.IsNullOrEmpty(response.Content) || response.Data == null)
+                    throw new Exception(response.Content);
+                else
                     return _mapper.Map<SysFarmResponse>(response.Data);
-                }
             }
-            catch (Exception ex) {
+            catch (Exception ex)
+            {
                 _logger.Error(ex.ToMessageAndCompleteStacktrace());
                 return null;
             }

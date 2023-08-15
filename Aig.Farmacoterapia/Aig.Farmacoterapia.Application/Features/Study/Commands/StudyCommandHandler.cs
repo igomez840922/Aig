@@ -9,6 +9,7 @@ using Aig.Farmacoterapia.Infrastructure.Configuration;
 using Microsoft.Extensions.Options;
 using System.Text.Encodings.Web;
 using Aig.Farmacoterapia.Domain.Entities.Studies.Enums;
+using Aig.Farmacoterapia.Application.Features.Study.Queries;
 
 namespace Aig.Farmacoterapia.Application.Features.Study.Commands
 {
@@ -77,17 +78,41 @@ namespace Aig.Farmacoterapia.Application.Features.Study.Commands
                 request.Model.ProductsMetadata = string.Join("//", request.Model.Medicamentos.Select(p => p.Nombre));
                 var item = _unitOfWork.Repository<AigEstudioDNFD>().GetAll().FirstOrDefault(p => p.AigCodigo.Codigo == request.Model.Codigo);
                 if(item!=null) request.Model.AigEstudioDNFDId = item.Id;
-                if (request.Model.Id > 0)
-                    await _unitOfWork.Repository<AigEstudio>().UpdateAsync(request.Model);
-                else
+
+                //if (request.Model.Id > 0)
+                //    await _unitOfWork.Repository<AigEstudio>().UpdateAsync(request.Model);
+                //else
+                //    await _unitOfWork.Repository<AigEstudio>().AddAsync(request.Model);
+                //answer = Result<bool>.Success(_unitOfWork.Commit());
+
+                var entity = request.Model.Id > 0 ?
+                    await _unitOfWork.Repository<AigEstudio>().UpdateAsync(request.Model) :
                     await _unitOfWork.Repository<AigEstudio>().AddAsync(request.Model);
-                answer = Result<bool>.Success(_unitOfWork.Commit());
+                answer = entity != null && _unitOfWork.Commit() ?
+                    Result<AigEstudio>.Success(entity) :
+                    Result<AigEstudio>.Fail(new List<string>() { "Error durante la operación" });
 
             }
             catch (Exception exc)
             {
                 _logger.Error("Error en la operación solicitada", exc);
                 return Result.Fail(new List<string>() { exc.Message });
+            }
+            return answer;
+        }
+
+        public async Task<Result<AigEstudio>> Handle(GetStudyQuery request, CancellationToken cancellationToken)
+        {
+            var answer = new Result<AigEstudio>();
+            try
+            {
+                var result = await _unitOfWork.Repository<AigEstudio>().GetByIdAsync(request.Id);
+                answer = result == null ? Result<AigEstudio>.Fail() : Result<AigEstudio>.Success(result);
+            }
+            catch (Exception exc)
+            {
+                _logger.Error("Requested operation failed", exc);
+                return Result<AigEstudio>.Fail(new List<string>() { exc.Message });
             }
             return answer;
         }

@@ -319,9 +319,9 @@ namespace Aig.Farmacoterapia.Infrastructure
             //{
             //    var unitOfWork = scope.ServiceProvider.GetService<IUnitOfWork>();
             //    AigService? item;
-            //    if ((item = unitOfWork?.Repository<AigService>().Entities.AsNoTracking().FirstOrDefault(p => p.Code == "SYSFARM")) != null)
+            //    if ((item = unitOfWork?.Repository<AigService>().Entities.AsNoTracking().FirstOrDefault(p => p.IsActive && p.Code == "SYSFARM")) != null)
             //        sysFarmInterval = item.UpdateTime;
-            //    if ((item = unitOfWork?.Repository<AigService>().Entities.AsNoTracking().FirstOrDefault(p => p.Code == "SIRFAD")) != null)
+            //    if ((item = unitOfWork?.Repository<AigService>().Entities.AsNoTracking().FirstOrDefault(p => p.IsActive && p.Code == "SIRFAD")) != null)
             //        sirFadInterval = item.UpdateTime;
             //}
             services.AddQuartz(q =>
@@ -329,10 +329,10 @@ namespace Aig.Farmacoterapia.Infrastructure
                 q.UseMicrosoftDependencyInjectionJobFactory();
                 q.AddJob<SysFarmUpdateJob>("SysFarmUpdateJob", sysFarmInterval);
                 q.AddJob<SirFadUpdateJob>("SirFadUpdateJob", sirFadInterval);
+                
                 //q.AddJob<RecordUpdateJob>("RecordUpdateJob", "0/5 * * * * ?"); // run every 5 seconds
             });
             services.AddQuartzHostedService(q => q.WaitForJobsToComplete = true);
-
             return services;
         }
         public static IServiceCollection RegisterInfrastructureServices(this IServiceCollection services, IConfiguration configuration)

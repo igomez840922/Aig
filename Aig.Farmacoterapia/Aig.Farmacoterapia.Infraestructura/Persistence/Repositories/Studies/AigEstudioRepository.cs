@@ -174,7 +174,7 @@ namespace Aig.Farmacoterapia.Infrastructure.Persistence.Repositories.Studies
                 if (orderByList.Count == 0)
                 {
                     orderByList.Add(new(new() { Direction = SortingDirection.ASC, Priority = 1 }, c => c.Estado));
-                    orderByList.Add(new(new() { Direction = SortingDirection.ASC, Priority = 2 }, c => c.Created));
+                    orderByList.Add(new(new() { Direction = SortingDirection.DESC, Priority = 2 }, c => c.Created));
                 }
 
                 var filterSpec = new StudieSpecification(filterList);

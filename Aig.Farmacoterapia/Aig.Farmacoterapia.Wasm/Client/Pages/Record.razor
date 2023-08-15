@@ -135,7 +135,7 @@
     </HeaderContent>
     <RowTemplate>
         <MudTd>
-            <MudIconButton Icon="@(!context.ShowDetails?Icons.Filled.ArrowRight:@Icons.Filled.ArrowDropDown)" Variant="Variant.Outlined" Color="Color.Primary" Size="Size.Small" OnClick="@(() => ShowBtnPress(context.Id))" />
+            <MudIconButton Icon="@(!context.ShowDetails?Icons.Filled.ArrowCircleRight:@Icons.Filled.ArrowCircleDown)" Variant="Variant.Filled" Color="Color.Primary" Size="Size.Small" OnClick="@(() => context.ShowDetails=!context.ShowDetails)" />
         </MudTd>
         <MudTd DataLabel="No. Registro">@context.Numero</MudTd>
         <MudTd DataLabel="Fech. Emisión">@(string.Format("{0:dd/MM/yyyy}", context.FechaExpedicion))</MudTd>
@@ -195,10 +195,12 @@
 
                         </div>
 
+
                         <div _ngcontent-lil-c210="" class="mx-4">
-                           
+                            
+
                             <div _ngcontent-lil-c210="" class="d-flex mb-2">
-                                <span _ngcontent-lil-c210="" class="font-weight-bold font-size-sm" style="margin-right: 5px;">
+                                <span _ngcontent-lil-c210="" class="font-weight-bold font-size-sm" style="font-weight:bold; margin-right: 5px;">
                                     Registro:
                                 </span>
                                 <span _ngcontent-lil-c210="" class="text-dark-50">
@@ -207,7 +209,7 @@
                             </div>
 
                             <div _ngcontent-lil-c210="" class="d-flex mb-2">
-                                <span _ngcontent-lil-c210="" class="font-weight-bold font-size-sm" style="margin-right: 5px;">
+                                <span _ngcontent-lil-c210="" class="font-weight-bold font-size-sm" style="font-weight:bold; margin-right: 5px;">
                                     Renovación:
                                 </span>
                                 <span _ngcontent-lil-c210="" class="text-dark-50">
@@ -215,20 +217,18 @@
                                 </span>
                             </div>
                             <div _ngcontent-lil-c210="" class="d-flex mb-2">
-                                <span _ngcontent-lil-c210="" class="font-weight-bold font-size-sm" style="margin-right: 5px;">
+                                <span _ngcontent-lil-c210="" class="font-weight-bold font-size-sm" style="font-weight:bold; margin-right: 5px;">
                                     Estado:
                                 </span>
                                 <span _ngcontent-lil-c210="" class="text-dark-50">
                                     @(!string.IsNullOrEmpty(context.Estado) ? context.Estado : "-")
                                 </span>
                             </div>
-                            
-                        </div>
 
-                        <div _ngcontent-lil-c210="" class="mx-4">
+                            <hr>
 
                             <div _ngcontent-lil-c210="" class="d-flex mb-2">
-                                <span _ngcontent-lil-c210="" class="font-weight-bold font-size-sm" style="margin-right: 5px;">
+                                <span _ngcontent-lil-c210="" class="font-weight-bold font-size-sm" style="font-weight:bold;margin-right: 5px;">
                                     Envase:
                                 </span>
                                 <span _ngcontent-lil-c210="" class="text-dark-50">
@@ -236,7 +236,7 @@
                                 </span>
                             </div>
                             <div _ngcontent-lil-c210="" class="d-flex mb-2">
-                                <span _ngcontent-lil-c210="" class="font-weight-bold font-size-sm" style="margin-right: 5px;">
+                                <span _ngcontent-lil-c210="" class="font-weight-bold font-size-sm" style="font-weight:bold;margin-right: 5px;">
                                     Clasificaciónn:
                                 </span>
                                 <span _ngcontent-lil-c210="" class="text-dark-50">
@@ -244,19 +244,18 @@
                                 </span>
                             </div>
                             <div _ngcontent-lil-c210="" class="d-flex mb-2">
-                                <span _ngcontent-lil-c210="" class="font-weight-bold font-size-sm" style="margin-right: 5px;">
-                                   Venta:
+                                <span _ngcontent-lil-c210="" class="font-weight-bold font-size-sm" style="font-weight:bold;margin-right: 5px;">
+                                    Venta:
                                 </span>
                                 <span _ngcontent-lil-c210="" class="text-dark-50">
                                     @(!string.IsNullOrEmpty(@context.Producto?.CondicionVenta) ? @context.Producto?.CondicionVenta : "-")
                                 </span>
                             </div>
-                        </div>
 
-                        <div _ngcontent-lil-c210="" class="mx-4">
+                            <hr>
 
                             <div _ngcontent-lil-c210="" class="d-flex mb-2">
-                                <span _ngcontent-lil-c210="" class="font-weight-bold font-size-sm" style="margin-right: 5px;">
+                                <span _ngcontent-lil-c210="" class="font-weight-bold font-size-sm" style="font-weight:bold;margin-right: 5px;">
                                     Forma Farmacéutica:
                                 </span>
                                 <span _ngcontent-lil-c210="" class="text-dark-50">
@@ -264,7 +263,7 @@
                                 </span>
                             </div>
                             <div _ngcontent-lil-c210="" class="d-flex mb-2">
-                                <span _ngcontent-lil-c210="" class="font-weight-bold font-size-sm" style="margin-right: 5px;">
+                                <span _ngcontent-lil-c210="" class="font-weight-bold font-size-sm" style="font-weight:bold;margin-right: 5px;">
                                     Vía de Administración:
                                 </span>
                                 <span _ngcontent-lil-c210="" class="text-dark-50">
@@ -272,7 +271,7 @@
                                 </span>
                             </div>
                             <div _ngcontent-lil-c210="" class="d-flex mb-2">
-                                <span _ngcontent-lil-c210="" class="font-weight-bold font-size-sm" style="margin-right: 5px;">
+                                <span _ngcontent-lil-c210="" class="font-weight-bold font-size-sm" style="font-weight:bold;margin-right: 5px;">
                                     Vida Útil
                                 </span>
                                 <span _ngcontent-lil-c210="" class="text-dark-50">
@@ -282,7 +281,7 @@
                             @if (context.Presentaciones?.Count > 0)
                             {
                                 <div _ngcontent-lil-c210="" class="d-flex mb-2">
-                                    <span _ngcontent-lil-c210="" class="font-weight-bold font-size-sm" style="margin-right: 5px;">
+                                    <span _ngcontent-lil-c210="" class="font-weight-bold font-size-sm" style="font-weight:bold;margin-right: 5px;">
                                         Presentaciones:
                                     </span>
                                     <span _ngcontent-lil-c210="" class="text-dark-50">
@@ -316,12 +315,10 @@
                                 </div>
                             }
 
-                        </div>
-
-                        <div _ngcontent-lil-c210="" class="mx-4">
+                            <hr>
 
                             <div _ngcontent-lil-c210="" class="d-flex mb-2">
-                                <span _ngcontent-lil-c210="" class="font-weight-bold font-size-sm" style="margin-right: 5px;">
+                                <span _ngcontent-lil-c210="" class="font-weight-bold font-size-sm" style="font-weight:bold;margin-right: 5px;">
                                     Fabricante:
                                 </span>
                                 <span _ngcontent-lil-c210="" class="text-dark-50">
@@ -329,7 +326,7 @@
                                 </span>
                             </div>
                             <div _ngcontent-lil-c210="" class="d-flex mb-2">
-                                <span _ngcontent-lil-c210="" class="font-weight-bold font-size-sm" style="margin-right: 5px;">
+                                <span _ngcontent-lil-c210="" class="font-weight-bold font-size-sm" style="font-weight:bold;margin-right: 5px;">
                                     Dirección:
                                 </span>
                                 <span _ngcontent-lil-c210="" class="text-dark-50">
@@ -337,7 +334,7 @@
                                 </span>
                             </div>
                             <div _ngcontent-lil-c210="" class="d-flex mb-2">
-                                <span _ngcontent-lil-c210="" class="font-weight-bold font-size-sm" style="margin-right: 5px;">
+                                <span _ngcontent-lil-c210="" class="font-weight-bold font-size-sm" style="font-weight:bold;margin-right: 5px;">
                                     País:
                                 </span>
                                 <span _ngcontent-lil-c210="" class="text-dark-50">
@@ -347,7 +344,7 @@
                             @if (!string.IsNullOrEmpty(@context.Distribuidor?.NombreDistribuidorNacional))
                             {
                                 <div _ngcontent-lil-c210="" class="d-flex mb-2">
-                                    <span _ngcontent-lil-c210="" class="font-weight-bold font-size-sm" style="margin-right: 5px;">
+                                    <span _ngcontent-lil-c210="" class="font-weight-bold font-size-sm" style="font-weight:bold;margin-right: 5px;">
                                         Distribuidor:
                                     </span>
                                     <span _ngcontent-lil-c210="" class="text-dark-50">
@@ -358,7 +355,7 @@
                             @if (!string.IsNullOrEmpty(@context.Distribuidor?.NombreTitular))
                             {
                                 <div _ngcontent-lil-c210="" class="d-flex mb-2">
-                                    <span _ngcontent-lil-c210="" class="font-weight-bold font-size-sm" style="margin-right: 5px;">
+                                    <span _ngcontent-lil-c210="" class="font-weight-bold font-size-sm" style="font-weight:bold;margin-right: 5px;">
                                         Titular:
                                     </span>
                                     <span _ngcontent-lil-c210="" class="text-dark-50">
@@ -369,7 +366,7 @@
                             @if (!string.IsNullOrEmpty(@context.Distribuidor?.NombreAcondicionadorPrimario))
                             {
                                 <div _ngcontent-lil-c210="" class="d-flex mb-2">
-                                    <span _ngcontent-lil-c210="" class="font-weight-bold font-size-sm" style="margin-right: 5px;">
+                                    <span _ngcontent-lil-c210="" class="font-weight-bold font-size-sm" style="font-weight:bold;margin-right: 5px;">
                                         Acondicionador Primario:
                                     </span>
                                     <span _ngcontent-lil-c210="" class="text-dark-50">
@@ -382,7 +379,7 @@
                             @if (!string.IsNullOrEmpty(@context.Distribuidor?.NombreAcondicionadorSecundario))
                             {
                                 <div _ngcontent-lil-c210="" class="d-flex mb-2">
-                                    <span _ngcontent-lil-c210="" class="font-weight-bold font-size-sm" style="margin-right: 5px;">
+                                    <span _ngcontent-lil-c210="" class="font-weight-bold font-size-sm" style="font-weight:bold;margin-right: 5px;">
                                         Acondicionador Secundario:
                                     </span>
                                     <span _ngcontent-lil-c210="" class="text-dark-50">
@@ -390,8 +387,11 @@
                                     </span>
                                 </div>
                             }
+
                         </div>
 
+
+                    
                     </div>
 
                 </td>

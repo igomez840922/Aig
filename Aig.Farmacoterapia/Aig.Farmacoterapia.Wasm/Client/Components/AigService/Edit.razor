@@ -60,12 +60,12 @@
                             </MudItem>
                             
                             <MudItem xs="12" md="6" Style="padding:4px !important">
-                                <MudDatePicker DisableToolbar="true" Culture="@CultureInfo.GetCultureInfo("es-Es")" DateFormat="dd/MM/yyyy" Style="border: 1px solid #bbbfc7;padding: 3px 8px 3px 8px;border-radius: 4px;" Label="Última Ejecución" @bind-Date="_modelData.LastRun" />
+                                <MudDatePicker Editable="true" DisableToolbar="true" Culture="@CultureInfo.GetCultureInfo("es-Es")" DateFormat="dd/MM/yyyy" Style="border: 1px solid #bbbfc7;padding: 3px 8px 3px 8px;border-radius: 4px;" Label="Última Ejecución" @bind-Date="_modelData.LastRun" />
                                 <ValidationMessage For="@(() => _modelData.LastRun)" />
                             </MudItem>
 
                             <MudItem xs="12" md="6" Style="padding:4px !important">
-                                <MudTimePicker Label="Hora" AmPm="true" Style="border: 1px solid #bbbfc7;padding: 3px 8px 3px 8px;border-radius: 4px;" @bind-Time="_lastTimeRun" />
+                                <MudTimePicker Editable="true"  Label="Hora" AmPm="true" Style="border: 1px solid #bbbfc7;padding: 3px 8px 3px 8px;border-radius: 4px;" @bind-Time="_lastTimeRun" />
                             </MudItem>
 
                             <MudItem xs="12" md="6" Style="padding: 15px 4px 4px 4px !important;">
@@ -76,6 +76,10 @@
                                 <MudCheckBox @bind-Checked="_modelData.Https" Label="Esquema HTTPS?" Color="Color.Primary"></MudCheckBox>
                             </MudItem>
 
+                            <MudItem xs="12" md="6" Style="padding: 0px 4px 4px 4px !important;">
+                                <MudCheckBox @bind-Checked="_modelData.IsActive" Label="Activo?" Color="Color.Primary"></MudCheckBox>
+                            </MudItem>
+                            
                         </MudGrid>
                     </MudItem>
                 </MudGrid>
