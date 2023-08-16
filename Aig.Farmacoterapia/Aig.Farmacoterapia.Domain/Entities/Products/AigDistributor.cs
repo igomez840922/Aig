@@ -18,7 +18,13 @@ namespace Aig.Farmacoterapia.Domain.Entities.Products
         [JsonPropertyName("NombreAcondicionadorPrimario")]
         public string NombreAcondicionadorPrimario { get; set; }
 
+        [JsonPropertyName("PaisAcondicionadorPrimario")]
+        public string? PaisAcondicionadorPrimario { get; set; }
+
         [JsonPropertyName("NombreAcondicionadorSecundario")]
         public string NombreAcondicionadorSecundario { get; set; }
+
+        [JsonPropertyName("PaisAcondicionadorSecundario")]
+        public string? PaisAcondicionadorSecundario { get; set; }
     }
 }

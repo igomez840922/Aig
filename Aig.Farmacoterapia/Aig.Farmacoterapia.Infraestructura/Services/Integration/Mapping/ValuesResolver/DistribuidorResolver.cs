@@ -16,9 +16,10 @@ namespace Aig.Farmacoterapia.Infrastructure.Services.Integration.Mapping.ValuesR
             if (source.Distribuidores?.Count > 0) {
                 var value=String.Join(",", source.Distribuidores.Select(s=>$"{s.Nombre} ({s.Licencia})"));
                 return  new AigDistributor(){
+                    NombreAcondicionadorPrimario = source.Acondicionador?.AconAntiguo ?? string.Empty,
+                    PaisAcondicionadorPrimario = source.Acondicionador?.AconAntiguoPais ?? string.Empty,
                     NombreTitular = value,
                     NombreDistribuidorNacional = string.Empty,
-                    NombreAcondicionadorPrimario = string.Empty,
                     NombreAcondicionadorSecundario = string.Empty
                 };
             }
