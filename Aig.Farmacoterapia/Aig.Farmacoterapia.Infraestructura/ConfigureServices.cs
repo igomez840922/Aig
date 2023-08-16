@@ -314,7 +314,7 @@ namespace Aig.Farmacoterapia.Infrastructure
         public static IServiceCollection AddQuartz(this IServiceCollection services)
         {
             var sysFarmInterval = 60; var sirFadInterval = 60;
-            //var scopeFactory = services.BuildServiceProvider().GetRequiredService<IServiceScopeFactory>();
+            var scopeFactory = services.BuildServiceProvider().GetRequiredService<IServiceScopeFactory>();
             //using (var scope = scopeFactory.CreateScope())
             //{
             //    var unitOfWork = scope.ServiceProvider.GetService<IUnitOfWork>();
@@ -329,7 +329,6 @@ namespace Aig.Farmacoterapia.Infrastructure
                 q.UseMicrosoftDependencyInjectionJobFactory();
                 q.AddJob<SysFarmUpdateJob>("SysFarmUpdateJob", sysFarmInterval);
                 q.AddJob<SirFadUpdateJob>("SirFadUpdateJob", sirFadInterval);
-                
                 //q.AddJob<RecordUpdateJob>("RecordUpdateJob", "0/5 * * * * ?"); // run every 5 seconds
             });
             services.AddQuartzHostedService(q => q.WaitForJobsToComplete = true);
