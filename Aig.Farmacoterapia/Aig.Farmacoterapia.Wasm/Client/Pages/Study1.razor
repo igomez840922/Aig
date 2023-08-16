@@ -1,4 +1,4 @@
-﻿@page "/studies"
+﻿@page "/studies1"
 @attribute [Authorize]
 @using Aig.Farmacoterapia.Domain.Entities.Enums
 @using Aig.Farmacoterapia.Domain.Entities.Studies
@@ -194,56 +194,52 @@
 <MudTable  HorizontalScrollbar="true" FixedHeader="false" FixedFooter="false" Elevation="25" @ref="_table" Striped="true" SortLabel="name" LoadingProgressColor="Color.Primary" Dense="true" Hover="true" ServerData="@(new Func<TableState, Task<TableData<AigEstudio>>>(DoFetchData))">
       
     <HeaderContent>
-        <MudTh style="width:3px;"></MudTh>
-        <MudTh style="width:3px;"></MudTh>
-        <MudTh> <MudTableSortLabel Style="width:150px !important" SortLabel="status" T="AigEstudio">Estado</MudTableSortLabel></MudTh>
+        <MudTh></MudTh>
+        <MudTh> <MudTableSortLabel Style="width:200px !important" SortLabel="status" T="AigEstudio">Estado</MudTableSortLabel></MudTh>
         <MudTh> <MudTableSortLabel Style="width:100px !important" SortLabel="admissionDate" T="AigEstudio">Fecha de Ingreso</MudTableSortLabel></MudTh>
-        <MudTh><MudInputLabel Style="width:120px !important">Código del protocolo de investigación</MudInputLabel></MudTh>
-        <MudTh><MudInputLabel Style="width:400px !important">Título del protocolo de investigación</MudInputLabel></MudTh>
+        <MudTh><MudInputLabel Style="width:200px !important">Código del protocolo de investigación</MudInputLabel></MudTh>
+        <MudTh><MudInputLabel Style="width:500px !important">Título del protocolo de investigación</MudInputLabel></MudTh>
 
         <MudTh><MudTableSortLabel Style="width:100px" SortLabel="assignmentDate" T="AigEstudio">Fecha de Asignación</MudTableSortLabel></MudTh>
-       @* <MudTh><MudTableSortLabel Style="width:100px" SortLabel="evaluationDate" T="AigEstudio">Fecha de Evaluación</MudTableSortLabel></MudTh>*@
-        <MudTh><MudInputLabel Style="width:80px">Días transcurridos</MudInputLabel></MudTh>
+        <MudTh><MudTableSortLabel Style="width:100px" SortLabel="evaluationDate" T="AigEstudio">Fecha de Evaluación</MudTableSortLabel></MudTh>
+        <MudTh><MudInputLabel Style="width:100px">Días transcurridos</MudInputLabel></MudTh>
         <MudTh><MudInputLabel Style="width:100px !important">Evaluadores</MudInputLabel></MudTh>
-       @* <MudTh> <MudInputLabel Style="width:150px !important">Nota de Evaluación</MudInputLabel> </MudTh>
+        <MudTh> <MudInputLabel Style="width:150px !important">Nota de Evaluación</MudInputLabel> </MudTh>
         <MudTh><MudInputLabel Style="width:400px">Observaciones por el evaluador</MudInputLabel></MudTh>
         <MudTh><MudInputLabel Style="width:200px">Investigador principal</MudInputLabel></MudTh>
         <MudTh><MudInputLabel Style="width:200px">Patrocinador del estudio</MudInputLabel></MudTh>
         <MudTh><MudInputLabel Style="width:200px">Duración del estudio</MudInputLabel></MudTh>
         <MudTh><MudInputLabel Style="width:100px">Número de participantes en panamá</MudInputLabel></MudTh>
-        <MudTh><MudInputLabel Style="width:200px">Centro de investigación</MudInputLabel></MudTh>*@
-       @* <MudTh><MudTableSortLabel Style="width:80px" SortLabel="created" T="AigEstudio">Creado</MudTableSortLabel></MudTh>*@
-        
+        <MudTh><MudInputLabel Style="width:200px">Centro de investigación</MudInputLabel></MudTh>
+        <MudTh><MudTableSortLabel Style="width:200px" SortLabel="created" T="AigEstudio">Creado</MudTableSortLabel></MudTh>
+        <MudTh></MudTh>
     </HeaderContent>
     <RowTemplate>
-        <MudTd>
-            <MudIconButton Icon="@(!context.ShowDetails?Icons.Filled.ArrowCircleRight:@Icons.Filled.ArrowCircleDown)" Variant="Variant.Filled" Color="Color.Primary" Size="Size.Small" OnClick="@(() => context.ShowDetails=!context.ShowDetails)" />
-        </MudTd>
         <MudTd>
 
             <MudMenu Icon="@Icons.Material.Filled.Settings" Color="Color.Default">
                 <MudMenuItem Disabled=(!IsEdit(context.Evaluators)) Icon="@Icons.Material.Filled.Edit" OnClick="@(() => AddEdit(@context.Id))" OnTouch="@(() => AddEdit(@context.Id))">Editar</MudMenuItem>
                 <MudMenuItem Disabled="!IsAddAndEvaluators()" Style="border-bottom:1px solid #E4E6EF !important;" Icon="@Icons.Material.Filled.HowToReg" OnClick="@(() => SetEvaluators(@context.Id))" OnTouch="@(() => SetEvaluators(@context.Id))">Evaluadores</MudMenuItem>
 
-                @if (context.Estado != EstadoEstudio.Pendiente && context.Nota?.Lines?.Count > 0)
+               @if (context.Estado != EstadoEstudio.Pendiente && context.Nota?.Lines?.Count>0)
                 {
                     <MudMenuItem Target="_blank" Disabled=(!IsEdit(context.Evaluators)) Style="border-bottom:1px solid #E4E6EF !important;" IconColor="Color.Primary" Icon="@Icons.Filled.PictureAsPdf"
-                                 Link="@($"{_appConfiguration.ApiUrl}{AppConstants.ReportEndpoints.NoteReportURL(context.Id)}")">
+                             Link="@($"{_appConfiguration.ApiUrl}{AppConstants.ReportEndpoints.NoteReportURL(context.Id)}")">
                         Exportar Evaluación
                     </MudMenuItem>
-                }
 
+                }
                 <MudMenuItem Disabled=(!IsCopy()) Icon="@Icons.Material.Filled.ContentCopy" OnClick="@(() => Clone(@context.Id))" OnTouch="@(() => Clone(@context.Id))">
                     Clonar
                 </MudMenuItem>
-
                 @if (IsDelete())
                 {
-                    <MudMenuItem Style="border-bottom:1px solid #E4E6EF !important;" IconColor="Color.Error" Icon="@Icons.Material.Filled.Delete" OnClick="@(() => Delete(@context.Id))" OnTouch="@(() => Delete(@context.Id))">Eliminar</MudMenuItem>
+                  <MudMenuItem  Style="border-bottom:1px solid #E4E6EF !important;" IconColor="Color.Error" Icon="@Icons.Material.Filled.Delete" OnClick="@(() => Delete(@context.Id))" OnTouch="@(() => Delete(@context.Id))">Eliminar</MudMenuItem>
                 }
             </MudMenu>
 
         </MudTd>
+
         <MudTd DataLabel="Estado">
 
             @switch (context.Estado)
@@ -322,7 +318,7 @@
            
         </MudTd>
 
-      @*  <MudTd DataLabel="Fecha de Evaluación">
+        <MudTd DataLabel="Fecha de Evaluación">
             @if (context.Estado != EstadoEstudio.Pendiente)
             {
                 <MudBadge Content="@(string.Format("{0:dd/MM/yyyy}", @context.Nota?.FechaEvaluacion))" Color="Color.Tertiary" Overlap="true" Class="mx-2 my-2">
@@ -333,7 +329,7 @@
                 <MudBadge Content="@("---")" Color="Color.Default" Overlap="true" Class="mx-2 my-2">
                 </MudBadge>
             }
-        </MudTd>*@
+        </MudTd>
 
         <MudTd DataLabel="Días transcurridos">
 
@@ -393,7 +389,7 @@
             }
         </MudTd>
 
-      @*  <MudTd DataLabel="Nota de Evaluación">
+        <MudTd DataLabel="Nota de Evaluación">
             @if (context.Estado != EstadoEstudio.Pendiente && !string.IsNullOrEmpty(@context.Nota?.Observaciones))
             {
                 <MudBadge Content="@context.Nota?.GetNoteCode(@context.Id)" Color="Color.Tertiary" Overlap="true" Class="mx-2 my-2">
@@ -423,165 +419,39 @@
         <MudTd DataLabel="Duración del estudio">@context.Duracion</MudTd>
         <MudTd DataLabel="Número de participantes en panamá">@context.Participantes</MudTd>
 
-        <MudTd DataLabel="Centro de investigación">@context.CentroInvestigacion</MudTd>*@
+        <MudTd DataLabel="Centro de investigación">@context.CentroInvestigacion</MudTd>
+        <MudTd DataLabel="Creado">@(string.Format("{0:dd/MM/yyyy}", context.Created))</MudTd>
+        <MudTd>
 
-       @* <MudTd DataLabel="Creado">@(string.Format("{0:dd/MM/yyyy}", context.Created))</MudTd>*@
+            <MudMenu Icon="@Icons.Material.Filled.Settings" Color="Color.Default">
+                <MudMenuItem Disabled=(!IsEdit(context.Evaluators)) Icon="@Icons.Material.Filled.Edit" OnClick="@(() => AddEdit(@context.Id))" OnTouch="@(() => AddEdit(@context.Id))">Editar</MudMenuItem>
+                <MudMenuItem Disabled="!IsAddAndEvaluators()" Style="border-bottom:1px solid #E4E6EF !important;" Icon="@Icons.Material.Filled.HowToReg" OnClick="@(() => SetEvaluators(@context.Id))" OnTouch="@(() => SetEvaluators(@context.Id))">Evaluadores</MudMenuItem>
 
-     
+                @if (context.Estado != EstadoEstudio.Pendiente && context.Nota?.Lines?.Count>0)
+                {
+                    <MudMenuItem Target="_blank" Disabled=(!IsEdit(context.Evaluators)) Style="border-bottom:1px solid #E4E6EF !important;" IconColor="Color.Primary" Icon="@Icons.Filled.PictureAsPdf"
+                             Link="@($"{_appConfiguration.ApiUrl}{AppConstants.ReportEndpoints.NoteReportURL(context.Id)}")">
+                        Exportar Evaluación
+                    </MudMenuItem>
+                }
+
+                <MudMenuItem Disabled=(!IsCopy()) Icon="@Icons.Material.Filled.ContentCopy" OnClick="@(() => Clone(@context.Id))" OnTouch="@(() => Clone(@context.Id))">
+                    Clonar
+                </MudMenuItem>
+
+                @if (IsDelete())
+                {
+                  <MudMenuItem  Style="border-bottom:1px solid #E4E6EF !important;" IconColor="Color.Error" Icon="@Icons.Material.Filled.Delete" OnClick="@(() => Delete(@context.Id))" OnTouch="@(() => Delete(@context.Id))">Eliminar</MudMenuItem>
+                }
+            </MudMenu>
+
+        </MudTd>
     </RowTemplate>
     <ChildRowContent>
         @if (context.ShowDetails)
         {
             <MudTr>
-                <td colspan="9">
 
-                    <div style="background-color: #f2eefc;" _ngcontent-lil-c210="" class="py-4 d-flex ng-star-inserted">
-
-                        <div _ngcontent-lil-c210="" class="mx-4">
-                            <div _ngcontent-lil-c210="" class="d-flex mb-2">
-                                <span _ngcontent-lil-c210="" class="font-weight-bold font-size-sm" style="font-weight:bold; margin-right: 5px;">
-                                    Fecha de Creación:
-                                </span>
-                                <span _ngcontent-lil-c210="" class="text-dark-50">
-                                   @(string.Format("{0:dd/MM/yyyy}", context.Created))
-                                </span>
-                            </div>
-
-                            <hr>
-
-                            <div _ngcontent-lil-c210="" class="d-flex mb-2">
-                                <span _ngcontent-lil-c210="" class="font-weight-bold font-size-sm" style="font-weight:bold; margin-right: 5px;">
-                                    Fecha de Evaluación:&nbsp;
-                                </span>
-                                <span _ngcontent-lil-c210="" class="text-dark-50">
-                                    @if (context.Estado != EstadoEstudio.Pendiente)
-                                    {
-                                        <MudBadge Content="@(string.Format("{0:dd/MM/yyyy}", @context.Nota?.FechaEvaluacion))" Color="Color.Tertiary" Overlap="true" Class="mx-2 my-2">
-                                        </MudBadge>
-                                    }
-                                    else
-                                    {
-                                        @("---")
-                                    }
-                                </span>
-                            </div>
-                           
-                            <div _ngcontent-lil-c210="" class="d-flex mb-2">
-                                <span _ngcontent-lil-c210="" class="font-weight-bold font-size-sm" style="font-weight:bold; margin-right: 5px;">
-                                    Nota de Evaluación:&nbsp;
-                                </span>
-                                <span _ngcontent-lil-c210="" class="text-dark-50">
-                                    @if (context.Estado != EstadoEstudio.Pendiente && !string.IsNullOrEmpty(@context.Nota?.Observaciones))
-                                    {
-                                        <MudBadge Content="@context.Nota?.GetNoteCode(@context.Id)" Color="Color.Tertiary" Overlap="true" Class="mx-2 my-2">
-                                        </MudBadge>
-                                    }
-                                    else
-                                    {
-                                        @("---")
-                                    }
-                                </span>
-                            </div>
-
-                            <div _ngcontent-lil-c210="" class="d-flex mb-2">
-                                <span _ngcontent-lil-c210="" class="font-weight-bold font-size-sm" style="font-weight:bold; margin-right: 5px;">
-                                    Observaciones por el evaluador:
-                                </span>
-                                <span _ngcontent-lil-c210="" class="text-dark-50">
-                                    @if (!string.IsNullOrEmpty(@context.Nota?.Observaciones))
-                                    {
-                                        @context.Nota?.Observaciones
-                                    }
-                                    else
-                                    {
-                                        @("---")
-                                    }
-                                </span>
-                            </div>
-
-                            <hr>
-
-                            <div _ngcontent-lil-c210="" class="d-flex mb-2">
-                                <span _ngcontent-lil-c210="" class="font-weight-bold font-size-sm" style="font-weight:bold; margin-right: 5px;">
-                                    Centro de investigación:
-                                </span>
-                                <span _ngcontent-lil-c210="" class="text-dark-50">
-                                    @if (!string.IsNullOrEmpty(@context.CentroInvestigacion))
-                                    {
-                                        @context.CentroInvestigacion
-                                    }
-                                    else
-                                    {
-                                        @("---")
-                                    }
-                                </span>
-                            </div>
-
-                            <div _ngcontent-lil-c210="" class="d-flex mb-2">
-                                <span _ngcontent-lil-c210="" class="font-weight-bold font-size-sm" style="font-weight:bold; margin-right: 5px;">
-                                    Investigador principal:
-                                </span>
-                                <span _ngcontent-lil-c210="" class="text-dark-50">
-                                    @if (!string.IsNullOrEmpty(@context.InvestigadorPrincipal))
-                                    {
-                                        @context.InvestigadorPrincipal
-                                    }
-                                    else
-                                    {
-                                        @("---")
-                                    }
-                                </span>
-                            </div>
-
-                            <div _ngcontent-lil-c210="" class="d-flex mb-2">
-                                <span _ngcontent-lil-c210="" class="font-weight-bold font-size-sm" style="font-weight:bold; margin-right: 5px;">
-                                    Patrocinador del estudio:
-                                </span>
-                                <span _ngcontent-lil-c210="" class="text-dark-50">
-                                    @if (!string.IsNullOrEmpty(@context.Patrocinador))
-                                    {
-                                        @context.Patrocinador
-                                    }
-                                    else
-                                    {
-                                        @("---")
-                                    }
-                                </span>
-                            </div>
-
-                            <div _ngcontent-lil-c210="" class="d-flex mb-2">
-                                <span _ngcontent-lil-c210="" class="font-weight-bold font-size-sm" style="font-weight:bold; margin-right: 5px;">
-                                    Duración del estudio:
-                                </span>
-                                <span _ngcontent-lil-c210="" class="text-dark-50">
-                                    @if (!string.IsNullOrEmpty(@context.Duracion))
-                                    {
-                                        @context.Duracion
-                                    }
-                                    else
-                                    {
-                                        @("---")
-                                    }
-                                </span>
-                            </div>
-
-                            <div _ngcontent-lil-c210="" class="d-flex mb-2">
-                                <span _ngcontent-lil-c210="" class="font-weight-bold font-size-sm" style="font-weight:bold; margin-right: 5px;">
-                                   Número de participantes en panamá:
-                                </span>
-                                <span _ngcontent-lil-c210="" class="text-dark-50">
-                                   
-                                   @context.Participantes
-                                   
-                                </span>
-                            </div>
-
-
-                        </div>
-
-                    </div>
-
-                </td>
             </MudTr>
         }
     </ChildRowContent>
