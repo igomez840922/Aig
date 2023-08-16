@@ -139,6 +139,31 @@ namespace Aig.FarmacoVigilancia.Components.RFV
             }
             this.InvokeAsync(StateHasChanged);
         }
+
+
+        AttachmentTB selectedAttachment { get; set; } = null;
+        bool DeleteDialog { get; set; } = false;
+        private async Task OnDeleteAttachment(AttachmentTB _attachment = null)
+        {
+            bus.Subscribe<Aig.FarmacoVigilancia.Events.DeleteConfirmationDlg.DeleteConfirmationCloseEvent>(DeleteAttachmentConfirmationCloseEventHandler);
+            selectedAttachment = _attachment;
+            DeleteDialog = true;
+
+            await this.InvokeAsync(StateHasChanged);
+        }
+        protected void DeleteAttachmentConfirmationCloseEventHandler(MessageArgs args)
+        {
+            DeleteDialog = false;
+            bus.UnSubscribe<Aig.FarmacoVigilancia.Events.DeleteConfirmationDlg.DeleteConfirmationCloseEvent>(DeleteAttachmentConfirmationCloseEventHandler);
+            var message = args.GetMessage<Aig.FarmacoVigilancia.Events.DeleteConfirmationDlg.DeleteConfirmationCloseEvent>();
+            if (message.YesNo)
+            {
+                RemoveAttachment(selectedAttachment);
+            }
+
+            this.InvokeAsync(StateHasChanged);
+        }
+
     }
 
 }

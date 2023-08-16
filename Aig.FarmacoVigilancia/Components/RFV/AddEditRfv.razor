@@ -189,7 +189,7 @@
                                                                 <NavLink href="@dt.Url" target="_blank">@languageContainerService.Keys["ViewAttachemnt"]</NavLink>
                                                             </td>
                                                             <td style="text-align:right">
-                                                                <button type="button" class="btn btn-danger" @onclick="(e)=>{RemoveAttachment(dt);}">@languageContainerService.Keys["Delete"]</button>
+                                                                <button type="button" class="btn btn-danger" @onclick="(e)=>{OnDeleteAttachment(dt);}">@languageContainerService.Keys["Delete"]</button>
 
                                                             </td>
                                                         </tr>
@@ -231,6 +231,11 @@
     @if (openAttachment)
     {
         <Aig.FarmacoVigilancia.Components.Attachments.AddEditAttachment attachment="@attachment"></Aig.FarmacoVigilancia.Components.Attachments.AddEditAttachment>
+    }
+
+    @if (DeleteDialog)
+    {
+        <Aig.FarmacoVigilancia.Components.DeleteConfirmDialog2></Aig.FarmacoVigilancia.Components.DeleteConfirmDialog2>
     }
 }
 

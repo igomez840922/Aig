@@ -246,7 +246,7 @@
                                                                 <NavLink href="@dt.Url" target="_blank">@languageContainerService.Keys["ViewAttachemnt"]</NavLink>
                                                             </td>
                                                             <td style="text-align:right">
-                                                                <button type="button" class="btn btn-danger" @onclick="(e)=>{RemoveAttachment(dt);}">@languageContainerService.Keys["Delete"]</button>
+                                                                <button type="button" class="btn btn-danger" @onclick="(e)=>{OnDeleteAttachment(dt);}">@languageContainerService.Keys["Delete"]</button>
 
                                                             </td>
                                                         </tr>
@@ -300,6 +300,10 @@
 @if (showSearchMedicine)
 {
     <Aig.FarmacoVigilancia.Components.SearchMedicines.Search></Aig.FarmacoVigilancia.Components.SearchMedicines.Search>
+}
+@if (DeleteDialog)
+{
+    <Aig.FarmacoVigilancia.Components.DeleteConfirmDialog2></Aig.FarmacoVigilancia.Components.DeleteConfirmDialog2>
 }
 
 <div class="modal-backdrop fade show"></div>

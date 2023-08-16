@@ -82,11 +82,11 @@ namespace Aig.FarmacoVigilancia.Components.Pmr
             {               
                 if (Pmr.EvaluadorId == null)
                 {
-                    Pmr.EvaluadorId = lEvaluators?.FirstOrDefault()?.Id ?? null;
-                    if (Pmr.EvaluadorId != null)
-                    {
-                        Pmr.Evaluador = lEvaluators.Where(x => x.Id == Pmr.EvaluadorId.Value).FirstOrDefault();
-                    }
+                    //Pmr.EvaluadorId = lEvaluators?.FirstOrDefault()?.Id ?? null;
+                    //if (Pmr.EvaluadorId != null)
+                    //{
+                    //    Pmr.Evaluador = lEvaluators.Where(x => x.Id == Pmr.EvaluadorId.Value).FirstOrDefault();
+                    //}
                 }
             }
 
@@ -214,6 +214,29 @@ namespace Aig.FarmacoVigilancia.Components.Pmr
             this.InvokeAsync(StateHasChanged);
         }
 
+
+        AttachmentTB selectedAttachment { get; set; } = null;
+        bool DeleteDialog { get; set; } = false;
+        private async Task OnDeleteAttachment(AttachmentTB _attachment = null)
+        {
+            bus.Subscribe<Aig.FarmacoVigilancia.Events.DeleteConfirmationDlg.DeleteConfirmationCloseEvent>(DeleteAttachmentConfirmationCloseEventHandler);
+            selectedAttachment = _attachment;
+            DeleteDialog = true;
+
+            await this.InvokeAsync(StateHasChanged);
+        }
+        protected void DeleteAttachmentConfirmationCloseEventHandler(MessageArgs args)
+        {
+            DeleteDialog = false;
+            bus.UnSubscribe<Aig.FarmacoVigilancia.Events.DeleteConfirmationDlg.DeleteConfirmationCloseEvent>(DeleteAttachmentConfirmationCloseEventHandler);
+            var message = args.GetMessage<Aig.FarmacoVigilancia.Events.DeleteConfirmationDlg.DeleteConfirmationCloseEvent>();
+            if (message.YesNo)
+            {
+                RemoveAttachment(selectedAttachment);
+            }
+
+            this.InvokeAsync(StateHasChanged);
+        }
 
         /////////
         ///        
