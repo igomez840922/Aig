@@ -2206,7 +2206,7 @@ namespace Aig.Auditoria.Services
                                     }
                                 });
                             }
-
+                                                        
                             if (inspection.InspRutinaVigFarmacia.AreaFisicaFarmacia != null)
                             {
                                 column.Item().PaddingVertical(5).AlignLeft().Text(" ");
@@ -2229,6 +2229,51 @@ namespace Aig.Auditoria.Services
                                     if (inspection.InspRutinaVigFarmacia?.AreaFisicaFarmacia?.LContenido?.Count > 0)
                                     {
                                         foreach (var dat in inspection.InspRutinaVigFarmacia.AreaFisicaFarmacia.LContenido)
+                                        {
+                                            if (dat.IsHeader)
+                                            {
+                                                table.Cell().ColumnSpan(3).Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
+                                            }
+                                            else
+                                            {
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
+                                                if (dat.LEvaluacion?.Count > 0)
+                                                {
+                                                    foreach (var eva in dat.LEvaluacion)
+                                                    {
+                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
+                                                    }
+                                                }
+                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Observaciones);
+                                            }
+                                        }
+
+                                    }
+                                });
+                            }
+
+                            if (inspection.InspRutinaVigFarmacia.RegMovimientoExistencia != null)
+                            {
+                                column.Item().PaddingVertical(5).AlignLeft().Text(" ");
+                                //column.Item().AlignLeft().Text(string.Format("REGISTRO DE MOVIMIENTO DE EXISTENCIA".ToUpper())).Bold();
+                                column.Item().Table(table =>
+                                {
+                                    table.ColumnsDefinition(columns =>
+                                    {
+                                        columns.RelativeColumn((float)3);
+                                        columns.RelativeColumn((float)1);
+                                        columns.RelativeColumn((float)4);
+                                    });
+                                    table.Header(header =>
+                                    {
+                                        header.Cell().ColumnSpan(3).Border(1).BorderColor(Colors.Black).DefaultTextStyle(cellTextStyle).Background("#011E56").AlignLeft().Padding(3).Text("REGISTRO DE MOVIMIENTO DE EXISTENCIA".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).DefaultTextStyle(cellTextStyle).Background("#011E56").AlignCenter().Padding(3).Text("PREGUNTA".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).DefaultTextStyle(cellTextStyle).Background("#011E56").AlignCenter().Padding(3).Text("EVALUACIÓN".ToUpper());
+                                        header.Cell().Border(1).BorderColor(Colors.Black).DefaultTextStyle(cellTextStyle).Background("#011E56").AlignCenter().Padding(3).Text("OBSERVACIóN".ToUpper());
+                                    });
+                                    if (inspection.InspRutinaVigFarmacia?.RegMovimientoExistencia?.LContenido?.Count > 0)
+                                    {
+                                        foreach (var dat in inspection.InspRutinaVigFarmacia.RegMovimientoExistencia.LContenido)
                                         {
                                             if (dat.IsHeader)
                                             {
@@ -2297,50 +2342,6 @@ namespace Aig.Auditoria.Services
                                 });
                             }
 
-                            if (inspection.InspRutinaVigFarmacia.RegMovimientoExistencia != null)
-                            {
-                                column.Item().PaddingVertical(5).AlignLeft().Text(" ");
-                                //column.Item().AlignLeft().Text(string.Format("REGISTRO DE MOVIMIENTO DE EXISTENCIA".ToUpper())).Bold();
-                                column.Item().Table(table =>
-                                {
-                                    table.ColumnsDefinition(columns =>
-                                    {
-                                        columns.RelativeColumn((float)3);
-                                        columns.RelativeColumn((float)1);
-                                        columns.RelativeColumn((float)4);
-                                    });
-                                    table.Header(header =>
-                                    {
-                                        header.Cell().ColumnSpan(3).Border(1).BorderColor(Colors.Black).DefaultTextStyle(cellTextStyle).Background("#011E56").AlignLeft().Padding(3).Text("REGISTRO DE MOVIMIENTO DE EXISTENCIA".ToUpper());
-                                        header.Cell().Border(1).BorderColor(Colors.Black).DefaultTextStyle(cellTextStyle).Background("#011E56").AlignCenter().Padding(3).Text("PREGUNTA".ToUpper());
-                                        header.Cell().Border(1).BorderColor(Colors.Black).DefaultTextStyle(cellTextStyle).Background("#011E56").AlignCenter().Padding(3).Text("EVALUACIÓN".ToUpper());
-                                        header.Cell().Border(1).BorderColor(Colors.Black).DefaultTextStyle(cellTextStyle).Background("#011E56").AlignCenter().Padding(3).Text("OBSERVACIóN".ToUpper());
-                                    });
-                                    if (inspection.InspRutinaVigFarmacia?.RegMovimientoExistencia?.LContenido?.Count > 0)
-                                    {
-                                        foreach (var dat in inspection.InspRutinaVigFarmacia.RegMovimientoExistencia.LContenido)
-                                        {
-                                            if (dat.IsHeader)
-                                            {
-                                                table.Cell().ColumnSpan(3).Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).Text(dat.Titulo);
-                                            }
-                                            else
-                                            {
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Titulo);
-                                                if (dat.LEvaluacion?.Count > 0)
-                                                {
-                                                    foreach (var eva in dat.LEvaluacion)
-                                                    {
-                                                        table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(DataModel.Helper.Helper.GetDescription(eva.Evaluacion));
-                                                    }
-                                                }
-                                                table.Cell().Border(1).BorderColor(Colors.Black).AlignLeft().Padding(3).ShowOnce().Text(dat.Observaciones);
-                                            }
-                                        }
-
-                                    }
-                                });
-                            }
 
                             if (inspection.InspRutinaVigFarmacia.RegMovimientoExistencia2 != null)
                             {

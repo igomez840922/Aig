@@ -361,7 +361,7 @@ namespace DataModel
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){
-                        Titulo = "Los registros de temperatura deben ser verificados por personal responsable en intervalos definidos",
+                        Titulo = "Existe un sistema para el control de fauna nociva",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
                     },
                         new ContenidoPreguntas(){

@@ -363,10 +363,10 @@ namespace DataModel
              };
         }
 
-        public void Inicializa_RegMovimientoExistencia()
+        public void Inicializa_RegMovimientoExistencia2()
         {
-            RegMovimientoExistencia = new AUD_ContenidoGenerico();
-            RegMovimientoExistencia.LContenido = new List<ContenidoPreguntas>() {
+            RegMovimientoExistencia2 = new AUD_ContenidoGenerico();
+            RegMovimientoExistencia2.LContenido = new List<ContenidoPreguntas>() {
                         new ContenidoPreguntas(){
                         Titulo = "Se mantiene un registro para el manejo de las sustancias controladas",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
@@ -428,10 +428,10 @@ namespace DataModel
              };
         }
 
-        public void Inicializa_RegMovimientoExistencia2()
+        public void Inicializa_RegMovimientoExistencia()
         {
-            RegMovimientoExistencia2 = new AUD_ContenidoGenerico();
-            RegMovimientoExistencia2.LContenido = new List<ContenidoPreguntas>() {
+            RegMovimientoExistencia = new AUD_ContenidoGenerico();
+            RegMovimientoExistencia.LContenido = new List<ContenidoPreguntas>() {
                         new ContenidoPreguntas(){
                         Titulo = "Se encuentra el Libro Récord en el establecimiento a disposición del inspector",
                         LEvaluacion = new List<OpcionEvaluacion>(){ new OpcionEvaluacion()},
