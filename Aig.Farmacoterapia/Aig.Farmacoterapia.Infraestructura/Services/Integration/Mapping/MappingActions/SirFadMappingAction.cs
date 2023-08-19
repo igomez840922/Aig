@@ -16,12 +16,12 @@ namespace Aig.Farmacoterapia.Infrastructure.Services.Integration.Mapping.Mapping
         public void Process(Registro source, AigRecord destination, ResolutionContext context)
         {
             try
-            {
-                if (!string.IsNullOrEmpty(source.FechaExpedicion))
+            {   
+                if (!string.IsNullOrEmpty(source?.FechaExpedicion))
                     destination.FechaExpedicion = DateTime.ParseExact(source.FechaExpedicion, "yyyy-MM-dd", CultureInfo.InvariantCulture);
-                if (!string.IsNullOrEmpty(source.FechaVencimiento))
+                if (!string.IsNullOrEmpty(source?.FechaVencimiento))
                     destination.FechaVencimiento = DateTime.ParseExact(source.FechaVencimiento, "yyyy-MM-dd", CultureInfo.InvariantCulture);
-                if (!string.IsNullOrEmpty(source.FechaUltimaActualizacion))
+                if (!string.IsNullOrEmpty(source?.FechaUltimaActualizacion))
                     destination.FechaUltimaActualizacion = DateTime.ParseExact(source.FechaUltimaActualizacion, "yyyy-MM-dd", CultureInfo.InvariantCulture);
             }
             catch { }

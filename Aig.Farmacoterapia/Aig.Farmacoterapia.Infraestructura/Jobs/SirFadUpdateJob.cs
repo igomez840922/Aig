@@ -1,7 +1,5 @@
-﻿using Aig.Farmacoterapia.Domain.Entities.Products;
-using Aig.Farmacoterapia.Domain.Interfaces;
+﻿using Aig.Farmacoterapia.Domain.Interfaces;
 using Aig.Farmacoterapia.Domain.Interfaces.Integration;
-using Microsoft.EntityFrameworkCore;
 using Quartz;
 
 namespace Aig.Farmacoterapia.Infrastructure.Jobs

@@ -2,13 +2,21 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Security.Principal;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using Aig.Farmacoterapia.Domain.Common;
+using Aig.Farmacoterapia.Domain.Entities.Products;
 using Aig.Farmacoterapia.Domain.Interfaces;
 using Aig.Farmacoterapia.Domain.Specifications.Base;
 using Aig.Farmacoterapia.Infrastructure.Extensions;
+using IdentityModel;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
+using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using Polly;
 
 namespace Aig.Farmacoterapia.Infrastructure.Persistence.Repositories
 {
@@ -71,11 +79,37 @@ namespace Aig.Farmacoterapia.Infrastructure.Persistence.Repositories
             var result = await _dbContext.Set<T>().OrderBy(order).WhereBy(filter).PaginatedByAsync(args.PageIndex, args.PageSize);
             return result;
         }
-
         public async Task<T> UpdateAsync(T entity)
         {
             var result = _dbContext.Set<T>().Update(entity);
             return entity;
         }
+        public async Task<T> UpdateDeepAsync(T entity, params Tuple<Expression<Func<T, object>>,object> [] navigation)
+        {
+
+            var dbEntity = await GetByIdAsync(entity.Id);
+            if (dbEntity != null)
+            {
+                var dbEntry = _dbContext.Entry<T>(dbEntity);
+                dbEntry.CurrentValues.SetValues(entity);
+                foreach (var property in navigation){
+                    var propertyName = property.Item1.GetPropertyAccess().Name;
+                    var currentNavigation = dbEntry.Reference(propertyName);
+                    currentNavigation?.TargetEntry?.CurrentValues.SetValues(property.Item2);
+                }
+            }
+            else
+            {
+                _dbContext.Set<T>().Attach(entity);
+                _dbContext.Set<T>().Add(entity);
+            }
+            return entity;
+        }
+        public T UpdateDeep(T entity, params Tuple<Expression<Func<T, object>>, object>[] navigation)
+        {
+            var task = Task.Run(async () => await UpdateDeepAsync(entity, navigation));
+            return task.Result;
+        }
+       
     }
 }

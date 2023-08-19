@@ -1,4 +1,5 @@
-﻿using Aig.Farmacoterapia.Domain.Entities.Products;
+﻿using Aig.Farmacoterapia.Domain.Entities.Enums;
+using Aig.Farmacoterapia.Domain.Entities.Products;
 using Aig.Farmacoterapia.Domain.Integration.SirFad;
 using Aig.Farmacoterapia.Domain.Integration.SysFarm;
 using Aig.Farmacoterapia.Domain.Interfaces;
@@ -10,6 +11,7 @@ using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json.Linq;
 using RestSharp;
+using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
@@ -243,8 +245,7 @@ namespace Aig.Farmacoterapia.Infrastructure.Services.Integration.SirFad
                 {
                     if (service.LastRun == null)
                         result = await GetAllRecords(cancellationToke);
-                    else
-                    {
+                    else {
                         var date = service.LastRun?.ToString("yyyy-MM-dd");
                         var request = CreateRequest("sirfadwebapi/api/dnfdaig/GetRegistrosFarmacovigilancia", Method.GET, new Dictionary<string, string> { { "fechaConsulta", date } });
                         var response = await _requester.ExecuteAsync<Root>(request, cancellationToke);
@@ -254,30 +255,42 @@ namespace Aig.Farmacoterapia.Infrastructure.Services.Integration.SirFad
                             result = _mapper.Map<SirFadResponse>(response.Data);
                     }
                 }
-                if (result?.Status == true && result?.Cantidad > 0)
+                if (result?.Cantidad > 0)
                 {
-                    await _unitOfWork.ExecuteInTransactionAsync(async (cc) =>
-                    {
+                    await _unitOfWork.ExecuteInTransactionAsync(async (cc) => {
                         await _unitOfWork.BeginTransactionAsync(cc);
-
-                        foreach (var item in result.Registros)
-                        {
-                            AigRecord record;
-                            if ((record = _unitOfWork.Repository<AigRecord>().Entities.AsNoTracking().FirstOrDefault(p => p.Numero == item.Numero)) != null)
-                            {
+                        AigRecord record;
+                        foreach (var item in result.Registros) {
+                            item.Servicio = ServiceType.SIRFAD;
+                            if ((record = _unitOfWork.Repository<AigRecord>().Entities.AsNoTracking().FirstOrDefault(p => p.Numero == item.Numero)) != null){
                                 item.Id = record.Id;
                                 item.DataSheetURL = record.DataSheetURL;
                                 item.ProspectusURL = record.ProspectusURL;
                                 item.PictureData = record.PictureData;
                             }
-                            await _unitOfWork.Repository<AigRecord>().UpdateAsync(item);
+                            if (item.Distribuidor == null)
+                                item.Distribuidor = record?.Distribuidor??new AigDistributor();
+                            if (item.Fabricante == null)
+                                item.Fabricante = record?.Fabricante ?? new AigMaker();
+                            var product = new Tuple<Expression<Func<AigRecord, object>>, object>(p => p.Producto, item.Producto);
+                            var maker = new Tuple<Expression<Func<AigRecord, object>>, object>(p => p.Fabricante, item.Fabricante);
+                            var distributor = new Tuple<Expression<Func<AigRecord, object>>, object>(p => p.Distribuidor, item.Distribuidor);
+                            await _unitOfWork.Repository<AigRecord>().UpdateDeepAsync(item, product, maker, distributor);
                         }
                         // updated last run
                         service.LastRun = DateTime.Now;
                         service.LastRetrieved = result.Cantidad;
-                        await _unitOfWork.Repository<AigService>().UpdateAsync(service);
+                        await _unitOfWork.Repository<AigService>().UpdateDeepAsync(service);
                         var commit = await _unitOfWork.CommitAsync(cc);
                     }, default);
+                }
+                else if(result?.Cantidad == 0)
+                {
+                    //updated last run
+                    service.LastRun = DateTime.Now;
+                    service.LastRetrieved = result.Cantidad;
+                    await _unitOfWork.Repository<AigService>().UpdateDeepAsync(service);
+                    var commit = await _unitOfWork.CommitAsync();
                 }
             }
             catch (Exception ex)

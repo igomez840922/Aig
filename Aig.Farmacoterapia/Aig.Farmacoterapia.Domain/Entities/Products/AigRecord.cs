@@ -1,4 +1,5 @@
 ﻿using Aig.Farmacoterapia.Domain.Common;
+using Aig.Farmacoterapia.Domain.Entities.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,14 +19,15 @@ namespace Aig.Farmacoterapia.Domain.Entities.Products
         public string Libro { get; set; }
         public string Folio { get; set; }
         public AigMedication Producto { get; set; }
-        public AigMaker Fabricante { get; set; }
-        public AigDistributor Distribuidor { get; set; }
+        public AigMaker? Fabricante { get; set; }
+        public AigDistributor? Distribuidor { get; set; }
         public List<AigPresentation> Presentaciones { get; set; }
         public List<AigExcipient> Excipientes { get; set; }
         public DateTime? FechaExpedicion { get; set; }
         public DateTime? FechaVencimiento { get; set; }
         public DateTime? FechaUltimaActualizacion { get; set; }
         public string Estado { get; set; }
+        public ServiceType? Servicio { get; set; }
 
         //----------------------------------------------------------------
         public bool ShowDetails { get; set; } = false;

@@ -1,4 +1,5 @@
-﻿using Aig.Farmacoterapia.Domain.Entities.Products;
+﻿using Aig.Farmacoterapia.Domain.Entities.Enums;
+using Aig.Farmacoterapia.Domain.Entities.Products;
 using Aig.Farmacoterapia.Domain.Integration.SysFarm;
 using Aig.Farmacoterapia.Domain.Interfaces;
 using Aig.Farmacoterapia.Domain.Interfaces.Integration;
@@ -6,9 +7,12 @@ using Aig.Farmacoterapia.Infrastructure.Configuration;
 using Aig.Farmacoterapia.Infrastructure.Extensions;
 using Aig.Farmacoterapia.Infrastructure.Helpers.ApiClient;
 using AutoMapper;
+using IdentityModel;
 using Microsoft.EntityFrameworkCore;
 using RestSharp;
+using System.Linq.Expressions;
 using System.Text.Json.Serialization;
+using System.Threading;
 
 namespace Aig.Farmacoterapia.Infrastructure.Services.Integration.SysFarm
 {
@@ -219,30 +223,49 @@ namespace Aig.Farmacoterapia.Infrastructure.Services.Integration.SysFarm
                             result = _mapper.Map<SysFarmResponse>(response.Data);
                     }
                 }
-                if (result?.Status == true && result?.Cantidad > 0)
+                if (result?.Status == true)
                 {
-                    await _unitOfWork.ExecuteInTransactionAsync(async (cc) =>
+                    if(result?.Cantidad > 0)
                     {
-                        await _unitOfWork.BeginTransactionAsync(cc);
-
-                        foreach (var item in result.Registros)
+                        await _unitOfWork.ExecuteInTransactionAsync(async (cc) =>
                         {
+                            await _unitOfWork.BeginTransactionAsync(cc);
                             AigRecord record;
-                            if ((record = _unitOfWork.Repository<AigRecord>().Entities.AsNoTracking().FirstOrDefault(p => p.Numero == item.Numero)) != null)
+                            foreach (var item in result.Registros)
                             {
-                                item.Id = record.Id;
-                                item.DataSheetURL = record.DataSheetURL;
-                                item.ProspectusURL = record.ProspectusURL;
-                                item.PictureData = record.PictureData;
+                                item.Servicio = ServiceType.SYSFARM;
+                                if ((record = _unitOfWork.Repository<AigRecord>().Entities.FirstOrDefault(p => p.Numero == item.Numero && p.Servicio == ServiceType.SYSFARM)) != null)
+                                {
+                                    item.Id = record.Id;
+                                    item.DataSheetURL = record.DataSheetURL;
+                                    item.ProspectusURL = record.ProspectusURL;
+                                    item.PictureData = record.PictureData;
+                                }
+                                if (item.Distribuidor == null)
+                                    item.Distribuidor = record?.Distribuidor ?? new AigDistributor();
+                                if (item.Fabricante == null)
+                                    item.Fabricante = record?.Fabricante ?? new AigMaker();
+                                var product = new Tuple<Expression<Func<AigRecord, object>>, object>(p => p.Producto, item.Producto);
+                                var maker = new Tuple<Expression<Func<AigRecord, object>>, object>(p => p.Fabricante, item.Fabricante);
+                                var distributor = new Tuple<Expression<Func<AigRecord, object>>, object>(p => p.Distribuidor, item.Distribuidor);
+                                await _unitOfWork.Repository<AigRecord>().UpdateDeepAsync(item, product, maker, distributor);
                             }
-                            await _unitOfWork.Repository<AigRecord>().UpdateAsync(item);
-                        }
-                        // updated last run
+                            //updated last run
+                            service.LastRun = DateTime.Now;
+                            service.LastRetrieved = result.Cantidad;
+                            await _unitOfWork.Repository<AigService>().UpdateDeepAsync(service);
+                            var commit = await _unitOfWork.CommitAsync(cc);
+                        }, default);
+                    }
+                    else
+                    {
+                        //updated last run
                         service.LastRun = DateTime.Now;
                         service.LastRetrieved = result.Cantidad;
-                        await _unitOfWork.Repository<AigService>().UpdateAsync(service);
-                        var commit = await _unitOfWork.CommitAsync(cc);
-                    }, default);
+                        await _unitOfWork.Repository<AigService>().UpdateDeepAsync(service);
+                        var commit = await _unitOfWork.CommitAsync();
+                    }
+                    
                 }
             }
             catch (Exception ex)

@@ -9,5 +9,6 @@ namespace Aig.Farmacoterapia.Wasm.Client.Infrastructure.Managers.Codes
         Task<PaginatedResult<AigService>> SearchAsync(PageArgs request);
         Task<IResult<AigService>> GetAsync(long id);
         Task<IResult<AigService>> UpdateAsync(AigService request);
+        Task<IResult> ExecuteAsync(string code);
     }
 }

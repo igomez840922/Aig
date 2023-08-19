@@ -1,6 +1,5 @@
 ﻿using Aig.Farmacoterapia.Domain.Common;
 using Aig.Farmacoterapia.Domain.Entities.Products;
-using Aig.Farmacoterapia.Domain.Entities.Studies;
 using Aig.Farmacoterapia.Domain.Interfaces;
 using Aig.Farmacoterapia.Wasm.Client.Extensions;
 using System.Net.Http.Json;
@@ -35,6 +34,11 @@ namespace Aig.Farmacoterapia.Wasm.Client.Infrastructure.Managers.Codes
             return await response.ToResult<AigService>();
 
         }
-      
+        public async Task<IResult> ExecuteAsync(string code)
+        {
+            var response = await _httpClient.PostAsJsonAsync(AppConstants.AigServiceEndpoints.Execute, new { code = code });
+            return await response.ToResult();
+        }
+       
     }
 }

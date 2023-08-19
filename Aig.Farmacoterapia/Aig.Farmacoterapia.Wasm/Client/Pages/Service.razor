@@ -68,6 +68,10 @@
     }
 </style>
 
+ @if (_loading)
+{
+  <MudProgressLinear Color="Color.Primary" Indeterminate="true" />
+}
 <MudCard Elevation="25" Style="margin-bottom: 12px;">
     <MudCardContent>
 
@@ -124,8 +128,17 @@
             }
             else
             {
-                <MudBadge Content="@(string.Format("{0:dd/MM/yyyy hh:mm:ss tt}", context.LastRun))" Color="Color.Tertiary" Overlap="true" Class="mx-2 my-2">
-                </MudBadge>
+                @if (context.LastRetrieved == 0)
+                {
+                    <MudBadge Content="@(string.Format("{0:dd/MM/yyyy hh:mm:ss tt}", context.LastRun))" Color="Color.Error" Overlap="true" Class="mx-2 my-2">
+                    </MudBadge>
+                }
+                else
+                {
+                    <MudBadge Content="@(string.Format("{0:dd/MM/yyyy hh:mm:ss tt}", context.LastRun))" Color="Color.Tertiary" Overlap="true" Class="mx-2 my-2">
+                    </MudBadge>
+                }
+
             }
         </MudTd>
         <MudTd DataLabel="Registros">
@@ -137,7 +150,7 @@
             }
             else
             {
-                <MudBadge Content="@(context.LastRetrieved.ToString())" Color="Color.Primary" Overlap="true" Class="mx-2 my-2">
+                <MudBadge Content="@(context.LastRetrieved.ToString())" Color="Color.Tertiary" Overlap="true" Class="mx-2 my-2">
                 </MudBadge>
             }
         </MudTd>
@@ -155,10 +168,11 @@
         </MudTd>
 
         <MudTd>
-                <MudMenu Icon="@Icons.Material.Filled.Settings" Color="Color.Default">
-                    <MudMenuItem Icon="@Icons.Material.Filled.Edit" OnClick="@(() => Edit(@context.Id))" OnTouch="@(() => Edit(@context.Id))">Editar</MudMenuItem>
-                </MudMenu>
-            </MudTd>
+            <MudMenu Icon="@Icons.Material.Filled.Settings" Color="Color.Default">
+                <MudMenuItem Disabled="@(_loading)" Icon="@Icons.Material.Filled.Edit" OnClick="@(() => Edit(@context.Id))" OnTouch="@(() => Edit(@context.Id))">Editar</MudMenuItem>
+                <MudMenuItem Disabled="@(_loading)" Icon="@Icons.Material.Filled.MiscellaneousServices" OnClick="@(() => Execute(@context.Code))" OnTouch="@(() => Execute(@context.Code))">Ejecutar Manualmente</MudMenuItem>
+            </MudMenu>
+        </MudTd>
         </RowTemplate>
 
         <NoRecordsContent>
@@ -218,6 +232,34 @@
         {
             await _table.ReloadServerData();
             await _bus.Publish(true);
+        }
+    }
+    private async Task Execute(string code)
+    {
+        var parameters = new DialogParameters
+         {
+             {
+               nameof(Shared.Dialogs.DlgConfirmation.ContentText), string.Format("¿Estás seguro de querer ejecutar manualmente el servicio?")
+             },
+             {
+               nameof(Shared.Dialogs.DlgConfirmation.Icon),@Icons.Material.Filled.MiscellaneousServices
+             }
+         };
+
+        var options = new DialogOptions { CloseButton = true, MaxWidth = MaxWidth.ExtraSmall, FullWidth = true, DisableBackdropClick = true };
+        var dialog = _dialogService.Show<Shared.Dialogs.DlgConfirmation>("Ejecutar", parameters, options);
+        var result = await dialog.Result;
+        if (!result.Cancelled)
+        {
+            await RefresView(true);
+            var response = await _manager.ExecuteAsync(code);
+            if (response.Succeeded)
+                await _table.ReloadServerData();
+            foreach (var message in response.Messages){
+                _snackBar.Add(message, response.Succeeded ? Severity.Success : Severity.Error);
+            }
+            await _table.ReloadServerData();
+            await RefresView(false);
         }
     }
     private async Task Refresh()

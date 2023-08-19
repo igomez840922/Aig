@@ -1,4 +1,5 @@
 ﻿using Aig.Farmacoterapia.Domain.Common;
+using Aig.Farmacoterapia.Domain.Entities.Products;
 using Aig.Farmacoterapia.Domain.Specifications.Base;
 using System;
 using System.Collections.Generic;
@@ -21,6 +22,8 @@ namespace Aig.Farmacoterapia.Domain.Interfaces
         Task<PaginatedResult<IEntity>> GetPagedResponseAsync(PageArgs args, Tuple<SortingOption, Expression<Func<T, object>>> order, ISpecification<IEntity> filter);
         Task<T> AddAsync(T entity);
         Task<T> UpdateAsync(T entity);
+        Task<T> UpdateDeepAsync(T entity, params Tuple<Expression<Func<T, object>>, object>[] navigation);
+        T UpdateDeep(T entity, params Tuple<Expression<Func<T, object>>, object>[] navigation);
         Task DeleteAsync(T entity);
     }
 }

@@ -115,8 +115,10 @@ namespace Aig.Farmacoterapia.Wasm.Client.Infrastructure
             public static string Search = "api/services/search";
             public static string Update = "api/services/update";
             public static string Get(long id) => $"api/services/service/{id}";
+            public static string Execute=> $"api/services/execute";
+           
         }
-
+   
         public static class AigRecordManagerEndpoints
         {
             public static string AdminSearch = "api/record/adminsearch";

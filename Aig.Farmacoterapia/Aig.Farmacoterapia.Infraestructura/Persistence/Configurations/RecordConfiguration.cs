@@ -1,16 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Aig.Farmacoterapia.Domain.Entities;
 using Aig.Farmacoterapia.Domain.Entities.Products;
-using Aig.Farmacoterapia.Domain.Entities.Studies;
 using Aig.Farmacoterapia.Infrastructure.Extensions;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Aig.Farmacoterapia.Infrastructure.Persistence.Configurations
 {
-    public class MedicationRecordConfiguration :
+    public class RecordConfiguration :
         IEntityTypeConfiguration<AigRecord> {
         public void Configure(EntityTypeBuilder<AigRecord> builder)
         {

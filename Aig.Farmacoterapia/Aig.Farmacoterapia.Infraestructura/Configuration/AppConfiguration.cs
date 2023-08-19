@@ -15,5 +15,6 @@ namespace Aig.Farmacoterapia.Infrastructure.Configuration
         public string Issuer { get; set; }
         public string Audience { get; set; }
         public string ExpiryInMinutes { get; set; }
+        public int UpdateTime { get; set; }
     }
 }

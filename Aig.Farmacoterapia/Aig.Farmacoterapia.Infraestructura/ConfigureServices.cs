@@ -311,24 +311,34 @@ namespace Aig.Farmacoterapia.Infrastructure
             );
         }
 
-        public static IServiceCollection AddQuartz(this IServiceCollection services)
+        public static IServiceCollection AddQuartz(this IServiceCollection services, IConfiguration configuration)
         {
-            var sysFarmInterval = 60; var sirFadInterval = 60;
+            var interval = services.GetApplicationSettings(configuration).UpdateTime;
             var scopeFactory = services.BuildServiceProvider().GetRequiredService<IServiceScopeFactory>();
             //using (var scope = scopeFactory.CreateScope())
             //{
             //    var unitOfWork = scope.ServiceProvider.GetService<IUnitOfWork>();
-            //    AigService? item;
-            //    if ((item = unitOfWork?.Repository<AigService>().Entities.AsNoTracking().FirstOrDefault(p => p.IsActive && p.Code == "SYSFARM")) != null)
-            //        sysFarmInterval = item.UpdateTime;
-            //    if ((item = unitOfWork?.Repository<AigService>().Entities.AsNoTracking().FirstOrDefault(p => p.IsActive && p.Code == "SIRFAD")) != null)
-            //        sirFadInterval = item.UpdateTime;
+            //    try{
+            //        AigService? item;
+            //        if ((item = unitOfWork?.Repository<AigService>().Entities.AsNoTracking().FirstOrDefault(p => p.Code == "SYSFARM")) != null) {
+            //            item.UpdateTime = interval;
+            //            unitOfWork.Repository<AigService>().UpdateDeep(item);
+            //        }
+            //        if ((item = unitOfWork?.Repository<AigService>().Entities.AsNoTracking().FirstOrDefault(p => p.Code == "SIRFAD")) != null)
+            //        {
+            //            item.UpdateTime = interval;
+            //            unitOfWork.Repository<AigService>().UpdateDeep(item);
+            //        }
+            //        var commit = unitOfWork.Commit();
+            //    }
+            //    catch {;}
             //}
             services.AddQuartz(q =>
             {
                 q.UseMicrosoftDependencyInjectionJobFactory();
-                q.AddJob<SysFarmUpdateJob>("SysFarmUpdateJob", sysFarmInterval);
-                q.AddJob<SirFadUpdateJob>("SirFadUpdateJob", sirFadInterval);
+                q.AddJob<RecordUpdateJob>("RecordUpdateJob", interval);
+                //q.AddJob<SysFarmUpdateJob>("SysFarmUpdateJob", interval);
+                //q.AddJob<SirFadUpdateJob>("SirFadUpdateJob", interval);
                 //q.AddJob<RecordUpdateJob>("RecordUpdateJob", "0/5 * * * * ?"); // run every 5 seconds
             });
             services.AddQuartzHostedService(q => q.WaitForJobsToComplete = true);
@@ -346,7 +356,7 @@ namespace Aig.Farmacoterapia.Infrastructure
             RegisterSwagger(services);
             AddInfrastructureMappings(services);
             AddHttpClient(services, configuration);
-            AddQuartz(services);
+            AddQuartz(services, configuration);
             return services;
         }
     }

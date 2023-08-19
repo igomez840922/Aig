@@ -21,7 +21,7 @@ builder.Services.AddRepositories();
 builder.Services.AddJwtAuthentication(builder.Configuration);
 builder.Services.RegisterSwagger();
 builder.Services.AddApplicationLayer();
-builder.Services.AddQuartz();
+builder.Services.AddQuartz(builder.Configuration);
 // Add services to the container.
 
 //builder.Services.AddControllersWithViews();
