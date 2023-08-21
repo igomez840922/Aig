@@ -1,4 +1,5 @@
 ﻿
+using Aig.Farmacoterapia.Domain.Entities.Enums;
 using Aig.Farmacoterapia.Domain.Entities.Studies.Enums;
 using Aig.Farmacoterapia.Domain.Models;
 
@@ -26,6 +27,7 @@ namespace Aig.Farmacoterapia.Wasm.Client.Model
         public DateTime? StartExpirationDate { get; set; }
         public DateTime? EndExpirationDate { get; set; }
         public string Fabricante { get; set; }
+        public ServiceType ServiceType { get; set; }
 
     }
 

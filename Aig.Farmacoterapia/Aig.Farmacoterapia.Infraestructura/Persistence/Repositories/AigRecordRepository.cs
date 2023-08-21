@@ -4,11 +4,12 @@ using System.Globalization;
 using System.Linq;
 using System.Linq.Expressions;
 using Aig.Farmacoterapia.Domain.Common;
+using Aig.Farmacoterapia.Domain.Entities.Enums;
 using Aig.Farmacoterapia.Domain.Entities.Products;
+using Aig.Farmacoterapia.Domain.Extensions;
 using Aig.Farmacoterapia.Domain.Interfaces;
 using Aig.Farmacoterapia.Domain.Specifications.Record;
 using Aig.Farmacoterapia.Infrastructure.Extensions;
-using Aig.Farmacoterapia.Infrastructure.Services.Integration;
 
 namespace Aig.Farmacoterapia.Infrastructure.Persistence.Repositories
 {
@@ -72,6 +73,16 @@ namespace Aig.Farmacoterapia.Infrastructure.Persistence.Repositories
                                     filterList.Add(expression);
                                 }
                                 break;
+                            case "service":
+                                {
+                                    var service = filteringOption.Value.ParseEnum<ServiceType>();
+                                    if (service != ServiceType.All)
+                                    {
+                                        Expression<Func<AigRecord, bool>> expression = f => f.Servicio == service;
+                                        filterList.Add(expression);
+                                    }
+                                }
+                                break;
                             case "startDateOfIssue":
                                 {
                                     var value = filteringOption.Value;
@@ -106,7 +117,10 @@ namespace Aig.Farmacoterapia.Infrastructure.Persistence.Repositories
                                     filterList.Add(expression);
                                 }
                                 break;
+
                              
+
+
                         }
                     }
                 }

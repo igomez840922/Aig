@@ -85,7 +85,7 @@
                     <MudTextField HelperText="No.Registro / Nombre / Principio Activo / Fabricante" Variant="Variant.Outlined" Margin="Margin.Dense" @bind-Value="_modelFilter.Term" Label="Buscar" />
                 </MudItem>
 
-                 <MudItem md="7">
+                 <MudItem md="5">
                     <MudGrid>
                         <MudItem md="6">
                             <MudDateRangePicker Culture="@CultureInfo.GetCultureInfo("es-Es")" DateFormat="dd/MM/yyyy" Label="Fecha de Emisión:"  @bind-DateRange="dateRange" />
@@ -95,6 +95,22 @@
                         </MudItem>
                     </MudGrid>
                 </MudItem>
+                <MudItem md="2" Style="margin-top:20px !important">
+                    <MudGrid>
+                       
+                        <MudItem md="12" Style="padding:3px !important">
+                        <MudSelect T="ServiceType" Label="Fuente" Margin="Margin.Dense" Dense="true" Variant="Variant.Outlined" @bind-Value="_modelFilter.ServiceType">
+                            @foreach (ServiceType dt in Enum.GetValues(typeof(ServiceType)))
+                                {
+                                    <MudSelectItem Value="@(dt)">@(dt.ToDescriptionString())</MudSelectItem>
+                                }
+                            </MudSelect>
+                        </MudItem>
+                     
+                    </MudGrid>
+                </MudItem>
+
+              
 
                 <MudItem md="2" Style="margin-top:12px !important">
                     <MudGrid>
@@ -127,10 +143,11 @@
         <MudTh style="width:60px;"><MudTableSortLabel SortLabel="numReg" T="AigRecord">Registro</MudTableSortLabel></MudTh>
         <MudTh style="width:100px;"><MudTableSortLabel SortLabel="dateOfIssue" T="AigRecord">Emisión</MudTableSortLabel></MudTh>
         <MudTh style="width:100px;"><MudTableSortLabel SortLabel="expirationDate" T="AigRecord">Expiración</MudTableSortLabel></MudTh>
-        <MudTh style="width:350px;"><MudTableSortLabel InitialDirection="SortDirection.Ascending" SortLabel="name" T="AigRecord">Medicamento</MudTableSortLabel></MudTh>
-        <MudTh style="width:350px;">Principio Activo</MudTh>
+        <MudTh style="width:300px;"><MudTableSortLabel InitialDirection="SortDirection.Ascending" SortLabel="name" T="AigRecord">Medicamento</MudTableSortLabel></MudTh>
+        <MudTh style="width:300px;">Principio Activo</MudTh>
         <MudTh>Fabricante</MudTh>
         <MudTh style="width:20px;"><MudTableSortLabel T="AigRecord" SortLabel="updated">Actualizado</MudTableSortLabel></MudTh>
+        <MudTh style="width:100px;">Fuente</MudTh>
         <MudTh style="width:5px;"></MudTh>
     </HeaderContent>
     <RowTemplate>
@@ -144,6 +161,7 @@
             <MudTd DataLabel="Principio Activo">@context.Producto?.PrincipioActivo</MudTd>
             <MudTd DataLabel="Fabricante">@context.Fabricante?.Nombre</MudTd>
             <MudTd DataLabel="Actualizado">@(string.Format("{0:dd/MM/yyyy}", context.FechaUltimaActualizacion))</MudTd>
+            <MudTd DataLabel="Fuente">@context.Servicio.ToDescriptionString()</MudTd>
             <MudTd>
 
                 <MudMenu Icon="@Icons.Material.Filled.Settings" Color="Color.Default">
@@ -341,8 +359,10 @@
                                     @(!string.IsNullOrEmpty(@context.Fabricante?.Pais) ? @context.Fabricante?.Pais : "-")
                                 </span>
                             </div>
+
                             @if (!string.IsNullOrEmpty(@context.Distribuidor?.NombreDistribuidorNacional))
                             {
+
                                 <div _ngcontent-lil-c210="" class="d-flex mb-2">
                                     <span _ngcontent-lil-c210="" class="font-weight-bold font-size-sm" style="font-weight:bold;margin-right: 5px;">
                                         Distribuidor:
@@ -376,6 +396,17 @@
                                     </span>
                                 </div>
                             }
+                            @if (!string.IsNullOrEmpty(@context.Distribuidor?.PaisAcondicionadorPrimario))
+                            {
+                                <div _ngcontent-lil-c210="" class="d-flex mb-2">
+                                    <span _ngcontent-lil-c210="" class="font-weight-bold font-size-sm" style="font-weight:bold;margin-right: 5px;">
+                                        País Acondicionador Primario:
+                                    </span>
+                                    <span _ngcontent-lil-c210="" class="text-dark-50">
+                                        @(!string.IsNullOrEmpty(@context.Distribuidor?.PaisAcondicionadorPrimario) ? @context.Distribuidor?.PaisAcondicionadorPrimario : "-")
+                                    </span>
+                                </div>
+                            }
                             @if (!string.IsNullOrEmpty(@context.Distribuidor?.NombreAcondicionadorSecundario))
                             {
                                 <div _ngcontent-lil-c210="" class="d-flex mb-2">
@@ -386,6 +417,17 @@
                                         @(!string.IsNullOrEmpty(@context.Distribuidor?.NombreAcondicionadorSecundario) ? @context.Distribuidor?.NombreAcondicionadorSecundario : "-")
                                     </span>
                                 </div>
+                            }
+                            @if (!string.IsNullOrEmpty(@context.Distribuidor?.PaisAcondicionadorSecundario))
+                            {
+                            <div _ngcontent-lil-c210="" class="d-flex mb-2">
+                                <span _ngcontent-lil-c210="" class="font-weight-bold font-size-sm" style="font-weight:bold;margin-right: 5px;">
+                                        País Acondicionador Secundario:
+                                </span>
+                                <span _ngcontent-lil-c210="" class="text-dark-50">
+                                    @(!string.IsNullOrEmpty(@context.Distribuidor?.PaisAcondicionadorSecundario) ? @context.Distribuidor?.PaisAcondicionadorSecundario : "-")
+                                </span>
+                            </div>
                             }
 
                         </div>
@@ -462,7 +504,8 @@
             filters.Add(new FilteringOption { Field = "startExpirationDate", Operator = FilteringOperator.GreaterThanEqual, Value = _modelFilter.StartExpirationDate.Value.ToString("dd/MM/yyyy") });
             filters.Add(new FilteringOption { Field = "endDateExpirationDate", Operator = FilteringOperator.LessThanEqual, Value = _modelFilter.EndExpirationDate.Value.ToString("dd/MM/yyyy") });
         }
-       
+        
+        filters.Add(new FilteringOption { Field = "service", Operator = FilteringOperator.Contains, Value = _modelFilter.ServiceType.ToString() });
         var args = new PageSearchArgs()
             {
                 PageIndex = state.Page + 1,
