@@ -209,7 +209,6 @@
     private async Task<TableData<AigService>> DoFetchData(TableState state)
     {
         var result = new TableData<AigService>();
-        await RefresView(true);
         var args = new PageArgs()
             {
                 PageIndex = state.Page + 1,
@@ -218,7 +217,7 @@
         _paginatedResult = await _manager.SearchAsync(args);
         List = _paginatedResult.Data.ToList();
         result = new TableData<AigService>() { TotalItems = _paginatedResult.TotalCount, Items = _paginatedResult.Data };
-        await RefresView(false);
+        await this.InvokeAsync(StateHasChanged);
         return result;
     }
 
