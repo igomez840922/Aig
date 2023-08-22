@@ -21,9 +21,15 @@ namespace Aig.Farmacoterapia.Application.Features.StudyDNFD.Queries
         public long Id { get; set; }
         public GetStudyDNFDQuery(long id) => Id = id;
     }
+    public class GetStudyByCodeDNFDQuery : IRequest<Result<AigEstudioDNFD>>
+    {
+        public string Code { get; set; }
+        public GetStudyByCodeDNFDQuery(string code) => Code = code;
+    }
     internal class StudyDNFDQueryHandler : 
         IRequestHandler<GetAllStudyDNFDQuery, PaginatedResult<AigEstudioDNFD>>,
-        IRequestHandler<GetStudyDNFDQuery, Result<AigEstudioDNFD>>
+        IRequestHandler<GetStudyDNFDQuery, Result<AigEstudioDNFD>>,
+        IRequestHandler<GetStudyByCodeDNFDQuery, Result<AigEstudioDNFD>>
     {
         private readonly IAigEstudioDNFDRepository _repository;
         private readonly IUnitOfWork _unitOfWork;
@@ -67,5 +73,20 @@ namespace Aig.Farmacoterapia.Application.Features.StudyDNFD.Queries
             return answer;
         }
 
+        public async Task<Result<AigEstudioDNFD>> Handle(GetStudyByCodeDNFDQuery request, CancellationToken cancellationToken)
+        {
+            var answer = new Result<AigEstudioDNFD>();
+            try
+            {
+                var result = _unitOfWork.Repository<AigEstudioDNFD>().Entities.FirstOrDefault(p => p.AigCodigo.Codigo == request.Code);
+                answer = result == null ? Result<AigEstudioDNFD>.Fail() : Result<AigEstudioDNFD>.Success(result);
+            }
+            catch (Exception exc)
+            {
+                _logger.Error("Requested operation failed", exc);
+                return Result<AigEstudioDNFD>.Fail(new List<string>() { exc.Message });
+            }
+            return answer;
+        }
     }
 }

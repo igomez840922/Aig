@@ -23,6 +23,8 @@ namespace Aig.Farmacoterapia.Api.Controllers
 
         [HttpGet("study/{id}")]
         public async Task<IActionResult> GetStudy(long id) => Ok(await _mediator.Send(new GetStudyDNFDQuery(id)));
+        [HttpGet("studybycode/{code}")]
+        public async Task<IActionResult> GetStudyByCode(string code) => Ok(await _mediator.Send(new GetStudyByCodeDNFDQuery(code)));
 
         [HttpPost("update")]
         public async Task<IActionResult> Update([FromBody] AigEstudioDNFD model) => Ok(await _mediator.Send(new AddEditStudyDNFDCommand(model)));

@@ -114,7 +114,7 @@
 
                 <MudItem md="2" Style="margin-top:12px !important">
                     <MudGrid>
-                        <MudItem md="6" Style="margin-top: 10px !important;">
+                        <MudItem md="12" Style="margin-top: 10px !important;">
                             <MudTooltip Text="Buscar" Arrow="true" Placement="Placement.Top" Color="Color.Default">
                                 <MudIconButton Disabled="@(_loading)" Style="margin-right: 8px;" ButtonType="ButtonType.Submit" Icon="@Icons.Material.Filled.Search" Variant="Variant.Outlined" Color="Color.Primary" Size="Size.Small" />
                             </MudTooltip>
@@ -122,8 +122,8 @@
                                 <MudIconButton Disabled="@(_loading)" ButtonType="ButtonType.Button" Icon="@Icons.Material.Filled.Clear" Variant="Variant.Outlined" Color="Color.Primary" Size="Size.Small" OnClick="()=>OnReset()" />
                             </MudTooltip>
                         </MudItem>
-                        <MudItem md="6">
-                        </MudItem>
+                       @* <MudItem md="6">
+                        </MudItem>*@
                     </MudGrid>
 
                 </MudItem>

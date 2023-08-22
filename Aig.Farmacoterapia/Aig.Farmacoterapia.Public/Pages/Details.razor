@@ -42,6 +42,9 @@
         overflow-y: auto;
     }
 
+    p {
+        margin: 0px !important;
+    }
 </style>
 
 @if (loading)
@@ -141,7 +144,7 @@ else
                                                 {
                                                     <h5 style="font-size: 12px !important;color: #e4573d !important;">
                                                         @* <span style="font-size: 12px !important;color: #e4573d !important;"> Vigencia:</span>*@
-                                                        @($"{string.Format("{0:dd/MM/yyyy}", item.FechaVencimiento)} ({item?.Estado})")
+                                                        @($"{string.Format("{0:dd/MM/yyyy}", item.FechaVencimiento)}")
                                                     </h5>
                                                 }
                                             </div>
@@ -286,10 +289,14 @@ else
                                             <div class="col-12">
                                                 <div class="pro-02-list-info f-left">
                                                     <span>Presentación</span>
-                                                    <ul>
+                                                    <ul class="footer-link">
                                                         @foreach (var pre in item.Presentaciones)
                                                         {
-                                                            <li>@($"{pre.Presentacion}({pre.Tipo})")</li>
+                                                            <li>
+                                                                 <p>
+                                                                    @($"{pre.Presentacion}({pre.Tipo})")
+                                                                  </p>
+                                                            </li>
                                                         }
                                                     </ul>
 
@@ -305,10 +312,12 @@ else
                                             <div class="col-12" style="margin-top: 10px;">
                                                 <div class="pro-02-list-info f-left">
                                                     <span>Excipientes</span>
-                                                    <ul>
+                                                    <ul class="footer-link">
                                                         @foreach (var ex in item.Excipientes)
                                                         {
-                                                            <li>@($"{ex.Descripcion}({ex.Concentracion})")</li>
+                                                            <li>
+                                                                <p> @($"{ex.Descripcion}({ex.Concentracion})") </p>
+                                                            </li>
                                                         }
                                                     </ul>
 
