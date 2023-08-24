@@ -103,7 +103,7 @@
                                         <ValidationMessage For="@(() => _modelData.FechaIngreso)" />
                                     </MudItem>
 
-                                    @if (_user?.GetRole().ParseEnum<RoleType>()== RoleType.Boss)
+                                    @if (_user?.GetRole().ParseEnum<RoleType>() == RoleType.Boss || _user?.GetRole().ParseEnum<RoleType>() == RoleType.Admin)
                                     {
                                         <MudItem xs="12" md="3" Style="padding:3px !important">
                                             <MudDatePicker Disabled="!IsEditData()" Culture="@CultureInfo.GetCultureInfo("es-Es")" DateFormat="dd/MM/yyyy" Style="border: 1px solid #e2e5ec;padding: 3px 8px 3px 8px;" Label="Fecha de asignación" @bind-Date="_modelData.FechaAsignacion" />
