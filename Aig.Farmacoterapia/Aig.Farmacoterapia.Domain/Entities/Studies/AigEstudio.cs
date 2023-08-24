@@ -13,6 +13,7 @@ namespace Aig.Farmacoterapia.Domain.Entities.Studies
 {
     public class AigEstudio : AigEstudioBase
     {
+        public string? NumTramite { get; set; }
         public string Codigo { get; set; } 
         public string AgenciaDistribuidora { get; set; } = string.Empty;
         public AigTramitanteEstudio Tramitante { get; set; } = new AigTramitanteEstudio();

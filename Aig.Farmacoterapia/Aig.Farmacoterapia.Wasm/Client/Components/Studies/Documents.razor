@@ -17,8 +17,6 @@
 
 </style>
 
-
- 
 <MudTable Items="@_parent?.Documents"  Dense="true" Hover="true" Height="500px">
         <HeaderContent>
              <MudTh>Nombre del Documento</MudTh>
@@ -32,13 +30,20 @@
                  @context.Nombre
             </MudTd>
             <MudTd DataLabel="Fichero Adjunt">
-                <MudButton Variant="Variant.Text"
+               @* <MudButton Variant="Variant.Text"
                     Color="Color.Info"
                     StartIcon="@Icons.Filled.FileDownload"
                     Size="Size.Small"
                     Link="@($"{_appConfiguration.ApiUrl}{AppConstants.EstudioEndpoints.DocumentURL(@context.Document!.FileName)}")" Target="_blank">
                     @context.Document!.FileName
-                </MudButton>
+                </MudButton>*@
+               <MudButton Variant="Variant.Text"
+                       Color="Color.Info"
+                       StartIcon="@Icons.Filled.FileDownload"
+                       Size="Size.Small"
+                       Link="@context.Document!.Url" Target="_blank">
+                @context.Document!.FileName
+            </MudButton>
             </MudTd>
            
           <MudTd>

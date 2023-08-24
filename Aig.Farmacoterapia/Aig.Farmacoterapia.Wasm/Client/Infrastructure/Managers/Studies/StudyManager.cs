@@ -75,7 +75,7 @@ namespace Aig.Farmacoterapia.Wasm.Client.Infrastructure.Managers.Studies
         //    return await response.ToResult();
         //}
 
-        public async Task<IResult> UploadFileAsync(UploadObject model)
+        public async Task<IResult<UploadObject>> UploadFileAsync(UploadObject model)
         {
             var fileContent = new StreamContent(model.Data);
             fileContent.Headers.ContentType = new MediaTypeHeaderValue(model.ContentType);
@@ -84,7 +84,7 @@ namespace Aig.Farmacoterapia.Wasm.Client.Infrastructure.Managers.Studies
                { new StringContent(model.UploadType.ToString()),"type"},
             };
             var response = await _httpClient.PostAsync(AppConstants.MediaEndpoints.Upload(), content);
-            return await response.ToResult();
+            return await response.ToResult<UploadObject>();
         }
         public async Task<IResult> DeleteFileAsync(UploadType uploadType, string file)
         {

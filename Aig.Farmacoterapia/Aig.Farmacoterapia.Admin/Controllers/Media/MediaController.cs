@@ -115,9 +115,12 @@ namespace Aig.Farmacoterapia.Admin.Controllers.Media
                         Size = file.Length,
                         UploadType = (UploadType)Enum.Parse(typeof(UploadType), "datasheet", true),
                     };
-                    var result = string.Empty;
-                    if (!string.IsNullOrEmpty(result = await _uploadService.UploadAsync(uploadData)))
-                        return Ok($"File: {result} Length: {file.Length}");
+                    //var result = string.Empty;
+                    //if (!string.IsNullOrEmpty(result = await _uploadService.UploadAsync(uploadData)))
+                    //    return Ok($"File: {result} Length: {file.Length}");
+                    UploadObject result;
+                    if ((result = await _uploadService.UploadAsync(uploadData))!=null)
+                        return Ok($"File: {result.FileName} Length: {result.Size}");
                     throw new Exception("Upload operation failed");
                 }
                 else

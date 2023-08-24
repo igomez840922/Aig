@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Aig.Farmacoterapia.Application.Features.Media.Commands;
 using Aig.Farmacoterapia.Infrastructure.Helpers;
+using Aig.Farmacoterapia.Application.Features.Medicament.Queries;
 
 namespace Aig.Farmacoterapia.Api.Controllers
 {
@@ -20,5 +21,9 @@ namespace Aig.Farmacoterapia.Api.Controllers
 
         [HttpPost("delete")]
         public async Task<IActionResult> DeleteFile([FromBody] DeleteMediaCommand model) => Ok(await _mediator.Send(model));
+
+        [HttpGet("{type}/{file}")]
+        [AllowAnonymous]
+        public async Task<FileStreamResult> GetFile(string type, string file) => await _mediator.Send(new GetFileQuery(type, file));
     }
 }

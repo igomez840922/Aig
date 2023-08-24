@@ -10,7 +10,8 @@ namespace Aig.Farmacoterapia.Domain.Interfaces
 {
     public interface IUploadService
     {
-        Task<string> UploadAsync(UploadObject request);
+        //Task<string> UploadAsync(UploadObject request);
+        Task<UploadObject> UploadAsync(UploadObject request);
         Task<bool> DeleteAsync(string relativePath);
         Task<bool> DeleteAsync(UploadType uploadType, string fileName);
         Task<byte[]> GetFileAsync(string file, UploadType uploadType);

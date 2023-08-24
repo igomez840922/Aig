@@ -440,6 +440,25 @@
                         <div _ngcontent-lil-c210="" class="mx-4">
                             <div _ngcontent-lil-c210="" class="d-flex mb-2">
                                 <span _ngcontent-lil-c210="" class="font-weight-bold font-size-sm" style="font-weight:bold; margin-right: 5px;">
+                                    Número de Trámite:&nbsp;
+                                </span>
+                                <span _ngcontent-lil-c210="" class="text-dark-50">
+                                    @if (!string.IsNullOrEmpty(@context.NumTramite))
+                                    {
+                                    }
+                                        <MudBadge  Content="context.NumTramite" Color="Color.Info" Overlap="true" Class="mx-2 my-2">
+                                        </MudBadge>
+                                    }
+                                    else
+                                    {
+                                        @("---")
+                                    }
+                                </span>
+                            </div>
+
+
+                            <div _ngcontent-lil-c210="" class="d-flex mb-2">
+                                <span _ngcontent-lil-c210="" class="font-weight-bold font-size-sm" style="font-weight:bold; margin-right: 5px;">
                                     Fecha de Creación:
                                 </span>
                                 <span _ngcontent-lil-c210="" class="text-dark-50">

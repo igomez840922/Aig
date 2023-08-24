@@ -7,7 +7,7 @@ using IResponse = Aig.Farmacoterapia.Domain.Interfaces.IResult;
 
 namespace Aig.Farmacoterapia.Application.Features.Media.Commands
 {
-    public partial class UploadMediaCommand : IRequest<Result<string>>
+    public partial class UploadMediaCommand : IRequest<Result<UploadObject>>
     {
         public IFormCollection FormData { get; set; }
         public UploadMediaCommand(IFormCollection formData) => FormData = formData;
@@ -25,7 +25,7 @@ namespace Aig.Farmacoterapia.Application.Features.Media.Commands
 
     }
     internal class MediaCommandHandler : 
-        IRequestHandler<UploadMediaCommand, Result<string>>,
+        IRequestHandler<UploadMediaCommand, Result<UploadObject>>,
         IRequestHandler<DeleteMediaCommand, IResponse>
     {
         private readonly IUploadService _uploadService;
@@ -36,7 +36,7 @@ namespace Aig.Farmacoterapia.Application.Features.Media.Commands
             _uploadService = uploadService;
             _logger = logger;
         }
-        public async Task<Result<string>> Handle(UploadMediaCommand request, CancellationToken cancellationToken)
+        public async Task<Result<UploadObject>> Handle(UploadMediaCommand request, CancellationToken cancellationToken)
         {
             try
             {
@@ -53,18 +53,21 @@ namespace Aig.Farmacoterapia.Application.Features.Media.Commands
                         ContentType = file.ContentType,
                         UploadType = (UploadType)Enum.Parse(typeof(UploadType), type.ToString(), true),
                     };
-                    var result = string.Empty;
-                    if(!string.IsNullOrEmpty(result=await _uploadService.UploadAsync(uploadData)))
-                        return Result<string>.Success(file.FileName, "Successful upload");
-                    return Result<string>.Fail(new List<string>() { "Upload operation failed" });
+                    //var result = string.Empty;
+                    //if(!string.IsNullOrEmpty(result=await _uploadService.UploadAsync(uploadData)))
+                    //    return Result<string>.Success(file.FileName, "Successful upload");
+                    UploadObject result;
+                    if ((result = await _uploadService.UploadAsync(uploadData)) != null)
+                        return Result<UploadObject>.Success(result, "Successful upload");
+                   return Result<UploadObject>.Fail(new List<string>() { "Upload operation failed" });
                 }
                 else
-                    return Result<string>.Fail(new List<string>() { "The file is required" });
+                    return Result<UploadObject>.Fail(new List<string>() { "The file is required" });
             }
             catch (Exception exc)
             {
                 _logger.Error("Requested operation failed", exc);
-                return Result<string>.Fail(new List<string>() { exc.Message });
+                return Result<UploadObject>.Fail(new List<string>() { exc.Message });
             }
     
         }

@@ -18,15 +18,13 @@ namespace Aig.Farmacoterapia.Infrastructure.Services
         {
             _environment = environment;
         }
-
-        public async Task<string> UploadAsync(UploadObject request)
+        public async Task<UploadObject> UploadAsync(UploadObject request)
         {
             var dbPath = string.Empty;
-            if (request.Data?.Length == 0) return dbPath;
+            if (request.Data?.Length == 0) return null;
 
             var folder = request.UploadType.ToDescriptionString();
             var folderName = Path.Combine("Files", folder);
-            //var pathToSave = Path.Combine(_environment.WebRootPath, folderName);
             var pathToSave = Path.Combine(Directory.GetCurrentDirectory(), folderName);
             bool exists = Directory.Exists(pathToSave);
             if (!exists) Directory.CreateDirectory(pathToSave);
@@ -42,43 +40,19 @@ namespace Aig.Farmacoterapia.Infrastructure.Services
             await request.Data!.CopyToAsync(fs);
             request.Data.Close();
             fs.Close();
-
-            return dbPath;
+            request.Url = $"/api/media/{request.UploadType.ToDescriptionString()}/{fileName}";
+            request.AbsolutePath = Path.Combine(folderName, fileName);
+            return request;
         }
 
         //public async Task<string> UploadAsync(UploadObject request)
         //{
         //    var dbPath = string.Empty;
-        //    if (request.Data?.Length == 0) return string.Empty;
-        //    using (var streamData = new MemoryStream(request.Data!)){
-        //        var folder = request.UploadType.ToDescriptionString();
-        //        var folderName = Path.Combine("Files", folder);
-        //        var pathToSave = Path.Combine(Directory.GetCurrentDirectory(), folderName);
-        //        bool exists = Directory.Exists(pathToSave);
-        //        if (!exists) Directory.CreateDirectory(pathToSave);
-        //        var fileName = request.FileName.Trim();
-        //        var fullPath = Path.Combine(pathToSave, fileName);
-        //        dbPath = Path.Combine(folderName, fileName);
-        //        if (File.Exists(dbPath)){
-        //            dbPath = NextAvailableFilename(dbPath);
-        //            fullPath = NextAvailableFilename(fullPath);
-        //        }
-        //        using var stream = new FileStream(fullPath, FileMode.Create);
-        //        streamData.CopyTo(stream);
-        //    }
-        //    return dbPath;
-        //}
-
-        //public async Task<string> UploadAsync(UploadObject request)
-        //{
-        //    var dbPath = string.Empty;
-        //    if (request.Stream==null) return string.Empty;
-
-        //    using var streamData = new MemoryStream();
-        //    await request.Stream.CopyToAsync(streamData);
+        //    if (request.Data?.Length == 0) return dbPath;
 
         //    var folder = request.UploadType.ToDescriptionString();
         //    var folderName = Path.Combine("Files", folder);
+        //    //var pathToSave = Path.Combine(_environment.WebRootPath, folderName);
         //    var pathToSave = Path.Combine(Directory.GetCurrentDirectory(), folderName);
         //    bool exists = Directory.Exists(pathToSave);
         //    if (!exists) Directory.CreateDirectory(pathToSave);
@@ -90,8 +64,10 @@ namespace Aig.Farmacoterapia.Infrastructure.Services
         //        dbPath = NextAvailableFilename(dbPath);
         //        fullPath = NextAvailableFilename(fullPath);
         //    }
-        //    using var stream = new FileStream(fullPath, FileMode.Create);
-        //    streamData.CopyTo(stream);
+        //    FileStream fs = File.Create(fullPath);
+        //    await request.Data!.CopyToAsync(fs);
+        //    request.Data.Close();
+        //    fs.Close();
 
         //    return dbPath;
         //}

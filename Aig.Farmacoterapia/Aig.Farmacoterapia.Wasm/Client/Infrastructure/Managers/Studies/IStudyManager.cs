@@ -17,7 +17,7 @@ namespace Aig.Farmacoterapia.Wasm.Client.Infrastructure.Managers.Studies
         Task<IResult<List<UserModelOutput>>> GetEvaluators(long id);
         Task<IResult> SetEvaluatorsAsync(long id, string[] evaluators);
         Task<IResult> CloneAsync(long id);
-        Task<IResult> UploadFileAsync(UploadObject model);
+        Task<IResult<UploadObject>> UploadFileAsync(UploadObject model);
         Task<IResult> DeleteFileAsync(UploadType uploadType, string file);
 
     }

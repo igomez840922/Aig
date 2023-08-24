@@ -177,8 +177,13 @@
                             ContentType = contentType,
                             Extension = extension,
                         };
-                if ((await _manager.UploadFileAsync(request)).Succeeded)
-                    _modelData.Document = request;
+                //if ((await _manager.UploadFileAsync(request)).Succeeded)
+                //    _modelData.Document = request;
+                var response = await _manager.UploadFileAsync(request);
+                if (response.Succeeded) {
+                    _modelData.Document = response.Data;
+                    await this.InvokeAsync(StateHasChanged);
+                }
             }
             else { _showFileInputAlert = true; }
             _fileLoading = false;
