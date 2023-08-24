@@ -79,9 +79,11 @@ namespace Aig.Farmacoterapia.Application.Features.Study.Commands
                 var item = _unitOfWork.Repository<AigEstudioDNFD>().GetAll().FirstOrDefault(p => p.AigCodigo.Codigo == request.Model.Codigo);
                 if(item!=null) request.Model.AigEstudioDNFDId = item.Id;
 
-                var study = _unitOfWork.Repository<AigEstudio>().Entities.FirstOrDefault(p => p.NumTramite == request.Model.NumTramite);
-                if (study != null)
-                    request.Model.Id = study.Id;
+                if (!string.IsNullOrEmpty(request.Model.NumTramite)){
+                    var study = _unitOfWork.Repository<AigEstudio>().EntitiesNoTracking.FirstOrDefault(p => p.NumTramite == request.Model.NumTramite);
+                    if (study != null)
+                        request.Model.Id = study.Id;
+                }
 
                 //if (request.Model.Id > 0)
                 //    await _unitOfWork.Repository<AigEstudio>().UpdateAsync(request.Model);
@@ -90,7 +92,7 @@ namespace Aig.Farmacoterapia.Application.Features.Study.Commands
                 //answer = Result<bool>.Success(_unitOfWork.Commit());
 
                 var entity = request.Model.Id > 0 ?
-                    await _unitOfWork.Repository<AigEstudio>().UpdateDeepAsync(request.Model) :
+                    await _unitOfWork.Repository<AigEstudio>().UpdateAsync(request.Model) :
                     await _unitOfWork.Repository<AigEstudio>().AddAsync(request.Model);
                 answer = entity != null && _unitOfWork.Commit() ?
                     Result<AigEstudio>.Success(entity) :

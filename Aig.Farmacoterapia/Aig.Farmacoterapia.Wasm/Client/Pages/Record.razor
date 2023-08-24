@@ -67,6 +67,9 @@
                         Medicamentos
                     </MudText>
                     <MudSpacer />
+                    <MudTooltip Text="Actualizar" Arrow="true" Placement="Placement.Left" Color="Color.Default">
+                        <MudIconButton ButtonType="ButtonType.Button" Disabled="@(_loading)" Icon="@Icons.Material.Filled.Refresh" Variant="Variant.Outlined" Color="Color.Default" Size="Size.Small" @onclick="@(async () =>await Refresh())" />
+                    </MudTooltip>
                 </MudToolBar>
             </MudItem>
         </MudGrid>
@@ -548,5 +551,11 @@
         var result = await dialog.Result;
         if (!result.Cancelled)
             await _table.ReloadServerData();
+    }
+
+    private async Task Refresh()
+    {
+        await _table.ReloadServerData();
+        await this.InvokeAsync(StateHasChanged);
     }
 }

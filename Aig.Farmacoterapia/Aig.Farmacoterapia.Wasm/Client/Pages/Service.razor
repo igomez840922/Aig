@@ -264,6 +264,7 @@
     private async Task Refresh()
     {
         await _table.ReloadServerData();
+        await this.InvokeAsync(StateHasChanged);
     }
 
 }

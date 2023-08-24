@@ -80,6 +80,9 @@
                @* <MudTooltip Text="Nuevo" Arrow="true" Placement="Placement.Left" Color="Color.Default">
                     <MudIconButton ButtonType="ButtonType.Button" Disabled="@(_loading || !IsAddAndEvaluators())" Icon="@Icons.Material.Filled.Add" Variant="Variant.Outlined" Color="Color.Default" Size="Size.Small" @onclick="@(() => AddEdit(0))" />
                 </MudTooltip>*@
+            <MudTooltip Text="Actualizar" Arrow="true" Placement="Placement.Left" Color="Color.Default">
+                <MudIconButton ButtonType="ButtonType.Button" Disabled="@(_loading)" Icon="@Icons.Material.Filled.Refresh" Variant="Variant.Outlined" Color="Color.Default" Size="Size.Small" @onclick="@(async () =>await Refresh())" />
+            </MudTooltip>
             </MudToolBar>
      
 
@@ -445,7 +448,6 @@
                                 <span _ngcontent-lil-c210="" class="text-dark-50">
                                     @if (!string.IsNullOrEmpty(@context.NumTramite))
                                     {
-                                    }
                                         <MudBadge  Content="context.NumTramite" Color="Color.Info" Overlap="true" Class="mx-2 my-2">
                                         </MudBadge>
                                     }
@@ -864,5 +866,11 @@
                 _snackBar.Add(message, response.Succeeded ? Severity.Success : Severity.Error);
             }
         }
+    }
+
+    private async Task Refresh()
+    {
+        await _table.ReloadServerData();
+        await this.InvokeAsync(StateHasChanged);
     }
 }
