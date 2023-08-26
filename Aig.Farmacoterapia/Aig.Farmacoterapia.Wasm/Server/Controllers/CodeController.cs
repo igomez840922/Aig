@@ -1,5 +1,7 @@
 ﻿using Aig.Farmacoterapia.Application.Features.Code.Queries;
+using Aig.Farmacoterapia.Application.Features.Medicament.Queries;
 using Aig.Farmacoterapia.Application.Features.Study.Commands;
+using Aig.Farmacoterapia.Application.Medicament.Model;
 using Aig.Farmacoterapia.Domain.Common;
 using Aig.Farmacoterapia.Domain.Entities.Studies;
 using Aig.Farmacoterapia.Infrastructure.Helpers;
@@ -33,6 +35,7 @@ namespace Aig.Farmacoterapia.Api.Controllers
 
         [HttpPost("delete")]
         public async Task<IActionResult> Delete([FromBody] DeleteCodeCommand model) => Ok(await _mediator.Send(model));
-
+        [HttpPost("listbyterm")]
+        public async Task<IActionResult> ListByTerm([FromBody] RequestPageSearch model) => Ok(await _mediator.Send(new ListByTermQuery(model)));
     }
 }

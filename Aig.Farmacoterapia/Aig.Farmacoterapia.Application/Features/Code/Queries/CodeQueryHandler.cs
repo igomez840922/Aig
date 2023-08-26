@@ -14,6 +14,9 @@ using AutoMapper;
 using Aig.Farmacoterapia.Domain.Entities.Enums;
 using Aig.Farmacoterapia.Infrastructure.Extensions;
 using Aig.Farmacoterapia.Domain.Specifications.Studies;
+using Aig.Farmacoterapia.Application.Medicament.Model;
+using Aig.Farmacoterapia.Domain.Entities;
+using Aig.Farmacoterapia.Application.Features.Medicament.Queries;
 
 namespace Aig.Farmacoterapia.Application.Features.Code.Queries
 {
@@ -31,10 +34,16 @@ namespace Aig.Farmacoterapia.Application.Features.Code.Queries
     {
         public string Value { get; set; }
     }
+    public class ListByTermQuery : IRequest<PaginatedResult<AigCodigoEstudio>>
+    {
+        public RequestPageSearch Args { get; set; }
+        public ListByTermQuery(RequestPageSearch args) => Args = args;
+    }
     internal class CodeQueryHandler :
         IRequestHandler<GetAllCodeQuery, PaginatedResult<AigCodigoEstudio>>,
         IRequestHandler<GetCodeQuery, Result<AigCodigoEstudio>>,
-        IRequestHandler<GetCodesQuery, Result<List<AigCodigoEstudio>>>
+        IRequestHandler<GetCodesQuery, Result<List<AigCodigoEstudio>>>,
+        IRequestHandler<ListByTermQuery, PaginatedResult<AigCodigoEstudio>>
     {
         private readonly IAigCodigoEstudioRepository _repository;
         private readonly IUnitOfWork _unitOfWork;
@@ -97,6 +106,31 @@ namespace Aig.Farmacoterapia.Application.Features.Code.Queries
             {
                 _logger.Error("Requested operation failed", exc);
                 return Result<List<AigCodigoEstudio>>.Fail(new List<string>() { exc.Message });
+            }
+            return answer;
+        }
+
+        public async Task<PaginatedResult<AigCodigoEstudio>> Handle(ListByTermQuery request, CancellationToken cancellationToken)
+        {
+            PaginatedResult<AigCodigoEstudio> answer;
+            try
+            {
+                var searchArgs = new PageSearchArgs()
+                {
+                    PageIndex = request.Args.PageIndex,
+                    PageSize = request.Args.PageSize,
+                    FilteringOptions = !string.IsNullOrEmpty(request.Args.Term) ? new List<FilteringOption>() {
+                        new FilteringOption {
+                            Field = "term", Operator = FilteringOperator.Contains, Value =  request.Args.Term
+                        }
+                    } : new List<FilteringOption>()
+                };
+                answer = await _repository.ListAsync(searchArgs);
+            }
+            catch (Exception exc)
+            {
+                _logger.Error("Requested operation failed", exc);
+                return PaginatedResult<AigCodigoEstudio>.Failure(new List<string>() { exc.Message });
             }
             return answer;
         }

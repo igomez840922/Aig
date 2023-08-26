@@ -60,8 +60,8 @@ namespace Aig.Farmacoterapia.Application.Features.Medicament.Queries
 
     public class ListMedicamentQuery : IRequest<PaginatedResult<AigMedicamento>>
     {
-        public MedicamentPageSearch Args { get; set; }
-        public ListMedicamentQuery(MedicamentPageSearch args) => Args = args;
+        public RequestPageSearch Args { get; set; }
+        public ListMedicamentQuery(RequestPageSearch args) => Args = args;
     }
     internal class MedicamentQueryHandler : 
         IRequestHandler<AdminGetAllMedicamentQuery, PaginatedResult<AigMedicamento>>,

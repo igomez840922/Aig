@@ -32,9 +32,9 @@ namespace Aig.Farmacoterapia.Application.Medicament.Model
         public AigFabricante? Fabricante { get; set; }
 
     }
-    public class MedicamentPageSearch : BaseFilter
+    public class RequestPageSearch : BaseFilter
     {
-        public MedicamentPageSearch() : base()
+        public RequestPageSearch() : base()
         {
             PageIndex = 1;
             PageSize = 10;

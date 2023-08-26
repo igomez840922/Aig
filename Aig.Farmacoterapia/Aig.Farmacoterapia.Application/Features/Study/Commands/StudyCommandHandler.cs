@@ -81,8 +81,11 @@ namespace Aig.Farmacoterapia.Application.Features.Study.Commands
 
                 if (!string.IsNullOrEmpty(request.Model.NumTramite)){
                     var study = _unitOfWork.Repository<AigEstudio>().EntitiesNoTracking.FirstOrDefault(p => p.NumTramite == request.Model.NumTramite);
-                    if (study != null)
+                    if (study != null){
                         request.Model.Id = study.Id;
+                        request.Model.Created = study.Created;
+                        request.Model.CreatedBy = study.CreatedBy;
+                    } 
                 }
 
                 //if (request.Model.Id > 0)

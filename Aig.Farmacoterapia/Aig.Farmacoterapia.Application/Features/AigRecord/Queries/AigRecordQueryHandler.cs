@@ -46,8 +46,8 @@ namespace Aig.Farmacoterapia.Application.Features.Medicament.Queries
    
     public class ListAigRecordQuery : IRequest<PaginatedResult<AigRecord>>
     {
-        public MedicamentPageSearch Args { get; set; }
-        public ListAigRecordQuery(MedicamentPageSearch args) => Args = args;
+        public RequestPageSearch Args { get; set; }
+        public ListAigRecordQuery(RequestPageSearch args) => Args = args;
     }
     internal class AigRecordQueryHandler : 
         IRequestHandler<AdminGetAllAigRecordQuery, PaginatedResult<AigRecord>>,

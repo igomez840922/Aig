@@ -23,7 +23,7 @@ namespace Aig.Farmacoterapia.Admin.Controllers.Identity
         }
         
         [HttpPost]
-        public async Task<PaginatedResult<AigMedicamento>> List([FromBody] MedicamentPageSearch args)
+        public async Task<PaginatedResult<AigMedicamento>> List([FromBody] RequestPageSearch args)
         {
             try
             {

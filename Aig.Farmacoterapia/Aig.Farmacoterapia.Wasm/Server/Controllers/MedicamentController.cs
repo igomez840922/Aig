@@ -53,7 +53,7 @@ namespace Aig.Farmacoterapia.Api.Controllers
         public async Task<FileStreamResult> GetFile(string type, string file) => await _mediator.Send(new GetFileQuery(type, file));
 
         [HttpPost("list")]
-        public async Task<IActionResult> List([FromBody] MedicamentPageSearch model) => Ok(await _mediator.Send(new ListMedicamentQuery(model)));
+        public async Task<IActionResult> List([FromBody] RequestPageSearch model) => Ok(await _mediator.Send(new ListMedicamentQuery(model)));
 
     }
 }
