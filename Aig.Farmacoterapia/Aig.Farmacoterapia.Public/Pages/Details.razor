@@ -128,37 +128,15 @@ else
                                                     </h5>
                                                 }
                                                 <h4>
-                                                    @* @if (@item.Vigente)
-                                                {
-                                                <span title="Vigente" class="fa fa-check-circle" aria-hidden="true" style="cursor: pointer;font-size: 20px;margin-right:7px;">
-                                                </span>
-                                                }
-                                                else
-                                                {
-                                                <span title="Caducado" class="fa fa-times-circle" aria-hidden="true" style="cursor: pointer;color: #e4573d !important;font-size: 20px;margin-right:7px">
-                                                </span>
-                                                }*@
-                                                    @item?.Producto?.Nombre
+                                                @item?.Producto?.Nombre
                                                 </h4>
-                                                @if (@item?.FechaVencimiento != null)
-                                                {
-                                                    <h5 style="font-size: 12px !important;color: #e4573d !important;">
-                                                        @* <span style="font-size: 12px !important;color: #e4573d !important;"> Vigencia:</span>*@
-                                                        @($"{string.Format("{0:dd/MM/yyyy}", item.FechaVencimiento)}")
-                                                    </h5>
-                                                }
                                             </div>
                                         </div>
 
                                     </div>
                                 </div>
 
-
-
                             </div>
-
-                            <hr style="margin: 0 0 1rem 0 !important;" />
-
 
                             <div class="container">
 

@@ -1,12 +1,6 @@
 ﻿using Aig.Farmacoterapia.Domain.Common;
-using Aig.Farmacoterapia.Domain.Entities.Products;
 using Aig.Farmacoterapia.Domain.Specifications.Base;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Aig.Farmacoterapia.Domain.Interfaces
 {
@@ -17,6 +11,7 @@ namespace Aig.Farmacoterapia.Domain.Interfaces
         Task<T?> GetByIdAsync(long id);
         IQueryable<T> GetAll();
         Task<int> CountAsync();
+        Task<long> CountAsync(Expression<Func<T, bool>> where, CancellationToken cancellationToken = default);
         Task<List<T>> GetPagedResponseAsync(int pageNumber, int pageSize);
         Task<PaginatedResult<T>> GetPagedResponseAsync(PageArgs args, Tuple<SortingOption, Expression<Func<T, object>>> order);
         Task<PaginatedResult<IEntity>> GetPagedResponseAsync(PageArgs args, Tuple<SortingOption, Expression<Func<T, object>>> order, ISpecification<IEntity> filter);

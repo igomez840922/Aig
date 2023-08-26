@@ -4,6 +4,7 @@ using System.Globalization;
 using System.Linq;
 using System.Linq.Expressions;
 using Aig.Farmacoterapia.Domain.Common;
+using Aig.Farmacoterapia.Domain.Entities;
 using Aig.Farmacoterapia.Domain.Entities.Enums;
 using Aig.Farmacoterapia.Domain.Entities.Products;
 using Aig.Farmacoterapia.Domain.Extensions;
@@ -117,9 +118,17 @@ namespace Aig.Farmacoterapia.Infrastructure.Persistence.Repositories
                                     filterList.Add(expression);
                                 }
                                 break;
-
-                             
-
+                            case "expiration":
+                                {
+                                    var value = int.Parse(filteringOption.Value);
+                                    Expression<Func<AigRecord, bool>> expression = value switch {
+                                        0 => f => true,
+                                        1 => f => DateTime.Now < f.FechaVencimiento,
+                                        2 => f => DateTime.Now > f.FechaVencimiento,
+                                    };
+                                    filterList.Add(expression);
+                                }
+                                break;
 
                         }
                     }
@@ -157,7 +166,10 @@ namespace Aig.Farmacoterapia.Infrastructure.Persistence.Repositories
             try
             {
                 var orderByList = new List<Tuple<SortingOption, Expression<Func<AigRecord, object>>>>();
-                var filterList = new List<Expression<Func<AigRecord, bool>>>();
+                var filterList = new List<Expression<Func<AigRecord, bool>>>()
+                {
+                    f => DateTime.Now < f.FechaVencimiento
+                };
 
                 if (args.SortingOptions != null)
                 {

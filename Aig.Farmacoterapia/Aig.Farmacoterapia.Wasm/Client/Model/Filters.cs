@@ -28,7 +28,6 @@ namespace Aig.Farmacoterapia.Wasm.Client.Model
         public DateTime? EndExpirationDate { get; set; }
         public string Fabricante { get; set; }
         public ServiceType ServiceType { get; set; }
-
     }
 
     public class StudiesDNFDFilter : BaseFilter

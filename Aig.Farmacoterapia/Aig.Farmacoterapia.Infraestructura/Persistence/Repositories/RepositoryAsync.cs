@@ -1,22 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+using System.Data;
 using System.Linq.Expressions;
-using System.Security.Principal;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 using Aig.Farmacoterapia.Domain.Common;
-using Aig.Farmacoterapia.Domain.Entities.Products;
 using Aig.Farmacoterapia.Domain.Interfaces;
 using Aig.Farmacoterapia.Domain.Specifications.Base;
 using Aig.Farmacoterapia.Infrastructure.Extensions;
-using IdentityModel;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
-using Polly;
 
 namespace Aig.Farmacoterapia.Infrastructure.Persistence.Repositories
 {
@@ -53,7 +43,20 @@ namespace Aig.Farmacoterapia.Infrastructure.Persistence.Repositories
         {
             return _dbContext.Set<T>().CountAsync();
         }
-
+        public async Task<long> CountAsync(Expression<Func<T, bool>> where, CancellationToken cancellationToken = default)
+        {
+            long answer = 0;
+            IQueryable<T> query = _dbContext.Set<T>();
+            if (where != null)
+            {
+                query = query.Where(where);
+                answer = query.Count();
+            }
+            else 
+                answer = query.Count();
+           
+            return answer;
+        }
         public async Task<T?> GetByIdAsync(long id)
         {
             return await _dbContext.Set<T>().FindAsync(id);

@@ -234,6 +234,8 @@ namespace Aig.Farmacoterapia.Infrastructure.Services.Integration.SysFarm
                             foreach (var item in result.Registros)
                             {
                                 item.Servicio = ServiceType.SYSFARM;
+                                var count =await _unitOfWork.Repository<AigRecord>().CountAsync(p => p.Numero == item.Numero && p.Servicio == ServiceType.SIRFAD);
+                                if (count > 0) continue;
                                 if ((record = _unitOfWork.Repository<AigRecord>().Entities.FirstOrDefault(p => p.Numero == item.Numero && p.Servicio == ServiceType.SYSFARM)) != null)
                                 {
                                     item.Id = record.Id;
