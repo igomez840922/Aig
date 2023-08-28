@@ -54,7 +54,7 @@
                 <ActivatorContent>
                     @if (string.IsNullOrEmpty(_avatar))
                     {
-                        <MudAvatar Color="Color.Secondary">
+                        <MudAvatar Style="background-color: #fff;color:#f16796; ">
                             @_name?[..1]?.ToUpper()
                         </MudAvatar>
                         <MudText Style="margin: 7px 10px 7px 10px;">@_name</MudText>

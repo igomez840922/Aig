@@ -236,9 +236,9 @@
                     </MudMenuItem>
                 }
 
-                <MudMenuItem Disabled=(!IsCopy()) Icon="@Icons.Material.Filled.ContentCopy" OnClick="@(() => Clone(@context.Id))" OnTouch="@(() => Clone(@context.Id))">
+             @*   <MudMenuItem Disabled=(!IsCopy()) Icon="@Icons.Material.Filled.ContentCopy" OnClick="@(() => Clone(@context.Id))" OnTouch="@(() => Clone(@context.Id))">
                     Clonar
-                </MudMenuItem>
+                </MudMenuItem>*@
 
                 @if (IsDelete())
                 {

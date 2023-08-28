@@ -85,8 +85,68 @@
     </MudCard>
 </EditForm>
 
-
 @if (_paginatedResult != null && _paginatedResult.Data.Count > 0)
+{
+
+    <MudGrid Style="margin-top:5px !important;" Spacing="5">
+        @if (_paginatedResult != null && _paginatedResult.Data.Count > 0)
+        {
+
+            @foreach (var dt in _paginatedResult.Data)
+            {
+                <MudItem xs="12" sm="4" md="3">
+                    <MudCard Elevation="25" Class="align-content-center align-self-center">
+                        <MudCardContent Style="padding: 0.5rem;display: flex;flex-wrap: nowrap;align-content: center;justify-content: flex-start; align-items: center;">
+                            <MudGrid Style="padding: 1rem;">
+                            </MudGrid>
+                            <MudGrid Style="display: contents;">
+                                <MudItem>
+                                    <MudTooltip Text="Editar Perfil" Arrow="true" Placement="Placement.Bottom" Color="Color.Default" Typo="Typo.h5">
+                                        <MudMenu AnchorOrigin="Origin.CenterCenter" TransformOrigin="Origin.TopRight" Icon="@Icons.Material.Filled.MoreVert" Size="Size.Medium" Color="Color.Default" Style="font-size:2rem;">
+                                            <MudMenuItem Disabled="!IsEdit()" Icon="@Icons.Material.Filled.CoPresent" OnClick="@(() => Edit(@dt.UserName))" OnTouch="@(() => Edit(@dt.UserName))">Perfil</MudMenuItem>
+                                            <MudMenuItem Disabled="!IsEdit()" Style="border-top:1px solid #E4E6EF !important;" Icon="@Icons.Material.Filled.Key" OnClick="@(() => Password(@dt.UserName))" OnTouch="@(() => Password(@dt.UserName))">Contraseña</MudMenuItem>
+                                            <MudMenuItem Disabled="!IsEdit()" Style="border-top:1px solid #E4E6EF !important;" Icon="@Icons.Material.Filled.Group" OnClick="@(() => Role(@dt.UserName))" OnTouch="@(() => Role(@dt.UserName))">Rol</MudMenuItem>
+                                            <MudMenuItem Disabled="!IsEdit()" Style="border-top:1px solid #E4E6EF !important;" Icon="@Icons.Material.Filled.Delete" OnClick="@(() => Delete(@dt.Id))" OnTouch="@(() => Delete(@dt.Id))">Eliminar</MudMenuItem>
+                                        </MudMenu>
+                                    </MudTooltip>
+                                </MudItem>
+                            </MudGrid>
+                        </MudCardContent>
+                        <MudCardContent Style="padding-top: 0px;display: flex;align-content: center;align-items: center;justify-content: center;flex-wrap: wrap;">
+                            @if (string.IsNullOrEmpty(dt.ProfilePicture))
+                            {
+                                <MudAvatar Elevation="25" Style="background-color: #7365f3 ; height:140px; width:140px; border-color:white;border-width:2.5px;display: flex; align-content: center;justify-content: center; flex-wrap: wrap;font-size: 40px;" Color="Color.Default">@dt.FirstName?[..1]?.ToUpper()  </MudAvatar>
+                            }
+                            else
+                            {
+                                <MudAvatar Image="@dt.ProfilePicture" Elevation="25" Style="height:140px; width:140px; border-color:white;border-width:2.5px;display: flex; align-content: center;justify-content: center; flex-wrap: wrap;"> </MudAvatar>
+                            }
+                        </MudCardContent>
+                        <MudCardContent Style="padding:5px">
+                            <MudText Align="Align.Center" Color="Color.Default"><b>@dt.FullName</b></MudText>
+                            <MudText Style="margin-top:5px;" Align="Align.Center" Color="Color.Default"><b>Correo:</b> @dt.Email</MudText>
+                            <MudText Style="margin-top:5px;margin-bottom: 10px;" Align="Align.Center" Color="Color.Default"> <b>Teléfono:</b>@dt.PhoneNumber</MudText>
+                            <MudCardContent Justify="Justify.SpaceEvenly" Style="background-color: #f0f0f0;display: flex;justify-content: space-evenly!important;">
+                                <MudText Style="font-size: 1rem; margin-top:10px;color:#7365f3  !important" Align="Align.Center">@dt.UserRoleDescription</MudText>
+                            </MudCardContent>
+                        </MudCardContent>
+                    </MudCard>
+                </MudItem>
+
+            }
+
+        }
+    </MudGrid>
+    <MudGrid Style="margin-bottom:100px !important;">
+        <MudItem>
+            <MudPagination Selected="@_paginatedResult.CurrentPage" SelectedChanged="PageChanged" Variant="Variant.Outlined" Count="@_paginatedResult.TotalPages" Class="pa-4" />
+        </MudItem>
+    </MudGrid>
+
+}
+
+
+@*@if (_paginatedResult != null && _paginatedResult.Data.Count > 0)
 {
     <MudGrid Style="margin-top:5px !important;">
         <MudItem>
@@ -148,7 +208,7 @@
         </MudItem>
     </MudGrid>
 
-}
+}*@
 
 @code {
 
