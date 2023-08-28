@@ -226,6 +226,8 @@ namespace Aig.Farmacoterapia.Infrastructure.Services.Integration.SirFad
         {
             try
             {
+                var keys = new Dictionary<string, AigRecord>();
+                string keySelector(AigRecord p) => p.Numero;
                 SirFadResponse? result = null;
                 AigService? service;
                 if ((service = _unitOfWork.Repository<AigService>().Entities.FirstOrDefault(p => p.IsActive && p.Code == _code)) != null)
@@ -248,6 +250,11 @@ namespace Aig.Farmacoterapia.Infrastructure.Services.Integration.SirFad
                         await _unitOfWork.BeginTransactionAsync(cc);
                         AigRecord record;
                         foreach (var item in result.Registros) {
+                           
+                            var key = keySelector(item);
+                            if (keys.ContainsKey(key)) continue;
+                            keys.Add(key, item);
+
                             item.Servicio = ServiceType.SIRFAD;
                             if ((record = _unitOfWork.Repository<AigRecord>().Entities.AsNoTracking().FirstOrDefault(p => p.Numero == item.Numero)) != null){
                                 item.Id = record.Id;

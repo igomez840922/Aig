@@ -6,6 +6,7 @@ using Aig.Farmacoterapia.Domain.Interfaces;
 using Aig.Farmacoterapia.Domain.Specifications.Base;
 using Aig.Farmacoterapia.Infrastructure.Extensions;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 
 namespace Aig.Farmacoterapia.Infrastructure.Persistence.Repositories
@@ -21,7 +22,6 @@ namespace Aig.Farmacoterapia.Infrastructure.Persistence.Repositories
 
         public IQueryable<T> Entities => _dbContext.Set<T>();
         public IQueryable<T> EntitiesNoTracking => _dbContext.Set<T>().AsNoTracking();
-
         public async Task<T> AddAsync(T entity)
         {
             await _dbContext.Set<T>().AddAsync(entity);

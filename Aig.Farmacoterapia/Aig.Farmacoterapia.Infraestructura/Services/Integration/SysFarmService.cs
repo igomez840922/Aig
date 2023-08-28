@@ -206,6 +206,8 @@ namespace Aig.Farmacoterapia.Infrastructure.Services.Integration.SysFarm
         {
             try
             {
+                var keys = new Dictionary<string, AigRecord>();
+                string keySelector(AigRecord p) => p.Numero;
                 SysFarmResponse? result = null;
                 AigService? service;
                 if ((service = _unitOfWork.Repository<AigService>().Entities.FirstOrDefault(p => p.IsActive && p.Code == _code)) != null)
@@ -233,9 +235,15 @@ namespace Aig.Farmacoterapia.Infrastructure.Services.Integration.SysFarm
                             AigRecord record;
                             foreach (var item in result.Registros)
                             {
-                                item.Servicio = ServiceType.SYSFARM;
                                 var count =await _unitOfWork.Repository<AigRecord>().CountAsync(p => p.Numero == item.Numero && p.Servicio == ServiceType.SIRFAD);
                                 if (count > 0) continue;
+
+                                var key = keySelector(item);
+                                if (keys.ContainsKey(key)) continue;
+                                keys.Add(key, item);
+
+                                item.Servicio = ServiceType.SYSFARM;
+
                                 if ((record = _unitOfWork.Repository<AigRecord>().Entities.FirstOrDefault(p => p.Numero == item.Numero && p.Servicio == ServiceType.SYSFARM)) != null)
                                 {
                                     item.Id = record.Id;

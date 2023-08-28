@@ -232,8 +232,10 @@
 <MudTable Elevation="25" Style="margin-bottom:80px !important;" @ref="_table" Striped="true" SortLabel="name" LoadingProgressColor="Color.Primary" Dense="true" Hover="true" ServerData="@(new Func<TableState, Task<TableData<AigRecord>>>(DoFetchData))" Breakpoint="Breakpoint.Sm">
 
     <HeaderContent>
-        <MudTh style="width:3px;"></MudTh>
-        <MudTh style="width:3px;"></MudTh>
+       @* <MudTh style="width:3px;"></MudTh>
+        <MudTh style="width:3px;"></MudTh>*@
+        <MudTh><MudInputLabel Style="width:3px"></MudInputLabel></MudTh>
+        <MudTh><MudInputLabel Style="width:3px"></MudInputLabel></MudTh>
         <MudTh style="width:60px;"><MudTableSortLabel SortLabel="numReg" T="AigRecord">Registro</MudTableSortLabel></MudTh>
         <MudTh style="width:100px;"><MudTableSortLabel SortLabel="dateOfIssue" T="AigRecord">Emisión</MudTableSortLabel></MudTh>
         <MudTh style="width:100px;"><MudTableSortLabel SortLabel="expirationDate" T="AigRecord">Expiración</MudTableSortLabel></MudTh>
@@ -241,7 +243,8 @@
         <MudTh style="width:300px;">Principio Activo</MudTh>
         <MudTh>Fabricante</MudTh>
         <MudTh style="width:20px;"><MudTableSortLabel T="AigRecord" SortLabel="updated">Actualizado</MudTableSortLabel></MudTh>
-        <MudTh style="width:100px;">Fuente</MudTh>
+       @* <MudTh style="width:100px;">Fuente</MudTh>*@
+        <MudTh><MudInputLabel Style="width:100px">Fuente</MudInputLabel></MudTh>
     </HeaderContent>
     <RowTemplate>
         <MudTd>
@@ -269,27 +272,46 @@
             </MudMenu>
         </MudTd>
         <MudTd DataLabel="No. Registro">@context.Numero</MudTd>
-        <MudTd DataLabel="Fech. Emisión">@(string.Format("{0:dd/MM/yyyy}", context.FechaExpedicion))</MudTd>
-        <MudTd DataLabel="Fech. Expiración">
-           @* @(string.Format("{0:dd/MM/yyyy}", context.FechaVencimiento))*@
-            @if (DateTime.Now > context.FechaVencimiento)
+        <MudTd DataLabel="Fech. Emisión">
+            @if (context.FechaExpedicion != null)
             {
-                <MudTooltip Text="Medicamento caducado" Arrow="true" Placement="Placement.Top" Color="Color.Default">
-                    <MudBadge Content="@(string.Format("{0:dd/MM/yyyy}", context.FechaVencimiento))" Color="Color.Default" Overlap="true">
-                        <MudIcon Size="Size.Large" Icon="@Icons.Material.Filled.Warning" Color="Color.Error" />
-                    </MudBadge>
-                </MudTooltip>
-
+                <MudBadge Content="@(string.Format("{0:dd/MM/yyyy}", @context.FechaExpedicion))" Color="Color.Info" Overlap="true" Class="mx-2 my-2">
+                </MudBadge>
             }
             else
             {
-                <MudTooltip Arrow="true" Placement="Placement.Top" Color="Color.Default">
-                    <MudBadge Content="@(string.Format("{0:dd/MM/yyyy}", context.FechaVencimiento))" Color="Color.Default" Overlap="true">
-                        <MudIcon Size="Size.Large" Icon="@Icons.Material.Filled.CheckCircle" Color="Color.Tertiary" />
-                    </MudBadge>
-                </MudTooltip>
-
+                <MudBadge Content="@("---")" Color="Color.Default" Overlap="true" Class="mx-2 my-2">
+                </MudBadge>
             }
+         </MudTd>
+        <MudTd DataLabel="Fech. Expiración">
+            @if (context.FechaVencimiento != null)
+            {
+                @if (DateTime.Now > context.FechaVencimiento)
+                {
+                    <MudTooltip Text="Medicamento caducado" Arrow="true" Placement="Placement.Top" Color="Color.Default">
+                        <MudBadge Content="@(string.Format("{0:dd/MM/yyyy}", context.FechaVencimiento))" Color="Color.Default" Overlap="true">
+                            <MudIcon Size="Size.Large" Icon="@Icons.Material.Filled.Warning" Color="Color.Error" />
+                        </MudBadge>
+                    </MudTooltip>
+
+                }
+                else
+                {
+                    <MudTooltip Arrow="true" Placement="Placement.Top" Color="Color.Default">
+                        <MudBadge Content="@(string.Format("{0:dd/MM/yyyy}", context.FechaVencimiento))" Color="Color.Default" Overlap="true">
+                            <MudIcon Size="Size.Large" Icon="@Icons.Material.Filled.CheckCircle" Color="Color.Tertiary" />
+                        </MudBadge>
+                    </MudTooltip>
+
+                }
+            }
+            else
+            {
+                <MudBadge Content="@("---")" Color="Color.Default" Overlap="true" Class="mx-2 my-2">
+                </MudBadge>
+            }
+           
         </MudTd>
         <MudTd DataLabel="Medicamento">@context.Producto?.Nombre</MudTd>
         <MudTd DataLabel="Principio Activo">@context.Producto?.PrincipioActivo</MudTd>
