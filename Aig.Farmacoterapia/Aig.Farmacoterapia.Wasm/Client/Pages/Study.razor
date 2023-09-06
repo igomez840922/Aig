@@ -230,15 +230,16 @@
 
                 @if (context.Estado != EstadoEstudio.Pendiente && context.Nota?.Lines?.Count > 0)
                 {
-                    <MudMenuItem Target="_blank" Disabled=(!IsEdit(context.Evaluators)) Style="border-bottom:1px solid #E4E6EF !important;" IconColor="Color.Primary" Icon="@Icons.Filled.PictureAsPdf"
+                   @* <MudMenuItem Target="_blank" Disabled=(!IsEdit(context.Evaluators)) Style="border-bottom:1px solid #E4E6EF !important;" IconColor="Color.Primary" Icon="@Icons.Filled.PictureAsPdf"
                                  Link="@($"{_appConfiguration.ApiUrl}{AppConstants.ReportEndpoints.NoteReportURL(context.Id)}")">
                         Exportar Evaluación
+                    </MudMenuItem>*@
+                    <MudMenuItem Disabled=(!IsEdit(context.Evaluators)) Style="border-bottom:1px solid #E4E6EF !important;" IconColor="Color.Primary" Icon="@Icons.Material.Filled.PictureAsPdf" OnClick="@(() => ShowNote(@context.Id,@context.NumTramite))" OnTouch="@(() => ShowNote(@context.Id,@context.NumTramite))">
+                       Exportar Evaluación
                     </MudMenuItem>
+                    
                 }
 
-             @*   <MudMenuItem Disabled=(!IsCopy()) Icon="@Icons.Material.Filled.ContentCopy" OnClick="@(() => Clone(@context.Id))" OnTouch="@(() => Clone(@context.Id))">
-                    Clonar
-                </MudMenuItem>*@
 
                 @if (IsDelete())
                 {
@@ -818,6 +819,10 @@
                
       }
 
+    private void ShowNote(long id, string num)
+    {
+        _navigationManager.NavigateTo($"note/{id}/{num}");
+    }
       private async Task SetEvaluators(long id)
         {
             var parameters = new DialogParameters { ["_id"]=id };

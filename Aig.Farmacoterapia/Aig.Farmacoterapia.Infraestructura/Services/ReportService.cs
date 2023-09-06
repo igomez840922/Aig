@@ -79,8 +79,9 @@ namespace Aig.Farmacoterapia.Infrastructure.Services
             {
                 var list = _userManager.Users.Where(p => evaluators.Contains(p.Id)).ToList()
                                               .Select(w => { w.FirstName = w.FirstName[..1].ToLower(); w.LastName = w.LastName[..1].ToLower(); return $"{ w.FirstName}{ w.LastName}"; }).ToList();
-                if (list != null && !string.IsNullOrEmpty(jefe) && !list.Any(p => p == jefe.ToLower()))
-                    list.Insert(0,jefe);
+                //if (list != null && !string.IsNullOrEmpty(jefe) && !list.Any(p => p == jefe.ToLower()))
+                if (list != null && !string.IsNullOrEmpty(jefe))
+                        list.Insert(0,jefe);
                result = string.Join(" / ", list);
             }
             catch (Exception exc)

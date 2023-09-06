@@ -273,11 +273,13 @@ namespace Aig.Farmacoterapia.Infrastructure
             services.AddScoped<AppState>();
             services.Configure<AppConfiguration>(configuration.GetSection("AppConfiguration"));
             services.Configure<MailConfiguration>(configuration.GetSection("MailConfiguration"));
+            services.Configure<TramitesConfiguration>(configuration.GetSection("TramitesConfiguration"));
             services.AddTransient<IMailService, SMTPMailService>();
             services.AddTransient<ISqlRetryPolicy, SqlRetryPolicy>();
             services.AddTransient<IRestApiClient, RestApiClient>();
             services.AddTransient<ISysFarmService, SysFarmService>();
             services.AddTransient<ISirFadServices, SirFadServices>();
+            services.AddTransient<ITramitesServices, TramitesServices>();
             services.AddSingleton(typeof(IConverter), new SynchronizedConverter(new PdfTools()));
 
             return services;

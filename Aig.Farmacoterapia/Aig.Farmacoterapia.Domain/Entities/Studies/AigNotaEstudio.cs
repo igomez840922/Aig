@@ -30,7 +30,7 @@ namespace Aig.Farmacoterapia.Domain.Entities.Studies
             if (noteNo == default) return string.Empty;
             var noteCode = noteNo.ToString();
             noteCode = noteCode.PadLeft(noteCode.Length+2,'0');
-            return $"{noteCode}-FCT/DNFD-{DateTime.Now:yy}";
+            return $"{noteCode}-FCT-DNFD-{DateTime.Now:yy}";
         }
     }
 }

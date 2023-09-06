@@ -109,6 +109,8 @@ namespace Aig.Farmacoterapia.Wasm.Client.Infrastructure
         public static class ReportEndpoints
         {
             public static string NoteReportURL(long studyId) => $"api/report/{studyId}";
+            public static string SendNote => $"api/report/note";
+            
         }
         public static class AigServiceEndpoints
         {

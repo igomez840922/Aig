@@ -1,8 +1,11 @@
-﻿using Aig.Farmacoterapia.Application.Features.Medicament.Commands;
+﻿using Aig.Farmacoterapia.Application.Features.Code.Queries;
+using Aig.Farmacoterapia.Application.Features.Medicament.Commands;
 using Aig.Farmacoterapia.Application.Features.Medicament.Queries;
 using Aig.Farmacoterapia.Application.Features.Report.Queries;
+using Aig.Farmacoterapia.Application.Features.Study.Commands;
 using Aig.Farmacoterapia.Domain.Common;
 using Aig.Farmacoterapia.Domain.Entities;
+using Aig.Farmacoterapia.Domain.Models;
 using Aig.Farmacoterapia.Infrastructure.Helpers;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
@@ -22,5 +25,9 @@ namespace Aig.Farmacoterapia.Api.Controllers
         [HttpGet("{studyId}")]
         [AllowAnonymous]
         public async Task<FileStreamResult> GetFile(long studyId) => await _mediator.Send(new GetNoteFileQuery(studyId));
+      
+        [HttpPost("note")]
+        public async Task<IActionResult> Note(SendNoteCommand model) => Ok(await _mediator.Send(model));
+
     }
 }
