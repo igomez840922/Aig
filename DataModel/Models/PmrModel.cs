@@ -17,6 +17,6 @@ namespace DataModel.Models
         //public FMV_OrigenAlertaTB? OrigenAlerta { get; set; }
         public DateTime? FechaEntrada { get; set; }
         public List<AttachmentTB> LAdjuntos { get; set; }
-
+        public long IdTramite { get; set; }
     }
 }

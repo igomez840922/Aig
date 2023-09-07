@@ -120,18 +120,25 @@ namespace Aig.FarmacoVigilancia.Controllers
         {
             try
             {
-                var data = new FMV_AlertaTB()
+                var data = dalService.Get<FMV_AlertaTB>(model.IdTramite);
+
+                if(data == null)
                 {
-                    FechaRecepcion = model.FechaEntrada,
-                    Producto = model.NombreComercial,
-                    DCI = model.PrincipioActivo,
-                    OrigenAlertaId = model.OrigenAlerta.Id,
-                    Descripcion = model.Descripcion, //+ " " + model.LaboratorioFabricante?.Nombre ?? "" + " " + model.RegSanitario
-                    Observaciones =  model.LaboratorioFabricante?.Nombre ?? "" + " " + model.RegSanitario
-                };
+                    data = new FMV_AlertaTB()
+                    {
+                        FechaRecepcion = model.FechaEntrada,
+                        Producto = model.NombreComercial,
+                        DCI = model.PrincipioActivo,
+                        OrigenAlertaId = model.OrigenAlerta.Id,
+                        Descripcion = model.Descripcion, //+ " " + model.LaboratorioFabricante?.Nombre ?? "" + " " + model.RegSanitario
+                        Observaciones = model.LaboratorioFabricante?.Nombre ?? "" + " " + model.RegSanitario
+                    };
+                }
+                
                 if (model?.LAdjuntos?.Count > 0)
                 {
-                    data.Adjunto = new AttachmentData() { };
+                    data.Adjunto = data.Adjunto!=null? data.Adjunto: new AttachmentData() { };
+                    data.Adjunto.LAttachments.Clear();
 
                     foreach (var item in model?.LAdjuntos)
                     {
@@ -155,19 +162,26 @@ namespace Aig.FarmacoVigilancia.Controllers
         {
             try
             {
-                var data = new FMV_PmrTB()
+                var data = dalService.Get<FMV_PmrTB>(model.IdTramite);
+
+                if (data == null)
                 {
-                    FechaEntrada = model.FechaEntrada,
-                    PmrProducto = new FMV_PmrProductoTB() { 
-                     RegSanitario = model.RegSanitario,
-                        NomComercial = model.NombreComercial,
-                        LaboratorioId = model.LaboratorioFabricante.Id
-                    },
-                    PrincActivo = model.PrincipioActivo,
-                };
+                    data = new FMV_PmrTB()
+                    {
+                        FechaEntrada = model.FechaEntrada,
+                        PmrProducto = new FMV_PmrProductoTB()
+                        {
+                            RegSanitario = model.RegSanitario,
+                            NomComercial = model.NombreComercial,
+                            LaboratorioId = model.LaboratorioFabricante.Id
+                        },
+                        PrincActivo = model.PrincipioActivo,
+                    };
+                }                    
                 if (model?.LAdjuntos?.Count > 0)
                 {
-                    data.Adjunto = new AttachmentData() { };
+                    data.Adjunto = data.Adjunto != null ? data.Adjunto : new AttachmentData() { };
+                    data.Adjunto.LAttachments.Clear();
 
                     foreach (var item in model?.LAdjuntos)
                     {
@@ -191,21 +205,27 @@ namespace Aig.FarmacoVigilancia.Controllers
         {
             try
             {
-                var data = new FMV_RfvTB()
+                var data = dalService.Get<FMV_RfvTB>(model.IdTramite);
+                if (data == null)
                 {
-                    FechaNotificacion = model.FechaEntrada,
-                    Correos = model.Correo,
-                    DireccionFisica = model.Direccion,
-                    LaboratorioId = model.Empresa?.Id,
-                    NombreCompleto = model.NombreCompleto,
-                    Observaciones = model.Observaciones,
-                    TipoCargo = model.Cargo,
-                    TipoUbicacion = model.OrigenPersona,
-                    Telefonos = model.Telefono,
-                };
+                    data = new FMV_RfvTB()
+                    {
+                        FechaNotificacion = model.FechaEntrada,
+                        Correos = model.Correo,
+                        DireccionFisica = model.Direccion,
+                        LaboratorioId = model.Empresa?.Id,
+                        NombreCompleto = model.NombreCompleto,
+                        Observaciones = model.Observaciones,
+                        TipoCargo = model.Cargo,
+                        TipoUbicacion = model.OrigenPersona,
+                        Telefonos = model.Telefono,
+                    };
+                }
+                 
                 if (model?.LAdjuntos?.Count > 0)
                 {
-                    data.Adjunto = new AttachmentData() { };
+                    data.Adjunto = data.Adjunto != null ? data.Adjunto : new AttachmentData() { };
+                    data.Adjunto.LAttachments.Clear();
                     foreach (var item in model?.LAdjuntos)
                     {
                         data.Adjunto.LAttachments.Add(item);
@@ -229,7 +249,6 @@ namespace Aig.FarmacoVigilancia.Controllers
             try
             {
                 var data = dalService.Get<FMV_IpsTB>(model.IdTramite);
-
                 if(data == null)
                 {
                     data = new FMV_IpsTB()
@@ -331,26 +350,25 @@ namespace Aig.FarmacoVigilancia.Controllers
                     
                     nota.Adjunto = nota.Adjunto != null ? nota.Adjunto : new AttachmentData() { };
                     nota.Adjunto.LAttachments = nota.Adjunto.LAttachments?.Count > 0 ? nota.Adjunto.LAttachments : new List<AttachmentTB>();
+                    nota.Adjunto.LAttachments.Clear();
                     if (model.LAdjuntos?.Count > 0)
                     {
                         foreach (var item in model.LAdjuntos)
                         {
-                            if(nota.Adjunto.LAttachments.Find(x=>x.FileName == item.FileName)==null)
-                                nota.Adjunto.LAttachments.Add(item);                          
+                            nota.Adjunto.LAttachments.Add(item);
                         }
                     }
 
                     nota.NotaContactos = nota.NotaContactos != null ? nota.NotaContactos : new FMV_NotaContactos();
                     nota.NotaContactos.LContactos = nota.NotaContactos.LContactos?.Count > 0 ? nota.NotaContactos.LContactos : new List<FMV_ContactosTB>();
+                    nota.NotaContactos.LContactos.Clear();
                     if (model.LCorreos?.Count > 0)
                     {
                         foreach (var item in model.LCorreos)
                         {
-                            if(nota.NotaContactos.LContactos.Find(x => x.Correo == item.Correo)==null) 
-                                nota.NotaContactos.LContactos.Add(new FMV_ContactosTB() { Cargo=item.Cargo, Correo = item.Correo, Nombre = item.NombreCompleto, Instalacion = item.Departamento  });
+                            nota.NotaContactos.LContactos.Add(new FMV_ContactosTB() { Cargo = item.Cargo, Correo = item.Correo, Nombre = item.NombreCompleto, Instalacion = item.Departamento });
                         }
                     }
-
                     var result = dalService.Save(nota);
                     if (result != null)
                     {

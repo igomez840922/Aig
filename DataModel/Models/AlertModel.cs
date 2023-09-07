@@ -18,5 +18,9 @@ namespace DataModel.Models
         public DateTime? FechaEntrada { get; set; }
         public List<AttachmentTB> LAdjuntos { get; set; }
 
+        public long IdTramite { get; set; }
+
+
+
     }
 }

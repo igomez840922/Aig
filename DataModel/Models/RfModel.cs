@@ -44,6 +44,7 @@ namespace DataModel.Models
         }
 
         public List<AttachmentTB> LAdjuntos { get; set; }
+        public long IdTramite { get; set; }
 
 
 
