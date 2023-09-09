@@ -60,12 +60,12 @@
                           </MudButton>
                     
                     <MudButton style="margin-left:10px !important" Variant="Variant.Filled"
-                               Color="Color.Primary"
+                               Color="Color.Tertiary"
                                Size="Size.Medium"
                                OnClick="@(async () =>await Send($"{_appConfiguration.ApiUrl}{AppConstants.ReportEndpoints.NoteReportURL(Id)}"))"
                                Target="_blank"
                                StartIcon="@Icons.Material.Filled.Send">
-                        21 Tramites
+                        Enviar Nota a FADDI
                     </MudButton>
                     </div>
                
@@ -124,7 +124,13 @@
                     UploadType = 12,
                     Url = $"{_appConfiguration.ApiUrl}{AppConstants.ReportEndpoints.NoteReportURL(Id)}"
                 };
-            await _manager.SendAsync(Num,file);
+            var response= await _manager.SendAsync(Num,file);
+            if (!response.Succeeded) {
+                foreach (var message in response.Messages){
+                    _snackBar.Add(message, response.Succeeded ? Severity.Success : Severity.Error);
+                }
+            }
+
             await RefresView(false);
             _navigationManager.NavigateTo("/studies");
         }

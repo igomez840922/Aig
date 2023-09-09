@@ -43,7 +43,7 @@ namespace Aig.Farmacoterapia.Wasm.Client.Extensions
                    configuration.SnackbarConfiguration.PositionClass = Defaults.Classes.Position.TopRight;
                    configuration.SnackbarConfiguration.HideTransitionDuration = 100;
                    configuration.SnackbarConfiguration.ShowTransitionDuration = 100;
-                   configuration.SnackbarConfiguration.VisibleStateDuration = 3000;
+                   configuration.SnackbarConfiguration.VisibleStateDuration = 5000;
                    configuration.SnackbarConfiguration.ShowCloseIcon = false;
                  })
                 .AddScoped<AppStateProvider>()

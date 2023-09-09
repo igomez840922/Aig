@@ -14,7 +14,7 @@ namespace Aig.Farmacoterapia.Infrastructure.Services.Integration.SysFarm
     public class ResponseModel
     {
         [JsonPropertyName("messages")]
-        public List<object> Messages { get; set; }
+        public List<string> Messages { get; set; }
 
         [JsonPropertyName("succeeded")]
         public bool Succeeded { get; set; }
@@ -32,12 +32,13 @@ namespace Aig.Farmacoterapia.Infrastructure.Services.Integration.SysFarm
             var request = CreateRequest($"api/tramitesAPIM/note/{code}", Method.POST);
             request.AddJsonBody(file);
             var response = await _requester.ExecuteAsync<ResponseModel>(request, cancellationToke);
-            if (!response.IsSuccessful || string.IsNullOrEmpty(response.Content))
+            if (response== null || response.Data==null || !response.IsSuccessful || string.IsNullOrEmpty(response.Content))
             {
-                _logger.Error(new Exception(response.Content).ToMessageAndCompleteStacktrace());
-                return Result.Fail(response.StatusDescription);
+                _logger.Error(new Exception(response?.Content).ToMessageAndCompleteStacktrace());
+                return Result.Fail(response?.StatusDescription);
             }
-            return Result.Success();
+            return response.Data.Succeeded ? Result.Success() : Result.Fail(response.Data.Messages);
+          
         }
       
     }
