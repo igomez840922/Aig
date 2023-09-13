@@ -34,12 +34,11 @@ namespace Aig.Farmacoterapia.Infrastructure.Services
             _unitOfWork = unitOfWork;
             _logger = logger;
         }
-        public async Task<byte[]> GetNotePdfAsync(long studyId)
+        public async Task<byte[]> GetNotePdfAsync(AigEstudio item)
         {
             try
             {
                 var dateFormatInfo = CultureInfo.CreateSpecificCulture("es-PAN").DateTimeFormat;
-                var item = await _unitOfWork.Repository<AigEstudio>().GetByIdAsync(studyId);
                 item!.EvaluatorToShow = EvaluatorToShow(item.EstudioEvaluador.Select(s => s.UserId).ToList(), item.Nota?.Jefe);
                 if (item == null) return new byte[0];
                 var html = "<html>" +

@@ -26,91 +26,93 @@
     <MudProgressCircular Size="Size.Large" Color="Color.Default" Indeterminate="true" />
 </MudOverlay>
 
-<div class="col-xl-12 col-lg-12">
-    <div class="pro-ful-tab">
-       
-        @if (paginatedResult != null && paginatedResult.Data.Count > 0)
-        {
-            <div class="row">
-                <div class="col-12" style="text-align: center;">
-                    <span style="text-align:center; color: #6c757d !important;font-size: 16px;"> @($"{paginatedResult.StartIndex+1} al {paginatedResult.EndIndex+1} de {paginatedResult.TotalCount }")</span>
-                </div>
-            </div>
-
-            <div class="d-flex flex-column align-center" style="margin: 10px 0 20px 0 !important;">
-                <MudPagination Size="Size.Medium" Selected="@paginatedResult.CurrentPage" SelectedChanged="PageChanged" Color="Color.Info" Count="@paginatedResult.TotalPages" />
-            </div>
-
-        }
-
-        <div class="product-tab-content" style="padding: 10px !important; margin: 10px !important; border: 1px solid #e4e4e4 !important;">
-            <div class="tab-content" id="myTabContent">
-
-                @if (!loading && (paginatedResult == null || paginatedResult.Data.Count == 0))
-                {
-                    <div class="row">
-                        <div class="col-xl-6 col-lg-6 offset-lg-3 offset-xl-3">
-                            <div class="section-title text-center" style="padding: 50px !important;">
-                                <h2>No se encontraron resultados</h2>
-                                <p>Intente cambiar los parámetros de búsqueda </p>
-                            </div>
-                        </div>
-                    </div>
-                }
+  <div class="col-xl-12 col-lg-12">
+            <div class="pro-ful-tab">
 
                 @if (paginatedResult != null && paginatedResult.Data.Count > 0)
                 {
-                    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                        <div class="row">
-                            @foreach (var context in paginatedResult.Data)
-                            {
-
-                                <div class="col-xl-2 cl-lg-2 col-md-4">
-                                    <div style="box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;" class="product-03-wrapper pos-rel text-center mb-30">
-                                        <div class="product-02-img pos-rel">
-
-                                            @if (!string.IsNullOrEmpty(@context.PictureData))
-                                            {
-                                                <a target="_blank" href="/details/@context.Id">
-                                                    <img src="@context.PictureData" Width="150" Height="150" />
-                                                </a>
-                                            }
-                                            else
-                                            {
-                                                <a target="_blank" href="/details/@context.Id">
-                                                    <img src="assets/img/products/no-image.png" Width="150" Height="140">
-                                                </a>
-                                            }
-
-                                        </div>
-                                        <div class="product-text">
-
-                                            <h4>
-                                                <a target="_blank" href="/details/@context.Id">@context.Producto?.Nombre</a>
-                                            </h4>
-
-                                            <span>
-                                                @context.Producto.PrincipioActivo
-                                            </span>
-
-                                            <h5>
-                                                @(!string.IsNullOrEmpty(@context.Producto.FormaFarmaceutica) ? @context.Producto.FormaFarmaceutica : "-")
-                                            </h5>
-
-                                        </div>
-                                    </div>
-                                </div>
-                            }
+                    <div class="row">
+                        <div class="col-12" style="text-align: center;">
+                            <span style="text-align:center; color: #6c757d !important;font-size: 16px;"> @($"{paginatedResult.StartIndex + 1} al {paginatedResult.EndIndex + 1} de {paginatedResult.TotalCount}")</span>
                         </div>
+                    </div>
+
+                    <div class="d-flex flex-column align-center" style="margin: 10px 0 20px 0 !important;">
+                        <MudPagination Size="Size.Medium" Selected="@paginatedResult.CurrentPage" SelectedChanged="PageChanged" Color="Color.Info" Count="@paginatedResult.TotalPages" />
                     </div>
 
                 }
 
+                <div class="product-tab-content" style="padding: 10px !important; margin: 10px !important; border: 1px solid #e4e4e4 !important;">
+                    <div class="tab-content" id="myTabContent">
+
+                        @if (!loading && (paginatedResult == null || paginatedResult.Data.Count == 0))
+                        {
+                            <div class="row">
+                                <div class="col-xl-6 col-lg-6 offset-lg-3 offset-xl-3">
+                                    <div class="section-title text-center" style="padding: 50px !important;">
+                                        <h2>No se encontraron resultados</h2>
+                                        <p>Intente cambiar los parámetros de búsqueda </p>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+
+                        @if (paginatedResult != null && paginatedResult.Data.Count > 0)
+                        {
+
+                           <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                                <div class="row">
+                                    @foreach (var context in paginatedResult.Data)
+                                    {
+
+                                <div style="display:flex;" class="col-xl-2 col-lg-2 col-md-4 col-xs-12 col-sm-12">
+                                            <div style="box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;" class="product-03-wrapper pos-rel text-center mb-30">
+                                                <div class="product-02-img pos-rel">
+
+                                                    @if (!string.IsNullOrEmpty(@context.PictureData))
+                                                    {
+                                                        <a target="_blank" href="/details/@context.Id">
+                                                            <img src="@context.PictureData" Width="150" Height="150" />
+                                                        </a>
+                                                    }
+                                                    else
+                                                    {
+                                                        <a target="_blank" href="/details/@context.Id">
+                                                            <img src="assets/img/products/no-image.png" Width="150" Height="140">
+                                                        </a>
+                                                    }
+
+                                                </div>
+                                                <div class="product-text">
+
+                                                    <h4>
+                                                        <a target="_blank" href="/details/@context.Id">@context.Producto?.Nombre</a>
+                                                    </h4>
+
+                                                    <span>
+                                                        @context.Producto.PrincipioActivo
+                                                    </span>
+
+                                                    <h5>
+                                                        @(!string.IsNullOrEmpty(@context.Producto.FormaFarmaceutica) ? @context.Producto.FormaFarmaceutica : "-")
+                                                    </h5>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+
+                        }
+
+                    </div>
+                </div>
+
             </div>
         </div>
-
-    </div>
-</div>
+    
 
 @code {
 

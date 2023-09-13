@@ -1,4 +1,4 @@
-﻿@page "/note/{Id:long}/{Num}"
+﻿@page "/note/{Id:long}/{Num}/{Code}"
 @attribute [Authorize]
 @using Aig.Farmacoterapia.Domain.Entities.Enums
 @using Aig.Farmacoterapia.Domain.Entities.Products;
@@ -6,6 +6,7 @@
 @using Aig.Farmacoterapia.Domain.Interfaces.Integration;
 @using Aig.Farmacoterapia.Domain.Models;
 @using Aig.Farmacoterapia.Wasm.Client.Components.Medicament
+@using Aig.Farmacoterapia.Wasm.Client.Components.PdfWebViewer
 @using Aig.Farmacoterapia.Wasm.Client.Components.Record;
 @using Aig.Farmacoterapia.Wasm.Client.Extensions
 @using Aig.Farmacoterapia.Wasm.Client.Infrastructure.Managers.Note;
@@ -53,7 +54,7 @@
                         <MudButton Variant="Variant.Filled"
                                Color="Color.Primary"
                                Size="Size.Medium"
-                               Href="@($"{_appConfiguration.ApiUrl}{AppConstants.ReportEndpoints.NoteReportURL(Id)}")"
+                               Href="@($"{_appConfiguration.ApiUrl}{AppConstants.ReportEndpoints.NoteReportURL(Id,Code)}")"
                                Target="_blank"
                                StartIcon="@Icons.Material.Filled.Download">
                             Descargar
@@ -62,16 +63,20 @@
                     <MudButton style="margin-left:10px !important" Variant="Variant.Filled"
                                Color="Color.Tertiary"
                                Size="Size.Medium"
-                               OnClick="@(async () =>await Send($"{_appConfiguration.ApiUrl}{AppConstants.ReportEndpoints.NoteReportURL(Id)}"))"
+                               OnClick="@(async () =>await Send($"{_appConfiguration.ApiUrl}{AppConstants.ReportEndpoints.NoteReportURL(Id,Code)}"))"
                                Target="_blank"
                                StartIcon="@Icons.Material.Filled.Send">
                         Enviar Nota a FADDI
                     </MudButton>
                     </div>
                
-                <object data="@($"{_appConfiguration.ApiUrl}{AppConstants.ReportEndpoints.NoteReportURL(Id)}")" type="application/pdf" width="100%" height="1200">
+             @*   <object data="@($"{_appConfiguration.ApiUrl}{AppConstants.ReportEndpoints.NoteReportURL(Id)}")" type="application/pdf" width="100%" height="1200">
                     <p> No se pudo visualizar correctamente el contenido</p>
-                  </object>
+                  </object>*@
+
+                  <PdfViewer Url="@($"{_appConfiguration.ApiUrl}{AppConstants.ReportEndpoints.NoteReportURL(Id,Code)}")"  Width="100%" Height="1200px" />
+    
+
                 </MudItem>
       </MudGrid>
 
@@ -85,6 +90,8 @@
     public long Id { get; set; }
     [Parameter]
     public string Num { get; set; }
+    [Parameter]
+    public string Code { get; set; }
     protected bool _loading = false;
     protected async override Task OnInitializedAsync()
     {
@@ -111,18 +118,18 @@
     private async Task Send(string url)
     {
         var parameters = new DialogParameters{
-             { nameof(Shared.Dialogs.DeleteConfirmation.ContentText), string.Format("¿Estás seguro que desea enviar la nota a 21 tramites?") }};
+             { nameof(Shared.Dialogs.DeleteConfirmation.ContentText), string.Format("¿Estás seguro que desea enviar la nota a FADDI?") }};
         var options = new DialogOptions { CloseButton = true, MaxWidth = MaxWidth.ExtraSmall, FullWidth = true, DisableBackdropClick = true };
         var dialog = _dialogService.Show<Shared.Dialogs.DlgConfirmation>("Enviar", parameters, options);
         var result = await dialog.Result;
         if (!result.Cancelled) {
             await RefresView(true);
             var file = new UploadFileDTO(){
-                    FileName = "Nota",
+                    FileName = Code,
                     Extension = ".pdf",
                     ContentType = "application/pdf",
                     UploadType = 12,
-                    Url = $"{_appConfiguration.ApiUrl}{AppConstants.ReportEndpoints.NoteReportURL(Id)}"
+                    Url = $"{_appConfiguration.ApiUrl}{AppConstants.ReportEndpoints.NoteReportURL(Id,Code)}"
                 };
             var response= await _manager.SendAsync(Num,file);
             if (!response.Succeeded) {

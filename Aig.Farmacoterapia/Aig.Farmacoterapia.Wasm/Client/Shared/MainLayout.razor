@@ -6,7 +6,7 @@
 @inherits LayoutComponentBase
 @implements IDisposable;
 
-<MudThemeProvider />
+<MudThemeProvider Theme="@MyCustomTheme" />
 <MudDialogProvider />
 <MudSnackbarProvider />
 
@@ -34,7 +34,7 @@
 
 </style>
 <MudLayout>
-    <MudAppBar Style="background-color: #7365f3 !important;" Elevation="8">
+    <MudAppBar Style="background-color: #004b9c !important;" Elevation="8">
         <MudImage Src="media/logo2.png" Style="margin-right:30px" />
         <MudIconButton Icon="@Icons.Material.Filled.Menu" Color="MudBlazor.Color.Inherit" Edge="Edge.Start" OnClick="@((e) => DrawerToggle())" />
         <MudSpacer />
@@ -92,12 +92,28 @@
         </MudAppBar>*@
 
     <MudScrollToTop>
-        <MudFab Style="background-color: #7365f3 !important;color:#fff!important" Icon="@Icons.Material.Filled.KeyboardArrowUp" />
+        <MudFab Style="background-color: #004b9c !important;color:#fff!important" Icon="@Icons.Material.Filled.KeyboardArrowUp" />
     </MudScrollToTop>
 
 </MudLayout>
 
 @code {
+
+    MudTheme MyCustomTheme = new MudTheme()
+        {
+            Palette = new Palette()
+            {
+                Info = "#004B9C",//Colors.Blue.Darken4,
+                Success = "#009688",//Colors.Green.Accent4,
+                Error = "#D50000",//Colors.Red.Default,
+                Warning = "#EF6C00",
+                Primary = "#004B9C",//Colors.Blue.Darken4,
+                Secondary = "#D50000",//Colors.Green.Accent4,
+                Tertiary = "#009688",//Colors.Green.Accent4,
+                //Define other properties here.
+            },
+
+        };
 
     bool _drawerOpen = true;
     private string _avatar { get; set; }

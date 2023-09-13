@@ -115,7 +115,7 @@
                         <MudCardContent Style="padding-top: 0px;display: flex;align-content: center;align-items: center;justify-content: center;flex-wrap: wrap;">
                             @if (string.IsNullOrEmpty(dt.ProfilePicture))
                             {
-                                <MudAvatar Elevation="25" Style="background-color: #7365f3 ; height:140px; width:140px; border-color:white;border-width:2.5px;display: flex; align-content: center;justify-content: center; flex-wrap: wrap;font-size: 40px;" Color="Color.Default">@dt.FirstName?[..1]?.ToUpper()  </MudAvatar>
+                                <MudAvatar Elevation="25" Style="background-color: #004b9c ; height:140px; width:140px; border-color:white;border-width:2.5px;display: flex; align-content: center;justify-content: center; flex-wrap: wrap;font-size: 40px;" Color="Color.Default">@dt.FirstName?[..1]?.ToUpper()  </MudAvatar>
                             }
                             else
                             {
@@ -127,7 +127,7 @@
                             <MudText Style="margin-top:5px;" Align="Align.Center" Color="Color.Default"><b>Correo:</b> @dt.Email</MudText>
                             <MudText Style="margin-top:5px;margin-bottom: 10px;" Align="Align.Center" Color="Color.Default"> <b>Teléfono:</b>@dt.PhoneNumber</MudText>
                             <MudCardContent Justify="Justify.SpaceEvenly" Style="background-color: #f0f0f0;display: flex;justify-content: space-evenly!important;">
-                                <MudText Style="font-size: 1rem; margin-top:10px;color:#7365f3  !important" Align="Align.Center">@dt.UserRoleDescription</MudText>
+                                <MudText Style="font-size: 1rem; margin-top:10px;color:#004b9c  !important" Align="Align.Center">@dt.UserRoleDescription</MudText>
                             </MudCardContent>
                         </MudCardContent>
                     </MudCard>

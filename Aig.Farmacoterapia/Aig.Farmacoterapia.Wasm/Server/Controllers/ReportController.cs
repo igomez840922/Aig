@@ -22,9 +22,9 @@ namespace Aig.Farmacoterapia.Api.Controllers
         private readonly IMediator _mediator;
         public ReportController(IMediator mediator) => _mediator = mediator;
 
-        [HttpGet("{studyId}")]
+        [HttpGet("{studyId}/{code}")]
         [AllowAnonymous]
-        public async Task<FileStreamResult> GetFile(long studyId) => await _mediator.Send(new GetNoteFileQuery(studyId));
+        public async Task<FileStreamResult> GetFile(long studyId,string code) => await _mediator.Send(new GetNoteFileQuery(studyId));
       
         [HttpPost("note")]
         public async Task<IActionResult> Note(SendNoteCommand model) => Ok(await _mediator.Send(model));

@@ -234,7 +234,7 @@
                                  Link="@($"{_appConfiguration.ApiUrl}{AppConstants.ReportEndpoints.NoteReportURL(context.Id)}")">
                         Exportar Evaluación
                     </MudMenuItem>*@
-                    <MudMenuItem Disabled=(!IsEdit(context.Evaluators)) Style="border-bottom:1px solid #E4E6EF !important;" IconColor="Color.Primary" Icon="@Icons.Material.Filled.PictureAsPdf" OnClick="@(() => ShowNote(@context.Id,@context.NumTramite))" OnTouch="@(() => ShowNote(@context.Id,@context.NumTramite))">
+                    <MudMenuItem Disabled=(!IsEdit(context.Evaluators)) Style="border-bottom:1px solid #E4E6EF !important;" IconColor="Color.Primary" Icon="@Icons.Material.Filled.PictureAsPdf" OnClick="@(() => ShowNote(@context))" OnTouch="@(() => ShowNote(@context))">
                         Nota de Evaluación
                     </MudMenuItem>
                     
@@ -819,9 +819,14 @@
                
       }
 
-    private void ShowNote(long id, string num)
+  @*  private void ShowNote(long id, string num)
     {
         _navigationManager.NavigateTo($"note/{id}/{num}");
+    }*@
+    private void ShowNote(AigEstudio item)
+    {
+        var code = item.Nota?.GetNoteCode(item.Id);
+        _navigationManager.NavigateTo($"note/{item.Id}/{item.NumTramite}/{code}");
     }
       private async Task SetEvaluators(long id)
         {

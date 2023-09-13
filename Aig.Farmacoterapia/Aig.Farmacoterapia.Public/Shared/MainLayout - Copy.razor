@@ -1,0 +1,366 @@
+﻿@using Aig.Farmacoterapia.Application.Dashboard.Event
+@using Aig.Farmacoterapia.Infrastructure.Application
+@using Aig.Farmacoterapia.Public.Components
+@using Blazored.FluentValidation
+@inherits LayoutComponentBase
+@attribute [Microsoft.AspNetCore.Authorization.Authorize]
+@inject NavigationManager _navigation;
+@inject AppState _appState;
+@inject IJSRuntime _jsRuntime
+<PageTitle>Medicamentos</PageTitle>
+
+<MudDialogProvider />
+
+<style>
+.product-text h5 {
+   
+    margin-top: 8px;
+}
+.product-text h4 a {
+    text-decoration: underline !important;
+}
+
+
+#scrollUp {
+    margin-bottom: 10px !important;
+    box-shadow: 0 3px 1px -2px rgb(0 0 0 / 20%), 0 2px 2px 0 rgb(0 0 0 / 14%), 0 1px 5px 0 rgb(0 0 0 / 12%);
+}
+
+#scrollUp:hover {
+	 background: #e4573d !important;
+}
+.product-02-tab ul li a {
+    border: 1px solid #e4e4e4 !important;
+}
+
+.product-03-wrapper .product-text h4 {
+    font-size: 17px !important;
+}
+
+.mud-typography-body1 {
+    margin-left: 3px !important;
+}
+
+.product-list-content p {
+    margin: 0 !important;
+}
+
+.product-text {
+    margin: 0 !important;
+}
+
+.product-03-wrapper {
+    padding: 10px 10px 35px 10px !important;
+}
+
+.action-btn {
+    height: 30px !important;
+    width: 30px !important;
+    line-height: 0px !important;
+    box-shadow: 0 3px 1px -2px rgb(0 0 0 / 20%), 0 2px 2px 0 rgb(0 0 0 / 14%), 0 1px 5px 0 rgb(0 0 0 / 12%);
+}
+
+.category-sidebar {
+   /*background: #f8f8f8 !important;*/ 
+    border: 1px solid #e4e4e4 !important;
+}
+.header-search-form input {
+    background: #fff !important;
+  
+}
+
+.product-text span {
+    /*color: #e4573d;*/
+        color: #004b9c !important;
+    font-weight: normal !important;
+}
+
+.my-mud-icon-button .mud-icon-button {
+    padding: 0 !important;
+}
+
+.header-02-search .header-search-form button {
+    color: #ededed !important;
+    right: 2px !important;
+    top: 5px !important;
+    transition: all 0.3s ease 0s !important;
+    cursor: pointer !important;
+    height: 40px !important;
+    width: 40px !important;
+        background: #004b9c !important;
+    border-radius: 50% !important;
+    box-shadow: 0 3px 1px -2px rgb(0 0 0 / 20%), 0 2px 2px 0 rgb(0 0 0 / 14%), 0 1px 5px 0 rgb(0 0 0 / 12%);
+}
+
+.header-02-search .header-search-form button:hover {
+    background: #e4573d !important;
+}
+
+.header-02-search .header-search-form input {
+    padding: 20px 60px 20px 20px !important;
+    border: 2px solid #d0cece !important;
+}
+
+.custom-search {
+    color:#fff !important;
+    margin: 5px !important;
+    height: 30px !important;
+    width: 30px !important;
+    background: #9b9b9b !important;
+    border-radius: 50% !important;
+    box-shadow: 0 3px 1px -2px rgb(0 0 0 / 20%), 0 2px 2px 0 rgb(0 0 0 / 14%), 0 1px 5px 0 rgb(0 0 0 / 12%);
+}
+.custom-search:hover {
+    background: #e4573d !important;
+}
+
+.filterLabel {
+    font-size: 16px;
+    color: #848181;
+    position: relative;
+    font-weight: 400;
+    margin: 2px 0 0 5px;
+}
+
+.shop-menu ul li a {
+    color: #fff !important;
+}
+
+.shop-menu ul li a:hover {
+    color: #fff !important;
+}
+
+.pr-165 {
+    padding-left:  50px !important;
+    padding-right: 50px !important;
+}
+
+    #scrollUp {
+        background: #004b9c !important;
+    }
+
+    .mud-button-filled.mud-button-filled-info {
+        background-color: #004b9c !important;
+    }
+</style>
+
+<header>
+    <div class="header-top-area pl-165 pr-165" style="background-color: #004b9c !important;box-shadow: 0 3px 1px -2px rgb(0 0 0 / 20%), 0 2px 2px 0 rgb(0 0 0 / 14%), 0 1px 5px 0 rgb(0 0 0 / 12%);">
+        <div class="container-fluid" style="padding: 0 !important;">
+            <div class="row">
+                <div class="col-xl-4 col-lg-4 col-md-4">
+                 @* <div class="header-top-wrapper">  
+                       <div class="header-link f-left" style="margin-left: 20px !important;">
+                            <span style="color:#fff !important;font-size: 18px !important; font-weight:bold !important;">
+                               SISTEMA DE MONOGRAFÍAS Y PROSPECTOS DE LA DIRECCIÓN NACIONAL DE FARMACIA Y DROGAS
+                              </span>
+                        </div>
+                    </div>*@
+                </div>
+                <div class="col-xl-8 col-lg-8 col-md-8">
+                    <div class="header-top-right text-md-right">
+                        <div class="shop-menu">
+                            <ul>
+                                <li>
+                                    <a href="/">
+                                        <i class="fa fa-home"></i>
+                                        Inicio
+                                    </a>
+                                </li>
+                                <li>
+                                    <a target="__blank"
+                                       title="Portal Regional de Notificación en línea de Sospecha de Reacciones Adversas a Medicamentos de uso humano"
+                                       href="http://notificacentroamerica.net/n/Pages/mapa.aspx#no-back-button">
+                                        <i class="fa fa-bell"></i>
+                                        Noti-FACEDRA
+                                    </a>
+                                </li>
+                               <li>
+                                    <a target="__blank"
+                                       title="Notas de seguridad de medicamentos"
+                                       href="https://www.minsa.gob.pa/informacion-salud/alertas-y-comunicados">
+                                        <i class="fa fa-comment"></i>
+                                        Notas de seguridad
+                                    </a>
+                                </li>
+                                <li>
+                                   
+                                     <a
+                                       title="Notas de seguridad de medicamentos"
+                                       href="javascript:void(0)"
+                                       @onclick="() => InvokeModal()">
+                                        <i class="fa fa-exclamation-triangle"></i>
+                                        Descargo de Responsabilidad
+                                    </a>
+
+                                </li>
+                                <li>
+                                   
+                                     <a
+                                       title="Recomendaciones"
+                                       href="javascript:void(0)"
+                                       @onclick="() => InvokeModal2()">
+                                        <i class="fa fa-info"></i>
+                                       Recomendaciones
+                                    </a>
+
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="sticky-header" class="main-menu-area menu-01 pl-165 pr-165">
+        <div class="container-fluid">
+            <div class="row align-items-center">
+               
+                <div class="col-4" style="margin-top: 20px;">
+
+                    <span style="color:#ab152a !important;font-size: 18px !important; font-weight:bold !important;text-align: center;display: flex;">
+                       SISTEMA DE MONOGRAFÍAS Y PROSPECTOS DE LA DIRECCIÓN NACIONAL DE FARMACIA Y DROGAS
+                    </span>
+                </div>
+
+                <div class="col-5">
+
+                    <div class="header-search header-02-search" style="margin-top: 15px;">
+
+                        <EditForm Model="this" class="header-search-form" OnValidSubmit="InvokenSearch">
+                            <FluentValidationValidator />
+                            <input type="text" @bind-value="@_filter.Term" placeholder="Num. Registro / Nombre de medicamento / Principio activo" @bind-value:event="oninput" @onkeyup="() => OnSearchChanged()">
+                            <button type="submit"><i class="far fa-search"></i></button>
+                        </EditForm>
+
+                    </div>
+
+                </div>
+
+                <div class="col-3">
+                    <div class="logo" style="margin-top: 20px;">
+                        <a href="/"><img src="assets/img/logo/logo.png" alt="" /></a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</header>
+
+
+<main>
+
+    <div style="padding-top: 50px !important" class="shhop-full-area pt-100 pb-100 pr-60 pl-60">
+        <div class="container-fluid">
+
+            <div class="row">
+              @Body
+            </div>
+
+        </div>
+    </div>
+
+
+</main>
+
+<footer>
+    <div class="footer-bottom-area mr-70 ml-70 pt-25 pb-25">
+        <div class="container">
+            <div class="row">
+
+                <div class="col-xl-5 col-lg-5 col-md-5">
+                    @* <div class="footer-bottom-link f-right">
+                        <ul>
+                        <li><a href="#">Home </a></li>
+                        <li><a href="#"> About Us</a></li>
+                        <li><a href="#">Our Product</a></li>
+                        <li><a href="#">Service </a></li>
+                        </ul>
+                        </div>*@
+                </div>
+                <div class="col-xl-7 col-lg-7 col-md-7">
+                    <div class="copyright">
+                        <p>
+                            Copyright
+                            <i class="far fa-copyright"></i> @DateTime.Now.Year <a target="_blank" href="https://soaint.com/">SOAINT</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<MudThemeProvider />
+
+@code {
+
+    protected AppFilter _filter { get; set; } = new AppFilter();
+    protected async override Task OnInitializedAsync()
+    {    
+        base.OnInitialized();
+    }
+
+    private void InvokenSearch()
+    {    
+        _filter.Classification = null;
+        _filter.SaleCondition = null;
+        _filter.Valid = true;
+        OnSearch();
+    }
+    private void OnSearch()
+    {  
+        var path= _navigation.ToBaseRelativePath(_navigation.Uri).ToLower();
+        if (path.Contains("details")||path.Contains("disclaimer")||path.Contains("notfound")) {
+            _appState.SetSearchText(_filter,false);
+            _navigation.NavigateTo("./");
+        }
+        else
+        {
+            _appState.SetSearchText(_filter);
+        }
+
+    }
+
+    private void OnSearchChanged()
+    {  
+        if (string.IsNullOrEmpty(_filter.Term)) {
+            _appState.SetSearchText(_filter,false);
+        }
+    }
+
+    private async Task InvokeModal()
+    {
+        var parameters = new DialogParameters();
+        var options = new DialogOptions { CloseButton = true, MaxWidth = MaxWidth.Large, FullWidth = true, DisableBackdropClick = true };
+        var dialog = _dialogService.Show<Disclaimer>("DESCARGO DE RESPONSABILIDAD", parameters, options);
+        var result = await dialog.Result;
+    }
+
+    private async Task InvokeModal2()
+    {
+        var parameters = new DialogParameters();
+        var options = new DialogOptions { CloseButton = true, MaxWidth = MaxWidth.ExtraSmall, FullWidth = true, DisableBackdropClick = true };
+        var dialog = _dialogService.Show<Info>("RECOMENDACIONES", parameters, options);
+        var result = await dialog.Result;
+    }
+
+    private async Task InvokeFilterModal()
+    {
+        var parameters = new DialogParameters();
+        var options = new DialogOptions { CloseButton = true, MaxWidth = MaxWidth.Small, FullWidth = true, DisableBackdropClick = true };
+        var dialog = _dialogService.Show<Search>("FILTRO", parameters, options);
+        var result = await dialog.Result;
+        if (!result.Cancelled)
+        {
+            var search= result.Data as AppFilter;
+            if (search != null){
+                _filter = search;
+                 _appState.SetSearchText(search,false);
+                OnSearch();
+            }
+        }
+    }
+}

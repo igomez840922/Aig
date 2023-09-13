@@ -9,7 +9,9 @@
 @inject IJSRuntime _jsRuntime
 <PageTitle>Medicamentos</PageTitle>
 
+<MudThemeProvider />
 <MudDialogProvider />
+<MudSnackbarProvider />
 
 <style>
 .product-text h5 {
@@ -27,7 +29,7 @@
 }
 
 #scrollUp:hover {
-	 background: #e4573d !important;
+            background: #ab152a !important;
 }
 .product-02-tab ul li a {
     border: 1px solid #e4e4e4 !important;
@@ -71,7 +73,7 @@
 
 .product-text span {
     /*color: #e4573d;*/
-        color: #004b9c !important;
+    color: #004b9c !important;
     font-weight: normal !important;
 }
 
@@ -93,7 +95,7 @@
 }
 
 .header-02-search .header-search-form button:hover {
-    background: #e4573d !important;
+   background: #ab152a !important;
 }
 
 .header-02-search .header-search-form input {
@@ -142,158 +144,195 @@
     .mud-button-filled.mud-button-filled-info {
         background-color: #004b9c !important;
     }
+
+    .input-search > .mud-input-control-input-container > .mud-input.mud-input-outlined .mud-input-outlined-border {
+        border-radius: 40px !important;
+        border-width: 2px !important;
+    }
+
+    .mud-input.mud-input-outlined:focus-within .mud-input-outlined-border {
+        border-width: 2px;
+        border-color: #004b9c !important;
+    }
+
+    .input-search > .mud-input-control-input-container > .mud-input > .mud-input-adornment .mud-button-root {
+        height: 50px;
+        width: 50px;
+        background: #004b9c;
+        border-radius: 50%;
+        color: #fff !important;
+    }
+
+    .input-search > .mud-input-control-input-container > .mud-input > .mud-input-adornment .mud-button-root:hover {
+            height: 50px;
+            width: 50px;
+            background: #ab152a !important;
+            border-radius: 50%;
+            color: #fff !important;
+        }
+    .footer_copyright {
+        position: fixed;
+        bottom: 8px;
+        left: 48%;
+        right: 0;
+        height: 30px;
+        color: #9b9b9b;
+    }
+
+    .footer-bottom-area {
+        border:none !important;
+    }
+
 </style>
 
-<header>
-    <div class="header-top-area pl-165 pr-165" style="background-color: #004b9c !important;box-shadow: 0 3px 1px -2px rgb(0 0 0 / 20%), 0 2px 2px 0 rgb(0 0 0 / 14%), 0 1px 5px 0 rgb(0 0 0 / 12%);">
-        <div class="container-fluid" style="padding: 0 !important;">
-            <div class="row">
-                <div class="col-xl-4 col-lg-4 col-md-4">
-                 @* <div class="header-top-wrapper">  
-                       <div class="header-link f-left" style="margin-left: 20px !important;">
-                            <span style="color:#fff !important;font-size: 18px !important; font-weight:bold !important;">
-                               SISTEMA DE MONOGRAFÍAS Y PROSPECTOS DE LA DIRECCIÓN NACIONAL DE FARMACIA Y DROGAS
-                              </span>
-                        </div>
-                    </div>*@
-                </div>
-                <div class="col-xl-8 col-lg-8 col-md-8">
-                    <div class="header-top-right text-md-right">
-                        <div class="shop-menu">
-                            <ul>
-                                <li>
-                                    <a href="/">
-                                        <i class="fa fa-home"></i>
-                                        Inicio
-                                    </a>
-                                </li>
-                                <li>
-                                    <a target="__blank"
-                                       title="Portal Regional de Notificación en línea de Sospecha de Reacciones Adversas a Medicamentos de uso humano"
-                                       href="http://notificacentroamerica.net/n/Pages/mapa.aspx#no-back-button">
-                                        <i class="fa fa-bell"></i>
-                                        Noti-FACEDRA
-                                    </a>
-                                </li>
-                               <li>
-                                    <a target="__blank"
-                                       title="Notas de seguridad de medicamentos"
-                                       href="https://www.minsa.gob.pa/informacion-salud/alertas-y-comunicados">
-                                        <i class="fa fa-comment"></i>
-                                        Notas de seguridad
-                                    </a>
-                                </li>
-                                <li>
-                                   
-                                     <a
-                                       title="Notas de seguridad de medicamentos"
-                                       href="javascript:void(0)"
-                                       @onclick="() => InvokeModal()">
-                                        <i class="fa fa-exclamation-triangle"></i>
-                                        Descargo de Responsabilidad
-                                    </a>
+<MudLayout>
+    <MudAppBar Style="background-color: #004b9c !important;" Elevation="25" Dense="true" Fixed="true">
+        <MudSpacer />
+        <MudHidden Breakpoint="Breakpoint.MdAndUp" Invert="true">
 
-                                </li>
-                                <li>
-                                   
-                                     <a
-                                       title="Recomendaciones"
-                                       href="javascript:void(0)"
-                                       @onclick="() => InvokeModal2()">
-                                        <i class="fa fa-info"></i>
-                                       Recomendaciones
-                                    </a>
+                <MudToolBar>
+                  <MudButton Href="/"
+                           Variant="Variant.Text"
+                           StartIcon="@Icons.Material.Filled.Home"
+                           Color="Color.Inherit"
+                           Style="text-transform:uppercase">
+                    Inicio
+                </MudButton>
+                <MudButton Href="http://notificacentroamerica.net/n/Pages/mapa.aspx#no-back-button"
+                           Target="_blank"
+                           Variant="Variant.Text"
+                           StartIcon="@Icons.Material.Filled.Notifications"
+                           Color="Color.Inherit"
+                           Style="text-transform:uppercase">
+                    Noti-FACEDRA
+                </MudButton>
+                <MudButton Href="https://www.minsa.gob.pa/informacion-salud/alertas-y-comunicados"
+                           Target="_blank"
+                           Variant="Variant.Text"
+                           StartIcon="@Icons.Material.Filled.Warning"
+                           Color="Color.Inherit"
+                           Style="text-transform:uppercase">
+                    Notas de seguridad
+                </MudButton>
 
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div id="sticky-header" class="main-menu-area menu-01 pl-165 pr-165">
-        <div class="container-fluid">
-            <div class="row align-items-center">
+                <MudDivider Vertical="true" FlexItem="true" DividerType="DividerType.Middle" Class="my-6" />
+
+                <MudButton OnClick="() => InvokeModal()"
+                           Target="_blank"
+                           Variant="Variant.Text"
+                           StartIcon="@Icons.Material.Filled.SpeakerNotes"
+                           Color="Color.Inherit"
+                           Style="text-transform:uppercase">
+                    Descargo de Responsabilidad
+                </MudButton>
+                
+                <MudButton OnClick="() => InvokeModal2()"
+                           Target="_blank"
+                           Variant="Variant.Text"
+                           StartIcon="@Icons.Material.Filled.Info"
+                           Color="Color.Inherit"
+                           Style="text-transform:uppercase">
+                    Recomendaciones
+                </MudButton>
+              </MudToolBar>
+           
+
+        
+         </MudHidden>
+        <MudHidden Breakpoint="Breakpoint.SmAndDown" Invert="true">
+            <MudMenu Icon="@Icons.Filled.Menu" Color="Color.Inherit" Dense="true">
+                <MudMenuItem Icon="@Icons.Material.Filled.Home" Href="/" Target="_blank">Inicio</MudMenuItem>
+                <MudDivider DividerType="DividerType.Inset" />
+                <MudMenuItem Icon="@Icons.Material.Filled.Notifications" Href="http://notificacentroamerica.net/n/Pages/mapa.aspx#no-back-button" Target="_blank">Noti-FACEDRA</MudMenuItem>
+                <MudDivider DividerType="DividerType.Inset" />
+                <MudMenuItem Icon="@Icons.Material.Filled.SpeakerNotes" Href="https://www.minsa.gob.pa/informacion-salud/alertas-y-comunicados" Target="_blank">Notas de seguridad</MudMenuItem>
+                <MudDivider DividerType="DividerType.Inset" />
+                <MudMenuItem Icon="@Icons.Material.Filled.Warning" OnClick="() => InvokeModal()" Target="_blank">Descargo de Responsabilidad</MudMenuItem>
+                <MudDivider DividerType="DividerType.Inset" />
+                <MudMenuItem Icon="@Icons.Material.Filled.Info" OnClick="() => InvokeModal2()" Target="_blank">Recomendaciones</MudMenuItem>
+            </MudMenu>
+        </MudHidden>
+    </MudAppBar>
+
+    <MudAppBar Elevation="0" Dense="true" Fixed="false" Style="z-index:1299 !important; background-color: transparent !important;margin-top:80px">
+        <MudHidden Breakpoint="Breakpoint.MdAndUp" Invert="true">
+           <MudGrid>
+            <MudItem md="4" Style="margin-top: 20px;">
+                <span style="color:#ab152a !important;font-size: 18px !important; font-weight:bold !important;text-align: center;display: flex;">
+                    SISTEMA DE MONOGRAFÍAS Y PROSPECTOS DE LA DIRECCIÓN NACIONAL DE FARMACIA Y DROGAS
+                </span>
+            </MudItem>
+            <MudItem md="4" Style="margin-top: 5px;">
+                
+                    <MudTextField Variant="Variant.Outlined"
+                                  Class="input-search"
+                                  Margin="Margin.Normal"
+                                  @bind-Value="_filter.Term"
+                                  Adornment="Adornment.End"
+                                  AdornmentIcon="@Icons.Filled.Search"
+                                  AdornmentColor="Color.Info"
+                                  OnAdornmentClick="(s=>this.InvokenSearch())"
+                                  Clearable="true"
+                                  OnClearButtonClick="(s=>this.InvokenSearch())"
+                                  Placeholder="No.Registro / Nombre / Principio Activo / Fabricante" />
                
-                <div class="col-4" style="margin-top: 20px;">
-
-                    <span style="color:#ab152a !important;font-size: 18px !important; font-weight:bold !important;text-align: center;display: flex;">
-                       SISTEMA DE MONOGRAFÍAS Y PROSPECTOS DE LA DIRECCIÓN NACIONAL DE FARMACIA Y DROGAS
-                    </span>
+            </MudItem>
+            <MudItem md="4">
+                <div class="logo" style="margin-top: 20px;">
+                    <a href="/"><img src="assets/img/logo/logo.png" alt="" /></a>
                 </div>
+            </MudItem>
+        </MudGrid>
+        </MudHidden>
+        <MudHidden Breakpoint="Breakpoint.SmAndDown" Invert="true">
+            <MudGrid>
+               
+                <MudItem  xs="12" sm="12" xl="12" md="12" lg="12" Style="margin-top: 20px;">
 
-                <div class="col-5">
+                    <MudTextField Variant="Variant.Outlined"
+                                  Class="input-search"
+                                  Margin="Margin.None"
+                                  @bind-Value="_filter.Term"
+                                  Adornment="Adornment.End"
+                                  AdornmentIcon="@Icons.Filled.Search"
+                                  AdornmentColor="Color.Info"
+                                  OnAdornmentClick="(s=>this.InvokenSearch())"
+                                  Clearable="true"
+                                  OnClearButtonClick="(s=>this.InvokenSearch())"
+                                  Placeholder="No.Registro / Nombre / Principio Activo / Fabricante" />
 
-                    <div class="header-search header-02-search" style="margin-top: 15px;">
+                </MudItem>
+                
+            </MudGrid>
+        </MudHidden>
+    </MudAppBar>
 
-                        <EditForm Model="this" class="header-search-form" OnValidSubmit="InvokenSearch">
-                            <FluentValidationValidator />
-                            <input type="text" @bind-value="@_filter.Term" placeholder="Num. Registro / Nombre de medicamento / Principio activo" @bind-value:event="oninput" @onkeyup="() => OnSearchChanged()">
-                            <button type="submit"><i class="far fa-search"></i></button>
-                        </EditForm>
+    <MudMainContent>
+            @Body
+    </MudMainContent>
 
+    <footer>
+        <div class="footer-bottom-area mr-70 ml-70 pt-25 pb-25">
+            <div class="container">
+                <div class="row">
+
+                    <div class="col-xl-5 col-lg-5 col-md-5">
+                      
                     </div>
-
-                </div>
-
-                <div class="col-3">
-                    <div class="logo" style="margin-top: 20px;">
-                        <a href="/"><img src="assets/img/logo/logo.png" alt="" /></a>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </div>
-
-</header>
-
-
-<main>
-
-    <div style="padding-top: 50px !important" class="shhop-full-area pt-100 pb-100 pr-60 pl-60">
-        <div class="container-fluid">
-
-            <div class="row">
-              @Body
-            </div>
-
-        </div>
-    </div>
-
-
-</main>
-
-<footer>
-    <div class="footer-bottom-area mr-70 ml-70 pt-25 pb-25">
-        <div class="container">
-            <div class="row">
-
-                <div class="col-xl-5 col-lg-5 col-md-5">
-                    @* <div class="footer-bottom-link f-right">
-                        <ul>
-                        <li><a href="#">Home </a></li>
-                        <li><a href="#"> About Us</a></li>
-                        <li><a href="#">Our Product</a></li>
-                        <li><a href="#">Service </a></li>
-                        </ul>
-                        </div>*@
-                </div>
-                <div class="col-xl-7 col-lg-7 col-md-7">
-                    <div class="copyright">
-                        <p>
-                            Copyright
-                            <i class="far fa-copyright"></i> @DateTime.Now.Year <a target="_blank" href="https://soaint.com/">SOAINT</a>
-                        </p>
+                    <div class="col-xl-7 col-lg-7 col-md-7">
+                        <div class="copyright">
+                            <p>
+                                Copyright
+                                <i class="far fa-copyright"></i> @DateTime.Now.Year <a target="_blank" href="https://soaint.com/">SOAINT</a>
+                            </p>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-</footer>
+    </footer>
 
-<MudThemeProvider />
+</MudLayout>
 
 @code {
 

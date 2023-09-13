@@ -90,6 +90,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Update="Shared\MainLayout - Copy.razor">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+    </Content>
     <Content Update="wwwroot\favicon.ico">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Content>
