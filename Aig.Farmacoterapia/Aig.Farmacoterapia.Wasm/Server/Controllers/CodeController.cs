@@ -29,7 +29,6 @@ namespace Aig.Farmacoterapia.Api.Controllers
         [HttpPost("list")]
         public async Task<IActionResult> GetPharmaceutical(GetCodesQuery model) => Ok(await _mediator.Send(model));
 
-
         [HttpPost("update")]
         public async Task<IActionResult> Update([FromBody] AigCodigoEstudio model) => Ok(await _mediator.Send(new AddEditCodeCommand(model)));
 
