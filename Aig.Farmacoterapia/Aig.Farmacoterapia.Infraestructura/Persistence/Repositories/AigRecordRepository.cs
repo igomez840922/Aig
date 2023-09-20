@@ -125,6 +125,8 @@ namespace Aig.Farmacoterapia.Infrastructure.Persistence.Repositories
                                         0 => f => true,
                                         1 => f => DateTime.Now < f.FechaVencimiento,
                                         2 => f => DateTime.Now > f.FechaVencimiento,
+                                        3 => f => f.Activated,
+                                        4 => f => !f.Activated,
                                     };
                                     filterList.Add(expression);
                                 }
@@ -168,7 +170,8 @@ namespace Aig.Farmacoterapia.Infrastructure.Persistence.Repositories
                 var orderByList = new List<Tuple<SortingOption, Expression<Func<AigRecord, object>>>>();
                 var filterList = new List<Expression<Func<AigRecord, bool>>>()
                 {
-                    f => DateTime.Now < f.FechaVencimiento
+                    f => DateTime.Now < f.FechaVencimiento,
+                    f=> f.Activated
                 };
 
                 if (args.SortingOptions != null)

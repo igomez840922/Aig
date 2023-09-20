@@ -250,6 +250,7 @@ namespace Aig.Farmacoterapia.Infrastructure.Services.Integration.SysFarm
                                     item.DataSheetURL = record.DataSheetURL;
                                     item.ProspectusURL = record.ProspectusURL;
                                     item.PictureData = record.PictureData;
+                                    item.Activated = record.Activated;
                                 }
                                 if (item.Distribuidor == null)
                                     item.Distribuidor = record?.Distribuidor ?? new AigDistributor();

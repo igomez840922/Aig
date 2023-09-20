@@ -144,11 +144,13 @@
 
                              <MudGrid>
 
-                                <MudItem md="4">
+                                <MudItem md="12">
                                     <MudRadioGroup @bind-SelectedOption="expiration" Variant="Variant.Outlined">
                                         <MudRadio Option="0" Color="Color.Primary" Dense="true">Todos</MudRadio>
                                         <MudRadio Option="1" Color="Color.Success" Dense="false">Vigentes</MudRadio>
                                         <MudRadio Option="2" Color="Color.Error" Dense="false">Caducados</MudRadio>
+                                        <MudRadio Option="3" Color="Color.Warning" Dense="false">Activos</MudRadio>
+                                        <MudRadio Option="4" Color="Color.Default" Dense="false">No Activos</MudRadio>
                                     </MudRadioGroup>
                                 </MudItem>
 
@@ -349,6 +351,22 @@
 
                         <div _ngcontent-lil-c210="" class="mx-4">
                             
+                             <div _ngcontent-lil-c210="" class="d-flex mb-2">
+                                <span _ngcontent-lil-c210="" class="font-weight-bold font-size-sm" style="font-weight:bold; margin-right: 5px;">
+                                    Activo:
+                                </span>
+                                <span _ngcontent-lil-c210="" class="text-dark-50">
+
+                                    @if (@context.Activated)
+                                    {
+                                        <MudIcon style="font-size: 20px;color:#1BC5BD" Icon="@Icons.Material.Filled.CheckBox" />
+                                    }
+                                    else
+                                    {
+                                        <MudIcon style="font-size: 20px;color:#EE2D41" Icon="@Icons.Material.Filled.DisabledByDefault" />
+                                    }
+                                </span>
+                            </div>
 
                             <div _ngcontent-lil-c210="" class="d-flex mb-2">
                                 <span _ngcontent-lil-c210="" class="font-weight-bold font-size-sm" style="font-weight:bold; margin-right: 5px;">
@@ -610,6 +628,8 @@
             _table.SetRowsPerPage(10);
         }
     }
+
+   
     private async Task RefresView(bool state)
     {
         _loading = state;

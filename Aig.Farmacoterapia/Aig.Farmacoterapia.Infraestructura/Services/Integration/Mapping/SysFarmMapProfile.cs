@@ -18,6 +18,7 @@ namespace Aig.Farmacoterapia.Infrastructure.Services.Integration.Mapping
             CreateMap<Registro, AigRecord>()
                 .ForMember(x => x.Id, opt => opt.Ignore())
                 .ForMember(p => p.RecordId, p => p.MapFrom(s => s.Id))
+                .ForMember(p => p.Activated, p => p.MapFrom(s => true))
                 .ForMember(dest => dest.Producto, opt => opt.MapFrom((source, destination, member, context) =>
                     new AigMedication()
                     {

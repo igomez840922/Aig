@@ -34,6 +34,7 @@ namespace Aig.Farmacoterapia.Domain.Entities.Products
         public string? DataSheetURL { get; set; }
         public string? ProspectusURL { get; set; }
         public string? PictureData { get; set; }
+        public bool Activated { get; set; } = true;
     }
 
 }

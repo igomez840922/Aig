@@ -14,27 +14,34 @@
 @using System.Security.Claims
 @inject IAigRecordManager _manager;
 <style>
-.mud-dialog {
-    max-height: calc(108vh - var(--mud-appbar-height));
-    overflow-y: auto;
-}
- .mud-input.mud-disabled {
-    color: var(--mud-palette-text-primary) !important;
-    cursor: default;
-  }
-  .mud-input-control>.mud-input-control-input-container>.mud-input-label-inputcontrol.mud-disabled {
-    color: var(--mud-palette-text-primary) !important;
-  }
-   .mud-input-control>.mud-input-control-input-container>.mud-input-label-inputcontrol {
+    .mud-dialog {
+        max-height: calc(108vh - var(--mud-appbar-height));
+        overflow-y: auto;
+    }
+
+    .mud-input.mud-disabled {
+        color: var(--mud-palette-text-primary) !important;
+        cursor: default;
+    }
+
+    .mud-input-control > .mud-input-control-input-container > .mud-input-label-inputcontrol.mud-disabled {
+        color: var(--mud-palette-text-primary) !important;
+    }
+
+    .mud-input-control > .mud-input-control-input-container > .mud-input-label-inputcontrol {
         padding: 0 5px !important;
     }
+
+    .mud-checkbox > .mud-icon-button {
+        padding: 12px 12px 12px 0 !important;
+    }
 </style>
-<EditForm Model="@_modelData" OnValidSubmit=@(async () => await SubmitAsync()) >
+<EditForm Model="@_modelData" OnValidSubmit=@(async () => await SubmitAsync())>
     <FluentValidationValidator @ref="_fluentValidation" Options="@(options => options.IncludeAllRuleSets())" />
     <MudDialog>
         <TitleContent>
             <MudText Typo="Typo.h6">
-                             
+
                 @{
                     <MudText Typo="Typo.h6">
                         <MudIcon Icon="@Icons.Material.Filled.Edit" Class="mr-3 mb-n1" />
@@ -44,7 +51,7 @@
 
             </MudText>
         </TitleContent>
-        <DialogContent >
+        <DialogContent>
             @if (_loading)
             {
                 <div style="margin-left:45% !important;">
@@ -68,197 +75,204 @@
                 </MudGrid>
 
                 <MudGrid Style="margin-top:30px !important">
-                        <MudItem xs="12">
-                            <MudGrid>
-                                <MudItem xs="12" md="12" Style="padding:3px !important">
+                    <MudItem xs="12">
+                        <MudGrid>
+                            <MudItem xs="12" md="12" Style="padding:3px !important">
 
-                                    <table cellspacing="0" cellpadding="0">
+                                <table cellspacing="0" cellpadding="0">
 
-                                        <tr>
+                                    <tr>
 
-                                            <td style="border-right: 1px solid #e2e5ec; padding-right: 5px;">
+                                        <td style="border-right: 1px solid #e2e5ec; padding-right: 5px;">
 
-                                                <table class="divInputFile" cellspacing="0" cellpadding="0">
-                                                    <tr>
-                                                        <td>
-                                                            <div>
-                                                                <InputFile id="imagefileInput" hidden OnChange="UploadPictureFiles" />
-                                                                @if (string.IsNullOrEmpty(_modelData.PictureData))
-                                                                {
-                                                                    <MudButton HtmlTag="label"
-                                                                       Variant="Variant.Text"
-                                                                       Color="Color.Primary"
-                                                                       Size="Size.Small"
-                                                                       StartIcon="@Icons.Filled.Photo"
-                                                                       for="imagefileInput">
-                                                                        Foto
-                                                                    </MudButton>
-                                                                }
-
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <div style="padding:0px; margin: 0px;">
-
-                                                                @if (!_showPictureFileInputAlert && !string.IsNullOrEmpty(_modelData.PictureData))
-                                                                {
-                                                                    <img src="@_modelData.PictureData" Width="100" Height="80" />
-                                                                    <MudButton Style="padding-right: 15px;" Variant="Variant.Text"
-                                                                       Color="Color.Error"
-                                                                       StartIcon="@Icons.Filled.Delete"
-                                                                       Size="Size.Small"
-                                                                       OnClick="DeletePictureAsync">
-                                                                        Eliminar
-                                                                    </MudButton>
-                                                                }
-                                                            </div>
-                                                        </td>
-                                                        @if (_pictureLoading)
-                                                        {
-                                                            <td>
-                                                                <div>
-                                                                    <MudProgressCircular style="margin-left: 10px !important" Color="Color.Primary" Size="Size.Small" Indeterminate="true" />
-                                                                </div>
-                                                            </td>
-                                                        }
-                                                    </tr>
-
-                                                </table>
-                                            </td>
-
-                                            <td style="border-right: 1px solid #e2e5ec; padding-right: 5px;">
-
-                                                <table class="divInputFile" cellspacing="0" cellpadding="0">
-
-                                                    <tr>
-                                                        <td>
-                                                            <div>
-                                                                <InputFile id="fileInput" hidden OnChange="UploadeDataSheetFiles" SuppressOnChangeWhenInvalid="SuppressOnChangeWhenInvalid" />
+                                            <table class="divInputFile" cellspacing="0" cellpadding="0">
+                                                <tr>
+                                                    <td>
+                                                        <div>
+                                                            <InputFile id="imagefileInput" hidden OnChange="UploadPictureFiles" />
+                                                            @if (string.IsNullOrEmpty(_modelData.PictureData))
+                                                            {
                                                                 <MudButton HtmlTag="label"
+                                                                           Variant="Variant.Text"
+                                                                           Color="Color.Primary"
+                                                                           Size="Size.Small"
+                                                                           StartIcon="@Icons.Filled.Photo"
+                                                                           for="imagefileInput">
+                                                                    Foto
+                                                                </MudButton>
+                                                            }
+
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div style="padding:0px; margin: 0px;">
+
+                                                            @if (!_showPictureFileInputAlert && !string.IsNullOrEmpty(_modelData.PictureData))
+                                                            {
+                                                                <img src="@_modelData.PictureData" Width="100" Height="80" />
+                                                                <MudButton Style="padding-right: 15px;" Variant="Variant.Text"
+                                                                           Color="Color.Error"
+                                                                           StartIcon="@Icons.Filled.Delete"
+                                                                           Size="Size.Small"
+                                                                           OnClick="DeletePictureAsync">
+                                                                    Eliminar
+                                                                </MudButton>
+                                                            }
+                                                        </div>
+                                                    </td>
+                                                    @if (_pictureLoading)
+                                                    {
+                                                        <td>
+                                                            <div>
+                                                                <MudProgressCircular style="margin-left: 10px !important" Color="Color.Primary" Size="Size.Small" Indeterminate="true" />
+                                                            </div>
+                                                        </td>
+                                                    }
+                                                </tr>
+
+                                            </table>
+                                        </td>
+
+                                        <td style="border-right: 1px solid #e2e5ec; padding-right: 5px;">
+
+                                            <table class="divInputFile" cellspacing="0" cellpadding="0">
+
+                                                <tr>
+                                                    <td>
+                                                        <div>
+                                                            <InputFile id="fileInput" hidden OnChange="UploadeDataSheetFiles" SuppressOnChangeWhenInvalid="SuppressOnChangeWhenInvalid" />
+                                                            <MudButton HtmlTag="label"
                                                                        Variant="Variant.Text"
                                                                        Color="Color.Primary"
                                                                        Size="Size.Small"
                                                                        StartIcon="@Icons.Filled.AttachFile"
                                                                        for="fileInput">
-                                                                    Monografía
+                                                                Monografía
+                                                            </MudButton>
+
+                                                        </div>
+
+                                                    </td>
+                                                    <td>
+                                                        <div>
+
+                                                            @if (!_showDataSheetFileInputAlert && !string.IsNullOrEmpty(_modelData.DataSheetURL))
+                                                            {
+                                                                <MudButton Variant="Variant.Text"
+                                                                           Color="Color.Info"
+                                                                           StartIcon="@Icons.Filled.RemoveRedEye"
+                                                                           Size="Size.Small"
+                                                                           Link="@($"{_appConfiguration.ApiUrl}{AppConstants.MedicamentEndpoints.DataSheetURL(_modelData.DataSheetURL)}")" Target="_blank">
+                                                                    Ver
                                                                 </MudButton>
-
-                                                            </div>
-
-                                                        </td>
+                                                                <MudButton Variant="Variant.Text"
+                                                                           Color="Color.Error"
+                                                                           StartIcon="@Icons.Filled.Delete"
+                                                                           Size="Size.Small"
+                                                                           OnClick="DeleteDataSheetAsync">
+                                                                    Eliminar
+                                                                </MudButton>
+                                                            }
+                                                        </div>
+                                                    </td>
+                                                    @if (_dataSheetLoading)
+                                                    {
                                                         <td>
                                                             <div>
-
-                                                                @if (!_showDataSheetFileInputAlert && !string.IsNullOrEmpty(_modelData.DataSheetURL))
-                                                                {
-                                                                    <MudButton Variant="Variant.Text"
-                                                                       Color="Color.Info"
-                                                                       StartIcon="@Icons.Filled.RemoveRedEye"
-                                                                       Size="Size.Small"
-                                                                       Link="@($"{_appConfiguration.ApiUrl}{AppConstants.MedicamentEndpoints.DataSheetURL(_modelData.DataSheetURL)}")" Target="_blank">
-                                                                        Ver
-                                                                    </MudButton>
-                                                                    <MudButton Variant="Variant.Text"
-                                                                       Color="Color.Error"
-                                                                       StartIcon="@Icons.Filled.Delete"
-                                                                       Size="Size.Small"
-                                                                       OnClick="DeleteDataSheetAsync">
-                                                                        Eliminar
-                                                                    </MudButton>
-                                                                }
+                                                                <MudProgressCircular style="margin-left: 10px !important" Color="Color.Primary" Size="Size.Small" Indeterminate="true" />
                                                             </div>
                                                         </td>
-                                                        @if (_dataSheetLoading)
-                                                        {
-                                                            <td>
-                                                                <div>
-                                                                    <MudProgressCircular style="margin-left: 10px !important" Color="Color.Primary" Size="Size.Small" Indeterminate="true" />
-                                                                </div>
-                                                            </td>
-                                                        }
-                                                    </tr>
+                                                    }
+                                                </tr>
 
-                                                </table>
+                                            </table>
 
-                                            </td>
+                                        </td>
 
-                                            <td style="padding-left: 5px;">
-                                                <table class="divInputFile" cellspacing="0" cellpadding="0">
+                                        <td style="padding-left: 5px;">
+                                            <table class="divInputFile" cellspacing="0" cellpadding="0">
 
-                                                    <tr>
-                                                        <td>
-                                                            <div>
-                                                                <InputFile id="prospectusfileInput" hidden OnChange="UploadProspectusFiles" />
-                                                                <MudButton HtmlTag="label"
+                                                <tr>
+                                                    <td>
+                                                        <div>
+                                                            <InputFile id="prospectusfileInput" hidden OnChange="UploadProspectusFiles" />
+                                                            <MudButton HtmlTag="label"
                                                                        Variant="Variant.Text"
                                                                        Color="Color.Primary"
                                                                        Size="Size.Small"
                                                                        StartIcon="@Icons.Filled.AttachFile"
                                                                        for="prospectusfileInput">
-                                                                    Prospecto
+                                                                Prospecto
+                                                            </MudButton>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div>
+
+                                                            @if (!_showProspectusFileInputAlert && !string.IsNullOrEmpty(_modelData.ProspectusURL))
+                                                            {
+                                                                <MudButton Variant="Variant.Text"
+                                                                           Color="Color.Info"
+                                                                           StartIcon="@Icons.Filled.RemoveRedEye"
+                                                                           Size="Size.Small"
+                                                                           Link="@($"{_appConfiguration.ApiUrl}{AppConstants.MedicamentEndpoints.ProspectusURL(_modelData.ProspectusURL)}")" Target="_blank">
+                                                                    Ver
                                                                 </MudButton>
-                                                            </div>
-                                                        </td>
+                                                                <MudButton Variant="Variant.Text"
+                                                                           Color="Color.Error"
+                                                                           StartIcon="@Icons.Filled.Delete"
+                                                                           Size="Size.Small"
+                                                                           OnClick="DeleteProspectusAsync">
+                                                                    Eliminar
+                                                                </MudButton>
+                                                            }
+                                                        </div>
+                                                    </td>
+                                                    @if (_prospectusLoading)
+                                                    {
                                                         <td>
                                                             <div>
-
-                                                                @if (!_showProspectusFileInputAlert && !string.IsNullOrEmpty(_modelData.ProspectusURL))
-                                                                {
-                                                                    <MudButton Variant="Variant.Text"
-                                                                       Color="Color.Info"
-                                                                       StartIcon="@Icons.Filled.RemoveRedEye"
-                                                                       Size="Size.Small"
-                                                                       Link="@($"{_appConfiguration.ApiUrl}{AppConstants.MedicamentEndpoints.ProspectusURL(_modelData.ProspectusURL)}")" Target="_blank">
-                                                                        Ver
-                                                                    </MudButton>
-                                                                    <MudButton Variant="Variant.Text"
-                                                                       Color="Color.Error"
-                                                                       StartIcon="@Icons.Filled.Delete"
-                                                                       Size="Size.Small"
-                                                                       OnClick="DeleteProspectusAsync">
-                                                                        Eliminar
-                                                                    </MudButton>
-                                                                }
+                                                                <MudProgressCircular style="margin-left: 10px !important" Color="Color.Primary" Size="Size.Small" Indeterminate="true" />
                                                             </div>
                                                         </td>
-                                                        @if (_prospectusLoading)
-                                                        {
-                                                            <td>
-                                                                <div>
-                                                                    <MudProgressCircular style="margin-left: 10px !important" Color="Color.Primary" Size="Size.Small" Indeterminate="true" />
-                                                                </div>
-                                                            </td>
-                                                        }
-                                                    </tr>
+                                                    }
+                                                </tr>
 
-                                                </table>
-                                            </td>
-                                        </tr>
+                                            </table>
+                                        </td>
+                                    </tr>
 
-                                    </table>
-                                    @if (_showPictureFileInputAlert)
-                                    {
-                                        <MudAlert Severity="Severity.Error" Dense="true" Class="my-2">El tamaño máximo del fichero de foto es de 1 MB </MudAlert>
-                                    }
-                                    @if (_showDataSheetFileInputAlert)
-                                    {
-                                        <MudAlert Severity="Severity.Error" Dense="true" Class="my-2">El tamaño máximo de fichero para la monografía es de 50 MB </MudAlert>
-                                    }
-                                    @if (_showProspectusFileInputAlert)
-                                    {
-                                        <MudAlert Severity="Severity.Error" Dense="true" Class="my-2">El tamaño máximo de fichero para el prospecto es de 50 MB </MudAlert>
-                                    }
+                                </table>
+                                @if (_showPictureFileInputAlert)
+                                {
+                                    <MudAlert Severity="Severity.Error" Dense="true" Class="my-2">El tamaño máximo del fichero de foto es de 1 MB </MudAlert>
+                                }
+                                @if (_showDataSheetFileInputAlert)
+                                {
+                                    <MudAlert Severity="Severity.Error" Dense="true" Class="my-2">El tamaño máximo de fichero para la monografía es de 50 MB </MudAlert>
+                                }
+                                @if (_showProspectusFileInputAlert)
+                                {
+                                    <MudAlert Severity="Severity.Error" Dense="true" Class="my-2">El tamaño máximo de fichero para el prospecto es de 50 MB </MudAlert>
+                                }
 
+                            </MudItem>
+                            @if (CanActivated())
+                            {
+                                <MudItem xs="12" md="6" Style="padding: 0px 4px 4px 4px !important;">
+                                    <MudCheckBox @bind-Checked="_modelData.Activated" Label="Activo?" Color="Color.Primary"></MudCheckBox>
                                 </MudItem>
 
-                            </MudGrid>
-                        </MudItem>
-                    </MudGrid>
-                  
+                            }
+
+                        </MudGrid>
+                    </MudItem>
+                </MudGrid>
+
             }
         </DialogContent>
-        <DialogActions >
-            <MudButton ButtonType="ButtonType.Button" Variant="Variant.Filled" Color="Color.Default" OnClick="()=>Cancel()">Cancel</MudButton>
+        <DialogActions>
+            <MudButton ButtonType="ButtonType.Button" Variant="Variant.Filled" Color="Color.Default" OnClick="()=>Cancel()">Cancelar</MudButton>
             <MudButton Disabled="@(!Validate())" ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Primary">Guardar</MudButton>
         </DialogActions>
     </MudDialog>
@@ -291,21 +305,29 @@
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         if (firstRender)
-        {     _user = await _authenticationManager.CurrentUser();
-              Validate();
+        {
+            _user = await _authenticationManager.CurrentUser();
+            Validate();
         }
-      
+
     }
     private bool Validate() => _fluentValidation.Validate();
-
+    protected bool CanActivated()
+    {
+        var canActivated = false;
+        if (_user == null) return canActivated;
+        var role = _user.GetRole();
+        var userRole = role.ParseEnum<RoleType>();
+        return (userRole == RoleType.Admin || userRole == RoleType.Boss);
+    }
     protected bool IsEdit()
     {
-        var disabled=true;
+        var disabled = true;
         if (_user == null) return disabled;
-        var userId= _user.GetUserId();
-        var role= _user.GetRole();
+        var userId = _user.GetUserId();
+        var role = _user.GetRole();
         var userRole = role.ParseEnum<RoleType>();
-        return  userRole== RoleType.Admin || userRole== RoleType.Boss || userRole== RoleType.Evaluator ;
+        return userRole == RoleType.Admin || userRole == RoleType.Boss || userRole == RoleType.Evaluator;
     }
 
     private async Task RefresView()
@@ -316,24 +338,27 @@
     private async Task UploadeDataSheetFiles(InputFileChangeEventArgs e)
     {
         _dataSheetFile = e.File;
-        if (_dataSheetFile != null) {
+        if (_dataSheetFile != null)
+        {
             _showDataSheetFileInputAlert = false;
             _dataSheetLoading = true;
             await RefresView();
             long maxFileSize = 1048576 * 50;//50MB
-            if (_dataSheetFile.Size <= maxFileSize) {
+            if (_dataSheetFile.Size <= maxFileSize)
+            {
                 var uploadType = UploadType.DataSheet;
                 var contentType = _dataSheetFile.ContentType;
                 var extension = Path.GetExtension(_dataSheetFile.Name);
                 var stream = _dataSheetFile.OpenReadStream(maxAllowedSize: (int)_dataSheetFile.Size);
-                var request = new UploadObject{
-                            FileName = $"{Guid.NewGuid()}{extension}",
-                            Data = stream,
-                            Size = _dataSheetFile.Size,
-                            UploadType = uploadType,
-                            ContentType = contentType,
-                            Extension = extension,
-                        };
+                var request = new UploadObject
+                    {
+                        FileName = $"{Guid.NewGuid()}{extension}",
+                        Data = stream,
+                        Size = _dataSheetFile.Size,
+                        UploadType = uploadType,
+                        ContentType = contentType,
+                        Extension = extension,
+                    };
                 if ((await _manager.UploadFileAsync(request)).Succeeded)
                     _modelData.DataSheetURL = request.FileName;
             }
@@ -345,35 +370,39 @@
 
     private async Task DeleteDataSheetAsync()
     {
-       
-        if (!string.IsNullOrEmpty(_modelData.DataSheetURL)) {
+
+        if (!string.IsNullOrEmpty(_modelData.DataSheetURL))
+        {
             await _manager.DeleteFileAsync(UploadType.DataSheet, _modelData.DataSheetURL);
             _modelData.DataSheetURL = string.Empty;
             await RefresView();
-         }
+        }
     }
 
     private async Task UploadProspectusFiles(InputFileChangeEventArgs e)
     {
         _prospectusFile = e.File;
-        if (_prospectusFile != null) {
+        if (_prospectusFile != null)
+        {
             _showProspectusFileInputAlert = false;
             _prospectusLoading = true;
             await RefresView();
             long maxFileSize = 1048576 * 50;//50MB
-            if (_prospectusFile.Size <= maxFileSize) {
+            if (_prospectusFile.Size <= maxFileSize)
+            {
                 var uploadType = UploadType.Prospectus;
                 var contentType = _prospectusFile.ContentType;
                 var extension = Path.GetExtension(_prospectusFile.Name);
                 var stream = _prospectusFile.OpenReadStream(maxAllowedSize: (int)_prospectusFile.Size);
-                var request = new UploadObject{
-                            FileName = $"{Guid.NewGuid()}{extension}",
-                            Data = stream,
-                            Size = _prospectusFile.Size,
-                            UploadType = uploadType,
-                            ContentType = contentType,
-                            Extension = extension,
-                        };
+                var request = new UploadObject
+                    {
+                        FileName = $"{Guid.NewGuid()}{extension}",
+                        Data = stream,
+                        Size = _prospectusFile.Size,
+                        UploadType = uploadType,
+                        ContentType = contentType,
+                        Extension = extension,
+                    };
                 if ((await _manager.UploadFileAsync(request)).Succeeded)
                     _modelData.ProspectusURL = request.FileName;
             }
@@ -385,11 +414,12 @@
 
     private async Task DeleteProspectusAsync()
     {
-        if (!string.IsNullOrEmpty(_modelData.ProspectusURL)){
-             await _manager.DeleteFileAsync(UploadType.Prospectus, _modelData.ProspectusURL);
+        if (!string.IsNullOrEmpty(_modelData.ProspectusURL))
+        {
+            await _manager.DeleteFileAsync(UploadType.Prospectus, _modelData.ProspectusURL);
             _modelData.ProspectusURL = string.Empty;
             await RefresView();
-         }
+        }
     }
 
     private async Task<byte[]> GetDataAsync(Stream stream)
@@ -414,7 +444,8 @@
             await RefresView();
             long maxFileSize = 1048576 * 10;//10 MB
             var contentType = _imageFile.ContentType;
-            if (_imageFile.Size <= maxFileSize){
+            if (_imageFile.Size <= maxFileSize)
+            {
                 var imageFile = await _imageFile.RequestImageFileAsync(contentType, 600, 400);
                 var stream = imageFile.OpenReadStream(maxAllowedSize: (int)imageFile.Size);
                 var data = Convert.ToBase64String(await GetDataAsync(stream));
@@ -422,7 +453,7 @@
             }
             else { _showPictureFileInputAlert = true; }
 
-            _pictureLoading = false;  
+            _pictureLoading = false;
             await RefresView();
 
         }
@@ -441,7 +472,8 @@
             var response = await _manager.UpdateAsync(_modelData);
             if (response.Succeeded)
                 MudDialog.Close();
-            foreach (var message in response.Messages){
+            foreach (var message in response.Messages)
+            {
                 _snackBar.Add(message, response.Succeeded ? Severity.Success : Severity.Error);
             }
         }
@@ -459,9 +491,10 @@
             _loading = true;
             await this.InvokeAsync(StateHasChanged);
             var response = await _manager.GetAsync(_id);
-            if (response.Succeeded){
+            if (response.Succeeded)
+            {
                 _modelData = response.Data;
-             }
+            }
             _loading = false;
             await this.InvokeAsync(StateHasChanged);
         }

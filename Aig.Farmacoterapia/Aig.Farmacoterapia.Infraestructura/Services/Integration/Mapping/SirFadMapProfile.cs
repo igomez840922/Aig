@@ -19,6 +19,7 @@ namespace Aig.Farmacoterapia.Infrastructure.Services.Integration.Mapping
             .ForMember(p => p.RecordId, p => p.MapFrom(s => s.Id))
             .ForMember(p => p.RenovacionNumero, p => p.MapFrom(s => 0))
             .ForMember(p => p.RenovacionTexto, p => p.MapFrom(s => string.Empty))
+            .ForMember(p => p.Activated, p => p.MapFrom(s =>true))
             .ForMember(p => p.Numero, p => p.MapFrom(s => s.NumeroRegistro))
             .ForMember(p => p.Estado, p => p.MapFrom(s => s.EstadoDetalles))
             .ForMember(p => p.Excipientes, p => p.MapFrom(s => Array.Empty<AigExcipient>()))
