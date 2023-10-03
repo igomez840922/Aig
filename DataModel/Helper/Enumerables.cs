@@ -7,7 +7,42 @@ using System.Threading.Tasks;
 
 namespace DataModel.Helper
 {
-	public enum enumAUD_TipoEstablecimiento
+    public enum TipoPersona
+    {
+        [Description("Natural")]
+        NAT = 0,
+        [Description("Jurídica")]
+        JUD = 2,
+    }
+
+    public enum LicenciaEstatus
+    {
+        [Description("N/A")]
+        NA = 0,
+        [Description("Vigente")]
+        VIG = 1,
+        [Description("Cancelada")]
+        CAN = 2,
+    }
+
+    public enum TipoIdentificaion
+    {
+        [Description("N/A")]
+        NA = 0,
+        [Description("Pasaporte")]
+        PASS = 1,
+        [Description("Cedula Panameña Nacido en el Extranjero")]
+        CED_NAC_EX = 2,
+        [Description("Cedula Panameña por Nacimiento")]
+        CED_NAC_NAC = 3,
+        [Description("Cedula Panameña Nacionalizado")]
+        CED_NAC_ADO = 4,
+        [Description("Cedula Extranjero con Residencia")]
+        CED_EXT_RES = 5,
+    }
+
+
+    public enum enumAUD_TipoEstablecimiento
 	{
 		[Description("Ninguna")]
 		None = 0,

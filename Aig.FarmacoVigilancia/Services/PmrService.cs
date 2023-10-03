@@ -27,7 +27,7 @@ namespace Aig.FarmacoVigilancia.Services
                               (model.ToDate == null ? true : (data.FechaEntrada <= model.ToDate)) &&
                               (model.EvaluatorId == null ? true : (data.EvaluadorId == model.EvaluatorId)) &&
                               (model.StatusPMR == null ? true : (data.Status == model.StatusPMR))
-                                orderby data.CreatedDate
+                                orderby data.CreatedDate descending
                               select data).Skip(model.PagIdx * model.PagAmt).Take(model.PagAmt).ToList();
 
                 model.Total = (from data in DalService.DBContext.Set<FMV_PmrTB>()

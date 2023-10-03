@@ -100,6 +100,21 @@ namespace Aig.FarmacoVigilancia.Controllers
         }
 
         [AllowAnonymous]
+        [HttpGet("GetAllInstituciones")]
+        public async Task<IActionResult> GetAllInstituciones()
+        {
+            try
+            {
+                var data = dalService.GetAll<InstitucionDestinoTB>();
+                return Ok(data);
+
+            }
+            catch (Exception ex) { return BadRequest(new { message = ex.Message }); }
+
+            return BadRequest(new { message = "resultados no encontrados" });
+        }
+
+        [AllowAnonymous]
         [HttpGet("GetAllOrigenAlerta")]
         public async Task<IActionResult> GetAllOrigenAlerta()
         {
@@ -381,6 +396,114 @@ namespace Aig.FarmacoVigilancia.Controllers
             return BadRequest(new { message = "los datos no pueden actualizados" });
         }
 
+        [AllowAnonymous]
+        [HttpPost("UpdateFT")]
+        public async Task<IActionResult> UpdateFT([FromBody]FTModel model)
+        {
+            try
+            {
+                var ft = dalService.Get<FMV_FtTB>(model.IdTramite);
+                if (ft == null)
+                {
+                    ft = new FMV_FtTB()
+                    {
+                        CodCNFV = "-",
+                        NombreComercial = "-",
+                        NombreDci = "-",
+                        Notificador = "-",
+                    };
+                }
+
+                if (ft != null)
+                {
+                    ft.NombreComercial = model.DatosMedicamento?.NomComercial??"";
+                    ft.NombreDci = model.DatosMedicamento?.NomDCI ?? "";
+                    ft.Presentacion = model.DatosMedicamento?.Presentacion ?? "";
+                    ft.Concentracion = model.DatosMedicamento?.Concentracion ?? "";
+                    ft.FormaFarmaceutica = model.DatosMedicamento?.FormaFarmaceutica ?? "";
+                    ft.FabricanteId = model.DatosMedicamento?.Laboratorio?.Id ?? null;
+                    ft.RegSanitario = model.DatosMedicamento?.RegSanitario ?? "";
+                    ft.TipoNotificacion = model.DatosNotificador?.TipoNotificador ?? DataModel.Helper.enumFMV_RAMNotificationType.NOREP;
+                    //ft.ProvinciaId = model.DatosNotificador?.Provincia?.Id ?? 0;
+                    var codProv = model.DatosNotificador?.Provincia?.Codigo ?? null;
+                    ft.ProvinciaId = string.IsNullOrEmpty(codProv)? null : (dalService.Find<ProvinciaTB>(x => x.Codigo == codProv)?.Id ?? null);
+                    ft.InstitucionId = model.DatosNotificador?.InstalacionSalud?.Id ?? null;
+                    ft.Notificador = model.DatosNotificador?.Notificador?.NombreCompleto ?? "";
+                    ft.Notificador = model.DatosNotificador?.Notificador?.NombreCompleto ?? "";
+                    if(!string.IsNullOrEmpty(model.DatosMedicamento?.Lotes ?? null))
+                    {
+                        ft.LLotes = ft.LLotes?.Count > 0 ? ft.LLotes : new List<FMV_LoteTB>();
+                        ft.LLotes.RemoveAll(x=>x.Nombre == model.DatosMedicamento.Lotes);
+                        ft.LLotes.Add(new FMV_LoteTB() { Nombre = model.DatosMedicamento.Lotes, FechaExpira = model.DatosMedicamento.FechaExp });
+                    }
+                    ft.DetalleFalla = model.SospechaFallaTerapeutica?.Razones ?? "";
+
+                    ft.DatosPaciente.NombrePaciente = model.DatosPaciente?.Paciente?.NombreCompleto ?? "";
+                    ft.DatosPaciente.Sexo = model.DatosPaciente?.Sexo ??  DataModel.Helper.enumSexo.NA;
+                    ft.DatosPaciente.Edad = model.DatosPaciente?.Edad ?? "";
+                    ft.DatosPaciente.HistClinica = "";
+                    if (model.DatosPaciente != null)
+                    {
+                        ft.DatosPaciente.HistClinica += "\r\n" + (model.DatosPaciente.Alergias? ("Alergias: si " + model.DatosPaciente.AlergiasDesc) : "Alergias: no");
+                        ft.DatosPaciente.HistClinica += "\r\n" + (model.DatosPaciente.Embarazo ? ("Embarazo: si " + model.DatosPaciente.EmbarazoDesc) : "Embarazo: no");
+                        ft.DatosPaciente.HistClinica += "\r\n" + (model.DatosPaciente.Alcohol ? ("Alcohol: si " + model.DatosPaciente.AlcoholDesc) : "Alcohol: no");
+                        ft.DatosPaciente.HistClinica += "\r\n" + (model.DatosPaciente.Droga ? ("Drogas: si " + model.DatosPaciente.DrogaDesc) : "Drogas: no");
+                        ft.DatosPaciente.HistClinica += "\r\n" + (model.DatosPaciente.Tabaquismo ? ("Tabaquismo: si " + model.DatosPaciente.TabaquismoDesc) : "Tabaquismo: no");
+                        ft.DatosPaciente.HistClinica += "\r\n" + (model.DatosPaciente.Diabetes ? ("Diabetes: si " + model.DatosPaciente.DiabetesDesc) : "Diabetes: no");
+                        ft.DatosPaciente.HistClinica += "\r\n" + (model.DatosPaciente.Hta ? ("Hta: si " + model.DatosPaciente.HtaDesc) : "Hta: no");
+                        ft.DatosPaciente.HistClinica += "\r\n" + (model.DatosPaciente.Hepatico ? ("Hepático: si " + model.DatosPaciente.HepaticoDesc) : "Hepático: no");
+                        ft.DatosPaciente.HistClinica += "\r\n" + (model.DatosPaciente.Renal ? ("Renal: si " + model.DatosPaciente.RenalDesc) : "Renal: no");
+                        ft.DatosPaciente.HistClinica += "\r\n" + (model.DatosPaciente.Cardiaco ? ("Cardiaco: si " + model.DatosPaciente.CardiacoDesc) : "Cardiaco: no");
+                        ft.DatosPaciente.HistClinica += "\r\n" + (model.DatosPaciente.Respiratorio ? ("Respiratorio: si " + model.DatosPaciente.RespiratorioDesc) : "Respiratorio: no");
+                        ft.DatosPaciente.HistClinica += "\r\n" + (model.DatosPaciente.Hematologico ? ("Hematológico: si " + model.DatosPaciente.HematologicoDesc) : "Hematológico: no");
+                        ft.DatosPaciente.HistClinica += "\r\n" + (model.DatosPaciente.Gi ? ("GI: si " + model.DatosPaciente.GiDesc) : "GI: no");
+                        ft.DatosPaciente.HistClinica += "\r\n" + (model.DatosPaciente.Piel ? ("Piel: si " + model.DatosPaciente.PielDesc) : "Piel: no");
+                        ft.DatosPaciente.HistClinica += "\r\n" + (model.DatosPaciente.Neurologico ? ("Neurológico: si " + model.DatosPaciente.NeurologicoDesc) : "Neurológico: no");
+                        ft.DatosPaciente.HistClinica += "\r\n" + (model.DatosPaciente.Otros ? ("Otros: si " + model.DatosPaciente.OtrosDesc) : "Otros: no");
+                    }
+                    ft.DatosPaciente.FechaTratInicial = model.DatosMedicamento?.FechaIni?.ToString("dd/MM/yyyy") ?? "";
+                    ft.DatosPaciente.FechaTratFinal = model.DatosMedicamento?.FechaFin?.ToString("dd/MM/yyyy") ?? "";
+                    ft.DatosPaciente.FechaFT = model.SospechaFallaTerapeutica?.FechaFalla?.ToString("dd/MM/yyyy") ?? "";
+                    ft.DatosPaciente.Indicacion = model.DatosMedicamento?.Diagnostigo??"";
+                    ft.DatosPaciente.ViaAdministracion = model.DatosMedicamento?.DosisPosologiaPrescrita ?? "";
+                    if(model.SospechaFallaTerapeutica?.LMedicamentoSospechoso?.Count > 0)
+                    {
+                        ft.Concominantes.LProductos = ft.Concominantes?.LProductos?.Count > 0 ? ft.Concominantes.LProductos : new List<FMV_RamFarmacoConcominante>();
+                        ft.Concominantes.LProductos.Clear();
+
+                        foreach(var prd in model.SospechaFallaTerapeutica.LMedicamentoSospechoso)
+                        {
+                            ft.Concominantes.LProductos.Add(new FMV_RamFarmacoConcominante() 
+                            {
+                                 Nombre = prd.NomComercial,
+                                ViaAdministracion = prd.ViaAdministracion,
+                                FechaTratamiento = prd.FechaIni?.ToString("dd/MM/yyyy") ?? "",
+                                Indicacion = prd.Diagnostico,
+                            });
+                        }
+                    }
+                    if (model.LAdjuntos?.Count > 0)
+                    {
+                        ft.Adjunto.LAttachments = ft.Adjunto.LAttachments?.Count > 0 ? ft.Adjunto.LAttachments : new List<AttachmentTB>();
+                        ft.Adjunto.LAttachments.Clear();
+
+                        foreach (var attch in model.LAdjuntos)
+                        {
+                            ft.Adjunto.LAttachments.Add(attch);
+                        }
+                    }
+                                        
+                    var result = dalService.Save(ft);
+                    if (result != null)
+                    {
+                        return Ok(result.Id);
+                    }
+                }
+            }
+            catch (Exception ex) { return BadRequest(new { message = ex.Message }); }
+
+            return BadRequest(new { message = "los datos no pueden actualizados" });
+        }
 
     }
 }

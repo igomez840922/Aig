@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace DataModel
@@ -38,21 +39,27 @@ namespace DataModel
 
 
         private List<FMV_NotaTB> lNotas;
+        [JsonIgnore]
         public virtual List<FMV_NotaTB> LNotas { get => lNotas; set => SetProperty(ref lNotas, value); }
 
         private List<FMV_EsaviTB> lEsavi;
+        [JsonIgnore]
         public virtual List<FMV_EsaviTB> LEsavi { get => lEsavi; set => SetProperty(ref lEsavi, value); }
 
         private List<FMV_FfTB> lFf;
+        [JsonIgnore]
         public virtual List<FMV_FfTB> LFf { get => lFf; set => SetProperty(ref lFf, value); }
 
         private List<FMV_RamTB> lRam;
+        [JsonIgnore]
         public virtual List<FMV_RamTB> LRam { get => lRam; set => SetProperty(ref lRam, value); }
 
         private List<FMV_Ram2TB> lRam2;
+        [JsonIgnore]
         public virtual List<FMV_Ram2TB> LRam2{ get => lRam2; set => SetProperty(ref lRam2, value); }
 
         private List<FMV_Esavi2TB> lEsavi2;
+        [JsonIgnore]
         public virtual List<FMV_Esavi2TB> LEsavi2 { get => lEsavi2; set => SetProperty(ref lEsavi2, value); }
 
     }
