@@ -1,0 +1,83 @@
+﻿<style>
+
+    .mud-dialog .mud-dialog-content {
+        padding: 0px !important;
+    }
+
+    .mud-dialog-content {
+        padding: 0px !important;
+    }
+
+    .mud-container {
+        padding-left: 0px !important;
+        padding-right: 0px !important;
+    }
+</style>
+
+<MudDialog>
+    <DialogContent>
+        <MudContainer Style="max-height: 80vh; overflow-y: scroll!important">
+            <EditForm Model="@User" OnValidSubmit="SaveData">
+                <DataAnnotationsValidator />
+                <MudCard Outlined="false" Elevation="0">
+                    @*<MudCardHeader>
+                    <CardHeaderContent>
+                    <MudText>@(Currency.Id > 0 ? "New" : "Edit") Currency</MudText>
+                    </CardHeaderContent>
+                    </MudCardHeader>*@
+                    <MudCardContent>
+                        <MudPaper Class="pa-2" Elevation="0">
+                            <MudText Typo="Typo.h6" Color="Color.Primary">Account Information</MudText>
+                            <MudGrid>
+                                <MudItem xs="12" md="6">
+                                    <MudTextField Margin="Margin.Dense" @bind-Value="User.UserName" Label="User Name(Email)" Variant="Variant.Outlined" For="@(() => User.UserName)" />
+                                </MudItem>
+                            </MudGrid>
+                            <MudGrid>
+                                <MudItem xs="12" md="6">
+                                    <MudTextField Margin="Margin.Dense" InputType="InputType.Password" @bind-Value="User.Password" Label="Password" Variant="Variant.Outlined" For="@(() => User.Password)" />
+                                </MudItem>
+                                <MudItem xs="12" md="6">
+                                    <MudTextField Margin="Margin.Dense" InputType="InputType.Password" @bind-Value="User.PasswordConfirm" Label="Confirm Password" Variant="Variant.Outlined" For="@(() => User.PasswordConfirm)" />
+                                </MudItem>
+                            </MudGrid>
+                        </MudPaper>
+                        <MudPaper Class="pa-2" Elevation="0">
+                            <MudText Typo="Typo.h6" Color="Color.Primary">Personal Information</MudText>
+                            <MudGrid>
+                                <MudItem xs="12" md="6">
+                                    <MudTextField Margin="Margin.Dense" @bind-Value="User.UserProfile.FirstName" Label="First Name" Variant="Variant.Outlined" For="@(() => User.UserProfile.FirstName)" />
+                                </MudItem>
+                                <MudItem xs="12" md="6">
+                                    <MudTextField Margin="Margin.Dense" @bind-Value="User.UserProfile.LastName" Label="Last Name" Variant="Variant.Outlined" For="@(() => User.UserProfile.LastName)" />
+                                </MudItem>
+                            </MudGrid>                      
+                        </MudPaper>                       
+                        <MudPaper Class="pa-2" Elevation="0">
+                            <MudText Typo="Typo.h6" Color="Color.Primary">Contact Information</MudText>
+                            <MudGrid>
+                                @*  <MudItem xs="12" md="6">
+                                <MudTextField @bind-Value="User.UserProfile.CompanyName" Label="Company Name" Variant="Variant.Outlined" For="@(() => User.UserProfile.CompanyName)" />
+                                </MudItem> *@
+                                <MudItem xs="12" md="6">
+                                    <MudTextField Margin="Margin.Dense" @bind-Value="User.UserProfile.PhoneNumber" Label="Phone Number" Variant="Variant.Outlined" For="@(() => User.UserProfile.PhoneNumber)" />
+                                </MudItem>
+                            </MudGrid>
+                        </MudPaper>                        
+                    </MudCardContent>
+                    <MudCardActions Class="pt-4 pl-4">
+                        <div style="text-align:right;" class="ml-auto">
+                            <MudButton Margin="Margin.Dense" ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Primary" Size="Size.Large" Class="ma-1">Save</MudButton>
+                            <MudButton Margin="Margin.Dense" ButtonType="ButtonType.Button" Variant="Variant.Filled" Color="Color.Error" Size="Size.Large" Class="ma-1" OnClick="Cancel">Cancel</MudButton>
+                        </div>
+                    </MudCardActions>
+                </MudCard>
+            </EditForm>
+
+        </MudContainer>
+    </DialogContent>
+    @*<DialogActions>
+    <MudButton OnClick="Cancel">Cancel</MudButton>
+    <MudButton Color="@Color" Variant="Variant.Filled" OnClick="Submit">@ButtonText</MudButton>
+    </DialogActions>*@
+</MudDialog>

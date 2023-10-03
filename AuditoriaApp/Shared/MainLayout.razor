@@ -1,17 +1,82 @@
 ﻿@inherits LayoutComponentBase
+@layout BlankLayout
+@attribute [Authorize]
 
-<div class="page">
-    <div class="sidebar">
+@* <MudThemeProvider Theme="_themeManager.Theme" /> *@
+<MudThemeProvider Theme="@MyCustomTheme" />
+<MudDialogProvider />
+<MudSnackbarProvider />
+
+<style>
+    .footer_copyright {
+        position: fixed;
+        bottom: 8px;
+        left: 48%;
+        right: 0;
+        height: 30px;
+    }
+
+
+    .mud-dialog-title {
+        border-bottom: 1px solid #e9e7e7 !important;
+    }
+
+    .mud-dialog-actions {
+        border-top: 1px solid #e9e7e7 !important;
+    }
+
+    .mud-dialog-content {
+        padding: 25px !important;
+    }
+</style>
+
+<MudLayout>
+    <MudAppBar Style="background-color:#54565a!important" Elevation="2" Dense="true">
+        <MudHidden Breakpoint="Breakpoint.SmAndDown">
+            @*<MudIcon Icon="@Icons.Custom.Brands.MudBlazor" Size="Size.Large" />*@
+        </MudHidden>
+        <MudHidden Breakpoint="Breakpoint.MdAndUp">
+            <MudIconButton Icon="@Icons.Material.Outlined.Menu" Color="Color.Inherit" Edge="Edge.Start" OnClick="@((e) => DrawerToggle())" />
+        </MudHidden>
+        <MudHidden Breakpoint="Breakpoint.Xs">
+            @* <MudText Typo="Typo.h6">@languageContainerService.Keys["Roulette"]</MudText> *@
+        </MudHidden>
+        <MudHidden Breakpoint="Breakpoint.Xs" Invert="true">
+            @* <MudText Typo="Typo.subtitle2">@languageContainerService.Keys["Roulette"]</MudText> *@
+        </MudHidden>
+        <MudSpacer />
+        @*<MudMenu Icon="@Icons.Material.Outlined.Translate" Color="Color.Inherit" Direction="Direction.Bottom" OffsetY="true" Dense="true">
+            <MudMenuItem>English</MudMenuItem>
+            <MudMenuItem>Swedish</MudMenuItem>
+            <MudMenuItem>Old Norse</MudMenuItem>
+        </MudMenu>*@
+        <MudMenu AnchorOrigin="Origin.CenterLeft" Dense="true" Class="mt-1 ml-4">
+            <ActivatorContent>
+               <MudIconButton Icon="@Icons.Material.Filled.Settings" Color="Color.Inherit" />
+           </ActivatorContent>
+            <ChildContent>
+                @*<PersonCard Class="mt-n2" />*@
+                <MudDivider Class="mb-2" />
+                <MudListItem Text="Account" Icon="@Icons.Material.Outlined.Person"  OnClick="OpenProfile" />
+                <MudListItem Text="Change Password" Icon="@Icons.Material.Outlined.Key" OnClick="OpenChangePsw" />
+                <MudListItem Text="@languageContainerService.Keys["SignOut"]" Icon="@Icons.Material.Outlined.Login" Href="/logout" />
+            </ChildContent>
+        </MudMenu>
+    </MudAppBar>
+    <MudDrawer @bind-Open="_drawerOpen" Elevation="8">
+        <MudLink Href="/" Style="margin: 5%;">
+            <MudImage Fluid="true" Src="img/logo.png" />
+        </MudLink>
         <NavMenu />
-    </div>
-
-    <main>
-        <div class="top-row px-4">
-            <a href="https://docs.microsoft.com/aspnet/" target="_blank">About</a>
-        </div>
-
-        <article class="content px-4">
+    </MudDrawer>
+    <MudMainContent>
+      
+        <MudContainer MaxWidth="MaxWidth.False" Class="mt-1">
             @Body
-        </article>
-    </main>
-</div>
+        </MudContainer>
+    </MudMainContent>
+</MudLayout>
+
+<MudOverlay @bind-Visible="showOverlay" DarkBackground="true" ZIndex="9999" AutoClose="false" >
+    <MudProgressCircular Color="Color.Primary" Size="Size.Large" Indeterminate="true" />
+</MudOverlay>

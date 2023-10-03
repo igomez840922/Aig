@@ -1,0 +1,68 @@
+﻿@implements IDisposable
+
+<style>
+
+    .mud-dialog .mud-dialog-content {
+        padding: 0px !important;
+    }
+
+    .mud-dialog-content {
+        padding: 0px !important;
+    }
+
+    .mud-container {
+        padding-left: 0px !important;
+        padding-right: 0px !important;
+    }
+</style>
+<MudDialog>
+    <DialogContent>
+        <MudContainer Style="max-height: 80vh; overflow-y: scroll!important">
+            <EditForm Model="@Data" OnValidSubmit="SaveData">
+                <DataAnnotationsValidator />
+                <MudCard Outlined="false" Elevation="0">
+                    @*<MudCardHeader>
+                    <CardHeaderContent>
+                    <MudText>@(Country.Id > 0 ? "New" : "Edit") Country</MudText>
+                    </CardHeaderContent>
+                    </MudCardHeader>*@
+                    <MudCardContent>
+                        <MudPaper Class="pa-2" Elevation="0">
+                            <MudText Typo="Typo.h6" Color="Color.Primary">Personal Information</MudText>
+                            <MudGrid>
+                                <MudItem xs="12">
+                                    <MudTextField Margin="Margin.Dense" @bind-Value="Data.Description" For="@(() => Data.Description)" Label="@languageContainerService.Keys["Description"]" Variant="Variant.Outlined" />
+                                </MudItem>
+                            </MudGrid>
+                            <MudGrid>
+                                <MudItem xs="12">
+                                    <MudFileUpload T="IBrowserFile" FilesChanged="UploadFiles" Accept=".doc, .docx, .xls, .xlsx, .pdf">
+                                        <ButtonTemplate Context="contextBtn">
+                                            <MudButton HtmlTag="label"
+                                                       Variant="Variant.Filled"
+                                                       Color="Color.Primary"
+                                                       StartIcon="@Icons.Material.Filled.CloudUpload"
+                                                       for="@contextBtn">
+                                                @languageContainerService.Keys["Upload File"]
+                                            </MudButton>
+                                        </ButtonTemplate>
+                                    </MudFileUpload>
+                                </MudItem>
+                            </MudGrid>
+                        </MudPaper>                        
+                    </MudCardContent>
+                    <MudCardActions Class="pt-4 pl-4">
+                        <div style="text-align:right;" class="ml-auto">
+                            <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Primary" Size="Size.Large" Class="ma-1">Save</MudButton>
+                            <MudButton ButtonType="ButtonType.Button" Variant="Variant.Filled" Color="Color.Error" Size="Size.Large" Class="ma-1" OnClick="Cancel">Cancel</MudButton>
+                        </div>
+                    </MudCardActions>
+                    <MudOverlay Visible="loading" DarkBackground="true" Absolute="true">
+                        <MudProgressCircular Color="Color.Secondary" Indeterminate="true" />
+                    </MudOverlay>
+                </MudCard>
+            </EditForm>
+
+        </MudContainer>
+    </DialogContent>
+</MudDialog>

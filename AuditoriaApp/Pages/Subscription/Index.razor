@@ -1,0 +1,69 @@
+﻿@page "/subscription"
+@attribute [Authorize]
+@layout MainLayout
+
+<MudText Typo="Typo.h5" Color="Color.Primary" Class="mb-4">License Option</MudText>
+
+@if (model != null)
+{
+
+    <MudGrid>
+        <MudItem xs="12">
+            <MudCard Elevation="25">
+
+                <EditForm Model="@model" OnValidSubmit="SaveData">
+                    <DataAnnotationsValidator />
+                    <MudCard Outlined="false" Elevation="0">
+                        <MudCardHeader>
+                            <CardHeaderContent>
+                                <MudText Typo="Typo.h6" Color="Color.Primary">License</MudText>
+                    </CardHeaderContent>
+                    </MudCardHeader>
+                        <MudCardContent>
+                            <MudPaper Class="pa-2" Elevation="0">
+                               
+                                <MudGrid>
+                                    <MudItem xs="12" md="6">
+                                        <MudSelect Margin="Margin.Dense" T="@DataModel.LicenseOptionTB" For="@(() => model.LicenseOption)" Label="Select License Option" Variant="Variant.Outlined" AnchorOrigin="Origin.BottomCenter" @bind-Value="model.LicenseOption" ToStringFunc="@(e=> e==null?null : e.Description)">
+                                            @if (lLicenseOptions?.Count > 0)
+                                            {
+                                                @foreach (var part in lLicenseOptions)
+                                                {
+                                                    <MudSelectItem Value="@part">@part.Description</MudSelectItem>
+                                                }
+                                            }
+                                        </MudSelect>
+                                    </MudItem>     
+                                </MudGrid>
+                                <MudGrid>
+                                    <MudItem xs="12">
+                                        <MudText Typo="Typo.subtitle2" Color="Color.Primary">Payment Information</MudText>
+                                    </MudItem>
+                                    <MudItem xs="12" md="6">
+                                        <MudTextField Margin="Margin.Dense" @bind-Value="model.CardNumber" Label="Card number" Variant="Variant.Outlined" For="@(() => model.CardNumber)" />
+                                    </MudItem>
+                                    <MudItem xs="12" md="6">
+                                        <MudTextField Margin="Margin.Dense" @bind-Value="model.ExpirationDate" Label="Exp. Date (MMYY)" Variant="Variant.Outlined" For="@(() => model.ExpirationDate)" />
+                                    </MudItem>
+                                    <MudItem xs="12" md="6">
+                                        <MudTextField Margin="Margin.Dense" @bind-Value="model.CardCode" Label="CCV" Variant="Variant.Outlined" For="@(() => model.CardCode)" />
+                                    </MudItem>
+                                </MudGrid>
+                            </MudPaper>
+                        </MudCardContent>
+                        <MudCardActions Class="pt-4 pl-4">
+                            <div style="text-align:right;" class="ml-auto">
+                                <MudButton Margin="Margin.Dense" ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Primary" Size="Size.Large" Class="ma-1">Submit Payment</MudButton>
+                                <MudButton Margin="Margin.Dense" ButtonType="ButtonType.Button" Variant="Variant.Filled" Color="Color.Error" Size="Size.Large" Class="ma-1" OnClick="Cancel">Cancel</MudButton>
+                            </div>
+                        </MudCardActions>
+                    </MudCard>
+                </EditForm>
+
+
+            </MudCard>
+        </MudItem>
+
+    </MudGrid>
+
+}

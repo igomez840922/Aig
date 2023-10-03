@@ -1,0 +1,35 @@
+﻿@page "/register"
+@layout LoginLayout
+
+
+<EditForm id="loginform" class="kt-form" OnValidSubmit="OnRegister" Model="RegisterRequest">
+	<DataAnnotationsValidator />
+	
+	<MudText Typo="Typo.subtitle2" GutterBottom="true">Account Info</MudText>
+	
+	<MudTextField Margin="Margin.Dense" T="string" @bind-Value="RegisterRequest.UserName" For="@(() => RegisterRequest.UserName)" Label="@languageContainerService.Keys["UserName"]" Variant="Variant.Outlined" Class="py-2"></MudTextField>
+	
+	<MudTextField Margin="Margin.Dense" @bind-Value="@RegisterRequest.Password" For="@(() => RegisterRequest.Password)" Label="@languageContainerService.Keys["Password"]" Variant="Variant.Outlined" InputType="@PasswordInput" Adornment="Adornment.End" AdornmentIcon="@PasswordInputIcon" OnAdornmentClick="TogglePasswordVisibility" Class="py-2" />
+
+	<MudTextField Margin="Margin.Dense" @bind-Value="@RegisterRequest.PasswordConfirm" For="@(() => RegisterRequest.PasswordConfirm)" Label="@languageContainerService.Keys["PasswordConfirm"]" Variant="Variant.Outlined" InputType="@PasswordInput" Adornment="Adornment.End" AdornmentIcon="@PasswordInputIcon" OnAdornmentClick="TogglePasswordVisibility" Class="py-2" />
+
+
+	<MudText Typo="Typo.subtitle2" GutterBottom="true">Personal Info</MudText>
+	<MudTextField Margin="Margin.Dense" T="string" @bind-Value="RegisterRequest.UserProfile.FirstName" For="@(() => RegisterRequest.UserProfile.FirstName)" Label="@languageContainerService.Keys["FirstName"]" Variant="Variant.Outlined" Class="py-2" ></MudTextField>
+
+	<MudTextField Margin="Margin.Dense" T="string" @bind-Value="RegisterRequest.UserProfile.LastName" For="@(() => RegisterRequest.UserProfile.LastName)" Label="@languageContainerService.Keys["LastName"]" Variant="Variant.Outlined" Class="py-2"></MudTextField>
+
+	<MudTextField Margin="Margin.Dense" T="string" @bind-Value="RegisterRequest.UserProfile.PhoneNumber" For="@(() => RegisterRequest.UserProfile.PhoneNumber)" Label="@languageContainerService.Keys["PhoneNumber"]" Variant="Variant.Outlined" Class="py-2"></MudTextField>
+
+	<MudCheckBox @bind-Checked="@AgreeToTerms" Label="I agree to the terms and privacy" Color="Color.Primary" Class="ml-n1 my-2"></MudCheckBox>
+
+	<MudButton Variant="Variant.Filled" Color="Color.Primary" Disabled="@(!AgreeToTerms)" Size="Size.Large" FullWidth="true" ButtonType="ButtonType.Submit">@languageContainerService.Keys["SignUp"]</MudButton>
+
+	<MudText Class="pt-1">Already have an account?</MudText>
+	<MudButton Margin="Margin.Dense" Variant="Variant.Filled" Color="Color.Info" Href="/login" Size="Size.Large" FullWidth="true">@languageContainerService.Keys["SignIn"]</MudButton>
+
+</EditForm>
+@if(ShowAuthError){
+	<MudAlert vis Severity="Severity.Error" Class="mt-8 mud-width-full" Style="max-width:500px;" Elevation="25">@Error</MudAlert>
+}
+

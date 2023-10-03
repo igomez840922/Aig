@@ -6,3 +6,38 @@
 @using Microsoft.JSInterop
 @using AuditoriaApp
 @using AuditoriaApp.Shared
+
+@using System.Net.Http.Json
+@using Microsoft.AspNetCore.Components.WebAssembly.Http
+@using Microsoft.AspNetCore.Components.Authorization
+@using Microsoft.Extensions.Configuration
+@using Microsoft.AspNetCore.Authorization
+@using AuditoriaApp.Wasm.Theme;
+@using AuditoriaApp.Services;
+@using AuditoriaApp.Helper;
+
+
+@*Configuration File*@
+@inject Microsoft.Extensions.Configuration.IConfiguration config;
+
+@*MudBlazor*@
+@using MudBlazor
+@using MudBlazor.ThemeManager
+@inject ISnackbar snackbar
+
+@*Multilanguaje*@
+@* @using AKSoftware.Localization.MultiLanguages;
+@inject ILanguageContainerService languageContainerService *@
+
+@inject NavigationManager navigationManager
+@inject IJSRuntime jsRuntime
+
+@*QUARTZ*@
+@inject IQuartzSchedulerService quartzSchedulerService
+
+@*BUS NOTOFOCATION*@
+@using BlazorComponentBus
+@inject ComponentBus bus
+
+@inject IDialogService _dialogService
+

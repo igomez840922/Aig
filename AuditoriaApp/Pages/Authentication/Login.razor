@@ -1,0 +1,29 @@
+﻿@page "/login"
+@layout LoginLayout
+
+
+@* <MudText Typo="Typo.h5" Align="Align.Center" GutterBottom="true">@languageContainerService.Keys["Login"]</MudText> *@
+
+@*<MudText>Don't have an account? <MudLink Href="/register">Sign Up</MudLink></MudText>*@
+
+<EditForm id="loginform" class="kt-form" OnValidSubmit="OnLogin" Model="loginRequest">
+	<DataAnnotationsValidator />
+
+	<MudTextField Margin="Margin.Dense" T="string" @bind-Value="loginRequest.UserName" Label="@languageContainerService.Keys["UserName"]" Variant="Variant.Outlined" Class="py-2"></MudTextField>
+	
+	<MudTextField Margin="Margin.Dense" @bind-Value="@loginRequest.Password" Label="@languageContainerService.Keys["Password"]" Variant="Variant.Outlined" InputType="@PasswordInput" Adornment="Adornment.End" AdornmentIcon="@PasswordInputIcon" OnAdornmentClick="TogglePasswordVisibility" Class="py-2" />
+
+	<div Class="d-flex justify-space-between align-center">
+		<MudCheckBox T="bool" Label="@languageContainerService.Keys["RememberMe"]" Color="Color.Primary" Class="ml-n1 my-3" @bind-Value="loginRequest.RememberMe"></MudCheckBox>
+		<MudLink Href="javascript:;">@languageContainerService.Keys["ForgotPassword"]?</MudLink>
+	</div>
+
+	<MudButton Margin="Margin.Dense" Variant="Variant.Filled" Color="Color.Primary" ButtonType="ButtonType.Submit" Size="Size.Large" FullWidth="true">@languageContainerService.Keys["SignIn"]</MudButton>
+	
+	<MudText Class="pt-1">Don't have an account?</MudText>
+	<MudButton Margin="Margin.Dense" Variant="Variant.Filled" Color="Color.Info" Href="/register" Size="Size.Large" FullWidth="true">@languageContainerService.Keys["SignUp"]</MudButton>
+
+</EditForm>
+@if(ShowAuthError){
+	<MudAlert vis Severity="Severity.Error" Class="mt-8 mud-width-full" Style="max-width:500px;" Elevation="25">@Error</MudAlert>
+}
