@@ -10,6 +10,9 @@ namespace DataModel.DTO
     {
         public bool IsAuthSuccessful { get; set; }
         public string ErrorMessage { get; set; }
-        public string Token { get; set; }
+        public string Token { get; set; }       
+        public string UserId { get; set; }
+        public string LoginToken { get; set; }
+
     }
 }

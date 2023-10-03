@@ -4,19 +4,17 @@
 <MudNavMenu>
     
     <AuthorizeView>
-        <MudText Typo="Typo.subtitle2" Color="Color.Inherit" Class="ml-4 my-3">@languageContainerService.Keys["Data"]</MudText>
+        <MudText Typo="Typo.subtitle2" Color="Color.Inherit" Class="ml-4 my-3">Data</MudText>
 
-        <MudNavLink Href="/dashboard" Match="NavLinkMatch.All" Icon="@Icons.Material.Outlined.Dashboard">@languageContainerService.Keys["Dashboard"]</MudNavLink>
-        <MudNavLink Href="/rouletteprediction" Match="NavLinkMatch.All" Icon="@Icons.Material.Outlined.OnlinePrediction">@languageContainerService.Keys["RoulettePrediction"]</MudNavLink>
+        <MudNavLink Href="/dashboard" Match="NavLinkMatch.All" Icon="@Icons.Material.Outlined.Dashboard">Dashboard</MudNavLink>
         
 
-        <MudText Typo="Typo.subtitle2" Color="Color.Inherit" Class="ml-4 my-3">@languageContainerService.Keys["Settings"]</MudText>
+        <MudText Typo="Typo.subtitle2" Color="Color.Inherit" Class="ml-4 my-3">Configuración</MudText>
 
         @* <MudNavGroup Title="@languageContainerService.Keys["GateWay"]" Icon="@Icons.Material.Outlined.Settings" Expanded="false">
             <MudNavLink Href="/settings/behavioralstatus">@languageContainerService.Keys["Behavioral Status"]</MudNavLink>        
         </MudNavGroup> *@
-        <MudNavLink Href="/subscription" Match="NavLinkMatch.All" Icon="@Icons.Material.Outlined.Policy">@languageContainerService.Keys["License"]</MudNavLink>
-
+       
 
     </AuthorizeView>
 

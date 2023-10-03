@@ -123,49 +123,49 @@ namespace AuditoriaApp.Shared
 
         private async Task OpenProfile()
         {
-            var authstate = await GetAuthenticationStateAsync.GetAuthenticationStateAsync();
-            var userClaims = authstate.User;
-            //var isRole = userClaims.IsInRole("Client");
-            var user = (await systemUserService.GetByName(userClaims.Identity.Name));
-            if(user != null)
-            {
-                //Open Modal
-                var parameters = new DialogParameters();
-                parameters.Add("User", user);
-                var options = new DialogOptions() { CloseButton = true, MaxWidth = MaxWidth.Large, Position = DialogPosition.Center, FullWidth = true, DisableBackdropClick = true };
-                var dialog = await DialogService.ShowAsync<AuditoriaApp.Components.SystemUsers.Edit>(string.Format("Edit"), parameters, options);
-                var result = await dialog.Result;
-                if (!result.Cancelled)
-                {
-                    FetchData();
-                }
-            }
+            //var authstate = await GetAuthenticationStateAsync.GetAuthenticationStateAsync();
+            //var userClaims = authstate.User;
+            ////var isRole = userClaims.IsInRole("Client");
+            //var user = (await systemUserService.GetByName(userClaims.Identity.Name));
+            //if(user != null)
+            //{
+            //    //Open Modal
+            //    var parameters = new DialogParameters();
+            //    parameters.Add("User", user);
+            //    var options = new DialogOptions() { CloseButton = true, MaxWidth = MaxWidth.Large, Position = DialogPosition.Center, FullWidth = true, DisableBackdropClick = true };
+            //    var dialog = await DialogService.ShowAsync<AuditoriaApp.Components.SystemUsers.Edit>(string.Format("Edit"), parameters, options);
+            //    var result = await dialog.Result;
+            //    if (!result.Cancelled)
+            //    {
+            //        FetchData();
+            //    }
+            //}
 
         }
 
         private async Task OpenChangePsw()
         {
-            var authstate = await GetAuthenticationStateAsync.GetAuthenticationStateAsync();
-            var userClaims = authstate.User;
-            //var isRole = userClaims.IsInRole("Client");
-            var user = (await systemUserService.GetByName(userClaims.Identity.Name));
-            if (user != null)
-            {
-                if (user != null)
-                {
-                    var newUser = new ChangePswModel() { Id = user.Id };
-                    //Open Modal
-                    var parameters = new DialogParameters();
-                    parameters.Add("User", newUser);
-                    var options = new DialogOptions() { CloseButton = true, MaxWidth = MaxWidth.Large, Position = DialogPosition.Center, FullWidth = true, DisableBackdropClick = true };
-                    var dialog = await DialogService.ShowAsync<AuditoriaApp.Components.SystemUsers.ChangePsw>(string.Format("Change Password"), parameters, options);
-                    var result = await dialog.Result;
-                    if (!result.Cancelled)
-                    {
-                        FetchData();
-                    }
-                }
-            }
+            //var authstate = await GetAuthenticationStateAsync.GetAuthenticationStateAsync();
+            //var userClaims = authstate.User;
+            ////var isRole = userClaims.IsInRole("Client");
+            //var user = (await systemUserService.GetByName(userClaims.Identity.Name));
+            //if (user != null)
+            //{
+            //    if (user != null)
+            //    {
+            //        var newUser = new ChangePswModel() { Id = user.Id };
+            //        //Open Modal
+            //        var parameters = new DialogParameters();
+            //        parameters.Add("User", newUser);
+            //        var options = new DialogOptions() { CloseButton = true, MaxWidth = MaxWidth.Large, Position = DialogPosition.Center, FullWidth = true, DisableBackdropClick = true };
+            //        var dialog = await DialogService.ShowAsync<AuditoriaApp.Components.SystemUsers.ChangePsw>(string.Format("Change Password"), parameters, options);
+            //        var result = await dialog.Result;
+            //        if (!result.Cancelled)
+            //        {
+            //            FetchData();
+            //        }
+            //    }
+            //}
 
         }
 

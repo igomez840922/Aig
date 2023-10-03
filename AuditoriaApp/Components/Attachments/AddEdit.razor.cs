@@ -79,7 +79,7 @@ namespace AuditoriaApp.Components.Attachments
                     _options = _options != null ? _options : new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
                     if (selectedFile.Size > maxFileSize)
                     {
-                        snackbar.Add(languageContainerService.Keys["YouExceedMaximumSizeOf"] + " 10MB", Severity.Error);
+                        snackbar.Add("Ha excedido el máximo de 10MB", Severity.Error);
                         return;
                     }
 
@@ -102,14 +102,14 @@ namespace AuditoriaApp.Components.Attachments
                 }
                 else
                 {
-                    snackbar.Add(languageContainerService.Keys["Please select a File"], Severity.Error);
+                    snackbar.Add("Seleccione un Archivo", Severity.Error);
                     return;
                 }
             }
             catch(Exception ex) { snackbar.Add(ex.Message, Severity.Error); }
             finally { loading = false; }
 
-            snackbar.Add(languageContainerService.Keys["DataSaveError"], Severity.Error);
+            snackbar.Add("Error al guardar el archivo", Severity.Error);
         }
 
         [JSInvokable]
@@ -128,7 +128,7 @@ namespace AuditoriaApp.Components.Attachments
             }
             else
             {
-                await jsRuntime.InvokeVoidAsync("ShowError", languageContainerService.Keys["DataSaveError"]);
+                snackbar.Add("Error al guardar el archivo", Severity.Error);
             }
             await this.InvokeAsync(StateHasChanged);
         }

@@ -1,5 +1,4 @@
-﻿using AKSoftware.Localization.MultiLanguages;
-using BlazorComponentBus;
+﻿using BlazorComponentBus;
 using DataModel.Models;
 using DataModel;
 using Microsoft.AspNetCore.Components.Authorization;

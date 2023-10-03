@@ -1,11 +1,11 @@
-﻿using AuditoriaApp.Data;
-using SQLite;
+﻿using SQLite;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using SQLite;
+using AuditoriaApp.Data;
 
 namespace AuditoriaApp.Services
 {
@@ -13,7 +13,7 @@ namespace AuditoriaApp.Services
     {
         public SQLiteAsyncConnection dbContext { get; set; }
 
-        string dbPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "AuditoriaApp.db02");
+        string dbPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "AuditoriaApp.db01");
                
         public DalService()
         {

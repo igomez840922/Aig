@@ -78,4 +78,8 @@
       <Folder Include="wwwroot\img\pdf\" />
     </ItemGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\DataModel\DataModel.csproj" />
+    </ItemGroup>
+
 </Project>

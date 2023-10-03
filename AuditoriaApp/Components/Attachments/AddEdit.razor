@@ -31,7 +31,7 @@
                             <MudText Typo="Typo.h6" Color="Color.Primary">Personal Information</MudText>
                             <MudGrid>
                                 <MudItem xs="12">
-                                    <MudTextField Margin="Margin.Dense" @bind-Value="Data.Description" For="@(() => Data.Description)" Label="@languageContainerService.Keys["Description"]" Variant="Variant.Outlined" />
+                                    <MudTextField Margin="Margin.Dense" @bind-Value="Data.Description" For="@(() => Data.Description)" Label="Descripción" Variant="Variant.Outlined" />
                                 </MudItem>
                             </MudGrid>
                             <MudGrid>
@@ -43,7 +43,7 @@
                                                        Color="Color.Primary"
                                                        StartIcon="@Icons.Material.Filled.CloudUpload"
                                                        for="@contextBtn">
-                                                @languageContainerService.Keys["Upload File"]
+                                                Subir Archivo
                                             </MudButton>
                                         </ButtonTemplate>
                                     </MudFileUpload>
