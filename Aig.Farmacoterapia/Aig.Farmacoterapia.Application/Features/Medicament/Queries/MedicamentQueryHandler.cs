@@ -118,13 +118,13 @@ namespace Aig.Farmacoterapia.Application.Features.Medicament.Queries
        
         public async Task<FileStreamResult> Handle(GetFileQuery request, CancellationToken cancellationToken)
         {
-            FileStreamResult result = new(new MemoryStream(Array.Empty<byte>()), "application/unknow");
+            FileStreamResult result = new(new MemoryStream(Array.Empty<byte>()), "application/pdf");
             try
             {
                 if (string.IsNullOrEmpty(request.Type) || string.IsNullOrEmpty(request.File)) return result;
                 var type = (UploadType)Enum.Parse(typeof(UploadType), request.Type, true);
                 var data = await _uploadService.GetFileAsync(request.File,type);
-                result = new(new MemoryStream(data), "application/unknow");
+                result = new(new MemoryStream(data), "application/pdf");
             }
             catch (Exception exc)
             {
