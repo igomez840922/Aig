@@ -1,6 +1,6 @@
 ﻿using AuditoriaApp.Services;
-using Blazored.LocalStorage;
 using Microsoft.AspNetCore.Components.Authorization;
+using Quartz.Util;
 using System.Net.Http.Headers;
 using System.Security.Claims;
 
@@ -10,25 +10,25 @@ namespace AuditoriaApp.Helper
     {
         //private readonly HttpClient _httpClient;
         private readonly IApiConnectionService apiConnectionService;
-        private readonly ILocalStorageService _localStorage;
+        private readonly IAccountDataService accountDataService;
         private readonly AuthenticationState _anonymous;
 
-        public AuthStateProvider(IApiConnectionService apiConnectionService, ILocalStorageService localStorage)
+        public AuthStateProvider(IApiConnectionService apiConnectionService, IAccountDataService accountDataService)
         {
             this.apiConnectionService = apiConnectionService;
-            _localStorage = localStorage;
+            this.accountDataService = accountDataService;
             _anonymous = new AuthenticationState(new ClaimsPrincipal(new ClaimsIdentity()));
         }
 
         public override async Task<AuthenticationState> GetAuthenticationStateAsync()
         {
-            var token = await _localStorage.GetItemAsync<string>("authToken");
-            if (string.IsNullOrWhiteSpace(token))
+            var data = await accountDataService.First();
+            if(data==null || string.IsNullOrWhiteSpace(data.AccessToken))
                 return _anonymous;
 
-            apiConnectionService.Client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("bearer", token);
+            apiConnectionService.Client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("bearer", data.AccessToken);
 
-            return new AuthenticationState(new ClaimsPrincipal(new ClaimsIdentity(JwtParser.ParseClaimsFromJwt(token), "jwtAuthType")));
+            return new AuthenticationState(new ClaimsPrincipal(new ClaimsIdentity(JwtParser.ParseClaimsFromJwt(data.AccessToken), "jwtAuthType")));
         }
 
         public void NotifyUserAuthentication(string email)

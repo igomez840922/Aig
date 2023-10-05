@@ -1,5 +1,4 @@
 ﻿using AuditoriaApp.Helper;
-using Blazored.LocalStorage;
 using DataModel.DTO;
 using Microsoft.AspNetCore.Components.Authorization;
 using System.Net.Http.Headers;
@@ -15,15 +14,15 @@ namespace AuditoriaApp.Services
         //private readonly HttpClient _client;
         private readonly IApiConnectionService apiConnectionService;
         private readonly JsonSerializerOptions _options;
-        private readonly AuthenticationStateProvider _authStateProvider; 
-        private readonly ILocalStorageService _localStorage;
+        private readonly AuthenticationStateProvider _authStateProvider;
+        private readonly IAccountDataService accountDataService;
 
-        public AuthenticationService(IApiConnectionService apiConnectionService, AuthenticationStateProvider authStateProvider, ILocalStorageService localStorage)
+        public AuthenticationService(IApiConnectionService apiConnectionService, AuthenticationStateProvider authStateProvider, IAccountDataService accountDataService)
         {
             this.apiConnectionService = apiConnectionService;
             _options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
-            _authStateProvider = authStateProvider; 
-            _localStorage = localStorage;
+            _authStateProvider = authStateProvider;
+            this.accountDataService = accountDataService;
         }
 
         public async Task<RegistrationResponseDto> RegisterUser(RegisterModel userForRegistration)
@@ -51,19 +50,33 @@ namespace AuditoriaApp.Services
         public async Task<AuthResponseDto> Login(LoginDTO userForAuthentication)
         {
             try {
+
+                var authenticationString = $"{userForAuthentication.UserName}:{userForAuthentication.Password}";
+                var base64String = Convert.ToBase64String(System.Text.Encoding.ASCII.GetBytes(authenticationString));
+                apiConnectionService.Client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", base64String);
+
                 var content = JsonSerializer.Serialize(userForAuthentication);
                 var bodyContent = new StringContent(content, Encoding.UTF8, "application/json");
 
-                var authResult = await apiConnectionService.Client.PostAsync("accounts/login", bodyContent);
+                var authResult = await apiConnectionService.Client.PostAsync("Accounts/ApiSigIn", bodyContent);
                 var authContent = await authResult.Content.ReadAsStringAsync();
                 var result = JsonSerializer.Deserialize<AuthResponseDto>(authContent, _options);
 
                 if (!authResult.IsSuccessStatusCode)
                     return result;
 
-                await _localStorage.SetItemAsync("authToken", result.Token);
+                //await _localStorage.SetItemAsync("authToken", result.Token);
+                //save login user data in localdb
+                var data = await accountDataService.First();
+                data = data != null ? data : new Data.AccountData();
+                data.UserId = result.UserId;
+                data.AccessToken = result.Token;
+                data.BasicToken = base64String;
+                await accountDataService.Save(data);
+
                 ((AuthStateProvider)_authStateProvider).NotifyUserAuthentication(userForAuthentication.UserName);
                 apiConnectionService.Client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("bearer", result.Token);
+                //apiConnectionService.Client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("bearer", result.Token);
 
                 return new AuthResponseDto { IsAuthSuccessful = true };
             }
@@ -75,7 +88,7 @@ namespace AuditoriaApp.Services
 
         public async Task Logout()
         {
-            await _localStorage.RemoveItemAsync("authToken");
+            //await _localStorage.RemoveItemAsync("authToken");
             ((AuthStateProvider)_authStateProvider).NotifyUserLogout();
             apiConnectionService.Client.DefaultRequestHeaders.Authorization = null;
         }

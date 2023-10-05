@@ -2,10 +2,11 @@
 using AuditoriaApp.Helper;
 using AuditoriaApp.Services;
 using BlazorComponentBus;
-using Blazored.LocalStorage;
 using Microsoft.AspNetCore.Components.Authorization;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using MudBlazor.Services;
+using System.Reflection;
 
 namespace AuditoriaApp
 {
@@ -22,17 +23,20 @@ namespace AuditoriaApp
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
                 });
 
-            //            builder.Services.AddMauiBlazorWebView();
+            //Para agregar archivo de configuracion appsettings.json
+            using var stream = Assembly.GetExecutingAssembly().GetManifestResourceStream("AuditoriaApp.Resources.appsettings.json");
+            var config = new ConfigurationBuilder().AddJsonStream(stream).Build();
+            builder.Configuration.AddConfiguration(config);
 
-            //#if DEBUG
-            //    		builder.Services.AddBlazorWebViewDeveloperTools();
-            //    		builder.Logging.AddDebug();
-            //#endif
 
-            //            builder.Services.AddSingleton<WeatherForecastService>();
+            builder.Services.AddMauiBlazorWebView();
 
-            //            return builder.Build();
+#if DEBUG
+            builder.Services.AddBlazorWebViewDeveloperTools();
+            builder.Logging.AddDebug();
+#endif
 
+           
             //MUDBLAZOR
             builder.Services.AddMudServices(config =>
             {
@@ -66,12 +70,13 @@ namespace AuditoriaApp
             //languaje
             //builder.Services.AddLanguageContainer(Assembly.GetExecutingAssembly());
             //local storage
-            builder.Services.AddBlazoredLocalStorage();
+            //builder.Services.AddBlazoredLocalStorage();
+            
             //authorization
             builder.Services.AddAuthorizationCore();
+
             //mudblazor
             builder.Services.AddMudServices();
-
 
             var app = builder.Build();
 

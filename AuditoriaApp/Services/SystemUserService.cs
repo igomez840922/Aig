@@ -1,6 +1,5 @@
 ﻿using DataModel.Models;
 using DataModel;
-using Blazored.LocalStorage;
 using Microsoft.AspNetCore.Components.Authorization;
 using AuditoriaApp.Services;
 using System.Text.Json;
@@ -15,13 +14,13 @@ namespace AuditoriaApp.Services
         //private readonly HttpClient _client;
         private readonly IApiConnectionService apiConnectionService;
         private readonly JsonSerializerOptions _options;
-        private readonly ILocalStorageService _localStorage;
+        private readonly IAccountDataService accountDataService;
 
-        public SystemUserService(IApiConnectionService apiConnectionService, ILocalStorageService localStorage)
+        public SystemUserService(IApiConnectionService apiConnectionService, IAccountDataService accountDataService)
         {
             this.apiConnectionService = apiConnectionService;
             _options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
-            _localStorage = localStorage;
+            this.accountDataService = accountDataService;
         }
 
         public async Task<GenericModel<ApplicationUser>> FindAll(GenericModel<ApplicationUser> model)
@@ -31,8 +30,8 @@ namespace AuditoriaApp.Services
                 model.Data = null;
                 model.Ldata = null; model.Total = 0;
 
-                string Token = await _localStorage.GetItemAsync<string>("authToken");
-                apiConnectionService.Client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("bearer", Token);
+                var data = await accountDataService.First();
+                apiConnectionService.Client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("bearer", data.AccessToken);
 
                 var content = JsonSerializer.Serialize(model);
                 var bodyContent = new StringContent(content, Encoding.UTF8, "application/json");
@@ -54,8 +53,8 @@ namespace AuditoriaApp.Services
         {
             try
             {
-                string Token = await _localStorage.GetItemAsync<string>("authToken");
-                apiConnectionService.Client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("bearer", Token);
+                var data = await accountDataService.First();
+                apiConnectionService.Client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("bearer", data.AccessToken);
 
                 //var content = JsonSerializer.Serialize(model);
                 //var bodyContent = new StringContent(content, Encoding.UTF8, "application/json");
@@ -76,8 +75,8 @@ namespace AuditoriaApp.Services
         {
             try
             {
-                string Token = await _localStorage.GetItemAsync<string>("authToken");
-                apiConnectionService.Client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("bearer", Token);
+                var data = await accountDataService.First();
+                apiConnectionService.Client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("bearer", data.AccessToken);
 
                 //var content = JsonSerializer.Serialize(model);
                 //var bodyContent = new StringContent(content, Encoding.UTF8, "application/json");
@@ -98,8 +97,8 @@ namespace AuditoriaApp.Services
         {
             try
             {
-                string Token = await _localStorage.GetItemAsync<string>("authToken");
-                apiConnectionService.Client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("bearer", Token);
+                var accountData = await accountDataService.First();
+                apiConnectionService.Client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("bearer", accountData.AccessToken);
 
                 var content = JsonSerializer.Serialize(data);
                 var bodyContent = new StringContent(content, Encoding.UTF8, "application/json");
@@ -119,8 +118,8 @@ namespace AuditoriaApp.Services
         {
             try
             {
-                string Token = await _localStorage.GetItemAsync<string>("authToken");
-                apiConnectionService.Client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("bearer", Token);
+                var accountData = await accountDataService.First();
+                apiConnectionService.Client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("bearer", accountData.AccessToken);
 
                 var content = JsonSerializer.Serialize(data);
                 var bodyContent = new StringContent(content, Encoding.UTF8, "application/json");
@@ -140,8 +139,8 @@ namespace AuditoriaApp.Services
         {
             try
             {
-                string Token = await _localStorage.GetItemAsync<string>("authToken");
-                apiConnectionService.Client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("bearer", Token);
+                var accountData = await accountDataService.First();
+                apiConnectionService.Client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("bearer", accountData.AccessToken);
 
                 //var content = JsonSerializer.Serialize(model);
                 //var bodyContent = new StringContent(content, Encoding.UTF8, "application/json");
@@ -160,8 +159,8 @@ namespace AuditoriaApp.Services
         {
             try
             {
-                string Token = await _localStorage.GetItemAsync<string>("authToken");
-                apiConnectionService.Client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("bearer", Token);
+                var accountData = await accountDataService.First();
+                apiConnectionService.Client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("bearer", accountData.AccessToken);
 
                 var content = JsonSerializer.Serialize(data);
                 var bodyContent = new StringContent(content, Encoding.UTF8, "application/json");
@@ -181,8 +180,8 @@ namespace AuditoriaApp.Services
         {
             try
             {
-                string Token = await _localStorage.GetItemAsync<string>("authToken");
-                apiConnectionService.Client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("bearer", Token);
+                var accountData = await accountDataService.First();
+                apiConnectionService.Client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("bearer", accountData.AccessToken);
 
                 //var content = JsonSerializer.Serialize(model);
                 //var bodyContent = new StringContent(content, Encoding.UTF8, "application/json");

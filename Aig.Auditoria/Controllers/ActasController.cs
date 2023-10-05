@@ -2,6 +2,7 @@
 using Aig.Auditoria.Services;
 using DataAccess;
 using DataModel;
+using DataModel.DTO;
 using DataModel.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
@@ -87,6 +88,7 @@ namespace Aig.Auditoria.Controllers
             catch (Exception ex) { return BadRequest(new { message = ex.Message }); }
             return BadRequest(new { message = "datos no encontrados" });
         }
+
 
     }
 }

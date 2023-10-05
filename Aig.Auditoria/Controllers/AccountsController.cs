@@ -1,4 +1,5 @@
 ﻿using DataModel.DTO;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
@@ -10,8 +11,9 @@ using System.Text;
 
 namespace Aig.Auditoria.Controllers
 {
-	[Route("api/accounts")]
-	[ApiController]
+    [Route("api/[controller]")]
+    [ApiController]
+	[AllowAnonymous]
 	public class AccountsController : ControllerBase
 	{
 		private readonly UserManager<IdentityUser> _userManager;
@@ -25,8 +27,10 @@ namespace Aig.Auditoria.Controllers
 			_jwtSettings = _configuration.GetSection("JwtSettings");
 		}
 
-		[HttpPost("Registration")]
-		public async Task<IActionResult> RegisterUser([FromBody] RegisterDTO userForRegistration)
+
+        [HttpPost("Registration")]
+        [AllowAnonymous]
+        public async Task<IActionResult> RegisterUser([FromBody] RegisterDTO userForRegistration)
 		{
 			if (userForRegistration == null || !ModelState.IsValid)
 				return BadRequest();
@@ -44,8 +48,10 @@ namespace Aig.Auditoria.Controllers
 			return StatusCode(201);
 		}
 
-		[HttpPost("Login")]
-		public async Task<IActionResult> Login([FromBody] LoginDTO userForAuthentication)
+
+        [HttpPost("Login")]
+        [AllowAnonymous]
+        public async Task<IActionResult> Login([FromBody] LoginDTO userForAuthentication)
 		{
 			var user = await _userManager.FindByNameAsync(userForAuthentication.UserName);
 
@@ -57,10 +63,28 @@ namespace Aig.Auditoria.Controllers
 			var tokenOptions = GenerateTokenOptions(signingCredentials, claims);
 			var token = new JwtSecurityTokenHandler().WriteToken(tokenOptions);
 
-			return Ok(new AuthResponseDto { IsAuthSuccessful = true, Token = token });
+			return Ok(new AuthResponseDto { IsAuthSuccessful = true, Token = token, UserId = user.Id });
 		}
 
-		private SigningCredentials GetSigningCredentials()
+
+        [HttpPost("ApiSigIn")]
+        [AllowAnonymous]
+        public async Task<IActionResult> ApiSigIn([FromBody] LoginDTO userForAuthentication)
+        {
+            var user = await _userManager.FindByNameAsync(userForAuthentication.UserName);
+
+            if (user == null || !await _userManager.CheckPasswordAsync(user, userForAuthentication.Password))
+                return Unauthorized(new AuthResponseDto { ErrorMessage = "Invalid Authentication" });
+
+            var signingCredentials = GetSigningCredentials();
+            var claims = GetClaims(user);
+            var tokenOptions = GenerateTokenOptions(signingCredentials, claims);
+            var token = new JwtSecurityTokenHandler().WriteToken(tokenOptions);
+
+            return Ok(new AuthResponseDto { IsAuthSuccessful = true, Token = token, UserId = user.Id });
+        }
+
+        private SigningCredentials GetSigningCredentials()
 		{
 			var key = Encoding.UTF8.GetBytes(_jwtSettings.GetSection("securityKey").Value);
 			var secret = new SymmetricSecurityKey(key);
@@ -72,8 +96,9 @@ namespace Aig.Auditoria.Controllers
 		{
 			var claims = new List<Claim>
 			{
-				new Claim(ClaimTypes.Name, user.Email)
-			};
+				new Claim(ClaimTypes.Name, user.Email),
+                new Claim(ClaimTypes.NameIdentifier, user.Id)
+            };
 
 			return claims;
 		}

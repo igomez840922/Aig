@@ -5,18 +5,17 @@ using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Authorization;
 using MudBlazor;
 using AuditoriaApp.Events.Overlay;
+using System.Net.Http.Headers;
 
 namespace AuditoriaApp.Pages.Authentication
 {
     public partial class Login
     {
-        private LoginDTO loginRequest = new LoginDTO();
+        private LoginDTO model = new LoginDTO();
 		
 		[Inject]
         public IAuthenticationService AuthenticationService { get; set; }
-        [Inject]
-        public IAccountDataService AccountDataService { get; set; }
-
+       
         
 
         [CascadingParameter]
@@ -31,7 +30,9 @@ namespace AuditoriaApp.Pages.Authentication
         InputType PasswordInput = InputType.Password;
         string PasswordInputIcon = Icons.Material.Filled.VisibilityOff;
 
-		protected async override Task OnInitializedAsync()
+        private bool loading { get; set; } = false;
+
+        protected async override Task OnInitializedAsync()
 		{
 			var user = (await authStat).User;
 			if (user.Identity.IsAuthenticated)
@@ -52,22 +53,26 @@ namespace AuditoriaApp.Pages.Authentication
 			await base.OnAfterRenderAsync(firstRender);
 		}
 
+        private bool _passwordVisibility;
+        private InputType _passwordInput = InputType.Password;
+        private string _passwordInputIcon = Icons.Material.Filled.VisibilityOff;
 
-		void TogglePasswordVisibility()
+        void TogglePasswordVisibility()
         {
-            if(PasswordVisibility)
+            if (_passwordVisibility)
             {
-                PasswordVisibility = false;
-                PasswordInputIcon = Icons.Material.Filled.VisibilityOff;
-                PasswordInput = InputType.Password;
+                _passwordVisibility = false;
+                _passwordInputIcon = Icons.Material.Filled.VisibilityOff;
+                _passwordInput = InputType.Password;
             }
             else
             {
-                PasswordVisibility = true;
-                PasswordInputIcon = Icons.Material.Filled.Visibility;
-                PasswordInput = InputType.Text;
+                _passwordVisibility = true;
+                _passwordInputIcon = Icons.Material.Filled.Visibility;
+                _passwordInput = InputType.Text;
             }
         }
+        
 
         public async Task OnLogin()
         {
@@ -75,7 +80,7 @@ namespace AuditoriaApp.Pages.Authentication
             try {
                 ShowAuthError = false;
 
-                var result = await AuthenticationService.Login(loginRequest);
+                var result = await AuthenticationService.Login(model);
                 if (!result.IsAuthSuccessful)
                 {
                     Error = result.ErrorMessage;
@@ -83,13 +88,7 @@ namespace AuditoriaApp.Pages.Authentication
                 }
                 else
                 {
-                    //save login user data in localdb
-                    var data = await AccountDataService.First();
-                    data = data != null ? data : new Data.AccountData();
-                    data.UserId = result.UserId;
-                    data.AccessToken = result.Token;
-                    await AccountDataService.Save(data);
-
+                                       
                     navigationManager.NavigateTo("/dashboard");
                 }
             }

@@ -49,6 +49,34 @@ builder.Services.Configure<IdentityOptions>(options =>
     options.Password.RequireLowercase = false;
 });
 
+//For API CONTROLLERS
+builder.Services.AddCors(policy =>
+{
+    policy.AddPolicy("CorsPolicy", opt => opt
+    .AllowAnyOrigin()
+    .AllowAnyHeader()
+    .AllowAnyMethod()
+    .WithExposedHeaders("X-Pagination"));
+});
+var jwtSettings = builder.Configuration.GetSection("JwtSettings");
+//builder.Services.AddAuthentication(opt =>
+//{
+//    //opt.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+//    //opt.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+//}).AddJwtBearer(options =>
+//{
+//    options.TokenValidationParameters = new TokenValidationParameters
+//    {
+//        ValidateIssuer = false, //you might want to validate the audience and issuer depending on your use case
+//        ValidateAudience = false,
+//        ValidateLifetime = true, //here we are saying that we don't care about the token's expiration date
+//        ValidateIssuerSigningKey = true,
+//        ValidIssuer = jwtSettings.GetSection("validIssuer").Value,
+//        //ValidAudience = jwtSettings.GetSection("validAudience").Value,
+//        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSettings.GetSection("securityKey").Value))
+//    };
+//});
+
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
 builder.Services.AddScoped<AuthenticationStateProvider, RevalidatingIdentityAuthenticationStateProvider<ApplicationUser>>();
@@ -156,6 +184,7 @@ app.UseAuthentication();
 app.UseAuthorization();
 app.UseMiddleware<BlazorCookieLoginMiddleware<ApplicationUser>>();
 app.MapControllers();
+app.UseCors("CorsPolicy");
 
 app.MapBlazorHub();
 app.MapFallbackToPage("/_Host");

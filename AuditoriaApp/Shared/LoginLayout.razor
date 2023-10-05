@@ -1,4 +1,4 @@
-﻿@inherits LayoutComponentBase
+﻿@* @inherits LayoutComponentBase
 @layout BlankLayout
 
 
@@ -8,16 +8,121 @@
 <MudContainer MaxWidth="MaxWidth.Small" Class="d-flex align-center" Style="height: 100vh;">
     <div class="d-flex flex-column mud-width-full">
         <MudPaper Elevation="25" Class="pa-8" Width="100%">
-            @*<MudIcon Icon="@Icons.Custom.Brands.MudBlazor" Size="Size.Large" Style="width:100px; height:100px;" />*@
             <MudImage Style="margin-left: 25%; max-width:50%" Src="img/logo.png" Alt="flag" Class="rounded-lg" />
             @Body
         </MudPaper>
 
-        @* <MudText Typo="Typo.h5" Align="Align.Center" GutterBottom="true" Class="mt-6 my-6">@languageContainerService.Keys["Roulette"]</MudText> *@
     </div>
 
 </MudContainer>
 
 <MudOverlay @bind-Visible="showOverlay" DarkBackground="true" ZIndex="9999" AutoClose="false" >
     <MudProgressCircular Color="Color.Primary" Size="Size.Large" Indeterminate="true" />
-</MudOverlay>
+</MudOverlay> *@
+
+@inherits LayoutComponentBase
+<MudThemeProvider Theme="@MyCustomTheme" />
+<MudSnackbarProvider />
+<style>
+    .gradient-custom-2 {
+        /*background: #594ae2ff;
+            background: -webkit-linear-gradient(to right, #594ae2, #594ae2, #7a6df6, #b076fa);
+            background: linear-gradient(to right, #b076fa,#7a6df6, #594ae2, #594ae2);*/
+    }
+
+    @@media (min-width: 768px) {
+        .gradient-form {
+            height: 100vh !important;
+        }
+    }
+
+    @@media (min-width: 769px) {
+        .gradient-custom-2 {
+            border-top-right-radius: .3rem;
+            border-bottom-right-radius: .3rem;
+        }
+    }
+
+    .mud-input-helper-text.mud-input-error {
+        color: var(--mud-palette-error-darken);
+        /*background-color: var(--mud-palette-error-hover);*/
+        font-size: 13px;
+        padding: 5px 0 0 0;
+        border-radius: var(--mud-default-borderradius);
+        margin-left: -8px !important;
+    }
+
+    p.mud-input-error > div:before {
+        content: url('data:image/svg+xml, <svg width="1.5em" height="1.5em" style=" fill: rgb(244, 67, 54)" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 5.99L19.53 19H4.47L12 5.99M12 2L1 21h22L12 2zm1 14h-2v2h2v-2zm0-6h-2v4h2v-4z"></path></svg>');
+        vertical-align: -0.5em;
+        padding: 0 10px 0px 10px;
+        padding-left: 5px;
+    }
+
+    p.mud-input-error div.me-auto {
+        margin-top: 5px !important;
+    }
+
+
+    .footer_copyright {
+        position: fixed;
+        bottom: 0;
+        left: 48%;
+        right: 0;
+        height: 30px;
+    }
+
+    .mud-paper {
+        background-color: transparent !important;
+    }
+
+</style>
+
+<MudLayout>
+
+    <div class="container py-5 h-100" style="padding-top: 10% !important;">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-xl-12">
+                <div class="card rounded-3 text-black" style="border: 1px solid #cbc6f7;">
+                    <div class="row g-0">
+                        <div class="col-lg-6 d-flex align-items-center gradient-custom-2">
+                            <div class="text-white" style="padding-left: 50px;">
+                                <img width="85%" ; src="/media/Header.png">
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="card-body p-md-5 mx-md-4">
+                                @Body
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</MudLayout>
+<MudPaper Elevation="0" Class="footer_copyright">
+    @DateTime.Now.Year &nbsp;&copy;&nbsp;
+    <MudLink Target="_blank" Href="https://soaint.com" Typo="Typo.body2">SOAINT</MudLink>
+</MudPaper>
+
+@code {
+
+    MudTheme MyCustomTheme = new MudTheme()
+        {
+            Palette = new Palette()
+            {
+                Info = "#004B9C",//Colors.Blue.Darken4,
+                Success = "#009688",//Colors.Green.Accent4,
+                Error = "#D50000",//Colors.Red.Default,
+                Warning = "#EF6C00",
+                Primary = "#004B9C",//Colors.Blue.Darken4,
+                Secondary = "#D50000",//Colors.Green.Accent4,
+                Tertiary = "#009688",//Colors.Green.Accent4,
+                //Define other properties here.
+            },
+
+        };   
+}
+

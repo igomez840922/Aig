@@ -1,7 +1,6 @@
 ﻿using DataModel.Models;
 using DataModel;
 using Microsoft.AspNetCore.Identity;
-using Blazored.LocalStorage;
 using System.Text.Json;
 using System.Net.Http.Headers;
 using System.Text;
@@ -14,20 +13,20 @@ namespace AuditoriaApp.Services
         //private readonly HttpClient _client;
         private readonly IApiConnectionService apiConnectionService;
         private readonly JsonSerializerOptions options;
-        private readonly ILocalStorageService localStorage;
+        private readonly IAccountDataService accountDataService;
 
-        public UploadService(IApiConnectionService apiConnectionService, ILocalStorageService localStorage)
+        public UploadService(IApiConnectionService apiConnectionService, IAccountDataService accountDataService)
         {
             this.apiConnectionService = apiConnectionService;
             this.options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
-            this.localStorage = localStorage;
+            this.accountDataService = accountDataService;
         }
 
         public async Task<FileUploadResult> UploadFile(IBrowserFile File)
         {
-            
-            string Token = await localStorage.GetItemAsync<string>("authToken");
-            apiConnectionService.Client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("bearer", Token);
+
+            var accountData = await accountDataService.First();
+            apiConnectionService.Client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("bearer", accountData.AccessToken);
 
             using (var formData = new MultipartFormDataContent())
             {
@@ -45,9 +44,9 @@ namespace AuditoriaApp.Services
         }
                 
         public async Task<bool> DeleteFile(AttachmentTB data)
-        {           
-            string Token = await localStorage.GetItemAsync<string>("authToken");
-            apiConnectionService.Client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("bearer", Token);
+        {
+            var accountData = await accountDataService.First();
+            apiConnectionService.Client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("bearer", accountData.AccessToken);
 
             var content = JsonSerializer.Serialize(data);
             var bodyContent = new StringContent(content, Encoding.UTF8, "application/json");

@@ -13,7 +13,7 @@ namespace AuditoriaApp.Services
     {
         public SQLiteAsyncConnection dbContext { get; set; }
 
-        string dbPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "AuditoriaApp.db01");
+        string dbPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "AuditoriaApp.db02");
                
         public DalService()
         {

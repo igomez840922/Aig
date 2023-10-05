@@ -1,12 +1,7 @@
 ﻿@page "/login"
 @layout LoginLayout
 
-
-@* <MudText Typo="Typo.h5" Align="Align.Center" GutterBottom="true">@languageContainerService.Keys["Login"]</MudText> *@
-
-@*<MudText>Don't have an account? <MudLink Href="/register">Sign Up</MudLink></MudText>*@
-
-<EditForm id="loginform" class="kt-form" OnValidSubmit="OnLogin" Model="loginRequest">
+@* <EditForm id="loginform" class="kt-form" OnValidSubmit="OnLogin" Model="loginRequest">
 	<DataAnnotationsValidator />
 
 	<MudTextField Margin="Margin.Dense" T="string" @bind-Value="loginRequest.UserName" Label="Usuario" Variant="Variant.Outlined" Class="py-2"></MudTextField>
@@ -23,7 +18,47 @@
 	<MudText Class="pt-1">Don't have an account?</MudText>
 	<MudButton Margin="Margin.Dense" Variant="Variant.Filled" Color="Color.Info" Href="/register" Size="Size.Large" FullWidth="true">Crear Cuenta</MudButton>
 
+</EditForm> *@
+
+
+<EditForm Model="@model" OnValidSubmit="OnLogin">    
+
+    <MudGrid>
+
+        <MudItem xs="12">
+            <div class="d-flex justify-center">
+                <MudText Typo="Typo.h6">Entre con su cuenta</MudText>
+            </div>
+        </MudItem>
+
+        <MudItem xs="12">
+            <MudTextField T="string" Label="Usuario" Variant="Variant.Outlined" Margin="Margin.Dense"
+            @bind-Value="model.UserName" For="@(() => model.UserName)" />
+        </MudItem>
+        <MudItem xs="12">
+            <MudTextField Label="Contraseña" Variant="Variant.Outlined" Margin="Margin.Dense"
+            @bind-Value="model.Password" For="@(() => model.Password)"
+                          InputType="@_passwordInput" Adornment="Adornment.End" AdornmentIcon="@_passwordInputIcon" OnAdornmentClick="TogglePasswordVisibility" />
+        </MudItem>
+        @* <MudItem xs="12">
+            <MudText Typo="Typo.body2">
+                ¿Aún no tiene una cuenta?
+                <MudLink Class="mud-typography-body2" Underline="Underline.Always" Href="/register">
+                    Regístrese Ahora
+                </MudLink>
+            </MudText>
+        </MudItem> *@
+        <MudItem xs="12">
+            <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Primary" Size="Size.Small" Style="float:right;">
+                <MudText>Iniciar Sesión</MudText>
+            </MudButton>
+        </MudItem>
+
+    </MudGrid>
 </EditForm>
+
+
+
 @if(ShowAuthError){
 	<MudAlert vis Severity="Severity.Error" Class="mt-8 mud-width-full" Style="max-width:500px;" Elevation="25">@Error</MudAlert>
 }
