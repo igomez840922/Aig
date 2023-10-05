@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Security.Policy;
 using Aig.Farmacoterapia.Domain.Common;
 using Aig.Farmacoterapia.Domain.Entities;
 using Aig.Farmacoterapia.Domain.Entities.Enums;
@@ -33,7 +34,13 @@ namespace Aig.Farmacoterapia.Infrastructure.Persistence.Repositories
             {
                 var orderByList = new List<Tuple<SortingOption, Expression<Func<AigRecord, object>>>>();
                 var filterList = new List<Expression<Func<AigRecord, bool>>>();
-               
+
+                //var filterList = new List<Expression<Func<AigRecord, bool>>>()
+                //{
+                //    f => DateTime.Now < f.FechaVencimiento,
+                //    f=> f.Activated
+                //};
+
                 if (args.SortingOptions != null){
                     foreach (var sortingOption in args.SortingOptions)
                     {
@@ -72,6 +79,14 @@ namespace Aig.Farmacoterapia.Infrastructure.Persistence.Repositories
                                     f.Producto.PrincipioActivo.ToLower().Contains(((string)filteringOption.Value).ToLower()) ||
                                     f.Fabricante.Nombre.ToLower().Contains(((string)filteringOption.Value).ToLower());
                                     filterList.Add(expression);
+                                }
+                                break;
+                            case "all":
+                                {
+                                   var all= Convert.ToBoolean(filteringOption.Value);
+                                    if (!all) {
+                                       filterList.Add(f => DateTime.Now < f.FechaVencimiento && f.Activated);
+                                    }
                                 }
                                 break;
                             case "service":

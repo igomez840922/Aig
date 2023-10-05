@@ -13,9 +13,12 @@ namespace Aig.Farmacoterapia.Application.Medicament.Model
         public BaseFilter()
         {
             Term = string.Empty;
+            All = true;
         }
         [DefaultValue("")]
         public string Term { get; set; }
+        [DefaultValue(true)]
+        public bool All { get; set; }
     }
     public class MedicamentFilter: BaseFilter
     {

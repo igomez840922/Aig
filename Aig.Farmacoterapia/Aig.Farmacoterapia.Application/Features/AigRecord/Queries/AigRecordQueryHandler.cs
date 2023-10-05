@@ -137,16 +137,23 @@ namespace Aig.Farmacoterapia.Application.Features.Medicament.Queries
             PaginatedResult<AigRecord> answer;
             try
             {
-                var searchArgs = new PageSearchArgs() {
+                var searchArgs = new PageSearchArgs()
+                {
                     PageIndex = request.Args.PageIndex,
                     PageSize = request.Args.PageSize,
                     FilteringOptions = !string.IsNullOrEmpty(request.Args.Term) ? new List<FilteringOption>() {
                         new FilteringOption {
                             Field = "term", Operator = FilteringOperator.Contains, Value =  request.Args.Term
+                        },
+                        new FilteringOption {
+                            Field = "all", Operator = FilteringOperator.Contains, Value = request.Args.All?bool.TrueString:bool.FalseString
                         }
-                    } : new List<FilteringOption>()
+                    } : new List<FilteringOption>(){new FilteringOption {
+                            Field = "all", Operator = FilteringOperator.Contains, Value = request.Args.All?bool.TrueString:bool.FalseString
+                        }
+                    }
                 };
-                answer= await _repository.AdminListAsync(searchArgs);
+                answer = await _repository.AdminListAsync(searchArgs);
             }
             catch (Exception exc) {
                 _logger.Error("Requested operation failed", exc);
