@@ -1,5 +1,4 @@
 ﻿
-using AuditoriaApp.Data;
 using Quartz.Impl;
 using Quartz;
 using SQLite;

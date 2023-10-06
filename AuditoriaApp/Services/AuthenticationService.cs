@@ -69,7 +69,7 @@ namespace AuditoriaApp.Services
                 //await _localStorage.SetItemAsync("authToken", result.Token);
                 //save login user data in localdb
                 var data = await accountDataService.First();
-                data = data != null ? data : new Data.AccountData();
+                data = data != null ? data : new APP_Account();
                 data.UserId = result.UserId;
                 data.AccessToken = result.Token;
                 data.UserName = appUser.UserName;

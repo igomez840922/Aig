@@ -1,5 +1,4 @@
-﻿
-using AuditoriaApp.Data;
+﻿using DataModel;
 using SQLite;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
@@ -13,47 +12,42 @@ namespace AuditoriaApp.Services
            this.dalService = dalService;
         }
               
-        public async Task<int> Save(AccountData data)
+        public async Task<APP_Account> Save(APP_Account data)
         {
             try {
-                if (data.Id != 0)
-                {
-                    return await dalService.dbContext.UpdateAsync(data);
-                }
-                return await dalService.dbContext.InsertAsync(data);
+                return  dalService.Save<APP_Account>(data);
             }
-            catch (Exception e) { }
-            return 0;
-        }
-
-        public async Task<int> Delete(AccountData data)
-        {
-           
-            try { return await dalService.dbContext.DeleteAsync(data); }
-            catch (Exception e) { }
-            return 0;
-        }
-        
-        public async Task<List<AccountData>> GetAll()
-        {
-           
-            try { return await dalService.dbContext.Table<AccountData>().ToListAsync(); }
             catch (Exception e) { }
             return null;
         }
-        public async Task<AccountData> First()
+
+        public async Task<APP_Account> Delete(long Id)
         {
-            try { return await dalService.dbContext.Table<AccountData>().FirstOrDefaultAsync(); }
+           
+            try { return  dalService.Delete<APP_Account>(Id); }
+            catch (Exception e) { }
+            return null;
+        }
+        
+        public async Task<List<APP_Account>> GetAll()
+        {
+           
+            try { return  dalService.GetAll<APP_Account>(); }
+            catch (Exception e) { }
+            return null;
+        }
+        public async Task<APP_Account> First()
+        {
+            try { return dalService.First<APP_Account>(); }
             catch(Exception e) { }
             return null;
             
         }
 
-        public async Task<AccountData> GetByID(int Id)
+        public async Task<APP_Account> GetByID(long Id)
         {            
             try {
-                var data = await dalService.dbContext.QueryAsync<AccountData>($"Select * From {nameof(AccountData)} where Id={Id} ");
-                return data.FirstOrDefault();
+                return dalService.Get<APP_Account>(Id);
             }
             catch (Exception e) { }
             return null;

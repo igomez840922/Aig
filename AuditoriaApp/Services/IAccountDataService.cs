@@ -1,14 +1,14 @@
 ﻿
-using AuditoriaApp.Data;
+using DataModel;
 
 namespace AuditoriaApp.Services
 {
     public interface IAccountDataService
     {
-        Task<AccountData> First();
-        Task<List<AccountData>> GetAll();
-        Task<AccountData> GetByID(int Id);
-        Task<int> Save(AccountData data);
-        Task<int> Delete(AccountData data);
+        Task<APP_Account> Save(APP_Account data);
+        Task<APP_Account> Delete(long Id);
+        Task<List<APP_Account>> GetAll();
+        Task<APP_Account> GetByID(long Id);
+        Task<APP_Account> First();
     }
 }

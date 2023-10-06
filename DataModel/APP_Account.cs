@@ -1,20 +1,18 @@
-﻿using SQLite;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AuditoriaApp.Data
-{    
-    public class AccountData
-    {
-        [PrimaryKey, AutoIncrement]
-        public int Id { get; set; }
-
+namespace DataModel
+{
+	public class APP_Account : SystemId
+	{
         public string UserId { get; set; }
         public string UserName { get; set; }
         public string AccessToken { get; set; }
         public string BasicToken { get; set; }
+
     }
 }

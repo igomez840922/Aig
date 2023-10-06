@@ -1,8 +1,8 @@
-﻿using AuditoriaApp.Data;
-using AuditoriaApp.Helper;
+﻿using AuditoriaApp.Helper;
 using AuditoriaApp.Services;
 using BlazorComponentBus;
 using Microsoft.AspNetCore.Components.Authorization;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using MudBlazor.Services;
@@ -49,6 +49,9 @@ namespace AuditoriaApp
                 config.SnackbarConfiguration.ShowTransitionDuration = 500;
                 config.SnackbarConfiguration.SnackbarVariant = MudBlazor.Variant.Filled;
             });
+
+            builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlite(config.GetConnectionString("DefaultConnection")));
+            //builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
             //COMMON SERVICES
             //builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
