@@ -1,0 +1,83 @@
+﻿@page "/inspections"
+@attribute [Authorize]
+@layout MainLayout
+
+<MudText Typo="Typo.h5" Color="Color.Primary" Class="mb-4">Inspecciones</MudText>
+<MudGrid>
+    <MudItem xs="12">
+        <MudCard Elevation="25">
+            <EditForm Model="@model" OnValidSubmit="FetchData">
+                <DataAnnotationsValidator />
+                <MudCard>
+                    <MudCardHeader>
+                        <CardHeaderContent>
+                            <MudText>Filtro</MudText>
+                        </CardHeaderContent>
+                        <CardHeaderActions>
+                            <MudMenu Icon="@Icons.Material.Filled.MoreVert" Dense="true">
+                                <MudMenuItem Icon="@Icons.Material.Outlined.CloudSync" OnTouch="@((e)=> SyncData())" OnClick="@((e)=> SyncData())">Sincronizar</MudMenuItem>
+                                <MudMenuItem Icon="@Icons.Material.Outlined.Refresh" OnTouch="@((e)=> FetchData())" OnClick="@((e)=> FetchData())">Actualizar</MudMenuItem>
+                            </MudMenu>
+                        </CardHeaderActions>
+                    </MudCardHeader>
+                    <MudCardContent>
+                        <MudGrid>
+                            <MudItem xs="12" md="6">
+                                <MudTextField Margin="Margin.Dense" @bind-Value="model.Filter" Label="Buscar" Variant="Variant.Outlined" Adornment="Adornment.End" AdornmentIcon="@Icons.Filled.Search" OnAdornmentClick="FetchData" DebounceInterval="2000" OnDebounceIntervalElapsed="FetchData" />
+                            </MudItem>
+                        </MudGrid>
+                    </MudCardContent>
+                </MudCard>
+            </EditForm>
+        </MudCard>
+    </MudItem>
+    <MudItem xs="12">
+
+        @if (model?.Ldata?.Count > 0)
+        {
+            <MudTable Items="@(model.Ldata)" Dense="false" Hover="true" Bordered="false" Striped="true" RowsPerPage="@(model.PagAmt)">
+                @*<ToolBarContent>
+            <MudText Typo="Typo.h6">Periodic Elements</MudText>
+            <MudSpacer />
+            <MudTextField @bind-Value="searchString1" Placeholder="Search" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0"></MudTextField>
+            </ToolBarContent>*@
+                <HeaderContent>
+                    <MudTh>No. Trámite</MudTh>
+                    <MudTh>Tipo de Inspección</MudTh>
+                    <MudTh>Fecha</MudTh>
+                    <MudTh>Establecimiento</MudTh>
+                    <MudTh>Provincia</MudTh>
+                    <MudTh></MudTh>
+                </HeaderContent>
+                <RowTemplate>
+                    <MudTd DataLabel="No. Trámite">@context.NumActa</MudTd>
+                    <MudTd DataLabel="Tipo de Inspección">@DataModel.Helper.Helper.GetDescription(context.Inspeccion.TipoActa)</MudTd>
+                    <MudTd DataLabel="Fecha">@context.Inspeccion.FechaInicio.ToString("dd/MM/yyyy hh:mm tt")</MudTd>
+                    <MudTd DataLabel="Establecimiento">
+                        @(context.Inspeccion.DatosEstablecimiento?.Nombre ?? "")
+                        <br />
+                        @(context.Inspeccion.DatosEstablecimiento?.NumLicencia ?? "")
+                    </MudTd>
+                    <MudTd DataLabel="Provincia">@(context.Inspeccion.DatosEstablecimiento?.Provincia?.Nombre ?? "")</MudTd>
+                    <MudTd Style="text-align:right">
+                        <MudMenu Icon="@Icons.Material.Filled.MoreVert" Dense="true">
+                            <MudMenuItem Icon="@Icons.Material.Outlined.Delete" OnTouch="@((e)=> OnDelete(@context))" OnClick="@((e)=> OnDelete(@context))">Eliminar</MudMenuItem>
+                        </MudMenu>
+                    </MudTd>
+                </RowTemplate>
+                <NoRecordsContent>
+                    <MudText>No Data Found</MudText>
+                </NoRecordsContent>
+                <LoadingContent>
+                    <MudText>Loading...</MudText>
+                </LoadingContent>
+                <PagerContent>
+                    <MudPagination Class="ma-2" Rectangular="true" Variant="Variant.Outlined" ShowFirstButton="@true" ShowLastButton="@true" SelectedChanged="OnPagingChange" Count="@(model?.PagesCount??0)" Selected="@(model?.PagIdx+1??0)" BoundaryCount="2" MiddleCount="3" />
+                </PagerContent>
+            </MudTable>
+        }
+
+
+    </MudItem>
+
+</MudGrid>

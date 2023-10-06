@@ -37,13 +37,16 @@ namespace AuditoriaApp.Helper
         {
             using (var serviceScope = serviceProvider.GetRequiredService<IServiceScopeFactory>().CreateScope())
             {                
-                var dalService = serviceScope.ServiceProvider.GetService<IDalService>();
-                                
+                var dalService = serviceScope.ServiceProvider.GetService<IDalService>();                                
                 if (dalService.Count<APP_Account>() <= 0)
                 {
                     var account = new APP_Account() {  };
                     dalService.Save(account);
-                }              
+                }
+
+                var inspectionService = serviceScope.ServiceProvider.GetService<IInspectionService>();
+                await inspectionService.InspectionsUpload();
+                await inspectionService.InspectionsSync();
             }
         }
 

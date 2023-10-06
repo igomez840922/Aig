@@ -4,9 +4,11 @@ using DataAccess;
 using DataModel;
 using DataModel.DTO;
 using DataModel.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System.IdentityModel.Tokens.Jwt;
 using System.Net;
 using static SkiaSharp.HarfBuzz.SKShaper;
 
@@ -87,6 +89,120 @@ namespace Aig.Auditoria.Controllers
             }
             catch (Exception ex) { return BadRequest(new { message = ex.Message }); }
             return BadRequest(new { message = "datos no encontrados" });
+        }
+
+        //////////////////////////////////////////
+        ///
+        //Servicios para la App Offline
+
+        [HttpPost("DownloadPending")]
+        public async Task<IActionResult> DownloadPending([FromBody] APP_Updates lastUpdate)
+        {
+            try
+            {
+                var data = dalService.FindAll<AUD_InspeccionTB>(x => x.StatusInspecciones !=  DataModel.Helper.enum_StatusInspecciones.Completed && !x.Deleted && x.UpdatedDate >= lastUpdate.InspectionsUpdate);
+                if (data?.Count > 0)
+                {
+                    return Ok(data);
+                }
+            }
+            catch (Exception ex) { return BadRequest(new { message = ex.Message }); }
+            return BadRequest(new { message = "dato no encontrado" });
+        }
+
+
+        [HttpPost("UploadPending")]
+        public async Task<IActionResult> UploadPending([FromBody] AUD_InspeccionTB inspeccion)
+        {
+            try
+            {
+                var data = dalService.Get<AUD_InspeccionTB>(inspeccion.Id);
+                if (data!=null)
+                {
+                    if (inspeccion.DatosEstablecimiento?.PendingUpdate ?? false)
+                    {
+                        data.DatosEstablecimiento = inspeccion.DatosEstablecimiento;
+                        data.DatosEstablecimiento.PendingUpdate = false;
+                    }
+                    if (inspeccion.ParticipantesDNFD?.PendingUpdate ?? false)
+                    {
+                        data.ParticipantesDNFD = inspeccion.ParticipantesDNFD;
+                        data.ParticipantesDNFD.PendingUpdate = false;
+                    }
+                    if (inspeccion.DatosConclusiones?.PendingUpdate ?? false)
+                    {
+                        data.DatosConclusiones = inspeccion.DatosConclusiones;
+                        data.DatosConclusiones.PendingUpdate = false;
+                    }
+
+                    ///// tipos de inspecciones
+                    ///
+                    switch (data.TipoActa)
+                    {
+                        case DataModel.Helper.enumAUD_TipoActa.AF:
+                        case DataModel.Helper.enumAUD_TipoActa.CUF:
+                            {
+                                if (inspeccion.InspAperCambUbicFarm?.DatosSolicitante?.PendingUpdate ?? false)
+                                {
+                                    data.InspAperCambUbicFarm.DatosSolicitante = inspeccion.InspAperCambUbicFarm.DatosSolicitante;
+                                    data.InspAperCambUbicFarm.DatosSolicitante.PendingUpdate = false;
+                                }
+                                if (inspeccion.InspAperCambUbicFarm?.DatosRegente?.PendingUpdate ?? false)
+                                {
+                                    data.InspAperCambUbicFarm.DatosRegente = inspeccion.InspAperCambUbicFarm.DatosRegente;
+                                    data.InspAperCambUbicFarm.DatosRegente.PendingUpdate = false;
+                                }
+                                if (inspeccion.InspAperCambUbicFarm?.HorariosAtencion?.PendingUpdate ?? false)
+                                {
+                                    data.InspAperCambUbicFarm.HorariosAtencion = inspeccion.InspAperCambUbicFarm.HorariosAtencion;
+                                    data.InspAperCambUbicFarm.HorariosAtencion.PendingUpdate = false;
+                                }
+                                if (inspeccion.InspAperCambUbicFarm?.DatosEstructuraOrganizacional?.PendingUpdate ?? false)
+                                {
+                                    data.InspAperCambUbicFarm.DatosEstructuraOrganizacional = inspeccion.InspAperCambUbicFarm.DatosEstructuraOrganizacional;
+                                    data.InspAperCambUbicFarm.DatosEstructuraOrganizacional.PendingUpdate = false;
+                                }
+                                if (inspeccion.InspAperCambUbicFarm?.DatosInfraEstructura?.PendingUpdate ?? false)
+                                {
+                                    data.InspAperCambUbicFarm.DatosInfraEstructura = inspeccion.InspAperCambUbicFarm.DatosInfraEstructura;
+                                    data.InspAperCambUbicFarm.DatosInfraEstructura.PendingUpdate = false;
+                                }
+                                if (inspeccion.InspAperCambUbicFarm?.DatosAreaFisica?.PendingUpdate ?? false)
+                                {
+                                    data.InspAperCambUbicFarm.DatosAreaFisica = inspeccion.InspAperCambUbicFarm.DatosAreaFisica;
+                                    data.InspAperCambUbicFarm.DatosAreaFisica.PendingUpdate = false;
+                                }
+                                if (inspeccion.InspAperCambUbicFarm?.DatosPreguntasGenericas?.PendingUpdate ?? false)
+                                {
+                                    data.InspAperCambUbicFarm.DatosPreguntasGenericas = inspeccion.InspAperCambUbicFarm.DatosPreguntasGenericas;
+                                    data.InspAperCambUbicFarm.DatosPreguntasGenericas.PendingUpdate = false;
+                                }
+                                if (inspeccion.InspAperCambUbicFarm?.DatosAreaProductosControlados?.PendingUpdate ?? false)
+                                {
+                                    data.InspAperCambUbicFarm.DatosAreaProductosControlados = inspeccion.InspAperCambUbicFarm.DatosAreaProductosControlados;
+                                    data.InspAperCambUbicFarm.DatosAreaProductosControlados.PendingUpdate = false;
+                                }
+                                if (inspeccion.InspAperCambUbicFarm?.DatosAreaAlmacenamiento?.PendingUpdate ?? false)
+                                {
+                                    data.InspAperCambUbicFarm.DatosAreaAlmacenamiento = inspeccion.InspAperCambUbicFarm.DatosAreaAlmacenamiento;
+                                    data.InspAperCambUbicFarm.DatosAreaAlmacenamiento.PendingUpdate = false;
+                                }
+                                if (inspeccion.InspAperCambUbicFarm?.DatosAreaAlmacenamientoAlcohol?.PendingUpdate ?? false)
+                                {
+                                    data.InspAperCambUbicFarm.DatosAreaAlmacenamientoAlcohol = inspeccion.InspAperCambUbicFarm.DatosAreaAlmacenamientoAlcohol;
+                                    data.InspAperCambUbicFarm.DatosAreaAlmacenamientoAlcohol.PendingUpdate = false;
+                                }
+                                break;
+                            }
+                    }
+
+                    dalService.Save<AUD_InspeccionTB>(data);
+
+                    return Ok(data);
+                }
+            }
+            catch (Exception ex) { return BadRequest(new { message = ex.Message }); }
+            return BadRequest(new { message = "dato no encontrado" });
         }
 
 

@@ -36,6 +36,7 @@ namespace AuditoriaApp.Services
             catch (Exception e) { }
             return null;
         }
+        
         public async Task<APP_Account> First()
         {
             try { return dalService.First<APP_Account>(); }
@@ -52,6 +53,28 @@ namespace AuditoriaApp.Services
             catch (Exception e) { }
             return null;
         }
+
+        /////////////////////////////////////////////
+        ///
+
+        public async Task<APP_Updates> SaveLastUpdate(APP_Updates data)
+        {
+            try
+            {
+                return dalService.Save<APP_Updates>(data);
+            }
+            catch (Exception e) { }
+            return null;
+        }
+
+        public async Task<APP_Updates> FirstLastUpdate()
+        {
+            try { return dalService.First<APP_Updates>(); }
+            catch (Exception e) { }
+            return null;
+
+        }
+
 
     }
 

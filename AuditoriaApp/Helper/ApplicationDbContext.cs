@@ -1,6 +1,7 @@
 ﻿using DataModel;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,7 +27,7 @@ namespace AuditoriaApp.Helper
             //lazy loading
             //optionsBuilder.UseLazyLoadingProxies();
 
-            string dbPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "AuditoriaApp_EF00.db");
+            string dbPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "AuditoriaApp_EF03.db");
             optionsBuilder.UseSqlite(string.Format("Filename={0}", dbPath));//("Filename=YourDatabase.db");
 
             base.OnConfiguring(optionsBuilder);
@@ -45,16 +46,26 @@ namespace AuditoriaApp.Helper
             //    .HasOne(s => s.UserProfile)
             //    .WithOne(ad => ad.AppUser);
 
-           
-//            //JSON
-//            modelBuilder.Entity<AUD_InspeccionTB>()
-//.Property(e => e.ParticipantesDNFD)
-//.HasConversion(x => JsonConvert.SerializeObject(x, Formatting.None, new JsonSerializerSettings() { ReferenceLoopHandling = ReferenceLoopHandling.Ignore }), x => x == null ? null : JsonConvert.DeserializeObject<AUD_ParticipantesDNFD>(x));
+            //JSON
+            modelBuilder.Entity<APP_Inspeccion>()
+.Property(e => e.Inspeccion)
+.HasConversion(x => JsonConvert.SerializeObject(x, Formatting.None, new JsonSerializerSettings() { ReferenceLoopHandling = ReferenceLoopHandling.Ignore }), x => x == null ? null : JsonConvert.DeserializeObject<AUD_InspeccionTB>(x));
+
+
+            ///////////////////////////////
+            ///
+
 
             base.OnModelCreating(modelBuilder);
         }
 
         public virtual DbSet<APP_Account> Account { get; set; }
+        public virtual DbSet<APP_Updates> Updates { get; set; }
+        public virtual DbSet<APP_Inspeccion> Inspeccion { get; set; }
+
+        ///////////////////////////////////
+        ///
+
     }
 
 }

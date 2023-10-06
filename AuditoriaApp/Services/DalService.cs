@@ -134,7 +134,7 @@ namespace AuditoriaApp.Services
                 //    DBContext.Set<T>().Add(_Data);
                 //}
                 //var _OldData = DBContext.Set<T>().Find(_Data.Id);
-                if (_Data.Id > 0)
+                if (_Data?.Id > 0)
                 {
                     DBContext.Set<T>().Update(_Data);
                 }

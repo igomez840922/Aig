@@ -10,5 +10,7 @@ namespace AuditoriaApp.Services
         Task<List<APP_Account>> GetAll();
         Task<APP_Account> GetByID(long Id);
         Task<APP_Account> First();
+        Task<APP_Updates> SaveLastUpdate(APP_Updates data);
+        Task<APP_Updates> FirstLastUpdate();
     }
 }

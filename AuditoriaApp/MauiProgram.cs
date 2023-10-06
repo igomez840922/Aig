@@ -63,6 +63,7 @@ namespace AuditoriaApp
             builder.Services.AddSingleton<IDalService, DalService>();
             builder.Services.AddSingleton<IFeatureService, FeatureService>();
             builder.Services.AddScoped<IAccountDataService, AccountDataService>();
+            builder.Services.AddScoped<IInspectionService, InspectionService>();
 
             //QUARTZ            
             // Register the QuartzSchedulerService as a singleton

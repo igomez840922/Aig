@@ -4,12 +4,12 @@
 <MudNavMenu>
     
     <AuthorizeView>
-        <MudText Typo="Typo.subtitle2" Color="Color.Inherit" Class="ml-4 my-3">Data</MudText>
+        @* <MudText Typo="Typo.subtitle2" Color="Color.Inherit" Class="ml-4 my-3">Data</MudText> *@
 
-        <MudNavLink Href="/dashboard" Match="NavLinkMatch.All" Icon="@Icons.Material.Outlined.Dashboard">Dashboard</MudNavLink>
-        
+        <MudNavLink Href="/dashboard" Match="NavLinkMatch.All" Icon="@Icons.Material.Outlined.Dashboard">Tablero</MudNavLink>
+        <MudNavLink Href="/inspections" Match="NavLinkMatch.All" Icon="@Icons.Material.Outlined.FileCopy">Inspecciones</MudNavLink>
 
-        <MudText Typo="Typo.subtitle2" Color="Color.Inherit" Class="ml-4 my-3">Configuración</MudText>
+        @* <MudText Typo="Typo.subtitle2" Color="Color.Inherit" Class="ml-4 my-3">Configuración</MudText> *@
 
         @* <MudNavGroup Title="@languageContainerService.Keys["GateWay"]" Icon="@Icons.Material.Outlined.Settings" Expanded="false">
             <MudNavLink Href="/settings/behavioralstatus">@languageContainerService.Keys["Behavioral Status"]</MudNavLink>        

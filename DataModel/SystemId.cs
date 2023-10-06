@@ -38,6 +38,9 @@ namespace DataModel
         private DateTime updatedDate;
         public DateTime UpdatedDate { get => updatedDate; set => SetProperty(ref updatedDate, value); }
 
+        private bool pendingUpdate;
+        public bool PendingUpdate { get => pendingUpdate; set => SetProperty(ref pendingUpdate, value); }
+
         private bool hasError;
         [System.ComponentModel.DataAnnotations.Schema.NotMapped]
         public bool HasError { get => hasError; set => SetProperty(ref hasError, value); }
