@@ -6,12 +6,14 @@ using Microsoft.AspNetCore.Components.Authorization;
 using MudBlazor;
 using AuditoriaApp.Events.Overlay;
 using System.Net.Http.Headers;
+using DataModel;
+using DataModel.Models;
 
 namespace AuditoriaApp.Pages.Authentication
 {
     public partial class Login
     {
-        private LoginDTO model = new LoginDTO();
+        private LoginModel model = new LoginModel();
 		
 		[Inject]
         public IAuthenticationService AuthenticationService { get; set; }

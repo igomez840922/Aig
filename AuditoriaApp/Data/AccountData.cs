@@ -13,9 +13,8 @@ namespace AuditoriaApp.Data
         public int Id { get; set; }
 
         public string UserId { get; set; }
-
+        public string UserName { get; set; }
         public string AccessToken { get; set; }
-        public long licenseId { get; set; }
         public string BasicToken { get; set; }
     }
 }

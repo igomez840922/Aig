@@ -6,6 +6,7 @@ using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 using DataModel.Models;
+using DataModel;
 
 namespace AuditoriaApp.Services
 {
@@ -47,18 +48,18 @@ namespace AuditoriaApp.Services
            
         }
 
-        public async Task<AuthResponseDto> Login(LoginDTO userForAuthentication)
+        public async Task<AuthResponseDto> Login(LoginModel appUser)
         {
             try {
+               
+                //var authenticationString = $"{appUser.UserName}:{appUser.Password}";
+                //var base64String = Convert.ToBase64String(System.Text.Encoding.ASCII.GetBytes(authenticationString));
+                //apiConnectionService.Client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", base64String);
 
-                var authenticationString = $"{userForAuthentication.UserName}:{userForAuthentication.Password}";
-                var base64String = Convert.ToBase64String(System.Text.Encoding.ASCII.GetBytes(authenticationString));
-                apiConnectionService.Client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", base64String);
-
-                var content = JsonSerializer.Serialize(userForAuthentication);
+                var content = JsonSerializer.Serialize(appUser);
                 var bodyContent = new StringContent(content, Encoding.UTF8, "application/json");
 
-                var authResult = await apiConnectionService.Client.PostAsync("Accounts/ApiSigIn", bodyContent);
+                var authResult = await apiConnectionService.Client.PostAsync("Accounts/Login", bodyContent);
                 var authContent = await authResult.Content.ReadAsStringAsync();
                 var result = JsonSerializer.Deserialize<AuthResponseDto>(authContent, _options);
 
@@ -71,10 +72,11 @@ namespace AuditoriaApp.Services
                 data = data != null ? data : new Data.AccountData();
                 data.UserId = result.UserId;
                 data.AccessToken = result.Token;
-                data.BasicToken = base64String;
+                data.UserName = appUser.UserName;
+                //data.BasicToken = base64String;
                 await accountDataService.Save(data);
 
-                ((AuthStateProvider)_authStateProvider).NotifyUserAuthentication(userForAuthentication.UserName);
+                ((AuthStateProvider)_authStateProvider).NotifyUserAuthentication(appUser.UserName);
                 apiConnectionService.Client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("bearer", result.Token);
                 //apiConnectionService.Client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("bearer", result.Token);
 

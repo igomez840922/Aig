@@ -1,4 +1,5 @@
-﻿using DataModel.DTO;
+﻿using DataModel;
+using DataModel.DTO;
 using DataModel.Models;
 using System;
 using System.Collections.Generic;
@@ -10,7 +11,7 @@ namespace AuditoriaApp.Services
     public interface IAuthenticationService
     {
         Task<RegistrationResponseDto> RegisterUser(RegisterModel userForRegistration);
-        Task<AuthResponseDto> Login(LoginDTO userForAuthentication); 
+        Task<AuthResponseDto> Login(LoginModel userForAuthentication); 
         Task Logout();
         Task<bool> HeartBeat();
     }

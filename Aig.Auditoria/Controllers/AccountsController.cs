@@ -1,4 +1,8 @@
-﻿using DataModel.DTO;
+﻿using Aig.Auditoria.Services;
+using DataModel;
+using DataModel.DTO;
+using DataModel.Models;
+using DocumentFormat.OpenXml.Spreadsheet;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -16,73 +20,57 @@ namespace Aig.Auditoria.Controllers
 	[AllowAnonymous]
 	public class AccountsController : ControllerBase
 	{
-		private readonly UserManager<IdentityUser> _userManager;
+		private readonly IAuthService authService;
 		private readonly IConfiguration _configuration;
 		private readonly IConfigurationSection _jwtSettings;
 
-		public AccountsController(UserManager<IdentityUser> userManager, IConfiguration configuration)
+		public AccountsController(IAuthService authService, IConfiguration configuration)
 		{
-			_userManager = userManager;
+			this.authService = authService;
 			_configuration = configuration;
 			_jwtSettings = _configuration.GetSection("JwtSettings");
 		}
 
 
-        [HttpPost("Registration")]
-        [AllowAnonymous]
-        public async Task<IActionResult> RegisterUser([FromBody] RegisterDTO userForRegistration)
+		//      [HttpPost("Registration")]
+		//      [AllowAnonymous]
+		//      public async Task<IActionResult> RegisterUser([FromBody] RegisterDTO userForRegistration)
+		//{
+		//	if (userForRegistration == null || !ModelState.IsValid)
+		//		return BadRequest();
+
+		//	var user = new IdentityUser { UserName = userForRegistration.UserName, Email = userForRegistration.UserName };
+
+		//	var result = await authService.Register(user, userForRegistration.Password);
+		//	if (!result.Succeeded)
+		//	{
+		//		var errors = result.Errors.Select(e => e.Description);
+
+		//		return BadRequest(new RegistrationResponseDto { Errors = errors });
+		//	}
+
+		//	return StatusCode(201);
+		//}
+
+
+		[HttpPost("Login")]
+		[AllowAnonymous]
+		public async Task<IActionResult> Login([FromBody] LoginModel appUser)
 		{
-			if (userForRegistration == null || !ModelState.IsValid)
-				return BadRequest();
-
-			var user = new IdentityUser { UserName = userForRegistration.UserName, Email = userForRegistration.UserName };
-
-			var result = await _userManager.CreateAsync(user, userForRegistration.Password);
-			if (!result.Succeeded)
+			var response = await authService.Login(appUser);
+			if (response?.Result??false)
 			{
-				var errors = result.Errors.Select(e => e.Description);
+				var user = await authService.CurrentUserInfo(appUser.UserName);
 
-				return BadRequest(new RegistrationResponseDto { Errors = errors });
+                var signingCredentials = GetSigningCredentials();
+				var claims = GetClaims(user);
+				var tokenOptions = GenerateTokenOptions(signingCredentials, claims);
+				var token = new JwtSecurityTokenHandler().WriteToken(tokenOptions);
+
+				return Ok(new AuthResponseDto { IsAuthSuccessful = true, Token = token, UserId = user.Id });
 			}
-
-			return StatusCode(201);
+			return Unauthorized(new AuthResponseDto { ErrorMessage = "nombre de usuario o contraseña no válidos" });
 		}
-
-
-        [HttpPost("Login")]
-        [AllowAnonymous]
-        public async Task<IActionResult> Login([FromBody] LoginDTO userForAuthentication)
-		{
-			var user = await _userManager.FindByNameAsync(userForAuthentication.UserName);
-
-			if (user == null || !await _userManager.CheckPasswordAsync(user, userForAuthentication.Password))
-				return Unauthorized(new AuthResponseDto { ErrorMessage = "Invalid Authentication" });
-
-			var signingCredentials = GetSigningCredentials();
-			var claims = GetClaims(user);
-			var tokenOptions = GenerateTokenOptions(signingCredentials, claims);
-			var token = new JwtSecurityTokenHandler().WriteToken(tokenOptions);
-
-			return Ok(new AuthResponseDto { IsAuthSuccessful = true, Token = token, UserId = user.Id });
-		}
-
-
-        [HttpPost("ApiSigIn")]
-        [AllowAnonymous]
-        public async Task<IActionResult> ApiSigIn([FromBody] LoginDTO userForAuthentication)
-        {
-            var user = await _userManager.FindByNameAsync(userForAuthentication.UserName);
-
-            if (user == null || !await _userManager.CheckPasswordAsync(user, userForAuthentication.Password))
-                return Unauthorized(new AuthResponseDto { ErrorMessage = "Invalid Authentication" });
-
-            var signingCredentials = GetSigningCredentials();
-            var claims = GetClaims(user);
-            var tokenOptions = GenerateTokenOptions(signingCredentials, claims);
-            var token = new JwtSecurityTokenHandler().WriteToken(tokenOptions);
-
-            return Ok(new AuthResponseDto { IsAuthSuccessful = true, Token = token, UserId = user.Id });
-        }
 
         private SigningCredentials GetSigningCredentials()
 		{
@@ -92,11 +80,11 @@ namespace Aig.Auditoria.Controllers
 			return new SigningCredentials(secret, SecurityAlgorithms.HmacSha256);
 		}
 
-		private List<Claim> GetClaims(IdentityUser user)
+		private List<Claim> GetClaims(ApplicationUser user)
 		{
 			var claims = new List<Claim>
 			{
-				new Claim(ClaimTypes.Name, user.Email),
+				new Claim(ClaimTypes.Name, user.UserName),
                 new Claim(ClaimTypes.NameIdentifier, user.Id)
             };
 
@@ -109,8 +97,8 @@ namespace Aig.Auditoria.Controllers
 				issuer: _jwtSettings.GetSection("validIssuer").Value,
 				audience: _jwtSettings.GetSection("validAudience").Value,
 				claims: claims,
-				expires: DateTime.Now.AddMinutes(Convert.ToDouble(_jwtSettings.GetSection("expiryInMinutes").Value)),
-				signingCredentials: signingCredentials);
+				expires: DateTime.UtcNow.AddYears(5),//DateTime.Now.AddMinutes(Convert.ToDouble(_jwtSettings.GetSection("expiryInMinutes").Value)),
+                signingCredentials: signingCredentials);
 
 			return tokenOptions;
 		}

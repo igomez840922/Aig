@@ -84,9 +84,9 @@ namespace DataModel
         //[Required(ErrorMessage = "campo requerido")]
         //public string Email { get; set; }
 
-        //[System.ComponentModel.DataAnnotations.Schema.NotMapped]
+        [System.ComponentModel.DataAnnotations.Schema.NotMapped]
         //[Required(ErrorMessage = "requerido")]
-        //public string Password { get; set; }
+        public string Password { get; set; }
 
         //[System.ComponentModel.DataAnnotations.Schema.NotMapped]
         //[Required(ErrorMessage = "requerido")]

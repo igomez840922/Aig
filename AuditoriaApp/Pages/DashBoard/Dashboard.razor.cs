@@ -54,13 +54,13 @@ namespace AuditoriaApp.Pages.DashBoard
         {
             try
             {
-                var authstate = await GetAuthenticationStateAsync.GetAuthenticationStateAsync();
-                var userClaims = authstate.User;
-                if (!userClaims.IsInRole("Admin"))
-                {
-                    var user = await systemUserService.GetByName(userClaims.Identity.Name);
-                    //model.userId = user.Id;
-                }
+                //var authstate = await GetAuthenticationStateAsync.GetAuthenticationStateAsync();
+                //var userClaims = authstate.User;
+                //if (!userClaims.IsInRole("Admin"))
+                //{
+                //    var user = await systemUserService.GetByName(userClaims.Identity.Name);
+                //    //model.userId = user.Id;
+                //}
             }
             catch { }
         }
