@@ -1,0 +1,15 @@
+﻿@page "/inspectionsedit/{Id:long}"
+@attribute [Authorize]
+@layout MainLayout
+@implements IDisposable
+
+@if (model != null)
+{
+    switch (model.Inspeccion.TipoActa){
+        case DataModel.Helper.enumAUD_TipoActa.AF:
+        case DataModel.Helper.enumAUD_TipoActa.CUF:{
+                <AuditoriaApp.Components.Inspections._1_AperturaUbicacionFarmacia.Index Id="@Id" BackToMain="BackToMain"></AuditoriaApp.Components.Inspections._1_AperturaUbicacionFarmacia.Index>
+                break;
+            }
+    }
+}

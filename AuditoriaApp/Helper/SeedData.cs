@@ -44,9 +44,31 @@ namespace AuditoriaApp.Helper
                     dalService.Save(account);
                 }
 
+                var accountDataService = serviceScope.ServiceProvider.GetService<IAccountDataService>();
+                var lastUpdate = await accountDataService.FirstLastUpdate();
+                lastUpdate = lastUpdate != null ? lastUpdate : new APP_Updates() { SettingsUpdate = DateTime.Now.AddYears(-5) };
+                //lastUpdate.SettingsUpdate = DateTime.Now.AddYears(-5);
+                await accountDataService.SaveLastUpdate(lastUpdate);
+
                 var inspectionService = serviceScope.ServiceProvider.GetService<IInspectionService>();
                 await inspectionService.InspectionsUpload();
                 await inspectionService.InspectionsSync();
+
+                var paisService = serviceScope.ServiceProvider.GetService<IPaisService>();
+                await paisService.Syncronization();
+
+                var provinciaService = serviceScope.ServiceProvider.GetService<IProvinciaService>();
+                await provinciaService.Syncronization();
+
+                var distritoService = serviceScope.ServiceProvider.GetService<IDistritoService>();
+                await distritoService.Syncronization();
+
+                var corregimientoService = serviceScope.ServiceProvider.GetService<ICorregimientoService>();
+                await corregimientoService.Syncronization();
+
+                lastUpdate.SettingsUpdate = DateTime.Now;
+                await accountDataService.SaveLastUpdate(lastUpdate);
+
             }
         }
 

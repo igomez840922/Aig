@@ -4,6 +4,7 @@ using DataAccess;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231009134242_M165")]
+    partial class M165
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -6152,7 +6154,7 @@ namespace DataAccess.Migrations
                         .HasForeignKey("InstitucionDestinoId");
 
                     b.HasOne("DataModel.ProvinciaTB", "Provincia")
-                        .WithMany()
+                        .WithMany("LEsavi2")
                         .HasForeignKey("ProvinciaId");
 
                     b.HasOne("DataModel.TipoInstitucionTB", "TipoInstitucion")
@@ -6213,8 +6215,9 @@ namespace DataAccess.Migrations
                         .HasForeignKey("LaboratorioId");
 
                     b.HasOne("DataModel.ProvinciaTB", "Provincia")
-                        .WithMany()
-                        .HasForeignKey("ProvinciaId");
+                        .WithMany("LEsavi")
+                        .HasForeignKey("ProvinciaId")
+                        .OnDelete(DeleteBehavior.NoAction);
 
                     b.HasOne("DataModel.TipoInstitucionTB", "TipoInstitucion")
                         .WithMany("LEsavi")
@@ -6296,8 +6299,9 @@ namespace DataAccess.Migrations
                         .OnDelete(DeleteBehavior.NoAction);
 
                     b.HasOne("DataModel.ProvinciaTB", "Provincia")
-                        .WithMany()
-                        .HasForeignKey("ProvinciaId");
+                        .WithMany("LFf")
+                        .HasForeignKey("ProvinciaId")
+                        .OnDelete(DeleteBehavior.NoAction);
 
                     b.HasOne("DataModel.TipoInstitucionTB", "TipoInstitucion")
                         .WithMany("LFf")
@@ -6501,8 +6505,9 @@ namespace DataAccess.Migrations
                         .OnDelete(DeleteBehavior.NoAction);
 
                     b.HasOne("DataModel.ProvinciaTB", "Provincia")
-                        .WithMany()
-                        .HasForeignKey("ProvinciaId");
+                        .WithMany("LRam2")
+                        .HasForeignKey("ProvinciaId")
+                        .OnDelete(DeleteBehavior.NoAction);
 
                     b.HasOne("DataModel.TipoInstitucionTB", "TipoInstitucion")
                         .WithMany("LRam2")
@@ -6563,8 +6568,9 @@ namespace DataAccess.Migrations
                         .OnDelete(DeleteBehavior.NoAction);
 
                     b.HasOne("DataModel.ProvinciaTB", "Provincia")
-                        .WithMany()
-                        .HasForeignKey("ProvinciaId");
+                        .WithMany("LRam")
+                        .HasForeignKey("ProvinciaId")
+                        .OnDelete(DeleteBehavior.NoAction);
 
                     b.HasOne("DataModel.TipoInstitucionTB", "TipoInstitucion")
                         .WithMany("LRam")
@@ -6603,8 +6609,9 @@ namespace DataAccess.Migrations
             modelBuilder.Entity("DataModel.InstitucionDestinoTB", b =>
                 {
                     b.HasOne("DataModel.ProvinciaTB", "Provincia")
-                        .WithMany()
-                        .HasForeignKey("ProvinciaId");
+                        .WithMany("LInstitucion")
+                        .HasForeignKey("ProvinciaId")
+                        .OnDelete(DeleteBehavior.NoAction);
 
                     b.HasOne("DataModel.TipoInstitucionTB", "TipoInstitucion")
                         .WithMany("LInstituciones")
@@ -6920,6 +6927,18 @@ namespace DataAccess.Migrations
             modelBuilder.Entity("DataModel.ProvinciaTB", b =>
                 {
                     b.Navigation("LDistritos");
+
+                    b.Navigation("LEsavi");
+
+                    b.Navigation("LEsavi2");
+
+                    b.Navigation("LFf");
+
+                    b.Navigation("LInstitucion");
+
+                    b.Navigation("LRam");
+
+                    b.Navigation("LRam2");
                 });
 
             modelBuilder.Entity("DataModel.TipoInstitucionTB", b =>

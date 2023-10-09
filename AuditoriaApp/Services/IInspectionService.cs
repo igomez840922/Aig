@@ -8,6 +8,7 @@ namespace AuditoriaApp.Services
     {
         Task InspectionsSync();
         Task InspectionsUpload();
+        Task<bool> InspectionsUploadOne(long Id);
 
         /// <summary>
         /// ////////////////////////////////////////////
@@ -17,6 +18,7 @@ namespace AuditoriaApp.Services
         Task<GenericModel<APP_Inspeccion>> FindAll(GenericModel<APP_Inspeccion> model);
         Task<List<APP_Inspeccion>> GetAll();
         Task<APP_Inspeccion> Get(long Id);
+        Task Reload();
         Task<APP_Inspeccion> Save(APP_Inspeccion data);
         Task<APP_Inspeccion> Delete(long Id);
 

@@ -92,6 +92,36 @@ namespace AuditoriaApp.Services
             catch { }
         }
 
+        public async Task<bool> InspectionsUploadOne(long Id)
+        {
+            try
+            {
+                var data = await accountDataService.First();
+                apiConnectionService.Client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("bearer", data.AccessToken);
+
+                var appItem = dalService.Get<APP_Inspeccion>(Id);
+                if (appItem != null)
+                {
+                    var content = JsonSerializer.Serialize(appItem.Inspeccion);
+                    var bodyContent = new StringContent(content, Encoding.UTF8, "application/json");
+
+                    var authResult = await apiConnectionService.Client.PostAsync("Actas/UploadPending", bodyContent);
+                    var authContent = await authResult.Content.ReadAsStringAsync();
+                    if (authResult.IsSuccessStatusCode)
+                    {
+                        appItem.PendingUpdate = false;
+                        dalService.Save(appItem);
+
+                        await InspectionsSync();
+
+                        return true;
+                    }
+                }
+            }
+            catch { }
+            return false;
+        }
+
 
         ///////////////////////////////////////////
         ///
@@ -130,6 +160,10 @@ namespace AuditoriaApp.Services
         {
             return dalService.Get<APP_Inspeccion>(Id);
 
+        }
+        public async Task Reload()
+        {
+             dalService.Reload();
         }
 
         public async Task<APP_Inspeccion> Save(APP_Inspeccion data)

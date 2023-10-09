@@ -64,6 +64,10 @@ namespace AuditoriaApp
             builder.Services.AddSingleton<IFeatureService, FeatureService>();
             builder.Services.AddScoped<IAccountDataService, AccountDataService>();
             builder.Services.AddScoped<IInspectionService, InspectionService>();
+            builder.Services.AddScoped<IPaisService, PaisService>();
+            builder.Services.AddScoped<IProvinciaService, ProvinciaService>();
+            builder.Services.AddScoped<IDistritoService, DistritoService>();
+            builder.Services.AddScoped<ICorregimientoService, CorregimientoService>();
 
             //QUARTZ            
             // Register the QuartzSchedulerService as a singleton

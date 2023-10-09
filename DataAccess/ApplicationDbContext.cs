@@ -1478,11 +1478,11 @@ namespace DataAccess
          .HasForeignKey(e => e.TipoInstitucionId)
          .OnDelete(DeleteBehavior.NoAction);
 
-            modelBuilder.Entity<ProvinciaTB>()
-          .HasMany(e => e.LInstitucion)
-          .WithOne(e => e.Provincia)
-          .HasForeignKey(e => e.ProvinciaId)
-          .OnDelete(DeleteBehavior.NoAction);
+          //  modelBuilder.Entity<ProvinciaTB>()
+          //.HasMany(e => e.LInstitucion)
+          //.WithOne(e => e.Provincia)
+          //.HasForeignKey(e => e.ProvinciaId)
+          //.OnDelete(DeleteBehavior.NoAction);
 
             modelBuilder.Entity<TipoInstitucionTB>()
        .HasMany(e => e.LEsavi)
@@ -1490,11 +1490,11 @@ namespace DataAccess
        .HasForeignKey(e => e.TipoInstitucionId)
        .OnDelete(DeleteBehavior.NoAction);
 
-            modelBuilder.Entity<ProvinciaTB>()
-        .HasMany(e => e.LEsavi)
-        .WithOne(e => e.Provincia)
-        .HasForeignKey(e => e.ProvinciaId)
-        .OnDelete(DeleteBehavior.NoAction);
+        //    modelBuilder.Entity<ProvinciaTB>()
+        //.HasMany(e => e.LEsavi)
+        //.WithOne(e => e.Provincia)
+        //.HasForeignKey(e => e.ProvinciaId)
+        //.OnDelete(DeleteBehavior.NoAction);
 
             modelBuilder.Entity<InstitucionDestinoTB>()
        .HasMany(e => e.LEsavi)
@@ -1508,11 +1508,11 @@ namespace DataAccess
       .HasForeignKey(e => e.TipoInstitucionId)
       .OnDelete(DeleteBehavior.NoAction);
 
-            modelBuilder.Entity<ProvinciaTB>()
-        .HasMany(e => e.LFf)
-        .WithOne(e => e.Provincia)
-        .HasForeignKey(e => e.ProvinciaId)
-        .OnDelete(DeleteBehavior.NoAction);
+        //    modelBuilder.Entity<ProvinciaTB>()
+        //.HasMany(e => e.LFf)
+        //.WithOne(e => e.Provincia)
+        //.HasForeignKey(e => e.ProvinciaId)
+        //.OnDelete(DeleteBehavior.NoAction);
 
             modelBuilder.Entity<InstitucionDestinoTB>()
        .HasMany(e => e.LFf)
@@ -1533,17 +1533,17 @@ namespace DataAccess
      .HasForeignKey(e => e.TipoInstitucionId)
      .OnDelete(DeleteBehavior.NoAction);
 
-            modelBuilder.Entity<ProvinciaTB>()
-        .HasMany(e => e.LRam)
-        .WithOne(e => e.Provincia)
-        .HasForeignKey(e => e.ProvinciaId)
-        .OnDelete(DeleteBehavior.NoAction);
+       //     modelBuilder.Entity<ProvinciaTB>()
+       // .HasMany(e => e.LRam)
+       // .WithOne(e => e.Provincia)
+       // .HasForeignKey(e => e.ProvinciaId)
+       // .OnDelete(DeleteBehavior.NoAction);
 
-            modelBuilder.Entity<ProvinciaTB>()
-       .HasMany(e => e.LRam2)
-       .WithOne(e => e.Provincia)
-       .HasForeignKey(e => e.ProvinciaId)
-       .OnDelete(DeleteBehavior.NoAction);
+       //     modelBuilder.Entity<ProvinciaTB>()
+       //.HasMany(e => e.LRam2)
+       //.WithOne(e => e.Provincia)
+       //.HasForeignKey(e => e.ProvinciaId)
+       //.OnDelete(DeleteBehavior.NoAction);
 
             modelBuilder.Entity<InstitucionDestinoTB>()
        .HasMany(e => e.LRam)

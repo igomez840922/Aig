@@ -35,6 +35,11 @@ namespace DataModel
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)] 
         public DateTime FechaInicio { get => fechaInicio; set => SetProperty(ref fechaInicio, value); }
 
+        [System.ComponentModel.DataAnnotations.Schema.NotMapped]
+        public DateTime? FechaInicioTemp { get => FechaInicio; set{
+                FechaInicio = value.HasValue? value.Value: FechaInicio;
+                } }
+
         //status del acta
         private enum_StatusInspecciones statusInspecciones;
         public enum_StatusInspecciones StatusInspecciones { get => statusInspecciones; set => SetProperty(ref statusInspecciones, value); }

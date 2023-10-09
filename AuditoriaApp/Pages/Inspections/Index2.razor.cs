@@ -45,8 +45,15 @@ namespace AuditoriaApp.Pages.Inspections
             await base.OnAfterRenderAsync(firstRender);
         }
 
+        public void Dispose()
+        {
+            //bus.UnSubscribe<LanguageChangeEvent>(LanguageChangeEventHandler);
+        }
+
         protected async Task FetchData()
         {
+            await inspectionService.Reload();
+
             model.ErrorMsg = null;
             model.Data = new APP_Inspeccion();
 
@@ -95,65 +102,22 @@ namespace AuditoriaApp.Pages.Inspections
                 snackbar.Add("Error durante la Sincronización", Severity.Error);
             }
             finally { await bus.Publish(new OverlayShowEvent { Show = false }); }
-
-            //if (data == null)
-            //{
-            //    data = new APP_Inspeccion() { PredictionType = DBModel.Enums.PredictionType.Prediction_1181936 };
-            //    //Open Modal
-            //    var parameters = new DialogParameters();
-            //    parameters.Add("data", data);
-            //    var options = new DialogOptions() { CloseButton = true, MaxWidth = MaxWidth.Large, Position = DialogPosition.Center, FullWidth = true, DisableBackdropClick = true };
-            //    var dialog = await DialogService.ShowAsync<RuletRules.Client.Components.PredictionOptions.AddNew>(string.Format("New"), parameters, options);
-            //    var result = await dialog.Result;
-            //    if (!result.Cancelled)
-            //    {
-            //        FetchData();
-            //    }
-            //}
-            //else
-            //{
-            //    //Open Modal
-            //    var parameters = new DialogParameters();
-            //    parameters.Add("data", data);
-            //    var options = new DialogOptions() { CloseButton = true, MaxWidth = MaxWidth.Large, Position = DialogPosition.Center, FullWidth = true, DisableBackdropClick = true };
-            //    var dialog = await DialogService.ShowAsync<RuletRules.Client.Components.PredictionOptions.AddNew>(string.Format("Edit"), parameters, options);
-            //    var result = await dialog.Result;
-            //    if (!result.Cancelled)
-            //    {
-            //        FetchData();
-            //    }
-            //}  
         }
 
-        private async Task OnDelete(APP_Inspeccion data)
+        private async Task OnSelect(long Id)
         {
-            //model.Data = data;
-
-            ////Open Modal
-            //var parameters = new DialogParameters();
-            //parameters.Add("ContentText", "Do you really want to delete these records? This process cannot be undone.");
-            //parameters.Add("ButtonText", "Delete");
-            //parameters.Add("Color", Color.Error);
-            //var options = new DialogOptions() { CloseButton = true, MaxWidth = MaxWidth.ExtraSmall };
-            //var dialog = await DialogService.ShowAsync<RuletRules.Client.Components.Dialog.DialogComponent>("Delete", parameters, options);
-            //var result = await dialog.Result;
-            //if (!result.Cancelled)
-            //{
-            //    DeleteData();
-            //}
-        }
-
-        private async Task DeleteData()
-        {
-            //var result = await PredictionOptionService.Delete(model.Data.Id);
-            //if (result != null)
-            //{
-            //    snackbar.Add(languageContainerService.Keys["DataDeleteSuccessfully"], Severity.Success);
-            //    FetchData();
-            //}
-            //else
-            //    snackbar.Add(languageContainerService.Keys["DataDeleteError"], Severity.Error);
-        }
+            await bus.Publish(new OverlayShowEvent { Show = true });
+            try
+            {
+                if(Id>0)
+                    navigationManager.NavigateTo($"inspectionsedit/{Id}");
+            }
+            catch
+            {
+                //snackbar.Add("Error durante la Sincronización", Severity.Error);
+            }
+            finally { await bus.Publish(new OverlayShowEvent { Show = false }); }
+        }        
 
     }
 }

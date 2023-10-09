@@ -27,7 +27,7 @@ namespace AuditoriaApp.Helper
             //lazy loading
             //optionsBuilder.UseLazyLoadingProxies();
 
-            string dbPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "AuditoriaApp_EF03.db");
+            string dbPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "AuditoriaApp_EF11.db");
             optionsBuilder.UseSqlite(string.Format("Filename={0}", dbPath));//("Filename=YourDatabase.db");
 
             base.OnConfiguring(optionsBuilder);
@@ -51,6 +51,26 @@ namespace AuditoriaApp.Helper
 .Property(e => e.Inspeccion)
 .HasConversion(x => JsonConvert.SerializeObject(x, Formatting.None, new JsonSerializerSettings() { ReferenceLoopHandling = ReferenceLoopHandling.Ignore }), x => x == null ? null : JsonConvert.DeserializeObject<AUD_InspeccionTB>(x));
 
+            //JSON
+            modelBuilder.Entity<APP_Paises>()
+.Property(e => e.LPaises)
+.HasConversion(x => JsonConvert.SerializeObject(x, Formatting.None, new JsonSerializerSettings() { ReferenceLoopHandling = ReferenceLoopHandling.Ignore }), x => x == null ? null : JsonConvert.DeserializeObject<List<PaisTB>>(x));
+
+            //JSON
+            modelBuilder.Entity<APP_Provincias>()
+.Property(e => e.LProvincias)
+.HasConversion(x => JsonConvert.SerializeObject(x, Formatting.None, new JsonSerializerSettings() { ReferenceLoopHandling = ReferenceLoopHandling.Ignore }), x => x == null ? null : JsonConvert.DeserializeObject<List<ProvinciaTB>>(x));
+
+            //JSON
+            modelBuilder.Entity<APP_Corregimientos>()
+.Property(e => e.LCorregimientos)
+.HasConversion(x => JsonConvert.SerializeObject(x, Formatting.None, new JsonSerializerSettings() { ReferenceLoopHandling = ReferenceLoopHandling.Ignore }), x => x == null ? null : JsonConvert.DeserializeObject<List<CorregimientoTB>>(x));
+
+            //JSON
+            modelBuilder.Entity<APP_Distritos>()
+.Property(e => e.LDistritos)
+.HasConversion(x => JsonConvert.SerializeObject(x, Formatting.None, new JsonSerializerSettings() { ReferenceLoopHandling = ReferenceLoopHandling.Ignore }), x => x == null ? null : JsonConvert.DeserializeObject<List<DistritoTB>>(x));
+
 
             ///////////////////////////////
             ///
@@ -65,7 +85,10 @@ namespace AuditoriaApp.Helper
 
         ///////////////////////////////////
         ///
-
+        public virtual DbSet<APP_Paises> Paises { get; set; }
+        public virtual DbSet<APP_Provincias> Provincias { get; set; }
+        public virtual DbSet<APP_Corregimientos> Corregimientos { get; set; }
+        public virtual DbSet<APP_Distritos> Distritos { get; set; }
     }
 
 }

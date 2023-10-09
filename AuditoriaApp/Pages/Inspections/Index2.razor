@@ -1,6 +1,7 @@
 ﻿@page "/inspections"
 @attribute [Authorize]
 @layout MainLayout
+@implements IDisposable
 
 <MudText Typo="Typo.h5" Color="Color.Primary" Class="mb-4">Inspecciones</MudText>
 <MudGrid>
@@ -60,9 +61,10 @@
                     </MudTd>
                     <MudTd DataLabel="Provincia">@(context.Inspeccion.DatosEstablecimiento?.Provincia?.Nombre ?? "")</MudTd>
                     <MudTd Style="text-align:right">
-                        <MudMenu Icon="@Icons.Material.Filled.MoreVert" Dense="true">
-                            <MudMenuItem Icon="@Icons.Material.Outlined.Delete" OnTouch="@((e)=> OnDelete(@context))" OnClick="@((e)=> OnDelete(@context))">Eliminar</MudMenuItem>
-                        </MudMenu>
+                        <MudButton ButtonType="ButtonType.Button" Variant="Variant.Filled" Color="Color.Primary" Size="Size.Small" Class="ma-1" StartIcon="@Icons.Material.Filled.Edit" OnClick="@((e)=> OnSelect(@context.Id))">ABRIR</MudButton>
+                        @* <MudMenu Icon="@Icons.Material.Filled.MoreVert" Dense="true">
+                            <MudMenuItem Icon="@Icons.Material.Outlined.Delete" OnTouch="@((e)=> OnSelect(@context.Id))" OnClick="@((e)=> OnSelect(@context.Id))">Seleccionar</MudMenuItem>
+                        </MudMenu> *@
                     </MudTd>
                 </RowTemplate>
                 <NoRecordsContent>

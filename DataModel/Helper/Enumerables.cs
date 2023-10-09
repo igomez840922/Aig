@@ -1025,85 +1025,85 @@ namespace DataModel.Helper
     {
         [Description("None")]
         None = 0,
-        [Description("Cap01")]
+        [Description("Cap 01")]
         Cap01 = 1,
-        [Description("Cap02")]
+        [Description("Cap 02")]
         Cap02 = 2,
-        [Description("Cap03")]
+        [Description("Cap 03")]
         Cap03 = 3,
-        [Description("Cap04")]
+        [Description("Cap 04")]
         Cap04 = 4,
-        [Description("Cap05")]
+        [Description("Cap 05")]
         Cap05 = 5,
-        [Description("Cap06")]
+        [Description("Cap 06")]
         Cap06 = 6,
-        [Description("Cap07")]
+        [Description("Cap 07")]
         Cap07 = 7,
-        [Description("Cap08")]
+        [Description("Cap 08")]
         Cap08 = 8,
-        [Description("Cap09")]
+        [Description("Cap 09")]
         Cap09 = 9,
-        [Description("Cap10")]
+        [Description("Cap 10")]
         Cap10 = 10,
-        [Description("Cap11")]
+        [Description("Cap 11")]
         Cap11 = 11,
-        [Description("Cap12")]
+        [Description("Cap 12")]
         Cap12 = 12,
-        [Description("Cap13")]
+        [Description("Cap 13")]
         Cap13 = 13,
-        [Description("Cap14")]
+        [Description("Cap 14")]
         Cap14 = 14,
-        [Description("Cap15")]
+        [Description("Cap 15")]
         Cap15 = 15,
-        [Description("Cap16")]
+        [Description("Cap 16")]
         Cap16 = 16,
-        [Description("Cap17")]
+        [Description("Cap 17")]
         Cap17 = 17,
-        [Description("Cap18")]
+        [Description("Cap 18")]
         Cap18 = 18,
-        [Description("Cap19")]
+        [Description("Cap 19")]
         Cap19 = 19,
-        [Description("Cap20")]
+        [Description("Cap 20")]
         Cap20 = 20,
-        [Description("Cap21")]
+        [Description("Cap 21")]
         Cap21 = 21,
-        [Description("Cap22")]
+        [Description("Cap 22")]
         Cap22 = 22,
-        [Description("Cap23")]
+        [Description("Cap 23")]
         Cap23 = 23,
-        [Description("Cap24")]
+        [Description("Cap 24")]
         Cap24 = 24,
-        [Description("Cap25")]
+        [Description("Cap 25")]
         Cap25 = 25,
-        [Description("Cap26")]
+        [Description("Cap 26")]
         Cap26 = 26,
-        [Description("Cap27")]
+        [Description("Cap 27")]
         Cap27 = 27,
-        [Description("Cap28")]
+        [Description("Cap 28")]
         Cap28 = 28,
-        [Description("Cap29")]
+        [Description("Cap 29")]
         Cap29 = 29,
-        [Description("Cap30")]
+        [Description("Cap 30")]
         Cap30 = 30,
-        [Description("Cap31")]
+        [Description("Cap 31")]
         Cap31 = 31,
-        [Description("Cap32")]
+        [Description("Cap 32")]
         Cap32 = 32,
-        [Description("Cap33")]
+        [Description("Cap 33")]
         Cap33 = 33,
-        [Description("Cap34")]
+        [Description("Cap 34")]
         Cap34 = 34,
-        [Description("Cap35")]
+        [Description("Cap 35")]
         Cap35 = 35,
-        [Description("Cap36")]
+        [Description("Cap 36")]
         Cap36 = 36,
-        [Description("Cap37")]
+        [Description("Cap 37")]
         Cap37 = 37,
-        [Description("Cap38")]
+        [Description("Cap 38")]
         Cap38 = 38,
-        [Description("Cap39")]
+        [Description("Cap 39")]
         Cap39 = 39,
-        [Description("Cap40")]
+        [Description("Cap 40")]
         Cap40 = 40,
     }
 

@@ -194,10 +194,74 @@ namespace Aig.Auditoria.Controllers
                                 }
                                 break;
                             }
+                    
+                    
                     }
 
                     dalService.Save<AUD_InspeccionTB>(data);
 
+                    return Ok(data);
+                }
+            }
+            catch (Exception ex) { return BadRequest(new { message = ex.Message }); }
+            return BadRequest(new { message = "dato no encontrado" });
+        }
+
+
+
+        [HttpPost("DownloadPaises")]
+        public async Task<IActionResult> DownloadPaises([FromBody] APP_Updates lastUpdate)
+        {
+            try
+            {
+                var data = dalService.FindAll<PaisTB>(x => !x.Deleted && x.UpdatedDate >= lastUpdate.SettingsUpdate);
+                if (data?.Count > 0)
+                {
+                    return Ok(data);
+                }
+            }
+            catch (Exception ex) { return BadRequest(new { message = ex.Message }); }
+            return BadRequest(new { message = "dato no encontrado" });
+        }
+
+        [HttpPost("DownloadProvincias")]
+        public async Task<IActionResult> DownloadProvincias([FromBody] APP_Updates lastUpdate)
+        {
+            try
+            {
+                var data = dalService.FindAll<ProvinciaTB>(x => !x.Deleted && x.UpdatedDate >= lastUpdate.SettingsUpdate);
+                if (data?.Count > 0)
+                {
+                    return Ok(data);
+                }
+            }
+            catch (Exception ex) { return BadRequest(new { message = ex.Message }); }
+            return BadRequest(new { message = "dato no encontrado" });
+        }
+
+        [HttpPost("DownloadDistritos")]
+        public async Task<IActionResult> DownloadDistritos([FromBody] APP_Updates lastUpdate)
+        {
+            try
+            {
+                var data = dalService.FindAll<DistritoTB>(x => !x.Deleted && x.UpdatedDate >= lastUpdate.SettingsUpdate);
+                if (data?.Count > 0)
+                {
+                    return Ok(data);
+                }
+            }
+            catch (Exception ex) { return BadRequest(new { message = ex.Message }); }
+            return BadRequest(new { message = "dato no encontrado" });
+        }
+
+        [HttpPost("DownloadCorregimientos")]
+        public async Task<IActionResult> DownloadCorregimientos([FromBody] APP_Updates lastUpdate)
+        {
+            try
+            {
+                var data = dalService.FindAll<CorregimientoTB>(x => !x.Deleted && x.UpdatedDate >= lastUpdate.SettingsUpdate);
+                if (data?.Count > 0)
+                {
                     return Ok(data);
                 }
             }
