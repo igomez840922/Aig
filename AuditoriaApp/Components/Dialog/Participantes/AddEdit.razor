@@ -1,0 +1,47 @@
+﻿@implements IDisposable
+
+
+<MudDialog>
+    <DialogContent>
+        <MudContainer Style="max-height: 80vh; overflow-y: scroll!important">
+            @if (Data != null)
+            {
+                <EditForm Model="@Data" OnValidSubmit="SaveData">
+                    <DataAnnotationsValidator />
+                    <MudCard Outlined="false" Elevation="0">
+                        <MudCardContent>
+                            <MudPaper Class="pa-2" Elevation="0">
+                                <MudGrid>
+                                    <MudItem xs="12">
+                                        <MudTextField Margin="Margin.Dense" @bind-Value="Data.NombreCompleto" For="@(() => Data.NombreCompleto)" Label="Nombre Completo" Variant="Variant.Outlined" />
+                                    </MudItem>
+                                    <MudItem xs="6">
+                                        <MudTextField Margin="Margin.Dense" @bind-Value="Data.CedulaIdentificacion" For="@(() => Data.CedulaIdentificacion)" Label="Identificación" Variant="Variant.Outlined" />
+                                    </MudItem>
+                                    <MudItem xs="6">
+                                        <MudTextField Margin="Margin.Dense" @bind-Value="Data.RegistroNumero" For="@(() => Data.RegistroNumero)" Label="No. Registro" Variant="Variant.Outlined" />
+                                    </MudItem>
+                                    <MudItem xs="6">
+                                        <MudTextField Margin="Margin.Dense" @bind-Value="Data.Cargo" For="@(() => Data.Cargo)" Label="Cargo" Variant="Variant.Outlined" />
+                                    </MudItem>
+                                    <MudItem xs="6">
+                                        <MudTextField Margin="Margin.Dense" @bind-Value="Data.AreaEvaluada" For="@(() => Data.AreaEvaluada)" Label="Area Evaluada" Variant="Variant.Outlined" />
+                                    </MudItem>
+                                </MudGrid>                               
+                            </MudPaper>
+                        </MudCardContent>
+                        <MudCardActions Class="pt-4 pl-4">
+                            <div style="text-align:right;" class="ml-auto">
+                                <MudButton ButtonType="ButtonType.Button" Variant="Variant.Filled" Color="Color.Error" Size="Size.Medium" Class="ma-1" OnClick="Cancel" StartIcon="@Icons.Material.Filled.Cancel">Cancelar</MudButton>
+                                <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Primary" Size="Size.Medium" Class="ma-1" StartIcon="@Icons.Material.Filled.Save">Guardar</MudButton>
+                            </div>
+                        </MudCardActions>
+                        <MudOverlay Visible="loading" DarkBackground="true" Absolute="true">
+                            <MudProgressCircular Color="Color.Secondary" Indeterminate="true" />
+                        </MudOverlay>
+                    </MudCard>
+                </EditForm>
+            }
+        </MudContainer>
+    </DialogContent>
+</MudDialog>

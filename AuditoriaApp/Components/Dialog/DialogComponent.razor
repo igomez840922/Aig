@@ -1,6 +1,6 @@
 ﻿<style>
 
-    .mud-dialog .mud-dialog-content {
+    /* .mud-dialog .mud-dialog-content {
         padding: 0px !important;
     }
 
@@ -11,14 +11,19 @@
     .mud-container {
         padding-left: 0px !important;
         padding-right: 0px !important;
-    }
+    } */
 </style>
 <MudDialog>
     <DialogContent>
-        <MudText>@ContentText</MudText>
+        <MudGrid>
+            <MudItem xs="12">
+                <MudText>@ContentText</MudText>
+            </MudItem>
+        </MudGrid>
+       
     </DialogContent>
     <DialogActions>
-        <MudButton OnClick="Cancel">Cancel</MudButton>
-        <MudButton Color="@Color" Variant="Variant.Filled" OnClick="Submit">@ButtonText</MudButton>
+        <MudButton ButtonType="ButtonType.Button" Variant="Variant.Filled" OnClick="Cancel" Color="Color.Primary">Cancelar</MudButton>
+        <MudButton ButtonType="ButtonType.Button" Variant="Variant.Filled" Color="@Color" OnClick="Submit">@ButtonText</MudButton>
     </DialogActions>
 </MudDialog>

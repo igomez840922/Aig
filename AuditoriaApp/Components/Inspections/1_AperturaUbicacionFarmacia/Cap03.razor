@@ -1,0 +1,61 @@
+﻿@if (Inspeccion?.Inspeccion?.InspAperCambUbicFarm?.DatosRegente != null)
+{
+    <EditForm Model="@Inspeccion.Inspeccion" OnValidSubmit="Save">
+        <DataAnnotationsValidator />
+        <MudCard Elevation="25">
+            <MudCardHeader>
+                @*  <CardHeaderAvatar>
+            <MudAvatar Color="Color.Secondary">I</MudAvatar>
+            </CardHeaderAvatar> *@
+                <CardHeaderContent>
+                    <MudText Typo="Typo.body1">@(Inspeccion.Inspeccion.NumActa) - @(DataModel.Helper.Helper.GetDescription(Inspeccion.Inspeccion.TipoActa))</MudText>
+                </CardHeaderContent>
+                <CardHeaderActions>
+                    <MudMenu Icon="@Icons.Material.Filled.MoreVert">
+                        <MudMenuItem Icon="@Icons.Material.Outlined.Save" OnTouch="@((e)=> Save())" OnClick="@((e)=> Save())">Guardar</MudMenuItem>
+                        <MudMenuItem Icon="@Icons.Material.Filled.Logout" OnClick="@((e)=> Cancel())" OnTouch="@((e)=> Cancel())">Salir</MudMenuItem>
+                    </MudMenu>
+                </CardHeaderActions>
+            </MudCardHeader>
+            <MudCardContent>
+                <MudGrid>
+                    <MudItem xs="12">
+                        <MudText Typo="Typo.body1">Información del Regente Farmacéutico</MudText>
+                    </MudItem>
+                </MudGrid>
+                <MudGrid>
+                    <MudItem xs="12" md="6">
+                        <MudTextField Margin="Margin.Dense" @bind-Value="Inspeccion.Inspeccion.InspAperCambUbicFarm.DatosRegente.Nombre" Label="Nombre Completo" Variant="Variant.Outlined" For="@(() => Inspeccion.Inspeccion.InspAperCambUbicFarm.DatosRegente.Nombre)" />
+                    </MudItem>
+                    <MudItem xs="12" md="6">
+                        <MudTextField Margin="Margin.Dense" @bind-Value="Inspeccion.Inspeccion.InspAperCambUbicFarm.DatosRegente.NumRegistro" Label="Número de Registro de Idoneidad" Variant="Variant.Outlined" For="@(() => Inspeccion.Inspeccion.InspAperCambUbicFarm.DatosRegente.NumRegistro)" />
+                    </MudItem>
+                    <MudItem xs="12" md="6">
+                        <MudTextField Margin="Margin.Dense" @bind-Value="Inspeccion.Inspeccion.InspAperCambUbicFarm.DatosRegente.Cedula" Label="Identificación" Variant="Variant.Outlined" For="@(() => Inspeccion.Inspeccion.InspAperCambUbicFarm.DatosRegente.Cedula)" />
+                    </MudItem>
+                    <MudItem xs="12" md="6">
+                        <MudTextField Margin="Margin.Dense" @bind-Value="Inspeccion.Inspeccion.InspAperCambUbicFarm.DatosRegente.Email" Label="Correo" Variant="Variant.Outlined" For="@(() => Inspeccion.Inspeccion.InspAperCambUbicFarm.DatosRegente.Email)" />
+                    </MudItem>
+                    <MudItem xs="12" md="6">
+                        <MudTextField Margin="Margin.Dense" @bind-Value="Inspeccion.Inspeccion.InspAperCambUbicFarm.DatosRegente.TelefonoMovil" Label="Telefono Movil" Variant="Variant.Outlined" For="@(() => Inspeccion.Inspeccion.InspAperCambUbicFarm.DatosRegente.TelefonoMovil)" />
+                    </MudItem>
+                </MudGrid>
+
+            </MudCardContent>
+            <MudCardActions Class="pt-4 pl-4">
+                <div style="text-align:right;" class="ml-auto">
+                    <MudButton ButtonType="ButtonType.Button" Variant="Variant.Filled" Color="Color.Primary" Size="Size.Medium" Class="ma-1" OnClick="@((e)=> SaveExit())" StartIcon="@Icons.Material.Filled.Save">Guardar y Salir</MudButton>
+                    <MudButton ButtonType="ButtonType.Button" Variant="Variant.Filled" Color="Color.Primary" Size="Size.Medium" Class="ma-1" OnClick="@((e)=> Save())" EndIcon="@Icons.Material.Filled.SaveAs">Guardar</MudButton>
+                    <MudButton ButtonType="ButtonType.Button" Variant="Variant.Filled" Color="Color.Error" Size="Size.Medium" Class="ma-1" OnClick="@((e)=> Cancel())" StartIcon="@Icons.Material.Filled.Logout">Salir</MudButton>
+                </div>
+            </MudCardActions>
+        </MudCard>
+
+    </EditForm>
+
+
+
+
+
+
+}

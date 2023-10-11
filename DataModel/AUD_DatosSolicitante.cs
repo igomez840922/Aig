@@ -3,6 +3,7 @@ using DataModel.Helper;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -28,6 +29,11 @@ namespace DataModel
         private string nacionalidad;
         [StringLength(250)]
         public string Nacionalidad { get => nacionalidad; set => SetProperty(ref nacionalidad, value); }
+
+        //Solicitante - Nacionalidad
+        private PaisTB pais;
+        [NotMapped()]
+        public PaisTB Pais { get => pais; set { pais = value; if (pais != null) { Nacionalidad = pais?.Nombre ?? ""; } } }
 
         //Solicitante Telefono Oficina
         private string telefonoOfic;

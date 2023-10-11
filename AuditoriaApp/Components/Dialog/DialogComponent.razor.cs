@@ -9,7 +9,7 @@ namespace AuditoriaApp.Components.Dialog
 
         [Parameter] public string ContentText { get; set; }
 
-        [Parameter] public string ButtonText { get; set; } = "Confirm";
+        [Parameter] public string ButtonText { get; set; } = "Confirmar";
 
         [Parameter] public MudBlazor.Color Color { get; set; } = MudBlazor.Color.Error;
 

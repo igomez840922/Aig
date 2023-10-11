@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace AuditoriaApp.Components.Inspections._1_AperturaUbicacionFarmacia
 {
@@ -32,9 +33,7 @@ namespace AuditoriaApp.Components.Inspections._1_AperturaUbicacionFarmacia
 
         [Parameter]
         public EventCallback BackToMain { get; set; }
-
-        List<MenuOptionModel> MenuOptions { get; set; } = new List<MenuOptionModel>();
-        enumSelectedChapter selectedChapter { get; set; } = enumSelectedChapter.None;
+       
 
         List<ProvinciaTB> LProvincias { get; set; }
         List<DistritoTB> LDistritos { get; set; }
@@ -88,40 +87,71 @@ namespace AuditoriaApp.Components.Inspections._1_AperturaUbicacionFarmacia
         ////////////////////
         ///
 
-        protected async Task Cancel()
+        protected async Task Cancel(bool warning=true)
         {
             try
             {                
+                if(warning)
+                {
+                    var parameters = new DialogParameters{
+             { nameof(Components.Dialog.DialogComponent.ContentText), string.Format("Los cambios no guardados se perderán. Está seguro desea salir?") }};
+                    var options = new DialogOptions { CloseButton = true, MaxWidth = MaxWidth.Small, FullWidth = true, DisableBackdropClick = true };
+                    var dialog = _dialogService.Show<Components.Dialog.DialogComponent>("Confirmar Salir", parameters, options);
+                    var result = await dialog.Result;
+                    if (result.Cancelled)
+                    {
+                        return;
+                    }
+                }
                 this.BackToMain.InvokeAsync();
             }
-            catch { }
+            catch (Exception ex)
+            {
+                snackbar.Add(ex.Message, Severity.Error);
+            }
             finally
             {
                 await this.InvokeAsync(StateHasChanged);
             }
         }
 
-        protected async Task Save()
+        protected async Task<bool> Save()
         {
             try
             {
-
+                Inspeccion.Inspeccion.PendingUpdate = true;
+                Inspeccion.Inspeccion.DatosEstablecimiento.PendingUpdate = true;
+                var data = inspectionService.Save(Inspeccion);
+                if(data != null) {
+                    snackbar.Add("Datos guardados satisfactoriamente", Severity.Info);
+                    return true;
+                }
             }
-            catch { }
+            catch (Exception ex)
+            {
+                snackbar.Add(ex.Message, Severity.Error);
+            }
             finally
             {
                 await this.InvokeAsync(StateHasChanged);
             }
+            snackbar.Add("Error al guardar los datos", Severity.Error);
+            return false;
         }
 
         protected async Task SaveExit()
         {
             try
             {
-                await Save();
-                await Cancel();
+                if(await Save())
+                {
+                    await Cancel(false);
+                }
             }
-            catch { }
+            catch (Exception ex)
+            {
+                snackbar.Add(ex.Message, Severity.Error);
+            }
             finally
             {
                 await this.InvokeAsync(StateHasChanged);
@@ -146,6 +176,45 @@ namespace AuditoriaApp.Components.Inspections._1_AperturaUbicacionFarmacia
             LCorregimientos = null;
             LCorregimientos = LCorregimientos?.Count > 0 ? LCorregimientos : (await corregimientoService.GetAllByDist(distrito?.Id ?? 0));
             LCorregimientos = LCorregimientos != null ? LCorregimientos : new List<CorregimientoTB>();
+            await this.InvokeAsync(StateHasChanged);
+        }
+
+        ////////////////////////////////////
+        ///
+        private async Task EditParticipant(Participante data = null)
+        {
+            data = data!= null ? data : new Participante();
+            var parameters = new DialogParameters { ["Data"] = data };
+            var options = new DialogOptions { CloseButton = true, MaxWidth = MaxWidth.Medium, FullWidth = true, DisableBackdropClick = true };
+            var dialog = _dialogService.Show<Components.Dialog.Participantes.AddEdit>(data!=null? "Editar Participante" : "Agregar Participante", parameters, options);
+            var result = await dialog.Result;
+            if (!result.Cancelled)
+            {
+                if (result.Data != null)
+                {
+                    var actividad = (Participante)result.Data;
+                    Inspeccion.Inspeccion.ParticipantesDNFD.LParticipantes = Inspeccion.Inspeccion.ParticipantesDNFD.LParticipantes?.Count > 0 ? Inspeccion.Inspeccion.ParticipantesDNFD.LParticipantes : new List<Participante>();
+                    if (!Inspeccion.Inspeccion.ParticipantesDNFD.LParticipantes.Contains(actividad))
+                        Inspeccion.Inspeccion.ParticipantesDNFD.LParticipantes.Add(actividad);
+                    await this.InvokeAsync(StateHasChanged);
+                }
+            }
+
+        }
+        private async Task RemoveParticipant(Participante data)
+        {
+            //Open Modal
+            var parameters = new DialogParameters{
+             { nameof(Components.Dialog.DialogComponent.ContentText), string.Format("Está seguro desea eliminar el dato seleccionado?") }};
+            var options = new DialogOptions { CloseButton = true, MaxWidth = MaxWidth.Small, FullWidth = true, DisableBackdropClick = true };
+            var dialog = _dialogService.Show<Components.Dialog.DialogComponent>("Confirmar Eliminar", parameters, options);
+            var result = await dialog.Result;
+            if (result.Cancelled)
+            {
+                return;
+            }
+
+            Inspeccion.Inspeccion.ParticipantesDNFD.LParticipantes.Remove(data);
             await this.InvokeAsync(StateHasChanged);
         }
     }
