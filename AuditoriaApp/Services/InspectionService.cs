@@ -35,7 +35,7 @@ namespace AuditoriaApp.Services
 
                 var lastUpdate = await accountDataService.FirstLastUpdate();
                 lastUpdate = lastUpdate != null ? lastUpdate : new APP_Updates() { InspectionsUpdate = DateTime.Now.AddMonths(-3) };
-                //lastUpdate.InspectionsUpdate = DateTime.Now.AddMonths(-3);
+                lastUpdate.InspectionsUpdate = DateTime.Now.AddMonths(-5);
 
                 var content = JsonSerializer.Serialize(lastUpdate);
                 var bodyContent = new StringContent(content, Encoding.UTF8, "application/json");

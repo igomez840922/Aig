@@ -28,6 +28,7 @@ namespace AuditoriaApp.Helper
             //optionsBuilder.UseLazyLoadingProxies();
 
             string dbPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "AuditoriaApp_EF11.db");
+            //Path.Combine(FileSystem.Current.AppDataDirectory, "AuditoriaApp_EF01.db");
             optionsBuilder.UseSqlite(string.Format("Filename={0}", dbPath));//("Filename=YourDatabase.db");
 
             base.OnConfiguring(optionsBuilder);

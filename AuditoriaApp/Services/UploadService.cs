@@ -14,6 +14,7 @@ namespace AuditoriaApp.Services
         private readonly IApiConnectionService apiConnectionService;
         private readonly JsonSerializerOptions options;
         private readonly IAccountDataService accountDataService;
+        //private readonly IWebHostEnvironment env;
 
         public UploadService(IApiConnectionService apiConnectionService, IAccountDataService accountDataService)
         {
@@ -21,46 +22,84 @@ namespace AuditoriaApp.Services
             this.options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
             this.accountDataService = accountDataService;
         }
-
-        public async Task<FileUploadResult> UploadFile(IBrowserFile File)
+   
+        public async Task<FileUploadResult> UploadFile(IBrowserFile file)//([FromForm] IEnumerable<IFormFile> files)
         {
 
-            var accountData = await accountDataService.First();
-            apiConnectionService.Client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("bearer", accountData.AccessToken);
-
-            using (var formData = new MultipartFormDataContent())
-            {
-                formData.Add(new StreamContent(File.OpenReadStream(File.Size)), "file", File.Name);;
-
-                var authResult = await apiConnectionService.Client.PostAsync("FileUpload/UploadFile", formData);
-                var authContent = await authResult.Content.ReadAsStringAsync();
-                if (authResult.IsSuccessStatusCode)
+            try
+            {      
+                if (file != null)
                 {
-                    var result = JsonSerializer.Deserialize<FileUploadResult>(authContent, options);
-                    return result;
+                    var buffer = new byte[file.Size];
+                    var stream = file.OpenReadStream();
+                    await stream.ReadAsync(buffer, 0, (int)file.Size);
+
+                    //var dir = Path.Combine(env.WebRootPath, "files");//Path.GetRandomFileName()
+                    //var dir = Path.Combine("wwwroot", "files");//Path.GetRandomFileName()
+                    //                                           //var dir = Path.Combine("Files");
+                    //FileSystem.AppDataDirectory
+                    string dir = Path.Combine(FileSystem.Current.AppDataDirectory, "AuditoriaApp");
+                    //Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "AuditoriaApp");
+                    if (!Directory.Exists(dir))
+                    {
+                        Directory.CreateDirectory(dir);
+                    }
+
+                    var fileName = string.Format("{0}.{1}", Guid.NewGuid().ToString(), file.Name.Split(".").LastOrDefault());
+                    var path = System.IO.Path.Combine(dir, fileName);
+
+                    //var path = Path.Combine(dir, file.FileName);
+                    using (FileStream fileStream = new FileStream(path, FileMode.Create))
+                    {
+                        await fileStream.WriteAsync(buffer, 0, buffer.Length);
+                    }
+
+                    var model = new FileUploadResult()
+                    {
+                        AbsolutePath = path,
+                        Url = string.Format("/files/{0}", fileName),
+                        FileName = fileName
+                    };
+
+                    return model;
                 }
-                return null;
-            }            
+            }
+            catch { }
+            return null;
         }
-                
+
         public async Task<bool> DeleteFile(AttachmentTB data)
         {
-            var accountData = await accountDataService.First();
-            apiConnectionService.Client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("bearer", accountData.AccessToken);
-
-            var content = JsonSerializer.Serialize(data);
-            var bodyContent = new StringContent(content, Encoding.UTF8, "application/json");
-
-            var authResult = await apiConnectionService.Client.PostAsync("FileUpload/DeleteFile", bodyContent);
-            var authContent = await authResult.Content.ReadAsStringAsync();
-            if (authResult.IsSuccessStatusCode)
+            try
             {
-                return true;
+                if (System.IO.File.Exists(data.AbsolutePath))
+                {
+                    System.IO.File.Delete(data.AbsolutePath);
+
+                    return true;
+                }
             }
+            catch{}
             return false;
         }
 
-
+        public async Task ExecuteFile(string filePath)
+        {
+            try
+            {
+                if (!string.IsNullOrEmpty(filePath))
+                {
+                    await Launcher.OpenAsync(new OpenFileRequest
+                    {
+                        File = new ReadOnlyFile(filePath)
+                    });
+                }
+            }
+            catch (Exception ex)
+            {
+                // Handle exceptions, e.g., if there's no associated app to open the file
+            }
+        }
 
     }
 

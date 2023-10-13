@@ -10,5 +10,7 @@ namespace AuditoriaApp.Services
         Task<FileUploadResult> UploadFile(IBrowserFile File);
 
         Task<bool> DeleteFile(AttachmentTB data);
+
+        Task ExecuteFile(string filePath);
     }
 }

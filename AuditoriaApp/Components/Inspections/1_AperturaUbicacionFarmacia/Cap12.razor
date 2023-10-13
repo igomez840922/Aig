@@ -1,0 +1,117 @@
+﻿@if (Inspeccion?.Inspeccion?.DatosConclusiones != null)
+{
+    <EditForm Model="@Inspeccion.Inspeccion" OnValidSubmit="Save">
+        <DataAnnotationsValidator />
+        <MudCard Elevation="25">
+            <MudCardHeader>
+                @*  <CardHeaderAvatar>
+            <MudAvatar Color="Color.Secondary">I</MudAvatar>
+            </CardHeaderAvatar> *@
+                <CardHeaderContent>
+                    <MudText Typo="Typo.body1">@(Inspeccion.Inspeccion.NumActa) - @(DataModel.Helper.Helper.GetDescription(Inspeccion.Inspeccion.TipoActa))</MudText>
+                </CardHeaderContent>
+                <CardHeaderActions>
+                    <MudMenu Icon="@Icons.Material.Filled.MoreVert">
+                        <MudMenuItem Icon="@Icons.Material.Outlined.Save" OnTouch="@((e)=> Save())" OnClick="@((e)=> Save())">Guardar</MudMenuItem>
+                        <MudMenuItem Icon="@Icons.Material.Filled.Logout" OnClick="@((e)=> Cancel())" OnTouch="@((e)=> Cancel())">Salir</MudMenuItem>
+                    </MudMenu>
+                </CardHeaderActions>
+            </MudCardHeader>
+            <MudCardHeader>
+                <CardHeaderContent>
+                    <MudText Typo="Typo.h6" Color="Color.Dark">Firmas</MudText>
+                </CardHeaderContent>
+            </MudCardHeader>
+            <MudCardHeader>
+                <CardHeaderContent>
+                    <MudText Typo="Typo.h6" Color="Color.Dark">Por el Establecimiento</MudText>
+                </CardHeaderContent>
+            </MudCardHeader>
+            <MudCardContent>
+                <MudGrid>                     
+                    <MudItem xs="12" md="12">
+                        <MudTextField Margin="Margin.Dense" @bind-Value="Inspeccion.Inspeccion.InspAperCambUbicFarm.DatosSolicitante.Nombre" Label="Nombre Completo" Variant="Variant.Outlined" For="@(() => Inspeccion.Inspeccion.InspAperCambUbicFarm.DatosSolicitante.Nombre)"/>
+                    </MudItem>
+                    <MudItem xs="12" md="6">
+                        <MudTextField Margin="Margin.Dense" @bind-Value="Inspeccion.Inspeccion.InspAperCambUbicFarm.DatosSolicitante.Cargo" Label="Cargo" Variant="Variant.Outlined" For="@(() => Inspeccion.Inspeccion.InspAperCambUbicFarm.DatosSolicitante.Cargo)" />
+                    </MudItem>
+                    <MudItem xs="12" md="6">
+                        <MudTextField Margin="Margin.Dense" @bind-Value="Inspeccion.Inspeccion.InspAperCambUbicFarm.DatosSolicitante.Cedula" Label="Cédula" Variant="Variant.Outlined" For="@(() => Inspeccion.Inspeccion.InspAperCambUbicFarm.DatosSolicitante.Cedula)" />
+                    </MudItem>
+                    
+                            <MudItem xs="12" md="6">
+                        <SignaturePad @bind-Value="Inspeccion.Inspeccion.InspAperCambUbicFarm.DatosSolicitante.FirmaData" />
+                            </MudItem>
+                </MudGrid>
+            </MudCardContent>
+            <MudCardHeader>
+                <CardHeaderContent>
+                    <MudText Typo="Typo.h6" Color="Color.Dark">Regente Farmaceutico</MudText>
+                </CardHeaderContent>
+            </MudCardHeader>
+            <MudCardContent>
+                <MudGrid>
+                    <MudItem xs="12" md="12">
+                        <MudTextField Margin="Margin.Dense" @bind-Value="Inspeccion.Inspeccion.InspAperCambUbicFarm.DatosRegente.Nombre" Label="Nombre Completo" Variant="Variant.Outlined" For="@(() => Inspeccion.Inspeccion.InspAperCambUbicFarm.DatosRegente.Nombre)" />
+                    </MudItem>
+                    <MudItem xs="12" md="6">
+                        <MudTextField Margin="Margin.Dense" @bind-Value="Inspeccion.Inspeccion.InspAperCambUbicFarm.DatosRegente.Cargo" Label="Cargo" Variant="Variant.Outlined" For="@(() => Inspeccion.Inspeccion.InspAperCambUbicFarm.DatosRegente.Cargo)" />
+                    </MudItem>
+                    <MudItem xs="12" md="6">
+                        <MudTextField Margin="Margin.Dense" @bind-Value="Inspeccion.Inspeccion.InspAperCambUbicFarm.DatosRegente.Cedula" Label="Cédula" Variant="Variant.Outlined" For="@(() => Inspeccion.Inspeccion.InspAperCambUbicFarm.DatosRegente.Cedula)" />
+                    </MudItem>
+                    <MudItem xs="12" md="6">
+                        <MudTextField Margin="Margin.Dense" @bind-Value="Inspeccion.Inspeccion.InspAperCambUbicFarm.DatosRegente.NumRegistro" Label="No. Registro" Variant="Variant.Outlined" For="@(() => Inspeccion.Inspeccion.InspAperCambUbicFarm.DatosRegente.NumRegistro)" />
+                    </MudItem>
+                    <MudItem xs="12" md="6"></MudItem>
+                    
+                            <MudItem xs="12" md="6">
+                        <SignaturePad @bind-Value="Inspeccion.Inspeccion.InspAperCambUbicFarm.DatosRegente.FirmaData" />
+                            </MudItem>
+                </MudGrid>
+            </MudCardContent>
+
+            @if (Inspeccion.Inspeccion?.ParticipantesDNFD?.LParticipantes?.Count > 0)
+            {
+                <MudCardHeader>
+                    <CardHeaderContent>
+                        <MudText Typo="Typo.h6" Color="Color.Dark">Participantes DNFD</MudText>
+                    </CardHeaderContent>
+                </MudCardHeader>
+                <MudCardContent>
+                    @foreach (var dt in Inspeccion.Inspeccion.ParticipantesDNFD.LParticipantes)
+                    {
+                        <MudGrid>
+                            <MudItem xs="12" md="12">
+                                <MudTextField Margin="Margin.Dense" @bind-Value="dt.NombreCompleto" Label="Nombre Completo" Variant="Variant.Outlined" For="@(() => dt.NombreCompleto)" />
+                            </MudItem>
+                            <MudItem xs="12" md="6">
+                                <MudTextField Margin="Margin.Dense" @bind-Value="dt.CedulaIdentificacion" Label="Cédula" Variant="Variant.Outlined" For="@(() => dt.CedulaIdentificacion)" />
+                            </MudItem>
+                            <MudItem xs="12" md="6">
+                                <MudTextField Margin="Margin.Dense" @bind-Value="dt.RegistroNumero" Label="No. Registro" Variant="Variant.Outlined" For="@(() => dt.RegistroNumero)" />
+                            </MudItem>
+                            <MudItem xs="12" md="6">
+                                <SignaturePad @bind-Value="dt.FirmaData" />
+                            </MudItem>
+                             <MudItem xs="12" md="12">
+                               @*  <MudDivider /> *@
+                             </MudItem>
+                        </MudGrid>
+                        
+                    }
+                </MudCardContent>
+            }
+
+            <MudCardActions Class="pt-4 pl-4">
+                <div style="text-align:right;" class="ml-auto">
+                    <MudButton ButtonType="ButtonType.Button" Variant="Variant.Filled" Color="Color.Primary" Size="Size.Medium" Class="ma-1" OnClick="@((e)=> SaveExit())" StartIcon="@Icons.Material.Filled.Save">Guardar y Salir</MudButton>
+                    <MudButton ButtonType="ButtonType.Button" Variant="Variant.Filled" Color="Color.Primary" Size="Size.Medium" Class="ma-1" OnClick="@((e)=> Save())" EndIcon="@Icons.Material.Filled.SaveAs">Guardar</MudButton>
+                    <MudButton ButtonType="ButtonType.Button" Variant="Variant.Filled" Color="Color.Error" Size="Size.Medium" Class="ma-1" OnClick="@((e)=> Cancel())" StartIcon="@Icons.Material.Filled.Logout">Salir</MudButton>
+                </div>
+            </MudCardActions>
+        </MudCard>
+
+    </EditForm>
+
+}

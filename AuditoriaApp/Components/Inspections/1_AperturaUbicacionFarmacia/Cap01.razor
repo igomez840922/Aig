@@ -17,12 +17,13 @@
                     </MudMenu>
                 </CardHeaderActions>
             </MudCardHeader>
+            <MudCardHeader>
+                <CardHeaderContent>
+                    <MudText Typo="Typo.h6" Color="Color.Dark">Información General</MudText>
+                </CardHeaderContent>
+            </MudCardHeader>
             <MudCardContent>
-                <MudGrid>
-                    <MudItem xs="12">
-                        <MudText Typo="Typo.body1">Información General</MudText>
-                    </MudItem>
-
+                <MudGrid>   
                     <MudItem xs="12" md="6">
                         <MudDatePicker type PickerVariant="PickerVariant.Dialog" Margin="Margin.Dense" @bind-Date="@(Inspeccion.Inspeccion.FechaInicioTemp)" For="@(() => Inspeccion.Inspeccion.FechaInicioTemp)" DateFormat="dd/MM/yyyy" Variant="Variant.Outlined" Label="Fecha de Evaluación" />
                     </MudItem>
@@ -87,47 +88,53 @@
                         <MudTextField Margin="Margin.Dense" @bind-Value="Inspeccion.Inspeccion.DatosEstablecimiento.Correo" Label="Correo" Variant="Variant.Outlined" For="@(() => Inspeccion.Inspeccion.DatosEstablecimiento.Correo)" />
                     </MudItem>
                 </MudGrid>
+                
+             </MudCardContent>
+            <MudCardHeader>
+                <CardHeaderContent>
+                    <MudText Typo="Typo.h6" Color="Color.Dark">Lista de Participantes</MudText>
+                </CardHeaderContent>
+            </MudCardHeader>
+            <MudCardContent>
                 <MudGrid>
-                    <MudItem xs="12">
-                        <MudText Typo="Typo.body1">Lista de Participantes</MudText>
-                    </MudItem>
+                    
                     <MudItem xs="12">
 
-                        @if (Inspeccion.Inspeccion?.ParticipantesDNFD?.LParticipantes!=null)
-        {
+                        @if (Inspeccion.Inspeccion?.ParticipantesDNFD?.LParticipantes != null)
+                        {
                             <MudTable Items="@(Inspeccion.Inspeccion.ParticipantesDNFD.LParticipantes)" Dense="false" Hover="true" Bordered="false" Striped="true">
                                 <HeaderContent>
-                    <MudTh>Nombre</MudTh>
+                                    <MudTh>Nombre</MudTh>
                                     <MudTh>Identificación</MudTh>
                                     <MudTh>No. Registro</MudTh>
                                     <MudTh>Cargo</MudTh>
                                     <MudTh Style="text-align:right!important">
                                         <MudButton ButtonType="ButtonType.Button" Variant="Variant.Filled" Color="Color.Primary" Size="Size.Medium" Class="ma-1" StartIcon="@Icons.Material.Filled.Add" OnClick="@((e)=> EditParticipant())">Agregar</MudButton>
                                     </MudTh>
-                </HeaderContent>
+                                </HeaderContent>
                                 <RowTemplate Context="tbContext">
                                     <MudTd DataLabel="Nombre">@(tbContext.NombreCompleto)</MudTd>
                                     <MudTd DataLabel="Identificación">@(tbContext.CedulaIdentificacion)</MudTd>
                                     <MudTd DataLabel="No. Registro">@(tbContext.RegistroNumero)</MudTd>
                                     <MudTd DataLabel="Cargo">@(tbContext.Cargo)</MudTd>
-                        <MudTd Style="text-align:right!important">
+                                    <MudTd Style="text-align:right!important">
                                         <MudMenu Icon="@Icons.Material.Filled.MoreVert">
                                             <MudMenuItem Icon="@Icons.Material.Outlined.Edit" OnTouch="@((e)=> EditParticipant(tbContext))" OnClick="@((e)=> EditParticipant(tbContext))">Editar</MudMenuItem>
                                             <MudMenuItem Icon="@Icons.Material.Filled.Remove" OnClick="@((e)=> RemoveParticipant(tbContext))" OnTouch="@((e)=> RemoveParticipant(tbContext))">Eliminar</MudMenuItem>
                                         </MudMenu>
-                        </MudTd>
-                </RowTemplate>              
-                <LoadingContent>
-                    <MudText>Cargando...</MudText>
-                </LoadingContent>               
-            </MudTable>
-        }
+                                    </MudTd>
+                                </RowTemplate>
+                                <LoadingContent>
+                                    <MudText>Cargando...</MudText>
+                                </LoadingContent>
+                            </MudTable>
+                        }
 
 
-    </MudItem>
+                    </MudItem>
                 </MudGrid>
-             
-             </MudCardContent>
+
+            </MudCardContent>
             <MudCardActions Class="pt-4 pl-4">
                 <div style="text-align:right;" class="ml-auto">
                     <MudButton ButtonType="ButtonType.Button" Variant="Variant.Filled" Color="Color.Primary" Size="Size.Medium" Class="ma-1" OnClick="@((e)=> SaveExit())" StartIcon="@Icons.Material.Filled.Save">Guardar y Salir</MudButton>

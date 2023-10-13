@@ -9,6 +9,11 @@ namespace DataModel
 {
     public class Participante : SystemId
     {
+        public Participante()
+        {
+            FirmaData = Array.Empty<byte>();
+        }
+        
         //Inspector 1 Nombre
         private string nombreCompleto;
         [Required(ErrorMessage = "requerido")]
@@ -38,6 +43,8 @@ namespace DataModel
         private string areaEvaluada;
         public string AreaEvaluada { get => areaEvaluada; set => SetProperty(ref areaEvaluada, value); }
 
-
+        private byte[] firmaData;
+        public byte[] FirmaData { get { return firmaData; } set { firmaData = value; if (firmaData?.Length > 0) { Firma = Encoding.UTF8.GetString(FirmaData); }; } }
+    
     }
 }

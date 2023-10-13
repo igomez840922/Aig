@@ -15,6 +15,11 @@ namespace DataModel
     /// </summary>
     public class AUD_DatosSolicitante: SystemId
     {
+        public AUD_DatosSolicitante()
+        {
+            FirmaData = Array.Empty<byte>();
+        }
+
         //Solicitante - nombre
         private string nombre;
         [StringLength(250)]
@@ -93,6 +98,11 @@ namespace DataModel
         //El establecimiento se compromete al fiel cumplimiento del Artículo 386 del Decreto Ejecutivo 115 De 16 de agosto de 2022? Firma de Regente Farmacéutico
         private string firma;
         public string Firma { get => firma; set => SetProperty(ref firma, value); }
+
+        //public string? Firma { get { return (FirmaData != null ? Encoding.UTF8.GetString(FirmaData) : null); } set { } }
+
+        private byte[] firmaData;
+        public byte[] FirmaData { get { return firmaData; } set { firmaData = value; if (firmaData?.Length > 0) { Firma = Encoding.UTF8.GetString(FirmaData); }; } } 
 
     }
 }

@@ -79,7 +79,7 @@ namespace AuditoriaApp.Components.Attachments
                     _options = _options != null ? _options : new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
                     if (selectedFile.Size > maxFileSize)
                     {
-                        snackbar.Add("Ha excedido el máximo de 10MB", Severity.Error);
+                        snackbar.Add(string.Format("Ha excedido el máximo de 10MB"), Severity.Error);
                         return;
                     }
 

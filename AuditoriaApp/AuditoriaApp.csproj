@@ -96,6 +96,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\DataModel\DataModel.csproj" />
+      <ProjectReference Include="..\SigPad\SignaturePad\SignaturePad\SignaturePad.csproj" />
     </ItemGroup>
 
 </Project>
