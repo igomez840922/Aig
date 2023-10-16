@@ -142,6 +142,7 @@ namespace Aig.Auditoria.Controllers
                         case DataModel.Helper.enumAUD_TipoActa.AF:
                         case DataModel.Helper.enumAUD_TipoActa.CUF:
                             {
+                                inspeccion.InspAperCambUbicFarm.PendingUpdate = false;
                                 if (inspeccion.InspAperCambUbicFarm?.DatosSolicitante?.PendingUpdate ?? false)
                                 {
                                     data.InspAperCambUbicFarm.DatosSolicitante = inspeccion.InspAperCambUbicFarm.DatosSolicitante;
@@ -194,9 +195,106 @@ namespace Aig.Auditoria.Controllers
                                 }
                                 break;
                             }
-                    
-                    
+                        case DataModel.Helper.enumAUD_TipoActa.AA:
+                        case DataModel.Helper.enumAUD_TipoActa.CUA:
+                            {
+                                inspeccion.InspAperCambUbicAgen.PendingUpdate = false;
+                                if (inspeccion.InspAperCambUbicAgen?.DatosSolicitante?.PendingUpdate ?? false)
+                                {
+                                    data.InspAperCambUbicAgen.DatosSolicitante = inspeccion.InspAperCambUbicAgen.DatosSolicitante;
+                                    data.InspAperCambUbicAgen.DatosSolicitante.PendingUpdate = false;
+                                }
+                                if (inspeccion.InspAperCambUbicAgen?.DatosRegente?.PendingUpdate ?? false)
+                                {
+                                    data.InspAperCambUbicAgen.DatosRegente = inspeccion.InspAperCambUbicAgen.DatosRegente;
+                                    data.InspAperCambUbicAgen.DatosRegente.PendingUpdate = false;
+                                }
+                                if (inspeccion.InspAperCambUbicAgen?.CondCaractEstablecimiento?.PendingUpdate ?? false)
+                                {
+                                    data.InspAperCambUbicAgen.CondCaractEstablecimiento = inspeccion.InspAperCambUbicAgen.CondCaractEstablecimiento;
+                                    data.InspAperCambUbicAgen.CondCaractEstablecimiento.PendingUpdate = false;
+                                }
+                                if (inspeccion.InspAperCambUbicAgen?.AreaAdministrativa?.PendingUpdate ?? false)
+                                {
+                                    data.InspAperCambUbicAgen.AreaAdministrativa = inspeccion.InspAperCambUbicAgen.AreaAdministrativa;
+                                    data.InspAperCambUbicAgen.AreaAdministrativa.PendingUpdate = false;
+                                }
+                                if (inspeccion.InspAperCambUbicAgen?.AreaRecepcionProducto?.PendingUpdate ?? false)
+                                {
+                                    data.InspAperCambUbicAgen.AreaRecepcionProducto = inspeccion.InspAperCambUbicAgen.AreaRecepcionProducto;
+                                    data.InspAperCambUbicAgen.AreaRecepcionProducto.PendingUpdate = false;
+                                }
+                                if (inspeccion.InspAperCambUbicAgen?.AreaAlmacenamiento?.PendingUpdate ?? false)
+                                {
+                                    data.InspAperCambUbicAgen.AreaAlmacenamiento = inspeccion.InspAperCambUbicAgen.AreaAlmacenamiento;
+                                    data.InspAperCambUbicAgen.AreaAlmacenamiento.PendingUpdate = false;
+                                }
+                                if (inspeccion.InspAperCambUbicAgen?.AreaProductosDevueltosVencidos?.PendingUpdate ?? false)
+                                {
+                                    data.InspAperCambUbicAgen.AreaProductosDevueltosVencidos = inspeccion.InspAperCambUbicAgen.AreaProductosDevueltosVencidos;
+                                    data.InspAperCambUbicAgen.AreaProductosDevueltosVencidos.PendingUpdate = false;
+                                }
+                                if (inspeccion.InspAperCambUbicAgen?.AreaProductosRetiradosMercado?.PendingUpdate ?? false)
+                                {
+                                    data.InspAperCambUbicAgen.AreaProductosRetiradosMercado = inspeccion.InspAperCambUbicAgen.AreaProductosRetiradosMercado;
+                                    data.InspAperCambUbicAgen.AreaProductosRetiradosMercado.PendingUpdate = false;
+                                }
+                                if (inspeccion.InspAperCambUbicAgen?.AreaDespachoProductos?.PendingUpdate ?? false)
+                                {
+                                    data.InspAperCambUbicAgen.AreaDespachoProductos = inspeccion.InspAperCambUbicAgen.AreaDespachoProductos;
+                                    data.InspAperCambUbicAgen.AreaDespachoProductos.PendingUpdate = false;
+                                }
+                                if (inspeccion.InspAperCambUbicAgen?.AreaAlmacenProdReqCadenaFrio?.PendingUpdate ?? false)
+                                {
+                                    data.InspAperCambUbicAgen.AreaAlmacenProdReqCadenaFrio = inspeccion.InspAperCambUbicAgen.AreaAlmacenProdReqCadenaFrio;
+                                    data.InspAperCambUbicAgen.AreaAlmacenProdReqCadenaFrio.PendingUpdate = false;
+                                }
+                                if (inspeccion.InspAperCambUbicAgen?.AreaAlmacenProdVolatiles?.PendingUpdate ?? false)
+                                {
+                                    data.InspAperCambUbicAgen.AreaAlmacenProdVolatiles = inspeccion.InspAperCambUbicAgen.AreaAlmacenProdVolatiles;
+                                    data.InspAperCambUbicAgen.AreaAlmacenProdVolatiles.PendingUpdate = false;
+                                }
+                                if (inspeccion.InspAperCambUbicAgen?.AreaAlmacenPlaguicidas?.PendingUpdate ?? false)
+                                {
+                                    data.InspAperCambUbicAgen.AreaAlmacenPlaguicidas = inspeccion.InspAperCambUbicAgen.AreaAlmacenPlaguicidas;
+                                    data.InspAperCambUbicAgen.AreaAlmacenPlaguicidas.PendingUpdate = false;
+                                }
+                                if (inspeccion.InspAperCambUbicAgen?.AreaAlmacenMateriaPrima?.PendingUpdate ?? false)
+                                {
+                                    data.InspAperCambUbicAgen.AreaAlmacenMateriaPrima = inspeccion.InspAperCambUbicAgen.AreaAlmacenMateriaPrima;
+                                    data.InspAperCambUbicAgen.AreaAlmacenMateriaPrima.PendingUpdate = false;
+                                }
+                                if (inspeccion.InspAperCambUbicAgen?.AreaAlmacenProdSujetosControl?.PendingUpdate ?? false)
+                                {
+                                    data.InspAperCambUbicAgen.AreaAlmacenProdSujetosControl = inspeccion.InspAperCambUbicAgen.AreaAlmacenProdSujetosControl;
+                                    data.InspAperCambUbicAgen.AreaAlmacenProdSujetosControl.PendingUpdate = false;
+                                }
+                                if (inspeccion.InspAperCambUbicAgen?.AreaDesperdicio?.PendingUpdate ?? false)
+                                {
+                                    data.InspAperCambUbicAgen.AreaDesperdicio = inspeccion.InspAperCambUbicAgen.AreaDesperdicio;
+                                    data.InspAperCambUbicAgen.AreaDesperdicio.PendingUpdate = false;
+                                }
+                                if (inspeccion.InspAperCambUbicAgen?.Requisitos?.PendingUpdate ?? false)
+                                {
+                                    data.InspAperCambUbicAgen.Requisitos = inspeccion.InspAperCambUbicAgen.Requisitos;
+                                    data.InspAperCambUbicAgen.Requisitos.PendingUpdate = false;
+                                }
+                                if (inspeccion.InspAperCambUbicAgen?.Actividades?.PendingUpdate ?? false)
+                                {
+                                    data.InspAperCambUbicAgen.Actividades = inspeccion.InspAperCambUbicAgen.Actividades;
+                                    data.InspAperCambUbicAgen.Actividades.PendingUpdate = false;
+                                }
+                                if (inspeccion.InspAperCambUbicAgen?.Productos?.PendingUpdate ?? false)
+                                {
+                                    data.InspAperCambUbicAgen.Productos = inspeccion.InspAperCambUbicAgen.Productos;
+                                    data.InspAperCambUbicAgen.Productos.PendingUpdate = false;
+                                }
+                                break;
+                            }                          
+
                     }
+
+                    data.PendingUpdate = false;
 
                     dalService.Save<AUD_InspeccionTB>(data);
 
