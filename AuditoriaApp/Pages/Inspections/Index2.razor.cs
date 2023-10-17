@@ -93,6 +93,7 @@ namespace AuditoriaApp.Pages.Inspections
             await bus.Publish(new OverlayShowEvent { Show = true });
             try
             {
+                await inspectionService.InspectionsUpload();
                 await inspectionService.InspectionsSync();
                 await FetchData();
                 snackbar.Add("Sincronización Finalizada", Severity.Info);

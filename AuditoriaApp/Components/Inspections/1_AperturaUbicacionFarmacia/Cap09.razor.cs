@@ -111,6 +111,7 @@ namespace AuditoriaApp.Components.Inspections._1_AperturaUbicacionFarmacia
         {
             try
             {
+                Inspeccion.PendingUpdate = true;
                 Inspeccion.Inspeccion.PendingUpdate = true;
                 Inspeccion.Inspeccion.InspAperCambUbicFarm.PendingUpdate = true;
                 Inspeccion.Inspeccion.InspAperCambUbicFarm.DatosAreaAlmacenamiento.PendingUpdate = true;

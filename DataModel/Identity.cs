@@ -11,6 +11,7 @@ namespace DataModel
         long Id { get; }
         bool Deleted { get; set; }
         DateTime UpdatedDate { get; set; }
-        DateTime CreatedDate { get; set; }        
+        DateTime CreatedDate { get; set; }
+        bool PendingUpdate { get; set; }
     }
 }

@@ -5,14 +5,8 @@ using DataModel.Helper;
 using DataModel.Models;
 using Microsoft.AspNetCore.Components;
 using MudBlazor;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
-namespace AuditoriaApp.Components.Inspections._1_AperturaUbicacionFarmacia
+namespace AuditoriaApp.Components.Inspections._2_AperturaUbicacionAgencia
 {
     public partial class Cap01
     {

@@ -17,6 +17,7 @@ namespace DataModel
         public AUD_DatosRegente()
         {
             FirmaData = Array.Empty<byte>();
+            RealizaOtraFuncion = enumAUD_TipoSeleccion.No;
         }
 
         //Regente - Nombre

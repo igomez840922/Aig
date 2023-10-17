@@ -124,6 +124,7 @@ namespace AuditoriaApp.Services
             try
             {
                 _Data.UpdatedDate = DateTime.Now;
+
                 //var _OldData = DBContext.Set<T>().Find(_Data.Id);
                 //if (_OldData != null)
                 //{                    

@@ -7,14 +7,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
-namespace AuditoriaApp.Components.Inspections._1_AperturaUbicacionFarmacia
+namespace AuditoriaApp.Components.Inspections._2_AperturaUbicacionAgencia
 {
-    public partial class Cap11
+    public partial class Cap19
     {
         [Inject]
-        IInspectionService inspectionService { get; set; }       
+        IInspectionService inspectionService { get; set; }
         [Inject]
         IUploadService uploadManager { get; set; }
 
@@ -27,7 +26,7 @@ namespace AuditoriaApp.Components.Inspections._1_AperturaUbicacionFarmacia
         [Parameter]
         public EventCallback BackToMain { get; set; }
 
-        
+
         /////////////////////////
         ///
         protected async override Task OnInitializedAsync()
@@ -54,7 +53,7 @@ namespace AuditoriaApp.Components.Inspections._1_AperturaUbicacionFarmacia
         protected async Task FetchData()
         {
             try
-            {                
+            {
                 Inspeccion.Inspeccion.DatosConclusiones = Inspeccion.Inspeccion.DatosConclusiones != null ? Inspeccion.Inspeccion.DatosConclusiones : new AUD_DatosConclusiones();
 
                 await LoadData();
@@ -68,7 +67,7 @@ namespace AuditoriaApp.Components.Inspections._1_AperturaUbicacionFarmacia
 
         protected async Task LoadData()
         {
-            
+
             await this.InvokeAsync(StateHasChanged);
         }
 
@@ -109,7 +108,10 @@ namespace AuditoriaApp.Components.Inspections._1_AperturaUbicacionFarmacia
             {
                 Inspeccion.PendingUpdate = true;
                 Inspeccion.Inspeccion.PendingUpdate = true;
-                Inspeccion.Inspeccion.DatosConclusiones.PendingUpdate = true;
+                Inspeccion.Inspeccion.InspAperCambUbicAgen.DatosSolicitante.PendingUpdate = true;
+                Inspeccion.Inspeccion.InspAperCambUbicAgen.DatosRegente.PendingUpdate = true;
+                Inspeccion.Inspeccion.ParticipantesDNFD.PendingUpdate = true;
+
                 var data = inspectionService.Save(Inspeccion);
                 if (data != null)
                 {
@@ -153,7 +155,8 @@ namespace AuditoriaApp.Components.Inspections._1_AperturaUbicacionFarmacia
 
         private async Task UploadFile()
         {
-            try {
+            try
+            {
                 var parameters = new DialogParameters { };
                 var options = new DialogOptions { CloseButton = true, MaxWidth = MaxWidth.Medium, FullWidth = true, DisableBackdropClick = true };
                 var dialog = dialogService.Show<AuditoriaApp.Components.Attachments.AddEdit>("Adjuntar Archivo", parameters, options);
@@ -174,7 +177,7 @@ namespace AuditoriaApp.Components.Inspections._1_AperturaUbicacionFarmacia
         private async Task DeleteFile(AttachmentTB file)
         {
             try
-            { 
+            {
                 //Open Modal
                 var parameters = new DialogParameters{
              { nameof(Components.Dialog.DialogComponent.ContentText), string.Format("Está seguro desea eliminar el dato seleccionado?") }};
