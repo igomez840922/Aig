@@ -36,10 +36,10 @@
                         <MudTextField Margin="Margin.Dense" @bind-Value="Inspeccion.Inspeccion.DatosEstablecimiento.NumLicencia" Label="No. Licencia" Variant="Variant.Outlined" For="@(() => Inspeccion.Inspeccion.DatosEstablecimiento.NumLicencia)" />
                     </MudItem>
                     <MudItem xs="12" md="6">
-                        <MudDatePicker type PickerVariant="PickerVariant.Dialog" Margin="Margin.Dense" @bind-Date="@(Inspeccion.Inspeccion.DatosEstablecimiento.VigenteDesde)" For="@(() => Inspeccion.Inspeccion.DatosEstablecimiento.VigenteDesde)" DateFormat="dd/MM/yyyy" Variant="Variant.Outlined" Label="Vigente Desde" />
+                        <MudDatePicker PickerVariant="PickerVariant.Dialog" Margin="Margin.Dense" @bind-Date="@(Inspeccion.Inspeccion.DatosEstablecimiento.VigenteDesde)" For="@(() => Inspeccion.Inspeccion.DatosEstablecimiento.VigenteDesde)" DateFormat="dd/MM/yyyy" Variant="Variant.Outlined" Label="Vigente Desde" />
                     </MudItem>
                     <MudItem xs="12" md="6">
-                        <MudDatePicker type PickerVariant="PickerVariant.Dialog" Margin="Margin.Dense" @bind-Date="@(Inspeccion.Inspeccion.DatosEstablecimiento.VigenteHasta)" For="@(() => Inspeccion.Inspeccion.DatosEstablecimiento.VigenteHasta)" DateFormat="dd/MM/yyyy" Variant="Variant.Outlined" Label="Vigente Hasta" />
+                        <MudDatePicker PickerVariant="PickerVariant.Dialog" Margin="Margin.Dense" @bind-Date="@(Inspeccion.Inspeccion.DatosEstablecimiento.VigenteHasta)" For="@(() => Inspeccion.Inspeccion.DatosEstablecimiento.VigenteHasta)" DateFormat="dd/MM/yyyy" Variant="Variant.Outlined" Label="Vigente Hasta" />
                     </MudItem>
                     <MudItem xs="12" md="6">
                         <MudTextField Margin="Margin.Dense" @bind-Value="Inspeccion.Inspeccion.DatosEstablecimiento.AvisoOperaciones" Label="Aviso de Operaciones" Variant="Variant.Outlined" For="@(() => Inspeccion.Inspeccion.DatosEstablecimiento.AvisoOperaciones)" />

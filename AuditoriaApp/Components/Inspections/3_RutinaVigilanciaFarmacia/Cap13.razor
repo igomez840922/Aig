@@ -1,0 +1,114 @@
+﻿@if (Inspeccion?.Inspeccion?.InspRutinaVigFarmacia?.InventarioMedicamento != null)
+{
+    <EditForm Model="@Inspeccion.Inspeccion" OnValidSubmit="Save">
+        <DataAnnotationsValidator />
+        <MudCard Elevation="25">
+            <MudCardHeader>
+                @*  <CardHeaderAvatar>
+            <MudAvatar Color="Color.Secondary">I</MudAvatar>
+            </CardHeaderAvatar> *@
+                <CardHeaderContent>
+                    <MudText Typo="Typo.body1">@(Inspeccion.Inspeccion.NumActa) - @(DataModel.Helper.Helper.GetDescription(Inspeccion.Inspeccion.TipoActa))</MudText>
+                </CardHeaderContent>
+                <CardHeaderActions>
+                    <MudMenu Icon="@Icons.Material.Filled.MoreVert">
+                        <MudMenuItem Icon="@Icons.Material.Outlined.Save" OnTouch="@((e)=> Save())" OnClick="@((e)=> Save())">Guardar</MudMenuItem>
+                        <MudMenuItem Icon="@Icons.Material.Filled.Logout" OnClick="@((e)=> Cancel())" OnTouch="@((e)=> Cancel())">Salir</MudMenuItem>
+                    </MudMenu>
+                </CardHeaderActions>
+            </MudCardHeader>
+            <MudCardHeader>
+                <CardHeaderContent>
+                    <MudText Typo="Typo.h6" Color="Color.Dark">Inventario de Medicamentos de Uso Controlado</MudText>
+                </CardHeaderContent>
+            </MudCardHeader>
+            <MudCardContent>
+
+                <MudGrid>
+
+                    <MudItem xs="12">
+
+                        @if (Inspeccion.Inspeccion.InspRutinaVigFarmacia?.InventarioMedicamento?.LProductos != null)
+                        {
+                            <MudTable Items="@(Inspeccion.Inspeccion.InspRutinaVigFarmacia.InventarioMedicamento.LProductos)" Dense="false" Hover="true" Bordered="false" Striped="true">
+                                <HeaderContent>
+                                    <MudTh>Nombre</MudTh>
+                                    <MudTh>Laboratorio</MudTh>
+                                    <MudTh>Lote</MudTh>
+                                    <MudTh>Vencimiento</MudTh>
+                                    <MudTh>Inventario Realizado</MudTh>
+                                    <MudTh>Cant. Registrada Sistema</MudTh>
+                                    <MudTh>Observaciones</MudTh>
+                                    <MudTh Style="text-align:right!important">
+                                        <MudButton ButtonType="ButtonType.Button" Variant="Variant.Filled" Color="Color.Primary" Size="Size.Medium" Class="ma-1" StartIcon="@Icons.Material.Filled.Add" OnClick="@((e)=> EditProduct())">Agregar</MudButton>
+                                    </MudTh>
+                                </HeaderContent>
+                                <RowTemplate Context="tbContext">
+                                    <MudTd DataLabel="Nombre">@(tbContext.Nombre)</MudTd>
+                                    <MudTd DataLabel="Laboratorio">@(tbContext.Fabricante)</MudTd>
+                                    <MudTd DataLabel="Lote">@(tbContext.Lote)</MudTd>
+                                    <MudTd DataLabel="Vencimiento">@(tbContext.FechaVencimiento?.ToString("dd/MM/yyyy") ?? "")</MudTd>
+                                    <MudTd DataLabel="Inventario Realizado">@(tbContext.Existencia)</MudTd>
+                                    <MudTd DataLabel="Cant. Registrada Sistema">@(tbContext.RegistroSistema)</MudTd>
+                                    <MudTd DataLabel="Observaciones">@(tbContext.Motivos)</MudTd>
+                                    <MudTd Style="text-align:right!important">
+                                        <MudMenu Icon="@Icons.Material.Filled.MoreVert">
+                                            <MudMenuItem Icon="@Icons.Material.Outlined.Edit" OnTouch="@((e)=> EditProduct(tbContext))" OnClick="@((e)=> EditProduct(tbContext))">Editar</MudMenuItem>
+                                            <MudMenuItem Icon="@Icons.Material.Filled.Remove" OnClick="@((e)=> RemoveProduct(tbContext))" OnTouch="@((e)=> RemoveProduct(tbContext))">Eliminar</MudMenuItem>
+                                        </MudMenu>
+                                    </MudTd>
+                                </RowTemplate>
+                                <LoadingContent>
+                                    <MudText>Cargando...</MudText>
+                                </LoadingContent>
+                            </MudTable>
+                        }
+
+
+                    </MudItem>
+
+                    
+                    <MudItem xs="12" md="6">
+                        <MudSelect Margin="Margin.Dense" T="DataModel.Helper.enumAUD_TipoSeleccion" Label="Se realizó inventario al azar" Variant="Variant.Outlined" AnchorOrigin="Origin.BottomCenter" @bind-Value="Inspeccion.Inspeccion.InspRutinaVigFarmacia.InventarioMedicamento.InventarioAlAzar" For="@(() => Inspeccion.Inspeccion.InspRutinaVigFarmacia.InventarioMedicamento.InventarioAlAzar)">
+                            @foreach (DataModel.Helper.enumAUD_TipoSeleccion dt in Enum.GetValues(typeof(DataModel.Helper.enumAUD_TipoSeleccion)))
+                            {
+                                if(dt!= DataModel.Helper.enumAUD_TipoSeleccion.NA)
+                                {
+                                    <MudSelectItem T="DataModel.Helper.enumAUD_TipoSeleccion" Value="dt">@DataModel.Helper.Helper.GetDescription(dt)</MudSelectItem>
+                                }                                
+                            }
+                        </MudSelect>
+                    </MudItem>
+                    <MudItem xs="12" md="6">
+                        <MudTextField Margin="Margin.Dense" @bind-Value="Inspeccion.Inspeccion.InspRutinaVigFarmacia.InventarioMedicamento.CantidadAlAzar" Label="Cant. de Productos Inventariados" Variant="Variant.Outlined" For="@(() => Inspeccion.Inspeccion.InspRutinaVigFarmacia.InventarioMedicamento.CantidadAlAzar)" />
+                    </MudItem>
+                    <MudItem xs="12" md="6">
+                        <MudSelect Margin="Margin.Dense" T="DataModel.Helper.enumAUD_TipoSeleccion" Label="Se realizó inventario de todos los productos a la venta" Variant="Variant.Outlined" AnchorOrigin="Origin.BottomCenter" @bind-Value="Inspeccion.Inspeccion.InspRutinaVigFarmacia.InventarioMedicamento.InventarioProductosVenta" For="@(() => Inspeccion.Inspeccion.InspRutinaVigFarmacia.InventarioMedicamento.InventarioProductosVenta)">
+                            @foreach (DataModel.Helper.enumAUD_TipoSeleccion dt in Enum.GetValues(typeof(DataModel.Helper.enumAUD_TipoSeleccion)))
+                            {
+                                if (dt != DataModel.Helper.enumAUD_TipoSeleccion.NA)
+                                {
+                                    <MudSelectItem T="DataModel.Helper.enumAUD_TipoSeleccion" Value="dt">@DataModel.Helper.Helper.GetDescription(dt)</MudSelectItem>
+                                }
+                            }
+                        </MudSelect>
+                    </MudItem>
+                </MudGrid>
+            </MudCardContent>
+            <MudCardActions Class="pt-4 pl-4">
+                <div style="text-align:right;" class="ml-auto">
+                    <MudButton ButtonType="ButtonType.Button" Variant="Variant.Filled" Color="Color.Primary" Size="Size.Medium" Class="ma-1" OnClick="@((e)=> SaveExit())" StartIcon="@Icons.Material.Filled.Save">Guardar y Salir</MudButton>
+                    <MudButton ButtonType="ButtonType.Button" Variant="Variant.Filled" Color="Color.Primary" Size="Size.Medium" Class="ma-1" OnClick="@((e)=> Save())" EndIcon="@Icons.Material.Filled.SaveAs">Guardar</MudButton>
+                    <MudButton ButtonType="ButtonType.Button" Variant="Variant.Filled" Color="Color.Error" Size="Size.Medium" Class="ma-1" OnClick="@((e)=> Cancel())" StartIcon="@Icons.Material.Filled.Logout">Salir</MudButton>
+                </div>
+            </MudCardActions>
+        </MudCard>
+
+    </EditForm>
+
+
+
+
+
+
+}
