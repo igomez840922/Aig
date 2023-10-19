@@ -1,0 +1,74 @@
+﻿@if (Inspeccion?.Inspeccion?.InspRutinaVigAgencia?.DatosRegente != null)
+{
+    <EditForm Model="@Inspeccion.Inspeccion" OnValidSubmit="Save">
+        <DataAnnotationsValidator />
+        <MudCard Elevation="25">
+            <MudCardHeader>
+                @*  <CardHeaderAvatar>
+            <MudAvatar Color="Color.Secondary">I</MudAvatar>
+            </CardHeaderAvatar> *@
+                <CardHeaderContent>
+                    <MudText Typo="Typo.body1">@(Inspeccion.Inspeccion.NumActa) - @(DataModel.Helper.Helper.GetDescription(Inspeccion.Inspeccion.TipoActa))</MudText>
+                </CardHeaderContent>
+                <CardHeaderActions>
+                    <MudMenu Icon="@Icons.Material.Filled.MoreVert">
+                        <MudMenuItem Icon="@Icons.Material.Outlined.Save" OnTouch="@((e)=> Save())" OnClick="@((e)=> Save())">Guardar</MudMenuItem>
+                        <MudMenuItem Icon="@Icons.Material.Filled.Logout" OnClick="@((e)=> Cancel())" OnTouch="@((e)=> Cancel())">Salir</MudMenuItem>
+                    </MudMenu>
+                </CardHeaderActions>
+            </MudCardHeader>
+            <MudCardHeader>
+                <CardHeaderContent>
+                    <MudText Typo="Typo.h6" Color="Color.Dark">Datos sobre el Regente Farmacéutico de la Empresa</MudText>
+                </CardHeaderContent>
+            </MudCardHeader>
+            <MudCardContent>                
+                <MudGrid>
+                    <MudItem xs="12" md="6">
+                        <MudTextField Margin="Margin.Dense" @bind-Value="Inspeccion.Inspeccion.InspRutinaVigAgencia.DatosRegente.Nombre" Label="Nombre Completo" Variant="Variant.Outlined" For="@(() => Inspeccion.Inspeccion.InspRutinaVigAgencia.DatosRegente.Nombre)" />
+                    </MudItem>
+                    <MudItem xs="12" md="6">
+                        <MudTextField Margin="Margin.Dense" @bind-Value="Inspeccion.Inspeccion.InspRutinaVigAgencia.DatosRegente.NumRegistro" Label="Número de Registro de Idoneidad" Variant="Variant.Outlined" For="@(() => Inspeccion.Inspeccion.InspRutinaVigAgencia.DatosRegente.NumRegistro)" />
+                    </MudItem>
+                    <MudItem xs="12" md="6">
+                        <MudTextField Margin="Margin.Dense" @bind-Value="Inspeccion.Inspeccion.InspRutinaVigAgencia.DatosRegente.Cedula" Label="Identificación" Variant="Variant.Outlined" For="@(() => Inspeccion.Inspeccion.InspRutinaVigAgencia.DatosRegente.Cedula)" />
+                    </MudItem>
+                    <MudItem xs="12" md="6">
+                        <MudTextField Margin="Margin.Dense" @bind-Value="Inspeccion.Inspeccion.InspRutinaVigAgencia.DatosRegente.Email" Label="Correo" Variant="Variant.Outlined" For="@(() => Inspeccion.Inspeccion.InspRutinaVigAgencia.DatosRegente.Email)" />
+                    </MudItem>
+                    <MudItem xs="12" md="6">
+                        <MudTextField Margin="Margin.Dense" @bind-Value="Inspeccion.Inspeccion.InspRutinaVigAgencia.DatosRegente.TelefonoMovil" Label="Telefono Movil" Variant="Variant.Outlined" For="@(() => Inspeccion.Inspeccion.InspRutinaVigAgencia.DatosRegente.TelefonoMovil)" />
+                    </MudItem>
+                    <MudItem xs="12" md="6">
+                        <MudSelect Margin="Margin.Dense" T="DataModel.Helper.enumAUD_TipoSeleccion" Label="Se encontraba presente al momento de la inspección?" Variant="Variant.Outlined" AnchorOrigin="Origin.BottomCenter" @bind-Value="Inspeccion.Inspeccion.InspRutinaVigAgencia.DatosRegente.PresenteEnInspeccion" For="@(() => Inspeccion.Inspeccion.InspRutinaVigAgencia.DatosRegente.PresenteEnInspeccion)">
+                            @foreach (DataModel.Helper.enumAUD_TipoSeleccion dt in Enum.GetValues(typeof(DataModel.Helper.enumAUD_TipoSeleccion)))
+                            {
+                                if(dt!= DataModel.Helper.enumAUD_TipoSeleccion.NA)
+                                {
+                                    <MudSelectItem T="DataModel.Helper.enumAUD_TipoSeleccion" Value="dt">@DataModel.Helper.Helper.GetDescription(dt)</MudSelectItem>
+                                }                                
+                            }
+                        </MudSelect>
+                    </MudItem>
+                    <MudItem xs="12" md="12">
+                        <MudTextField Margin="Margin.Dense" @bind-Value="Inspeccion.Inspeccion.InspRutinaVigAgencia.DatosRegente.HorarioRegencia" Label="Horario declarado en la Licencia de Operación" Variant="Variant.Outlined" For="@(() => Inspeccion.Inspeccion.InspRutinaVigAgencia.DatosRegente.HorarioRegencia)" />
+                    </MudItem>
+                </MudGrid>
+            </MudCardContent>
+            <MudCardActions Class="pt-4 pl-4">
+                <div style="text-align:right;" class="ml-auto">
+                    <MudButton ButtonType="ButtonType.Button" Variant="Variant.Filled" Color="Color.Primary" Size="Size.Medium" Class="ma-1" OnClick="@((e)=> SaveExit())" StartIcon="@Icons.Material.Filled.Save">Guardar y Salir</MudButton>
+                    <MudButton ButtonType="ButtonType.Button" Variant="Variant.Filled" Color="Color.Primary" Size="Size.Medium" Class="ma-1" OnClick="@((e)=> Save())" EndIcon="@Icons.Material.Filled.SaveAs">Guardar</MudButton>
+                    <MudButton ButtonType="ButtonType.Button" Variant="Variant.Filled" Color="Color.Error" Size="Size.Medium" Class="ma-1" OnClick="@((e)=> Cancel())" StartIcon="@Icons.Material.Filled.Logout">Salir</MudButton>
+                </div>
+            </MudCardActions>
+        </MudCard>
+
+    </EditForm>
+
+
+
+
+
+
+}

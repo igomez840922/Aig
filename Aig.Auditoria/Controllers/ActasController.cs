@@ -361,6 +361,101 @@ namespace Aig.Auditoria.Controllers
                                 }
                                 break;
                             }
+                        case DataModel.Helper.enumAUD_TipoActa.VA:
+                            {
+                                inspeccion.InspRutinaVigAgencia.PendingUpdate = false;
+                                if (inspeccion.InspRutinaVigAgencia?.DatosRepresentLegal?.PendingUpdate ?? false)
+                                {
+                                    data.InspRutinaVigAgencia.DatosRepresentLegal = inspeccion.InspRutinaVigAgencia.DatosRepresentLegal;
+                                    data.InspRutinaVigAgencia.DatosRepresentLegal.PendingUpdate = false;
+                                }
+                                if (inspeccion.InspRutinaVigAgencia?.DatosRegente?.PendingUpdate ?? false)
+                                {
+                                    data.InspRutinaVigAgencia.DatosRegente = inspeccion.InspRutinaVigAgencia.DatosRegente;
+                                    data.InspRutinaVigAgencia.DatosRegente.PendingUpdate = false;
+                                }
+                                if (inspeccion.InspRutinaVigAgencia?.CondCaractEstablecimiento?.PendingUpdate ?? false)
+                                {
+                                    data.InspRutinaVigAgencia.CondCaractEstablecimiento = inspeccion.InspRutinaVigAgencia.CondCaractEstablecimiento;
+                                    data.InspRutinaVigAgencia.CondCaractEstablecimiento.PendingUpdate = false;
+                                }
+                                if (inspeccion.InspRutinaVigAgencia?.AreaRecepcionProducto?.PendingUpdate ?? false)
+                                {
+                                    data.InspRutinaVigAgencia.AreaRecepcionProducto = inspeccion.InspRutinaVigAgencia.AreaRecepcionProducto;
+                                    data.InspRutinaVigAgencia.AreaRecepcionProducto.PendingUpdate = false;
+                                }
+                                if (inspeccion.InspRutinaVigAgencia?.AreaAlmacenamiento?.PendingUpdate ?? false)
+                                {
+                                    data.InspRutinaVigAgencia.AreaAlmacenamiento = inspeccion.InspRutinaVigAgencia.AreaAlmacenamiento;
+                                    data.InspRutinaVigAgencia.AreaAlmacenamiento.PendingUpdate = false;
+                                }
+                                if (inspeccion.InspRutinaVigAgencia?.AreaProductosDevueltosVencidos?.PendingUpdate ?? false)
+                                {
+                                    data.InspRutinaVigAgencia.AreaProductosDevueltosVencidos = inspeccion.InspRutinaVigAgencia.AreaProductosDevueltosVencidos;
+                                    data.InspRutinaVigAgencia.AreaProductosDevueltosVencidos.PendingUpdate = false;
+                                }
+                                if (inspeccion.InspRutinaVigAgencia?.AreaProductosRetiradosMercado?.PendingUpdate ?? false)
+                                {
+                                    data.InspRutinaVigAgencia.AreaProductosRetiradosMercado = inspeccion.InspRutinaVigAgencia.AreaProductosRetiradosMercado;
+                                    data.InspRutinaVigAgencia.AreaProductosRetiradosMercado.PendingUpdate = false;
+                                }
+                                if (inspeccion.InspRutinaVigAgencia?.AreaDespachoProductos?.PendingUpdate ?? false)
+                                {
+                                    data.InspRutinaVigAgencia.AreaDespachoProductos = inspeccion.InspRutinaVigAgencia.AreaDespachoProductos;
+                                    data.InspRutinaVigAgencia.AreaDespachoProductos.PendingUpdate = false;
+                                }
+                                if (inspeccion.InspRutinaVigAgencia?.AreaAlmacenProdReqCadenaFrio?.PendingUpdate ?? false)
+                                {
+                                    data.InspRutinaVigAgencia.AreaAlmacenProdReqCadenaFrio = inspeccion.InspRutinaVigAgencia.AreaAlmacenProdReqCadenaFrio;
+                                    data.InspRutinaVigAgencia.AreaAlmacenProdReqCadenaFrio.PendingUpdate = false;
+                                }
+                                if (inspeccion.InspRutinaVigAgencia?.AreaAlmacenProdVolatiles?.PendingUpdate ?? false)
+                                {
+                                    data.InspRutinaVigAgencia.AreaAlmacenProdVolatiles = inspeccion.InspRutinaVigAgencia.AreaAlmacenProdVolatiles;
+                                    data.InspRutinaVigAgencia.AreaAlmacenProdVolatiles.PendingUpdate = false;
+                                }
+                                if (inspeccion.InspRutinaVigAgencia?.AreaAlmacenPlaguicidas?.PendingUpdate ?? false)
+                                {
+                                    data.InspRutinaVigAgencia.AreaAlmacenPlaguicidas = inspeccion.InspRutinaVigAgencia.AreaAlmacenPlaguicidas;
+                                    data.InspRutinaVigAgencia.AreaAlmacenPlaguicidas.PendingUpdate = false;
+                                }
+                                if (inspeccion.InspRutinaVigAgencia?.AreaAlmacenMateriaPrima?.PendingUpdate ?? false)
+                                {
+                                    data.InspRutinaVigAgencia.AreaAlmacenMateriaPrima = inspeccion.InspRutinaVigAgencia.AreaAlmacenMateriaPrima;
+                                    data.InspRutinaVigAgencia.AreaAlmacenMateriaPrima.PendingUpdate = false;
+                                }
+                                if (inspeccion.InspRutinaVigAgencia?.AreaAlmacenProdSujetosControl?.PendingUpdate ?? false)
+                                {
+                                    data.InspRutinaVigAgencia.AreaAlmacenProdSujetosControl = inspeccion.InspRutinaVigAgencia.AreaAlmacenProdSujetosControl;
+                                    data.InspRutinaVigAgencia.AreaAlmacenProdSujetosControl.PendingUpdate = false;
+                                }
+                                if (inspeccion.InspRutinaVigAgencia?.Procedimientos?.PendingUpdate ?? false)
+                                {
+                                    data.InspRutinaVigAgencia.Procedimientos = inspeccion.InspRutinaVigAgencia.Procedimientos;
+                                    data.InspRutinaVigAgencia.Procedimientos.PendingUpdate = false;
+                                }
+                                if (inspeccion.InspRutinaVigAgencia?.Transporte?.PendingUpdate ?? false)
+                                {
+                                    data.InspRutinaVigAgencia.Transporte = inspeccion.InspRutinaVigAgencia.Transporte;
+                                    data.InspRutinaVigAgencia.Transporte.PendingUpdate = false;
+                                }
+                                if (inspeccion.InspRutinaVigAgencia?.Actividades?.PendingUpdate ?? false)
+                                {
+                                    data.InspRutinaVigAgencia.Actividades = inspeccion.InspRutinaVigAgencia.Actividades;
+                                    data.InspRutinaVigAgencia.Actividades.PendingUpdate = false;
+                                }
+                                if (inspeccion.InspRutinaVigAgencia?.Productos?.PendingUpdate ?? false)
+                                {
+                                    data.InspRutinaVigAgencia.Productos = inspeccion.InspRutinaVigAgencia.Productos;
+                                    data.InspRutinaVigAgencia.Productos.PendingUpdate = false;
+                                }
+                                if (inspeccion.InspRutinaVigAgencia?.InventarioMedicamento?.PendingUpdate ?? false)
+                                {
+                                    data.InspRutinaVigAgencia.InventarioMedicamento = inspeccion.InspRutinaVigAgencia.InventarioMedicamento;
+                                    data.InspRutinaVigAgencia.InventarioMedicamento.PendingUpdate = false;
+                                }
+                                break;
+                            }
 
 
                     }

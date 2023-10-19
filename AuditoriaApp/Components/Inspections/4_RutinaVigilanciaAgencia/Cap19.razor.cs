@@ -1,8 +1,5 @@
-﻿using AuditoriaApp.Events.Overlay;
-using AuditoriaApp.Services;
+﻿using AuditoriaApp.Services;
 using DataModel;
-using DataModel.Helper;
-using DataModel.Models;
 using Microsoft.AspNetCore.Components;
 using MudBlazor;
 using System;
@@ -10,34 +7,27 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
-namespace AuditoriaApp.Components.Inspections._1_AperturaUbicacionFarmacia
+namespace AuditoriaApp.Components.Inspections._4_RutinaVigilanciaAgencia
 {
-    public partial class Cap01
+    public partial class Cap19
     {
         [Inject]
         IInspectionService inspectionService { get; set; }
         [Inject]
-        IProvinciaService provinciaService { get; set; }
-        [Inject]
-        ICorregimientoService corregimientoService { get; set; }
-        [Inject]
-        IDistritoService distritoService { get; set; }
+        IPaisService paisService { get; set; }
+
 
         [Inject]
-        IDialogService DialogService { get; set; }
+        IDialogService dialogService { get; set; }
 
         [Parameter]
         public DataModel.APP_Inspeccion Inspeccion { get; set; }
 
         [Parameter]
         public EventCallback BackToMain { get; set; }
-       
 
-        List<ProvinciaTB> LProvincias { get; set; }
-        List<DistritoTB> LDistritos { get; set; }
-        List<CorregimientoTB> LCorregimientos { get; set; }
+        List<PaisTB> LPaises { get; set; }
 
         /////////////////////////
         ///
@@ -66,7 +56,12 @@ namespace AuditoriaApp.Components.Inspections._1_AperturaUbicacionFarmacia
         {
             try
             {
-               await LoadData();
+                if (Inspeccion.Inspeccion.InspRutinaVigAgencia.InventarioMedicamento == null)
+                {
+                    Inspeccion.Inspeccion.InspRutinaVigAgencia.InventarioMedicamento = new AUD_InventarioMedicamento();
+                }
+
+                await LoadData();
             }
             catch { }
             finally
@@ -77,9 +72,7 @@ namespace AuditoriaApp.Components.Inspections._1_AperturaUbicacionFarmacia
 
         protected async Task LoadData()
         {
-            LProvincias = LProvincias?.Count > 0 ? LProvincias : (await provinciaService.GetAll());
-            LDistritos = LDistritos?.Count > 0 ? LDistritos : (await distritoService.GetAllByProv(Inspeccion?.Inspeccion?.DatosEstablecimiento?.Provincia?.Id ?? 0));
-            LCorregimientos = LCorregimientos?.Count > 0 ? LCorregimientos : (await corregimientoService.GetAllByDist(Inspeccion?.Inspeccion?.DatosEstablecimiento?.Distrito?.Id ?? 0));
+            LPaises = await paisService.GetAll();
 
             await this.InvokeAsync(StateHasChanged);
         }
@@ -87,16 +80,16 @@ namespace AuditoriaApp.Components.Inspections._1_AperturaUbicacionFarmacia
         ////////////////////
         ///
 
-        protected async Task Cancel(bool warning=true)
+        protected async Task Cancel(bool warning = true)
         {
             try
-            {                
-                if(warning)
+            {
+                if (warning)
                 {
                     var parameters = new DialogParameters{
              { nameof(Components.Dialog.DialogComponent.ContentText), string.Format("Los cambios no guardados se perderán. Está seguro desea salir?") }};
                     var options = new DialogOptions { CloseButton = true, MaxWidth = MaxWidth.Small, FullWidth = true, DisableBackdropClick = true };
-                    var dialog = _dialogService.Show<Components.Dialog.DialogComponent>("Confirmar Salir", parameters, options);
+                    var dialog = dialogService.Show<Components.Dialog.DialogComponent>("Confirmar Salir", parameters, options);
                     var result = await dialog.Result;
                     if (result.Cancelled)
                     {
@@ -121,10 +114,11 @@ namespace AuditoriaApp.Components.Inspections._1_AperturaUbicacionFarmacia
             {
                 Inspeccion.PendingUpdate = true;
                 Inspeccion.Inspeccion.PendingUpdate = true;
-                Inspeccion.Inspeccion.DatosEstablecimiento.PendingUpdate = true;
-                Inspeccion.Inspeccion.ParticipantesDNFD.PendingUpdate = true;
+                Inspeccion.Inspeccion.InspRutinaVigAgencia.PendingUpdate = true;
+                Inspeccion.Inspeccion.InspRutinaVigAgencia.InventarioMedicamento.PendingUpdate = true;
                 var data = inspectionService.Save(Inspeccion);
-                if(data != null) {
+                if (data != null)
+                {
                     snackbar.Add("Datos guardados satisfactoriamente", Severity.Info);
                     return true;
                 }
@@ -145,7 +139,7 @@ namespace AuditoriaApp.Components.Inspections._1_AperturaUbicacionFarmacia
         {
             try
             {
-                if(await Save())
+                if (await Save())
                 {
                     await Cancel(false);
                 }
@@ -162,48 +156,29 @@ namespace AuditoriaApp.Components.Inspections._1_AperturaUbicacionFarmacia
 
         //////////////////////////////
         ///
-        private async Task OnProvinciaChanged(ProvinciaTB provincia)
-        {
-            Inspeccion.Inspeccion.DatosEstablecimiento.Distrito = null;
-            Inspeccion.Inspeccion.DatosEstablecimiento.Corregimiento = null;
-            LDistritos = null; LCorregimientos = null;
-            LDistritos = LDistritos?.Count > 0 ? LDistritos : (await distritoService.GetAllByProv(provincia?.Id ?? 0));
-            LDistritos = LDistritos != null ? LDistritos : new List<DistritoTB>();
-            LCorregimientos = LCorregimientos != null ? LCorregimientos : new List<CorregimientoTB>();
-            await this.InvokeAsync(StateHasChanged);
-        }
-        private async Task OnDistritoChanged(DistritoTB distrito)
-        {
-            Inspeccion.Inspeccion.DatosEstablecimiento.Corregimiento = null;
-            LCorregimientos = null;
-            LCorregimientos = LCorregimientos?.Count > 0 ? LCorregimientos : (await corregimientoService.GetAllByDist(distrito?.Id ?? 0));
-            LCorregimientos = LCorregimientos != null ? LCorregimientos : new List<CorregimientoTB>();
-            await this.InvokeAsync(StateHasChanged);
-        }
-
         ////////////////////////////////////
         ///
-        private async Task EditParticipant(Participante data = null)
+        private async Task EditProduct(AUD_InvProducto data = null)
         {
-            data = data!= null ? data : new Participante();
+            data = data != null ? data : new AUD_InvProducto();
             var parameters = new DialogParameters { ["Data"] = data };
             var options = new DialogOptions { CloseButton = true, MaxWidth = MaxWidth.Medium, FullWidth = true, DisableBackdropClick = true };
-            var dialog = _dialogService.Show<Components.Dialog.Participantes.AddEdit>(data!=null? "Editar Participante" : "Agregar Participante", parameters, options);
+            var dialog = _dialogService.Show<Components.Dialog.Medicamentos.AddEdit>(data != null ? "Editar Producto" : "Agregar Producto", parameters, options);
             var result = await dialog.Result;
             if (!result.Cancelled)
             {
                 if (result.Data != null)
                 {
-                    var actividad = (Participante)result.Data;
-                    Inspeccion.Inspeccion.ParticipantesDNFD.LParticipantes = Inspeccion.Inspeccion.ParticipantesDNFD.LParticipantes?.Count > 0 ? Inspeccion.Inspeccion.ParticipantesDNFD.LParticipantes : new List<Participante>();
-                    if (!Inspeccion.Inspeccion.ParticipantesDNFD.LParticipantes.Contains(actividad))
-                        Inspeccion.Inspeccion.ParticipantesDNFD.LParticipantes.Add(actividad);
+                    var actividad = (AUD_InvProducto)result.Data;
+                    Inspeccion.Inspeccion.InspRutinaVigAgencia.InventarioMedicamento.LProductos = Inspeccion.Inspeccion.InspRutinaVigAgencia.InventarioMedicamento.LProductos?.Count > 0 ? Inspeccion.Inspeccion.InspRutinaVigAgencia.InventarioMedicamento.LProductos : new List<AUD_InvProducto>();
+                    if (!Inspeccion.Inspeccion.InspRutinaVigAgencia.InventarioMedicamento.LProductos.Contains(actividad))
+                        Inspeccion.Inspeccion.InspRutinaVigAgencia.InventarioMedicamento.LProductos.Add(actividad);
                     await this.InvokeAsync(StateHasChanged);
                 }
             }
 
         }
-        private async Task RemoveParticipant(Participante data)
+        private async Task RemoveProduct(AUD_InvProducto data)
         {
             //Open Modal
             var parameters = new DialogParameters{
@@ -216,9 +191,8 @@ namespace AuditoriaApp.Components.Inspections._1_AperturaUbicacionFarmacia
                 return;
             }
 
-            Inspeccion.Inspeccion.ParticipantesDNFD.LParticipantes.Remove(data);
+            Inspeccion.Inspeccion.InspRutinaVigAgencia.InventarioMedicamento.LProductos.Remove(data);
             await this.InvokeAsync(StateHasChanged);
         }
     }
-
 }

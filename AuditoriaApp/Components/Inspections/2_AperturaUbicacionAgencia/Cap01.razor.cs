@@ -116,6 +116,7 @@ namespace AuditoriaApp.Components.Inspections._2_AperturaUbicacionAgencia
                 Inspeccion.PendingUpdate = true;
                 Inspeccion.Inspeccion.PendingUpdate = true;
                 Inspeccion.Inspeccion.DatosEstablecimiento.PendingUpdate = true;
+                Inspeccion.Inspeccion.ParticipantesDNFD.PendingUpdate = true;
                 var data = inspectionService.Save(Inspeccion);
                 if(data != null) {
                     snackbar.Add("Datos guardados satisfactoriamente", Severity.Info);
