@@ -27,8 +27,8 @@ namespace AuditoriaApp.Jobs
             {
                 // Now you can use the serviceProvider to retrieve any registered services.
                 // For example:
-                var bus = MauiProgram.serviceProvider.GetService<ComponentBus>();
-                await bus.Publish(new AuditoriaApp.Events.LoginProcess.CheckLoginEvent { Check = true });
+                //var bus = MauiProgram.serviceProvider.GetService<ComponentBus>();
+                //await bus.Publish(new AuditoriaApp.Events.LoginProcess.CheckLoginEvent { Check = true });
 
             }
             catch(Exception ex) 

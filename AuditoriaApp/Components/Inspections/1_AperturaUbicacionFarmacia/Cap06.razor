@@ -28,8 +28,8 @@
                         <MudSimpleTable Style="overflow-x: auto;">
                             <thead>
                                 <tr>
-                                    <th width="5%">Seleccione</th>
                                     <th width="40%">Título</th>
+                                    <th width="5%">Seleccione</th>
                                     <th>Observaciones</th>
                                 </tr>
                             </thead>
@@ -45,6 +45,7 @@
                                     else
                                     {
                                         <tr>
+                                            <td>@dt.Titulo</td>
                                             @foreach (var eva in dt.LEvaluacion)
                                             {
                                                 <td>
@@ -57,7 +58,6 @@
                                                     </MudSelect>
                                                 </td>
                                             }
-                                            <td>@dt.Titulo</td>
                                             <td>
                                                 <MudTextField Margin="Margin.Dense" @bind-Value="dt.Observaciones" Variant="Variant.Outlined" For="@(() => dt.Observaciones)" Lines="10" />
                                             </td>

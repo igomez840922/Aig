@@ -290,7 +290,78 @@ namespace Aig.Auditoria.Controllers
                                     data.InspAperCambUbicAgen.Productos.PendingUpdate = false;
                                 }
                                 break;
-                            }                          
+                            }
+                        case DataModel.Helper.enumAUD_TipoActa.VF:
+                            {
+                                inspeccion.InspRutinaVigFarmacia.PendingUpdate = false;
+                                if (inspeccion.InspRutinaVigFarmacia?.DatosRepresentLegal?.PendingUpdate ?? false)
+                                {
+                                    data.InspRutinaVigFarmacia.DatosRepresentLegal = inspeccion.InspRutinaVigFarmacia.DatosRepresentLegal;
+                                    data.InspRutinaVigFarmacia.DatosRepresentLegal.PendingUpdate = false;
+                                }
+                                if (inspeccion.InspRutinaVigFarmacia?.DatosRegente?.PendingUpdate ?? false)
+                                {
+                                    data.InspRutinaVigFarmacia.DatosRegente = inspeccion.InspRutinaVigFarmacia.DatosRegente;
+                                    data.InspRutinaVigFarmacia.DatosRegente.PendingUpdate = false;
+                                }
+                                if (inspeccion.InspRutinaVigFarmacia?.DatosFarmaceutico?.PendingUpdate ?? false)
+                                {
+                                    data.InspRutinaVigFarmacia.DatosFarmaceutico = inspeccion.InspRutinaVigFarmacia.DatosFarmaceutico;
+                                    data.InspRutinaVigFarmacia.DatosFarmaceutico.PendingUpdate = false;
+                                }
+                                if (inspeccion.InspRutinaVigFarmacia?.ExpPersonalFarmacia?.PendingUpdate ?? false)
+                                {
+                                    data.InspRutinaVigFarmacia.ExpPersonalFarmacia = inspeccion.InspRutinaVigFarmacia.ExpPersonalFarmacia;
+                                    data.InspRutinaVigFarmacia.ExpPersonalFarmacia.PendingUpdate = false;
+                                }
+                                if (inspeccion.InspRutinaVigFarmacia?.EstructOrganizFarmacia?.PendingUpdate ?? false)
+                                {
+                                    data.InspRutinaVigFarmacia.EstructOrganizFarmacia = inspeccion.InspRutinaVigFarmacia.EstructOrganizFarmacia;
+                                    data.InspRutinaVigFarmacia.EstructOrganizFarmacia.PendingUpdate = false;
+                                }
+                                if (inspeccion.InspRutinaVigFarmacia?.EstructFarmacia?.PendingUpdate ?? false)
+                                {
+                                    data.InspRutinaVigFarmacia.EstructFarmacia = inspeccion.InspRutinaVigFarmacia.EstructFarmacia;
+                                    data.InspRutinaVigFarmacia.EstructFarmacia.PendingUpdate = false;
+                                }
+                                if (inspeccion.InspRutinaVigFarmacia?.AreaFisicaFarmacia?.PendingUpdate ?? false)
+                                {
+                                    data.InspRutinaVigFarmacia.AreaFisicaFarmacia = inspeccion.InspRutinaVigFarmacia.AreaFisicaFarmacia;
+                                    data.InspRutinaVigFarmacia.AreaFisicaFarmacia.PendingUpdate = false;
+                                }
+                                if (inspeccion.InspRutinaVigFarmacia?.AreaProdControlados?.PendingUpdate ?? false)
+                                {
+                                    data.InspRutinaVigFarmacia.AreaProdControlados = inspeccion.InspRutinaVigFarmacia.AreaProdControlados;
+                                    data.InspRutinaVigFarmacia.AreaProdControlados.PendingUpdate = false;
+                                }
+                                if (inspeccion.InspRutinaVigFarmacia?.RegMovimientoExistencia?.PendingUpdate ?? false)
+                                {
+                                    data.InspRutinaVigFarmacia.RegMovimientoExistencia = inspeccion.InspRutinaVigFarmacia.RegMovimientoExistencia;
+                                    data.InspRutinaVigFarmacia.RegMovimientoExistencia.PendingUpdate = false;
+                                }
+                                if (inspeccion.InspRutinaVigFarmacia?.AreaAlmacenMedicamentos?.PendingUpdate ?? false)
+                                {
+                                    data.InspRutinaVigFarmacia.AreaAlmacenMedicamentos = inspeccion.InspRutinaVigFarmacia.AreaAlmacenMedicamentos;
+                                    data.InspRutinaVigFarmacia.AreaAlmacenMedicamentos.PendingUpdate = false;
+                                }
+                                if (inspeccion.InspRutinaVigFarmacia?.DatosAreaAlmacenamientoAlcohol?.PendingUpdate ?? false)
+                                {
+                                    data.InspRutinaVigFarmacia.DatosAreaAlmacenamientoAlcohol = inspeccion.InspRutinaVigFarmacia.DatosAreaAlmacenamientoAlcohol;
+                                    data.InspRutinaVigFarmacia.DatosAreaAlmacenamientoAlcohol.PendingUpdate = false;
+                                }
+                                if (inspeccion.InspRutinaVigFarmacia?.InventarioMedicamento?.PendingUpdate ?? false)
+                                {
+                                    data.InspRutinaVigFarmacia.InventarioMedicamento = inspeccion.InspRutinaVigFarmacia.InventarioMedicamento;
+                                    data.InspRutinaVigFarmacia.InventarioMedicamento.PendingUpdate = false;
+                                }
+                                if (inspeccion.InspRutinaVigFarmacia?.RegMovimientoExistencia2?.PendingUpdate ?? false)
+                                {
+                                    data.InspRutinaVigFarmacia.RegMovimientoExistencia2 = inspeccion.InspRutinaVigFarmacia.RegMovimientoExistencia2;
+                                    data.InspRutinaVigFarmacia.RegMovimientoExistencia2.PendingUpdate = false;
+                                }
+                                break;
+                            }
+
 
                     }
 

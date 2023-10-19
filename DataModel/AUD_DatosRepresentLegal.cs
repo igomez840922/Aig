@@ -10,6 +10,9 @@ namespace DataModel
 {
     public class AUD_DatosRepresentLegal : SystemId
     {
+        public AUD_DatosRepresentLegal() {
+            FirmaData = Array.Empty<byte>();
+        }
         //Regente - Nombre
         private string nombre;
         [StringLength(250)]
@@ -118,6 +121,10 @@ namespace DataModel
         //Otras Funciones
         private string otrasFunciones;
         public string OtrasFunciones { get => otrasFunciones; set => SetProperty(ref otrasFunciones, value); }
+
+        private byte[] firmaData;
+        public byte[] FirmaData { get { return firmaData; } set { firmaData = value; if (firmaData?.Length > 0) { Firma = Encoding.UTF8.GetString(FirmaData); }; } }
+
     }
 
 }

@@ -15,6 +15,7 @@ namespace DataModel
         public AUD_InspeccionTB()
         {
             FechaInicio=DateTime.Now;
+            ParticipantesDNFD = new AUD_ParticipantesDNFD();
         }
         /// <summary>
         /// /////////Generalidades de la Farmacia y Solicitante

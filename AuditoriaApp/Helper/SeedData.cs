@@ -46,7 +46,7 @@ namespace AuditoriaApp.Helper
 
                 var accountDataService = serviceScope.ServiceProvider.GetService<IAccountDataService>();
                 var lastUpdate = await accountDataService.FirstLastUpdate();
-                lastUpdate = lastUpdate != null ? lastUpdate : new APP_Updates() { SettingsUpdate = DateTime.Now.AddYears(-5) };
+                lastUpdate = lastUpdate != null ? lastUpdate : new APP_Updates() { SettingsUpdate = DateTime.Now.AddMonths(-1) };
                 //lastUpdate.SettingsUpdate = DateTime.Now.AddYears(-5);
                 await accountDataService.SaveLastUpdate(lastUpdate);
 

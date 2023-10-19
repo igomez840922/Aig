@@ -78,7 +78,7 @@
                                     @* <MudLink Href="@mContext.Url" Target="_blank">Ver Adjunto</MudLink> *@
                                     <MudButton ButtonType="ButtonType.Button" Variant="Variant.Text" Color="Color.Primary" Size="Size.Small" Class="ma-1" OnClick="@((e)=> OpenFile(@mContext))">Descargar</MudButton>
                                 </MudTd>
-                                <MudTd Style="text-align:right!important">
+                                <MudTd Style="text-align:right!important;">
                                     <MudButton ButtonType="ButtonType.Button" Variant="Variant.Filled" Color="Color.Error" Size="Size.Small" Class="ma-1" StartIcon="@Icons.Material.Filled.Delete" OnClick="@((e)=> DeleteFile(@mContext))">Eliminar</MudButton>
                                 </MudTd>
                             </RowTemplate>
