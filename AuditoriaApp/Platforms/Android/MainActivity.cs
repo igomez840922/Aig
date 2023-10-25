@@ -1,8 +1,6 @@
 ﻿using Android.App;
 using Android.Content.PM;
 using Android.OS;
-using Javax.Net.Ssl;
-using Org.Apache.Http.Conn.Ssl;
 
 namespace AuditoriaApp
 {
@@ -14,7 +12,7 @@ namespace AuditoriaApp
             // Lock the screen orientation to portrait
             RequestedOrientation = ScreenOrientation.Portrait;
 
-            HttpsURLConnection.DefaultHostnameVerifier = new AllowAllHostnameVerifier();
+            //HttpsURLConnection.DefaultHostnameVerifier = new AllowAllHostnameVerifier();
             base.OnCreate(savedInstanceState);
         }
     }

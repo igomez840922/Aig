@@ -23,6 +23,13 @@ namespace DataModel.Models
 
     }
 
+    public class FTNoteModel
+    {
+        public string CodCNFV { get; set; }
+        public AttachmentTB Adjunto { get; set; }
+
+    }
+
     public class DatosPaciente
     {
         

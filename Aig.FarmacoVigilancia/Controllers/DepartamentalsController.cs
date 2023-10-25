@@ -505,5 +505,37 @@ namespace Aig.FarmacoVigilancia.Controllers
             return BadRequest(new { message = "los datos no pueden actualizados" });
         }
 
+        [AllowAnonymous]
+        [HttpPost("UpdateFTNote")]
+        public async Task<IActionResult> UpdateFTNote([FromBody] FTNoteModel model)
+        {
+            try
+            {
+                var ft = dalService.Find<FMV_FtTB>(x=>x.CodCNFV == model.CodCNFV);
+                if (ft != null)
+                {
+                    ft.Adjunto.LAttachments = ft.Adjunto.LAttachments?.Count > 0 ? ft.Adjunto.LAttachments : new List<AttachmentTB>();
+
+                    var adjunto = ft.Adjunto.LAttachments.Find(x=>x.Description == model.Adjunto.Description);
+                    if(adjunto != null)
+                    {
+                        ft.Adjunto.LAttachments.Remove(adjunto);
+                    }
+                    ft.Adjunto.LAttachments.Add(model.Adjunto);
+
+                    var result = dalService.Save(ft);
+                    if (result != null)
+                    {
+                        return Ok(result.Id);
+                    }
+                }
+
+                
+            }
+            catch (Exception ex) { return BadRequest(new { message = ex.Message }); }
+
+            return BadRequest(new { message = "los datos no pueden actualizados" });
+        }
+
     }
 }
