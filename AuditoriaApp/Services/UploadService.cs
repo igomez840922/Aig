@@ -38,8 +38,8 @@ namespace AuditoriaApp.Services
                     //var dir = Path.Combine("wwwroot", "files");//Path.GetRandomFileName()
                     //                                           //var dir = Path.Combine("Files");
                     //FileSystem.AppDataDirectory
-                    string dir = Path.Combine(FileSystem.Current.AppDataDirectory, "AuditoriaApp");
-                    //Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "AuditoriaApp");
+                    string dir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "AuditoriaApp");
+                    //Path.Combine(FileSystem.Current.AppDataDirectory, "AuditoriaApp");
                     if (!Directory.Exists(dir))
                     {
                         Directory.CreateDirectory(dir);

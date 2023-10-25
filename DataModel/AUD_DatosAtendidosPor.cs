@@ -9,6 +9,10 @@ namespace DataModel
 {    
     public class AUD_DatosAtendidosPor : SystemId
     {
+        public AUD_DatosAtendidosPor()
+        {
+            FirmaData = Array.Empty<byte>();
+        }
         //Regente - Nombre
         private string nombre;
         [StringLength(250)]
@@ -78,6 +82,10 @@ namespace DataModel
         //profesion
         private string profesion;
         public string Profesion { get => profesion; set => SetProperty(ref profesion, value); }
+
+        private byte[] firmaData;
+        public byte[] FirmaData { get { return firmaData; } set { firmaData = value; if (firmaData?.Length > 0) { Firma = Encoding.UTF8.GetString(FirmaData); }; } }
+
     }
 
 }

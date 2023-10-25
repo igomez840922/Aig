@@ -6,7 +6,7 @@ using DataModel.Models;
 using Microsoft.AspNetCore.Components;
 using MudBlazor;
 
-namespace AuditoriaApp.Components.Inspections._2_AperturaUbicacionAgencia
+namespace AuditoriaApp.Components.Inspections._5_Investigaciones
 {
     public partial class Cap01
     {
@@ -72,7 +72,7 @@ namespace AuditoriaApp.Components.Inspections._2_AperturaUbicacionAgencia
         protected async Task LoadData()
         {
             Inspeccion.Inspeccion.ParticipantesDNFD = Inspeccion.Inspeccion.ParticipantesDNFD != null ? Inspeccion.Inspeccion.ParticipantesDNFD : new AUD_ParticipantesDNFD();
-
+            
             LProvincias = LProvincias?.Count > 0 ? LProvincias : (await provinciaService.GetAll());
             LDistritos = LDistritos?.Count > 0 ? LDistritos : (await distritoService.GetAllByProv(Inspeccion?.Inspeccion?.DatosEstablecimiento?.Provincia?.Id ?? 0));
             LCorregimientos = LCorregimientos?.Count > 0 ? LCorregimientos : (await corregimientoService.GetAllByDist(Inspeccion?.Inspeccion?.DatosEstablecimiento?.Distrito?.Id ?? 0));

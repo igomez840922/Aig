@@ -1,9 +1,6 @@
 ﻿using DataModel;
 using System.Linq.Expressions;
 using AuditoriaApp.Helper;
-using Microsoft.EntityFrameworkCore;
-using System;
-using Windows.UI;
 
 namespace AuditoriaApp.Services
 {

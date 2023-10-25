@@ -77,6 +77,8 @@ namespace AuditoriaApp.Components.Inspections._1_AperturaUbicacionFarmacia
 
         protected async Task LoadData()
         {
+            Inspeccion.Inspeccion.ParticipantesDNFD.LParticipantes = Inspeccion.Inspeccion.ParticipantesDNFD.LParticipantes?.Count > 0 ? Inspeccion.Inspeccion.ParticipantesDNFD.LParticipantes : new List<Participante>();
+
             LProvincias = LProvincias?.Count > 0 ? LProvincias : (await provinciaService.GetAll());
             LDistritos = LDistritos?.Count > 0 ? LDistritos : (await distritoService.GetAllByProv(Inspeccion?.Inspeccion?.DatosEstablecimiento?.Provincia?.Id ?? 0));
             LCorregimientos = LCorregimientos?.Count > 0 ? LCorregimientos : (await corregimientoService.GetAllByDist(Inspeccion?.Inspeccion?.DatosEstablecimiento?.Distrito?.Id ?? 0));

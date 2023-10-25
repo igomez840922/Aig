@@ -35,8 +35,7 @@ namespace AuditoriaApp.Services
                 apiConnectionService.Client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("bearer", data.AccessToken);
 
                 var lastUpdate = await accountDataService.FirstLastUpdate();
-                lastUpdate = lastUpdate != null ? lastUpdate : new APP_Updates() { SettingsUpdate = DateTime.Now.AddMonths(-3) };
-                
+
                 var content = JsonSerializer.Serialize(lastUpdate);
                 var bodyContent = new StringContent(content, Encoding.UTF8, "application/json");
 

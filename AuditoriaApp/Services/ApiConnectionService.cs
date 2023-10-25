@@ -19,7 +19,7 @@ namespace AuditoriaApp.Services
 
             var httpClienthandler = new HttpClientHandler();
             httpClienthandler.ServerCertificateCustomValidationCallback += (sender, certificate, chain, errors) => { return true; };
-            Client = new HttpClient(httpClienthandler) { Timeout = TimeSpan.FromSeconds(30) };
+            Client = new HttpClient(httpClienthandler) { Timeout = TimeSpan.FromMinutes(5) };
             Client.BaseAddress = new Uri(Url);
             Client.DefaultRequestHeaders.Accept.Clear();
             Client.DefaultRequestHeaders.Clear();

@@ -1,0 +1,63 @@
+﻿@if (Inspeccion?.Inspeccion?.InspInvestigacion?.DetallesInvestigacion != null)
+{
+    <EditForm Model="@Inspeccion.Inspeccion" OnValidSubmit="Save">
+        <DataAnnotationsValidator />
+        <MudCard Elevation="25">
+            <MudCardHeader>
+                @*  <CardHeaderAvatar>
+            <MudAvatar Color="Color.Secondary">I</MudAvatar>
+            </CardHeaderAvatar> *@
+                <CardHeaderContent>
+                    <MudText Typo="Typo.body1">@(Inspeccion.Inspeccion.NumActa) - @(DataModel.Helper.Helper.GetDescription(Inspeccion.Inspeccion.TipoActa))</MudText>
+                </CardHeaderContent>
+                <CardHeaderActions>
+                    <MudMenu Icon="@Icons.Material.Filled.MoreVert">
+                        <MudMenuItem Icon="@Icons.Material.Outlined.Save" OnTouch="@((e)=> Save())" OnClick="@((e)=> Save())">Guardar</MudMenuItem>
+                        <MudMenuItem Icon="@Icons.Material.Filled.Logout" OnClick="@((e)=> Cancel())" OnTouch="@((e)=> Cancel())">Salir</MudMenuItem>
+                    </MudMenu>
+                </CardHeaderActions>
+            </MudCardHeader>
+            <MudCardHeader>
+                <CardHeaderContent>
+                    <MudText Typo="Typo.h6" Color="Color.Dark">Datos de la Investigación</MudText>
+                </CardHeaderContent>
+            </MudCardHeader>
+            <MudCardContent>               
+                <MudGrid>
+                    <MudItem xs="12">
+                        <MudTextField Margin="Margin.Dense" @bind-Value="Inspeccion.Inspeccion.InspInvestigacion.DetallesInvestigacion.DetalleVerificacion" Label="Motivo de Investigación" Variant="Variant.Outlined" For="@(() => Inspeccion.Inspeccion.InspInvestigacion.DetallesInvestigacion.DetalleVerificacion)" Lines="10"/>
+                    </MudItem>
+                    <MudItem xs="12">
+                        <MudTextField Margin="Margin.Dense" @bind-Value="Inspeccion.Inspeccion.InspInvestigacion.DetallesInvestigacion.DetalleInspeccion" Label="Detalles de la Inspección" Variant="Variant.Outlined" For="@(() => Inspeccion.Inspeccion.InspInvestigacion.DetallesInvestigacion.DetalleInspeccion)" Lines="10" />
+                    </MudItem>
+                    <MudItem xs="12" md="6">
+                        <MudSelect Margin="Margin.Dense" T="DataModel.Helper.enumOpcionSiNo" Label="No se puede movilizar los productos hasta culminar la investigación?" Variant="Variant.Outlined" AnchorOrigin="Origin.BottomCenter" @bind-Value="Inspeccion.Inspeccion.InspInvestigacion.DetallesInvestigacion.MovilizarProductos" For="@(() => Inspeccion.Inspeccion.InspInvestigacion.DetallesInvestigacion.MovilizarProductos)">
+                            @foreach (DataModel.Helper.enumOpcionSiNo dt in Enum.GetValues(typeof(DataModel.Helper.enumOpcionSiNo)))
+                            {
+                                if (dt != DataModel.Helper.enumOpcionSiNo.NA)
+                                {
+                                    <MudSelectItem T="DataModel.Helper.enumOpcionSiNo" Value="dt">@DataModel.Helper.Helper.GetDescription(dt)</MudSelectItem>
+                                }
+                            }
+                        </MudSelect>
+                    </MudItem>
+                </MudGrid>
+               
+             </MudCardContent>
+            <MudCardActions Class="pt-4 pl-4">
+                <div style="text-align:right;" class="ml-auto">
+                    <MudButton ButtonType="ButtonType.Button" Variant="Variant.Filled" Color="Color.Primary" Size="Size.Medium" Class="ma-1" OnClick="@((e)=> SaveExit())" StartIcon="@Icons.Material.Filled.Save">Guardar y Salir</MudButton>
+                    <MudButton ButtonType="ButtonType.Button" Variant="Variant.Filled" Color="Color.Primary" Size="Size.Medium" Class="ma-1" OnClick="@((e)=> Save())" EndIcon="@Icons.Material.Filled.SaveAs">Guardar</MudButton>
+                    <MudButton ButtonType="ButtonType.Button" Variant="Variant.Filled" Color="Color.Error" Size="Size.Medium" Class="ma-1" OnClick="@((e)=> Cancel())" StartIcon="@Icons.Material.Filled.Logout">Salir</MudButton>
+                </div>
+            </MudCardActions>
+        </MudCard>
+
+    </EditForm>
+
+
+    
+
+
+
+}

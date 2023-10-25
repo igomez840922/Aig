@@ -26,6 +26,23 @@ namespace Aig.Auditoria.Controllers
             this.pdfGenerationService = pdfGenerationService;
         }
 
+        [HttpGet("GetTest")]
+        [AllowAnonymous]
+        public async Task<IActionResult> GetTest()
+        {
+            try
+            {
+                var data = dalService.First<AUD_InspeccionTB>();
+                if (data != null)
+                {
+                    return Ok(data);
+                }
+            }
+            catch (Exception ex) { return BadRequest(new { message = ex.Message }); }
+            return BadRequest(new { message = "data not found" });
+        }
+
+
         [HttpGet("GetByNumber")]
         public async Task<IActionResult> GetByNumber(string number)
         {
@@ -456,6 +473,22 @@ namespace Aig.Auditoria.Controllers
                                 }
                                 break;
                             }
+                        case DataModel.Helper.enumAUD_TipoActa.INV:
+                            {
+                                inspeccion.InspInvestigacion.PendingUpdate = false;
+                                if (inspeccion.InspInvestigacion?.DatosAtendidosPor?.PendingUpdate ?? false)
+                                {
+                                    data.InspInvestigacion.DatosAtendidosPor = inspeccion.InspInvestigacion.DatosAtendidosPor;
+                                    data.InspInvestigacion.DatosAtendidosPor.PendingUpdate = false;
+                                }
+                                if (inspeccion.InspInvestigacion?.DetallesInvestigacion?.PendingUpdate ?? false)
+                                {
+                                    data.InspInvestigacion.DetallesInvestigacion = inspeccion.InspInvestigacion.DetallesInvestigacion;
+                                    data.InspInvestigacion.DetallesInvestigacion.PendingUpdate = false;
+                                }
+                                
+                                break;
+                            }
 
 
                     }
@@ -474,6 +507,7 @@ namespace Aig.Auditoria.Controllers
 
 
         [HttpPost("DownloadPaises")]
+        [AllowAnonymous]
         public async Task<IActionResult> DownloadPaises([FromBody] APP_Updates lastUpdate)
         {
             try
@@ -489,6 +523,7 @@ namespace Aig.Auditoria.Controllers
         }
 
         [HttpPost("DownloadProvincias")]
+        [AllowAnonymous]
         public async Task<IActionResult> DownloadProvincias([FromBody] APP_Updates lastUpdate)
         {
             try
@@ -504,6 +539,7 @@ namespace Aig.Auditoria.Controllers
         }
 
         [HttpPost("DownloadDistritos")]
+        [AllowAnonymous]
         public async Task<IActionResult> DownloadDistritos([FromBody] APP_Updates lastUpdate)
         {
             try
@@ -519,6 +555,7 @@ namespace Aig.Auditoria.Controllers
         }
 
         [HttpPost("DownloadCorregimientos")]
+        [AllowAnonymous]
         public async Task<IActionResult> DownloadCorregimientos([FromBody] APP_Updates lastUpdate)
         {
             try

@@ -34,8 +34,8 @@ namespace AuditoriaApp.Services
                 apiConnectionService.Client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("bearer", data.AccessToken);
 
                 var lastUpdate = await accountDataService.FirstLastUpdate();
-                lastUpdate = lastUpdate != null ? lastUpdate : new APP_Updates() { InspectionsUpdate = DateTime.Now.AddMonths(-3) };
-                lastUpdate.InspectionsUpdate = DateTime.Now.AddMonths(-5);
+                lastUpdate = lastUpdate != null ? lastUpdate : new APP_Updates();
+                lastUpdate.InspectionsUpdate = lastUpdate.InspectionsUpdate!=null? lastUpdate.InspectionsUpdate: DateTime.Now.AddDays(-5);
 
                 var content = JsonSerializer.Serialize(lastUpdate);
                 var bodyContent = new StringContent(content, Encoding.UTF8, "application/json");
@@ -64,7 +64,8 @@ namespace AuditoriaApp.Services
                     }
                 }
             }
-            catch { }
+            catch(Exception ex)
+            { }
         }
 
         public async Task InspectionsUpload()

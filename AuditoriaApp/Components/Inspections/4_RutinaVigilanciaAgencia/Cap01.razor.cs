@@ -71,6 +71,8 @@ namespace AuditoriaApp.Components.Inspections._4_RutinaVigilanciaAgencia
 
         protected async Task LoadData()
         {
+            Inspeccion.Inspeccion.ParticipantesDNFD = Inspeccion.Inspeccion.ParticipantesDNFD != null ? Inspeccion.Inspeccion.ParticipantesDNFD : new AUD_ParticipantesDNFD();
+
             LProvincias = LProvincias?.Count > 0 ? LProvincias : (await provinciaService.GetAll());
             LDistritos = LDistritos?.Count > 0 ? LDistritos : (await distritoService.GetAllByProv(Inspeccion?.Inspeccion?.DatosEstablecimiento?.Provincia?.Id ?? 0));
             LCorregimientos = LCorregimientos?.Count > 0 ? LCorregimientos : (await corregimientoService.GetAllByDist(Inspeccion?.Inspeccion?.DatosEstablecimiento?.Distrito?.Id ?? 0));
