@@ -63,7 +63,7 @@ namespace AuditoriaApp.Shared
             bus.Subscribe<OverlayShowEvent>(OverlayShowEventHandler);
             bus.Subscribe<Events.LoginProcess.CheckLoginEvent>(CheckLoginEventHandler);
 
-            quartzSchedulerService.Start();
+            //quartzSchedulerService.Start();
 
             await base.OnInitializedAsync();
         }
@@ -191,7 +191,7 @@ namespace AuditoriaApp.Shared
         public void Dispose() {
 
             //heartBeatTimer?.Dispose();
-            quartzSchedulerService.Stop();
+            //quartzSchedulerService.Stop();
 
             bus.UnSubscribe<OverlayShowEvent>(OverlayShowEventHandler);
             bus.UnSubscribe<Events.LoginProcess.CheckLoginEvent>(CheckLoginEventHandler);
