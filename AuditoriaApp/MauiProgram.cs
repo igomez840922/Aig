@@ -71,7 +71,7 @@ namespace AuditoriaApp
 
             //QUARTZ            
             // Register the QuartzSchedulerService as a singleton
-            builder.Services.AddSingleton<IQuartzSchedulerService, QuartzSchedulerService>();
+            //builder.Services.AddSingleton<IQuartzSchedulerService, QuartzSchedulerService>();
 
             //For Components Comunucations Pul-Sub
             builder.Services.AddSingleton<ComponentBus>();

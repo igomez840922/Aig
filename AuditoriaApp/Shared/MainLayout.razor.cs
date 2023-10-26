@@ -75,15 +75,15 @@ namespace AuditoriaApp.Shared
             }
             await base.OnAfterRenderAsync(firstRender);
         }
-        private void OverlayShowEventHandler(MessageArgs args)
+        private async void OverlayShowEventHandler(MessageArgs args)
         {
             var message = args.GetMessage<OverlayShowEvent>();
             showOverlay = message.Show; 
-            FetchData();
+            await FetchData();
         }
         private void CheckLoginEventHandler(MessageArgs args)
         {
-            HeartBeat();
+            //HeartBeat();
         }
         private async Task FetchData()
         {           
