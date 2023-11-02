@@ -55,6 +55,9 @@ namespace AuditoriaApp.Components.Inspections._4_RutinaVigilanciaAgencia
             try
             {
                 Inspeccion.Inspeccion.DatosConclusiones = Inspeccion.Inspeccion.DatosConclusiones != null ? Inspeccion.Inspeccion.DatosConclusiones : new AUD_DatosConclusiones();
+                Inspeccion.Inspeccion.ParticipantesDNFD = Inspeccion.Inspeccion.ParticipantesDNFD != null ? Inspeccion.Inspeccion.ParticipantesDNFD : new AUD_ParticipantesDNFD();
+                Inspeccion.Inspeccion.InspRutinaVigAgencia.DatosRepresentLegal = Inspeccion.Inspeccion.InspRutinaVigAgencia.DatosRepresentLegal != null ? Inspeccion.Inspeccion.InspRutinaVigAgencia.DatosRepresentLegal : new AUD_DatosRepresentLegal();
+                Inspeccion.Inspeccion.InspRutinaVigAgencia.DatosRegente = Inspeccion.Inspeccion.InspRutinaVigAgencia.DatosRegente != null ? Inspeccion.Inspeccion.InspRutinaVigAgencia.DatosRegente : new AUD_DatosRegente();
 
                 await LoadData();
             }

@@ -2320,8 +2320,7 @@ namespace Aig.Auditoria.Services
         {
             var data = DalService.Get<AUD_InspeccionTB>(inspeccion.Id);
 
-            data.InspRetiroRetencion.RetiroRetencionType = inspeccion.InspRetiroRetencion.RetiroRetencionType;
-            data.InspRetiroRetencion.LProductos = inspeccion.InspRetiroRetencion.LProductos;
+            data.InspRetiroRetencion.DatosRetiroRetencion = inspeccion.InspRetiroRetencion.DatosRetiroRetencion;
 
             //generar el numero de acta
             if (string.IsNullOrEmpty(data.NumActa) || string.IsNullOrWhiteSpace(data.NumActa))
@@ -2331,7 +2330,17 @@ namespace Aig.Auditoria.Services
             }
 
             var result = DalService.Save(data);
-            
+            if (result != null)
+            {
+
+                if (result.InspRetiroRetencion != null)
+                {
+                    DalService.DBContext.Entry(result.InspRetiroRetencion).Property(b => b.DatosRetiroRetencion).IsModified = true;
+                }
+
+                DalService.DBContext.SaveChanges();
+            }
+
             return result;
         }
         public async Task<AUD_InspeccionTB> Save_RetiroRetencion_Frima(AUD_InspeccionTB inspeccion)

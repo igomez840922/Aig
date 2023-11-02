@@ -4322,7 +4322,7 @@ namespace Aig.Auditoria.Services
                             }
 
                             column.Item().Text(string.Format("Siendo las {0} del día {1} de {2} de {3}, actuando en representación de la Dirección Nacional de Farmacia y Drogas del Ministerio de Salud, procedimos a efectuar la {4}, de los productos a continuación descritos y que fueron localizados en el establecimiento denominado: {5}, ubicado en: {6}, con Aviso de Operación No. {7} y Licencia de operación {8}/DNFD. Y cuyo Representante Legal es {9} con documento de identidad personal N° {10}. Por la Dirección Nacional de Farmacia y Drogas, participamos: {11}. Y fuimos atendidos por: {12}, con cargo {13} cip: {14}\r\n",
-                                inspection.FechaInicio.ToString("hh:mm tt"), inspection.FechaInicio.ToString("dd"), Helper.Helper.GetMonthNameByMonthNumber(int.Parse(inspection.FechaInicio.ToString("MM"))), inspection.FechaInicio.ToString("yyyy"), DataModel.Helper.Helper.GetDescription(inspection.InspRetiroRetencion.RetiroRetencionType), inspection.DatosEstablecimiento?.Nombre ?? "", inspection.DatosEstablecimiento?.Direccion, inspection.DatosEstablecimiento?.AvisoOperaciones, inspection.DatosEstablecimiento?.NumLicencia, inspection.InspRetiroRetencion.DatosRepresentLegal?.Nombre, inspection.InspRetiroRetencion.DatosRepresentLegal?.Cedula, participantes, inspection.InspRetiroRetencion.DatosAtendidosPor?.Nombre, inspection.InspRetiroRetencion.DatosAtendidosPor?.Cargo, inspection.InspRetiroRetencion.DatosAtendidosPor?.Cedula));
+                                inspection.FechaInicio.ToString("hh:mm tt"), inspection.FechaInicio.ToString("dd"), Helper.Helper.GetMonthNameByMonthNumber(int.Parse(inspection.FechaInicio.ToString("MM"))), inspection.FechaInicio.ToString("yyyy"), DataModel.Helper.Helper.GetDescription(inspection.InspRetiroRetencion.DatosRetiroRetencion.RetiroRetencionType), inspection.DatosEstablecimiento?.Nombre ?? "", inspection.DatosEstablecimiento?.Direccion, inspection.DatosEstablecimiento?.AvisoOperaciones, inspection.DatosEstablecimiento?.NumLicencia, inspection.InspRetiroRetencion.DatosRepresentLegal?.Nombre, inspection.InspRetiroRetencion.DatosRepresentLegal?.Cedula, participantes, inspection.InspRetiroRetencion.DatosAtendidosPor?.Nombre, inspection.InspRetiroRetencion.DatosAtendidosPor?.Cargo, inspection.InspRetiroRetencion.DatosAtendidosPor?.Cedula));
 
                             column.Item().Table(table =>
                             {
@@ -4354,9 +4354,9 @@ namespace Aig.Auditoria.Services
                                 });
 
                                 //table.Cell().ColumnSpan(3).AlignLeft().Padding(3).Text("DIRECCIÓN NACIONAL DE FARMACIA Y DROGAS").Bold();
-                                if (inspection.InspRetiroRetencion?.LProductos?.Count>0)
+                                if (inspection.InspRetiroRetencion?.DatosRetiroRetencion?.LProductos?.Count>0)
                                 {
-                                    foreach (var prod in inspection.InspRetiroRetencion.LProductos)
+                                    foreach (var prod in inspection.InspRetiroRetencion.DatosRetiroRetencion.LProductos)
                                     {
                                         table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Padding(3).Text(prod.Nombre);
                                         table.Cell().Border(1).BorderColor(Colors.Black).AlignCenter().Padding(3).Text(prod.PresentacionComercial);

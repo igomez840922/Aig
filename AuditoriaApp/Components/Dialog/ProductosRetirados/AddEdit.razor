@@ -1,0 +1,73 @@
+﻿@implements IDisposable
+
+
+<MudDialog>
+    <DialogContent>
+        <MudContainer Style="max-height: 80vh; overflow-y: scroll!important">
+            @if (Data != null)
+            {
+                <EditForm Model="@Data" OnValidSubmit="SaveData">
+                    <DataAnnotationsValidator />
+                    <MudCard Outlined="false" Elevation="0">
+                        <MudCardContent>
+                            <MudPaper Class="pa-2" Elevation="0">
+                                <MudGrid>
+                                    <MudItem xs="12">
+                                        <MudTextField Margin="Margin.Dense" @bind-Value="Data.Nombre" For="@(() => Data.Nombre)" Label="Nombre del Producto" Variant="Variant.Outlined" />
+                                    </MudItem>
+                                    <MudItem xs="12">
+                                        <MudTextField Margin="Margin.Dense" @bind-Value="Data.PresentacionComercial" For="@(() => Data.PresentacionComercial)" Label="Presentación Comercial" Variant="Variant.Outlined" />
+                                    </MudItem>
+                                    <MudItem xs="6">
+                                        <MudTextField Margin="Margin.Dense" @bind-Value="Data.RegSanitario" For="@(() => Data.RegSanitario)" Label="No. Registro Sanitario" Variant="Variant.Outlined" />
+                                    </MudItem>
+                                    <MudItem xs="6">
+                                        <MudTextField Margin="Margin.Dense" @bind-Value="Data.Fabricante" For="@(() => Data.Fabricante)" Label="Fabricante" Variant="Variant.Outlined" />
+                                    </MudItem>
+                                    <MudItem xs="12" md="6">
+                                        <MudSelect Margin="Margin.Dense" T="DataModel.PaisTB" For="@(() => Data.PaisProduct)" Label="País de Fabricación" Variant="Variant.Outlined" AnchorOrigin="Origin.BottomCenter" @bind-Value="Data.PaisProduct" ToStringFunc="@(e=> e==null?null : e.Nombre)">
+                                            @if (LPaises?.Count > 0)
+                                            {
+                                                @foreach (var part in LPaises)
+                                                {
+                                                    <MudSelectItem Value="@part">@part.Nombre</MudSelectItem>
+                                                }
+                                            }
+                                        </MudSelect>
+                                    </MudItem>
+                                    <MudItem xs="6">
+                                        <MudTextField Margin="Margin.Dense" @bind-Value="Data.Lote" For="@(() => Data.Lote)" Label="Lote" Variant="Variant.Outlined" />
+                                    </MudItem>
+                                    <MudItem xs="6">
+                                        <MudTextField Margin="Margin.Dense" @bind-Value="Data.CantidadRetenida" For="@(() => Data.CantidadRetenida)" Label="Cantidad Retenida" Variant="Variant.Outlined" />
+                                    </MudItem>
+                                    <MudItem xs="6">
+                                        <MudTextField Margin="Margin.Dense" @bind-Value="Data.CantidadRetirada" For="@(() => Data.CantidadRetirada)" Label="Cantidad Retirada" Variant="Variant.Outlined" />
+                                    </MudItem>
+                                    <MudItem xs="12" md="6">
+                                        <MudDatePicker PickerVariant="PickerVariant.Dialog" Margin="Margin.Dense" @bind-Date="@(Data.FechaExp)" For="@(() => Data.FechaExp)" DateFormat="dd/MM/yyyy" Variant="Variant.Outlined" Label="Fecha Exp." />
+                                    </MudItem>
+                                    <MudItem xs="6">
+                                        <MudTextField Margin="Margin.Dense" @bind-Value="Data.Destino" For="@(() => Data.Destino)" Label="Destino del Producto" Variant="Variant.Outlined" />
+                                    </MudItem>
+                                    <MudItem xs="12">
+                                        <MudTextField Margin="Margin.Dense" @bind-Value="Data.Motivo" For="@(() => Data.Motivo)" Label="Motivo de Retención y/o Retiro" Variant="Variant.Outlined" Lines="10" />
+                                    </MudItem>
+                                </MudGrid>                               
+                            </MudPaper>
+                        </MudCardContent>
+                        <MudCardActions Class="pt-4 pl-4">
+                            <div style="text-align:right;" class="ml-auto">
+                                <MudButton ButtonType="ButtonType.Button" Variant="Variant.Filled" Color="Color.Error" Size="Size.Medium" Class="ma-1" OnClick="Cancel" StartIcon="@Icons.Material.Filled.Cancel">Cancelar</MudButton>
+                                <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Primary" Size="Size.Medium" Class="ma-1" StartIcon="@Icons.Material.Filled.Save">Guardar</MudButton>
+                            </div>
+                        </MudCardActions>
+                        <MudOverlay Visible="loading" DarkBackground="true" Absolute="true">
+                            <MudProgressCircular Color="Color.Secondary" Indeterminate="true" />
+                        </MudOverlay>
+                    </MudCard>
+                </EditForm>
+            }
+        </MudContainer>
+    </DialogContent>
+</MudDialog>

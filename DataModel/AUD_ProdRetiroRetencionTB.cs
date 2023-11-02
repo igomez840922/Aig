@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Text.Json.Serialization;
@@ -47,6 +48,11 @@ namespace DataModel
         private string pais;
         [StringLength(250)]
         public string Pais { get => pais; set => SetProperty(ref pais, value); }
+
+        //Solicitante - Nacionalidad
+        private PaisTB paisProduct;
+        [NotMapped()]
+        public PaisTB PaisProduct { get => paisProduct; set { paisProduct = value; if (pais != null) { Pais = paisProduct?.Nombre ?? ""; } } }
 
         //lote
         private string lote;

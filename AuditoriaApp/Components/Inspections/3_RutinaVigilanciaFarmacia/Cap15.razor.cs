@@ -55,6 +55,10 @@ namespace AuditoriaApp.Components.Inspections._3_RutinaVigilanciaFarmacia
             try
             {
                 Inspeccion.Inspeccion.DatosConclusiones = Inspeccion.Inspeccion.DatosConclusiones != null ? Inspeccion.Inspeccion.DatosConclusiones : new AUD_DatosConclusiones();
+                Inspeccion.Inspeccion.ParticipantesDNFD = Inspeccion.Inspeccion.ParticipantesDNFD != null ? Inspeccion.Inspeccion.ParticipantesDNFD : new AUD_ParticipantesDNFD();
+                Inspeccion.Inspeccion.InspRutinaVigFarmacia.DatosRepresentLegal = Inspeccion.Inspeccion.InspRutinaVigFarmacia.DatosRepresentLegal != null ? Inspeccion.Inspeccion.InspRutinaVigFarmacia.DatosRepresentLegal : new AUD_DatosRepresentLegal();
+                Inspeccion.Inspeccion.InspRutinaVigFarmacia.DatosRegente = Inspeccion.Inspeccion.InspRutinaVigFarmacia.DatosRegente != null ? Inspeccion.Inspeccion.InspRutinaVigFarmacia.DatosRegente : new AUD_DatosRegente();
+                Inspeccion.Inspeccion.InspRutinaVigFarmacia.DatosFarmaceutico = Inspeccion.Inspeccion.InspRutinaVigFarmacia.DatosFarmaceutico != null ? Inspeccion.Inspeccion.InspRutinaVigFarmacia.DatosFarmaceutico : new AUD_DatosFarmaceutico();
 
                 await LoadData();
             }

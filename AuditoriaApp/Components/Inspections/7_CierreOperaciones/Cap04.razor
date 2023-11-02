@@ -1,0 +1,100 @@
+﻿@if (Inspeccion?.Inspeccion?.DatosConclusiones != null)
+{
+    <EditForm Model="@Inspeccion.Inspeccion" OnValidSubmit="Save">
+        <DataAnnotationsValidator />
+        <MudCard Elevation="25">
+            <MudCardHeader>
+                @*  <CardHeaderAvatar>
+            <MudAvatar Color="Color.Secondary">I</MudAvatar>
+            </CardHeaderAvatar> *@
+                <CardHeaderContent>
+                    <MudText Typo="Typo.body1">@(Inspeccion.Inspeccion.NumActa) - @(DataModel.Helper.Helper.GetDescription(Inspeccion.Inspeccion.TipoActa))</MudText>
+                </CardHeaderContent>
+                <CardHeaderActions>
+                    <MudMenu Icon="@Icons.Material.Filled.MoreVert">
+                        <MudMenuItem Icon="@Icons.Material.Outlined.Save" OnTouch="@((e)=> Save())" OnClick="@((e)=> Save())">Guardar</MudMenuItem>
+                        <MudMenuItem Icon="@Icons.Material.Filled.Logout" OnClick="@((e)=> Cancel())" OnTouch="@((e)=> Cancel())">Salir</MudMenuItem>
+                    </MudMenu>
+                </CardHeaderActions>
+            </MudCardHeader>
+            <MudCardHeader>
+                <CardHeaderContent>
+                    <MudText Typo="Typo.h6" Color="Color.Dark">Conclusiones</MudText>
+                </CardHeaderContent>
+            </MudCardHeader>
+            <MudCardContent>
+                <MudGrid>
+                    @*  <MudItem xs="12" md="6">
+                <MudSelect Margin="Margin.Dense" T="bool" Label="El local cumple estructuralmente con los requisitos mínimos para operar" Variant="Variant.Outlined" AnchorOrigin="Origin.BottomCenter" @bind-Value="Inspeccion.Inspeccion.DatosConclusiones.CumpleRequisitosMinOperacion" For="@(() => Inspeccion.Inspeccion.DatosConclusiones.CumpleRequisitosMinOperacion)">
+                <MudSelectItem T="bool" Value="true">Si</MudSelectItem>
+                <MudSelectItem T="bool" Value="false">No</MudSelectItem>
+                </MudSelect>
+                </MudItem> *@
+                    <MudItem xs="12" md="6">
+                        <MudDatePicker type PickerVariant="PickerVariant.Dialog" Margin="Margin.Dense" @bind-Date="@(Inspeccion.Inspeccion.DatosConclusiones.FechaFinalizacion)" For="@(() => Inspeccion.Inspeccion.DatosConclusiones.FechaFinalizacion)" DateFormat="dd/MM/yyyy" Variant="Variant.Outlined" Label="Fecha de Finalización" />
+                    </MudItem>
+                    <MudItem xs="12" md="6">
+                <MudSelect Margin="Margin.Dense" T="bool" Label="Se reprograma inspección al Establecimiento" Variant="Variant.Outlined" AnchorOrigin="Origin.BottomCenter" @bind-Value="Inspeccion.Inspeccion.DatosConclusiones.ReprogramaInspeccion" For="@(() => Inspeccion.Inspeccion.DatosConclusiones.ReprogramaInspeccion)">
+                <MudSelectItem T="bool" Value="true">Si</MudSelectItem>
+                <MudSelectItem T="bool" Value="false">No</MudSelectItem>
+                </MudSelect>
+                </MudItem>
+                    <MudItem xs="12" md="6">
+                        <MudSelect Margin="Margin.Dense" T="DataModel.Helper.enum_StatusInspecciones" Label="Tipo" Variant="Variant.Outlined" AnchorOrigin="Origin.BottomCenter" @bind-Value="Inspeccion.Inspeccion.StatusInspecciones" For="@(() => Inspeccion.Inspeccion.StatusInspecciones)">
+                            @foreach (DataModel.Helper.enum_StatusInspecciones dt in Enum.GetValues(typeof(DataModel.Helper.enum_StatusInspecciones)))
+                            {
+                                <MudSelectItem T="DataModel.Helper.enum_StatusInspecciones" Value="dt">@DataModel.Helper.Helper.GetDescription(dt)</MudSelectItem>
+
+                            }
+                        </MudSelect>
+                    </MudItem>
+                    <MudItem xs="12" md="12">
+                        <MudTextField Margin="Margin.Dense" @bind-Value="Inspeccion.Inspeccion.DatosConclusiones.ObservacionesFinales" Label="Observaciones" Variant="Variant.Outlined" For="@(() => Inspeccion.Inspeccion.DatosConclusiones.ObservacionesFinales)" Lines="10" />
+                    </MudItem>
+                </MudGrid>
+            </MudCardContent>
+            <MudCardHeader>
+                <CardHeaderContent>
+                    <MudText Typo="Typo.h6" Color="Color.Dark">Adjuntar Archivos</MudText>
+                </CardHeaderContent>
+            </MudCardHeader>
+            <MudCardContent>
+                <MudGrid>
+                    <MudItem xs="12" md="12">
+                        <MudTable Dense="true" Elevation="0" Bordered="false" Items="@Inspeccion.Inspeccion.DatosConclusiones.LAttachments" Hover="true" Breakpoint="Breakpoint.Sm" LoadingProgressColor="Color.Info">
+                            <ToolBarContent>
+                                <MudText Typo="Typo.h6">Anexos</MudText>
+                            </ToolBarContent>
+                            <HeaderContent>
+                                <MudTh>Descripción</MudTh>
+                                <MudTh>Descargar</MudTh>
+                                <MudTh Style="text-align:right!important">
+                                    <MudButton ButtonType="ButtonType.Button" Variant="Variant.Filled" Color="Color.Primary" Size="Size.Medium" Class="ma-1" StartIcon="@Icons.Material.Filled.AttachFile" OnClick="UploadFile">Agregar</MudButton>
+                                </MudTh>
+                            </HeaderContent>
+                            <RowTemplate Context="mContext">
+                                <MudTd DataLabel="Descripción">@mContext.Description</MudTd>
+                                    <MudTd DataLabel="Url">
+                                        @* <MudLink Href="@mContext.Url" Target="_blank">Ver Adjunto</MudLink> *@
+                                        <MudButton ButtonType="ButtonType.Button" Variant="Variant.Text" Color="Color.Primary" Size="Size.Small" Class="ma-1" OnClick="@((e)=> OpenFile(@mContext))">Descargar</MudButton>
+                                    </MudTd>
+                                    <MudTd Style="text-align:right!important">
+                                        <MudButton ButtonType="ButtonType.Button" Variant="Variant.Filled" Color="Color.Error" Size="Size.Small" Class="ma-1" StartIcon="@Icons.Material.Filled.Delete" OnClick="@((e)=> DeleteFile(@mContext))">Eliminar</MudButton>
+                                    </MudTd>
+                                </RowTemplate>
+                            </MudTable>
+                        </MudItem>
+                    </MudGrid>
+                </MudCardContent>
+                <MudCardActions Class="pt-4 pl-4">
+                    <div style="text-align:right;" class="ml-auto">
+                        <MudButton ButtonType="ButtonType.Button" Variant="Variant.Filled" Color="Color.Primary" Size="Size.Medium" Class="ma-1" OnClick="@((e)=> SaveExit())" StartIcon="@Icons.Material.Filled.Save">Guardar y Salir</MudButton>
+                        <MudButton ButtonType="ButtonType.Button" Variant="Variant.Filled" Color="Color.Primary" Size="Size.Medium" Class="ma-1" OnClick="@((e)=> Save())" EndIcon="@Icons.Material.Filled.SaveAs">Guardar</MudButton>
+                        <MudButton ButtonType="ButtonType.Button" Variant="Variant.Filled" Color="Color.Error" Size="Size.Medium" Class="ma-1" OnClick="@((e)=> Cancel())" StartIcon="@Icons.Material.Filled.Logout">Salir</MudButton>
+                    </div>
+                </MudCardActions>
+            </MudCard>
+
+        </EditForm>
+
+}

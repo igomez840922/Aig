@@ -2,21 +2,16 @@
 using DataModel;
 using Microsoft.AspNetCore.Components;
 using MudBlazor;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
-namespace AuditoriaApp.Components.Inspections._1_AperturaUbicacionFarmacia
+namespace AuditoriaApp.Components.Inspections._6_RetencionRetiro
 {
-    public partial class Cap12
+    public partial class Cap04
     {
         [Inject]
         IInspectionService inspectionService { get; set; }
         [Inject]
-        IUploadService uploadManager { get; set; }
+        IPaisService paisService { get; set; }
+
 
         [Inject]
         IDialogService dialogService { get; set; }
@@ -27,6 +22,7 @@ namespace AuditoriaApp.Components.Inspections._1_AperturaUbicacionFarmacia
         [Parameter]
         public EventCallback BackToMain { get; set; }
 
+        List<PaisTB> LPaises { get; set; }
 
         /////////////////////////
         ///
@@ -55,11 +51,7 @@ namespace AuditoriaApp.Components.Inspections._1_AperturaUbicacionFarmacia
         {
             try
             {
-                Inspeccion.Inspeccion.DatosConclusiones = Inspeccion.Inspeccion.DatosConclusiones != null ? Inspeccion.Inspeccion.DatosConclusiones : new AUD_DatosConclusiones();
-                Inspeccion.Inspeccion.ParticipantesDNFD = Inspeccion.Inspeccion.ParticipantesDNFD != null ? Inspeccion.Inspeccion.ParticipantesDNFD : new AUD_ParticipantesDNFD();
-                Inspeccion.Inspeccion.InspAperCambUbicFarm.DatosSolicitante = Inspeccion.Inspeccion.InspAperCambUbicFarm.DatosSolicitante != null ? Inspeccion.Inspeccion.InspAperCambUbicFarm.DatosSolicitante : new AUD_DatosSolicitante();
-                Inspeccion.Inspeccion.InspAperCambUbicFarm.DatosRegente = Inspeccion.Inspeccion.InspAperCambUbicFarm.DatosRegente != null ? Inspeccion.Inspeccion.InspAperCambUbicFarm.DatosRegente : new AUD_DatosRegente();
-
+                Inspeccion.Inspeccion.InspRetiroRetencion.DatosRetiroRetencion = Inspeccion.Inspeccion.InspRetiroRetencion.DatosRetiroRetencion != null ? Inspeccion.Inspeccion.InspRetiroRetencion.DatosRetiroRetencion : new AUD_DatosRetiroRetencion();
                 await LoadData();
             }
             catch { }
@@ -71,6 +63,7 @@ namespace AuditoriaApp.Components.Inspections._1_AperturaUbicacionFarmacia
 
         protected async Task LoadData()
         {
+            LPaises = await paisService.GetAll();
 
             await this.InvokeAsync(StateHasChanged);
         }
@@ -112,10 +105,8 @@ namespace AuditoriaApp.Components.Inspections._1_AperturaUbicacionFarmacia
             {
                 Inspeccion.PendingUpdate = true;
                 Inspeccion.Inspeccion.PendingUpdate = true;
-                Inspeccion.Inspeccion.InspAperCambUbicFarm.DatosSolicitante.PendingUpdate = true;
-                Inspeccion.Inspeccion.InspAperCambUbicFarm.DatosRegente.PendingUpdate = true;
-                Inspeccion.Inspeccion.ParticipantesDNFD.PendingUpdate = true;
-
+                Inspeccion.Inspeccion.InspRetiroRetencion.PendingUpdate = true;
+                Inspeccion.Inspeccion.InspRetiroRetencion.DatosRetiroRetencion.PendingUpdate = true;
                 var data = inspectionService.Save(Inspeccion);
                 if (data != null)
                 {
@@ -156,61 +147,41 @@ namespace AuditoriaApp.Components.Inspections._1_AperturaUbicacionFarmacia
 
         //////////////////////////////
         ///
+        private async Task EditProduct(AUD_ProdRetiroRetencionTB data = null)
+        {
+            data = data != null ? data : new AUD_ProdRetiroRetencionTB();
+            var parameters = new DialogParameters { ["Data"] = data };
+            var options = new DialogOptions { CloseButton = true, MaxWidth = MaxWidth.Medium, FullWidth = true, DisableBackdropClick = true };
+            var dialog = _dialogService.Show<Components.Dialog.ProductosRetirados.AddEdit>(data != null ? "Editar Producto" : "Agregar Producto", parameters, options);
+            var result = await dialog.Result;
+            if (!result.Cancelled)
+            {
+                if (result.Data != null)
+                {
+                    var actividad = (AUD_ProdRetiroRetencionTB)result.Data;
+                    Inspeccion.Inspeccion.InspRetiroRetencion.DatosRetiroRetencion.LProductos = Inspeccion.Inspeccion.InspRetiroRetencion.DatosRetiroRetencion.LProductos?.Count > 0 ? Inspeccion.Inspeccion.InspRetiroRetencion.DatosRetiroRetencion.LProductos : new List<AUD_ProdRetiroRetencionTB>();
+                    if (!Inspeccion.Inspeccion.InspRetiroRetencion.DatosRetiroRetencion.LProductos.Contains(actividad))
+                        Inspeccion.Inspeccion.InspRetiroRetencion.DatosRetiroRetencion.LProductos.Add(actividad);
+                    await this.InvokeAsync(StateHasChanged);
+                }
+            }
 
-        private async Task UploadFile()
-        {
-            try
-            {
-                var parameters = new DialogParameters { };
-                var options = new DialogOptions { CloseButton = true, MaxWidth = MaxWidth.Medium, FullWidth = true, DisableBackdropClick = true };
-                var dialog = dialogService.Show<AuditoriaApp.Components.Attachments.AddEdit>("Adjuntar Archivo", parameters, options);
-                var result = await dialog.Result;
-                if (!result.Cancelled)
-                {
-                    if (result.Data != null)
-                    {
-                        var attachment = (AttachmentTB)result.Data;
-                        Inspeccion.Inspeccion.DatosConclusiones.LAttachments = Inspeccion.Inspeccion.DatosConclusiones.LAttachments?.Count > 0 ? Inspeccion.Inspeccion.DatosConclusiones.LAttachments : new List<AttachmentTB>();
-                        Inspeccion.Inspeccion.DatosConclusiones.LAttachments.Add(attachment);
-                        await this.InvokeAsync(StateHasChanged);
-                    }
-                }
-            }
-            catch { }
         }
-        private async Task DeleteFile(AttachmentTB file)
+        private async Task RemoveProduct(AUD_ProdRetiroRetencionTB data)
         {
-            try
-            {
-                //Open Modal
-                var parameters = new DialogParameters{
+            //Open Modal
+            var parameters = new DialogParameters{
              { nameof(Components.Dialog.DialogComponent.ContentText), string.Format("Está seguro desea eliminar el dato seleccionado?") }};
-                var options = new DialogOptions { CloseButton = true, MaxWidth = MaxWidth.Small, FullWidth = true, DisableBackdropClick = true };
-                var dialog = dialogService.Show<Components.Dialog.DialogComponent>("Confirmar Eliminar", parameters, options);
-                var result = await dialog.Result;
-                if (!result.Cancelled)
-                {
-                    var succeeded = await uploadManager.DeleteFile(file);
-                    if (succeeded)
-                    {
-                        Inspeccion.Inspeccion.DatosConclusiones.LAttachments.Remove(file);
-                        await this.InvokeAsync(StateHasChanged);
-                    }
-                    else
-                    {
-                        snackbar.Add("Error al remover el adjunto", Severity.Error);
-                    }
-                }
-            }
-            catch { }
-        }
-        private async Task OpenFile(AttachmentTB file)
-        {
-            try
+            var options = new DialogOptions { CloseButton = true, MaxWidth = MaxWidth.Small, FullWidth = true, DisableBackdropClick = true };
+            var dialog = _dialogService.Show<Components.Dialog.DialogComponent>("Confirmar Eliminar", parameters, options);
+            var result = await dialog.Result;
+            if (result.Cancelled)
             {
-                await uploadManager.ExecuteFile(file.AbsolutePath);
+                return;
             }
-            catch { }
+
+            Inspeccion.Inspeccion.InspRetiroRetencion.DatosRetiroRetencion.LProductos.Remove(data);
+            await this.InvokeAsync(StateHasChanged);
         }
 
     }

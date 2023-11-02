@@ -202,11 +202,11 @@ namespace DataAccess
                 .HasForeignKey(e => e.InspeccionId)
                 .OnDelete(DeleteBehavior.Cascade);
 
-            modelBuilder.Entity<AUD_InspRetiroRetencionTB>()
-                .HasMany(e => e.LProductos)
-                .WithOne(e => e.FrmRetiroRetencion)
-                .HasForeignKey(e => e.FrmRetiroRetencionId)
-                .OnDelete(DeleteBehavior.Cascade);
+            //modelBuilder.Entity<AUD_InspRetiroRetencionTB>()
+            //    .HasMany(e => e.LProductos)
+            //    .WithOne(e => e.FrmRetiroRetencion)
+            //    .HasForeignKey(e => e.FrmRetiroRetencionId)
+            //    .OnDelete(DeleteBehavior.Cascade);
 
             ///////////////////////////////////////////
             ///
@@ -328,6 +328,11 @@ namespace DataAccess
             modelBuilder.Entity<AUD_InspRetiroRetencionTB>()
     .Property(e => e.DatosAtendidosPor)
     .HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_DatosAtendidosPor>(x));
+
+            modelBuilder.Entity<AUD_InspRetiroRetencionTB>()
+   .Property(e => e.DatosRetiroRetencion)
+   .HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_DatosRetiroRetencion>(x));
+
 
             ///////////////////////////////////////////
             ///

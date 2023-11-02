@@ -99,7 +99,7 @@ namespace Aig.Auditoria.Components.Inspections._6_RetencionRetiro
                 }
                 editContext = editContext != null ? editContext : new(Inspeccion);
 
-                Inspeccion.InspRetiroRetencion.DatosAtendidosPor = Inspeccion.InspRetiroRetencion.DatosAtendidosPor != null ? Inspeccion.InspRetiroRetencion.DatosAtendidosPor : new AUD_DatosAtendidosPor();
+                Inspeccion.InspRetiroRetencion.DatosRetiroRetencion = Inspeccion.InspRetiroRetencion.DatosRetiroRetencion != null ? Inspeccion.InspRetiroRetencion.DatosRetiroRetencion : new AUD_DatosRetiroRetencion();
             }
             else { Cancel(); }
 
@@ -155,7 +155,7 @@ namespace Aig.Auditoria.Components.Inspections._6_RetencionRetiro
         {
             if (product != null)
             {
-                Inspeccion.InspRetiroRetencion.LProductos.Remove(product);
+                Inspeccion.InspRetiroRetencion.DatosRetiroRetencion.LProductos.Remove(product);
                 this.InvokeAsync(StateHasChanged);
             }
         }
@@ -170,10 +170,10 @@ namespace Aig.Auditoria.Components.Inspections._6_RetencionRetiro
             
             if (message.Product != null)
             {
-                Inspeccion.InspRetiroRetencion.LProductos = Inspeccion.InspRetiroRetencion.LProductos != null ? Inspeccion.InspRetiroRetencion.LProductos : new List<AUD_ProdRetiroRetencionTB>();
+                Inspeccion.InspRetiroRetencion.DatosRetiroRetencion.LProductos = Inspeccion.InspRetiroRetencion.DatosRetiroRetencion.LProductos != null ? Inspeccion.InspRetiroRetencion.DatosRetiroRetencion.LProductos : new List<AUD_ProdRetiroRetencionTB>();
 
-                if (!Inspeccion.InspRetiroRetencion.LProductos.Contains(message.Product))
-                    Inspeccion.InspRetiroRetencion.LProductos.Add(message.Product);
+                if (!Inspeccion.InspRetiroRetencion.DatosRetiroRetencion.LProductos.Contains(message.Product))
+                    Inspeccion.InspRetiroRetencion.DatosRetiroRetencion.LProductos.Add(message.Product);
             }
             this.InvokeAsync(StateHasChanged);
         }

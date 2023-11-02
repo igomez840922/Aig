@@ -1,0 +1,102 @@
+﻿@if (Inspeccion?.Inspeccion?.InspRetiroRetencion?.DatosRetiroRetencion != null)
+{
+    <EditForm Model="@Inspeccion.Inspeccion" OnValidSubmit="Save">
+        <DataAnnotationsValidator />
+        <MudCard Elevation="25">
+            <MudCardHeader>
+                @*  <CardHeaderAvatar>
+            <MudAvatar Color="Color.Secondary">I</MudAvatar>
+            </CardHeaderAvatar> *@
+                <CardHeaderContent>
+                    <MudText Typo="Typo.body1">@(Inspeccion.Inspeccion.NumActa) - @(DataModel.Helper.Helper.GetDescription(Inspeccion.Inspeccion.TipoActa))</MudText>
+                </CardHeaderContent>
+                <CardHeaderActions>
+                    <MudMenu Icon="@Icons.Material.Filled.MoreVert">
+                        <MudMenuItem Icon="@Icons.Material.Outlined.Save" OnTouch="@((e)=> Save())" OnClick="@((e)=> Save())">Guardar</MudMenuItem>
+                        <MudMenuItem Icon="@Icons.Material.Filled.Logout" OnClick="@((e)=> Cancel())" OnTouch="@((e)=> Cancel())">Salir</MudMenuItem>
+                    </MudMenu>
+                </CardHeaderActions>
+            </MudCardHeader>
+            <MudCardHeader>
+                <CardHeaderContent>
+                    <MudText Typo="Typo.h6" Color="Color.Dark">Productos Retirados</MudText>
+                </CardHeaderContent>
+            </MudCardHeader>
+            <MudCardContent>
+                <MudGrid>
+                    <MudItem xs="12" md="6">
+                        <MudSelect Margin="Margin.Dense" T="DataModel.Helper.enum_InspRetiroRetencionType" Label="Tipo de Inspección" Variant="Variant.Outlined" AnchorOrigin="Origin.BottomCenter" @bind-Value="Inspeccion.Inspeccion.InspRetiroRetencion.DatosRetiroRetencion.RetiroRetencionType" For="@(() => Inspeccion.Inspeccion.InspRetiroRetencion.DatosRetiroRetencion.RetiroRetencionType)">
+                            @foreach (DataModel.Helper.enum_InspRetiroRetencionType dt in Enum.GetValues(typeof(DataModel.Helper.enum_InspRetiroRetencionType)))
+                            {
+                                <MudSelectItem T="DataModel.Helper.enum_InspRetiroRetencionType" Value="dt">@DataModel.Helper.Helper.GetDescription(dt)</MudSelectItem>
+
+                            }
+                        </MudSelect>
+                    </MudItem>
+                </MudGrid>
+                <MudGrid>
+
+                    <MudItem xs="12">
+
+                        @if (Inspeccion.Inspeccion.InspRetiroRetencion.DatosRetiroRetencion.LProductos != null)
+                        {
+                            <MudTable Items="@(Inspeccion.Inspeccion.InspRetiroRetencion.DatosRetiroRetencion.LProductos)" Dense="false" Hover="true" Bordered="false" Striped="true">
+                                <HeaderContent>
+                                    <MudTh>Nombre del Producto</MudTh>
+                                    <MudTh>Presentación Comercial</MudTh>
+                                    <MudTh>Fabricante</MudTh>
+                                    <MudTh>País de Fabricación</MudTh>
+                                    <MudTh>Lote</MudTh>
+                                    <MudTh>Fecha Exp.</MudTh>
+                                    <MudTh>Cantidad Retenida</MudTh>
+                                    <MudTh>Cantidad Retirada</MudTh>
+                                    <MudTh>Destino del Producto</MudTh>
+                                    <MudTh Style="text-align:right!important">
+                                        <MudButton ButtonType="ButtonType.Button" Variant="Variant.Filled" Color="Color.Primary" Size="Size.Medium" Class="ma-1" StartIcon="@Icons.Material.Filled.Add" OnClick="@((e)=> EditProduct())">Agregar</MudButton>
+                                    </MudTh>
+                                </HeaderContent>
+                                <RowTemplate Context="tbContext">
+                                    <MudTd DataLabel="Nombre del Producto">@(tbContext.Nombre)</MudTd>
+                                    <MudTd DataLabel="Presentación Comercial">@(tbContext.PresentacionComercial)</MudTd>
+                                    <MudTd DataLabel="Fabricante">@(tbContext.Fabricante)</MudTd>
+                                    <MudTd DataLabel="País de Fabricación">@(tbContext.Pais)</MudTd>
+                                    <MudTd DataLabel="Lote">@(tbContext.Lote)</MudTd>
+                                    <MudTd DataLabel="Fecha Exp.">@(tbContext.FechaExp?.ToString("dd/MM/yyyy") ?? "")</MudTd>
+                                    <MudTd DataLabel="Cantidad Retenida">@(tbContext.CantidadRetenida)</MudTd>
+                                    <MudTd DataLabel="Cantidad Retirada">@(tbContext.CantidadRetirada)</MudTd>
+                                    <MudTd DataLabel="Destino del Producto">@(tbContext.Destino)</MudTd>
+                                    <MudTd Style="text-align:right!important">
+                                        <MudMenu Icon="@Icons.Material.Filled.MoreVert">
+                                            <MudMenuItem Icon="@Icons.Material.Outlined.Edit" OnTouch="@((e)=> EditProduct(tbContext))" OnClick="@((e)=> EditProduct(tbContext))">Editar</MudMenuItem>
+                                            <MudMenuItem Icon="@Icons.Material.Filled.Remove" OnClick="@((e)=> RemoveProduct(tbContext))" OnTouch="@((e)=> RemoveProduct(tbContext))">Eliminar</MudMenuItem>
+                                        </MudMenu>
+                                    </MudTd>
+                                </RowTemplate>
+                                <LoadingContent>
+                                    <MudText>Cargando...</MudText>
+                                </LoadingContent>
+                            </MudTable>
+                        }
+
+
+                    </MudItem>
+                </MudGrid>
+
+            </MudCardContent>
+            <MudCardActions Class="pt-4 pl-4">
+                <div style="text-align:right;" class="ml-auto">
+                    <MudButton ButtonType="ButtonType.Button" Variant="Variant.Filled" Color="Color.Primary" Size="Size.Medium" Class="ma-1" OnClick="@((e)=> SaveExit())" StartIcon="@Icons.Material.Filled.Save">Guardar y Salir</MudButton>
+                    <MudButton ButtonType="ButtonType.Button" Variant="Variant.Filled" Color="Color.Primary" Size="Size.Medium" Class="ma-1" OnClick="@((e)=> Save())" EndIcon="@Icons.Material.Filled.SaveAs">Guardar</MudButton>
+                    <MudButton ButtonType="ButtonType.Button" Variant="Variant.Filled" Color="Color.Error" Size="Size.Medium" Class="ma-1" OnClick="@((e)=> Cancel())" StartIcon="@Icons.Material.Filled.Logout">Salir</MudButton>
+                </div>
+            </MudCardActions>
+        </MudCard>
+
+    </EditForm>
+
+
+
+
+
+
+}

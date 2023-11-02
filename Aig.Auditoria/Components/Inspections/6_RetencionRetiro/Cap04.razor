@@ -1,7 +1,7 @@
 ﻿@using DataModel.Helper;
 @implements IDisposable
 
-@if (Inspeccion?.InspRetiroRetencion?.DatosAtendidosPor != null)
+@if (Inspeccion?.InspRetiroRetencion?.DatosRetiroRetencion != null)
 {
     <div class="kt-content  kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor" id="kt_content">
 
@@ -42,13 +42,13 @@
                                                     <label for="password">@languageContainerService.Keys["InspectionType"]</label>
                                                     <div class="form-group">
                                                         <div class="form-line">
-                                                            <InputSelect @bind-Value="Inspeccion.InspRetiroRetencion.RetiroRetencionType" class="form-control">
+                                                            <InputSelect @bind-Value="Inspeccion.InspRetiroRetencion.DatosRetiroRetencion.RetiroRetencionType" class="form-control">
                                                                 @foreach (enum_InspRetiroRetencionType dt in Enum.GetValues(typeof(enum_InspRetiroRetencionType)))
                                                                 {
                                                                     <option value="@dt">@(DataModel.Helper.Helper.GetDescription(dt))</option>
                                                                 }
                                                             </InputSelect>
-                                                            <ValidationMessage For=@(() => Inspeccion.InspRetiroRetencion.RetiroRetencionType) />
+                                                            <ValidationMessage For=@(() => Inspeccion.InspRetiroRetencion.DatosRetiroRetencion.RetiroRetencionType) />
                                                         </div>
                                                     </div>
                                                 </div>
@@ -76,9 +76,9 @@
                                                                     </tr>
                                                                 </thead>
                                                                 <tbody>
-                                                                    @if (Inspeccion != null && Inspeccion.InspRetiroRetencion.LProductos != null)
+                                                                    @if (Inspeccion != null && Inspeccion.InspRetiroRetencion.DatosRetiroRetencion.LProductos != null)
                                                                     {
-                                                                        @foreach (var dt in Inspeccion.InspRetiroRetencion.LProductos)
+                                                                        @foreach (var dt in Inspeccion.InspRetiroRetencion.DatosRetiroRetencion.LProductos)
                                                                         {
                                                                             <tr>
                                                                                 <td scope="row">@dt.Nombre</td>

@@ -7,11 +7,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
-namespace AuditoriaApp.Components.Inspections._1_AperturaUbicacionFarmacia
+namespace AuditoriaApp.Components.Inspections._7_CierreOperaciones
 {
-    public partial class Cap12
+    public partial class Cap05
     {
         [Inject]
         IInspectionService inspectionService { get; set; }
@@ -57,9 +56,8 @@ namespace AuditoriaApp.Components.Inspections._1_AperturaUbicacionFarmacia
             {
                 Inspeccion.Inspeccion.DatosConclusiones = Inspeccion.Inspeccion.DatosConclusiones != null ? Inspeccion.Inspeccion.DatosConclusiones : new AUD_DatosConclusiones();
                 Inspeccion.Inspeccion.ParticipantesDNFD = Inspeccion.Inspeccion.ParticipantesDNFD != null ? Inspeccion.Inspeccion.ParticipantesDNFD : new AUD_ParticipantesDNFD();
-                Inspeccion.Inspeccion.InspAperCambUbicFarm.DatosSolicitante = Inspeccion.Inspeccion.InspAperCambUbicFarm.DatosSolicitante != null ? Inspeccion.Inspeccion.InspAperCambUbicFarm.DatosSolicitante : new AUD_DatosSolicitante();
-                Inspeccion.Inspeccion.InspAperCambUbicFarm.DatosRegente = Inspeccion.Inspeccion.InspAperCambUbicFarm.DatosRegente != null ? Inspeccion.Inspeccion.InspAperCambUbicFarm.DatosRegente : new AUD_DatosRegente();
-
+                Inspeccion.Inspeccion.InspCierreOperacion.DatosRepresentLegal = Inspeccion.Inspeccion.InspCierreOperacion.DatosRepresentLegal != null ? Inspeccion.Inspeccion.InspCierreOperacion.DatosRepresentLegal : new AUD_DatosRepresentLegal();
+                                
                 await LoadData();
             }
             catch { }
@@ -112,8 +110,7 @@ namespace AuditoriaApp.Components.Inspections._1_AperturaUbicacionFarmacia
             {
                 Inspeccion.PendingUpdate = true;
                 Inspeccion.Inspeccion.PendingUpdate = true;
-                Inspeccion.Inspeccion.InspAperCambUbicFarm.DatosSolicitante.PendingUpdate = true;
-                Inspeccion.Inspeccion.InspAperCambUbicFarm.DatosRegente.PendingUpdate = true;
+                Inspeccion.Inspeccion.InspCierreOperacion.DatosRepresentLegal.PendingUpdate = true;
                 Inspeccion.Inspeccion.ParticipantesDNFD.PendingUpdate = true;
 
                 var data = inspectionService.Save(Inspeccion);

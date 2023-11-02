@@ -489,6 +489,43 @@ namespace Aig.Auditoria.Controllers
                                 
                                 break;
                             }
+                        case DataModel.Helper.enumAUD_TipoActa.RR:
+                            {
+                                inspeccion.InspRetiroRetencion.PendingUpdate = false;
+                                if (inspeccion.InspRetiroRetencion?.DatosRepresentLegal?.PendingUpdate ?? false)
+                                {
+                                    data.InspRetiroRetencion.DatosRepresentLegal = inspeccion.InspRetiroRetencion.DatosRepresentLegal;
+                                    data.InspRetiroRetencion.DatosRepresentLegal.PendingUpdate = false;
+                                }
+                                if (inspeccion.InspRetiroRetencion?.DatosAtendidosPor?.PendingUpdate ?? false)
+                                {
+                                    data.InspRetiroRetencion.DatosAtendidosPor = inspeccion.InspRetiroRetencion.DatosAtendidosPor;
+                                    data.InspRetiroRetencion.DatosAtendidosPor.PendingUpdate = false;
+                                }
+                                if (inspeccion.InspRetiroRetencion?.DatosRetiroRetencion?.PendingUpdate ?? false)
+                                {
+                                    data.InspRetiroRetencion.DatosRetiroRetencion = inspeccion.InspRetiroRetencion.DatosRetiroRetencion;
+                                    data.InspRetiroRetencion.DatosRetiroRetencion.PendingUpdate = false;
+                                }
+
+                                break;
+                            }
+                        case DataModel.Helper.enumAUD_TipoActa.COP:
+                            {
+                                inspeccion.InspCierreOperacion.PendingUpdate = false;
+                                if (inspeccion.InspCierreOperacion?.DatosRepresentLegal?.PendingUpdate ?? false)
+                                {
+                                    data.InspCierreOperacion.DatosRepresentLegal = inspeccion.InspCierreOperacion.DatosRepresentLegal;
+                                    data.InspCierreOperacion.DatosRepresentLegal.PendingUpdate = false;
+                                }
+                                if (inspeccion.InspCierreOperacion?.DatosInspeccion?.PendingUpdate ?? false)
+                                {
+                                    data.InspCierreOperacion.DatosInspeccion = inspeccion.InspCierreOperacion.DatosInspeccion;
+                                    data.InspCierreOperacion.DatosInspeccion.PendingUpdate = false;
+                                }
+
+                                break;
+                            }
 
 
                     }

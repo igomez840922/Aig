@@ -2,20 +2,16 @@
 using DataModel;
 using Microsoft.AspNetCore.Components;
 using MudBlazor;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace AuditoriaApp.Components.Inspections._2_AperturaUbicacionAgencia
+namespace AuditoriaApp.Components.Inspections._6_RetencionRetiro
 {
-    public partial class Cap19
+    public partial class Cap03
     {
         [Inject]
         IInspectionService inspectionService { get; set; }
         [Inject]
-        IUploadService uploadManager { get; set; }
+        IPaisService paisService { get; set; }
+
 
         [Inject]
         IDialogService dialogService { get; set; }
@@ -26,6 +22,7 @@ namespace AuditoriaApp.Components.Inspections._2_AperturaUbicacionAgencia
         [Parameter]
         public EventCallback BackToMain { get; set; }
 
+        List<PaisTB> LPaises { get; set; }
 
         /////////////////////////
         ///
@@ -54,11 +51,7 @@ namespace AuditoriaApp.Components.Inspections._2_AperturaUbicacionAgencia
         {
             try
             {
-                Inspeccion.Inspeccion.DatosConclusiones = Inspeccion.Inspeccion.DatosConclusiones != null ? Inspeccion.Inspeccion.DatosConclusiones : new AUD_DatosConclusiones();
-                Inspeccion.Inspeccion.ParticipantesDNFD = Inspeccion.Inspeccion.ParticipantesDNFD != null ? Inspeccion.Inspeccion.ParticipantesDNFD : new AUD_ParticipantesDNFD();
-                Inspeccion.Inspeccion.InspAperCambUbicAgen.DatosSolicitante = Inspeccion.Inspeccion.InspAperCambUbicAgen.DatosSolicitante != null ? Inspeccion.Inspeccion.InspAperCambUbicAgen.DatosSolicitante : new AUD_DatosSolicitante();
-                Inspeccion.Inspeccion.InspAperCambUbicAgen.DatosRegente = Inspeccion.Inspeccion.InspAperCambUbicAgen.DatosRegente != null ? Inspeccion.Inspeccion.InspAperCambUbicAgen.DatosRegente : new AUD_DatosRegente();
-
+                Inspeccion.Inspeccion.InspRetiroRetencion.DatosAtendidosPor = Inspeccion.Inspeccion.InspRetiroRetencion.DatosAtendidosPor != null ? Inspeccion.Inspeccion.InspRetiroRetencion.DatosAtendidosPor : new AUD_DatosAtendidosPor();
                 await LoadData();
             }
             catch { }
@@ -70,6 +63,7 @@ namespace AuditoriaApp.Components.Inspections._2_AperturaUbicacionAgencia
 
         protected async Task LoadData()
         {
+            LPaises = await paisService.GetAll();
 
             await this.InvokeAsync(StateHasChanged);
         }
@@ -111,10 +105,8 @@ namespace AuditoriaApp.Components.Inspections._2_AperturaUbicacionAgencia
             {
                 Inspeccion.PendingUpdate = true;
                 Inspeccion.Inspeccion.PendingUpdate = true;
-                Inspeccion.Inspeccion.InspAperCambUbicAgen.DatosSolicitante.PendingUpdate = true;
-                Inspeccion.Inspeccion.InspAperCambUbicAgen.DatosRegente.PendingUpdate = true;
-                Inspeccion.Inspeccion.ParticipantesDNFD.PendingUpdate = true;
-
+                Inspeccion.Inspeccion.InspRetiroRetencion.PendingUpdate = true;
+                Inspeccion.Inspeccion.InspRetiroRetencion.DatosAtendidosPor.PendingUpdate = true;
                 var data = inspectionService.Save(Inspeccion);
                 if (data != null)
                 {
@@ -155,62 +147,5 @@ namespace AuditoriaApp.Components.Inspections._2_AperturaUbicacionAgencia
 
         //////////////////////////////
         ///
-
-        private async Task UploadFile()
-        {
-            try
-            {
-                var parameters = new DialogParameters { };
-                var options = new DialogOptions { CloseButton = true, MaxWidth = MaxWidth.Medium, FullWidth = true, DisableBackdropClick = true };
-                var dialog = dialogService.Show<AuditoriaApp.Components.Attachments.AddEdit>("Adjuntar Archivo", parameters, options);
-                var result = await dialog.Result;
-                if (!result.Cancelled)
-                {
-                    if (result.Data != null)
-                    {
-                        var attachment = (AttachmentTB)result.Data;
-                        Inspeccion.Inspeccion.DatosConclusiones.LAttachments = Inspeccion.Inspeccion.DatosConclusiones.LAttachments?.Count > 0 ? Inspeccion.Inspeccion.DatosConclusiones.LAttachments : new List<AttachmentTB>();
-                        Inspeccion.Inspeccion.DatosConclusiones.LAttachments.Add(attachment);
-                        await this.InvokeAsync(StateHasChanged);
-                    }
-                }
-            }
-            catch { }
-        }
-        private async Task DeleteFile(AttachmentTB file)
-        {
-            try
-            {
-                //Open Modal
-                var parameters = new DialogParameters{
-             { nameof(Components.Dialog.DialogComponent.ContentText), string.Format("Está seguro desea eliminar el dato seleccionado?") }};
-                var options = new DialogOptions { CloseButton = true, MaxWidth = MaxWidth.Small, FullWidth = true, DisableBackdropClick = true };
-                var dialog = dialogService.Show<Components.Dialog.DialogComponent>("Confirmar Eliminar", parameters, options);
-                var result = await dialog.Result;
-                if (!result.Cancelled)
-                {
-                    var succeeded = await uploadManager.DeleteFile(file);
-                    if (succeeded)
-                    {
-                        Inspeccion.Inspeccion.DatosConclusiones.LAttachments.Remove(file);
-                        await this.InvokeAsync(StateHasChanged);
-                    }
-                    else
-                    {
-                        snackbar.Add("Error al remover el adjunto", Severity.Error);
-                    }
-                }
-            }
-            catch { }
-        }
-        private async Task OpenFile(AttachmentTB file)
-        {
-            try
-            {
-                await uploadManager.ExecuteFile(file.AbsolutePath);
-            }
-            catch { }
-        }
-
     }
 }

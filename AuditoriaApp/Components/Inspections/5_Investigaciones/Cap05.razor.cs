@@ -55,6 +55,8 @@ namespace AuditoriaApp.Components.Inspections._5_Investigaciones
             try
             {
                 Inspeccion.Inspeccion.DatosConclusiones = Inspeccion.Inspeccion.DatosConclusiones != null ? Inspeccion.Inspeccion.DatosConclusiones : new AUD_DatosConclusiones();
+                Inspeccion.Inspeccion.ParticipantesDNFD = Inspeccion.Inspeccion.ParticipantesDNFD != null ? Inspeccion.Inspeccion.ParticipantesDNFD : new AUD_ParticipantesDNFD();
+                Inspeccion.Inspeccion.InspInvestigacion.DatosAtendidosPor = Inspeccion.Inspeccion.InspInvestigacion.DatosAtendidosPor != null ? Inspeccion.Inspeccion.InspInvestigacion.DatosAtendidosPor : new AUD_DatosAtendidosPor();
 
                 await LoadData();
             }
