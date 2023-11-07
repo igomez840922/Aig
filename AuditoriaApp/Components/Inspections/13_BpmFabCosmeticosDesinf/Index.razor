@@ -1,0 +1,246 @@
+﻿
+@if (Inspeccion != null && Inspeccion.Inspeccion!=null)
+{
+    @switch(selectedChapter){
+        case DataModel.Helper.enumSelectedChapter.None:{
+            <MudCard Elevation="25">
+    <MudCardHeader>
+       @*  <CardHeaderAvatar>
+            <MudAvatar Color="Color.Secondary">I</MudAvatar>
+        </CardHeaderAvatar> *@
+        <CardHeaderContent>
+            <MudText Typo="Typo.body1">@(Inspeccion.Inspeccion.NumActa) - @(DataModel.Helper.Helper.GetDescription(Inspeccion.Inspeccion.TipoActa))</MudText>
+        </CardHeaderContent>
+        <CardHeaderActions>
+            <MudMenu Icon="@Icons.Material.Filled.MoreVert">
+                <MudMenuItem Icon="@Icons.Material.Outlined.CloudSync" OnTouch="@((e)=> SyncData())" OnClick="@((e)=> SyncData())">Sincronizar</MudMenuItem>
+                                <MudMenuItem Icon="@Icons.Material.Filled.Logout"  OnClick="@((e)=> Cancel())" OnTouch="@((e)=> Cancel())">Salir</MudMenuItem>
+            </MudMenu>
+        </CardHeaderActions>
+    </MudCardHeader>
+    <MudCardContent>
+           
+<MudGrid>    
+    <MudItem xs="12">
+
+            @if (MenuOptions?.Count > 0)
+        {
+                <MudTable Items="@(MenuOptions)" Dense="false" Hover="true" Bordered="false" Striped="true">               
+                <HeaderContent>
+                    <MudTh>No. Capítulo</MudTh>
+                    <MudTh>Nombre</MudTh>
+                    <MudTh></MudTh>
+                </HeaderContent>
+                <RowTemplate>
+                        <MudTd DataLabel="No. Capítulo">@(DataModel.Helper.Helper.GetDescription(context.Chapter))</MudTd>
+                        <MudTd DataLabel="Nombre">@context.Name</MudTd>
+                        <MudTd Style="text-align:right!important">
+                            <MudButton ButtonType="ButtonType.Button" Variant="Variant.Filled" Color="Color.Primary" Size="Size.Small" Class="ma-1" StartIcon="@Icons.Material.Filled.Edit" OnClick="@((e)=> SelectChapter(@context.Chapter))">ABRIR</MudButton>
+                        </MudTd>
+                </RowTemplate>
+               @*  <NoRecordsContent>
+                    <MudText>No Data Found</MudText>
+                </NoRecordsContent> *@
+                <LoadingContent>
+                    <MudText>Cargando...</MudText>
+                </LoadingContent>               
+            </MudTable>
+        }
+
+
+    </MudItem>
+
+</MudGrid>
+    </MudCardContent>   
+
+                </MudCard>
+                break;
+            }
+        case DataModel.Helper.enumSelectedChapter.Cap01:{
+            <AuditoriaApp.Components.Inspections._13_BpmFabCosmeticosDesinf.Cap01 Inspeccion="@Inspeccion" BackToMain="@((e)=> SelectChapter(DataModel.Helper.enumSelectedChapter.None))"></AuditoriaApp.Components.Inspections._13_BpmFabCosmeticosDesinf.Cap01>
+                break;
+            }
+        case DataModel.Helper.enumSelectedChapter.Cap02:
+            {
+                <AuditoriaApp.Components.Inspections._13_BpmFabCosmeticosDesinf.Cap02 Inspeccion="@Inspeccion" BackToMain="@((e)=> SelectChapter(DataModel.Helper.enumSelectedChapter.None))"></AuditoriaApp.Components.Inspections._13_BpmFabCosmeticosDesinf.Cap02>
+                break;
+            }
+        case DataModel.Helper.enumSelectedChapter.Cap03:
+            {
+                <AuditoriaApp.Components.Inspections._13_BpmFabCosmeticosDesinf.Cap03 Inspeccion="@Inspeccion" BackToMain="@((e)=> SelectChapter(DataModel.Helper.enumSelectedChapter.None))"></AuditoriaApp.Components.Inspections._13_BpmFabCosmeticosDesinf.Cap03>
+                break;
+            }
+       case DataModel.Helper.enumSelectedChapter.Cap04:
+            {
+                <AuditoriaApp.Components.Inspections._13_BpmFabCosmeticosDesinf.Cap04 Inspeccion="@Inspeccion" BackToMain="@((e)=> SelectChapter(DataModel.Helper.enumSelectedChapter.None))"></AuditoriaApp.Components.Inspections._13_BpmFabCosmeticosDesinf.Cap04>
+                break;
+            }
+       case DataModel.Helper.enumSelectedChapter.Cap05:
+            {
+                <AuditoriaApp.Components.Inspections._13_BpmFabCosmeticosDesinf.Cap05 Inspeccion="@Inspeccion" BackToMain="@((e)=> SelectChapter(DataModel.Helper.enumSelectedChapter.None))"></AuditoriaApp.Components.Inspections._13_BpmFabCosmeticosDesinf.Cap05>
+                break;
+            }
+       case DataModel.Helper.enumSelectedChapter.Cap06:
+            {
+                <AuditoriaApp.Components.Inspections._13_BpmFabCosmeticosDesinf.Cap06 Inspeccion="@Inspeccion" BackToMain="@((e)=> SelectChapter(DataModel.Helper.enumSelectedChapter.None))"></AuditoriaApp.Components.Inspections._13_BpmFabCosmeticosDesinf.Cap06>
+                break;
+            }
+        case DataModel.Helper.enumSelectedChapter.Cap07:
+            {
+                <AuditoriaApp.Components.Inspections._13_BpmFabCosmeticosDesinf.Cap07 Inspeccion="@Inspeccion" BackToMain="@((e)=> SelectChapter(DataModel.Helper.enumSelectedChapter.None))"></AuditoriaApp.Components.Inspections._13_BpmFabCosmeticosDesinf.Cap07>
+                break;
+            }
+        case DataModel.Helper.enumSelectedChapter.Cap08:
+            {
+                <AuditoriaApp.Components.Inspections._13_BpmFabCosmeticosDesinf.Cap08 Inspeccion="@Inspeccion" BackToMain="@((e)=> SelectChapter(DataModel.Helper.enumSelectedChapter.None))"></AuditoriaApp.Components.Inspections._13_BpmFabCosmeticosDesinf.Cap08>
+                break;
+            }
+        case DataModel.Helper.enumSelectedChapter.Cap09:
+            {
+                <AuditoriaApp.Components.Inspections._13_BpmFabCosmeticosDesinf.Cap09 Inspeccion="@Inspeccion" BackToMain="@((e)=> SelectChapter(DataModel.Helper.enumSelectedChapter.None))"></AuditoriaApp.Components.Inspections._13_BpmFabCosmeticosDesinf.Cap09>
+                break;
+            }
+        case DataModel.Helper.enumSelectedChapter.Cap10:
+            {
+                <AuditoriaApp.Components.Inspections._13_BpmFabCosmeticosDesinf.Cap10 Inspeccion="@Inspeccion" BackToMain="@((e)=> SelectChapter(DataModel.Helper.enumSelectedChapter.None))"></AuditoriaApp.Components.Inspections._13_BpmFabCosmeticosDesinf.Cap10>
+                break;
+            }
+        case DataModel.Helper.enumSelectedChapter.Cap11:
+            {
+                <AuditoriaApp.Components.Inspections._13_BpmFabCosmeticosDesinf.Cap11 Inspeccion="@Inspeccion" BackToMain="@((e)=> SelectChapter(DataModel.Helper.enumSelectedChapter.None))"></AuditoriaApp.Components.Inspections._13_BpmFabCosmeticosDesinf.Cap11>
+                break;
+            }
+        case DataModel.Helper.enumSelectedChapter.Cap12:
+            {
+                <AuditoriaApp.Components.Inspections._13_BpmFabCosmeticosDesinf.Cap12 Inspeccion="@Inspeccion" BackToMain="@((e)=> SelectChapter(DataModel.Helper.enumSelectedChapter.None))"></AuditoriaApp.Components.Inspections._13_BpmFabCosmeticosDesinf.Cap12>
+                break;
+            }
+        case DataModel.Helper.enumSelectedChapter.Cap13:
+            {
+                <AuditoriaApp.Components.Inspections._13_BpmFabCosmeticosDesinf.Cap13 Inspeccion="@Inspeccion" BackToMain="@((e)=> SelectChapter(DataModel.Helper.enumSelectedChapter.None))"></AuditoriaApp.Components.Inspections._13_BpmFabCosmeticosDesinf.Cap13>
+                break;
+            }
+        case DataModel.Helper.enumSelectedChapter.Cap14:
+            {
+                <AuditoriaApp.Components.Inspections._13_BpmFabCosmeticosDesinf.Cap14 Inspeccion="@Inspeccion" BackToMain="@((e)=> SelectChapter(DataModel.Helper.enumSelectedChapter.None))"></AuditoriaApp.Components.Inspections._13_BpmFabCosmeticosDesinf.Cap14>
+                break;
+            }
+        case DataModel.Helper.enumSelectedChapter.Cap15:
+            {
+                <AuditoriaApp.Components.Inspections._13_BpmFabCosmeticosDesinf.Cap15 Inspeccion="@Inspeccion" BackToMain="@((e)=> SelectChapter(DataModel.Helper.enumSelectedChapter.None))"></AuditoriaApp.Components.Inspections._13_BpmFabCosmeticosDesinf.Cap15>
+                break;
+            }
+        case DataModel.Helper.enumSelectedChapter.Cap16:
+            {
+                <AuditoriaApp.Components.Inspections._13_BpmFabCosmeticosDesinf.Cap16 Inspeccion="@Inspeccion" BackToMain="@((e)=> SelectChapter(DataModel.Helper.enumSelectedChapter.None))"></AuditoriaApp.Components.Inspections._13_BpmFabCosmeticosDesinf.Cap16>
+                break;
+            }
+        case DataModel.Helper.enumSelectedChapter.Cap17:
+            {
+                <AuditoriaApp.Components.Inspections._13_BpmFabCosmeticosDesinf.Cap17 Inspeccion="@Inspeccion" BackToMain="@((e)=> SelectChapter(DataModel.Helper.enumSelectedChapter.None))"></AuditoriaApp.Components.Inspections._13_BpmFabCosmeticosDesinf.Cap17>
+                break;
+            }
+        case DataModel.Helper.enumSelectedChapter.Cap18:
+            {
+                <AuditoriaApp.Components.Inspections._13_BpmFabCosmeticosDesinf.Cap18 Inspeccion="@Inspeccion" BackToMain="@((e)=> SelectChapter(DataModel.Helper.enumSelectedChapter.None))"></AuditoriaApp.Components.Inspections._13_BpmFabCosmeticosDesinf.Cap18>
+                break;
+            }
+        case DataModel.Helper.enumSelectedChapter.Cap19:
+            {
+                <AuditoriaApp.Components.Inspections._13_BpmFabCosmeticosDesinf.Cap19 Inspeccion="@Inspeccion" BackToMain="@((e)=> SelectChapter(DataModel.Helper.enumSelectedChapter.None))"></AuditoriaApp.Components.Inspections._13_BpmFabCosmeticosDesinf.Cap19>
+                break;
+            }
+        case DataModel.Helper.enumSelectedChapter.Cap20:
+            {
+                <AuditoriaApp.Components.Inspections._13_BpmFabCosmeticosDesinf.Cap20 Inspeccion="@Inspeccion" BackToMain="@((e)=> SelectChapter(DataModel.Helper.enumSelectedChapter.None))"></AuditoriaApp.Components.Inspections._13_BpmFabCosmeticosDesinf.Cap20>
+                break;
+            }
+        case DataModel.Helper.enumSelectedChapter.Cap21:
+            {
+                <AuditoriaApp.Components.Inspections._13_BpmFabCosmeticosDesinf.Cap21 Inspeccion="@Inspeccion" BackToMain="@((e)=> SelectChapter(DataModel.Helper.enumSelectedChapter.None))"></AuditoriaApp.Components.Inspections._13_BpmFabCosmeticosDesinf.Cap21>
+                break;
+            }
+        case DataModel.Helper.enumSelectedChapter.Cap22:
+            {
+                <AuditoriaApp.Components.Inspections._13_BpmFabCosmeticosDesinf.Cap22 Inspeccion="@Inspeccion" BackToMain="@((e)=> SelectChapter(DataModel.Helper.enumSelectedChapter.None))"></AuditoriaApp.Components.Inspections._13_BpmFabCosmeticosDesinf.Cap22>
+                break;
+            }
+        case DataModel.Helper.enumSelectedChapter.Cap23:
+            {
+                <AuditoriaApp.Components.Inspections._13_BpmFabCosmeticosDesinf.Cap23 Inspeccion="@Inspeccion" BackToMain="@((e)=> SelectChapter(DataModel.Helper.enumSelectedChapter.None))"></AuditoriaApp.Components.Inspections._13_BpmFabCosmeticosDesinf.Cap23>
+                break;
+            }
+        case DataModel.Helper.enumSelectedChapter.Cap24:
+            {
+                <AuditoriaApp.Components.Inspections._13_BpmFabCosmeticosDesinf.Cap24 Inspeccion="@Inspeccion" BackToMain="@((e)=> SelectChapter(DataModel.Helper.enumSelectedChapter.None))"></AuditoriaApp.Components.Inspections._13_BpmFabCosmeticosDesinf.Cap24>
+                break;
+            }
+        case DataModel.Helper.enumSelectedChapter.Cap25:
+            {
+                <AuditoriaApp.Components.Inspections._13_BpmFabCosmeticosDesinf.Cap25 Inspeccion="@Inspeccion" BackToMain="@((e)=> SelectChapter(DataModel.Helper.enumSelectedChapter.None))"></AuditoriaApp.Components.Inspections._13_BpmFabCosmeticosDesinf.Cap25>
+                break;
+            }
+        case DataModel.Helper.enumSelectedChapter.Cap26:
+            {
+                <AuditoriaApp.Components.Inspections._13_BpmFabCosmeticosDesinf.Cap26 Inspeccion="@Inspeccion" BackToMain="@((e)=> SelectChapter(DataModel.Helper.enumSelectedChapter.None))"></AuditoriaApp.Components.Inspections._13_BpmFabCosmeticosDesinf.Cap26>
+                break;
+            }
+        case DataModel.Helper.enumSelectedChapter.Cap27:
+            {
+                <AuditoriaApp.Components.Inspections._13_BpmFabCosmeticosDesinf.Cap27 Inspeccion="@Inspeccion" BackToMain="@((e)=> SelectChapter(DataModel.Helper.enumSelectedChapter.None))"></AuditoriaApp.Components.Inspections._13_BpmFabCosmeticosDesinf.Cap27>
+                break;
+            }
+        case DataModel.Helper.enumSelectedChapter.Cap28:
+            {
+                <AuditoriaApp.Components.Inspections._13_BpmFabCosmeticosDesinf.Cap28 Inspeccion="@Inspeccion" BackToMain="@((e)=> SelectChapter(DataModel.Helper.enumSelectedChapter.None))"></AuditoriaApp.Components.Inspections._13_BpmFabCosmeticosDesinf.Cap28>
+                break;
+            }
+        case DataModel.Helper.enumSelectedChapter.Cap29:
+            {
+                <AuditoriaApp.Components.Inspections._13_BpmFabCosmeticosDesinf.Cap29 Inspeccion="@Inspeccion" BackToMain="@((e)=> SelectChapter(DataModel.Helper.enumSelectedChapter.None))"></AuditoriaApp.Components.Inspections._13_BpmFabCosmeticosDesinf.Cap29>
+                break;
+            }
+        case DataModel.Helper.enumSelectedChapter.Cap30:
+            {
+                <AuditoriaApp.Components.Inspections._13_BpmFabCosmeticosDesinf.Cap30 Inspeccion="@Inspeccion" BackToMain="@((e)=> SelectChapter(DataModel.Helper.enumSelectedChapter.None))"></AuditoriaApp.Components.Inspections._13_BpmFabCosmeticosDesinf.Cap30>
+                break;
+            }
+        case DataModel.Helper.enumSelectedChapter.Cap31:
+            {
+                <AuditoriaApp.Components.Inspections._13_BpmFabCosmeticosDesinf.Cap31 Inspeccion="@Inspeccion" BackToMain="@((e)=> SelectChapter(DataModel.Helper.enumSelectedChapter.None))"></AuditoriaApp.Components.Inspections._13_BpmFabCosmeticosDesinf.Cap31>
+                break;
+            }
+        case DataModel.Helper.enumSelectedChapter.Cap32:
+            {
+                <AuditoriaApp.Components.Inspections._13_BpmFabCosmeticosDesinf.Cap32 Inspeccion="@Inspeccion" BackToMain="@((e)=> SelectChapter(DataModel.Helper.enumSelectedChapter.None))"></AuditoriaApp.Components.Inspections._13_BpmFabCosmeticosDesinf.Cap32>
+                break;
+            }
+        case DataModel.Helper.enumSelectedChapter.Cap33:
+            {
+                <AuditoriaApp.Components.Inspections._13_BpmFabCosmeticosDesinf.Cap33 Inspeccion="@Inspeccion" BackToMain="@((e)=> SelectChapter(DataModel.Helper.enumSelectedChapter.None))"></AuditoriaApp.Components.Inspections._13_BpmFabCosmeticosDesinf.Cap33>
+                break;
+            }
+        case DataModel.Helper.enumSelectedChapter.Cap34:
+            {
+                <AuditoriaApp.Components.Inspections._13_BpmFabCosmeticosDesinf.Cap34 Inspeccion="@Inspeccion" BackToMain="@((e)=> SelectChapter(DataModel.Helper.enumSelectedChapter.None))"></AuditoriaApp.Components.Inspections._13_BpmFabCosmeticosDesinf.Cap34>
+                break;
+            }
+        case DataModel.Helper.enumSelectedChapter.Cap35:
+            {
+                <AuditoriaApp.Components.Inspections._13_BpmFabCosmeticosDesinf.Cap35 Inspeccion="@Inspeccion" BackToMain="@((e)=> SelectChapter(DataModel.Helper.enumSelectedChapter.None))"></AuditoriaApp.Components.Inspections._13_BpmFabCosmeticosDesinf.Cap35>
+                break;
+            }
+        case DataModel.Helper.enumSelectedChapter.Cap36:
+            {
+                <AuditoriaApp.Components.Inspections._13_BpmFabCosmeticosDesinf.Cap36 Inspeccion="@Inspeccion" BackToMain="@((e)=> SelectChapter(DataModel.Helper.enumSelectedChapter.None))"></AuditoriaApp.Components.Inspections._13_BpmFabCosmeticosDesinf.Cap36>
+                break;
+            }
+        case DataModel.Helper.enumSelectedChapter.Cap37:
+            {
+                <AuditoriaApp.Components.Inspections._13_BpmFabCosmeticosDesinf.Cap37 Inspeccion="@Inspeccion" BackToMain="@((e)=> SelectChapter(DataModel.Helper.enumSelectedChapter.None))"></AuditoriaApp.Components.Inspections._13_BpmFabCosmeticosDesinf.Cap37>
+                break;
+            }
+    } 
+
+
+}

@@ -1,0 +1,124 @@
+﻿@if (Inspeccion?.Inspeccion?.InspGuiBPMFabCosmeticoMed?.OtrosFuncionarios != null)
+{
+    <EditForm Model="@Inspeccion.Inspeccion" OnValidSubmit="Save">
+        <DataAnnotationsValidator />
+        <MudCard Elevation="25">
+            <MudCardHeader>
+                @*  <CardHeaderAvatar>
+            <MudAvatar Color="Color.Secondary">I</MudAvatar>
+            </CardHeaderAvatar> *@
+                <CardHeaderContent>
+                    <MudText Typo="Typo.body1">@(Inspeccion.Inspeccion.NumActa) - @(DataModel.Helper.Helper.GetDescription(Inspeccion.Inspeccion.TipoActa))</MudText>
+                </CardHeaderContent>
+                <CardHeaderActions>
+                    <MudMenu Icon="@Icons.Material.Filled.MoreVert">
+                        <MudMenuItem Icon="@Icons.Material.Outlined.Save" OnTouch="@((e)=> Save())" OnClick="@((e)=> Save())">Guardar</MudMenuItem>
+                        <MudMenuItem Icon="@Icons.Material.Filled.Logout" OnClick="@((e)=> Cancel())" OnTouch="@((e)=> Cancel())">Salir</MudMenuItem>
+                    </MudMenu>
+                </CardHeaderActions>
+            </MudCardHeader>
+            <MudCardHeader>
+                <CardHeaderContent>
+                    <MudText Typo="Typo.h6" Color="Color.Dark">Funcionarios de la Empresa</MudText>
+                </CardHeaderContent>
+            </MudCardHeader>
+            <MudCardHeader>
+                <CardHeaderContent>
+                    <MudText Typo="Typo.h6" Color="Color.Dark">Responsable de Producción</MudText>
+                </CardHeaderContent>
+            </MudCardHeader>
+            <MudCardContent>                
+                <MudGrid>
+                    <MudItem xs="12" md="6">
+                        <MudTextField Margin="Margin.Dense" @bind-Value="Inspeccion.Inspeccion.InspGuiBPMFabCosmeticoMed.OtrosFuncionarios.RespProduccion.Nombre" Label="Nombre Completo" Variant="Variant.Outlined" For="@(() => Inspeccion.Inspeccion.InspGuiBPMFabCosmeticoMed.OtrosFuncionarios.RespProduccion.Nombre)" />
+                    </MudItem>
+                    <MudItem xs="12" md="6">
+                        <MudTextField Margin="Margin.Dense" @bind-Value="Inspeccion.Inspeccion.InspGuiBPMFabCosmeticoMed.OtrosFuncionarios.RespProduccion.Cedula" Label="Identificación" Variant="Variant.Outlined" For="@(() => Inspeccion.Inspeccion.InspGuiBPMFabCosmeticoMed.OtrosFuncionarios.RespProduccion.Cedula)" />
+                    </MudItem>
+                    <MudItem xs="12" md="6">
+                        <MudTextField Margin="Margin.Dense" @bind-Value="Inspeccion.Inspeccion.InspGuiBPMFabCosmeticoMed.OtrosFuncionarios.RespProduccion.Profesion" Label="Profesión" Variant="Variant.Outlined" For="@(() => Inspeccion.Inspeccion.InspGuiBPMFabCosmeticoMed.OtrosFuncionarios.RespProduccion.Profesion)" />
+                    </MudItem>                    
+                </MudGrid>
+            </MudCardContent>
+            <MudCardHeader>
+                <CardHeaderContent>
+                    <MudText Typo="Typo.h6" Color="Color.Dark">Responsable de Control de Calidad</MudText>
+                </CardHeaderContent>
+            </MudCardHeader>
+            <MudCardContent>
+                <MudGrid>
+                    <MudItem xs="12" md="6">
+                        <MudTextField Margin="Margin.Dense" @bind-Value="Inspeccion.Inspeccion.InspGuiBPMFabCosmeticoMed.OtrosFuncionarios.RespControlCalidad.Nombre" Label="Nombre Completo" Variant="Variant.Outlined" For="@(() => Inspeccion.Inspeccion.InspGuiBPMFabCosmeticoMed.OtrosFuncionarios.RespControlCalidad.Nombre)" />
+                    </MudItem>
+                    <MudItem xs="12" md="6">
+                        <MudTextField Margin="Margin.Dense" @bind-Value="Inspeccion.Inspeccion.InspGuiBPMFabCosmeticoMed.OtrosFuncionarios.RespControlCalidad.Cedula" Label="Identificación" Variant="Variant.Outlined" For="@(() => Inspeccion.Inspeccion.InspGuiBPMFabCosmeticoMed.OtrosFuncionarios.RespControlCalidad.Cedula)" />
+                    </MudItem>
+                    <MudItem xs="12" md="6">
+                        <MudTextField Margin="Margin.Dense" @bind-Value="Inspeccion.Inspeccion.InspGuiBPMFabCosmeticoMed.OtrosFuncionarios.RespControlCalidad.Profesion" Label="Profesión" Variant="Variant.Outlined" For="@(() => Inspeccion.Inspeccion.InspGuiBPMFabCosmeticoMed.OtrosFuncionarios.RespControlCalidad.Profesion)" />
+                    </MudItem>
+                </MudGrid>
+            </MudCardContent>
+            <MudCardHeader>
+                <CardHeaderContent>
+                    <MudText Typo="Typo.h6" Color="Color.Dark">Otros funcionarios de la empresa</MudText>
+                </CardHeaderContent>
+            </MudCardHeader>
+            <MudCardContent>
+                <MudGrid>
+
+                    <MudItem xs="12">
+
+                        @if (Inspeccion?.Inspeccion?.InspGuiBPMFabCosmeticoMed?.OtrosFuncionarios?.LPersona != null)
+                        {
+                            <MudTable Items="@(Inspeccion.Inspeccion.InspGuiBPMFabCosmeticoMed.OtrosFuncionarios.LPersona)" Dense="false" Hover="true" Bordered="false" Striped="true">
+                                <HeaderContent>
+                                    <MudTh>Nombre Completo</MudTh>
+                                    <MudTh>Cédula</MudTh>
+                                    <MudTh>No. Registro</MudTh>
+                                    <MudTh>Cargo</MudTh>
+                                    <MudTh Style="text-align:right!important">
+                                        <MudButton ButtonType="ButtonType.Button" Variant="Variant.Filled" Color="Color.Primary" Size="Size.Medium" Class="ma-1" StartIcon="@Icons.Material.Filled.Add" OnClick="@((e)=> EditParticipant())">Agregar</MudButton>
+                                    </MudTh>
+                                </HeaderContent>
+                                <RowTemplate Context="tbContext">
+                                    <MudTd DataLabel="Nombre Completo">@(tbContext.Nombre)</MudTd>
+                                    <MudTd DataLabel="Cédula">@(tbContext.Cedula)</MudTd>
+                                    <MudTd DataLabel="No. Registro">@(tbContext.NumRegistro)</MudTd>
+                                    <MudTd DataLabel="Cargo">@(tbContext.Cargo)</MudTd>
+                                    <MudTd Style="text-align:right!important">
+                                        <MudMenu Icon="@Icons.Material.Filled.MoreVert">
+                                            <MudMenuItem Icon="@Icons.Material.Outlined.Edit" OnTouch="@((e)=> EditParticipant(tbContext))" OnClick="@((e)=> EditParticipant(tbContext))">Editar</MudMenuItem>
+                                            <MudMenuItem Icon="@Icons.Material.Filled.Remove" OnClick="@((e)=> RemoveParticipant(tbContext))" OnTouch="@((e)=> RemoveParticipant(tbContext))">Eliminar</MudMenuItem>
+                                        </MudMenu>
+                                    </MudTd>
+                                </RowTemplate>
+                                <LoadingContent>
+                                    <MudText>Cargando...</MudText>
+                                </LoadingContent>
+                            </MudTable>
+                        }
+
+
+                    </MudItem>
+                </MudGrid>
+
+            </MudCardContent>
+
+
+            <MudCardActions Class="pt-4 pl-4">
+                <div style="text-align:right;" class="ml-auto">
+                    <MudButton ButtonType="ButtonType.Button" Variant="Variant.Filled" Color="Color.Primary" Size="Size.Medium" Class="ma-1" OnClick="@((e)=> SaveExit())" StartIcon="@Icons.Material.Filled.Save">Guardar y Salir</MudButton>
+                    <MudButton ButtonType="ButtonType.Button" Variant="Variant.Filled" Color="Color.Primary" Size="Size.Medium" Class="ma-1" OnClick="@((e)=> Save())" EndIcon="@Icons.Material.Filled.SaveAs">Guardar</MudButton>
+                    <MudButton ButtonType="ButtonType.Button" Variant="Variant.Filled" Color="Color.Error" Size="Size.Medium" Class="ma-1" OnClick="@((e)=> Cancel())" StartIcon="@Icons.Material.Filled.Logout">Salir</MudButton>
+                </div>
+            </MudCardActions>
+        </MudCard>
+
+    </EditForm>
+
+
+
+
+
+
+}
