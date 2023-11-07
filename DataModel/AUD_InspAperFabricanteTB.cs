@@ -990,6 +990,11 @@ namespace DataModel
 
     public class AUD_InspAperFabricanteProdFabrican : SystemId
     {
+        public AUD_InspAperFabricanteProdFabrican()
+        {
+            LAttachments = new List<AttachmentTB>();
+        }
+
         private string productosDesc;
         public string ProductosDesc { get => productosDesc; set => SetProperty(ref productosDesc, value); }
 

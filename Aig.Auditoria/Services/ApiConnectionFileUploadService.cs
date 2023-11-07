@@ -20,7 +20,7 @@ namespace Aig.Auditoria.Services
                         //    UseCookies = true,
                         //    CookieContainer = new CookieContainer()
                         //}
-                        );
+                        ){ Timeout = TimeSpan.FromMinutes(5) };
             Client.BaseAddress = new Uri(Url);
             Client.DefaultRequestHeaders.Accept.Clear();
             Client.DefaultRequestHeaders.Clear();

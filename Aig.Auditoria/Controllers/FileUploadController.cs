@@ -16,7 +16,7 @@ namespace Aig.Auditoria.Controllers
         }
 
         [HttpPost("UploadFile")]
-        //[DisableRequestSizeLimit]
+        [DisableRequestSizeLimit]
         public async Task<ActionResult> UploadFile(IFormFile file)//([FromForm] IEnumerable<IFormFile> files)
         {
             try

@@ -1,0 +1,102 @@
+﻿@if (Inspeccion?.Inspeccion?.InspDisposicionFinal?.DatosInspeccion != null)
+{
+    <EditForm Model="@Inspeccion.Inspeccion" OnValidSubmit="Save">
+        <DataAnnotationsValidator />
+        <MudCard Elevation="25">
+            <MudCardHeader>
+                @*  <CardHeaderAvatar>
+            <MudAvatar Color="Color.Secondary">I</MudAvatar>
+            </CardHeaderAvatar> *@
+                <CardHeaderContent>
+                    <MudText Typo="Typo.body1">@(Inspeccion.Inspeccion.NumActa) - @(DataModel.Helper.Helper.GetDescription(Inspeccion.Inspeccion.TipoActa))</MudText>
+                </CardHeaderContent>
+                <CardHeaderActions>
+                    <MudMenu Icon="@Icons.Material.Filled.MoreVert">
+                        <MudMenuItem Icon="@Icons.Material.Outlined.Save" OnTouch="@((e)=> Save())" OnClick="@((e)=> Save())">Guardar</MudMenuItem>
+                        <MudMenuItem Icon="@Icons.Material.Filled.Logout" OnClick="@((e)=> Cancel())" OnTouch="@((e)=> Cancel())">Salir</MudMenuItem>
+                    </MudMenu>
+                </CardHeaderActions>
+            </MudCardHeader>
+            <MudCardHeader>
+                <CardHeaderContent>
+                    <MudText Typo="Typo.h6" Color="Color.Dark">Datos de la Inspección</MudText>
+                </CardHeaderContent>
+            </MudCardHeader>
+            <MudCardContent>               
+                <MudGrid>
+                    <MudItem xs="12" md="6">
+                        <MudSelect Margin="Margin.Dense" T="DataModel.Helper.enum_TipoInspeccionDispFinal" Label="Tipo de Inspección" Variant="Variant.Outlined" AnchorOrigin="Origin.BottomCenter" @bind-Value="Inspeccion.Inspeccion.InspDisposicionFinal.DatosInspeccion.TipoInspeccion" For="@(() => Inspeccion.Inspeccion.InspDisposicionFinal.DatosInspeccion.TipoInspeccion)">
+                            @foreach (DataModel.Helper.enum_TipoInspeccionDispFinal dt in Enum.GetValues(typeof(DataModel.Helper.enum_TipoInspeccionDispFinal)))
+                            {
+                                <MudSelectItem T="DataModel.Helper.enum_TipoInspeccionDispFinal" Value="dt">@DataModel.Helper.Helper.GetDescription(dt)</MudSelectItem>
+
+                            }
+                        </MudSelect>
+                    </MudItem>
+                    <MudItem xs="12" md="6">
+                        <MudSelect Margin="Margin.Dense" T="DataModel.Helper.enum_TipoProductDispFinal" Label="Tipo de Producto" Variant="Variant.Outlined" AnchorOrigin="Origin.BottomCenter" @bind-Value="Inspeccion.Inspeccion.InspDisposicionFinal.DatosInspeccion.TipoProduct" For="@(() => Inspeccion.Inspeccion.InspDisposicionFinal.DatosInspeccion.TipoProduct)">
+                            @foreach (DataModel.Helper.enum_TipoProductDispFinal dt in Enum.GetValues(typeof(DataModel.Helper.enum_TipoProductDispFinal)))
+                            {
+                                <MudSelectItem T="DataModel.Helper.enum_TipoProductDispFinal" Value="dt">@DataModel.Helper.Helper.GetDescription(dt)</MudSelectItem>
+
+                            }
+                        </MudSelect>
+                    </MudItem>
+                    <MudItem xs="12" md="6">
+                        <MudSelect Margin="Margin.Dense" T="DataModel.Helper.enum_TipoVerificacionDispFinal" Label="Tipo de Verificación" Variant="Variant.Outlined" AnchorOrigin="Origin.BottomCenter" @bind-Value="Inspeccion.Inspeccion.InspDisposicionFinal.DatosInspeccion.TipoVerificacion" For="@(() => Inspeccion.Inspeccion.InspDisposicionFinal.DatosInspeccion.TipoVerificacion)">
+                            @foreach (DataModel.Helper.enum_TipoVerificacionDispFinal dt in Enum.GetValues(typeof(DataModel.Helper.enum_TipoVerificacionDispFinal)))
+                            {
+                                <MudSelectItem T="DataModel.Helper.enum_TipoVerificacionDispFinal" Value="dt">@DataModel.Helper.Helper.GetDescription(dt)</MudSelectItem>
+
+                            }
+                        </MudSelect>
+                    </MudItem>
+
+                    <MudItem xs="12">
+                        <MudTextField Margin="Margin.Dense" @bind-Value="Inspeccion.Inspeccion.InspDisposicionFinal.DatosInspeccion.SolicitudCierre" Label="Disposición final solicitado por" Variant="Variant.Outlined" For="@(() => Inspeccion.Inspeccion.InspDisposicionFinal.DatosInspeccion.SolicitudCierre)" />
+                    </MudItem>
+                    <MudItem xs="12" md="6">
+                        <MudTextField Margin="Margin.Dense" @bind-Value="Inspeccion.Inspeccion.InspDisposicionFinal.DatosInspeccion.NumNotaSDGSA" Label="N° de nota de SDGSA" Variant="Variant.Outlined" For="@(() => Inspeccion.Inspeccion.InspDisposicionFinal.DatosInspeccion.NumNotaSDGSA)" />
+                    </MudItem>
+                    <MudItem xs="12" md="6">
+                        <MudTextField Margin="Margin.Dense" @bind-Value="Inspeccion.Inspeccion.InspDisposicionFinal.DatosInspeccion.NumReciboPago" Label="N° de Recibo de Pago" Variant="Variant.Outlined" For="@(() => Inspeccion.Inspeccion.InspDisposicionFinal.DatosInspeccion.NumReciboPago)" />
+                    </MudItem>
+                    <MudItem xs="12" md="6">
+                        <MudTextField Margin="Margin.Dense" @bind-Value="Inspeccion.Inspeccion.InspDisposicionFinal.DatosInspeccion.PesoDestruir" Label="El peso de los productos a destruir (Kg)" Variant="Variant.Outlined" For="@(() => Inspeccion.Inspeccion.InspDisposicionFinal.DatosInspeccion.PesoDestruir)" />
+                    </MudItem>
+                    <MudItem xs="12" md="6">
+                        <MudTextField Margin="Margin.Dense" @bind-Value="Inspeccion.Inspeccion.InspDisposicionFinal.DatosInspeccion.Total" Label="Total de cajas/tarimas/bultos" Variant="Variant.Outlined" For="@(() => Inspeccion.Inspeccion.InspDisposicionFinal.DatosInspeccion.Total)" />
+                    </MudItem>
+                    <MudItem xs="12" md="6">
+                        <MudSelect Margin="Margin.Dense" T="bool" Label="Adjuntó lista de productos" Variant="Variant.Outlined" AnchorOrigin="Origin.BottomCenter" @bind-Value="Inspeccion.Inspeccion.InspDisposicionFinal.DatosInspeccion.Adjunta" For="@(() => Inspeccion.Inspeccion.InspDisposicionFinal.DatosInspeccion.Adjunta)">
+                            <MudSelectItem T="bool" Value="false">No</MudSelectItem>
+                            <MudSelectItem T="bool" Value="true">Si</MudSelectItem>
+                        </MudSelect>
+                    </MudItem>
+                    <MudItem xs="12">
+                        <MudSelect Margin="Margin.Dense" T="bool" Label="La existencia física coincide con el registro en la lista que adjuntó el establecimiento a la solicitud" Variant="Variant.Outlined" AnchorOrigin="Origin.BottomCenter" @bind-Value="Inspeccion.Inspeccion.InspDisposicionFinal.DatosInspeccion.Coincide" For="@(() => Inspeccion.Inspeccion.InspDisposicionFinal.DatosInspeccion.Coincide)">
+                            <MudSelectItem T="bool" Value="false">No</MudSelectItem>
+                            <MudSelectItem T="bool" Value="true">Si</MudSelectItem>
+                        </MudSelect>
+                    </MudItem>
+
+                </MudGrid>
+               
+             </MudCardContent>
+            <MudCardActions Class="pt-4 pl-4">
+                <div style="text-align:right;" class="ml-auto">
+                    <MudButton ButtonType="ButtonType.Button" Variant="Variant.Filled" Color="Color.Primary" Size="Size.Medium" Class="ma-1" OnClick="@((e)=> SaveExit())" StartIcon="@Icons.Material.Filled.Save">Guardar y Salir</MudButton>
+                    <MudButton ButtonType="ButtonType.Button" Variant="Variant.Filled" Color="Color.Primary" Size="Size.Medium" Class="ma-1" OnClick="@((e)=> Save())" EndIcon="@Icons.Material.Filled.SaveAs">Guardar</MudButton>
+                    <MudButton ButtonType="ButtonType.Button" Variant="Variant.Filled" Color="Color.Error" Size="Size.Medium" Class="ma-1" OnClick="@((e)=> Cancel())" StartIcon="@Icons.Material.Filled.Logout">Salir</MudButton>
+                </div>
+            </MudCardActions>
+        </MudCard>
+
+    </EditForm>
+
+
+    
+
+
+
+}

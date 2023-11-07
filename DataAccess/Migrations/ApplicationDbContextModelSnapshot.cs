@@ -2111,6 +2111,9 @@ namespace DataAccess.Migrations
                     b.Property<string>("DatosRepresentLegal")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("DatosRetiroRetencion")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<bool>("Deleted")
                         .HasColumnType("bit");
 
@@ -2122,9 +2125,6 @@ namespace DataAccess.Migrations
 
                     b.Property<bool>("PendingUpdate")
                         .HasColumnType("bit");
-
-                    b.Property<int>("RetiroRetencionType")
-                        .HasColumnType("int");
 
                     b.Property<DateTime>("UpdatedDate")
                         .HasColumnType("datetime2");
@@ -6098,7 +6098,7 @@ namespace DataAccess.Migrations
             modelBuilder.Entity("DataModel.AUD_ProdRetiroRetencionTB", b =>
                 {
                     b.HasOne("DataModel.AUD_InspRetiroRetencionTB", "FrmRetiroRetencion")
-                        .WithMany("LProductos")
+                        .WithMany()
                         .HasForeignKey("FrmRetiroRetencionId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -6779,8 +6779,6 @@ namespace DataAccess.Migrations
             modelBuilder.Entity("DataModel.AUD_InspRetiroRetencionTB", b =>
                 {
                     b.Navigation("Inspeccion");
-
-                    b.Navigation("LProductos");
                 });
 
             modelBuilder.Entity("DataModel.AUD_InspRutinaVigAgenciaTB", b =>
