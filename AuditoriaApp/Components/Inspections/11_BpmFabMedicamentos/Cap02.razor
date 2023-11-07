@@ -1,4 +1,4 @@
-﻿@if (Inspeccion?.Inspeccion?.InspAperFabricante?.DatosRepresentLegal != null)
+﻿@if (Inspeccion?.Inspeccion?.InspGuiaBPMFabricanteMed?.DatosRepresentLegal != null)
 {
     <EditForm Model="@Inspeccion.Inspeccion" OnValidSubmit="Save">
         <DataAnnotationsValidator />
@@ -25,16 +25,16 @@
             <MudCardContent>               
                 <MudGrid>
                     <MudItem xs="12" md="6">
-                        <MudTextField Margin="Margin.Dense" @bind-Value="Inspeccion.Inspeccion.InspAperFabricante.DatosRepresentLegal.Nombre" Label="Nombre Completo" Variant="Variant.Outlined" For="@(() => Inspeccion.Inspeccion.InspAperFabricante.DatosRepresentLegal.Nombre)" />
+                        <MudTextField Margin="Margin.Dense" @bind-Value="Inspeccion.Inspeccion.InspGuiaBPMFabricanteMed.DatosRepresentLegal.Nombre" Label="Nombre Completo" Variant="Variant.Outlined" For="@(() => Inspeccion.Inspeccion.InspGuiaBPMFabricanteMed.DatosRepresentLegal.Nombre)" />
                     </MudItem>                   
                     <MudItem xs="12" md="6">
-                        <MudTextField Margin="Margin.Dense" @bind-Value="Inspeccion.Inspeccion.InspAperFabricante.DatosRepresentLegal.Cedula" Label="Identificación" Variant="Variant.Outlined" For="@(() => Inspeccion.Inspeccion.InspAperFabricante.DatosRepresentLegal.Cedula)" />
+                        <MudTextField Margin="Margin.Dense" @bind-Value="Inspeccion.Inspeccion.InspGuiaBPMFabricanteMed.DatosRepresentLegal.Cedula" Label="Identificación" Variant="Variant.Outlined" For="@(() => Inspeccion.Inspeccion.InspGuiaBPMFabricanteMed.DatosRepresentLegal.Cedula)" />
                     </MudItem>
                     <MudItem xs="12" md="6">
-                        <MudTextField Margin="Margin.Dense" @bind-Value="Inspeccion.Inspeccion.InspAperFabricante.DatosRepresentLegal.Email" Label="Correo" Variant="Variant.Outlined" For="@(() => Inspeccion.Inspeccion.InspAperFabricante.DatosRepresentLegal.Email)" />
+                        <MudTextField Margin="Margin.Dense" @bind-Value="Inspeccion.Inspeccion.InspGuiaBPMFabricanteMed.DatosRepresentLegal.Email" Label="Correo" Variant="Variant.Outlined" For="@(() => Inspeccion.Inspeccion.InspGuiaBPMFabricanteMed.DatosRepresentLegal.Email)" />
                     </MudItem>               
                     <MudItem xs="12" md="6">
-                        <MudTextField Margin="Margin.Dense" @bind-Value="Inspeccion.Inspeccion.InspAperFabricante.DatosRepresentLegal.Profesion" Label="Profesión" Variant="Variant.Outlined" For="@(() => Inspeccion.Inspeccion.InspAperFabricante.DatosRepresentLegal.Profesion)" />
+                        <MudTextField Margin="Margin.Dense" @bind-Value="Inspeccion.Inspeccion.InspGuiaBPMFabricanteMed.DatosRepresentLegal.Profesion" Label="Profesión" Variant="Variant.Outlined" For="@(() => Inspeccion.Inspeccion.InspGuiaBPMFabricanteMed.DatosRepresentLegal.Profesion)" />
                     </MudItem>
                     @* <MudItem xs="12">
                         <MudText Typo="Typo.body1" Color="Color.Dark">

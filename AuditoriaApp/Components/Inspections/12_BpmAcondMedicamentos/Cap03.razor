@@ -1,4 +1,4 @@
-﻿@if (Inspeccion?.Inspeccion?.InspAperFabricante?.DatosRepresentLegal != null)
+﻿@if (Inspeccion?.Inspeccion?.InspGuiaBPMLabAcondicionador?.DatosRegente != null)
 {
     <EditForm Model="@Inspeccion.Inspeccion" OnValidSubmit="Save">
         <DataAnnotationsValidator />
@@ -19,31 +19,29 @@
             </MudCardHeader>
             <MudCardHeader>
                 <CardHeaderContent>
-                    <MudText Typo="Typo.h6" Color="Color.Dark">Información del Representante Legal o Propietario</MudText>
+                    <MudText Typo="Typo.h6" Color="Color.Dark">Datos sobre el Regente Farmacéutico de la Empresa</MudText>
                 </CardHeaderContent>
             </MudCardHeader>
-            <MudCardContent>               
+            <MudCardContent>                
                 <MudGrid>
                     <MudItem xs="12" md="6">
-                        <MudTextField Margin="Margin.Dense" @bind-Value="Inspeccion.Inspeccion.InspAperFabricante.DatosRepresentLegal.Nombre" Label="Nombre Completo" Variant="Variant.Outlined" For="@(() => Inspeccion.Inspeccion.InspAperFabricante.DatosRepresentLegal.Nombre)" />
-                    </MudItem>                   
-                    <MudItem xs="12" md="6">
-                        <MudTextField Margin="Margin.Dense" @bind-Value="Inspeccion.Inspeccion.InspAperFabricante.DatosRepresentLegal.Cedula" Label="Identificación" Variant="Variant.Outlined" For="@(() => Inspeccion.Inspeccion.InspAperFabricante.DatosRepresentLegal.Cedula)" />
+                        <MudTextField Margin="Margin.Dense" @bind-Value="Inspeccion.Inspeccion.InspGuiaBPMLabAcondicionador.DatosRegente.Nombre" Label="Nombre Completo" Variant="Variant.Outlined" For="@(() => Inspeccion.Inspeccion.InspGuiaBPMLabAcondicionador.DatosRegente.Nombre)" />
                     </MudItem>
                     <MudItem xs="12" md="6">
-                        <MudTextField Margin="Margin.Dense" @bind-Value="Inspeccion.Inspeccion.InspAperFabricante.DatosRepresentLegal.Email" Label="Correo" Variant="Variant.Outlined" For="@(() => Inspeccion.Inspeccion.InspAperFabricante.DatosRepresentLegal.Email)" />
-                    </MudItem>               
-                    <MudItem xs="12" md="6">
-                        <MudTextField Margin="Margin.Dense" @bind-Value="Inspeccion.Inspeccion.InspAperFabricante.DatosRepresentLegal.Profesion" Label="Profesión" Variant="Variant.Outlined" For="@(() => Inspeccion.Inspeccion.InspAperFabricante.DatosRepresentLegal.Profesion)" />
+                        <MudTextField Margin="Margin.Dense" @bind-Value="Inspeccion.Inspeccion.InspGuiaBPMLabAcondicionador.DatosRegente.NumRegistro" Label="Número de Registro de Idoneidad" Variant="Variant.Outlined" For="@(() => Inspeccion.Inspeccion.InspGuiaBPMLabAcondicionador.DatosRegente.NumRegistro)" />
                     </MudItem>
-                    @* <MudItem xs="12">
-                        <MudText Typo="Typo.body1" Color="Color.Dark">
-                            Ley 66 de 10 de noviembre de 1947. Código Sanitario de la República de Panamá. (G.O. 10467 de 6 de diciembre de 1947). Artículo 200. Prohíbese ejercer conjuntamente las profesiones de médico-cirujano y farmacéutico. A partir de la aprobación de este código, ningún médico que ejerza la profesión podrá ser dueño por sí mismo o por interpuesta persona, accionista o tener participación comercial cualquiera en establecimientos en que se fabriquen, preparen o vendan medicinas y artículos de cualquier clase que se usen para la prevención o curación de enfermedades, corrección de defectos o para el diagnóstico.
-                        </MudText>
-                    </MudItem> *@
+                    <MudItem xs="12" md="6">
+                        <MudTextField Margin="Margin.Dense" @bind-Value="Inspeccion.Inspeccion.InspGuiaBPMLabAcondicionador.DatosRegente.Cedula" Label="Identificación" Variant="Variant.Outlined" For="@(() => Inspeccion.Inspeccion.InspGuiaBPMLabAcondicionador.DatosRegente.Cedula)" />
+                    </MudItem>
+                    <MudItem xs="12" md="6">
+                        <MudTextField Margin="Margin.Dense" @bind-Value="Inspeccion.Inspeccion.InspGuiaBPMLabAcondicionador.DatosRegente.Email" Label="Correo" Variant="Variant.Outlined" For="@(() => Inspeccion.Inspeccion.InspGuiaBPMLabAcondicionador.DatosRegente.Email)" />
+                    </MudItem>
+                    <MudItem xs="12" md="6">
+                        <MudTextField Margin="Margin.Dense" @bind-Value="Inspeccion.Inspeccion.InspGuiaBPMLabAcondicionador.DatosRegente.TelefonoMovil" Label="Telefono Movil" Variant="Variant.Outlined" For="@(() => Inspeccion.Inspeccion.InspGuiaBPMLabAcondicionador.DatosRegente.TelefonoMovil)" />
+                    </MudItem>
+                    
                 </MudGrid>
-               
-             </MudCardContent>
+            </MudCardContent>
             <MudCardActions Class="pt-4 pl-4">
                 <div style="text-align:right;" class="ml-auto">
                     <MudButton ButtonType="ButtonType.Button" Variant="Variant.Filled" Color="Color.Primary" Size="Size.Medium" Class="ma-1" OnClick="@((e)=> SaveExit())" StartIcon="@Icons.Material.Filled.Save">Guardar y Salir</MudButton>
@@ -56,7 +54,7 @@
     </EditForm>
 
 
-    
+
 
 
 
