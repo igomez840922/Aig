@@ -971,6 +971,203 @@ namespace Aig.Auditoria.Controllers
 
                                 break;
                             }
+                        case DataModel.Helper.enumAUD_TipoActa.BPMCD:
+                            {
+                                inspeccion.InspGuiBPMFabCosmeticoMed.PendingUpdate = false;
+                                if (inspeccion.InspGuiBPMFabCosmeticoMed?.DatosRepresentLegal?.PendingUpdate ?? false)
+                                {
+                                    data.InspGuiBPMFabCosmeticoMed.DatosRepresentLegal = inspeccion.InspGuiBPMFabCosmeticoMed.DatosRepresentLegal;
+                                    data.InspGuiBPMFabCosmeticoMed.DatosRepresentLegal.PendingUpdate = false;
+                                }
+                                if (inspeccion.InspGuiBPMFabCosmeticoMed?.DatosRegente?.PendingUpdate ?? false)
+                                {
+                                    data.InspGuiBPMFabCosmeticoMed.DatosRegente = inspeccion.InspGuiBPMFabCosmeticoMed.DatosRegente;
+                                    data.InspGuiBPMFabCosmeticoMed.DatosRegente.PendingUpdate = false;
+                                }
+                                if (inspeccion.InspGuiBPMFabCosmeticoMed?.OtrosFuncionarios?.PendingUpdate ?? false)
+                                {
+                                    data.InspGuiBPMFabCosmeticoMed.OtrosFuncionarios = inspeccion.InspGuiBPMFabCosmeticoMed.OtrosFuncionarios;
+                                    data.InspGuiBPMFabCosmeticoMed.OtrosFuncionarios.PendingUpdate = false;
+                                }
+                                if (inspeccion.InspGuiBPMFabCosmeticoMed?.RequisitosLegales?.PendingUpdate ?? false)
+                                {
+                                    data.InspGuiBPMFabCosmeticoMed.RequisitosLegales = inspeccion.InspGuiBPMFabCosmeticoMed.RequisitosLegales;
+                                    data.InspGuiBPMFabCosmeticoMed.RequisitosLegales.PendingUpdate = false;
+
+                                    data.InspGuiBPMFabCosmeticoMed.Observaciones = inspeccion.InspGuiBPMFabCosmeticoMed.Observaciones;
+                                    data.InspGuiBPMFabCosmeticoMed.ProcesoVigilanciaSanit = inspeccion.InspGuiBPMFabCosmeticoMed.ProcesoVigilanciaSanit;
+                                    data.InspGuiBPMFabCosmeticoMed.FechaUltimaVista = inspeccion.InspGuiBPMFabCosmeticoMed.FechaUltimaVista;
+                                }
+                                if (inspeccion.InspGuiBPMFabCosmeticoMed?.ClasifActComerciales?.PendingUpdate ?? false)
+                                {
+                                    data.InspGuiBPMFabCosmeticoMed.ClasifActComerciales = inspeccion.InspGuiBPMFabCosmeticoMed.ClasifActComerciales;
+                                    data.InspGuiBPMFabCosmeticoMed.ClasifActComerciales.PendingUpdate = false;
+                                }
+                                if (inspeccion.InspGuiBPMFabCosmeticoMed?.ClasifEstablecimiento?.PendingUpdate ?? false)
+                                {
+                                    data.InspGuiBPMFabCosmeticoMed.ClasifEstablecimiento = inspeccion.InspGuiBPMFabCosmeticoMed.ClasifEstablecimiento;
+                                    data.InspGuiBPMFabCosmeticoMed.ClasifEstablecimiento.PendingUpdate = false;
+                                }
+                                if (inspeccion.InspGuiBPMFabCosmeticoMed?.AdminInfoGeneral?.PendingUpdate ?? false)
+                                {
+                                    data.InspGuiBPMFabCosmeticoMed.AdminInfoGeneral = inspeccion.InspGuiBPMFabCosmeticoMed.AdminInfoGeneral;
+                                    data.InspGuiBPMFabCosmeticoMed.AdminInfoGeneral.PendingUpdate = false;
+                                }
+                                if (inspeccion.InspGuiBPMFabCosmeticoMed?.CondExtAlmacenas?.PendingUpdate ?? false)
+                                {
+                                    data.InspGuiBPMFabCosmeticoMed.CondExtAlmacenas = inspeccion.InspGuiBPMFabCosmeticoMed.CondExtAlmacenas;
+                                    data.InspGuiBPMFabCosmeticoMed.CondExtAlmacenas.PendingUpdate = false;
+                                }
+                                if (inspeccion.InspGuiBPMFabCosmeticoMed?.CondIntAlmacenas?.PendingUpdate ?? false)
+                                {
+                                    data.InspGuiBPMFabCosmeticoMed.CondIntAlmacenas = inspeccion.InspGuiBPMFabCosmeticoMed.CondIntAlmacenas;
+                                    data.InspGuiBPMFabCosmeticoMed.CondIntAlmacenas.PendingUpdate = false;
+                                }
+                                if (inspeccion.InspGuiBPMFabCosmeticoMed?.AreaRecepMateriaPrima?.PendingUpdate ?? false)
+                                {
+                                    data.InspGuiBPMFabCosmeticoMed.AreaRecepMateriaPrima = inspeccion.InspGuiBPMFabCosmeticoMed.AreaRecepMateriaPrima;
+                                    data.InspGuiBPMFabCosmeticoMed.AreaRecepMateriaPrima.PendingUpdate = false;
+                                }
+                                if (inspeccion.InspGuiBPMFabCosmeticoMed?.AlmacenMateriaPrima?.PendingUpdate ?? false)
+                                {
+                                    data.InspGuiBPMFabCosmeticoMed.AlmacenMateriaPrima = inspeccion.InspGuiBPMFabCosmeticoMed.AlmacenMateriaPrima;
+                                    data.InspGuiBPMFabCosmeticoMed.AlmacenMateriaPrima.PendingUpdate = false;
+                                }
+                                if (inspeccion.InspGuiBPMFabCosmeticoMed?.AlmacenMatAcondicionamineto?.PendingUpdate ?? false)
+                                {
+                                    data.InspGuiBPMFabCosmeticoMed.AlmacenMatAcondicionamineto = inspeccion.InspGuiBPMFabCosmeticoMed.AlmacenMatAcondicionamineto;
+                                    data.InspGuiBPMFabCosmeticoMed.AlmacenMatAcondicionamineto.PendingUpdate = false;
+                                }
+                                if (inspeccion.InspGuiBPMFabCosmeticoMed?.RecepProductoTerminado?.PendingUpdate ?? false)
+                                {
+                                    data.InspGuiBPMFabCosmeticoMed.RecepProductoTerminado = inspeccion.InspGuiBPMFabCosmeticoMed.RecepProductoTerminado;
+                                    data.InspGuiBPMFabCosmeticoMed.RecepProductoTerminado.PendingUpdate = false;
+                                }
+                                if (inspeccion.InspGuiBPMFabCosmeticoMed?.AlmacenProductoTerminado?.PendingUpdate ?? false)
+                                {
+                                    data.InspGuiBPMFabCosmeticoMed.AlmacenProductoTerminado = inspeccion.InspGuiBPMFabCosmeticoMed.AlmacenProductoTerminado;
+                                    data.InspGuiBPMFabCosmeticoMed.AlmacenProductoTerminado.PendingUpdate = false;
+                                }
+                                if (inspeccion.InspGuiBPMFabCosmeticoMed?.ProductoDevueltoRechazado?.PendingUpdate ?? false)
+                                {
+                                    data.InspGuiBPMFabCosmeticoMed.ProductoDevueltoRechazado = inspeccion.InspGuiBPMFabCosmeticoMed.ProductoDevueltoRechazado;
+                                    data.InspGuiBPMFabCosmeticoMed.ProductoDevueltoRechazado.PendingUpdate = false;
+                                }
+                                if (inspeccion.InspGuiBPMFabCosmeticoMed?.DistProductoTerminado?.PendingUpdate ?? false)
+                                {
+                                    data.InspGuiBPMFabCosmeticoMed.DistProductoTerminado = inspeccion.InspGuiBPMFabCosmeticoMed.DistProductoTerminado;
+                                    data.InspGuiBPMFabCosmeticoMed.DistProductoTerminado.PendingUpdate = false;
+                                }
+                                if (inspeccion.InspGuiBPMFabCosmeticoMed?.ManejoQuejaReclamos?.PendingUpdate ?? false)
+                                {
+                                    data.InspGuiBPMFabCosmeticoMed.ManejoQuejaReclamos = inspeccion.InspGuiBPMFabCosmeticoMed.ManejoQuejaReclamos;
+                                    data.InspGuiBPMFabCosmeticoMed.ManejoQuejaReclamos.PendingUpdate = false;
+                                }
+                                if (inspeccion.InspGuiBPMFabCosmeticoMed?.RetiroProcMercado?.PendingUpdate ?? false)
+                                {
+                                    data.InspGuiBPMFabCosmeticoMed.RetiroProcMercado = inspeccion.InspGuiBPMFabCosmeticoMed.RetiroProcMercado;
+                                    data.InspGuiBPMFabCosmeticoMed.RetiroProcMercado.PendingUpdate = false;
+                                }
+                                if (inspeccion.InspGuiBPMFabCosmeticoMed?.SistemaInstAgua?.PendingUpdate ?? false)
+                                {
+                                    data.InspGuiBPMFabCosmeticoMed.SistemaInstAgua = inspeccion.InspGuiBPMFabCosmeticoMed.SistemaInstAgua;
+                                    data.InspGuiBPMFabCosmeticoMed.SistemaInstAgua.PendingUpdate = false;
+                                }
+                                if (inspeccion.InspGuiBPMFabCosmeticoMed?.OsmosisInversa?.PendingUpdate ?? false)
+                                {
+                                    data.InspGuiBPMFabCosmeticoMed.OsmosisInversa = inspeccion.InspGuiBPMFabCosmeticoMed.OsmosisInversa;
+                                    data.InspGuiBPMFabCosmeticoMed.OsmosisInversa.PendingUpdate = false;
+                                }
+                                if (inspeccion.InspGuiBPMFabCosmeticoMed?.SistemaDeIonizacion?.PendingUpdate ?? false)
+                                {
+                                    data.InspGuiBPMFabCosmeticoMed.SistemaDeIonizacion = inspeccion.InspGuiBPMFabCosmeticoMed.SistemaDeIonizacion;
+                                    data.InspGuiBPMFabCosmeticoMed.SistemaDeIonizacion.PendingUpdate = false;
+                                }
+                                if (inspeccion.InspGuiBPMFabCosmeticoMed?.CalibraVerifEquipo?.PendingUpdate ?? false)
+                                {
+                                    data.InspGuiBPMFabCosmeticoMed.CalibraVerifEquipo = inspeccion.InspGuiBPMFabCosmeticoMed.CalibraVerifEquipo;
+                                    data.InspGuiBPMFabCosmeticoMed.CalibraVerifEquipo.PendingUpdate = false;
+                                }
+                                if (inspeccion.InspGuiBPMFabCosmeticoMed?.Validaciones?.PendingUpdate ?? false)
+                                {
+                                    data.InspGuiBPMFabCosmeticoMed.Validaciones = inspeccion.InspGuiBPMFabCosmeticoMed.Validaciones;
+                                    data.InspGuiBPMFabCosmeticoMed.Validaciones.PendingUpdate = false;
+                                }
+                                if (inspeccion.InspGuiBPMFabCosmeticoMed?.MantAreaEquipos?.PendingUpdate ?? false)
+                                {
+                                    data.InspGuiBPMFabCosmeticoMed.MantAreaEquipos = inspeccion.InspGuiBPMFabCosmeticoMed.MantAreaEquipos;
+                                    data.InspGuiBPMFabCosmeticoMed.MantAreaEquipos.PendingUpdate = false;
+                                }
+                                if (inspeccion.InspGuiBPMFabCosmeticoMed?.AreaProdCondExternas?.PendingUpdate ?? false)
+                                {
+                                    data.InspGuiBPMFabCosmeticoMed.AreaProdCondExternas = inspeccion.InspGuiBPMFabCosmeticoMed.AreaProdCondExternas;
+                                    data.InspGuiBPMFabCosmeticoMed.AreaProdCondExternas.PendingUpdate = false;
+                                }
+                                if (inspeccion.InspGuiBPMFabCosmeticoMed?.AreaProdCondInternas?.PendingUpdate ?? false)
+                                {
+                                    data.InspGuiBPMFabCosmeticoMed.AreaProdCondInternas = inspeccion.InspGuiBPMFabCosmeticoMed.AreaProdCondInternas;
+                                    data.InspGuiBPMFabCosmeticoMed.AreaProdCondInternas.PendingUpdate = false;
+                                }
+                                if (inspeccion.InspGuiBPMFabCosmeticoMed?.AreaOrganizaDocumentacion?.PendingUpdate ?? false)
+                                {
+                                    data.InspGuiBPMFabCosmeticoMed.AreaOrganizaDocumentacion = inspeccion.InspGuiBPMFabCosmeticoMed.AreaOrganizaDocumentacion;
+                                    data.InspGuiBPMFabCosmeticoMed.AreaOrganizaDocumentacion.PendingUpdate = false;
+                                }
+                                if (inspeccion.InspGuiBPMFabCosmeticoMed?.AreaDispensionOrdFab?.PendingUpdate ?? false)
+                                {
+                                    data.InspGuiBPMFabCosmeticoMed.AreaDispensionOrdFab = inspeccion.InspGuiBPMFabCosmeticoMed.AreaDispensionOrdFab;
+                                    data.InspGuiBPMFabCosmeticoMed.AreaDispensionOrdFab.PendingUpdate = false;
+                                }
+                                if (inspeccion.InspGuiBPMFabCosmeticoMed?.FabProdDesinfectante?.PendingUpdate ?? false)
+                                {
+                                    data.InspGuiBPMFabCosmeticoMed.FabProdDesinfectante = inspeccion.InspGuiBPMFabCosmeticoMed.FabProdDesinfectante;
+                                    data.InspGuiBPMFabCosmeticoMed.FabProdDesinfectante.PendingUpdate = false;
+                                }
+                                if (inspeccion.InspGuiBPMFabCosmeticoMed?.FabPlaguicida?.PendingUpdate ?? false)
+                                {
+                                    data.InspGuiBPMFabCosmeticoMed.FabPlaguicida = inspeccion.InspGuiBPMFabCosmeticoMed.FabPlaguicida;
+                                    data.InspGuiBPMFabCosmeticoMed.FabPlaguicida.PendingUpdate = false;
+                                }
+                                if (inspeccion.InspGuiBPMFabCosmeticoMed?.FabCosmeticos?.PendingUpdate ?? false)
+                                {
+                                    data.InspGuiBPMFabCosmeticoMed.FabCosmeticos = inspeccion.InspGuiBPMFabCosmeticoMed.FabCosmeticos;
+                                    data.InspGuiBPMFabCosmeticoMed.FabCosmeticos.PendingUpdate = false;
+                                }
+                                if (inspeccion.InspGuiBPMFabCosmeticoMed?.AreaEnvasado?.PendingUpdate ?? false)
+                                {
+                                    data.InspGuiBPMFabCosmeticoMed.AreaEnvasado = inspeccion.InspGuiBPMFabCosmeticoMed.AreaEnvasado;
+                                    data.InspGuiBPMFabCosmeticoMed.AreaEnvasado.PendingUpdate = false;
+                                }
+                                if (inspeccion.InspGuiBPMFabCosmeticoMed?.AreaEtiquetadoEmpaque?.PendingUpdate ?? false)
+                                {
+                                    data.InspGuiBPMFabCosmeticoMed.AreaEtiquetadoEmpaque = inspeccion.InspGuiBPMFabCosmeticoMed.AreaEtiquetadoEmpaque;
+                                    data.InspGuiBPMFabCosmeticoMed.AreaEtiquetadoEmpaque.PendingUpdate = false;
+                                }
+                                if (inspeccion.InspGuiBPMFabCosmeticoMed?.LabControlCalidad?.PendingUpdate ?? false)
+                                {
+                                    data.InspGuiBPMFabCosmeticoMed.LabControlCalidad = inspeccion.InspGuiBPMFabCosmeticoMed.LabControlCalidad;
+                                    data.InspGuiBPMFabCosmeticoMed.LabControlCalidad.PendingUpdate = false;
+                                }
+                                if (inspeccion.InspGuiBPMFabCosmeticoMed?.AnalisisContrato?.PendingUpdate ?? false)
+                                {
+                                    data.InspGuiBPMFabCosmeticoMed.AnalisisContrato = inspeccion.InspGuiBPMFabCosmeticoMed.AnalisisContrato;
+                                    data.InspGuiBPMFabCosmeticoMed.AnalisisContrato.PendingUpdate = false;
+                                }
+                                if (inspeccion.InspGuiBPMFabCosmeticoMed?.InspeccionAudito?.PendingUpdate ?? false)
+                                {
+                                    data.InspGuiBPMFabCosmeticoMed.InspeccionAudito = inspeccion.InspGuiBPMFabCosmeticoMed.InspeccionAudito;
+                                    data.InspGuiBPMFabCosmeticoMed.InspeccionAudito.PendingUpdate = false;
+                                }
+                                if (inspeccion.InspGuiBPMFabCosmeticoMed?.InspeccionAudito?.PendingUpdate ?? false)
+                                {
+                                    data.InspGuiBPMFabCosmeticoMed.InspeccionAudito = inspeccion.InspGuiBPMFabCosmeticoMed.InspeccionAudito;
+                                    data.InspGuiBPMFabCosmeticoMed.InspeccionAudito.PendingUpdate = false;
+                                }
+
+
+
+                                break;
+                            }
 
                     }
 

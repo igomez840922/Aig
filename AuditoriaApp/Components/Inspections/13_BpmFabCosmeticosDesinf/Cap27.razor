@@ -1,0 +1,142 @@
+﻿@if (Inspeccion?.Inspeccion?.InspGuiBPMFabCosmeticoMed?.AreaDispensionOrdFab != null)
+{
+    <EditForm Model="@Inspeccion.Inspeccion" OnValidSubmit="Save">
+        <DataAnnotationsValidator />
+        <MudCard Elevation="25">
+            <MudCardHeader>
+                @*  <CardHeaderAvatar>
+            <MudAvatar Color="Color.Secondary">I</MudAvatar>
+            </CardHeaderAvatar> *@
+                <CardHeaderContent>
+                    <MudText Typo="Typo.body1">@(Inspeccion.Inspeccion.NumActa) - @(DataModel.Helper.Helper.GetDescription(Inspeccion.Inspeccion.TipoActa))</MudText>
+                </CardHeaderContent>
+                <CardHeaderActions>
+                    <MudMenu Icon="@Icons.Material.Filled.MoreVert">
+                        <MudMenuItem Icon="@Icons.Material.Outlined.Save" OnTouch="@((e)=> Save())" OnClick="@((e)=> Save())">Guardar</MudMenuItem>
+                        <MudMenuItem Icon="@Icons.Material.Filled.Logout" OnClick="@((e)=> Cancel())" OnTouch="@((e)=> Cancel())">Salir</MudMenuItem>
+                    </MudMenu>
+                </CardHeaderActions>
+            </MudCardHeader>           
+            <MudCardHeader>
+                <CardHeaderContent>
+                    <MudText Typo="Typo.h6" Color="Color.Dark">ÁREAS DE PRODUCCIÓN - Área de Dispensación de Ordenes de Fabricación</MudText>
+                </CardHeaderContent>
+            </MudCardHeader>
+            <MudCardContent>               
+                <MudGrid>
+                     <MudItem xs="12">
+                        <MudSimpleTable Style="overflow-x: auto;">
+                            <thead>
+                                <tr>                                    
+                                    <th width="5%">Pto. Max</th>
+                                    <th width="10%">Pto. Obten.</th>
+                                    <th width="30%">Título</th>
+                                    <th width="5%">Artículo</th>
+                                    <th width="5%">Evaluac</th>
+                                    <th width="5%">Criterio</th>
+                                    <th>Observaciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var dt in Inspeccion.Inspeccion.InspGuiBPMFabCosmeticoMed.AreaDispensionOrdFab.LContenido)
+                                {
+                                    @if (dt.IsHeader)
+                                    {
+                                        <tr>
+                                            <th colspan="7">@dt.Titulo</th>
+                                        </tr>
+                                    }
+                                    else if (dt.IsSubHeader)
+                                    {
+                                        <tr>
+                                            <td>@(dt.PuntosMax > 0 ? dt.PuntosMax : "")</td>
+                                            <td></td>
+                                            <td>@dt.Titulo</td>
+                                            <td>@dt.Articulo </td>
+                                            <td></td>
+                                            <td>@dt.Criterio </td>
+                                            <td></td>
+                                        </tr>
+                                    }
+                                    else
+                                    {
+                                        <tr>
+                                            <td>@(dt.PuntosMax > 0 ? dt.PuntosMax : "")</td>
+                                            <td>
+                                                @if (dt.PuntosMax > 0)
+                                                {
+                                                    <MudTextField Margin="Margin.Dense" @bind-Value="dt.PuntosObtenido" Variant="Variant.Outlined" For="@(() => dt.PuntosObtenido)"/>
+                                                }
+                                            </td>
+                                            <td>@dt.Titulo</td>
+                                            <td>@dt.Articulo</td>
+                                            @foreach (var eva in dt.LEvaluacion)
+                                            {
+                                                <td>
+                                                    @if (!eva.HideEvaluacion)
+                                                    {
+                                                        <MudSelect Margin="Margin.Dense" T="DataModel.Helper.enumAUD_TipoSeleccion" Variant="Variant.Outlined" AnchorOrigin="Origin.BottomCenter" @bind-Value="eva.Evaluacion" For="@(() => eva.Evaluacion)">
+                                                            @foreach (DataModel.Helper.enumAUD_TipoSeleccion dt in Enum.GetValues(typeof(DataModel.Helper.enumAUD_TipoSeleccion)))
+                                                            {
+                                                                <MudSelectItem T="DataModel.Helper.enumAUD_TipoSeleccion" Value="dt">@DataModel.Helper.Helper.GetDescription(dt)</MudSelectItem>
+                                                            }
+                                                        </MudSelect>                                                        
+                                                    }
+                                                </td>
+                                            }
+                                            <td>@dt.Criterio</td>
+                                            <td>
+                                                <MudTextField Margin="Margin.Dense" @bind-Value="dt.Observaciones" Variant="Variant.Outlined" For="@(() => dt.Observaciones)" Lines="10"/>
+                                            </td>
+                                        </tr>
+                                        @if (dt.LSubPreguntas?.Count > 0)
+                                        {
+                                            foreach (var sub in dt.LSubPreguntas)
+                                            {
+                                                <tr>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td>@sub.Nombre</td>
+                                                    <td></td>
+                                                    <td>
+                                                        @if (!sub.HideEvaluacion)
+                                                        {
+                                                            <MudSelect Margin="Margin.Dense" T="DataModel.Helper.enumAUD_TipoSeleccion" Variant="Variant.Outlined" AnchorOrigin="Origin.BottomCenter" @bind-Value="sub.Evaluacion" For="@(() => sub.Evaluacion)">
+                                                                @foreach (DataModel.Helper.enumAUD_TipoSeleccion dt in Enum.GetValues(typeof(DataModel.Helper.enumAUD_TipoSeleccion)))
+                                                                {
+                                                                    <MudSelectItem T="DataModel.Helper.enumAUD_TipoSeleccion" Value="dt">@DataModel.Helper.Helper.GetDescription(dt)</MudSelectItem>
+                                                                }
+                                                            </MudSelect>
+                                                        }
+                                                    </td>
+                                                    <td></td>
+                                                    <td></td>
+                                                </tr>
+                                            }
+                                        }
+                                    }
+                                }
+                            </tbody>
+                        </MudSimpleTable>    
+    </MudItem>
+                </MudGrid>
+
+            </MudCardContent>
+
+            <MudCardActions Class="pt-4 pl-4">
+                <div style="text-align:right;" class="ml-auto">
+                    <MudButton ButtonType="ButtonType.Button" Variant="Variant.Filled" Color="Color.Primary" Size="Size.Medium" Class="ma-1" OnClick="@((e)=> SaveExit())" StartIcon="@Icons.Material.Filled.Save">Guardar y Salir</MudButton>
+                    <MudButton ButtonType="ButtonType.Button" Variant="Variant.Filled" Color="Color.Primary" Size="Size.Medium" Class="ma-1" OnClick="@((e)=> Save())" EndIcon="@Icons.Material.Filled.SaveAs">Guardar</MudButton>
+                    <MudButton ButtonType="ButtonType.Button" Variant="Variant.Filled" Color="Color.Error" Size="Size.Medium" Class="ma-1" OnClick="@((e)=> Cancel())" StartIcon="@Icons.Material.Filled.Logout">Salir</MudButton>
+                </div>
+            </MudCardActions>
+        </MudCard>
+
+    </EditForm>
+
+
+
+
+
+
+}
