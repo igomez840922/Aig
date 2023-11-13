@@ -16,12 +16,9 @@ namespace AuditoriaApp.Pages.DashBoard
         [Inject]
         IDialogService DialogService { get; set; }
         [Inject]
-        ISystemUserService systemUserService { get; set; }
-        [Inject]
-        AuthenticationStateProvider GetAuthenticationStateAsync { get; set; }
-        [Inject]
-        IConfiguration configuration { get; set; }
-              
+        IDashboardService dashboardService { get; set; }   
+
+        APP_Dashboard model { get; set; }
 
         protected async override Task OnInitializedAsync()
         {
@@ -37,10 +34,7 @@ namespace AuditoriaApp.Pages.DashBoard
         protected override async Task OnAfterRenderAsync(bool firstRender)
         {
             if (firstRender)
-            {
-                
-                await getUserData();
-
+            {                              
                 FetchData();
             }
             await base.OnAfterRenderAsync(firstRender);
@@ -50,24 +44,14 @@ namespace AuditoriaApp.Pages.DashBoard
             
         }
 
-        private async Task getUserData()
-        {
-            try
-            {
-                //var authstate = await GetAuthenticationStateAsync.GetAuthenticationStateAsync();
-                //var userClaims = authstate.User;
-                //if (!userClaims.IsInRole("Admin"))
-                //{
-                //    var user = await systemUserService.GetByName(userClaims.Identity.Name);
-                //    //model.userId = user.Id;
-                //}
-            }
-            catch { }
-        }
+        
 
         protected async Task FetchData()
         {
-           
+            try {
+                model = await dashboardService.Get();
+            }
+            catch { }
             await this.InvokeAsync(StateHasChanged);
         }
                

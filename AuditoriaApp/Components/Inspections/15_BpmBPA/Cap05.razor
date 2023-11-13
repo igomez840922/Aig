@@ -1,0 +1,102 @@
+﻿@if (Inspeccion?.Inspeccion?.InspGuiaBPM_Bpa?.PropositoInsp != null)
+{
+    <EditForm Model="@Inspeccion.Inspeccion" OnValidSubmit="Save">
+        <DataAnnotationsValidator />
+        <MudCard Elevation="25">
+            <MudCardHeader>
+                @*  <CardHeaderAvatar>
+            <MudAvatar Color="Color.Secondary">I</MudAvatar>
+            </CardHeaderAvatar> *@
+                <CardHeaderContent>
+                    <MudText Typo="Typo.body1">@(Inspeccion.Inspeccion.NumActa) - @(DataModel.Helper.Helper.GetDescription(Inspeccion.Inspeccion.TipoActa))</MudText>
+                </CardHeaderContent>
+                <CardHeaderActions>
+                    <MudMenu Icon="@Icons.Material.Filled.MoreVert">
+                        <MudMenuItem Icon="@Icons.Material.Outlined.Save" OnTouch="@((e)=> Save())" OnClick="@((e)=> Save())">Guardar</MudMenuItem>
+                        <MudMenuItem Icon="@Icons.Material.Filled.Logout" OnClick="@((e)=> Cancel())" OnTouch="@((e)=> Cancel())">Salir</MudMenuItem>
+                    </MudMenu>
+                </CardHeaderActions>
+            </MudCardHeader>
+            <MudCardHeader>
+                <CardHeaderContent>
+                    <MudText Typo="Typo.h6" Color="Color.Dark">Generalidades</MudText>
+                </CardHeaderContent>
+            </MudCardHeader>
+                        
+            <MudCardHeader>
+                <CardHeaderContent>
+                    <MudText Typo="Typo.h6" Color="Color.Dark">Propósito de la Inspección de Buenas Prácticas de Almacenamiento y Distribución</MudText>
+                </CardHeaderContent>
+            </MudCardHeader>
+            <MudCardContent>
+                <MudGrid>
+                    <MudItem xs="12" md="6">
+                        <MudSelect Margin="Margin.Dense" T="DataModel.PropositoInspeccion" MultiSelection="true" Label="Seleccione los propósitos de dicha inspección" Variant="Variant.Outlined" AnchorOrigin="Origin.BottomCenter" @bind-Value="PropositoSelected" @bind-SelectedValues="@(LPropositosSelected)">
+                            @foreach (DataModel.PropositoInspeccion dt in LPropositos)
+                            {
+                                <MudSelectItem T="DataModel.PropositoInspeccion" Value="dt">@dt.Nombre</MudSelectItem>
+                            }
+                        </MudSelect>
+                    </MudItem>
+                                   
+                </MudGrid>
+            </MudCardContent>
+            <MudCardHeader>
+                <CardHeaderContent>
+                    <MudText Typo="Typo.h6" Color="Color.Dark">Evidencias / Observaciones</MudText>
+                </CardHeaderContent>
+            </MudCardHeader>
+            <MudCardContent>
+                <MudGrid>                   
+                    <MudItem xs="12" md="6">
+                        <MudTextField Margin="Margin.Dense" @bind-Value="Inspeccion.Inspeccion.InspGuiaBPM_Bpa.LicEspSustanciasCtr" Label="Licencia Especial de Sustancias Controladas Nº" Variant="Variant.Outlined" For="@(() => Inspeccion.Inspeccion.InspGuiaBPM_Bpa.LicEspSustanciasCtr)" />
+                    </MudItem>
+                    <MudItem xs="12" md="6">
+                        <MudDatePicker type PickerVariant="PickerVariant.Dialog" Margin="Margin.Dense" @bind-Date="@(Inspeccion.Inspeccion.InspGuiaBPM_Bpa.FechaExpLicEspecial)" For="@(() => Inspeccion.Inspeccion.InspGuiaBPM_Bpa.FechaExpLicEspecial)" DateFormat="dd/MM/yyyy" Variant="Variant.Outlined" Label="Fecha de Expiración" />
+                    </MudItem>
+                    <MudItem xs="12" md="6">
+                        <MudDatePicker type PickerVariant="PickerVariant.Dialog" Margin="Margin.Dense" @bind-Date="@(Inspeccion.Inspeccion.InspGuiaBPM_Bpa.FechaUltimaInspeccion)" For="@(() => Inspeccion.Inspeccion.InspGuiaBPM_Bpa.FechaUltimaInspeccion)" DateFormat="dd/MM/yyyy" Variant="Variant.Outlined" Label="Ultima Inspección por BPAD Oficial realizada" />
+                    </MudItem>
+
+                    <MudItem xs="12">
+                        <MudTextField Margin="Margin.Dense" @bind-Value="Inspeccion.Inspeccion.InspGuiaBPM_Bpa.ActComercialAprobada" Label="Actividad Comercial aprobada (Ley 1 Art. 172):" Variant="Variant.Outlined" For="@(() => Inspeccion.Inspeccion.InspGuiaBPM_Bpa.ActComercialAprobada)" Lines="10" />
+                    </MudItem>
+                </MudGrid>
+
+            </MudCardContent>
+            <MudCardHeader>
+                <CardHeaderContent>
+                    <MudText Typo="Typo.h6" Color="Color.Dark">Evidencias / Observaciones</MudText>
+                </CardHeaderContent>
+            </MudCardHeader>
+            <MudCardContent>
+                <MudGrid>
+                   
+                    <MudItem xs="12">
+                        <MudTextField Margin="Margin.Dense" @bind-Value="Inspeccion.Inspeccion.InspGuiaBPM_Bpa.HorarioEstFarmaceutico" Label="Establecimiento Farmacéutico" Variant="Variant.Outlined" For="@(() => Inspeccion.Inspeccion.InspGuiaBPM_Bpa.HorarioEstFarmaceutico)" Lines="10" />
+                    </MudItem>
+
+                    <MudItem xs="12">
+                        <MudTextField Margin="Margin.Dense" @bind-Value="Inspeccion.Inspeccion.InspGuiaBPM_Bpa.HorarioRegFarmaceutica" Label="Regencia Farmacéutica" Variant="Variant.Outlined" For="@(() => Inspeccion.Inspeccion.InspGuiaBPM_Bpa.HorarioRegFarmaceutica)" Lines="10" />
+                    </MudItem>
+                </MudGrid>
+
+            </MudCardContent>
+           
+            <MudCardActions Class="pt-4 pl-4">
+                <div style="text-align:right;" class="ml-auto">
+                    <MudButton ButtonType="ButtonType.Button" Variant="Variant.Filled" Color="Color.Primary" Size="Size.Medium" Class="ma-1" OnClick="@((e)=> SaveExit())" StartIcon="@Icons.Material.Filled.Save">Guardar y Salir</MudButton>
+                    <MudButton ButtonType="ButtonType.Button" Variant="Variant.Filled" Color="Color.Primary" Size="Size.Medium" Class="ma-1" OnClick="@((e)=> Save())" EndIcon="@Icons.Material.Filled.SaveAs">Guardar</MudButton>
+                    <MudButton ButtonType="ButtonType.Button" Variant="Variant.Filled" Color="Color.Error" Size="Size.Medium" Class="ma-1" OnClick="@((e)=> Cancel())" StartIcon="@Icons.Material.Filled.Logout">Salir</MudButton>
+                </div>
+            </MudCardActions>
+        </MudCard>
+
+    </EditForm>
+
+
+
+
+
+
+}

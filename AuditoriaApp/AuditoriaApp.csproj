@@ -44,10 +44,12 @@
 
     <ItemGroup>
         <!-- App Icon -->
-        <MauiIcon Include="Resources\AppIcon\appicon.svg" ForegroundFile="Resources\AppIcon\appiconfg.svg" Color="#512BD4" />
-
+		<!--<MauiIcon Include="Resources\AppIcon\appicon.svg" ForegroundFile="Resources\AppIcon\appiconfg.svg" Color="#512BD4" />-->
+		<MauiIcon Include="Resources\AppIcon\logo.jpg" ForegroundFile="Resources\AppIcon\logo.jpg" />
+		
         <!-- Splash Screen -->
-        <MauiSplashScreen Include="Resources\Splash\splash.svg" Color="#512BD4" BaseSize="128,128" />
+		<!--<MauiSplashScreen Include="Resources\Splash\splash.svg" Color="#512BD4" BaseSize="128,128" />-->
+		<MauiSplashScreen Include="Resources\Splash\logo.jpg" Color="#ffffff" BaseSize="128,128" />
 
         <!-- Images -->
         <MauiImage Include="Resources\Images\*" />
@@ -62,6 +64,10 @@
 
     <ItemGroup>
       <Content Remove="Resources\appsettings.json" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Remove="Resources\Splash\logo.jpg" />
     </ItemGroup>
 
     <ItemGroup>

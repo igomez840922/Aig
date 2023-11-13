@@ -1168,6 +1168,348 @@ namespace Aig.Auditoria.Controllers
 
                                 break;
                             }
+                        case DataModel.Helper.enumAUD_TipoActa.BPMMN:
+                            {
+                                inspeccion.InspGuiBPMFabNatMedicina.PendingUpdate = false;
+                                if (inspeccion.InspGuiBPMFabNatMedicina?.DatosRepresentLegal?.PendingUpdate ?? false)
+                                {
+                                    data.InspGuiBPMFabNatMedicina.DatosRepresentLegal = inspeccion.InspGuiBPMFabNatMedicina.DatosRepresentLegal;
+                                    data.InspGuiBPMFabNatMedicina.DatosRepresentLegal.PendingUpdate = false;
+                                }
+                                if (inspeccion.InspGuiBPMFabNatMedicina?.DatosRegente?.PendingUpdate ?? false)
+                                {
+                                    data.InspGuiBPMFabNatMedicina.DatosRegente = inspeccion.InspGuiBPMFabNatMedicina.DatosRegente;
+                                    data.InspGuiBPMFabNatMedicina.DatosRegente.PendingUpdate = false;
+                                }
+                                if (inspeccion.InspGuiBPMFabNatMedicina?.OtrosFuncionarios?.PendingUpdate ?? false)
+                                {
+                                    data.InspGuiBPMFabNatMedicina.OtrosFuncionarios = inspeccion.InspGuiBPMFabNatMedicina.OtrosFuncionarios;
+                                    data.InspGuiBPMFabNatMedicina.OtrosFuncionarios.PendingUpdate = false;
+                                }
+                                if (inspeccion.InspGuiBPMFabNatMedicina?.InfoGeneral?.PendingUpdate ?? false)
+                                {
+                                    data.InspGuiBPMFabNatMedicina.InfoGeneral = inspeccion.InspGuiBPMFabNatMedicina.InfoGeneral;
+                                    data.InspGuiBPMFabNatMedicina.InfoGeneral.PendingUpdate = false;
+                                }
+                                if (inspeccion.InspGuiBPMFabNatMedicina?.AuthFuncionamiento?.PendingUpdate ?? false)
+                                {
+                                    data.InspGuiBPMFabNatMedicina.AuthFuncionamiento = inspeccion.InspGuiBPMFabNatMedicina.AuthFuncionamiento;
+                                    data.InspGuiBPMFabNatMedicina.AuthFuncionamiento.PendingUpdate = false;
+                                }
+                                if (inspeccion.InspGuiBPMFabNatMedicina?.Organizacion?.PendingUpdate ?? false)
+                                {
+                                    data.InspGuiBPMFabNatMedicina.Organizacion = inspeccion.InspGuiBPMFabNatMedicina.Organizacion;
+                                    data.InspGuiBPMFabNatMedicina.Organizacion.PendingUpdate = false;
+                                }
+                                if (inspeccion.InspGuiBPMFabNatMedicina?.Personal?.PendingUpdate ?? false)
+                                {
+                                    data.InspGuiBPMFabNatMedicina.Personal = inspeccion.InspGuiBPMFabNatMedicina.Personal;
+                                    data.InspGuiBPMFabNatMedicina.Personal.PendingUpdate = false;
+                                }
+                                if (inspeccion.InspGuiBPMFabNatMedicina?.ResponPersonal?.PendingUpdate ?? false)
+                                {
+                                    data.InspGuiBPMFabNatMedicina.ResponPersonal = inspeccion.InspGuiBPMFabNatMedicina.ResponPersonal;
+                                    data.InspGuiBPMFabNatMedicina.ResponPersonal.PendingUpdate = false;
+                                }
+                                if (inspeccion.InspGuiBPMFabNatMedicina?.Capacitacion?.PendingUpdate ?? false)
+                                {
+                                    data.InspGuiBPMFabNatMedicina.Capacitacion = inspeccion.InspGuiBPMFabNatMedicina.Capacitacion;
+                                    data.InspGuiBPMFabNatMedicina.Capacitacion.PendingUpdate = false;
+                                }
+                                if (inspeccion.InspGuiBPMFabNatMedicina?.HigieneSalud?.PendingUpdate ?? false)
+                                {
+                                    data.InspGuiBPMFabNatMedicina.HigieneSalud = inspeccion.InspGuiBPMFabNatMedicina.HigieneSalud;
+                                    data.InspGuiBPMFabNatMedicina.HigieneSalud.PendingUpdate = false;
+                                }
+                                if (inspeccion.InspGuiBPMFabNatMedicina?.UbicacionDisenoConstruc?.PendingUpdate ?? false)
+                                {
+                                    data.InspGuiBPMFabNatMedicina.UbicacionDisenoConstruc = inspeccion.InspGuiBPMFabNatMedicina.UbicacionDisenoConstruc;
+                                    data.InspGuiBPMFabNatMedicina.UbicacionDisenoConstruc.PendingUpdate = false;
+                                }
+                                if (inspeccion.InspGuiBPMFabNatMedicina?.Almacenes?.PendingUpdate ?? false)
+                                {
+                                    data.InspGuiBPMFabNatMedicina.Almacenes = inspeccion.InspGuiBPMFabNatMedicina.Almacenes;
+                                    data.InspGuiBPMFabNatMedicina.Almacenes.PendingUpdate = false;
+                                }
+                                if (inspeccion.InspGuiBPMFabNatMedicina?.AreaRecepLimpieza?.PendingUpdate ?? false)
+                                {
+                                    data.InspGuiBPMFabNatMedicina.AreaRecepLimpieza = inspeccion.InspGuiBPMFabNatMedicina.AreaRecepLimpieza;
+                                    data.InspGuiBPMFabNatMedicina.AreaRecepLimpieza.PendingUpdate = false;
+                                }
+                                if (inspeccion.InspGuiBPMFabNatMedicina?.AreaSecadoMolienda?.PendingUpdate ?? false)
+                                {
+                                    data.InspGuiBPMFabNatMedicina.AreaSecadoMolienda = inspeccion.InspGuiBPMFabNatMedicina.AreaSecadoMolienda;
+                                    data.InspGuiBPMFabNatMedicina.AreaSecadoMolienda.PendingUpdate = false;
+                                }
+                                if (inspeccion.InspGuiBPMFabNatMedicina?.AreaDispensadoMatPrima?.PendingUpdate ?? false)
+                                {
+                                    data.InspGuiBPMFabNatMedicina.AreaDispensadoMatPrima = inspeccion.InspGuiBPMFabNatMedicina.AreaDispensadoMatPrima;
+                                    data.InspGuiBPMFabNatMedicina.AreaDispensadoMatPrima.PendingUpdate = false;
+                                }
+                                if (inspeccion.InspGuiBPMFabNatMedicina?.AreaProduccion?.PendingUpdate ?? false)
+                                {
+                                    data.InspGuiBPMFabNatMedicina.AreaProduccion = inspeccion.InspGuiBPMFabNatMedicina.AreaProduccion;
+                                    data.InspGuiBPMFabNatMedicina.AreaProduccion.PendingUpdate = false;
+                                }
+                                if (inspeccion.InspGuiBPMFabNatMedicina?.AreaEnvasadoEmpaque?.PendingUpdate ?? false)
+                                {
+                                    data.InspGuiBPMFabNatMedicina.AreaEnvasadoEmpaque = inspeccion.InspGuiBPMFabNatMedicina.AreaEnvasadoEmpaque;
+                                    data.InspGuiBPMFabNatMedicina.AreaEnvasadoEmpaque.PendingUpdate = false;
+                                }
+                                if (inspeccion.InspGuiBPMFabNatMedicina?.AreaAuxiliares?.PendingUpdate ?? false)
+                                {
+                                    data.InspGuiBPMFabNatMedicina.AreaAuxiliares = inspeccion.InspGuiBPMFabNatMedicina.AreaAuxiliares;
+                                    data.InspGuiBPMFabNatMedicina.AreaAuxiliares.PendingUpdate = false;
+                                }
+                                if (inspeccion.InspGuiBPMFabNatMedicina?.AreaControlCalidad?.PendingUpdate ?? false)
+                                {
+                                    data.InspGuiBPMFabNatMedicina.AreaControlCalidad = inspeccion.InspGuiBPMFabNatMedicina.AreaControlCalidad;
+                                    data.InspGuiBPMFabNatMedicina.AreaControlCalidad.PendingUpdate = false;
+                                }
+                                if (inspeccion.InspGuiBPMFabNatMedicina?.Generalidades8?.PendingUpdate ?? false)
+                                {
+                                    data.InspGuiBPMFabNatMedicina.Generalidades8 = inspeccion.InspGuiBPMFabNatMedicina.Generalidades8;
+                                    data.InspGuiBPMFabNatMedicina.Generalidades8.PendingUpdate = false;
+                                }
+                                if (inspeccion.InspGuiBPMFabNatMedicina?.Calibracion?.PendingUpdate ?? false)
+                                {
+                                    data.InspGuiBPMFabNatMedicina.Calibracion = inspeccion.InspGuiBPMFabNatMedicina.Calibracion;
+                                    data.InspGuiBPMFabNatMedicina.Calibracion.PendingUpdate = false;
+                                }
+                                if (inspeccion.InspGuiBPMFabNatMedicina?.SistemaAgua?.PendingUpdate ?? false)
+                                {
+                                    data.InspGuiBPMFabNatMedicina.SistemaAgua = inspeccion.InspGuiBPMFabNatMedicina.SistemaAgua;
+                                    data.InspGuiBPMFabNatMedicina.SistemaAgua.PendingUpdate = false;
+                                }
+                                if (inspeccion.InspGuiBPMFabNatMedicina?.SistemaAire?.PendingUpdate ?? false)
+                                {
+                                    data.InspGuiBPMFabNatMedicina.SistemaAire = inspeccion.InspGuiBPMFabNatMedicina.SistemaAire;
+                                    data.InspGuiBPMFabNatMedicina.SistemaAire.PendingUpdate = false;
+                                }
+                                if (inspeccion.InspGuiBPMFabNatMedicina?.Generalidades9?.PendingUpdate ?? false)
+                                {
+                                    data.InspGuiBPMFabNatMedicina.Generalidades9 = inspeccion.InspGuiBPMFabNatMedicina.Generalidades9;
+                                    data.InspGuiBPMFabNatMedicina.Generalidades9.PendingUpdate = false;
+                                }
+                                if (inspeccion.InspGuiBPMFabNatMedicina?.DispensadoMatPrima?.PendingUpdate ?? false)
+                                {
+                                    data.InspGuiBPMFabNatMedicina.DispensadoMatPrima = inspeccion.InspGuiBPMFabNatMedicina.DispensadoMatPrima;
+                                    data.InspGuiBPMFabNatMedicina.DispensadoMatPrima.PendingUpdate = false;
+                                }
+                                if (inspeccion.InspGuiBPMFabNatMedicina?.MatAcondicionamiento?.PendingUpdate ?? false)
+                                {
+                                    data.InspGuiBPMFabNatMedicina.MatAcondicionamiento = inspeccion.InspGuiBPMFabNatMedicina.MatAcondicionamiento;
+                                    data.InspGuiBPMFabNatMedicina.MatAcondicionamiento.PendingUpdate = false;
+                                }
+                                if (inspeccion.InspGuiBPMFabNatMedicina?.ProdAGranel?.PendingUpdate ?? false)
+                                {
+                                    data.InspGuiBPMFabNatMedicina.ProdAGranel = inspeccion.InspGuiBPMFabNatMedicina.ProdAGranel;
+                                    data.InspGuiBPMFabNatMedicina.ProdAGranel.PendingUpdate = false;
+                                }
+                                if (inspeccion.InspGuiBPMFabNatMedicina?.ProdTerminados?.PendingUpdate ?? false)
+                                {
+                                    data.InspGuiBPMFabNatMedicina.ProdTerminados = inspeccion.InspGuiBPMFabNatMedicina.ProdTerminados;
+                                    data.InspGuiBPMFabNatMedicina.ProdTerminados.PendingUpdate = false;
+                                }
+                                if (inspeccion.InspGuiBPMFabNatMedicina?.ProdRechazados?.PendingUpdate ?? false)
+                                {
+                                    data.InspGuiBPMFabNatMedicina.ProdRechazados = inspeccion.InspGuiBPMFabNatMedicina.ProdRechazados;
+                                    data.InspGuiBPMFabNatMedicina.ProdRechazados.PendingUpdate = false;
+                                }
+                                if (inspeccion.InspGuiBPMFabNatMedicina?.ProdDevueltos?.PendingUpdate ?? false)
+                                {
+                                    data.InspGuiBPMFabNatMedicina.ProdDevueltos = inspeccion.InspGuiBPMFabNatMedicina.ProdDevueltos;
+                                    data.InspGuiBPMFabNatMedicina.ProdDevueltos.PendingUpdate = false;
+                                }
+                                if (inspeccion.InspGuiBPMFabNatMedicina?.Generalidades10?.PendingUpdate ?? false)
+                                {
+                                    data.InspGuiBPMFabNatMedicina.Generalidades10 = inspeccion.InspGuiBPMFabNatMedicina.Generalidades10;
+                                    data.InspGuiBPMFabNatMedicina.Generalidades10.PendingUpdate = false;
+                                }
+                                if (inspeccion.InspGuiBPMFabNatMedicina?.DocumentosExigido?.PendingUpdate ?? false)
+                                {
+                                    data.InspGuiBPMFabNatMedicina.DocumentosExigido = inspeccion.InspGuiBPMFabNatMedicina.DocumentosExigido;
+                                    data.InspGuiBPMFabNatMedicina.DocumentosExigido.PendingUpdate = false;
+                                }
+                                if (inspeccion.InspGuiBPMFabNatMedicina?.ProcedimientoReg?.PendingUpdate ?? false)
+                                {
+                                    data.InspGuiBPMFabNatMedicina.ProcedimientoReg = inspeccion.InspGuiBPMFabNatMedicina.ProcedimientoReg;
+                                    data.InspGuiBPMFabNatMedicina.ProcedimientoReg.PendingUpdate = false;
+                                }
+                                if (inspeccion.InspGuiBPMFabNatMedicina?.ProdControlProceso?.PendingUpdate ?? false)
+                                {
+                                    data.InspGuiBPMFabNatMedicina.ProdControlProceso = inspeccion.InspGuiBPMFabNatMedicina.ProdControlProceso;
+                                    data.InspGuiBPMFabNatMedicina.ProdControlProceso.PendingUpdate = false;
+                                }
+                                if (inspeccion.InspGuiBPMFabNatMedicina?.Generalidades12?.PendingUpdate ?? false)
+                                {
+                                    data.InspGuiBPMFabNatMedicina.Generalidades12 = inspeccion.InspGuiBPMFabNatMedicina.Generalidades12;
+                                    data.InspGuiBPMFabNatMedicina.Generalidades12.PendingUpdate = false;
+                                }
+                                if (inspeccion.InspGuiBPMFabNatMedicina?.GarantiaCalidad?.PendingUpdate ?? false)
+                                {
+                                    data.InspGuiBPMFabNatMedicina.GarantiaCalidad = inspeccion.InspGuiBPMFabNatMedicina.GarantiaCalidad;
+                                    data.InspGuiBPMFabNatMedicina.GarantiaCalidad.PendingUpdate = false;
+                                }
+                                if (inspeccion.InspGuiBPMFabNatMedicina?.Generalidades13?.PendingUpdate ?? false)
+                                {
+                                    data.InspGuiBPMFabNatMedicina.Generalidades13 = inspeccion.InspGuiBPMFabNatMedicina.Generalidades13;
+                                    data.InspGuiBPMFabNatMedicina.Generalidades13.PendingUpdate = false;
+                                }
+                                if (inspeccion.InspGuiBPMFabNatMedicina?.Muestreo?.PendingUpdate ?? false)
+                                {
+                                    data.InspGuiBPMFabNatMedicina.Muestreo = inspeccion.InspGuiBPMFabNatMedicina.Muestreo;
+                                    data.InspGuiBPMFabNatMedicina.Muestreo.PendingUpdate = false;
+                                }
+                                if (inspeccion.InspGuiBPMFabNatMedicina?.MetodologiaAnalitica?.PendingUpdate ?? false)
+                                {
+                                    data.InspGuiBPMFabNatMedicina.MetodologiaAnalitica = inspeccion.InspGuiBPMFabNatMedicina.MetodologiaAnalitica;
+                                    data.InspGuiBPMFabNatMedicina.MetodologiaAnalitica.PendingUpdate = false;
+                                }
+                                if (inspeccion.InspGuiBPMFabNatMedicina?.MaterialesReferencia?.PendingUpdate ?? false)
+                                {
+                                    data.InspGuiBPMFabNatMedicina.MaterialesReferencia = inspeccion.InspGuiBPMFabNatMedicina.MaterialesReferencia;
+                                    data.InspGuiBPMFabNatMedicina.MaterialesReferencia.PendingUpdate = false;
+                                }
+                                if (inspeccion.InspGuiBPMFabNatMedicina?.Estabilidad?.PendingUpdate ?? false)
+                                {
+                                    data.InspGuiBPMFabNatMedicina.Estabilidad = inspeccion.InspGuiBPMFabNatMedicina.Estabilidad;
+                                    data.InspGuiBPMFabNatMedicina.Estabilidad.PendingUpdate = false;
+                                }
+                                if (inspeccion.InspGuiBPMFabNatMedicina?.Generalidades14?.PendingUpdate ?? false)
+                                {
+                                    data.InspGuiBPMFabNatMedicina.Generalidades14 = inspeccion.InspGuiBPMFabNatMedicina.Generalidades14;
+                                    data.InspGuiBPMFabNatMedicina.Generalidades14.PendingUpdate = false;
+                                }
+                                if (inspeccion.InspGuiBPMFabNatMedicina?.Retiros?.PendingUpdate ?? false)
+                                {
+                                    data.InspGuiBPMFabNatMedicina.Retiros = inspeccion.InspGuiBPMFabNatMedicina.Retiros;
+                                    data.InspGuiBPMFabNatMedicina.Retiros.PendingUpdate = false;
+                                }
+                                if (inspeccion.InspGuiBPMFabNatMedicina?.Generalidades15?.PendingUpdate ?? false)
+                                {
+                                    data.InspGuiBPMFabNatMedicina.Generalidades15 = inspeccion.InspGuiBPMFabNatMedicina.Generalidades15;
+                                    data.InspGuiBPMFabNatMedicina.Generalidades15.PendingUpdate = false;
+                                }
+                                if (inspeccion.InspGuiBPMFabNatMedicina?.Contratante?.PendingUpdate ?? false)
+                                {
+                                    data.InspGuiBPMFabNatMedicina.Contratante = inspeccion.InspGuiBPMFabNatMedicina.Contratante;
+                                    data.InspGuiBPMFabNatMedicina.Contratante.PendingUpdate = false;
+                                }
+                                if (inspeccion.InspGuiBPMFabNatMedicina?.Contratista?.PendingUpdate ?? false)
+                                {
+                                    data.InspGuiBPMFabNatMedicina.Contratista = inspeccion.InspGuiBPMFabNatMedicina.Contratista;
+                                    data.InspGuiBPMFabNatMedicina.Contratista.PendingUpdate = false;
+                                }
+                                if (inspeccion.InspGuiBPMFabNatMedicina?.AuditoriaCalidad?.PendingUpdate ?? false)
+                                {
+                                    data.InspGuiBPMFabNatMedicina.AuditoriaCalidad = inspeccion.InspGuiBPMFabNatMedicina.AuditoriaCalidad;
+                                    data.InspGuiBPMFabNatMedicina.AuditoriaCalidad.PendingUpdate = false;
+                                }
+
+
+                                break;
+                            }
+                        case DataModel.Helper.enumAUD_TipoActa.BPA:
+                            {
+                                inspeccion.InspGuiaBPM_Bpa.PendingUpdate = false;
+                                if (inspeccion.InspGuiaBPM_Bpa?.DatosRepresentLegal?.PendingUpdate ?? false)
+                                {
+                                    data.InspGuiaBPM_Bpa.DatosRepresentLegal = inspeccion.InspGuiaBPM_Bpa.DatosRepresentLegal;
+                                    data.InspGuiaBPM_Bpa.DatosRepresentLegal.PendingUpdate = false;
+                                }
+                                if (inspeccion.InspGuiaBPM_Bpa?.DatosRegente?.PendingUpdate ?? false)
+                                {
+                                    data.InspGuiaBPM_Bpa.DatosRegente = inspeccion.InspGuiaBPM_Bpa.DatosRegente;
+                                    data.InspGuiaBPM_Bpa.DatosRegente.PendingUpdate = false;
+                                }
+                                if (inspeccion.InspGuiaBPM_Bpa?.OtrosFuncionarios?.PendingUpdate ?? false)
+                                {
+                                    data.InspGuiaBPM_Bpa.OtrosFuncionarios = inspeccion.InspGuiaBPM_Bpa.OtrosFuncionarios;
+                                    data.InspGuiaBPM_Bpa.OtrosFuncionarios.PendingUpdate = false;
+                                }
+                                if (inspeccion.InspGuiaBPM_Bpa?.PropositoInsp?.PendingUpdate ?? false)
+                                {
+                                    data.InspGuiaBPM_Bpa.PropositoInsp = inspeccion.InspGuiaBPM_Bpa.PropositoInsp;
+                                    data.InspGuiaBPM_Bpa.PropositoInsp.PendingUpdate = false;
+
+                                    data.InspGuiaBPM_Bpa.ActComercialAprobada = inspeccion.InspGuiaBPM_Bpa.ActComercialAprobada;
+                                    data.InspGuiaBPM_Bpa.FechaUltimaInspeccion = inspeccion.InspGuiaBPM_Bpa.FechaUltimaInspeccion;
+                                    data.InspGuiaBPM_Bpa.HorarioEstFarmaceutico = inspeccion.InspGuiaBPM_Bpa.HorarioEstFarmaceutico;
+                                    data.InspGuiaBPM_Bpa.HorarioRegFarmaceutica = inspeccion.InspGuiaBPM_Bpa.HorarioRegFarmaceutica;
+                                }
+                                if (inspeccion.InspGuiaBPM_Bpa?.DispGenerlestablecimiento?.PendingUpdate ?? false)
+                                {
+                                    data.InspGuiaBPM_Bpa.DispGenerlestablecimiento = inspeccion.InspGuiaBPM_Bpa.DispGenerlestablecimiento;
+                                    data.InspGuiaBPM_Bpa.DispGenerlestablecimiento.PendingUpdate = false;
+                                }
+                                if (inspeccion.InspGuiaBPM_Bpa?.AreasEstablecimiento?.PendingUpdate ?? false)
+                                {
+                                    data.InspGuiaBPM_Bpa.AreasEstablecimiento = inspeccion.InspGuiaBPM_Bpa.AreasEstablecimiento;
+                                    data.InspGuiaBPM_Bpa.AreasEstablecimiento.PendingUpdate = false;
+                                }
+                                if (inspeccion.InspGuiaBPM_Bpa?.Distribucion?.PendingUpdate ?? false)
+                                {
+                                    data.InspGuiaBPM_Bpa.Distribucion = inspeccion.InspGuiaBPM_Bpa.Distribucion;
+                                    data.InspGuiaBPM_Bpa.Distribucion.PendingUpdate = false;
+                                }
+                                if (inspeccion.InspGuiaBPM_Bpa?.TransProdFarmaceuticos?.PendingUpdate ?? false)
+                                {
+                                    data.InspGuiaBPM_Bpa.TransProdFarmaceuticos = inspeccion.InspGuiaBPM_Bpa.TransProdFarmaceuticos;
+                                    data.InspGuiaBPM_Bpa.TransProdFarmaceuticos.PendingUpdate = false;
+                                }
+                                if (inspeccion.InspGuiaBPM_Bpa?.AutoInspec?.PendingUpdate ?? false)
+                                {
+                                    data.InspGuiaBPM_Bpa.AutoInspec = inspeccion.InspGuiaBPM_Bpa.AutoInspec;
+                                    data.InspGuiaBPM_Bpa.AutoInspec.PendingUpdate = false;
+                                }
+
+                                break;
+                            }
+                        case DataModel.Helper.enumAUD_TipoActa.AECA:
+                            {
+                                inspeccion.InspAperturaCosmetArtesanal.PendingUpdate = false;
+                                if (inspeccion.InspAperturaCosmetArtesanal?.DatosRepresentLegal?.PendingUpdate ?? false)
+                                {
+                                    data.InspAperturaCosmetArtesanal.DatosRepresentLegal = inspeccion.InspAperturaCosmetArtesanal.DatosRepresentLegal;
+                                    data.InspAperturaCosmetArtesanal.DatosRepresentLegal.PendingUpdate = false;
+                                }
+                                if (inspeccion.InspAperturaCosmetArtesanal?.Documentacion?.PendingUpdate ?? false)
+                                {
+                                    data.InspAperturaCosmetArtesanal.Documentacion = inspeccion.InspAperturaCosmetArtesanal.Documentacion;
+                                    data.InspAperturaCosmetArtesanal.Documentacion.PendingUpdate = false;
+                                }
+                                if (inspeccion.InspAperturaCosmetArtesanal?.Locales?.PendingUpdate ?? false)
+                                {
+                                    data.InspAperturaCosmetArtesanal.Locales = inspeccion.InspAperturaCosmetArtesanal.Locales;
+                                    data.InspAperturaCosmetArtesanal.Locales.PendingUpdate = false;
+                                }
+                                if (inspeccion.InspAperturaCosmetArtesanal?.AreaAlmacenamiento?.PendingUpdate ?? false)
+                                {
+                                    data.InspAperturaCosmetArtesanal.AreaAlmacenamiento = inspeccion.InspAperturaCosmetArtesanal.AreaAlmacenamiento;
+                                    data.InspAperturaCosmetArtesanal.AreaAlmacenamiento.PendingUpdate = false;
+                                }
+
+                                break;
+                            }
+                        case DataModel.Helper.enumAUD_TipoActa.ABP:
+                        case DataModel.Helper.enumAUD_TipoActa.CUBP:
+                            {
+                                inspeccion.InspAperCambUbicBotiquin.PendingUpdate = false;
+                                if (inspeccion.InspAperCambUbicBotiquin?.DatosRepresentLegal?.PendingUpdate ?? false)
+                                {
+                                    data.InspAperCambUbicBotiquin.DatosRepresentLegal = inspeccion.InspAperCambUbicBotiquin.DatosRepresentLegal;
+                                    data.InspAperCambUbicBotiquin.DatosRepresentLegal.PendingUpdate = false;
+                                }
+                                if (inspeccion.InspAperCambUbicBotiquin?.CondCaractEstablecimiento?.PendingUpdate ?? false)
+                                {
+                                    data.InspAperCambUbicBotiquin.CondCaractEstablecimiento = inspeccion.InspAperCambUbicBotiquin.CondCaractEstablecimiento;
+                                    data.InspAperCambUbicBotiquin.CondCaractEstablecimiento.PendingUpdate = false;
+                                }
+
+                                break;
+                            }
+
 
                     }
 

@@ -40,7 +40,7 @@
                         <MudTextField Margin="Margin.Dense" @bind-Value="Inspeccion.Inspeccion.InspAperCambUbicAgen.DatosRegente.TelefonoMovil" Label="Telefono Movil" Variant="Variant.Outlined" For="@(() => Inspeccion.Inspeccion.InspAperCambUbicAgen.DatosRegente.TelefonoMovil)" />
                     </MudItem>
                     <MudItem xs="12" md="6">
-                        <MudSelect Margin="Margin.Dense" T="DataModel.Helper.enumAUD_TipoSeleccion" Label="Realiza otras funciones del dentro de la empresa?" Variant="Variant.Outlined" AnchorOrigin="Origin.BottomCenter" @bind-Value="Inspeccion.Inspeccion.InspAperCambUbicAgen.DatosRegente.RealizaOtraFuncion" For="@(() => Inspeccion.Inspeccion.InspAperCambUbicAgen.DatosRegente.RealizaOtraFuncion)">
+                        <MudSelect Margin="Margin.Dense" T="DataModel.Helper.enumAUD_TipoSeleccion" Label="Realiza otras funciones dentro de la empresa?" Variant="Variant.Outlined" AnchorOrigin="Origin.BottomCenter" @bind-Value="Inspeccion.Inspeccion.InspAperCambUbicAgen.DatosRegente.RealizaOtraFuncion" For="@(() => Inspeccion.Inspeccion.InspAperCambUbicAgen.DatosRegente.RealizaOtraFuncion)">
                             @foreach (DataModel.Helper.enumAUD_TipoSeleccion dt in Enum.GetValues(typeof(DataModel.Helper.enumAUD_TipoSeleccion)))
                             {
                                 if(dt!= DataModel.Helper.enumAUD_TipoSeleccion.NA)

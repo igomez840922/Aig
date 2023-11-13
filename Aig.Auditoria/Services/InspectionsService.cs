@@ -5901,9 +5901,9 @@ namespace Aig.Auditoria.Services
         {
             var data = DalService.Get<AUD_InspeccionTB>(inspeccion.Id);
 
+            data.InspGuiaBPM_Bpa.PropositoInsp = inspeccion.InspGuiaBPM_Bpa.PropositoInsp;
             data.InspGuiaBPM_Bpa.ActComercialAprobada = inspeccion.InspGuiaBPM_Bpa.ActComercialAprobada;
             data.InspGuiaBPM_Bpa.FechaUltimaInspeccion = inspeccion.InspGuiaBPM_Bpa.FechaUltimaInspeccion;
-            data.InspGuiaBPM_Bpa.PropositoInsp = inspeccion.InspGuiaBPM_Bpa.PropositoInsp;
             data.InspGuiaBPM_Bpa.HorarioEstFarmaceutico = inspeccion.InspGuiaBPM_Bpa.HorarioEstFarmaceutico;
             data.InspGuiaBPM_Bpa.HorarioRegFarmaceutica = inspeccion.InspGuiaBPM_Bpa.HorarioRegFarmaceutica;
 

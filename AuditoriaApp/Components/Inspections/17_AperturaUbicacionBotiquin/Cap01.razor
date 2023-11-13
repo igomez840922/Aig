@@ -1,0 +1,160 @@
+﻿@if (Inspeccion?.Inspeccion?.DatosEstablecimiento != null)
+{
+    <EditForm Model="@Inspeccion.Inspeccion" OnValidSubmit="Save">
+        <DataAnnotationsValidator />
+        <MudCard Elevation="25">
+            <MudCardHeader>
+                @*  <CardHeaderAvatar>
+            <MudAvatar Color="Color.Secondary">I</MudAvatar>
+            </CardHeaderAvatar> *@
+                <CardHeaderContent>
+                    <MudText Typo="Typo.body1">@(Inspeccion.Inspeccion.NumActa) - @(DataModel.Helper.Helper.GetDescription(Inspeccion.Inspeccion.TipoActa))</MudText>
+                </CardHeaderContent>
+                <CardHeaderActions>
+                    <MudMenu Icon="@Icons.Material.Filled.MoreVert">
+                        <MudMenuItem Icon="@Icons.Material.Outlined.Save" OnTouch="@((e)=> Save())" OnClick="@((e)=> Save())">Guardar</MudMenuItem>
+                        <MudMenuItem Icon="@Icons.Material.Filled.Logout" OnClick="@((e)=> Cancel())" OnTouch="@((e)=> Cancel())">Salir</MudMenuItem>
+                    </MudMenu>
+                </CardHeaderActions>
+            </MudCardHeader>
+            <MudCardHeader>
+                <CardHeaderContent>
+                    <MudText Typo="Typo.h6" Color="Color.Dark">Información General</MudText>
+                </CardHeaderContent>
+            </MudCardHeader>
+            <MudCardContent>
+                <MudGrid>   
+                    <MudItem xs="12" md="6">
+                        <MudDatePicker type PickerVariant="PickerVariant.Dialog" Margin="Margin.Dense" @bind-Date="@(Inspeccion.Inspeccion.FechaInicioTemp)" For="@(() => Inspeccion.Inspeccion.FechaInicioTemp)" DateFormat="dd/MM/yyyy" Variant="Variant.Outlined" Label="Fecha de Evaluación" />
+                    </MudItem>
+                </MudGrid>
+                <MudGrid>
+                    <MudItem xs="12" md="6">
+                        <MudTextField Margin="Margin.Dense" @bind-Value="Inspeccion.Inspeccion.DatosEstablecimiento.Nombre" Label="Nombre del Establecimineto" Variant="Variant.Outlined" For="@(() => Inspeccion.Inspeccion.DatosEstablecimiento.Nombre)" />
+                    </MudItem>
+                    <MudItem xs="12" md="6">
+                        <MudTextField Margin="Margin.Dense" @bind-Value="Inspeccion.Inspeccion.DatosEstablecimiento.NumLicencia" Label="No. Licencia" Variant="Variant.Outlined" For="@(() => Inspeccion.Inspeccion.DatosEstablecimiento.NumLicencia)" />
+                    </MudItem>
+                    <MudItem xs="12" md="6">
+                        <MudDatePicker PickerVariant="PickerVariant.Dialog" Margin="Margin.Dense" @bind-Date="@(Inspeccion.Inspeccion.DatosEstablecimiento.VigenteDesde)" For="@(() => Inspeccion.Inspeccion.DatosEstablecimiento.VigenteDesde)" DateFormat="dd/MM/yyyy" Variant="Variant.Outlined" Label="Vigente Desde" />
+                    </MudItem>
+                    <MudItem xs="12" md="6">
+                        <MudDatePicker PickerVariant="PickerVariant.Dialog" Margin="Margin.Dense" @bind-Date="@(Inspeccion.Inspeccion.DatosEstablecimiento.VigenteHasta)" For="@(() => Inspeccion.Inspeccion.DatosEstablecimiento.VigenteHasta)" DateFormat="dd/MM/yyyy" Variant="Variant.Outlined" Label="Vigente Hasta" />
+                    </MudItem>
+                    <MudItem xs="12" md="6">
+                        <MudTextField Margin="Margin.Dense" @bind-Value="Inspeccion.Inspeccion.DatosEstablecimiento.AvisoOperaciones" Label="Aviso de Operaciones" Variant="Variant.Outlined" For="@(() => Inspeccion.Inspeccion.DatosEstablecimiento.AvisoOperaciones)" />
+                    </MudItem>
+                    <MudItem xs="12" md="6">
+                        <MudTextField Margin="Margin.Dense" @bind-Value="Inspeccion.Inspeccion.DatosEstablecimiento.ReciboPago" Label="Recibo de Pago" Variant="Variant.Outlined" For="@(() => Inspeccion.Inspeccion.DatosEstablecimiento.ReciboPago)" />
+                    </MudItem>
+                </MudGrid>
+                 <MudGrid>
+                    <MudItem xs="12" md="6">
+                        <MudSelect Margin="Margin.Dense" T="DataModel.ProvinciaTB" For="@(() => Inspeccion.Inspeccion.DatosEstablecimiento.Provincia)" Label="Provincia" Variant="Variant.Outlined" AnchorOrigin="Origin.BottomCenter" @bind-Value="Inspeccion.Inspeccion.DatosEstablecimiento.Provincia" SelectedValuesChanged="@((e) => { OnProvinciaChanged(e?.FirstOrDefault()??null);})" ToStringFunc="@(e=> e==null?null : e.Nombre)">
+                            @if (LProvincias?.Count > 0)
+                            {
+                                @foreach (var part in LProvincias)
+                                {
+                                    <MudSelectItem Value="@part">@part.Nombre</MudSelectItem>
+                                }
+                            }
+                        </MudSelect>
+                    </MudItem>
+                    <MudItem xs="12" md="6">
+                        <MudSelect Margin="Margin.Dense" T="DataModel.DistritoTB" For="@(() => Inspeccion.Inspeccion.DatosEstablecimiento.Distrito)" Label="Distrito" Variant="Variant.Outlined" AnchorOrigin="Origin.BottomCenter" @bind-Value="Inspeccion.Inspeccion.DatosEstablecimiento.Distrito" SelectedValuesChanged="@((e) => { OnDistritoChanged(e?.FirstOrDefault()??null);})" ToStringFunc="@(e=> e==null?null : e.Nombre)">
+                            @if (LDistritos?.Count > 0)
+                            {
+                                @foreach (var part in LDistritos)
+                                {
+                                    <MudSelectItem Value="@part">@part.Nombre</MudSelectItem>
+                                }
+                            }
+                        </MudSelect>
+                    </MudItem>
+                    <MudItem xs="12" md="6">
+                        <MudSelect Margin="Margin.Dense" T="DataModel.CorregimientoTB" For="@(() =>Inspeccion.Inspeccion.DatosEstablecimiento.Corregimiento)" Label="Corregimiento" Variant="Variant.Outlined" AnchorOrigin="Origin.BottomCenter" @bind-Value="Inspeccion.Inspeccion.DatosEstablecimiento.Corregimiento" ToStringFunc="@(e=> e==null?null : e.Nombre)">
+                            @if (LCorregimientos?.Count > 0)
+                            {
+                                @foreach (var part in LCorregimientos)
+                                {
+                                    <MudSelectItem Value="@part">@part.Nombre</MudSelectItem>
+                                }
+                            }
+                        </MudSelect>
+                    </MudItem>
+                 </MudGrid>
+                <MudGrid>
+                    <MudItem xs="12">
+                        <MudTextField Margin="Margin.Dense" @bind-Value="Inspeccion.Inspeccion.DatosEstablecimiento.Direccion" Label="Ubicación" Variant="Variant.Outlined" For="@(() => Inspeccion.Inspeccion.DatosEstablecimiento.Direccion)" />
+                    </MudItem>
+                    <MudItem xs="12" md="6">
+                        <MudTextField Margin="Margin.Dense" @bind-Value="Inspeccion.Inspeccion.DatosEstablecimiento.Telefono" Label="Telefono" Variant="Variant.Outlined" For="@(() => Inspeccion.Inspeccion.DatosEstablecimiento.Telefono)" />
+                    </MudItem>
+                    <MudItem xs="12" md="6">
+                        <MudTextField Margin="Margin.Dense" @bind-Value="Inspeccion.Inspeccion.DatosEstablecimiento.Correo" Label="Correo" Variant="Variant.Outlined" For="@(() => Inspeccion.Inspeccion.DatosEstablecimiento.Correo)" />
+                    </MudItem>
+                </MudGrid>
+                
+             </MudCardContent>
+            <MudCardHeader>
+                <CardHeaderContent>
+                    <MudText Typo="Typo.h6" Color="Color.Dark">Lista de Participantes</MudText>
+                </CardHeaderContent>
+            </MudCardHeader>
+            <MudCardContent>
+                <MudGrid>
+                    
+                    <MudItem xs="12">
+
+                        @if (Inspeccion.Inspeccion?.ParticipantesDNFD?.LParticipantes != null)
+                        {
+                            <MudTable Items="@(Inspeccion.Inspeccion.ParticipantesDNFD.LParticipantes)" Dense="false" Hover="true" Bordered="false" Striped="true">
+                                <HeaderContent>
+                                    <MudTh>Nombre</MudTh>
+                                    <MudTh>Identificación</MudTh>
+                                    <MudTh>No. Registro</MudTh>
+                                    <MudTh>Cargo</MudTh>
+                                    <MudTh Style="text-align:right!important">
+                                        <MudButton ButtonType="ButtonType.Button" Variant="Variant.Filled" Color="Color.Primary" Size="Size.Medium" Class="ma-1" StartIcon="@Icons.Material.Filled.Add" OnClick="@((e)=> EditParticipant())">Agregar</MudButton>
+                                    </MudTh>
+                                </HeaderContent>
+                                <RowTemplate Context="tbContext">
+                                    <MudTd DataLabel="Nombre">@(tbContext.NombreCompleto)</MudTd>
+                                    <MudTd DataLabel="Identificación">@(tbContext.CedulaIdentificacion)</MudTd>
+                                    <MudTd DataLabel="No. Registro">@(tbContext.RegistroNumero)</MudTd>
+                                    <MudTd DataLabel="Cargo">@(tbContext.Cargo)</MudTd>
+                                    <MudTd Style="text-align:right!important">
+                                        <MudMenu Icon="@Icons.Material.Filled.MoreVert">
+                                            <MudMenuItem Icon="@Icons.Material.Outlined.Edit" OnTouch="@((e)=> EditParticipant(tbContext))" OnClick="@((e)=> EditParticipant(tbContext))">Editar</MudMenuItem>
+                                            <MudMenuItem Icon="@Icons.Material.Filled.Remove" OnClick="@((e)=> RemoveParticipant(tbContext))" OnTouch="@((e)=> RemoveParticipant(tbContext))">Eliminar</MudMenuItem>
+                                        </MudMenu>
+                                    </MudTd>
+                                </RowTemplate>
+                                <LoadingContent>
+                                    <MudText>Cargando...</MudText>
+                                </LoadingContent>
+                            </MudTable>
+                        }
+
+
+                    </MudItem>
+                </MudGrid>
+
+            </MudCardContent>
+            <MudCardActions Class="pt-4 pl-4">
+                <div style="text-align:right;" class="ml-auto">
+                    <MudButton ButtonType="ButtonType.Button" Variant="Variant.Filled" Color="Color.Primary" Size="Size.Medium" Class="ma-1" OnClick="@((e)=> SaveExit())" StartIcon="@Icons.Material.Filled.Save">Guardar y Salir</MudButton>
+                    <MudButton ButtonType="ButtonType.Button" Variant="Variant.Filled" Color="Color.Primary" Size="Size.Medium" Class="ma-1" OnClick="@((e)=> Save())" EndIcon="@Icons.Material.Filled.SaveAs">Guardar</MudButton>
+                    <MudButton ButtonType="ButtonType.Button" Variant="Variant.Filled" Color="Color.Error" Size="Size.Medium" Class="ma-1" OnClick="@((e)=> Cancel())" StartIcon="@Icons.Material.Filled.Logout">Salir</MudButton>
+                </div>
+            </MudCardActions>
+        </MudCard>
+
+    </EditForm>
+
+
+    
+
+
+
+}
