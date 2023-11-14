@@ -10,7 +10,7 @@ namespace AuditoriaApp
         protected override void OnCreate(Bundle savedInstanceState)
         {
             // Lock the screen orientation to portrait
-            RequestedOrientation = ScreenOrientation.Portrait;
+            //RequestedOrientation = ScreenOrientation.Landscape;
 
             //HttpsURLConnection.DefaultHostnameVerifier = new AllowAllHostnameVerifier();
             base.OnCreate(savedInstanceState);

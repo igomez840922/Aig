@@ -16791,21 +16791,26 @@ namespace Aig.Auditoria.Services
                         {
                             column.Item().AlignLeft().Text(string.Format("Para: {0} \r\n{1}", correspondencia.NombreDirigido, correspondencia.DptoSeccion));
                             column.Item().AlignLeft().Text(string.Format("Fecha: {0}", DateTime.Now.ToString("dd/MM/yyyy")));
+                            column.Item().AlignLeft().Text(string.Format("Num.: {0}", correspondencia.SecNumberStr));
 
-                            
                             column.Item().PaddingVertical(10).AlignLeft().Padding(3).Text(string.Format(" ".ToUpper())).Bold();
-                            column.Item().AlignLeft().Text(string.Format("Asunto:".ToUpper())).Bold();
-                            column.Item().AlignLeft().Text(correspondencia.Asunto);
-                            
-                        });
+                            column.Item().AlignLeft().Text(string.Format("Observaciones o Instrucciones:".ToUpper())).Bold();
+                            column.Item().AlignLeft().Text(correspondencia.Observaciones);
 
-                        page.Footer().Column(column =>
-                        {
+                            column.Item().PaddingVertical(20).AlignLeft().Text(" ");
+
                             column.Item().AlignLeft().Text("De: ______________________________________");
                             column.Item().AlignLeft().Text("Ana Belén Gonzáles");
                             column.Item().AlignLeft().Text("Jefa del Dpto. Auditorías de Calidad a \r\nEstablecimientos Farmacéuticos y NF");
 
                         });
+
+                        //page.Footer().Column(column =>
+                        //{
+                        //column.Item().AlignLeft().Text("De: ______________________________________");
+                        //column.Item().AlignLeft().Text("Ana Belén Gonzáles");
+                        //column.Item().AlignLeft().Text("Jefa del Dpto. Auditorías de Calidad a \r\nEstablecimientos Farmacéuticos y NF");
+                        //});
 
                     });
                 })

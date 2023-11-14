@@ -179,7 +179,6 @@ namespace Aig.Auditoria.Pages.Correspondencia
             }
         }
 
-
         private async Task SendEmailNotification(long Id)
         {
             try
@@ -198,7 +197,14 @@ namespace Aig.Auditoria.Pages.Correspondencia
                     {
                         builder.Attachments.Add("correspondencia.pdf", stream);
                     }
-                    await emailService.SendEmailAsync(data.EmailDirigido, subject, builder);
+
+                    List<string> listemails = new List<string>();
+                    if (!string.IsNullOrEmpty(data.EmailDirigido)) { listemails.Add(data.EmailDirigido); }
+                    if (!string.IsNullOrEmpty(data.CorrespondenciaResponsable?.Correo ?? null)) { listemails.Add(data.CorrespondenciaResponsable.Correo); }
+                    if (listemails?.Count > 0)
+                        await emailService.SendEmailAsync(listemails, subject, builder);
+
+                    //await emailService.SendEmailAsync(data.EmailDirigido, subject, builder);
                 }
 
             }

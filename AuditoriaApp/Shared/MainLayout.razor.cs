@@ -93,6 +93,7 @@ namespace AuditoriaApp.Shared
         void DrawerToggle()
         {
             _drawerOpen = !_drawerOpen;
+            //_drawerOpen = true;
         }
 
         void OpenThemeManager(bool value)

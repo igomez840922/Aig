@@ -21,6 +21,12 @@ namespace DataModel
         [Required(ErrorMessage = "requerido")]
         public string Cargo { get => cargo; set => SetProperty(ref cargo, value); }
 
+        //correo electronico
+        private string correo;
+        [StringLength(250)]
+        [RegularExpression("^[a-zA-Z0-9_\\.-]+@([a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$", ErrorMessage = "inválido")]
+        public string Correo { get => correo; set => SetProperty(ref correo, value); }
+
         private List<AUD_CorrespondenciaTB> lCorrespondencia;
         [System.Text.Json.Serialization.JsonIgnore]
         public virtual List<AUD_CorrespondenciaTB> LCorrespondencia { get => lCorrespondencia; set => SetProperty(ref lCorrespondencia, value); }

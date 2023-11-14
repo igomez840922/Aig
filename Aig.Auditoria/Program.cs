@@ -25,6 +25,7 @@ using System.Globalization;
 using System.Reflection;
 using System.Text;
 
+
 var builder = WebApplication.CreateBuilder(args);
 ///
 // Add services to the container.
@@ -142,6 +143,8 @@ builder.Services.AddScoped<ICorrespondenciaAsuntoService, CorrespondenciaAsuntoS
 builder.Services.AddScoped<ICorrespondenciaContactoService, CorrespondenciaContactoService>();
 builder.Services.AddScoped<ICorrespondenciaRespRevisionService, CorrespondenciaRespRevisionService>();
 builder.Services.AddLanguageContainer(Assembly.GetExecutingAssembly());
+//QUARTZ - Register the QuartzSchedulerService as a singleton
+builder.Services.AddSingleton<IQuartzSchedulerService, QuartzSchedulerService>();
 
 ////Connection Configurations
 //builder.Services.AddServerSideBlazor(options =>
@@ -191,8 +194,11 @@ app.MapFallbackToPage("/_Host");
 
 app.UseWebSockets();
 
+
+Aig.Auditoria.Helper.Helper.serviceProvider = app.Services;
 //Check and Save initial data...
 Aig.Auditoria.Helper.SeedData.SeedAll(app.Services);
+
 
 //cultura en español
 CultureInfo.CurrentCulture = new CultureInfo("es");

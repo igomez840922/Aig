@@ -58,7 +58,8 @@
                                                     <thead class=thead-light>
                                                         <tr>
                                                             <th>@languageContainerService.Keys["FullName"]</th>
-                                                            <th>@languageContainerService.Keys["cargo"]</th>
+                                                            <th>@languageContainerService.Keys["Cargo"]</th>
+                                                            <th>@languageContainerService.Keys["Email"]</th>
                                                             <th></th>
                                                         </tr>
                                                     </thead>
@@ -68,6 +69,7 @@
                                                             <tr>
                                                                 <td>@(dt.Nombre)</td>
                                                                 <td>@(dt.Cargo)</td>
+                                                                <td>@(dt.Correo)</td>
                                                                 <td style="text-align:right">
                                                                     <div class="btn-group">
                                                                         <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">@languageContainerService.Keys["Actions"]</button>

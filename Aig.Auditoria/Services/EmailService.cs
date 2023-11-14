@@ -18,7 +18,7 @@ namespace Aig.Auditoria.Services
         }
         
 
-        public async Task SendEmailAsync(string email, string subject, BodyBuilder bodyBuilder)
+        public async Task SendEmailAsync(List<string> emails, string subject, BodyBuilder bodyBuilder)
         {
             try
             {
@@ -26,7 +26,10 @@ namespace Aig.Auditoria.Services
 
                 var message = new MimeMessage();
                 message.From.Add(new MailboxAddress("Notificaciones MINSA", smtpConfig.Correo));
-                message.To.Add(new MailboxAddress("Usuario", email));
+                foreach (var email in emails)
+                {
+                    message.To.Add(new MailboxAddress("Usuario", email));
+                }
                 message.Subject = subject;
                 message.Body = bodyBuilder.ToMessageBody();
                 //message.Body = new TextPart("html")
@@ -51,6 +54,6 @@ namespace Aig.Auditoria.Services
                // throw ex;
             }
         }
-
+                
     }
 }

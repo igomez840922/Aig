@@ -32,18 +32,19 @@
 
 <MudLayout>
     <MudAppBar Style="background-color:#54565a!important" Elevation="2" Dense="true">
-        <MudHidden Breakpoint="Breakpoint.SmAndDown">
-            @*<MudIcon Icon="@Icons.Custom.Brands.MudBlazor" Size="Size.Large" />*@
+        <MudIconButton Icon="@Icons.Material.Outlined.Menu" Color="Color.Inherit" Edge="Edge.Start" OnClick="@((e) => DrawerToggle())" />
+        @* <MudHidden Breakpoint="Breakpoint.SmAndDown">
+            <MudIcon Icon="@Icons.Custom.Brands.MudBlazor" Size="Size.Large" />
         </MudHidden>
         <MudHidden Breakpoint="Breakpoint.MdAndUp">
             <MudIconButton Icon="@Icons.Material.Outlined.Menu" Color="Color.Inherit" Edge="Edge.Start" OnClick="@((e) => DrawerToggle())" />
         </MudHidden>
         <MudHidden Breakpoint="Breakpoint.Xs">
-            @* <MudText Typo="Typo.h6">@languageContainerService.Keys["Roulette"]</MudText> *@
+            <MudText Typo="Typo.h6">@languageContainerService.Keys["Roulette"]</MudText>            
         </MudHidden>
         <MudHidden Breakpoint="Breakpoint.Xs" Invert="true">
-            @* <MudText Typo="Typo.subtitle2">@languageContainerService.Keys["Roulette"]</MudText> *@
-        </MudHidden>
+            <MudText Typo="Typo.subtitle2">@languageContainerService.Keys["Roulette"]</MudText>
+        </MudHidden> *@
         <MudSpacer />
         @*<MudMenu Icon="@Icons.Material.Outlined.Translate" Color="Color.Inherit" Direction="Direction.Bottom" OffsetY="true" Dense="true">
             <MudMenuItem>English</MudMenuItem>

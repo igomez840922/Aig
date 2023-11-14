@@ -21,12 +21,14 @@ namespace Aig.Auditoria.Helper
 {
     public static class SeedData
     {
+        
         public static async Task SeedAll(IServiceProvider serviceProvider)
         {
             await Aig.Auditoria.Helper.SeedData.UpdateMigrations(serviceProvider);
             await Aig.Auditoria.Helper.SeedData.SeedRoles(serviceProvider);
             await Aig.Auditoria.Helper.SeedData.SeedUsers(serviceProvider);
             await Aig.Auditoria.Helper.SeedData.SeedFirstData(serviceProvider);
+            await Aig.Auditoria.Helper.SeedData.SeedJobs(serviceProvider);
         }
 
         public static async Task UpdateMigrations(IServiceProvider serviceProvider)
@@ -788,6 +790,19 @@ namespace Aig.Auditoria.Helper
             }
         }
 
+        public static async Task SeedJobs(IServiceProvider serviceProvider)
+        {
+            try {
+                using (var serviceScope = serviceProvider.GetRequiredService<IServiceScopeFactory>().CreateScope())
+                {
+                    var quartzSchedulerService = serviceScope.ServiceProvider.GetService<IQuartzSchedulerService>();
+
+                    quartzSchedulerService.Stop();
+                    quartzSchedulerService.Start();
+                }
+            }
+            catch { }
+        }
 
     }
 }

@@ -216,7 +216,8 @@ namespace Aig.Auditoria.Pages.Inspections
                     {
                         builder.Attachments.Add("inspeccion.pdf", stream);
                     }
-                    await emailService.SendEmailAsync(data.DatosEstablecimiento.Correo, subject, builder);
+                    
+                    await emailService.SendEmailAsync(new List<string>() { data.DatosEstablecimiento.Correo }, subject, builder);
                 }
 
             }

@@ -2,6 +2,7 @@
 {
     public static class Helper
     {
+        public static IServiceProvider serviceProvider { get; set; }
         //retorna el nombre del Mes por su numero
         public static string GetMonthNameByMonthNumber(int monthNumber)
         {
