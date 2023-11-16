@@ -48,7 +48,7 @@
     </MudItem>*@
         <MudItem xs="12" md="6">
             @* <MudChart LegendPosition="Position.Bottom" ChartType="ChartType.Bar" ChartSeries="@Series" @bind-SelectedIndex="Index" XAxisLabels="@(XAxisLabels.ToArray())" Width="100%" Height="20%"></MudChart> *@
-            <MudChart ChartType="ChartType.Donut" Width="100%" Height="20%" InputData="@model.ChartData.ToArray()" InputLabels="@model.ChartLabels.ToArray()"></MudChart>
+            <MudChart ChartType="ChartType.Donut" Height="10%" InputData="@model.ChartData.ToArray()" InputLabels="@model.ChartLabels.ToArray()"></MudChart>
     </MudItem>
 </MudGrid>
 }

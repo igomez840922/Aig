@@ -34,7 +34,7 @@
                                     <th width="5%">Artículo</th>
                                     <th width="5%">Evaluac</th>
                                     <th width="5%">Criterio</th>
-                                    <th>Observaciones</th>
+                                    <th></th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -60,19 +60,19 @@
                                     }
                                     else
                                     {
-                                        <tr>
-                                            <td>@(dt.PuntosMax > 0 ? dt.PuntosMax : "")</td>
-                                            <td>
+                                         <tr>
+                                            <td style="border-bottom:none!important;">@(dt.PuntosMax > 0 ? dt.PuntosMax : "")</td>
+                                            <td style="border-bottom:none!important;">
                                                 @if (dt.PuntosMax > 0)
                                                 {
                                                     <MudTextField Margin="Margin.Dense" @bind-Value="dt.PuntosObtenido" Variant="Variant.Outlined" For="@(() => dt.PuntosObtenido)"/>
                                                 }
                                             </td>
-                                            <td>@dt.Titulo</td>
-                                            <td>@dt.Articulo</td>
+                                            <td style="border-bottom:none!important;">@dt.Titulo</td>
+                                            <td style="border-bottom:none!important;">@dt.Articulo</td>
                                             @foreach (var eva in dt.LEvaluacion)
                                             {
-                                                <td>
+                                                <td style="border-bottom:none!important;">
                                                     @if (!eva.HideEvaluacion)
                                                     {
                                                         <MudSelect Margin="Margin.Dense" T="DataModel.Helper.enumAUD_TipoSeleccion" Variant="Variant.Outlined" AnchorOrigin="Origin.BottomCenter" @bind-Value="eva.Evaluacion" For="@(() => eva.Evaluacion)">
@@ -84,9 +84,8 @@
                                                     }
                                                 </td>
                                             }
-                                            <td>@dt.Criterio</td>
-                                            <td>
-                                                <MudTextField Margin="Margin.Dense" @bind-Value="dt.Observaciones" Variant="Variant.Outlined" For="@(() => dt.Observaciones)" Lines="10"/>
+                                            <td style="border-bottom:none!important;">@dt.Criterio</td>
+                                            <td style="border-bottom:none!important;">
                                             </td>
                                         </tr>
                                         @if (dt.LSubPreguntas?.Count > 0)
@@ -94,11 +93,11 @@
                                             foreach (var sub in dt.LSubPreguntas)
                                             {
                                                 <tr>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td>@sub.Nombre</td>
-                                                    <td></td>
-                                                    <td>
+                                                    <td style="border-bottom:none!important;"></td>
+                                                    <td style="border-bottom:none!important;"></td>
+                                                    <td style="border-bottom:none!important;">@sub.Nombre</td>
+                                                    <td style="border-bottom:none!important;"></td>
+                                                    <td style="border-bottom:none!important;">
                                                         @if (!sub.HideEvaluacion)
                                                         {
                                                             <MudSelect Margin="Margin.Dense" T="DataModel.Helper.enumAUD_TipoSeleccion" Variant="Variant.Outlined" AnchorOrigin="Origin.BottomCenter" @bind-Value="sub.Evaluacion" For="@(() => sub.Evaluacion)">
@@ -109,11 +108,16 @@
                                                             </MudSelect>
                                                         }
                                                     </td>
-                                                    <td></td>
-                                                    <td></td>
+                                                    <td style="border-bottom:none!important;"></td>
+                                                    <td style="border-bottom:none!important;"></td>
                                                 </tr>
                                             }
                                         }
+                                        <tr>
+                                            <td colspan="@(dt.LEvaluacion.Count+6)">
+                                                <MudTextField Label="Observaciones" Margin="Margin.Dense" @bind-Value="dt.Observaciones" Variant="Variant.Outlined" For="@(() => dt.Observaciones)" Lines="10" />
+                                            </td>
+                                        </tr>                                        
                                     }
                                 }
                             </tbody>

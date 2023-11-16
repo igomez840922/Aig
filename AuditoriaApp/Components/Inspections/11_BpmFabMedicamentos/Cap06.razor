@@ -33,7 +33,7 @@
                                     <th width="30%">Título</th>
                                     <th width="5%">Criterio</th>
                                     <th width="5%">Cumple</th>
-                                    <th>Observaciones</th>
+                                    <th></th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -50,14 +50,16 @@
                                     }
                                     else
                                     {
+                                         
+
                                         <tr>
-                                            <td>@dt.Capitulo</td>
-                                            <td>@dt.Articulo</td>
-                                            <td>@dt.Titulo</td>
-                                            <td>@dt.Criterio</td>
+                                            <td style="border-bottom:none!important;">@dt.Capitulo</td>
+                                            <td style="border-bottom:none!important;">@dt.Articulo</td>
+                                            <td style="border-bottom:none!important;">@dt.Titulo</td>
+                                            <td style="border-bottom:none!important;">@dt.Criterio</td>
                                             @foreach (var eva in dt.LEvaluacion)
                                             {
-                                                <td>
+                                                <td style="border-bottom:none!important;">
                                                     <MudSelect Margin="Margin.Dense" T="DataModel.Helper.enumAUD_TipoSeleccion" Variant="Variant.Outlined" AnchorOrigin="Origin.BottomCenter" @bind-Value="eva.Evaluacion" For="@(() => eva.Evaluacion)">
                                                         @foreach (DataModel.Helper.enumAUD_TipoSeleccion dt in Enum.GetValues(typeof(DataModel.Helper.enumAUD_TipoSeleccion)))
                                                         {
@@ -67,8 +69,12 @@
                                                     </MudSelect>
                                                 </td>
                                             }
-                                            <td>
-                                                <MudTextField Margin="Margin.Dense" @bind-Value="dt.Observaciones" Variant="Variant.Outlined" For="@(() => dt.Observaciones)" Lines="10"/>
+                                            <td style="border-bottom:none!important;">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="@(dt.LEvaluacion.Count+5)">
+                                                <MudTextField Label="Observaciones" Margin="Margin.Dense" @bind-Value="dt.Observaciones" Variant="Variant.Outlined" For="@(() => dt.Observaciones)" Lines="10" />
                                             </td>
                                         </tr>
                                     }

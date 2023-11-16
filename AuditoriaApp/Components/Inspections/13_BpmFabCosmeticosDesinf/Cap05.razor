@@ -41,7 +41,7 @@
                                     <th width="30%">Título</th>
                                     <th width="5%">Criterio</th>
                                     <th width="5%">Cumple</th>
-                                    <th>Observaciones</th>
+                                    <th></th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -65,18 +65,24 @@
                                             <td>@dt.Criterio</td>
                                             @foreach (var eva in dt.LEvaluacion)
                                             {
-                                                <td>
-                                                    <MudSelect Margin="Margin.Dense" T="DataModel.Helper.enumAUD_TipoSeleccion" Variant="Variant.Outlined" AnchorOrigin="Origin.BottomCenter" @bind-Value="eva.Evaluacion" For="@(() => eva.Evaluacion)">
-                                                        @foreach (DataModel.Helper.enumAUD_TipoSeleccion dt in Enum.GetValues(typeof(DataModel.Helper.enumAUD_TipoSeleccion)))
-                                                        {
-                                                            <MudSelectItem T="DataModel.Helper.enumAUD_TipoSeleccion" Value="dt">@DataModel.Helper.Helper.GetDescription(dt)</MudSelectItem>
+                                                <td style="border-bottom:none!important;">
+                                                    @if (!eva.HideEvaluacion)
+                                                    {
+                                                        <MudSelect Margin="Margin.Dense" T="DataModel.Helper.enumAUD_TipoSeleccion" Variant="Variant.Outlined" AnchorOrigin="Origin.BottomCenter" @bind-Value="eva.Evaluacion" For="@(() => eva.Evaluacion)">
+                                                            @foreach (DataModel.Helper.enumAUD_TipoSeleccion dt in Enum.GetValues(typeof(DataModel.Helper.enumAUD_TipoSeleccion)))
+                                                            {
+                                                                <MudSelectItem T="DataModel.Helper.enumAUD_TipoSeleccion" Value="dt">@DataModel.Helper.Helper.GetDescription(dt)</MudSelectItem>
 
-                                                        }
-                                                    </MudSelect>
+                                                            }
+                                                        </MudSelect>
+                                                    }
                                                 </td>
                                             }
-                                            <td>
-                                                <MudTextField Margin="Margin.Dense" @bind-Value="dt.Observaciones" Variant="Variant.Outlined" For="@(() => dt.Observaciones)" Lines="10"/>
+                                            <td style="border-bottom:none!important;"></td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="@(dt.LEvaluacion.Count+5)">
+                                                <MudTextField Label="Observaciones" Margin="Margin.Dense" @bind-Value="dt.Observaciones" Variant="Variant.Outlined" For="@(() => dt.Observaciones)" Lines="10" />
                                             </td>
                                         </tr>
                                     }
@@ -128,7 +134,7 @@
                                     <th width="30%">Título</th>
                                     <th width="5%">Criterio</th>
                                     <th width="5%">Cumple</th>
-                                    <th>Observaciones</th>
+                                    <th></th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -152,18 +158,24 @@
                                             <td>@dt.Criterio</td>
                                             @foreach (var eva in dt.LEvaluacion)
                                             {
-                                                <td>
-                                                    <MudSelect Margin="Margin.Dense" T="DataModel.Helper.enumAUD_TipoSeleccion" Variant="Variant.Outlined" AnchorOrigin="Origin.BottomCenter" @bind-Value="eva.Evaluacion" For="@(() => eva.Evaluacion)">
-                                                        @foreach (DataModel.Helper.enumAUD_TipoSeleccion dt in Enum.GetValues(typeof(DataModel.Helper.enumAUD_TipoSeleccion)))
-                                                        {
-                                                            <MudSelectItem T="DataModel.Helper.enumAUD_TipoSeleccion" Value="dt">@DataModel.Helper.Helper.GetDescription(dt)</MudSelectItem>
+                                                <td style="border-bottom:none!important;">
+                                                    @if (!eva.HideEvaluacion)
+                                                    {
+                                                        <MudSelect Margin="Margin.Dense" T="DataModel.Helper.enumAUD_TipoSeleccion" Variant="Variant.Outlined" AnchorOrigin="Origin.BottomCenter" @bind-Value="eva.Evaluacion" For="@(() => eva.Evaluacion)">
+                                                            @foreach (DataModel.Helper.enumAUD_TipoSeleccion dt in Enum.GetValues(typeof(DataModel.Helper.enumAUD_TipoSeleccion)))
+                                                            {
+                                                                <MudSelectItem T="DataModel.Helper.enumAUD_TipoSeleccion" Value="dt">@DataModel.Helper.Helper.GetDescription(dt)</MudSelectItem>
 
-                                                        }
-                                                    </MudSelect>
+                                                            }
+                                                        </MudSelect>
+                                                    }
                                                 </td>
                                             }
-                                            <td>
-                                                <MudTextField Margin="Margin.Dense" @bind-Value="dt.Observaciones" Variant="Variant.Outlined" For="@(() => dt.Observaciones)" Lines="10"/>
+                                            <td style="border-bottom:none!important;"></td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="@(dt.LEvaluacion.Count+5)">
+                                                <MudTextField Label="Observaciones" Margin="Margin.Dense" @bind-Value="dt.Observaciones" Variant="Variant.Outlined" For="@(() => dt.Observaciones)" Lines="10" />
                                             </td>
                                         </tr>
                                     }
@@ -191,7 +203,7 @@
                                     <th width="30%">Título</th>
                                     <th width="5%">Criterio</th>
                                     <th width="5%">Cumple</th>
-                                    <th>Observaciones</th>
+                                    <th></th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -215,18 +227,24 @@
                                             <td>@dt.Criterio</td>
                                             @foreach (var eva in dt.LEvaluacion)
                                             {
-                                                <td>
-                                                    <MudSelect Margin="Margin.Dense" T="DataModel.Helper.enumAUD_TipoSeleccion" Variant="Variant.Outlined" AnchorOrigin="Origin.BottomCenter" @bind-Value="eva.Evaluacion" For="@(() => eva.Evaluacion)">
-                                                        @foreach (DataModel.Helper.enumAUD_TipoSeleccion dt in Enum.GetValues(typeof(DataModel.Helper.enumAUD_TipoSeleccion)))
-                                                        {
-                                                            <MudSelectItem T="DataModel.Helper.enumAUD_TipoSeleccion" Value="dt">@DataModel.Helper.Helper.GetDescription(dt)</MudSelectItem>
+                                                <td style="border-bottom:none!important;">
+                                                    @if (!eva.HideEvaluacion)
+                                                    {
+                                                        <MudSelect Margin="Margin.Dense" T="DataModel.Helper.enumAUD_TipoSeleccion" Variant="Variant.Outlined" AnchorOrigin="Origin.BottomCenter" @bind-Value="eva.Evaluacion" For="@(() => eva.Evaluacion)">
+                                                            @foreach (DataModel.Helper.enumAUD_TipoSeleccion dt in Enum.GetValues(typeof(DataModel.Helper.enumAUD_TipoSeleccion)))
+                                                            {
+                                                                <MudSelectItem T="DataModel.Helper.enumAUD_TipoSeleccion" Value="dt">@DataModel.Helper.Helper.GetDescription(dt)</MudSelectItem>
 
-                                                        }
-                                                    </MudSelect>
+                                                            }
+                                                        </MudSelect>
+                                                    }
                                                 </td>
                                             }
-                                            <td>
-                                                <MudTextField Margin="Margin.Dense" @bind-Value="dt.Observaciones" Variant="Variant.Outlined" For="@(() => dt.Observaciones)" Lines="10" />
+                                            <td style="border-bottom:none!important;"></td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="@(dt.LEvaluacion.Count+5)">
+                                                <MudTextField Label="Observaciones" Margin="Margin.Dense" @bind-Value="dt.Observaciones" Variant="Variant.Outlined" For="@(() => dt.Observaciones)" Lines="10" />
                                             </td>
                                         </tr>
                                     }
