@@ -29,7 +29,7 @@ namespace Aig.FarmacoVigilancia.Services
                               (model.LabId == null ? true : (data.LaboratorioId == model.LabId )) &&
                               (model.UbicationType == null ? true : (data.TipoUbicacion == model.UbicationType)) &&
                               (model.TipoCargo == null ? true : (data.TipoCargo == model.TipoCargo))
-                               orderby data.CreatedDate
+                               orderby data.CreatedDate descending
                               select data).Skip(model.PagIdx * model.PagAmt).Take(model.PagAmt).ToList();
 
                 model.Total = (from data in DalService.DBContext.Set<FMV_RfvTB>()
@@ -38,7 +38,7 @@ namespace Aig.FarmacoVigilancia.Services
                               (model.LabId == null ? true : (data.LaboratorioId == model.LabId)) &&
                               (model.UbicationType == null ? true : (data.TipoUbicacion == model.UbicationType)) &&
                               (model.TipoCargo == null ? true : (data.TipoCargo == model.TipoCargo))
-                               orderby data.CreatedDate
+                               orderby data.CreatedDate descending
                                select data).Count();  
             }
             catch (Exception ex)

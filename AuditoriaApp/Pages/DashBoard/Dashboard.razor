@@ -46,9 +46,10 @@
         <MudItem xs="12" sm="12">
             <MudText Typo="Typo.h6" Color="Color.Primary" Class="mb-4">Last 6 Months Wire Transfers History</MudText>
     </MudItem>*@
+
         <MudItem xs="12" md="6">
             @* <MudChart LegendPosition="Position.Bottom" ChartType="ChartType.Bar" ChartSeries="@Series" @bind-SelectedIndex="Index" XAxisLabels="@(XAxisLabels.ToArray())" Width="100%" Height="20%"></MudChart> *@
-            <MudChart ChartType="ChartType.Donut" Height="10%" InputData="@model.ChartData.ToArray()" InputLabels="@model.ChartLabels.ToArray()"></MudChart>
+            <MudChart ChartType="ChartType.Donut" Width="50%" InputData="@model.ChartData.ToArray()" InputLabels="@model.ChartLabels.ToArray()"></MudChart>
     </MudItem>
 </MudGrid>
 }
