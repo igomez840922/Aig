@@ -78,22 +78,29 @@ namespace AuditoriaApp.Services
                 var lInspections = dalService.FindAll<APP_Inspeccion>(x=>x.PendingUpdate);
                 foreach( var appItem in lInspections )
                 {
-                    var content = JsonSerializer.Serialize(appItem.Inspeccion);
-                    var bodyContent = new StringContent(content, Encoding.UTF8, "application/json");
+                    try {
+                        var content = JsonSerializer.Serialize(appItem.Inspeccion);
+                        var bodyContent = new StringContent(content, Encoding.UTF8, "application/json");
 
-                    var authResult = await apiConnectionService.Client.PostAsync("Actas/UploadPending", bodyContent);
-                    var authContent = await authResult.Content.ReadAsStringAsync();
-                    if (authResult.IsSuccessStatusCode)
-                    {
-                        appItem.PendingUpdate = false;
-                        dalService.Save(appItem);
+                        var authResult = await apiConnectionService.Client.PostAsync("Actas/UploadPending", bodyContent);
+                        var authContent = await authResult.Content.ReadAsStringAsync();
+                        if (authResult.IsSuccessStatusCode)
+                        {
+                            var result = JsonSerializer.Deserialize<ApiResponse>(authContent, _options);
+                            if (result.Result)
+                            {
+                                appItem.PendingUpdate = false;
+                                dalService.Save(appItem);
+                            }
+                        }
                     }
+                    catch( Exception ex ) { }
                 }
             }
             catch { }
         }
 
-        public async Task<bool> InspectionsUploadOne(long Id)
+        public async Task<ApiResponse> InspectionsUploadOne(long Id)
         {
             try
             {
@@ -108,19 +115,28 @@ namespace AuditoriaApp.Services
 
                     var authResult = await apiConnectionService.Client.PostAsync("Actas/UploadPending", bodyContent);
                     var authContent = await authResult.Content.ReadAsStringAsync();
+                    var result = JsonSerializer.Deserialize<ApiResponse>(authContent, _options);
                     if (authResult.IsSuccessStatusCode)
                     {
-                        appItem.PendingUpdate = false;
-                        dalService.Save(appItem);
-
-                        await InspectionsSync();
-
-                        return true;
+                        if (result.Result)
+                        {
+                            appItem.PendingUpdate = false;
+                            dalService.Save(appItem);
+                            await InspectionsSync();
+                        }
                     }
+                    else
+                    {
+                        if (string.IsNullOrEmpty(result.Message))
+                        {
+                            result.Message = authContent;
+                        }
+                    }
+                    return result;
                 }
             }
             catch { }
-            return false;
+            return new ApiResponse() { Result = false, Message = "Error de Servicio"};
         }
 
 

@@ -10,6 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using AuditoriaApp.Events.Overlay;
 using static System.Runtime.InteropServices.JavaScript.JSType;
+using Color = MudBlazor.Color;
 
 namespace AuditoriaApp.Pages.Inspections
 {
@@ -118,7 +119,35 @@ namespace AuditoriaApp.Pages.Inspections
                 //snackbar.Add("Error durante la Sincronización", Severity.Error);
             }
             finally { await bus.Publish(new OverlayShowEvent { Show = false }); }
-        }        
+        }
+
+        private async Task OnDelete(APP_Inspeccion data)
+        {            
+            try
+            {
+                var parameters = new DialogParameters();
+                parameters.Add("ContentText", "Esta seguro desea eliminar el trámite seleccionado.");
+                parameters.Add("ButtonText", "Eliminar");
+                parameters.Add("Color", Color.Error);
+                var options = new DialogOptions() { CloseButton = true, MaxWidth = MaxWidth.ExtraSmall };
+                var dialog = await DialogService.ShowAsync<AuditoriaApp.Components.Dialog.DialogComponent>("Eliminar", parameters, options);
+                var result = await dialog.Result;
+                if (!result.Cancelled)
+                {
+                    await bus.Publish(new OverlayShowEvent { Show = true });
+                    var response = await inspectionService.Delete(data.Id);
+                    if (response != null)
+                    {
+                        snackbar.Add("Trámite eliminado satisfactoriamente", Severity.Success);
+                        FetchData();
+                    }
+                    else
+                        snackbar.Add("Error al intentar eliminar el trámite", Severity.Error);
+                }
+            }
+            catch { }
+            finally { await bus.Publish(new OverlayShowEvent { Show = false }); }
+        }
 
     }
 }

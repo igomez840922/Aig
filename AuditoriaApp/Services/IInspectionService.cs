@@ -8,7 +8,7 @@ namespace AuditoriaApp.Services
     {
         Task InspectionsSync();
         Task InspectionsUpload();
-        Task<bool> InspectionsUploadOne(long Id);
+        Task<ApiResponse> InspectionsUploadOne(long Id);
 
         /// <summary>
         /// ////////////////////////////////////////////

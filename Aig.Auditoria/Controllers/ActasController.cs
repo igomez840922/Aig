@@ -123,8 +123,8 @@ namespace Aig.Auditoria.Controllers
                     return Ok(data);
                 }
             }
-            catch (Exception ex) { return BadRequest(new { message = ex.Message }); }
-            return BadRequest(new { message = "dato no encontrado" });
+            catch (Exception ex) { return BadRequest(new ApiResponse { Result = false, Message = ex.Message }); }
+            return BadRequest(new ApiResponse { Result = false, Message = "dato no encontrado" });
         }
 
 
@@ -1515,13 +1515,14 @@ namespace Aig.Auditoria.Controllers
 
                     data.PendingUpdate = false;
 
-                    dalService.Save<AUD_InspeccionTB>(data);
+                    data = dalService.Save<AUD_InspeccionTB>(data);
 
-                    return Ok(data);
+                    if(data!=null)
+                        return Ok(new ApiResponse { Result = true });
                 }
             }
-            catch (Exception ex) { return BadRequest(new { message = ex.Message }); }
-            return BadRequest(new { message = "dato no encontrado" });
+            catch (Exception ex) { return BadRequest(new ApiResponse { Result=false, Message = ex.Message }); }
+            return BadRequest(new ApiResponse { Result = false, Message = "dato no encontrado" });
         }
 
 

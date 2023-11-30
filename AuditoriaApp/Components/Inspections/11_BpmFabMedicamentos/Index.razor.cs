@@ -135,8 +135,8 @@ namespace AuditoriaApp.Components.Inspections._11_BpmFabMedicamentos
             try
             {
                 await inspectionService.Save(Inspeccion);
-
-                if(await inspectionService.InspectionsUploadOne(Inspeccion.Id))
+                var response = await inspectionService.InspectionsUploadOne(Inspeccion.Id);
+                if (response.Result)
                 {
                     //await FetchData();
                     snackbar.Add("Sincronización Finalizada", Severity.Info);
@@ -145,7 +145,7 @@ namespace AuditoriaApp.Components.Inspections._11_BpmFabMedicamentos
                 }
                 else
                 {
-                    snackbar.Add("Error durante la Sincronización", Severity.Error);
+                    snackbar.Add(string.Format("Error durante la Sincronización. {0}", response.Message), Severity.Error);
                 }
             }
             catch
