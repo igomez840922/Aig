@@ -168,6 +168,8 @@ builder.Services.AddSingleton<IQuartzSchedulerService, QuartzSchedulerService>()
 
 var app = builder.Build();
 
+app.UsePathBase("/auditoria");
+
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {

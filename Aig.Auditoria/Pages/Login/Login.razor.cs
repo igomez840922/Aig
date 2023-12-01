@@ -33,7 +33,7 @@ namespace Aig.Auditoria.Pages.Login
 			var user = (await authStat).User;
             if (user.Identity.IsAuthenticated)
             {
-                navigationManager.NavigateTo("/dashboard", true);
+                navigationManager.NavigateTo("./dashboard", true);
                 return;
             }
 
@@ -72,7 +72,7 @@ namespace Aig.Auditoria.Pages.Login
                     if (result.Succeeded)
                     {
                         Guid key = BlazorCookieLoginMiddleware<ApplicationUser>.AnnounceLogin(loginRequest);
-                        //navigationManager.NavigateTo($"login?key={key}",true);
+                        //navigationManager.NavigateTo($"./login?key={key}",true);
                         navigationManager.NavigateTo(string.Format("./login?key={0}", key), true);
                         return;
                     }
