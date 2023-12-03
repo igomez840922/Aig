@@ -13,6 +13,7 @@
       "dotnetRunMessages": true,
       "launchBrowser": true,
       "applicationUrl": "https://localhost:7267;http://localhost:5143",
+      "launchUrl": "https://localhost:7267/farmacovigilancia",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }

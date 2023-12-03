@@ -33,7 +33,7 @@ namespace Aig.FarmacoVigilancia.Pages.Login
 			var user = (await authStat).User;
             if (user.Identity.IsAuthenticated)
             {
-                navigationManager.NavigateTo("/dashboard", true);
+                navigationManager.NavigateTo("./dashboard", true);
                 return;
             }
 

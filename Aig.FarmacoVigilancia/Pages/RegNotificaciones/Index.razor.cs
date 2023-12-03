@@ -85,7 +85,7 @@ namespace Aig.FarmacoVigilancia.Pages.RegNotificaciones
         {
             //bus.UnSubscribe<Aig.Auditoria.Events.OpenHours.OpenHoursAddEdit_OpenEvent>(AddEditOpenEventHandler);
             OpenDialog = false;
-            navigationManager.NavigateTo("/registro", true);
+            navigationManager.NavigateTo("./registro", true);
         }
     }
 }

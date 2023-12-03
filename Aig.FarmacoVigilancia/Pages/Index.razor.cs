@@ -13,7 +13,7 @@ namespace Aig.FarmacoVigilancia.Pages
     {
         protected async override Task OnInitializedAsync()
         {
-            navigationManager.NavigateTo("/dashboard", true);
+            navigationManager.NavigateTo("./dashboard", true);
             await base.OnInitializedAsync();
         }
 

@@ -158,6 +158,8 @@ builder.Services.AddLanguageContainer(Assembly.GetExecutingAssembly());
 
 var app = builder.Build();
 
+app.UsePathBase("/farmacovigilancia");
+
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {

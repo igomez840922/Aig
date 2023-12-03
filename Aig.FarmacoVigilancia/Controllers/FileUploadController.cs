@@ -45,7 +45,7 @@ namespace Aig.FarmacoVigilancia.Controllers
                         var model = new FileUploadResult() 
                         {
                             AbsolutePath = path,
-                            Url = string.Format("/files/{0}", fileName),
+                            Url = string.Format("./files/{0}", fileName),
                             FileName = fileName
                         };
 

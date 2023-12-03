@@ -1,0 +1,117 @@
+﻿HelloWorld: Hello World!
+WelcomeMessage: Welcome Message
+InvalidEmail: Invalid Email
+RequiredField: Required Field
+ConfirmationPasswordNotMatch: Confirmation Password Not Match
+Payments: Payments
+Payouts: Payouts
+Refunds: Refunds
+Settlements: Settlements
+Pending: Pending
+Completed: Completed
+Cancelled: Cancelled
+Declined: Declined
+Dashboard: Dashboard
+Hi: Hi
+Profile: Profile
+Login: Log In
+SignOut: Sign Out
+English: English
+Spanish: Spanish
+Settings: Settings
+SystemUsers: System Users
+Update: Update
+New: New
+Search: Search
+Picture: Picture
+FilesType: Files Type
+AccessData: Access Data
+PersonalAccess: Personal Access
+UserName: UserName
+Password: Password
+ConfirmPassword: Confirm Password
+Email: Email
+PhoneNumber: Phone Number
+DataSaveSuccessfully: Data has been Saved Sucessfully
+DataSaveError: Data could not be Saved
+DataDeleteSuccessfully: Data has been Deleted Sucessfully
+DataDeleteError: Data could not be Deleted
+DeleteConfirmation: Delete Confirmation
+AreYouSureToDeleteItem: Are you sure you want to delete the selected item?
+ChangePassword: Change Password
+NewPassword: New Password
+Edit: Edit
+Delete: Delete
+Save: Save
+Cancel: Cancel
+FirstName: First Name
+SecondName: Second Name
+SureName: Sure Name
+SecondSurName: Second SurName
+Yes: Yes
+No: No
+GeneralData: General Data
+GateWays: GateWays
+FiatCurrency: Fiat Currency
+CryptoCurrency: Crypto Currency
+Name: Name
+Code: Code
+Description: Description
+SandBoxUrl: SandBox Url
+ProductionUrl: Production Url
+SandBox: SandBox
+Production: Production
+ClientId: Client Id
+ClientSecret: Client Secret
+GrantType: Grant Type
+AccessToken: Access Token
+ApiKey: Api Key
+Environment: Environment
+Disabled: Disabled
+TaxPercent: Tax Percent
+Actions: Actions
+Clients: Clients
+FullName: Full Name
+PosSystems: Pos Systems
+Operations: Operations
+ApiSecret: Api Secret
+Company: Company
+Details: Details
+ClientsTotals: Clients Totals
+PosSystemsTotals: PosSystems Totals
+OperationsTotals : Operations Totals
+Transactions: Transactions
+TransactionsAmount: Transactions Amount
+PublicKey: Public Key
+PrivateKey: Private Key
+MerchantId: Merchant Id
+LoginToYourAccount: Login To Your Account
+RememberMe: Remember me
+ForgotPassword: Forgot Password
+SignIn: Sign In
+AuditorysystemAig: Auditory System AIG
+PharmaciesAndDrugsAuditSystem: Pharmacies and Drugs Audit System
+Establishments: Establishments
+Inspections: Inspections
+QualityAudit: Quality Audit
+RecalledProducts: Recalled Products
+YouExceedMaximumSizeOf: You has been exceed the Maximum size of
+Roulette: Roulette 
+GeneralSettings: General Settings
+GateWay: GateWay
+Data: Data
+Refresh: Refresh
+RoulettePrediction: Roulette Prediction
+AuthorizeNet: AuthorizeNet Gateway
+GateWaySettings: GateWay Settings
+LicensesOptions: Licenses Options
+AuthorizeNetAccount: AuthorizeNet Account
+PredictionOptions: Predictions Options
+LicenseClients: Clients Licenses
+Distributors: Distributors
+Feedbacks: Feedbacks
+BackendSettings: Backend Settings
+PayPal: PayPal
+BacBrainOptions: BacBrain Options
+VideosTracks: Videos Tracks
+VideoTrack: Video Track

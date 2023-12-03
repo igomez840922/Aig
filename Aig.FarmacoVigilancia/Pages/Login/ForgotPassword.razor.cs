@@ -41,7 +41,7 @@ namespace Aig.FarmacoVigilancia.Pages.Login
 			//var user = (await authStat).User;
    //         if (user.Identity.IsAuthenticated)
    //         {
-   //             navigationManager.NavigateTo("/dashboard", true);
+   //             navigationManager.NavigateTo("./dashboard", true);
    //             return;
    //         }
 
@@ -125,7 +125,7 @@ namespace Aig.FarmacoVigilancia.Pages.Login
 
 		async Task BackLogin()
 		{
-			navigationManager.NavigateTo("/login");
+			navigationManager.NavigateTo("./login");
 		}
 
 		protected async Task getUserLanguaje(string? language = null)

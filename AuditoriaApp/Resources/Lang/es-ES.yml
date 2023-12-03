@@ -1,0 +1,116 @@
+HelloWorld: ¡Hola mundo!
+WelcomeMessage: Mensaje de bienvenida
+InvalidEmail: Correo electrónico no válido
+RequiredField: Campo obligatorio
+ConfirmationPasswordNotMatch: La contraseña de confirmación no coincide
+Payments: Pagos Entrantes
+Payouts: Pagos Salientes
+Refunds: Reembolsos
+Settlements: Liquidación
+Pending: Pendiente
+Completed: Completado
+Cancelled: Anulado
+Declined: Disminuido
+Dashboard: Tablero
+Hi: Hola
+Profile: Perfil
+Login: Iniciar Sesión
+SignOut: Salir
+English: Inglés
+Spanish: Español
+Settings: Configuraciones
+SystemUsers: Usuarios del Sistema
+Update: Actualizar
+New: Nuevo
+Search: Buscar
+Picture: Foto
+FilesType: Archivos
+AccessData: Datos de Acceso
+PersonalAccess: Datos Personales
+UserName: Nombre de Usuario
+Password: Constraseña
+ConfirmPassword: Confirmar Contraseña
+Email: Correo
+PhoneNumber: Telefono
+DataSaveSuccessfully: Datos Guardados Satisfactoriamente
+DataSaveError: Los Datos No Pudieron ser Guardados
+DataDeleteSuccessfully: Los Datos Fueron Eliminados Satisfactoriamente
+DataDeleteError: Los Datos no Pudieron ser Eliminados
+DeleteConfirmation: Confirmación para Eliminar
+AreYouSureToDeleteItem: Seguro desea eliminar el elemento seleccionado?  
+ChangePassword: Cambiar Contraseña
+NewPassword: Nueva Contraseña
+Edit: Editar
+Delete: Eliminar
+Save: Guardar
+Cancel: Cancelar
+FirstName: Primer Nombre
+SecondName: Segundo Nombre
+SureName: Primer Apellido
+SecondSurName: Segundo Apellido
+Yes: Si
+No: No
+GeneralData: Datos Generales
+GateWays: Pasarelas
+FiatCurrency: Monedas Fiat
+CryptoCurrency: Crypto Monedas
+Name: Nombre
+Code: Código
+Description: Descripción
+SandBoxUrl: Url de SandBox
+ProductionUrl: Url de Producción
+ClientId: Client Id
+ClientSecret: Client Secret
+GrantType: Grant Type
+AccessToken: Token de Acceso
+ApiKey: Api Key
+Environment: Ambiente
+Disabled: Deshabilitado
+SandBox: Desarrollo
+Production: Producción
+TaxPercent: Impuesto (%)
+Actions: Acciones
+Clients: Clientes
+FullName: Nombre Completo
+PosSystems: Sistemas POS
+Operations: Operaciones
+ApiSecret: Api Secret
+Company: Compañía
+Details: Detalles
+ClientsTotals: Total de Clientes
+PosSystemsTotals: Total de Sistemas POS
+OperationsTotals : Total de Operaciones
+Transactions: Transacciones
+TransactionsAmount: Monto de Transacciones
+PublicKey: Public Key
+PrivateKey: Private Key
+MerchantId: Merchant Id
+LoginToYourAccount: Entrar en su Cuenta
+RememberMe: Recordarme
+ForgotPassword: Olvidó su Contraseña
+SignIn: Entrar
+AuditorysystemAig: Sistema de Auditoría de la AIG
+PharmaciesAndDrugsAuditSystem: Sistema de Auditoría de Faramacias y Drogas
+Establishments: Establecimientos
+Inspections: Inspecciones
+QualityAudit: Auditorías de Calidad
+RecalledProducts: Productos Retirados
+YouExceedMaximumSizeOf: Ha excedido el tamaño máximo de
+Roulette: Ruleta
+GeneralSettings: Configuración General
+GateWay: Pasarela
+Data: Datos
+Refresh: Actualizar
+RoulettePrediction: Predicción Ruleta
+AuthorizeNet: Pasarela AuthorizeNet
+GateWaySettings: Configuración Pasarela
+LicensesOptions: Opciones de Licencias
+AuthorizeNetAccount: Cuenta de AuthorizeNet
+LicenseClients: Licencia de Clientes
+Distributors: Distribuidores
+Feedbacks: Retroalimentación
+BackendSettings: Configuración General
+PayPal: PayPal
+BacBrainOptions: BacBrain Options
+
+

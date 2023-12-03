@@ -13,7 +13,7 @@ namespace Aig.FarmacoVigilancia.Helper
 
         protected override void OnInitialized()
         {
-            NavigationManager.NavigateTo("/login", true);
+            NavigationManager.NavigateTo("./login", true);
         }
 
     }
