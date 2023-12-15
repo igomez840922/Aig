@@ -112,7 +112,7 @@
 
     private async Task Close()
     {
-        _navigationManager.NavigateTo("/studies");
+        _navigationManager.NavigateTo("./studies");
     }
 
     private async Task Send(string url)
@@ -139,7 +139,7 @@
             }
 
             await RefresView(false);
-            _navigationManager.NavigateTo("/studies");
+            _navigationManager.NavigateTo("./studies");
         }
        
     }

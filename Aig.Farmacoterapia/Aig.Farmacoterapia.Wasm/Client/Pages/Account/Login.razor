@@ -59,7 +59,7 @@
         var user = await _authenticationManager.CurrentUser();
         var isAuthenticated=user.Identity?.IsAuthenticated;
         if(isAuthenticated ?? false){
-            _navigationManager.NavigateTo("/");
+            _navigationManager.NavigateTo("./");
         }
         loading = false;
         await base.OnInitializedAsync();

@@ -43,6 +43,7 @@ builder.Services.AddCors(policy =>
 
 var app = builder.Build();
 
+app.UsePathBase("/farmacoterapiainterno");
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {

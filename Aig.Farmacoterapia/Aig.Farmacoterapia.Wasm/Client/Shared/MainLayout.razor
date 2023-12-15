@@ -177,7 +177,7 @@
         var result = await dialog.Result;
         if (!result.Cancelled){
             await _authenticationManager.Logout();
-            _navigationManager.NavigateTo("/login");
+            _navigationManager.NavigateTo("./login");
         }
     }
 
