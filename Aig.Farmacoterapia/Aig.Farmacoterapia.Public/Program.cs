@@ -25,6 +25,8 @@ builder.Services.AddControllers();
 builder.Services.AddScoped<ComponentBus>();
 
 var app = builder.Build();
+
+app.UsePathBase("/farmacoterapiaexterno");
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
