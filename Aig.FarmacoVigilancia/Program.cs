@@ -62,7 +62,7 @@ builder.Services.Configure<FormOptions>(options =>
 });
 builder.Services.AddSignalR(hubOptions =>
 {
-    hubOptions.MaximumReceiveMessageSize = 102400000; // 100MB
+    hubOptions.MaximumReceiveMessageSize = 1024*1024*100; // 100MB
     hubOptions.StreamBufferCapacity = 20; // 100MB
     //hubOptions.ClientTimeoutInterval = new TimeSpan(0,2,0);
     //hubOptions.HandshakeTimeout = new TimeSpan(0, 1, 0);

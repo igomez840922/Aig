@@ -34,7 +34,7 @@ namespace Aig.Auditoria.Components.Attachments
 
         bool loading { get; set; } = false;
 
-        int maxFileSize { get; set; } = 1024 * 1024 * 50;
+        int maxFileSize { get; set; } = 1024 * 1024 * 500;
 
         private DotNetObjectReference<AddEditAttachment>? objRef;
 
@@ -95,7 +95,7 @@ namespace Aig.Auditoria.Components.Attachments
                     _options = _options != null ? _options : new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
                     if (selectedFile.Size > maxFileSize)
                     {
-                        await jsRuntime.InvokeVoidAsync("ShowError", languageContainerService.Keys["YouExceedMaximumSizeOf"] + " 50MB");
+                        await jsRuntime.InvokeVoidAsync("ShowError", languageContainerService.Keys["YouExceedMaximumSizeOf"] + " 500MB");
                         return;
                     }
 

@@ -432,7 +432,9 @@ namespace Aig.FarmacoVigilancia.Controllers
 
                 if (ft != null)
                 {
-                    ft.NombreComercial = model.DatosMedicamento?.NomComercial??"";
+                    ft.CodExt = model.Num;
+					ft.FechaRecibidoCNFV = model.DatosNotificador?.FechaNotificacion??null;
+					ft.NombreComercial = model.DatosMedicamento?.NomComercial??"";
                     ft.NombreDci = model.DatosMedicamento?.NomDCI ?? "";
                     ft.Presentacion = model.DatosMedicamento?.Presentacion ?? "";
                     ft.Concentracion = model.DatosMedicamento?.Concentracion ?? "";
