@@ -99,6 +99,7 @@ namespace Aig.FarmacoVigilancia.Controllers
             return BadRequest(new { message = "resultados no encontrados" });
         }
 
+
         [AllowAnonymous]
         [HttpGet("GetAllInstituciones")]
         public async Task<IActionResult> GetAllInstituciones()
@@ -106,6 +107,21 @@ namespace Aig.FarmacoVigilancia.Controllers
             try
             {
                 var data = dalService.GetAll<InstitucionDestinoTB>();
+                return Ok(data);
+
+            }
+            catch (Exception ex) { return BadRequest(new { message = ex.Message }); }
+
+            return BadRequest(new { message = "resultados no encontrados" });
+        }
+
+        [AllowAnonymous]
+        [HttpGet("GetAllTipoInstituciones")]
+        public async Task<IActionResult> GetAllTipoInstituciones()
+        {
+            try
+            {
+                var data = dalService.GetAll<TipoInstitucionTB>();
                 return Ok(data);
 
             }
@@ -416,7 +432,9 @@ namespace Aig.FarmacoVigilancia.Controllers
 
                 if (ft != null)
                 {
-                    ft.NombreComercial = model.DatosMedicamento?.NomComercial??"";
+                    ft.CodExt = model.Num;
+					ft.FechaRecibidoCNFV = model.DatosNotificador?.FechaNotificacion??null;
+					ft.NombreComercial = model.DatosMedicamento?.NomComercial??"";
                     ft.NombreDci = model.DatosMedicamento?.NomDCI ?? "";
                     ft.Presentacion = model.DatosMedicamento?.Presentacion ?? "";
                     ft.Concentracion = model.DatosMedicamento?.Concentracion ?? "";

@@ -19,9 +19,9 @@ namespace DataModel.Models
         public List<AttachmentTB> LAdjuntos { get; set; }
         public long IdTramite { get; set; }
 
+		public string Num { get; set; }
 
-
-    }
+	}
 
     public class FTNoteModel
     {
@@ -155,7 +155,8 @@ namespace DataModel.Models
         public Persona Notificador { get; set; }
 
         public InstitucionDestinoTB? InstalacionSalud { get; set; }
-        public ProvinciaTB? Provincia { get; set; }
+		public TipoInstitucionTB? TipoInstitucion { get; set; }
+		public ProvinciaTB? Provincia { get; set; }
         public DateTime? FechaNotificacion { get; set; }
         public string? Firma { get; set; }
         public enumFMV_RAMNotificationType TipoNotificador { get; set; }
