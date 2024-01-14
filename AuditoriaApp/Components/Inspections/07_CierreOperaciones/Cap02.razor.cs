@@ -108,7 +108,7 @@ namespace AuditoriaApp.Components.Inspections._07_CierreOperaciones
                 Inspeccion.Inspeccion.PendingUpdate = true;
                 Inspeccion.Inspeccion.InspCierreOperacion.PendingUpdate = true;
                 Inspeccion.Inspeccion.InspCierreOperacion.DatosRepresentLegal.PendingUpdate = true;
-                var data = inspectionService.Save(Inspeccion);
+                var data = await inspectionService.Save(Inspeccion);
                 if (data != null)
                 {
                     snackbar.Add("Datos guardados satisfactoriamente", Severity.Info);

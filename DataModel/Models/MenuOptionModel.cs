@@ -12,4 +12,10 @@ namespace DataModel.Models
         public string Name { get; set; }
         public enumSelectedChapter Chapter { get; set; }
     }
+
+    public class InspectionTypeMenuOptionModel
+    {
+        public string Name { get; set; }
+        public enumAUD_TipoActa InspectionType { get; set; }
+    }
 }

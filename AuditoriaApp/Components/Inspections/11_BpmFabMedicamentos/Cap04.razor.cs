@@ -108,7 +108,7 @@ namespace AuditoriaApp.Components.Inspections._11_BpmFabMedicamentos
                 Inspeccion.Inspeccion.PendingUpdate = true;
                 Inspeccion.Inspeccion.InspGuiaBPMFabricanteMed.PendingUpdate = true;
                 Inspeccion.Inspeccion.InspGuiaBPMFabricanteMed.OtrosFuncionarios.PendingUpdate = true;
-                var data = inspectionService.Save(Inspeccion);
+                var data = await inspectionService.Save(Inspeccion);
                 if (data != null)
                 {
                     snackbar.Add("Datos guardados satisfactoriamente", Severity.Info);
@@ -150,23 +150,26 @@ namespace AuditoriaApp.Components.Inspections._11_BpmFabMedicamentos
         ///
         private async Task EditParticipant(DatosPersona data = null)
         {
-            data = data != null ? data : new DatosPersona();
-            var parameters = new DialogParameters { ["Data"] = data };
-            var options = new DialogOptions { CloseButton = true, MaxWidth = MaxWidth.Medium, FullWidth = true, DisableBackdropClick = true };
-            var dialog = _dialogService.Show<Components.Dialog.Participantes.AddEdit>(data != null ? "Editar Participante" : "Agregar Participante", parameters, options);
-            var result = await dialog.Result;
-            if (!result.Cancelled)
-            {
-                if (result.Data != null)
+            try {
+                //data = data != null ? data : new DatosPersona();
+                var parameters = new DialogParameters { ["Data"] = data };
+                var options = new DialogOptions { CloseButton = true, MaxWidth = MaxWidth.Medium, FullWidth = true, DisableBackdropClick = true };
+                var dialog = _dialogService.Show<Components.Dialog.Personas.AddEdit>(data != null ? "Editar Funcionario" : "Agregar Funcionario", parameters, options);
+                var result = await dialog.Result;
+                if (!result.Cancelled)
                 {
-                    var actividad = (DatosPersona)result.Data;
-                    Inspeccion.Inspeccion.InspGuiaBPMFabricanteMed.OtrosFuncionarios.LPersona = Inspeccion.Inspeccion.InspGuiaBPMFabricanteMed.OtrosFuncionarios.LPersona?.Count > 0 ? Inspeccion.Inspeccion.InspGuiaBPMFabricanteMed.OtrosFuncionarios.LPersona : new List<DatosPersona>();
-                    if (!Inspeccion.Inspeccion.InspGuiaBPMFabricanteMed.OtrosFuncionarios.LPersona.Contains(actividad))
-                        Inspeccion.Inspeccion.InspGuiaBPMFabricanteMed.OtrosFuncionarios.LPersona.Add(actividad);
-                    await this.InvokeAsync(StateHasChanged);
+                    if (result.Data != null)
+                    {
+                        var actividad = (DatosPersona)result.Data;
+                        Inspeccion.Inspeccion.InspGuiaBPMFabricanteMed.OtrosFuncionarios.LPersona = Inspeccion.Inspeccion.InspGuiaBPMFabricanteMed.OtrosFuncionarios.LPersona?.Count > 0 ? Inspeccion.Inspeccion.InspGuiaBPMFabricanteMed.OtrosFuncionarios.LPersona : new List<DatosPersona>();
+                        if (!Inspeccion.Inspeccion.InspGuiaBPMFabricanteMed.OtrosFuncionarios.LPersona.Contains(actividad))
+                            Inspeccion.Inspeccion.InspGuiaBPMFabricanteMed.OtrosFuncionarios.LPersona.Add(actividad);
+                        await this.InvokeAsync(StateHasChanged);
+                    }
                 }
             }
-
+            catch(Exception ex) 
+            { }
         }
         private async Task RemoveParticipant(DatosPersona data)
         {

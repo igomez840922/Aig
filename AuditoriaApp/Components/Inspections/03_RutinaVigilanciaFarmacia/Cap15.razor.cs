@@ -116,7 +116,7 @@ namespace AuditoriaApp.Components.Inspections._03_RutinaVigilanciaFarmacia
                 Inspeccion.Inspeccion.InspRutinaVigFarmacia.DatosRegente.PendingUpdate = true;
                 Inspeccion.Inspeccion.ParticipantesDNFD.PendingUpdate = true;
 
-                var data = inspectionService.Save(Inspeccion);
+                var data = await inspectionService.Save(Inspeccion);
                 if (data != null)
                 {
                     snackbar.Add("Datos guardados satisfactoriamente", Severity.Info);
@@ -208,7 +208,7 @@ namespace AuditoriaApp.Components.Inspections._03_RutinaVigilanciaFarmacia
         {
             try
             {
-                await uploadManager.ExecuteFile(file.AbsolutePath);
+                await uploadManager.ExecuteFile(file);
             }
             catch { }
         }

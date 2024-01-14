@@ -116,7 +116,7 @@ namespace AuditoriaApp.Components.Inspections._03_RutinaVigilanciaFarmacia
                 Inspeccion.Inspeccion.PendingUpdate = true;
                 Inspeccion.Inspeccion.InspRutinaVigFarmacia.PendingUpdate = true;
                 Inspeccion.Inspeccion.InspRutinaVigFarmacia.ExpPersonalFarmacia.PendingUpdate = true;
-                var data = inspectionService.Save(Inspeccion);
+                var data = await inspectionService.Save(Inspeccion);
                 if (data != null)
                 {
                     snackbar.Add("Datos guardados satisfactoriamente", Severity.Info);

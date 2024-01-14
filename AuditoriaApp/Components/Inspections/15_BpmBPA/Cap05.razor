@@ -31,7 +31,7 @@
             <MudCardContent>
                 <MudGrid>
                     <MudItem xs="12" md="6">
-                        <MudSelect Margin="Margin.Dense" T="DataModel.PropositoInspeccion" MultiSelection="true" Label="Seleccione los propósitos de dicha inspección" Variant="Variant.Outlined" AnchorOrigin="Origin.BottomCenter" @bind-Value="PropositoSelected" @bind-SelectedValues="@(LPropositosSelected)">
+                        <MudSelect Margin="Margin.Dense" T="DataModel.PropositoInspeccion" MultiSelection="true" Label="Seleccione los propósitos de dicha inspección" Variant="Variant.Outlined" AnchorOrigin="Origin.BottomCenter" @bind-Value="PropositoSelected" @bind-SelectedValues="@(LPropositosSelected)"  ToStringFunc="@(e=> e==null?null : e.Nombre)">
                             @foreach (DataModel.PropositoInspeccion dt in LPropositos)
                             {
                                 <MudSelectItem T="DataModel.PropositoInspeccion" Value="dt">@dt.Nombre</MudSelectItem>

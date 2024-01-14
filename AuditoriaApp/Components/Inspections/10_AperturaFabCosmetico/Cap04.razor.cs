@@ -108,7 +108,7 @@ namespace AuditoriaApp.Components.Inspections._10_AperturaFabCosmetico
                 Inspeccion.Inspeccion.PendingUpdate = true;
                 Inspeccion.Inspeccion.InspAperFabricanteCosmetMed.PendingUpdate = true;
                 Inspeccion.Inspeccion.InspAperFabricanteCosmetMed.ProdFabrican.PendingUpdate = true;
-                var data = inspectionService.Save(Inspeccion);
+                var data = await inspectionService.Save(Inspeccion);
                 if (data != null)
                 {
                     snackbar.Add("Datos guardados satisfactoriamente", Severity.Info);
@@ -200,7 +200,7 @@ namespace AuditoriaApp.Components.Inspections._10_AperturaFabCosmetico
         {
             try
             {
-                await uploadManager.ExecuteFile(file.AbsolutePath);
+                await uploadManager.ExecuteFile(file);
             }
             catch { }
         }

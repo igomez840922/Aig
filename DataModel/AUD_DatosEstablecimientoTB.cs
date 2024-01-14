@@ -14,7 +14,6 @@ namespace DataModel
         [System.Text.Json.Serialization.JsonIgnore]
         public virtual AUD_InspeccionTB Inspeccion { get => inspeccion; set => SetProperty(ref inspeccion, value); }
 
-
         //Establecimiento
         private long? establecimientoId;
         [Required(ErrorMessage = "requerido")]

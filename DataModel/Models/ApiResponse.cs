@@ -11,4 +11,9 @@ namespace DataModel.Models
         public bool Result { get; set; }
         public string Message { get; set; }
     }
+
+    public class InspectionApiResponse:ApiResponse
+    {
+        public long Id { get; set; }
+    }
 }

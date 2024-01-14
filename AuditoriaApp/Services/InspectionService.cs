@@ -86,9 +86,10 @@ namespace AuditoriaApp.Services
                         var authContent = await authResult.Content.ReadAsStringAsync();
                         if (authResult.IsSuccessStatusCode)
                         {
-                            var result = JsonSerializer.Deserialize<ApiResponse>(authContent, _options);
+                            var result = JsonSerializer.Deserialize<InspectionApiResponse>(authContent, _options);
                             if (result.Result)
                             {
+                                appItem.InspeccionId = result.Id;
                                 appItem.PendingUpdate = false;
                                 dalService.Save(appItem);
                             }
@@ -115,11 +116,12 @@ namespace AuditoriaApp.Services
 
                     var authResult = await apiConnectionService.Client.PostAsync("Actas/UploadPending", bodyContent);
                     var authContent = await authResult.Content.ReadAsStringAsync();
-                    var result = JsonSerializer.Deserialize<ApiResponse>(authContent, _options);
+                    var result = JsonSerializer.Deserialize<InspectionApiResponse>(authContent, _options);
                     if (authResult.IsSuccessStatusCode)
                     {
                         if (result.Result)
                         {
+                            appItem.InspeccionId = result.Id;
                             appItem.PendingUpdate = false;
                             dalService.Save(appItem);
                             await InspectionsSync();

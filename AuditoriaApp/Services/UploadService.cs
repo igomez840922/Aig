@@ -5,6 +5,7 @@ using System.Text.Json;
 using System.Net.Http.Headers;
 using System.Text;
 using Microsoft.AspNetCore.Components.Forms;
+using System.IO;
 
 namespace AuditoriaApp.Services
 {    
@@ -57,8 +58,9 @@ namespace AuditoriaApp.Services
                     var model = new FileUploadResult()
                     {
                         AbsolutePath = path,
-                        Url = string.Format("/files/{0}", fileName),
-                        FileName = fileName
+                        Url = null,//string.Format("/files/{0}", fileName),
+                        FileName = fileName,
+                        Base64 = Helper.Helper.ReturnBase64FromFilePath(path)
                     };
 
                     return model;
@@ -76,22 +78,55 @@ namespace AuditoriaApp.Services
                 {
                     System.IO.File.Delete(data.AbsolutePath);
 
-                    return true;
+                    //return true;
                 }
             }
             catch{}
-            return false;
+            return true;
         }
 
-        public async Task ExecuteFile(string filePath)
+        //public async Task ExecuteFile(string filePath)
+        //{
+        //    try
+        //    {
+        //        if (!string.IsNullOrEmpty(filePath))
+        //        {
+        //            await Launcher.OpenAsync(new OpenFileRequest
+        //            {
+        //                File = new ReadOnlyFile(filePath)
+        //            });
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        // Handle exceptions, e.g., if there's no associated app to open the file
+        //    }
+        //}
+
+        public async Task ExecuteFile(AttachmentTB attach)
         {
             try
             {
-                if (!string.IsNullOrEmpty(filePath))
+                //FileSystem.AppDataDirectory
+                string dir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "AuditoriaApp", "TempFile");
+                //Path.Combine(FileSystem.Current.AppDataDirectory, "AuditoriaApp");
+                if (!Directory.Exists(dir))
+                {
+                    Directory.CreateDirectory(dir);
+                }
+                // remove all files
+                foreach (string file in Directory.GetFiles(dir))
+                {
+                    File.Delete(file);
+                }
+                var fileBytes = Helper.Helper.ReturnByteArrayFromBase64(attach.Base64);
+                var path = System.IO.Path.Combine(dir, attach.FileName);
+                System.IO.File.WriteAllBytes(path, fileBytes);
+                if (!string.IsNullOrEmpty(path))
                 {
                     await Launcher.OpenAsync(new OpenFileRequest
                     {
-                        File = new ReadOnlyFile(filePath)
+                        File = new ReadOnlyFile(path)
                     });
                 }
             }

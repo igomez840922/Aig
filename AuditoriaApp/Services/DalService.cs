@@ -147,7 +147,7 @@ namespace AuditoriaApp.Services
 
                 DBContext.SaveChanges();
 
-                return Get<T>(_Data.Id); ;
+                return Get<T>(_Data.Id);
             }
             catch (Exception ex)
             { }

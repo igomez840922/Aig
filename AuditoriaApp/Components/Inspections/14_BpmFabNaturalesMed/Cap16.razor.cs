@@ -127,7 +127,7 @@ namespace AuditoriaApp.Components.Inspections._14_BpmFabNaturalesMed
                 Inspeccion.Inspeccion.InspGuiBPMFabNatMedicina.Generalidades15.PendingUpdate = true;
                 Inspeccion.Inspeccion.InspGuiBPMFabNatMedicina.Contratante.PendingUpdate = true;
                 Inspeccion.Inspeccion.InspGuiBPMFabNatMedicina.Contratista.PendingUpdate = true;
-                var data = inspectionService.Save(Inspeccion);
+                var data = await inspectionService.Save(Inspeccion);
                 if (data != null)
                 {
                     snackbar.Add("Datos guardados satisfactoriamente", Severity.Info);

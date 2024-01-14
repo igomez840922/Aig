@@ -115,7 +115,7 @@ namespace AuditoriaApp.Components.Inspections._06_RetencionRetiro
                 Inspeccion.Inspeccion.InspRetiroRetencion.DatosAtendidosPor.PendingUpdate = true;
                 Inspeccion.Inspeccion.ParticipantesDNFD.PendingUpdate = true;
 
-                var data = inspectionService.Save(Inspeccion);
+                var data = await inspectionService.Save(Inspeccion);
                 if (data != null)
                 {
                     snackbar.Add("Datos guardados satisfactoriamente", Severity.Info);
@@ -207,7 +207,7 @@ namespace AuditoriaApp.Components.Inspections._06_RetencionRetiro
         {
             try
             {
-                await uploadManager.ExecuteFile(file.AbsolutePath);
+                await uploadManager.ExecuteFile(file);
             }
             catch { }
         }

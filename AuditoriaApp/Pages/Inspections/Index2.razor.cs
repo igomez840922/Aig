@@ -149,5 +149,19 @@ namespace AuditoriaApp.Pages.Inspections
             finally { await bus.Publish(new OverlayShowEvent { Show = false }); }
         }
 
+        private async Task New()
+        {
+            await bus.Publish(new OverlayShowEvent { Show = true });
+            try
+            {
+                    navigationManager.NavigateTo($"inspectionsnew");
+            }
+            catch
+            {
+                //snackbar.Add("Error durante la Sincronización", Severity.Error);
+            }
+            finally { await bus.Publish(new OverlayShowEvent { Show = false }); }
+        }
+
     }
 }

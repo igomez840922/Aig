@@ -2,6 +2,7 @@
 using System.Net;
 using System;
 using Microsoft.Extensions.Configuration;
+using System.Security.Policy;
 
 namespace AuditoriaApp.Services
 {
@@ -16,6 +17,7 @@ namespace AuditoriaApp.Services
         {
             this.configuration = configuration;
             Url = configuration["ApiUrl"];
+            //Url = string.Format("{0}/api/", configuration["ApiUrl"]);
 
             var httpClienthandler = new HttpClientHandler();
             httpClienthandler.ServerCertificateCustomValidationCallback += (sender, certificate, chain, errors) => { return true; };

@@ -126,7 +126,7 @@ namespace AuditoriaApp.Components.Inspections._13_BpmFabCosmeticosDesinf
                 Inspeccion.Inspeccion.InspGuiBPMFabCosmeticoMed.RequisitosLegales.PendingUpdate = true;
                 Inspeccion.Inspeccion.InspGuiBPMFabCosmeticoMed.ClasifActComerciales.PendingUpdate = true;
                 Inspeccion.Inspeccion.InspGuiBPMFabCosmeticoMed.ClasifEstablecimiento.PendingUpdate = true;
-                var data = inspectionService.Save(Inspeccion);
+                var data = await inspectionService.Save(Inspeccion);
                 if (data != null)
                 {
                     snackbar.Add("Datos guardados satisfactoriamente", Severity.Info);

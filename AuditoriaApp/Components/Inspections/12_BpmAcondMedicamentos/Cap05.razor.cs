@@ -126,7 +126,7 @@ namespace AuditoriaApp.Components.Inspections._12_BpmAcondMedicamentos
                 Inspeccion.Inspeccion.InspGuiaBPMLabAcondicionador.RequisitosLegales.PendingUpdate = true;
                 Inspeccion.Inspeccion.InspGuiaBPMLabAcondicionador.ClasifActComerciales.PendingUpdate = true;
                 Inspeccion.Inspeccion.InspGuiaBPMLabAcondicionador.ClasifEstablecimiento.PendingUpdate = true;
-                var data = inspectionService.Save(Inspeccion);
+                var data = await inspectionService.Save(Inspeccion);
                 if (data != null)
                 {
                     snackbar.Add("Datos guardados satisfactoriamente", Severity.Info);

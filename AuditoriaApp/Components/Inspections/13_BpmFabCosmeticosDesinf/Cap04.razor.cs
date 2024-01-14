@@ -108,7 +108,7 @@ namespace AuditoriaApp.Components.Inspections._13_BpmFabCosmeticosDesinf
                 Inspeccion.Inspeccion.PendingUpdate = true;
                 Inspeccion.Inspeccion.InspGuiBPMFabCosmeticoMed.PendingUpdate = true;
                 Inspeccion.Inspeccion.InspGuiBPMFabCosmeticoMed.OtrosFuncionarios.PendingUpdate = true;
-                var data = inspectionService.Save(Inspeccion);
+                var data = await inspectionService.Save(Inspeccion);
                 if (data != null)
                 {
                     snackbar.Add("Datos guardados satisfactoriamente", Severity.Info);
@@ -150,10 +150,10 @@ namespace AuditoriaApp.Components.Inspections._13_BpmFabCosmeticosDesinf
         ///
         private async Task EditParticipant(DatosPersona data = null)
         {
-            data = data != null ? data : new DatosPersona();
+            //data = data != null ? data : new DatosPersona();
             var parameters = new DialogParameters { ["Data"] = data };
             var options = new DialogOptions { CloseButton = true, MaxWidth = MaxWidth.Medium, FullWidth = true, DisableBackdropClick = true };
-            var dialog = _dialogService.Show<Components.Dialog.Participantes.AddEdit>(data != null ? "Editar Participante" : "Agregar Participante", parameters, options);
+            var dialog = _dialogService.Show<Components.Dialog.Personas.AddEdit>(data != null ? "Editar Funcionario" : "Agregar Funcionario", parameters, options);
             var result = await dialog.Result;
             if (!result.Cancelled)
             {

@@ -11,6 +11,6 @@ namespace AuditoriaApp.Services
 
         Task<bool> DeleteFile(AttachmentTB data);
 
-        Task ExecuteFile(string filePath);
+        Task ExecuteFile(AttachmentTB attach);
     }
 }

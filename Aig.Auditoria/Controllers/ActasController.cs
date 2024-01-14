@@ -18,12 +18,15 @@ namespace Aig.Auditoria.Controllers
     [ApiController]
     public class ActasController : ControllerBase
     {
+        private readonly IWebHostEnvironment env;
         private readonly IDalService dalService;
         private readonly IPdfGenerationService pdfGenerationService;
-        public ActasController(IDalService dalService,IPdfGenerationService pdfGenerationService)
+        public ActasController(IDalService dalService,IPdfGenerationService pdfGenerationService, 
+            IWebHostEnvironment env)
         {
             this.dalService= dalService;
             this.pdfGenerationService = pdfGenerationService;
+            this.env = env;
         }
 
         [HttpGet("GetTest")]
@@ -133,6 +136,16 @@ namespace Aig.Auditoria.Controllers
         {
             try
             {
+                if(inspeccion.EstablecimientoId == 0)
+                {
+                    inspeccion.Establecimiento = dalService.Find<AUD_EstablecimientoTB>(x=>x.NumLicencia == inspeccion.DatosEstablecimiento.NumLicencia);
+                    inspeccion.Establecimiento = inspeccion.Establecimiento != null? inspeccion.Establecimiento : dalService.First<AUD_EstablecimientoTB>();
+                    inspeccion.EstablecimientoId = inspeccion.Establecimiento?.Id;
+                    inspeccion.DatosEstablecimiento.Establecimiento = inspeccion.Establecimiento;
+                    inspeccion.DatosEstablecimiento.EstablecimientoId = inspeccion.EstablecimientoId;
+                    inspeccion = dalService.Save<AUD_InspeccionTB>(inspeccion);
+                }
+
                 var data = dalService.Get<AUD_InspeccionTB>(inspeccion.Id);
                 if (data!=null)
                 {
@@ -147,9 +160,44 @@ namespace Aig.Auditoria.Controllers
                         data.ParticipantesDNFD.PendingUpdate = false;
                     }
                     if (inspeccion.DatosConclusiones?.PendingUpdate ?? false)
-                    {
+                    {                       
+                        //Inspeccion.Inspeccion.DatosConclusiones.LAttachments
+                        if (inspeccion.DatosConclusiones?.LAttachments?.Count > 0)
+                        {
+                            foreach(var attach in inspeccion.DatosConclusiones.LAttachments)
+                            {
+                                try 
+                                {
+                                    if (!string.IsNullOrEmpty(attach.Base64) && string.IsNullOrEmpty(attach.Url))
+                                    {
+                                        var fileBytes = Helper.Helper.ReturnByteArrayFromBase64(attach.Base64);
+                                        if(fileBytes?.Length > 0)
+                                        {
+                                            var dir = Path.Combine(env.WebRootPath, "files");//Path.GetRandomFileName()
+                                            if (!Directory.Exists(dir))
+                                            {
+                                                Directory.CreateDirectory(dir);
+                                            }
+
+                                            var fileName = string.Format("{0}.{1}", Guid.NewGuid().ToString(), attach.FileName.Split(".").LastOrDefault());
+                                            var path = System.IO.Path.Combine(dir, fileName);
+
+                                            System.IO.File.WriteAllBytes(path, fileBytes);
+
+                                            attach.AbsolutePath = path;
+                                            attach.Url = string.Format("./files/{0}", fileName);
+                                            attach.FileName = fileName;
+                                            //attach.Base64 = null;                                           
+                                        }
+                                    }
+                                }
+                                catch (Exception ex) { }
+                            }
+                        }
+
                         data.DatosConclusiones = inspeccion.DatosConclusiones;
                         data.DatosConclusiones.PendingUpdate = false;
+
                     }
 
                     ///// tipos de inspecciones
@@ -1518,11 +1566,11 @@ namespace Aig.Auditoria.Controllers
                     data = dalService.Save<AUD_InspeccionTB>(data);
 
                     if(data!=null)
-                        return Ok(new ApiResponse { Result = true });
+                        return Ok(new InspectionApiResponse { Result = true , Id= data.Id});
                 }
             }
-            catch (Exception ex) { return BadRequest(new ApiResponse { Result=false, Message = ex.Message }); }
-            return BadRequest(new ApiResponse { Result = false, Message = "dato no encontrado" });
+            catch (Exception ex) { return BadRequest(new InspectionApiResponse { Result=false, Message = ex.Message }); }
+            return BadRequest(new InspectionApiResponse { Result = false, Message = "dato no encontrado" });
         }
 
 

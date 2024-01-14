@@ -26,7 +26,7 @@ namespace AuditoriaApp.Components.Attachments
 
         bool loading { get; set; } = false;
 
-        int maxFileSize { get; set; } = 1024 * 1024 * 10;
+        int maxFileSize { get; set; } = 1024 * 1024 * 200;
 
         private DotNetObjectReference<AuditoriaApp.Components.Attachments.AddEdit>? objRef;
 
@@ -79,7 +79,7 @@ namespace AuditoriaApp.Components.Attachments
                     _options = _options != null ? _options : new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
                     if (selectedFile.Size > maxFileSize)
                     {
-                        snackbar.Add(string.Format("Ha excedido el máximo de 10MB"), Severity.Error);
+                        snackbar.Add(string.Format("Ha excedido el máximo de 200MB"), Severity.Error);
                         return;
                     }
 
@@ -90,6 +90,7 @@ namespace AuditoriaApp.Components.Attachments
                         Data.AbsolutePath = result.AbsolutePath;
                         Data.Url = result.Url;
                         Data.FileName = result.FileName;
+                        Data.Base64 = result.Base64;
 
                         MudDialog.Close(DialogResult.Ok(Data));
 

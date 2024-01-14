@@ -157,7 +157,7 @@ namespace AuditoriaApp.Components.Inspections._14_BpmFabNaturalesMed
                 Inspeccion.Inspeccion.InspGuiBPMFabNatMedicina.AreaEnvasadoEmpaque.PendingUpdate = true;
                 Inspeccion.Inspeccion.InspGuiBPMFabNatMedicina.AreaAuxiliares.PendingUpdate = true;
                 Inspeccion.Inspeccion.InspGuiBPMFabNatMedicina.AreaControlCalidad.PendingUpdate = true;
-                var data = inspectionService.Save(Inspeccion);
+                var data = await inspectionService.Save(Inspeccion);
                 if (data != null)
                 {
                     snackbar.Add("Datos guardados satisfactoriamente", Severity.Info);

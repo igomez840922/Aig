@@ -109,7 +109,7 @@ namespace AuditoriaApp.Components.Inspections._05_Investigaciones
                 Inspeccion.PendingUpdate = true;
                 Inspeccion.Inspeccion.PendingUpdate = true;
                 Inspeccion.Inspeccion.DatosConclusiones.PendingUpdate = true;
-                var data = inspectionService.Save(Inspeccion);
+                var data = await inspectionService.Save(Inspeccion);
                 if (data != null)
                 {
                     snackbar.Add("Datos guardados satisfactoriamente", Severity.Info);
@@ -201,7 +201,7 @@ namespace AuditoriaApp.Components.Inspections._05_Investigaciones
         {
             try
             {
-                await uploadManager.ExecuteFile(file.AbsolutePath);
+                await uploadManager.ExecuteFile(file);
             }
             catch { }
         }

@@ -20,7 +20,7 @@ namespace DataModel
         /// <summary>
         /// /////////Generalidades de la Farmacia y Solicitante
         /// </summary>
-
+        /// 
         //numero de acta...
         private string numActa;
         public string NumActa { get => numActa; set => SetProperty(ref numActa, value); }

@@ -61,5 +61,16 @@
             return "";
         }
 
+        public static byte[] ReturnByteArrayFromBase64(string base64String)
+        {
+            try
+            {
+                byte[] fileBytes = Convert.FromBase64String(base64String);
+                return fileBytes;
+            }
+            catch { }
+            return null;
+        }
+
     }
 }

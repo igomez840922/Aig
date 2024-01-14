@@ -16,7 +16,7 @@ namespace DataModel
         }
         // Nombre
         private string nombre;
-        [Required(ErrorMessage = "requerido")]
+        //[Required(ErrorMessage = "requerido")]
         public string Nombre { get => nombre; set => SetProperty(ref nombre, value); }
 
         //Numero de Registro de Identidad

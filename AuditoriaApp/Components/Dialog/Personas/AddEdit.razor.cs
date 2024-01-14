@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace AuditoriaApp.Components.Dialog.Personas
 {
@@ -46,6 +47,8 @@ namespace AuditoriaApp.Components.Dialog.Personas
         protected async Task FetchData()
         {
             loading = false;
+
+            Data = Data!=null ? Data : new DatosPersona();
 
             await this.InvokeAsync(StateHasChanged);
         }
