@@ -23,13 +23,13 @@
                                 <a class="nav-link active" data-toggle="tab" href="#cap1" role="tab">@languageContainerService.Keys["GeneralInfo"]</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" data-toggle="tab" href="#cap2" role="tab">@languageContainerService.Keys["Farmaceuticos"]</a>
-                            </li>
-                            <li class="nav-item">
                                 <a class="nav-link" data-toggle="tab" href="#cap3" role="tab">@languageContainerService.Keys["Representante Legal"]</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" data-toggle="tab" href="#cap4" role="tab">@languageContainerService.Keys["Regente Farmacéutico"]</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" data-toggle="tab" href="#cap2" role="tab">@languageContainerService.Keys["Farmaceuticos"]</a>
                             </li>
                         </ul>
                         <div class="tab-content">
@@ -84,6 +84,30 @@
                                         <div class="form-group">
                                             <div class="form-line">
                                                 <RadzenDatePicker TValue="DateTime?" @bind-Value="Establecimiento.FechaExpiracion" ShowTime="false" DateFormat="dd/MM/yyyy" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <label>@languageContainerService.Keys["Fecha de Vigencia"]</label>
+                                        <div class="form-group">
+                                            <div class="form-line">
+                                                <RadzenDatePicker TValue="DateTime?" @bind-Value="Establecimiento.FechaVigencia" ShowTime="false" DateFormat="dd/MM/yyyy" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <label>@languageContainerService.Keys["Fecha de Cierre"]</label>
+                                        <div class="form-group">
+                                            <div class="form-line">
+                                                <RadzenDatePicker TValue="DateTime?" @bind-Value="Establecimiento.FechaCierre" ShowTime="false" DateFormat="dd/MM/yyyy" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <label>@languageContainerService.Keys["Fecha de Modificación"]</label>
+                                        <div class="form-group">
+                                            <div class="form-line">
+                                                <RadzenDatePicker TValue="DateTime?" @bind-Value="Establecimiento.FechaModificacion" ShowTime="false" DateFormat="dd/MM/yyyy" />
                                             </div>
                                         </div>
                                     </div>
@@ -284,7 +308,7 @@
                                             </div>
                                         </div>
                                     </div>*@
-                                    <div class="col-sm-8">
+                                    <div class="col-sm-12">
                                         <label for="password">@languageContainerService.Keys["Nombre de Sociedad"]</label>
                                         <div class="form-group">
                                             <div class="form-line">
@@ -294,72 +318,70 @@
                                         </div>
                                     </div>
                                 </div>
-
-                            </div>
-                            <div class="tab-pane" id="cap2" role="tabpanel">
-                                <h5>@languageContainerService.Keys["Farmacéuticos"]</h5>
-                                <div class="row clearfix">
-                                    <div class="col-12" style="text-align:right;">
-                                        <button type="button" @onclick="(e)=>{OpenFarmaceutico();}"
-                                                class="btn btn-sm btn-outline-primary waves-effect">
-                                            @languageContainerService.Keys["Add"]
-                                        </button>
+                                <div class="row clearfix">                                   
+                                    <div class="col-sm-6">
+                                        <label for="password">@languageContainerService.Keys["Actividad"]</label>
+                                        <div class="form-group">
+                                            <div class="form-line">
+                                                <InputText class="form-control" @bind-Value="Establecimiento.Actividad" />
+                                                <ValidationMessage For=@(() => Establecimiento.Actividad) />
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-                                <!--begin::Section-->
-                                <div class="kt-section">
-                                    <div class="table-responsive">
-                                        <table class="table rounded table-striped">
-                                            <thead class=thead-light>
-                                                <tr>
-                                                    <th>@languageContainerService.Keys["Nombre"]</th>
-                                                    <th>@languageContainerService.Keys["Cédula"]</th>
-                                                    <th>@languageContainerService.Keys["No.Reg"]</th>
-                                                    <th>@languageContainerService.Keys["Folio"]</th>
-                                                    <th>@languageContainerService.Keys["Provincia"]</th>
-                                                    <th>@languageContainerService.Keys["Distrito"]</th>
-                                                    <th>@languageContainerService.Keys["Corregimiento"]</th>
-                                                    <th>@languageContainerService.Keys["Dirección"]</th>
-                                                    <th>@languageContainerService.Keys["Telefono"]</th>
-                                                    <th>@languageContainerService.Keys["Horario"]</th>
-                                                    <th></th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                @if (Establecimiento?.FarmaceuticoTablas?.LFarmaceuticos?.Count > 0)
-                                                {
-                                                    @foreach (var dt in Establecimiento.FarmaceuticoTablas.LFarmaceuticos)
+                                    <div class="col-sm-6">
+                                        <label>@languageContainerService.Keys["Clasificación"]</label>
+                                        <div class="form-group">
+                                            <div class="form-line">
+                                                <InputSelect @bind-Value="Establecimiento.Clasificacion" class="form-control">
+                                                    @foreach (enumAUD_ClasifEstablecimiento dt in Enum.GetValues(typeof(enumAUD_ClasifEstablecimiento)))
                                                     {
-                                                        <tr>
-                                                            <td scope="row">@dt.NombreCompleto</td>
-                                                            <td>@dt.Cedula</td>
-                                                            <td>@dt.NumReg</td>
-                                                            <td>@dt.Folio</td>
-                                                            <td>@dt.Provincia</td>
-                                                            <td>@dt.Distrito</td
-                                                            <td>@dt.Corregimiento</td>
-                                                            <td>@dt.Direccion</td>
-                                                            <td>@dt.Telefono</td>
-                                                            <td>@dt.Horario</td>
-                                                            <td style="text-align:right">
-                                                                        <div class="btn-group">
-                                                                            <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">@languageContainerService.Keys["Actions"]</button>
-                                                                            <div class="dropdown-menu">
-                                                                                 <a class="dropdown-item" href="javascript:void(0)" @onclick="() => OpenFarmaceutico(dt)" data-toggle="modal" data-target="#modal_createedit" data-ktportlet-tool="edit"><i class="fa fa-edit"></i>@languageContainerService.Keys["Edit"]</a>
-                                                                                <a class="dropdown-item" href="javascript:void(0)" @onclick="() => RemoveFarmaceutico(dt)"><i class="fa fa-trash"></i>@languageContainerService.Keys["Delete"]</a>
-                                                                            </div>
-                                                                        </div>
-                                                                        <!-- /btn-group -->
-                                                                    </td>
-                                                        </tr>
+                                                        <option value="@dt">@DataModel.Helper.Helper.GetDescription(dt)</option>
                                                     }
-                                                }
-                                            </tbody>
-                                        </table>
+                                                </InputSelect>
+                                                <ValidationMessage For=@(() => Establecimiento.Clasificacion) />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <label for="password">@languageContainerService.Keys["Controlado"]</label>
+                                        <div class="form-group">
+                                            <div class="form-line">
+                                                <InputText class="form-control" @bind-Value="Establecimiento.AreaControlado" />
+                                                <ValidationMessage For=@(() => Establecimiento.AreaControlado) />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <label for="password">@languageContainerService.Keys["Corregidor"]</label>
+                                        <div class="form-group">
+                                            <div class="form-line">
+                                                <InputText class="form-control" @bind-Value="Establecimiento.Corregidor" />
+                                                <ValidationMessage For=@(() => Establecimiento.Corregidor) />
+                                            </div>
+                                        </div>
+                                    </div>
+                                     <div class="col-sm-12">
+                                        <label for="password">@languageContainerService.Keys["Dirección Administrativa"]</label>
+                                        <div class="form-group">
+                                            <div class="form-line">
+                                                <InputText class="form-control" @bind-Value="Establecimiento.DirAdministrativa" />
+                                                <ValidationMessage For=@(() => Establecimiento.DirAdministrativa) />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12">
+                                        <label for="password">@languageContainerService.Keys["Observaciones"]</label>
+                                        <div class="form-group">
+                                            <div class="form-line">
+                                                <InputTextArea rows="4" class="form-control" @bind-Value="Establecimiento.Observaciones" />
+                                                <ValidationMessage For=@(() => Establecimiento.Observaciones) />
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
 
                             </div>
+                           
                             <div class="tab-pane" id="cap3" role="tabpanel">
                                 <h5>@languageContainerService.Keys["Representante Legal"]</h5>
                                 <div class="row clearfix">
@@ -512,10 +534,142 @@
                                             </div>
                                         </div>
                                     </div>
+                                    <div class="col-sm-4">
+                                        <label for="password">@languageContainerService.Keys["Distrito"]</label>
+                                        <div class="form-group">
+                                            <div class="form-line">
+                                                <InputText class="form-control" @bind-Value="Establecimiento.Regente.Distrito" />
+                                                <ValidationMessage For=@(() => Establecimiento.Regente.Distrito) />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <label for="password">@languageContainerService.Keys["Provincia"]</label>
+                                        <div class="form-group">
+                                            <div class="form-line">
+                                                <InputText class="form-control" @bind-Value="Establecimiento.Regente.Provincia" />
+                                                <ValidationMessage For=@(() => Establecimiento.Regente.Provincia) />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <label for="password">@languageContainerService.Keys["Corregimiento"]</label>
+                                        <div class="form-group">
+                                            <div class="form-line">
+                                                <InputText class="form-control" @bind-Value="Establecimiento.Regente.Corregimiento" />
+                                                <ValidationMessage For=@(() => Establecimiento.Regente.Corregimiento) />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12">
+                                        <label for="password">@languageContainerService.Keys["Dirección"]</label>
+                                        <div class="form-group">
+                                            <div class="form-line">
+                                                <InputText class="form-control" @bind-Value="Establecimiento.Regente.Direccion" />
+                                                <ValidationMessage For=@(() => Establecimiento.Regente.Direccion) />
+                                            </div>
+                                        </div>
+                                    </div>
+                                     <div class="col-sm-12">
+                                        <label for="password">@languageContainerService.Keys["Observaciones"]</label>
+                                        <div class="form-group">
+                                            <div class="form-line">
+                                                <InputTextArea rows="4" class="form-control" @bind-Value="Establecimiento.Regente.Observaciones" />
+                                                <ValidationMessage For=@(() => Establecimiento.Regente.Observaciones) />
+                                            </div>
+                                        </div>
+                                    </div>
+                                     <div class="col-sm-12">
+                                        <label for="password">@languageContainerService.Keys["Historial"]</label>
+                                        <div class="form-group">
+                                            <div class="form-line">
+                                                <InputTextArea rows="4" class="form-control" @bind-Value="Establecimiento.Regente.Historial" />
+                                                <ValidationMessage For=@(() => Establecimiento.Regente.Historial) />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <label>@languageContainerService.Keys["Visitador Médico"]</label>
+                                        <div class="form-group">
+                                            <div class="form-line">
+                                                <InputSelect @bind-Value="Establecimiento.Regente.VisitadorMed" class="form-control">
+                                                    <option value="@false">No</option>
+                                                    <option value="@true">Si</option>
+                                                </InputSelect>
+                                                <ValidationMessage For=@(() => Establecimiento.Regente.VisitadorMed) />
+                                            </div>
+                                        </div>
+                                    </div>
                                </div>
                                 
                             </div>
-                           </div>
+                           
+                             <div class="tab-pane" id="cap2" role="tabpanel">
+                                <h5>@languageContainerService.Keys["Farmacéuticos"]</h5>
+                                <div class="row clearfix">
+                                    <div class="col-12" style="text-align:right;">
+                                        <button type="button" @onclick="(e)=>{OpenFarmaceutico();}"
+                                                class="btn btn-sm btn-outline-primary waves-effect">
+                                            @languageContainerService.Keys["Add"]
+                                        </button>
+                                    </div>
+                                </div>
+                                <!--begin::Section-->
+                                <div class="kt-section">
+                                    <div class="table-responsive">
+                                        <table class="table rounded table-striped">
+                                            <thead class=thead-light>
+                                                <tr>
+                                                    <th>@languageContainerService.Keys["Nombre"]</th>
+                                                    <th>@languageContainerService.Keys["Cédula"]</th>
+                                                    <th>@languageContainerService.Keys["No.Reg"]</th>
+                                                    <th>@languageContainerService.Keys["Folio"]</th>
+                                                    <th>@languageContainerService.Keys["Provincia"]</th>
+                                                    <th>@languageContainerService.Keys["Distrito"]</th>
+                                                    <th>@languageContainerService.Keys["Corregimiento"]</th>
+                                                    <th>@languageContainerService.Keys["Dirección"]</th>
+                                                    <th>@languageContainerService.Keys["Telefono"]</th>
+                                                    <th>@languageContainerService.Keys["Horario"]</th>
+                                                    <th></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @if (Establecimiento?.FarmaceuticoTablas?.LFarmaceuticos?.Count > 0)
+                                                {
+                                                    @foreach (var dt in Establecimiento.FarmaceuticoTablas.LFarmaceuticos)
+                                                    {
+                                                        <tr>
+                                                            <td scope="row">@dt.NombreCompleto</td>
+                                                            <td>@dt.Cedula</td>
+                                                            <td>@dt.NumReg</td>
+                                                            <td>@dt.Folio</td>
+                                                            <td>@dt.Provincia</td>
+                                                            <td>@dt.Distrito</td
+                                                            <td>@dt.Corregimiento</td>
+                                                            <td>@dt.Direccion</td>
+                                                            <td>@dt.Telefono</td>
+                                                            <td>@dt.Horario</td>
+                                                            <td style="text-align:right">
+                                                                        <div class="btn-group">
+                                                                            <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">@languageContainerService.Keys["Actions"]</button>
+                                                                            <div class="dropdown-menu">
+                                                                                 <a class="dropdown-item" href="javascript:void(0)" @onclick="() => OpenFarmaceutico(dt)" data-toggle="modal" data-target="#modal_createedit" data-ktportlet-tool="edit"><i class="fa fa-edit"></i>@languageContainerService.Keys["Edit"]</a>
+                                                                                <a class="dropdown-item" href="javascript:void(0)" @onclick="() => RemoveFarmaceutico(dt)"><i class="fa fa-trash"></i>@languageContainerService.Keys["Delete"]</a>
+                                                                            </div>
+                                                                        </div>
+                                                                        <!-- /btn-group -->
+                                                                    </td>
+                                                        </tr>
+                                                    }
+                                                }
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+
+                            </div>
+                            
+                        </div>
 
                         <br>
                         <div class="modal-footer">

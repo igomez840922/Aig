@@ -353,6 +353,25 @@ namespace Aig.Auditoria.Helper
 
                                     estab.NumLicencia = numLic;// data.Cell(1).GetValue<string>();
                                     estab.Nombre = data.Cell(3).GetValue<string>();
+                                    estab.Actividad = data.Cell(8).GetValue<string>();//ACTIVIDAD_
+                                    estab.AreaControlado = data.Cell(33).GetValue<string>();//CONTROLADO
+                                    estab.Corregidor = data.Cell(43).GetValue<string>();//CORREGIDOR
+                                    estab.DirAdministrativa = data.Cell(30).GetValue<string>();//DIR_ADM
+                                    estab.Observaciones = data.Cell(11).GetValue<string>();//OBS
+                                    try {
+                                        estab.FechaCierre = data.Cell(21).GetValue<DateTime>();//FechaCierre
+                                    }
+                                    catch { }
+                                    try
+                                    {
+                                        estab.FechaModificacion= data.Cell(9).GetValue<DateTime>();//MODIFI
+                                    }
+                                    catch { }
+                                    try
+                                    {
+                                        estab.FechaVigencia = data.Cell(32).GetValue<DateTime>();//VIGENCIA
+                                    }
+                                    catch { }
 
                                     if (!string.IsNullOrEmpty(estab.Nombre) && !string.IsNullOrEmpty(estab.NumLicencia))
                                     {
@@ -575,6 +594,13 @@ namespace Aig.Auditoria.Helper
                                         farmaceutico.Distrito = data.Cell(16).GetValue<string>();
                                         farmaceutico.Provincia = data.Cell(17).GetValue<string>();
                                         farmaceutico.Corregimiento = data.Cell(18).GetValue<string>();
+                                        farmaceutico.Observaciones = data.Cell(2).GetValue<string>();//OBSERVACIO
+                                        farmaceutico.Historial = data.Cell(2).GetValue<string>();//HISTORIAL_
+                                        try
+                                        {
+                                            farmaceutico.VisitadorMed = data.Cell(21).GetValue<bool>();//V_MEDICO
+                                        }
+                                        catch { }
 
                                         lFarmaceuticos.Add(farmaceutico);
 
@@ -614,6 +640,9 @@ namespace Aig.Auditoria.Helper
                                                         Distrito = farm.Distrito,
                                                         Provincia = farm.Provincia,
                                                         Corregimiento = farm.Corregimiento,
+                                                        Observaciones = farm.Observaciones,
+                                                        Historial = farm.Historial,
+                                                        VisitadorMed = farm.VisitadorMed,
                                                     }
                                                     );
                                             }

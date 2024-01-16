@@ -50,5 +50,14 @@ namespace DataModel
         private string horario;
         public string Horario { get => horario; set => SetProperty(ref horario, value); }
 
+        private string observaciones;
+        public string Observaciones { get => observaciones; set => SetProperty(ref observaciones, value); }
+
+        private string historial;
+        public string Historial { get => historial; set => SetProperty(ref historial, value); }
+
+        private bool visitadorMed;
+        public bool VisitadorMed { get => visitadorMed; set => SetProperty(ref visitadorMed, value); }
+
     }
 }

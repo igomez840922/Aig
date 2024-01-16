@@ -26,6 +26,10 @@
         public string TelefonoTrabajo { get; set; }
 
         public string DireccionTrabajo { get; set; }
+        public string Observaciones { get; set; }
+        public string Historial { get; set; }
+        public bool VisitadorMed { get; set; }
+
 
     }
 }

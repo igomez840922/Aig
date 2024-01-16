@@ -269,5 +269,19 @@ namespace DataModel
         [System.ComponentModel.DataAnnotations.Schema.NotMapped]
         public PersonaDatos Regente { get => regente; set => SetProperty(ref regente, value); }
 
+        //Actividad
+        private string actividad;
+        public string Actividad { get => actividad; set => SetProperty(ref actividad, value); }
+
+        //Corregidor
+        private string corregidor;
+        public string Corregidor { get => corregidor; set => SetProperty(ref corregidor, value); }
+
+        //Direccion
+        private string dirAdministrativa;
+        public string DirAdministrativa { get => dirAdministrativa; set => SetProperty(ref dirAdministrativa, value); }
+
+        
+
     }
 }

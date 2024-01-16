@@ -263,12 +263,14 @@ namespace DataModel.Helper
     {
         [Description("None")]
         None = -1,
+        [Description("Por Asignar")]
+        ForAsign = 0,
         [Description("Pendiente")]
-        Pending = 0,
+        Pending = 1,
         [Description("En Proceso")]
-        InProcess = 1,
+        InProcess = 2,
         [Description("Finalizado")]
-        Completed = 2
+        Completed = 3
     }
 
     //public enum enumFMV_AlertType

@@ -125,8 +125,8 @@
                                 <label for="password">@languageContainerService.Keys["Dirección del Trabajo"]</label>
                                 <div class="form-group">
                                     <div class="form-line">
-                                        <InputText class="form-control" @bind-Value="Farmaceutico.TelefonoTrabajo" />
-                                        <ValidationMessage For=@(() => Farmaceutico.TelefonoTrabajo) />
+                                        <InputText class="form-control" @bind-Value="Farmaceutico.DireccionTrabajo" />
+                                        <ValidationMessage For=@(() => Farmaceutico.DireccionTrabajo) />
                                     </div>
                                 </div>
                             </div>
@@ -142,6 +142,38 @@
                                 </div>
                             </div>
                         </div>
+                        <di class="row clearfix">
+                             <div class="col-sm-12">
+                                        <label for="password">@languageContainerService.Keys["Observaciones"]</label>
+                                        <div class="form-group">
+                                            <div class="form-line">
+                                                <InputTextArea rows="4" class="form-control" @bind-Value="Farmaceutico.Observaciones" />
+                                                <ValidationMessage For=@(() => Farmaceutico.Observaciones) />
+                                            </div>
+                                        </div>
+                                    </div>
+                                     <div class="col-sm-12">
+                                        <label for="password">@languageContainerService.Keys["Historial"]</label>
+                                        <div class="form-group">
+                                            <div class="form-line">
+                                                <InputTextArea rows="4" class="form-control" @bind-Value="Farmaceutico.Historial" />
+                                                <ValidationMessage For=@(() =>Farmaceutico.Historial) />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <label>@languageContainerService.Keys["Visitador Médico"]</label>
+                                        <div class="form-group">
+                                            <div class="form-line">
+                                                <InputSelect @bind-Value="Farmaceutico.VisitadorMed" class="form-control">
+                                                    <option value="@false">No</option>
+                                                    <option value="@true">Si</option>
+                                                </InputSelect>
+                                                <ValidationMessage For=@(() => Farmaceutico.VisitadorMed) />
+                                            </div>
+                                        </div>
+                                    </div>
+                        </di>
                         
                         <br><br>
                         <div class="modal-footer">

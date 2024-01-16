@@ -44,7 +44,7 @@
                                         <label>@languageContainerService.Keys["EvaluatorDate"]</label>
                                         <div class="form-group">
                                             <div class="form-line">
-                                                <RadzenDatePicker Max="DateTime.Today" Min="Pmr.FechaEntrada" TValue="DateTime?" @bind-Value="Pmr.FechaEntregaEvaluador" ShowTime="false" DateFormat="dd/MM/yyyy" />
+                                                <RadzenDatePicker Max="DateTime.Today" Min="Pmr.FechaEntrada?.AddDays(-1)" TValue="DateTime?" @bind-Value="Pmr.FechaEntregaEvaluador" ShowTime="false" DateFormat="dd/MM/yyyy" />
                                                 <ValidationMessage For=@(() => Pmr.FechaEntregaEvaluador) />
                                             </div>
                                         </div>

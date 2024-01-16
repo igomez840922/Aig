@@ -39,5 +39,12 @@ namespace DataModel
        
         public string Cargo { get; set; }
         public string Departamento { get; set; }
+        public string Direccion { get; set; }
+        public string Observaciones { get; set; }
+        public string Historial { get; set; }
+        public string Distrito { get; set; }
+        public string Provincia { get; set; }
+        public string Corregimiento { get; set; }
+        public bool VisitadorMed { get; set; }
     }
 }

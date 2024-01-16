@@ -99,6 +99,7 @@ namespace Aig.FarmacoVigilancia.Components.Pmr
             if (Pmr.EvaluadorId != null && Pmr.EvaluadorId > 0)
             {
                 Pmr.Evaluador = await evaluatorService.Get(Pmr.EvaluadorId.Value);
+                Pmr.Status = Pmr.Status == DataModel.Helper.enumFMV_StatusPMR.ForAsign ? DataModel.Helper.enumFMV_StatusPMR.Pending : Pmr.Status;
             }
             if (Pmr.PmrProducto != null && string.IsNullOrEmpty(Pmr.PmrProducto.RegSanitario))
             {
