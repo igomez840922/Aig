@@ -75,7 +75,8 @@ namespace Aig.Farmacoterapia.Infrastructure.Persistence.Repositories.Studies
                                     string value = ((string)filteringOption.Value).ToLower();
                                     Expression<Func<AigEstudio, bool>> expression = f => f.Codigo.Contains(value) ||
                                     f.Titulo.ToLower().Contains(value) ||
-                                    f.CentroInvestigacion.ToLower().Contains(value);
+                                    f.CentroInvestigacion.ToLower().Contains(value) ||
+                                    f.NumTramite.ToLower().Contains(value);
                                     filterList.Add(expression);
                                 }
                                 break;

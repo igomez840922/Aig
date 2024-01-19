@@ -10,5 +10,6 @@ namespace Aig.Farmacoterapia.Domain.Interfaces.Integration
     public interface ITramitesServices
     {
         Task<IResult> SendNote(string code, UploadFileDTO file,CancellationToken cancellationToke = default);
+        Task<IResult> SendNote(string host, string code, UploadFileDTO file, CancellationToken cancellationToke = default);
     }
 }

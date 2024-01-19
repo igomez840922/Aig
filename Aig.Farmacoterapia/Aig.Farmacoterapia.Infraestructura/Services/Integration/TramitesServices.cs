@@ -38,8 +38,21 @@ namespace Aig.Farmacoterapia.Infrastructure.Services.Integration.SysFarm
                 return Result.Fail(response?.StatusDescription);
             }
             return response.Data.Succeeded ? Result.Success() : Result.Fail(response.Data.Messages);
-          
         }
-      
+
+        public async Task<IResult> SendNote(string host, string code, UploadFileDTO file, CancellationToken cancellationToke = default)
+        {
+            try {
+                var request = CreateRequest(host, $"api/tramitesAPIM/note/{code}", Method.POST);
+                request.AddJsonBody(file);
+                var response = await _requester.ExecuteAsync<ResponseModel>(request, cancellationToke);
+                if (response == null || response.Data == null || !response.IsSuccessful || string.IsNullOrEmpty(response.Content)){
+                    _logger.Error(new Exception($"host:{host} response:{response?.Content}").ToMessageAndCompleteStacktrace());
+                }
+            }
+            catch (Exception ex) { _logger.Error(ex.ToMessageAndCompleteStacktrace());}
+            return Result.Success();
+        }
+
     }
 }

@@ -1,6 +1,7 @@
 ﻿
 using Aig.Farmacoterapia.Domain.Interfaces;
 using Aig.Farmacoterapia.Infrastructure.Extensions;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Options;
 using RestSharp;
@@ -67,7 +68,18 @@ namespace Aig.Farmacoterapia.Infrastructure.Helpers.ApiClient
             //request.AddOrUpdateHeader("Authorization",$"Bearer {token}");
             return request;
         }
-
+        protected IRestRequest CreateRequest(string host, string path, Method method, Dictionary<string, string> parameters = default)
+        {
+            var absoluteUri = $"{host}/{path}";
+            if (parameters?.Count > 0)
+                absoluteUri = QueryHelpers.AddQueryString(absoluteUri, parameters);
+            IRestRequest request = new RestRequest(absoluteUri, method);
+            //var token = _config.Token;
+            //if (string.IsNullOrEmpty(token))
+            //    token = GetToken();
+            //request.AddOrUpdateHeader("Authorization",$"Bearer {token}");
+            return request;
+        }
         protected Uri BuildUri(string path)
         {
             var uriBuilder = new UriBuilder
