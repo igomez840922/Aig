@@ -21,12 +21,15 @@ namespace Aig.Auditoria.Controllers
         private readonly IWebHostEnvironment env;
         private readonly IDalService dalService;
         private readonly IPdfGenerationService pdfGenerationService;
+        private readonly IInspectionsService inspectionsService;
+        //
         public ActasController(IDalService dalService,IPdfGenerationService pdfGenerationService, 
-            IWebHostEnvironment env)
+            IWebHostEnvironment env, IInspectionsService inspectionsService)
         {
             this.dalService= dalService;
             this.pdfGenerationService = pdfGenerationService;
             this.env = env;
+            this.inspectionsService= inspectionsService;
         }
 
         [HttpGet("GetTest")]
@@ -143,7 +146,22 @@ namespace Aig.Auditoria.Controllers
                     inspeccion.EstablecimientoId = inspeccion.Establecimiento?.Id;
                     inspeccion.DatosEstablecimiento.Establecimiento = inspeccion.Establecimiento;
                     inspeccion.DatosEstablecimiento.EstablecimientoId = inspeccion.EstablecimientoId;
-                    inspeccion = dalService.Save<AUD_InspeccionTB>(inspeccion);
+
+                    inspeccion.DatosEstablecimiento.Direccion = !string.IsNullOrEmpty(inspeccion.Establecimiento.Ubicacion)? inspeccion.Establecimiento.Ubicacion: inspeccion.DatosEstablecimiento.Direccion;
+                    inspeccion.DatosEstablecimiento.Telefono = !string.IsNullOrEmpty(inspeccion.Establecimiento.Telefono1) ? inspeccion.Establecimiento.Telefono1: inspeccion.DatosEstablecimiento.Telefono;
+                    inspeccion.DatosEstablecimiento.Correo = !string.IsNullOrEmpty(inspeccion.Establecimiento.Email) ? inspeccion.Establecimiento.Email: inspeccion.DatosEstablecimiento.Correo;
+                    inspeccion.DatosEstablecimiento.Nombre = !string.IsNullOrEmpty(inspeccion.Establecimiento.Nombre) ? inspeccion.Establecimiento.Nombre: inspeccion.DatosEstablecimiento.Nombre;
+                    inspeccion.DatosEstablecimiento.NumLicencia = !string.IsNullOrEmpty(inspeccion.Establecimiento.NumLicencia) ? inspeccion.Establecimiento.NumLicencia: inspeccion.DatosEstablecimiento.NumLicencia;
+                    inspeccion.DatosEstablecimiento.AvisoOperaciones = !string.IsNullOrEmpty(inspeccion.Establecimiento.AvisoOperaciones) ? inspeccion.Establecimiento.AvisoOperaciones: inspeccion.DatosEstablecimiento.AvisoOperaciones;
+                    inspeccion.DatosEstablecimiento.Provincia = inspeccion.Establecimiento.Provincia!=null? inspeccion.Establecimiento.Provincia: inspeccion.DatosEstablecimiento.Provincia;
+                    inspeccion.DatosEstablecimiento.ProvinciaId = inspeccion.Establecimiento.Provincia != null ? inspeccion.Establecimiento.Provincia.Id: inspeccion.DatosEstablecimiento.ProvinciaId;
+                    inspeccion.DatosEstablecimiento.Distrito = inspeccion.Establecimiento.Distrito!=null? inspeccion.Establecimiento.Distrito: inspeccion.DatosEstablecimiento.Distrito;
+                    inspeccion.DatosEstablecimiento.Corregimiento = inspeccion.Establecimiento.Corregimiento!=null? inspeccion.Establecimiento.Corregimiento: inspeccion.DatosEstablecimiento.Corregimiento;
+                    inspeccion.DatosEstablecimiento.ReciboPago = !string.IsNullOrEmpty(inspeccion.Establecimiento.ReciboPago) ? inspeccion.Establecimiento.ReciboPago: inspeccion.DatosEstablecimiento.ReciboPago;
+
+                    inspeccion.DatosEstablecimiento.PendingUpdate = true;
+                    inspeccion.NumActa = inspectionsService.GetInspectNum(inspeccion);
+                    inspeccion = dalService.Save<AUD_InspeccionTB>(inspeccion);                    
                 }
 
                 var data = dalService.Get<AUD_InspeccionTB>(inspeccion.Id);

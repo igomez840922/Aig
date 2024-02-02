@@ -493,10 +493,11 @@ namespace Aig.FarmacoVigilancia.Controllers
                         {
                             ft.Concominantes.LProductos.Add(new FMV_RamFarmacoConcominante() 
                             {
-                                 Nombre = prd.NomComercial,
-                                ViaAdministracion = prd.ViaAdministracion,
+                                Nombre = prd.NomComercial,
+                                ViaAdministracion = string.Format("Dosis: {0}\r\nVía: {1}\r\nFrecuencia: {2}", prd.DosisAdministracion, prd.ViaAdministracion, prd.FrecuenciaAdministracion),
+                                //prd.ViaAdministracion,
                                 FechaTratamiento = prd.FechaIni?.ToString("dd/MM/yyyy") ?? "",
-                                Indicacion = prd.Diagnostico,
+                                Indicacion = prd.Diagnostico,                                 
                             });
                         }
                     }

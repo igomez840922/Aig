@@ -6290,7 +6290,7 @@ namespace Aig.Auditoria.Services
         }
 
 
-        private string GetInspectNum(AUD_InspeccionTB data)
+        public string GetInspectNum(AUD_InspeccionTB data)
         {
             string tipoActa = data.TipoActa.ToString();
             switch (data.TipoActa)
@@ -6316,6 +6316,8 @@ namespace Aig.Auditoria.Services
                         break;
                     }
             }
+
+            data.IntNumActa = data.IntNumActa>0? data.IntNumActa : (GetMaxInspectionActNumber() + 1);
 
             string tipoEstablecimiento = data.DatosEstablecimiento?.Establecimiento?.TipoEstablecimiento.ToString() ?? "";
             string provincia = data.DatosEstablecimiento?.Provincia?.Codigo ?? "";

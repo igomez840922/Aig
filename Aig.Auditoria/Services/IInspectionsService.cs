@@ -253,5 +253,7 @@ namespace Aig.Auditoria.Services
         Task<AUD_InspeccionTB> Save_AperCamUbicBotiquin_Cap3(AUD_InspeccionTB inspeccion);
         Task<AUD_InspeccionTB> Save_AperCamUbicBotiquin_Frima(AUD_InspeccionTB inspeccion);
 
+        string GetInspectNum(AUD_InspeccionTB data);
+
     }
 }
