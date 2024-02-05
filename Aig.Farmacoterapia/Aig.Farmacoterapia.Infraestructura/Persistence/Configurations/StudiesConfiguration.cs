@@ -94,7 +94,7 @@ namespace Aig.Farmacoterapia.Infrastructure.Persistence.Configurations
             builder.Property(p => p.Codigo)
                    .IsRequired()
                    .HasColumnType("nvarchar(250)");
-
+            builder.Ignore(c => c.Note);
             builder.ToTable("AigCodigos");
         }
     }

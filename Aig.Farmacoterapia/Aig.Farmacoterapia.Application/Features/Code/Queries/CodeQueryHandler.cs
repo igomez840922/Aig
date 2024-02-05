@@ -17,6 +17,7 @@ using Aig.Farmacoterapia.Domain.Specifications.Studies;
 using Aig.Farmacoterapia.Application.Medicament.Model;
 using Aig.Farmacoterapia.Domain.Entities;
 using Aig.Farmacoterapia.Application.Features.Medicament.Queries;
+using static SkiaSharp.HarfBuzz.SKShaper;
 
 namespace Aig.Farmacoterapia.Application.Features.Code.Queries
 {
@@ -109,7 +110,17 @@ namespace Aig.Farmacoterapia.Application.Features.Code.Queries
             }
             return answer;
         }
-
+        private string GetNote(long id)
+        { 
+            string note = string.Empty;
+            try {
+              AigEstudioDNFD study;
+              if ((study = _unitOfWork.Repository<AigEstudioDNFD>().GetAll().FirstOrDefault(p => p.AigCodigoEstudioId == id)) != null)
+                 note = study.NotaEvaluacion;
+            }
+            catch {;}
+            return note??string.Empty;
+        }
         public async Task<PaginatedResult<AigCodigoEstudio>> Handle(ListByTermQuery request, CancellationToken cancellationToken)
         {
             PaginatedResult<AigCodigoEstudio> answer;
@@ -125,10 +136,14 @@ namespace Aig.Farmacoterapia.Application.Features.Code.Queries
                         }
                     } : new List<FilteringOption>()
                 };
-                answer = await _repository.ListAsync(searchArgs);
+               answer = await _repository.ListAsync(searchArgs);
+               answer?.Data?.Select(p => {
+                    p.Note = GetNote(p.Id);
+                    return p;
+                }).ToList();
+
             }
-            catch (Exception exc)
-            {
+            catch (Exception exc) {
                 _logger.Error("Requested operation failed", exc);
                 return PaginatedResult<AigCodigoEstudio>.Failure(new List<string>() { exc.Message });
             }
