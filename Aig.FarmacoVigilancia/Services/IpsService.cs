@@ -43,7 +43,7 @@ namespace Aig.FarmacoVigilancia.Services
                               (model.EvaluatorId == null ? true : (data.EvaluadorId == model.EvaluatorId )) &&
                               (model.RegisterId == null ? true : (data.RegistradorId == model.RegisterId)) &&
                               (model.IpsStatusRevision == null ? true : (data.StatusRevision == model.IpsStatusRevision))
-                              orderby data.CreatedDate
+                              orderby data.CreatedDate descending
                               select data).Skip(model.PagIdx * model.PagAmt).Take(model.PagAmt).ToList();
 
                 model.Total = (from data in DalService.DBContext.Set<FMV_IpsTB>()

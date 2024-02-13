@@ -42,7 +42,7 @@ namespace Aig.FarmacoVigilancia.Services
                               (model.EvaluatorId == null ? true : (data.EvaluadorId == model.EvaluatorId )) &&
                               (model.AlertaNotaType == null ? true : (data.TipoAlerta == model.AlertaNotaType)) &&
                               (model.AlertaNotaStatus == null ? true : (data.Estado == model.AlertaNotaStatus))
-                              orderby data.CreatedDate
+                              orderby data.CreatedDate descending
                               select data).Skip(model.PagIdx * model.PagAmt).Take(model.PagAmt).ToList();
 
                 model.Total = (from data in DalService.DBContext.Set<FMV_AlertaTB>()

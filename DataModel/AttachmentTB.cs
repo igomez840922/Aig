@@ -43,7 +43,14 @@ namespace DataModel
 				{ return Base64; }
 
 				if (!string.IsNullOrEmpty(Url))
-				{ return Url; }
+				{
+					if (Url.StartsWith("/files/"))
+					{
+						Url = Url.Replace("/files/", "./files/");
+
+                    }
+					return Url; 
+				}
 
 				return "";
 			}
