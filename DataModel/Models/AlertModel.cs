@@ -7,20 +7,19 @@ using System.Threading.Tasks;
 
 namespace DataModel.Models
 {
+
     public class AlertModel
     {
-        public string NombreComercial { get; set; }
-        public string PrincipioActivo { get; set; }
-        public string RegSanitario { get; set; }
-        public string Descripcion { get; set; }
-        public LaboratorioTB? LaboratorioFabricante { get; set; }
-        public FMV_OrigenAlertaTB? OrigenAlerta { get; set; }
-        public DateTime? FechaEntrada { get; set; }
+        public string NumNota { get; set; }
+        public string Comentarios { get; set; }
         public List<AttachmentTB> LAdjuntos { get; set; }
-
+        public List<PersonaDatos> LCorreos { get; set; }
         public long IdTramite { get; set; }
-
-
+        public string NombreDirector { get; set; }
+        public string TituloNota { get; set; }
+        public string PrincipioActivo { get; set; }
+        public string CuerpoNota { get; set; }
+        public string FuentesBibliograficas { get; set; }
 
     }
 }

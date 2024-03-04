@@ -25,15 +25,17 @@
     <None Remove="Resources\en-US.yml" />
     <None Remove="Resources\es-ES.yml" />
     <None Remove="Resources\Establecimientos.xlsx" />
+    <None Remove="Resources\Establecimientos2.xlsx" />
     <None Remove="Resources\Farmaceuticos.xlsx" />
+    <None Remove="Resources\Farmaceuticos2.xlsx" />
     <None Remove="Resources\Horariosfarmaceuticos.xlsx" />
   </ItemGroup>
 
   <ItemGroup>
     <EmbeddedResource Include="Resources\en-US.yml" />
     <EmbeddedResource Include="Resources\es-ES.yml" />
-    <EmbeddedResource Include="Resources\Establecimientos.xlsx" />
-    <EmbeddedResource Include="Resources\Farmaceuticos.xlsx" />
+    <EmbeddedResource Include="Resources\Establecimientos2.xlsx" />
+    <EmbeddedResource Include="Resources\Farmaceuticos2.xlsx" />
     <EmbeddedResource Include="Resources\paises.json" />
     <EmbeddedResource Include="Resources\provincias.json" />
   </ItemGroup>
@@ -1803,6 +1805,11 @@
 
   <ItemGroup>
     <EmbeddedResource Include="Resources\Horariosfarmaceuticos.xlsx" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Establecimientos.xlsx" />
+    <EmbeddedResource Include="Resources\Farmaceuticos.xlsx" />
   </ItemGroup>
 
   <ItemGroup>

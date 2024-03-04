@@ -153,22 +153,25 @@ namespace Aig.FarmacoVigilancia.Controllers
             {
                 var data = dalService.Get<FMV_AlertaTB>(model.IdTramite);
 
-                if(data == null)
+                if (data == null)
                 {
                     data = new FMV_AlertaTB()
                     {
-                        FechaRecepcion = model.FechaEntrada,
-                        Producto = model.NombreComercial,
+                        FechaRecepcion = System.DateTime.Now,
+                        Producto = model.PrincipioActivo,
                         DCI = model.PrincipioActivo,
-                        OrigenAlertaId = model.OrigenAlerta.Id,
-                        Descripcion = model.Descripcion, //+ " " + model.LaboratorioFabricante?.Nombre ?? "" + " " + model.RegSanitario
-                        Observaciones = model.LaboratorioFabricante?.Nombre ?? "" + " " + model.RegSanitario
+                        Descripcion = model.TituloNota,
+                        TipoAlerta = DataModel.Helper.enumFMV_AlertType.NotaSeguridad,
+                        NumNota = model.NumNota,
+                        //OrigenAlertaId = model.OrigenAlerta.Id,
+                        //Descripcion = model.Descripcion, //+ " " + model.LaboratorioFabricante?.Nombre ?? "" + " " + model.RegSanitario
+                        Observaciones = model.CuerpoNota //model.LaboratorioFabricante?.Nombre ?? "" + " " + model.RegSanitario
                     };
                 }
-                
+
                 if (model?.LAdjuntos?.Count > 0)
                 {
-                    data.Adjunto = data.Adjunto!=null? data.Adjunto: new AttachmentData() { };
+                    data.Adjunto = data.Adjunto != null ? data.Adjunto : new AttachmentData() { };
                     data.Adjunto.LAttachments.Clear();
 
                     foreach (var item in model?.LAdjuntos)
@@ -181,6 +184,37 @@ namespace Aig.FarmacoVigilancia.Controllers
                 {
                     return Ok(result.Id);
                 }
+
+                //var data = dalService.Get<FMV_AlertaTB>(model.IdTramite);
+
+                //if(data == null)
+                //{
+                //    data = new FMV_AlertaTB()
+                //    {
+                //        FechaRecepcion = model.FechaEntrada,
+                //        Producto = model.NombreComercial,
+                //        DCI = model.PrincipioActivo,
+                //        OrigenAlertaId = model.OrigenAlerta.Id,
+                //        Descripcion = model.Descripcion, //+ " " + model.LaboratorioFabricante?.Nombre ?? "" + " " + model.RegSanitario
+                //        Observaciones = model.LaboratorioFabricante?.Nombre ?? "" + " " + model.RegSanitario
+                //    };
+                //}
+                
+                //if (model?.LAdjuntos?.Count > 0)
+                //{
+                //    data.Adjunto = data.Adjunto!=null? data.Adjunto: new AttachmentData() { };
+                //    data.Adjunto.LAttachments.Clear();
+
+                //    foreach (var item in model?.LAdjuntos)
+                //    {
+                //        data.Adjunto.LAttachments.Add(item);
+                //    }
+                //}
+                //var result = dalService.Save(data);
+                //if (result != null)
+                //{
+                //    return Ok(result.Id);
+                //}
             }
             catch (Exception ex) { return BadRequest(new { message = ex.Message }); }
 
@@ -366,11 +400,12 @@ namespace Aig.FarmacoVigilancia.Controllers
             try
             {
                 var nota = dalService.Get<FMV_NotaTB>(model.IdTramite);
-                if(nota == null)
+                if (nota == null)
                 {
-                    nota = new FMV_NotaTB() { 
+                    nota = new FMV_NotaTB()
+                    {
                         Adjunto = new AttachmentData() { },
-                         Descripcion = "--",
+                        Descripcion = "--",
                         Fecha = System.DateTime.Now,
                     };
                 }
@@ -378,7 +413,7 @@ namespace Aig.FarmacoVigilancia.Controllers
                 {
                     nota.NumNota = model.NumNota;
                     nota.Descripcion = model.Comentarios;
-                    
+
                     nota.Adjunto = nota.Adjunto != null ? nota.Adjunto : new AttachmentData() { };
                     nota.Adjunto.LAttachments = nota.Adjunto.LAttachments?.Count > 0 ? nota.Adjunto.LAttachments : new List<AttachmentTB>();
                     nota.Adjunto.LAttachments.Clear();

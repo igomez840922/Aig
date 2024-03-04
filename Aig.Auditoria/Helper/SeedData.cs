@@ -331,8 +331,10 @@ namespace Aig.Auditoria.Helper
                     }
                 }
 
-                if (dalService.Count<AUD_EstablecimientoTB>() <= 0)
+                //if (dalService.Count<AUD_EstablecimientoTB>() <= 0)
                 {
+                    PaisTB pais = dalService.Find<PaisTB>(x => x.Codigo == "PA");
+
                     using (Stream stream = Assembly.GetExecutingAssembly().GetManifestResourceStream("Aig.Auditoria.Resources.Establecimientos.xlsx"))
                     {
                         try
@@ -346,10 +348,10 @@ namespace Aig.Auditoria.Helper
                                 var numLic = data.Cell(1).GetValue<string>();
 
                                 AUD_EstablecimientoTB estab = dalService.Find<AUD_EstablecimientoTB>(x => x.NumLicencia == numLic);
-
-                                if (estab == null)
+                                estab = estab != null ? estab : new AUD_EstablecimientoTB();
+                                //if (estab == null)
                                 {
-                                    estab = new AUD_EstablecimientoTB();
+                                    //estab = new AUD_EstablecimientoTB();
 
                                     estab.NumLicencia = numLic;// data.Cell(1).GetValue<string>();
                                     estab.Nombre = data.Cell(3).GetValue<string>();
@@ -358,13 +360,32 @@ namespace Aig.Auditoria.Helper
                                     estab.Corregidor = data.Cell(43).GetValue<string>();//CORREGIDOR
                                     estab.DirAdministrativa = data.Cell(30).GetValue<string>();//DIR_ADM
                                     estab.Observaciones = data.Cell(11).GetValue<string>();//OBS
+                                    estab.Telefono1 = data.Cell(16).GetValue<string>();//Telefono1
+                                    estab.Telefono2 = data.Cell(31).GetValue<string>();//Telefono2
+                                    estab.ReciboPago = data.Cell(57).GetValue<string>();//ReciboPago
+                                    estab.Institucion = data.Cell(35).GetValue<string>();//Institucion
+                                    estab.Ubicacion = data.Cell(4).GetValue<string>();//Institucion
+                                    estab.Email = data.Cell(47).GetValue<string>();//Email
+                                    estab.NombreSociedad = data.Cell(6).GetValue<string>();//NombreSociedad
+                                    estab.RepLegalNombre = data.Cell(5).GetValue<string>();//NombreSociedad
+                                    estab.RepLegalCedula = data.Cell(34).GetValue<string>();//NombreSociedad
+
                                     try {
-                                        estab.FechaCierre = data.Cell(21).GetValue<DateTime>();//FechaCierre
+                                        estab.RepresentanteLegal = estab.RepresentanteLegal != null ? estab.RepresentanteLegal : new PersonaDatos();
+                                        estab.RepresentanteLegal.PrimerNombre = estab.RepLegalNombre.Split(" ").Length > 0? estab.RepLegalNombre.Split(" ")[0]:"";
+                                        estab.RepresentanteLegal.PrimerApellido = estab.RepLegalNombre.Split(" ").Length > 1 ? estab.RepLegalNombre.Split(" ")[1] : "";
+                                        estab.RepresentanteLegal.SegundoApellido = estab.RepLegalNombre.Split(" ").Length > 2 ? estab.RepLegalNombre.Split(" ")[2] : "";
+                                        estab.RepresentanteLegal.Identificacion = estab.RepLegalCedula;
+                                        //estab.RepresentanteLegal.Correo = estab.RepLegalCedula;
+                                    }
+                                    catch { }
+                                    try {
+                                        estab.FechaCierre = data.Cell(29).GetValue<DateTime>();//FechaCierre
                                     }
                                     catch { }
                                     try
                                     {
-                                        estab.FechaModificacion= data.Cell(9).GetValue<DateTime>();//MODIFI
+                                        estab.FechaModificacion= data.Cell(56).GetValue<DateTime>();//MODIFI
                                     }
                                     catch { }
                                     try
@@ -372,13 +393,62 @@ namespace Aig.Auditoria.Helper
                                         estab.FechaVigencia = data.Cell(32).GetValue<DateTime>();//VIGENCIA
                                     }
                                     catch { }
+                                    try
+                                    {
+                                        estab.FechaExpedida = data.Cell(19).GetValue<DateTime?>();
+                                    }
+                                    catch { }
+                                    try
+                                    {
+                                        estab.FechaExpiracion = data.Cell(20).GetValue<DateTime?>();
+                                    }
+                                    catch { }
+                                    try
+                                    {
+                                        estab.Periodo = data.Cell(2).GetValue<int?>();
+                                    }
+                                    catch { }
+                                    try
+                                    {
+                                        if (!string.IsNullOrEmpty(data.Cell(21).GetValue<string>()))
+                                        {
+                                            var provincia = dalService.Find<ProvinciaTB>(x => x.Nombre == data.Cell(21).GetValue<string>());
+                                            if (provincia == null)
+                                            {
+                                                provincia = new ProvinciaTB() { Nombre = data.Cell(21).GetValue<string>(), Codigo = data.Cell(21).GetValue<string>(), LDistritos = new List<DistritoTB>(), Pais = pais };
+                                                provincia = dalService.Save(provincia);
+                                            }
+                                            estab.ProvinciaId = provincia.Id;
+
+                                            if (!string.IsNullOrEmpty(data.Cell(22).GetValue<string>()))
+                                            {
+                                                var distrito = dalService.Find<DistritoTB>(x => x.Nombre == data.Cell(22).GetValue<string>() && x.ProvinciaId == estab.ProvinciaId);
+                                                if (distrito == null)
+                                                {
+                                                    distrito = new DistritoTB() { Nombre = data.Cell(22).GetValue<string>(), Codigo = data.Cell(22).GetValue<string>(), ProvinciaId = estab.ProvinciaId };
+                                                    distrito = dalService.Save(distrito);
+                                                }
+                                                estab.DistritoId = distrito.Id;
+
+                                                if (!string.IsNullOrEmpty(data.Cell(23).GetValue<string>()))
+                                                {
+                                                    var corregimineto = dalService.Find<CorregimientoTB>(x => x.Nombre == data.Cell(23).GetValue<string>() && x.DistritoId == estab.DistritoId);
+                                                    if (corregimineto == null)
+                                                    {
+                                                        corregimineto = new CorregimientoTB() { Nombre = data.Cell(23).GetValue<string>(), Codigo = data.Cell(23).GetValue<string>(), DistritoId = distrito.Id };
+                                                        corregimineto = dalService.Save(corregimineto);
+                                                    }
+                                                    estab.CorregimientoId = corregimineto.Id;
+                                                }                                                   
+                                            }                                            
+                                        }
+                                    }
+                                    catch { }
 
                                     if (!string.IsNullOrEmpty(estab.Nombre) && !string.IsNullOrEmpty(estab.NumLicencia))
                                     {
-                                        estab.Periodo = data.Cell(2).GetValue<int?>();
                                         estab.Ubicacion = data.Cell(4).GetValue<string>();
                                         estab.RepLegalNombre = data.Cell(5).GetValue<string>();
-                                        estab.NombreSociedad = data.Cell(6).GetValue<string>();
                                         switch (data.Cell(7).GetValue<string>())//Tipo Establecimiento
                                         {
                                             case "AGENCIA":
@@ -418,8 +488,6 @@ namespace Aig.Auditoria.Helper
                                                 }
                                         }
                                         estab.HorariosEstablecimiento = data.Cell(12).GetValue<string>();
-                                        estab.FechaExpedida = data.Cell(19).GetValue<DateTime?>();
-                                        estab.FechaExpiracion = data.Cell(20).GetValue<DateTime?>();
                                         switch (data.Cell(26).GetValue<string>()) //Clasificacion
                                         {
                                             case "APERTURA":
@@ -490,7 +558,7 @@ namespace Aig.Auditoria.Helper
                                                     break;
                                                 }
                                         }
-                                        estab.Email = data.Cell(47).GetValue<string>();
+                                        //estab.Email = data.Cell(47).GetValue<string>();
                                         if (!string.IsNullOrEmpty(estab.Email))
                                         {
                                             if (!Regex.IsMatch(estab.Email, @"^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$"))
@@ -595,7 +663,8 @@ namespace Aig.Auditoria.Helper
                                         farmaceutico.Provincia = data.Cell(17).GetValue<string>();
                                         farmaceutico.Corregimiento = data.Cell(18).GetValue<string>();
                                         farmaceutico.Observaciones = data.Cell(2).GetValue<string>();//OBSERVACIO
-                                        farmaceutico.Historial = data.Cell(2).GetValue<string>();//HISTORIAL_
+                                        farmaceutico.Historial = data.Cell(7).GetValue<string>();//HISTORIAL_
+                                        farmaceutico.Direccion = data.Cell(22).GetValue<string>();//Direccion
                                         try
                                         {
                                             farmaceutico.VisitadorMed = data.Cell(21).GetValue<bool>();//V_MEDICO
@@ -618,35 +687,70 @@ namespace Aig.Auditoria.Helper
                                 est.FarmaceuticoTablas = est.FarmaceuticoTablas != null ? est.FarmaceuticoTablas : new AUD_FarmaceuticoTablas();
                                 foreach (var horaio in lHorarios?.Where(x => x.NumLic?.Replace(" ", "") == est.NumLicencia?.Replace(" ", "")))
                                 {
-                                    if (!string.IsNullOrEmpty(horaio.NumRe1))
+                                    List<string> registros = new List<string>();
+                                    if(!string.IsNullOrEmpty(horaio.NumRe1))
+                                        registros.Add(horaio.NumRe1);
+                                    if (!string.IsNullOrEmpty(horaio.NumRe2))
+                                        registros.Add(horaio.NumRe2);
+                                    if (!string.IsNullOrEmpty(horaio.NumRe3))
+                                        registros.Add(horaio.NumRe3);
+                                    if (!string.IsNullOrEmpty(horaio.NumRe4))
+                                        registros.Add(horaio.NumRe4);
+                                    if (!string.IsNullOrEmpty(horaio.NumRe5))
+                                        registros.Add(horaio.NumRe5);
+                                    if (!string.IsNullOrEmpty(horaio.NumRe6))
+                                        registros.Add(horaio.NumRe6);
+                                    if (!string.IsNullOrEmpty(horaio.NumRe7))
+                                        registros.Add(horaio.NumRe7);
+                                    if (!string.IsNullOrEmpty(horaio.NumRe8))
+                                        registros.Add(horaio.NumRe8);
+                                    if (!string.IsNullOrEmpty(horaio.NumRe9))
+                                        registros.Add(horaio.NumRe9);
+                                    if (!string.IsNullOrEmpty(horaio.NumRe10))
+                                        registros.Add(horaio.NumRe10);
+                                    if (!string.IsNullOrEmpty(horaio.NumRe11))
+                                        registros.Add(horaio.NumRe11);
+                                    if (!string.IsNullOrEmpty(horaio.NumRe12))
+                                        registros.Add(horaio.NumRe12);
+                                    if (!string.IsNullOrEmpty(horaio.NumRe13))
+                                        registros.Add(horaio.NumRe13);
+                                    if (!string.IsNullOrEmpty(horaio.NumRe14))
+                                        registros.Add(horaio.NumRe14);
+                                    if (!string.IsNullOrEmpty(horaio.NumRe15))
+                                        registros.Add(horaio.NumRe15);
+
+                                    if (registros?.Count > 0)
                                     {
-                                        var farm = lFarmaceuticos.Where(x => x.NumReg?.Replace(" ", "") == horaio.NumRe1.Replace(" ", "")).FirstOrDefault();
-                                        if (farm != null)
+                                        foreach (var registro in registros)
                                         {
-                                            if (est.FarmaceuticoTablas.LFarmaceuticos.Find(x => x.NumReg?.Replace(" ", "") == farm.NumReg?.Replace(" ", "")) == null)
+                                            var farm = lFarmaceuticos.Where(x => x.NumReg?.Replace(" ", "") == registro.Replace(" ", "")).FirstOrDefault();
+                                            if (farm != null)
                                             {
-                                                est.FarmaceuticoTablas.LFarmaceuticos.Add(
-                                                    new AUD_Farmaceutico()
-                                                    {
-                                                        Direccion = farm.Direccion,
-                                                        NumReg = farm.NumReg,
-                                                        NombreCompleto = farm.NombreCompleto,
-                                                        Telefono = farm.Telefono,
-                                                        Folio = farm.Folio,
-                                                        Cedula = farm.Cedula,
-                                                        Sector = farm.Sector,
-                                                        TelefonoTrabajo = farm.TelefonoTrabajo,
-                                                        DireccionTrabajo = farm.DireccionTrabajo,
-                                                        Distrito = farm.Distrito,
-                                                        Provincia = farm.Provincia,
-                                                        Corregimiento = farm.Corregimiento,
-                                                        Observaciones = farm.Observaciones,
-                                                        Historial = farm.Historial,
-                                                        VisitadorMed = farm.VisitadorMed,
-                                                    }
-                                                    );
+                                                if (est.FarmaceuticoTablas.LFarmaceuticos.Find(x => x.NumReg?.Replace(" ", "") == farm.NumReg?.Replace(" ", "")) == null)
+                                                {
+                                                    est.FarmaceuticoTablas.LFarmaceuticos.Add(
+                                                        new AUD_Farmaceutico()
+                                                        {
+                                                            Direccion = farm.Direccion,
+                                                            NumReg = farm.NumReg,
+                                                            NombreCompleto = farm.NombreCompleto,
+                                                            Telefono = farm.Telefono,
+                                                            Folio = farm.Folio,
+                                                            Cedula = farm.Cedula,
+                                                            Sector = farm.Sector,
+                                                            TelefonoTrabajo = farm.TelefonoTrabajo,
+                                                            DireccionTrabajo = farm.DireccionTrabajo,
+                                                            Distrito = farm.Distrito,
+                                                            Provincia = farm.Provincia,
+                                                            Corregimiento = farm.Corregimiento,
+                                                            Observaciones = farm.Observaciones,
+                                                            Historial = farm.Historial,
+                                                            VisitadorMed = farm.VisitadorMed,
+                                                        }
+                                                        );
+                                                }
                                             }
-                                        }
+                                        }   
                                     }
                                 }
 
