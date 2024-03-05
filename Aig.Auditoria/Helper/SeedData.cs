@@ -331,7 +331,7 @@ namespace Aig.Auditoria.Helper
                     }
                 }
 
-                //if (dalService.Count<AUD_EstablecimientoTB>() <= 0)
+                if (dalService.Count<AUD_EstablecimientoTB>() <= 0)
                 {
                     PaisTB pais = dalService.Find<PaisTB>(x => x.Codigo == "PA");
 

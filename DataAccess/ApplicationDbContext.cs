@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.ApiAuthorization.IdentityServer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Storage;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 using System;
@@ -11,6 +12,7 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Nodes;
 using System.Threading.Tasks;
 
 
@@ -38,8 +40,21 @@ namespace DataAccess
             base.OnConfiguring(optionsBuilder);
         }
 
+        
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            //modelBuilder
+            //.HasDbFunction(typeof(ApplicationDbContext).GetMethod(nameof(DataAccess.Helper.Helper.JsonValue), new[] { typeof(string), typeof(string) }))
+            //.HasName("JsonValue");
+
+            modelBuilder.HasDbFunction(
+        typeof(Database).GetMethod(nameof(Helper.Helper.JsonValue))!
+    ).HasName("JSON_VALUE").IsBuiltIn();
+
+            modelBuilder.HasDbFunction(
+                typeof(Database).GetMethod(nameof(Helper.Helper.JsonQuery))!
+            ).HasName("JSON_QUERY").IsBuiltIn();
 
             //modelBuilder.Entity<ApplicationUser>()
             //    .HasMany(e => e.LPosSystems)

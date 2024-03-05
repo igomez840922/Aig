@@ -73,6 +73,7 @@
                                                             <th>@languageContainerService.Keys["Sector"]</th>
                                                             <th>@languageContainerService.Keys["Institute"]</th>
                                                             <th>@languageContainerService.Keys["Ubication"]</th>
+                                                            <th>@languageContainerService.Keys["Idoneidad"]</th>
                                                             <th>@languageContainerService.Keys["PhoneNumber"]</th>
                                                             <th>@languageContainerService.Keys["Email"]</th>
                                                             <th>@languageContainerService.Keys["Status"]</th>
@@ -89,6 +90,7 @@
                                                                 <td>@(DataModel.Helper.Helper.GetDescription(dt.Sector))</td>
                                                                 <td>@dt.Institucion</td>
                                                                 <td>@dt.Ubicacion</td>
+                                                                <td>@(dt.Regente?.NumIdoneidad??"")</td>
                                                                 <td>@dt.Telefono1</td>
                                                                 <td>@dt.Email</td>
                                                                 <td>@(DataModel.Helper.Helper.GetDescription(dt.Status))</td>
