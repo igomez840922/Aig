@@ -48,13 +48,13 @@ namespace DataAccess
             //.HasDbFunction(typeof(ApplicationDbContext).GetMethod(nameof(DataAccess.Helper.Helper.JsonValue), new[] { typeof(string), typeof(string) }))
             //.HasName("JsonValue");
 
-            modelBuilder.HasDbFunction(
-        typeof(Database).GetMethod(nameof(Helper.Helper.JsonValue))!
-    ).HasName("JSON_VALUE").IsBuiltIn();
+    //        modelBuilder.HasDbFunction(
+    //    typeof(Database).GetMethod(nameof(Helper.Helper.JsonValue))!
+    //).HasName("JSON_VALUE").IsBuiltIn();
 
-            modelBuilder.HasDbFunction(
-                typeof(Database).GetMethod(nameof(Helper.Helper.JsonQuery))!
-            ).HasName("JSON_QUERY").IsBuiltIn();
+    //        modelBuilder.HasDbFunction(
+    //            typeof(Database).GetMethod(nameof(Helper.Helper.JsonQuery))!
+    //        ).HasName("JSON_QUERY").IsBuiltIn();
 
             //modelBuilder.Entity<ApplicationUser>()
             //    .HasMany(e => e.LPosSystems)

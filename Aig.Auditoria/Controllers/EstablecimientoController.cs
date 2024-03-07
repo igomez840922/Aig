@@ -4,6 +4,7 @@ using DataAccess;
 using DataModel;
 using DataModel.DTO;
 using DataModel.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -26,6 +27,7 @@ namespace Aig.Auditoria.Controllers
         }
 
         [HttpGet("GetByNumber")]
+        [AllowAnonymous]
         public async Task<IActionResult> GetByNumber(string number)
         {
             try {
@@ -48,6 +50,7 @@ namespace Aig.Auditoria.Controllers
         }
 
         [HttpPost("SaveUpdate")]
+        [AllowAnonymous]
         public async Task<IActionResult> SaveUpdate([FromBody] AUD_EstablecimientoTB establecimiento)
         {
             //if (userForRegistration == null || !ModelState.IsValid)

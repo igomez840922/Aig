@@ -22,14 +22,14 @@ namespace Aig.Auditoria.Services
 
                 model.Ldata  = (from data in DalService.DBContext.Set<AUD_EstablecimientoTB>()
                               where data.Deleted == false &&
-                              (string.IsNullOrEmpty(model.Filter) ? true : (data.Nombre.Contains(model.Filter) || data.NumLicencia.Contains(model.Filter) || data.Institucion.Contains(model.Filter) || data.Telefono1.Contains(model.Filter) || data.Telefono2.Contains(model.Filter) || data.Email.Contains(model.Filter) || DataAccess.Helper.Helper.JsonValue("Regente", "NumIdoneidad") == model.Filter ))//|| data.Regente.NumIdoneidad.Contains(model.Filter)
+                              (string.IsNullOrEmpty(model.Filter) ? true : (data.Nombre.Contains(model.Filter) || data.NumLicencia.Contains(model.Filter) || data.Institucion.Contains(model.Filter) || data.Telefono1.Contains(model.Filter) || data.Telefono2.Contains(model.Filter) || data.Email.Contains(model.Filter)  ))//|| DataAccess.Helper.Helper.JsonValue("Regente", "NumIdoneidad") == model.Filter
                                 orderby data.Nombre
                               select data).Skip(model.PagIdx * model.PagAmt).Take(model.PagAmt).ToList();
 
                 model.Total = (from data in DalService.DBContext.Set<AUD_EstablecimientoTB>()
                              where data.Deleted == false &&
-                             (string.IsNullOrEmpty(model.Filter) ? true : (data.Nombre.Contains(model.Filter) || data.NumLicencia.Contains(model.Filter) || data.Institucion.Contains(model.Filter) || data.Telefono1.Contains(model.Filter) || data.Telefono2.Contains(model.Filter) || data.Email.Contains(model.Filter) || DataAccess.Helper.Helper.JsonValue("Regente", "NumIdoneidad") == model.Filter))//|| data.Regente.NumIdoneidad.Contains(model.Filter)
-                select data).Count();
+                             (string.IsNullOrEmpty(model.Filter) ? true : (data.Nombre.Contains(model.Filter) || data.NumLicencia.Contains(model.Filter) || data.Institucion.Contains(model.Filter) || data.Telefono1.Contains(model.Filter) || data.Telefono2.Contains(model.Filter) || data.Email.Contains(model.Filter) ))//|| || DataAccess.Helper.Helper.JsonValue("Regente", "NumIdoneidad") == model.Filter
+                               select data).Count();
 
                 //MyDbContext.JsonValue(e.ColumnaJson, "MiClave") == "MiValor")
             }

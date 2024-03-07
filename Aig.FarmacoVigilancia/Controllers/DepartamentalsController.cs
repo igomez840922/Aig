@@ -6,7 +6,9 @@ using DataModel;
 using DataModel.DTO;
 using DataModel.Models;
 using DocumentFormat.OpenXml.Office2010.Excel;
+using DocumentFormat.OpenXml.Office2016.Drawing.ChartDrawing;
 using Duende.IdentityServer.Models;
+using Irony.Parsing;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
@@ -158,16 +160,17 @@ namespace Aig.FarmacoVigilancia.Controllers
                     data = new FMV_AlertaTB()
                     {
                         FechaRecepcion = System.DateTime.Now,
-                        Producto = model.PrincipioActivo,
-                        DCI = model.PrincipioActivo,
-                        Descripcion = model.TituloNota,
-                        TipoAlerta = DataModel.Helper.enumFMV_AlertType.NotaSeguridad,
-                        NumNota = model.NumNota,
-                        //OrigenAlertaId = model.OrigenAlerta.Id,
-                        //Descripcion = model.Descripcion, //+ " " + model.LaboratorioFabricante?.Nombre ?? "" + " " + model.RegSanitario
-                        Observaciones = model.CuerpoNota //model.LaboratorioFabricante?.Nombre ?? "" + " " + model.RegSanitario
                     };
                 }
+
+                data.Producto = model.PrincipioActivo;
+                data.DCI = model.PrincipioActivo;
+                data.Descripcion = model.TituloNota;
+                data.TipoAlerta = DataModel.Helper.enumFMV_AlertType.NotaSeguridad;
+                data.NumNota = model.NumNota;
+                //data.OrigenAlertaId = model.OrigenAlerta.Id,
+                //data.Descripcion = model.Descripcion, //+ " " + model.LaboratorioFabricante?.Nombre ?? "" + " " + model.RegSanitario
+                data.Observaciones = model.CuerpoNota; //model.LaboratorioFabricante?.Nombre ?? "" + " " + model.RegSanitario
 
                 if (model?.LAdjuntos?.Count > 0)
                 {
