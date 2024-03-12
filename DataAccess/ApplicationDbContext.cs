@@ -40,7 +40,15 @@ namespace DataAccess
             base.OnConfiguring(optionsBuilder);
         }
 
-        
+        // in the context class
+        // adding static function to the DB Context
+        [DbFunction("JSON_VALUE", IsBuiltIn = true, IsNullable = false)]
+        public static string JsonValue(string expression, string path) => throw new NotImplementedException();
+        //[DbFunction("JSON_VALUE", IsBuiltIn = true, IsNullable = false)]
+        //public static string JsonValueObj<T>(T expression, string path) where T : class
+        //{
+        //    throw new NotImplementedException();
+        //}
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -1859,7 +1867,7 @@ namespace DataAccess
 
             base.OnModelCreating(modelBuilder);
         }
-       
+
         public virtual DbSet<AttachmentTB> Attachment { get; set; }
         public virtual DbSet<ActividadEstablecimientoTB> ActividadEstablecimiento { get; set; }
         public virtual DbSet<AUD_EstablecimientoTB> AUD_Establecimiento { get; set; }

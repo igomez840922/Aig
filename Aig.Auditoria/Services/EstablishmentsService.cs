@@ -3,6 +3,9 @@ using DataModel.Models;
 using DataModel;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using DocumentFormat.OpenXml.InkML;
+using Microsoft.AspNetCore.SignalR;
+using System.Linq;
 
 namespace Aig.Auditoria.Services
 {    
@@ -18,8 +21,10 @@ namespace Aig.Auditoria.Services
         {
             try
             {
+                
+                //var dataRes = DalService.DBContext.AUD_Establecimiento.Where(d => ApplicationDbContext.JsonValue(nameof(d.Nombre), "$.PrimerNombre").Contains(model.Filter)).ToList();
                 model.Ldata = null; model.Total = 0;
-
+                                
                 model.Ldata  = (from data in DalService.DBContext.Set<AUD_EstablecimientoTB>()
                               where data.Deleted == false &&
                               (string.IsNullOrEmpty(model.Filter) ? true : (data.Nombre.Contains(model.Filter) || data.NumLicencia.Contains(model.Filter) || data.Institucion.Contains(model.Filter) || data.Telefono1.Contains(model.Filter) || data.Telefono2.Contains(model.Filter) || data.Email.Contains(model.Filter)  ))//|| DataAccess.Helper.Helper.JsonValue("Regente", "NumIdoneidad") == model.Filter
@@ -28,9 +33,54 @@ namespace Aig.Auditoria.Services
 
                 model.Total = (from data in DalService.DBContext.Set<AUD_EstablecimientoTB>()
                              where data.Deleted == false &&
-                             (string.IsNullOrEmpty(model.Filter) ? true : (data.Nombre.Contains(model.Filter) || data.NumLicencia.Contains(model.Filter) || data.Institucion.Contains(model.Filter) || data.Telefono1.Contains(model.Filter) || data.Telefono2.Contains(model.Filter) || data.Email.Contains(model.Filter) ))//|| || DataAccess.Helper.Helper.JsonValue("Regente", "NumIdoneidad") == model.Filter
+                             (string.IsNullOrEmpty(model.Filter) ? true : (data.Nombre.Contains(model.Filter) || data.NumLicencia.Contains(model.Filter) || data.Institucion.Contains(model.Filter) || data.Telefono1.Contains(model.Filter) || data.Telefono2.Contains(model.Filter) || data.Email.Contains(model.Filter) ))//|| DataAccess.Helper.Helper.JsonValue("Regente", "NumIdoneidad") == model.Filter
                                select data).Count();
 
+                if (!string.IsNullOrEmpty(model.Filter))
+                {
+                    try {
+                        var ldata = DalService.DBContext.AUD_Establecimiento
+    .FromSqlRaw(@$"SELECT * FROM AUD_Establecimiento WHERE 
+JSON_VALUE(Regente, '$.NumIdoneidad') like '%{model.Filter}%'").ToList();
+                        if (ldata?.Count > 0)
+                        {
+                            model.Ldata = model.Ldata != null ? model.Ldata : new List<AUD_EstablecimientoTB>();
+                            if (ldata.Concat(model.Ldata).Distinct().Count() > 0)
+                            {
+                                model.Total = ldata.Concat(model.Ldata).Distinct().Count();
+                                model.Ldata.AddRange(ldata);
+                                model.Ldata = model.Ldata.Distinct().ToList();
+                                model.Ldata = model.Ldata.Skip(model.PagIdx * model.PagAmt).Take(model.PagAmt).ToList();
+                            }
+                        }
+                    }
+                    catch { }
+                    try
+                    {
+                        //                     var ldata = DalService.DBContext.AUD_Establecimiento
+                        //.FromSqlRaw(string.Format("SELECT DISTINCT t.* FROM AUD_Establecimiento as t CROSS APPLY OPENJSON(t.FarmaceuticoTablas, '$.LFarmaceuticos') WITH(NumReg NVARCHAR(MAX) '$.NumReg') AS jsonFarma WHERE jsonFarma.NumReg LIKE '%{0}%'", model.Filter)).ToList();
+
+                        var ldata = DalService.DBContext.AUD_Establecimiento
+   .FromSqlRaw(string.Format("SELECT * FROM [AUD_Establecimiento] WHERE JSON_VALUE(FarmaceuticoTablas,'$.LFarmaceuticos[0].NumReg') LIKE '%{0}%'", model.Filter)).ToList();
+                       
+                        if (ldata?.Count > 0)
+                        {
+                            model.Ldata = model.Ldata != null ? model.Ldata : new List<AUD_EstablecimientoTB>();
+                            if (ldata.Concat(model.Ldata).Distinct().Count() > 0)
+                            {
+                                model.Total = ldata.Concat(model.Ldata).Distinct().Count();
+                                model.Ldata.AddRange(ldata);
+                                model.Ldata = model.Ldata.Distinct().ToList();
+                                model.Ldata = model.Ldata.Skip(model.PagIdx * model.PagAmt).Take(model.PagAmt).ToList();
+                            }
+                        }
+                    }
+                    catch { }
+
+                   
+                }
+                
+                
                 //MyDbContext.JsonValue(e.ColumnaJson, "MiClave") == "MiValor")
             }
             catch (Exception ex)
