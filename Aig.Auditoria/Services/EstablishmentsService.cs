@@ -50,19 +50,20 @@ JSON_VALUE(Regente, '$.NumIdoneidad') like '%{model.Filter}%'").ToList();
                                 model.Total = ldata.Concat(model.Ldata).Distinct().Count();
                                 model.Ldata.AddRange(ldata);
                                 model.Ldata = model.Ldata.Distinct().ToList();
-                                model.Ldata = model.Ldata.Skip(model.PagIdx * model.PagAmt).Take(model.PagAmt).ToList();
+                                //model.Ldata = model.Ldata.Skip(model.PagIdx * model.PagAmt).Take(model.PagAmt).ToList();
                             }
                         }
                     }
                     catch { }
                     try
                     {
-                        //                     var ldata = DalService.DBContext.AUD_Establecimiento
-                        //.FromSqlRaw(string.Format("SELECT DISTINCT t.* FROM AUD_Establecimiento as t CROSS APPLY OPENJSON(t.FarmaceuticoTablas, '$.LFarmaceuticos') WITH(NumReg NVARCHAR(MAX) '$.NumReg') AS jsonFarma WHERE jsonFarma.NumReg LIKE '%{0}%'", model.Filter)).ToList();
+                        
+    var ldata = DalService.DBContext.AUD_Establecimiento
+   .FromSqlRaw(string.Format("SELECT DISTINCT t.* FROM AUD_Establecimiento as t CROSS APPLY OPENJSON(t.FarmaceuticoTablas, '$.LFarmaceuticos') WITH(NumReg NVARCHAR(MAX) '$.NumReg') AS jsonFarma WHERE jsonFarma.NumReg LIKE '%{0}%'", model.Filter)).ToList();
 
-                        var ldata = DalService.DBContext.AUD_Establecimiento
-   .FromSqlRaw(string.Format("SELECT * FROM [AUD_Establecimiento] WHERE JSON_VALUE(FarmaceuticoTablas,'$.LFarmaceuticos[0].NumReg') LIKE '%{0}%'", model.Filter)).ToList();
-                       
+                        //                     var ldata = DalService.DBContext.AUD_Establecimiento
+                        //.FromSqlRaw(string.Format("SELECT * FROM [AUD_Establecimiento] WHERE JSON_VALUE(FarmaceuticoTablas,'$.LFarmaceuticos[0].NumReg') LIKE '%{0}%'", model.Filter)).ToList();
+
                         if (ldata?.Count > 0)
                         {
                             model.Ldata = model.Ldata != null ? model.Ldata : new List<AUD_EstablecimientoTB>();
@@ -71,7 +72,7 @@ JSON_VALUE(Regente, '$.NumIdoneidad') like '%{model.Filter}%'").ToList();
                                 model.Total = ldata.Concat(model.Ldata).Distinct().Count();
                                 model.Ldata.AddRange(ldata);
                                 model.Ldata = model.Ldata.Distinct().ToList();
-                                model.Ldata = model.Ldata.Skip(model.PagIdx * model.PagAmt).Take(model.PagAmt).ToList();
+                                //model.Ldata = model.Ldata.Skip(model.PagIdx * model.PagAmt).Take(model.PagAmt).ToList();
                             }
                         }
                     }
