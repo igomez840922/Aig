@@ -599,32 +599,39 @@ namespace Aig.Auditoria.Helper
                                         horario.HorarioRe2 = data.Cell(3).GetValue<string>();
                                         horario.NumRe1 = data.Cell(4).GetValue<string>();
                                         horario.NumRe2 = data.Cell(5).GetValue<string>();
+
                                         horario.HorarioRe3 = data.Cell(6).GetValue<string>();
                                         horario.HorarioRe4 = data.Cell(7).GetValue<string>();
                                         horario.NumRe3 = data.Cell(8).GetValue<string>();
                                         horario.NumRe4 = data.Cell(9).GetValue<string>();
+
                                         horario.HorarioRe5 = data.Cell(10).GetValue<string>();
                                         horario.HorarioRe6 = data.Cell(11).GetValue<string>();
                                         horario.NumRe5 = data.Cell(12).GetValue<string>();
                                         horario.NumRe6 = data.Cell(13).GetValue<string>();
-                                        horario.NumRe7 = data.Cell(14).GetValue<string>();
-                                        horario.NumRe8 = data.Cell(15).GetValue<string>();
-                                        horario.NumRe9 = data.Cell(16).GetValue<string>();
-                                        horario.NumRe10 = data.Cell(17).GetValue<string>();
-                                        horario.HorarioRe7 = data.Cell(18).GetValue<string>();
-                                        horario.NumRe11 = data.Cell(19).GetValue<string>();
-                                        horario.NumRe12 = data.Cell(20).GetValue<string>();
-                                        horario.HorarioRe8 = data.Cell(21).GetValue<string>();
-                                        horario.HorarioRe9 = data.Cell(22).GetValue<string>();
-                                        horario.HorarioRe10 = data.Cell(23).GetValue<string>();
-                                        horario.HorarioRe11 = data.Cell(24).GetValue<string>();
-                                        horario.NumRe13 = data.Cell(40).GetValue<string>();
-                                        horario.NumRe14 = data.Cell(41).GetValue<string>();
-                                        horario.NumRe15 = data.Cell(42).GetValue<string>();
-                                        horario.HorarioRe12 = data.Cell(43).GetValue<string>();
-                                        horario.HorarioRe13 = data.Cell(44).GetValue<string>();
-                                        horario.HorarioRe14 = data.Cell(45).GetValue<string>();
-                                        horario.HorarioRe15 = data.Cell(46).GetValue<string>();
+
+                                        horario.HorarioRe7 = data.Cell(14).GetValue<string>();
+                                        horario.HorarioRe8 = data.Cell(15).GetValue<string>();
+                                        horario.NumRe7 = data.Cell(16).GetValue<string>();
+                                        horario.NumRe8 = data.Cell(17).GetValue<string>();
+
+                                        horario.HorarioRe9 = data.Cell(18).GetValue<string>();
+                                        horario.HorarioRe10 = data.Cell(19).GetValue<string>();
+                                        horario.NumRe9 = data.Cell(20).GetValue<string>();
+                                        horario.NumRe10 = data.Cell(21).GetValue<string>();
+
+                                        horario.HorarioRe11 = data.Cell(22).GetValue<string>();
+                                        horario.HorarioRe12 = data.Cell(23).GetValue<string>();
+                                        horario.NumRe11 = data.Cell(24).GetValue<string>();
+                                        horario.NumRe12 = data.Cell(25).GetValue<string>();
+
+                                        horario.HorarioRe13 = data.Cell(26).GetValue<string>();
+                                        horario.HorarioRe14 = data.Cell(27).GetValue<string>();
+                                        horario.NumRe13 = data.Cell(28).GetValue<string>();
+                                        horario.NumRe14 = data.Cell(29).GetValue<string>();
+
+                                        horario.HorarioRe15 = data.Cell(30).GetValue<string>();
+                                        horario.NumRe15 = data.Cell(31).GetValue<string>();
 
                                         lHorarios.Add(horario);
                                     }

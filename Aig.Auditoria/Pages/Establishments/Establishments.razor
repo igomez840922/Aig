@@ -67,11 +67,12 @@
                                 <table class="table rounded table-striped">
                                 <thead class=thead-light>
                                     <tr>
+                                        <th></th>
                                         <th>@languageContainerService.Keys["Name"]</th>
                                                             <th>@languageContainerService.Keys["LicNumber"]</th>
                                                             <th>@languageContainerService.Keys["Type"]</th>
-                                                            <th>@languageContainerService.Keys["Sector"]</th>
-                                                            <th>@languageContainerService.Keys["Institute"]</th>
+                                                            @* <th>@languageContainerService.Keys["Sector"]</th>
+                                                            <th>@languageContainerService.Keys["Institute"]</th> *@
                                                             <th>@languageContainerService.Keys["Ubication"]</th>
                                                             <th>@languageContainerService.Keys["Idoneidad"]</th>
                                                             <th>@languageContainerService.Keys["PhoneNumber"]</th>
@@ -84,11 +85,14 @@
                                 @foreach (var dt in dataModel.Ldata)
                                 {
                                     <tr>
+                                                                <td>
+                                                                    <a class="dropdown-item" href="javascript:void(0)" @onclick="() =>{dt.ViewDetail = !dt.ViewDetail;}" data-toggle="modal" data-target="#modal_createedit" data-ktportlet-tool="edit"><i class="fa fa-eye"></i></a>
+                                                                </td>
                                                                 <td scope="row">@dt.Nombre</td>
                                                                 <td scope="row">@dt.NumLicencia</td>
                                                                 <td>@(DataModel.Helper.Helper.GetDescription(dt.TipoEstablecimiento))</td>
-                                                                <td>@(DataModel.Helper.Helper.GetDescription(dt.Sector))</td>
-                                                                <td>@dt.Institucion</td>
+                                                               @*  <td>@(DataModel.Helper.Helper.GetDescription(dt.Sector))</td>
+                                                                <td>@dt.Institucion</td> *@
                                                                 <td>@dt.Ubicacion</td>
                                                                 <td>@(dt.Regente?.NumIdoneidad??"")</td>
                                                                 <td>@dt.Telefono1</td>
@@ -105,6 +109,48 @@
                                         <!-- /btn-group -->
                                         </td>
                                     </tr>
+                                    @if (dt.ViewDetail){
+                                        <tr style="background-color:transparent !important">
+                                                                    <td style="background-color:transparent!important"></td>
+                                                                    <td colspan="10" style="background-color:transparent!important">
+
+                                                                        <table class="table" style="background-color:transparent!important;width:auto;margin-bottom:0px;">
+                                                                            <thead style="background-color:transparent!important">
+                                                                            <tr style="background-color:transparent!important;">
+                                                                                    <td colspan="3" style="background-color:transparent!important;font-weight:bold!important;color:black!important;">Regente Farmaceutico:</td>
+                                                                            </tr>
+                                                                            </thead>
+                                                                            <tbody style="background-color:transparent!important">
+                                                                                <tr style="background-color:transparent!important">
+                                                                                    <td scope="row" style="background-color:transparent!important;width:auto;">@(dt.Regente?.NombreCompleto ?? "")</td>
+                                                                                    <td style="background-color:transparent!important;width:auto;">@(dt.Regente == null || (string.IsNullOrWhiteSpace(dt.Regente.NumIdoneidad)) ? "" : ("No. Idoneidad: " + dt.Regente?.NumIdoneidad ?? ""))</td>
+                                                                                    <td style="background-color:transparent!important">&emsp;</td>
+                                                                                </tr>
+                                                                            </tbody>
+                                                                        </table>
+                                                                        <table class="table" style="background-color:transparent!important;width:auto;margin-bottom:0px;">
+                                                                            <thead style="background-color:transparent!important">
+                                                                                <tr style="background-color:transparent!important;">
+                                                                                    <td colspan="3" style="background-color:transparent!important;font-weight:bold!important;color:black!important;">Farmacéuticos de Turno:</td>
+                                                                                </tr>
+                                                                            </thead>
+                                                                            <tbody style="background-color:transparent!important">
+                                                                                @if (dt?.FarmaceuticoTablas?.LFarmaceuticos?.Count > 0)
+                                                {
+                                                                                    @foreach (var dtsub in dt.FarmaceuticoTablas.LFarmaceuticos)
+                                                    {
+                                                                                        <tr style="background-color:transparent!important">
+                                                                                            <td scope="row" style="background-color:transparent!important;width:auto;">@dtsub.NombreCompleto</td>
+                                                                                            <td style="background-color:transparent!important;width:auto;">No. Registro: @dtsub.NumReg</td>
+                                                                                            <td style="background-color:transparent!important">&emsp;</td>
+                                                        </tr>
+                                                    }
+                                                }
+                                            </tbody>
+                                        </table>
+                                                                    </td>
+                                        </tr>
+                                    }
                                 }
                                 </tbody>
                                 </table>
