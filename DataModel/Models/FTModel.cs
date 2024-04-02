@@ -99,7 +99,7 @@ namespace DataModel.Models
         public DateTime? FechaIni { get; set; }
         public DateTime? FechaFin { get; set; }
 
-
+        public List<LoteMedicamento> LotesMed { get; set; }
 
 
     }
@@ -211,4 +211,9 @@ namespace DataModel.Models
 
     }
 
+    public class LoteMedicamento
+    {
+        public string Lote { get; set; }
+        public DateTime? ExpDate { get; set; }
+    }
 }

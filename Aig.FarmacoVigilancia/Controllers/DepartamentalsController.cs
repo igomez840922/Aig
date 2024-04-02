@@ -484,8 +484,9 @@ namespace Aig.FarmacoVigilancia.Controllers
                     var codProv = model.DatosNotificador?.Provincia?.Codigo ?? null;
                     ft.ProvinciaId = string.IsNullOrEmpty(codProv)? null : (dalService.Find<ProvinciaTB>(x => x.Codigo == codProv)?.Id ?? null);
                     ft.InstitucionId = model.DatosNotificador?.InstalacionSalud?.Id ?? null;
+                    ft.TipoInstitucionId = model.DatosNotificador?.TipoInstitucion?.Id ?? null;
                     ft.Notificador = model.DatosNotificador?.Notificador?.NombreCompleto ?? "";
-                    ft.Notificador = model.DatosNotificador?.Notificador?.NombreCompleto ?? "";
+                    //ft.Notificador = model.DatosNotificador?.Notificador?.NombreCompleto ?? "";
                     if(!string.IsNullOrEmpty(model.DatosMedicamento?.Lotes ?? null))
                     {
                         ft.LLotes = ft.LLotes?.Count > 0 ? ft.LLotes : new List<FMV_LoteTB>();
@@ -549,7 +550,19 @@ namespace Aig.FarmacoVigilancia.Controllers
                             ft.Adjunto.LAttachments.Add(attch);
                         }
                     }
-                                        
+                    if (model.DatosMedicamento?.LotesMed?.Count >0 )
+                    {
+                        ft.LLotes = ft.LLotes?.Count > 0 ? ft.LLotes : new List<FMV_LoteTB> ();
+                        foreach (var lote in model.DatosMedicamento.LotesMed)
+                        {
+                            var oldLot = ft.LLotes.Find(x=>x.Nombre == lote.Lote);
+                            if(oldLot == null)
+                            {
+                                ft.LLotes.Add(new FMV_LoteTB() { Nombre = lote.Lote, FechaExpira = lote.ExpDate });
+                            }
+                        }
+                    }
+
                     var result = dalService.Save(ft);
                     if (result != null)
                     {

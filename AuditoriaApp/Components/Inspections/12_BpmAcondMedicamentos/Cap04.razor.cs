@@ -153,7 +153,7 @@ namespace AuditoriaApp.Components.Inspections._12_BpmAcondMedicamentos
             data = data != null ? data : new DatosPersona();
             var parameters = new DialogParameters { ["Data"] = data };
             var options = new DialogOptions { CloseButton = true, MaxWidth = MaxWidth.Medium, FullWidth = true, DisableBackdropClick = true };
-            var dialog = _dialogService.Show<Components.Dialog.Participantes.AddEdit>(data != null ? "Editar Participante" : "Agregar Participante", parameters, options);
+            var dialog = _dialogService.Show<Components.Dialog.Personas.AddEdit>(data != null ? "Editar Participante" : "Agregar Participante", parameters, options);
             var result = await dialog.Result;
             if (!result.Cancelled)
             {

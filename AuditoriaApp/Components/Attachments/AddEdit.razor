@@ -38,7 +38,7 @@
                             </MudGrid>
                             <MudGrid>
                                 <MudItem xs="12">
-                                    <MudFileUpload T="IBrowserFile" FilesChanged="UploadFiles" Accept=".doc, .docx, .xls, .xlsx, .pdf">
+                                        <MudFileUpload T="IBrowserFile" FilesChanged="UploadFiles" Accept=".doc, .docx, .xls, .xlsx, .pdf" MaximumFileCount="@int.MaxValue">
                                         <ButtonTemplate Context="contextBtn">
                                             <MudButton HtmlTag="label"
                                                        Variant="Variant.Filled"

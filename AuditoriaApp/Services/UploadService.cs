@@ -31,8 +31,9 @@ namespace AuditoriaApp.Services
             {      
                 if (file != null)
                 {
+
                     var buffer = new byte[file.Size];
-                    var stream = file.OpenReadStream();
+                    var stream = file.OpenReadStream(int.MaxValue);
                     await stream.ReadAsync(buffer, 0, (int)file.Size);
 
                     //var dir = Path.Combine(env.WebRootPath, "files");//Path.GetRandomFileName()

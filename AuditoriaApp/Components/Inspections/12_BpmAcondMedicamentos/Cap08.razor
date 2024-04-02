@@ -33,11 +33,8 @@
                                     <th width="5%">Artículo</th>
                                     <th width="50%">Título</th>
                                     <th width="5%">Criterio</th>
-                                    <th>Materia Prima</th>
                                     <th>"Material Acondicionamiento</th>
-                                    <th>Producto a Granel</th>
                                     <th>Producto Terminado</th>
-                                    <th>Inflamables</th>
                                     <th>Prod. y Mat. Rechazados</th>
                                     <th>Devoluciones</th>
                                 </tr>
@@ -51,7 +48,7 @@
                                             <th>@dt.Capitulo</th>
                                             <th>@dt.Articulo</th>
                                             <th>@dt.Titulo</th>
-                                            <th colspan="8">@dt.Criterio</th>
+                                            <th colspan="6">@dt.Criterio</th>
                                         </tr>
                                     }
                                     else
@@ -79,6 +76,11 @@
                                             @* <td>
                                                 <MudTextField Margin="Margin.Dense" @bind-Value="dt.Observaciones" Variant="Variant.Outlined" For="@(() => dt.Observaciones)" Lines="10"/>
                                             </td> *@
+                                        </tr>
+                                        <tr>
+                                            <td colspan="@(dt.LEvaluacion.Count+4)">
+                                                <MudTextField Label="Observaciones" Margin="Margin.Dense" @bind-Value="dt.Observaciones" Variant="Variant.Outlined" For="@(() => dt.Observaciones)" Lines="10" />
+                                            </td>
                                         </tr>
                                     }
                                 }

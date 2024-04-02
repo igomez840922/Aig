@@ -131,7 +131,7 @@ namespace AuditoriaApp.Components.Attachments
             {
                 snackbar.Add("Error al guardar el archivo", Severity.Error);
             }
-            await this.InvokeAsync(StateHasChanged);
+            await this.InvokeAsync(StateHasChanged); 
         }
 
         private void UploadFiles(IBrowserFile file)

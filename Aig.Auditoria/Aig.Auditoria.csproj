@@ -28,6 +28,7 @@
     <None Remove="Resources\Establecimientos2.xlsx" />
     <None Remove="Resources\Farmaceuticos.xlsx" />
     <None Remove="Resources\Farmaceuticos2.xlsx" />
+    <None Remove="Resources\FechaExpiracion.xlsx" />
     <None Remove="Resources\Horariosfarmaceuticos.xlsx" />
   </ItemGroup>
 
@@ -36,6 +37,7 @@
     <EmbeddedResource Include="Resources\es-ES.yml" />
     <EmbeddedResource Include="Resources\Establecimientos2.xlsx" />
     <EmbeddedResource Include="Resources\Farmaceuticos2.xlsx" />
+    <EmbeddedResource Include="Resources\FechaExpiracion.xlsx" />
     <EmbeddedResource Include="Resources\paises.json" />
     <EmbeddedResource Include="Resources\provincias.json" />
   </ItemGroup>
