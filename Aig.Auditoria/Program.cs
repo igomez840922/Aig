@@ -13,8 +13,10 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Components.Web;
+using Microsoft.AspNetCore.Http.Features;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI;
+using Microsoft.AspNetCore.Server.Kestrel.Core;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
@@ -40,6 +42,14 @@ builder.Services.AddDefaultIdentity<ApplicationUser>(options =>
     .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<ApplicationDbContext>();
 
+builder.Services.AddAuthorization(opt =>
+{
+    opt.AddPolicy("NonStablishment", policy => policy.RequireRole("Usuario del Sistema", "Administrador", "Secretaria - Departamento de Auditorías",
+        "Secretaria - Sección de Licencias", "Jefe - Departamento de Auditorías", "Jefe - Sección de Auditorías", "Jefe - Sección de Inspecciones",
+        "Jefe - Sección de Licencias", "Evaluador - Inscripción de Materia Prima", "Consultor de Correspondencias", "Farmacéutico - Inspector", "Técnico - Inspector"));
+    //opt.AddPolicy("CanEditInvoice", policy => policy.RequireRole("admin", "manager"));
+});
+
 builder.Services.Configure<IdentityOptions>(options =>
 {
     // Password settings
@@ -48,6 +58,24 @@ builder.Services.Configure<IdentityOptions>(options =>
     options.Password.RequireNonAlphanumeric = false;
     options.Password.RequireUppercase = false;
     options.Password.RequireLowercase = false;
+});
+
+//File size upload
+builder.Services.Configure<KestrelServerOptions>(options =>
+{
+    options.Limits.MaxRequestBodySize = long.MaxValue; // if don't set default value is: 30 MB
+});
+builder.Services.Configure<IISServerOptions>(options =>
+{
+    options.MaxRequestBodySize = long.MaxValue;
+});
+builder.Services.Configure<FormOptions>(options =>
+{
+    options.ValueLengthLimit = int.MaxValue;
+    options.MultipartBodyLengthLimit = long.MaxValue; // if don't set default value is: 128 MB
+    options.MultipartHeadersLengthLimit = int.MaxValue;
+    options.MultipartBoundaryLengthLimit = int.MaxValue;
+    options.MultipartHeadersCountLimit = int.MaxValue;
 });
 
 //For API CONTROLLERS
@@ -199,7 +227,7 @@ app.UseWebSockets();
 
 Aig.Auditoria.Helper.Helper.serviceProvider = app.Services;
 //Check and Save initial data...
-Aig.Auditoria.Helper.SeedData.SeedAll(app.Services);
+await Aig.Auditoria.Helper.SeedData.SeedAll(app.Services);
 
 
 //cultura en español

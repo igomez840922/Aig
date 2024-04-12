@@ -4,6 +4,7 @@ using DataAccess;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240411151616_M172")]
+    partial class M172
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -1251,6 +1253,7 @@ namespace DataAccess.Migrations
                         .HasColumnType("bit");
 
                     b.Property<long?>("EstablecimientoId")
+                        .IsRequired()
                         .HasColumnType("bigint");
 
                     b.Property<DateTime>("FechaInicio")
@@ -5997,7 +6000,8 @@ namespace DataAccess.Migrations
                     b.HasOne("DataModel.AUD_EstablecimientoTB", "Establecimiento")
                         .WithMany("LInspections")
                         .HasForeignKey("EstablecimientoId")
-                        .OnDelete(DeleteBehavior.NoAction);
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
 
                     b.HasOne("DataModel.AUD_InspAperCambUbicAgenTB", "InspAperCambUbicAgen")
                         .WithOne("Inspeccion")

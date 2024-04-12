@@ -241,11 +241,10 @@ namespace DataModel
 		private string observaciones;
 		public string Observaciones { get => observaciones; set => SetProperty(ref observaciones, value); }
 
-        private List<AUD_InspeccionTB> lInspections;
-        //[System.Text.Json.Serialization.JsonIgnore]
+		private List<AUD_InspeccionTB> lInspections;
+		//[System.Text.Json.Serialization.JsonIgnore]
 		[JsonIgnore]
-        public virtual List<AUD_InspeccionTB> LInspections { get => lInspections; set => SetProperty(ref lInspections, value); }
-
+		public virtual List<AUD_InspeccionTB> LInspections { get => lInspections; set => SetProperty(ref lInspections, value); }
 
 		private string nameAndRegNum;
         [System.ComponentModel.DataAnnotations.Schema.NotMapped]

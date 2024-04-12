@@ -38,6 +38,8 @@ namespace DataModel
         FarmaInspector = 11,
         [Description("Técnico - Inspector")]
         TecInspector = 12,
+        [Description("Consultor de Establecimientos")]
+        ConsultEsta = 14,
     }
 
     public class ApplicationUser : IdentityUser

@@ -206,6 +206,8 @@ namespace DataAccess
                 .HasForeignKey(e => e.EstablecimientoId)
                 .OnDelete(DeleteBehavior.NoAction);
 
+            modelBuilder.Entity<AUD_EstablecimientoTB>().Navigation(e => e.LInspections).AutoInclude(false);
+
             modelBuilder.Entity<AUD_EstablecimientoTB>()
 .Property(e => e.FarmaceuticoTablas)
 .HasConversion(x => JsonConvert.SerializeObject(x), x => x == null ? null : JsonConvert.DeserializeObject<AUD_FarmaceuticoTablas>(x));

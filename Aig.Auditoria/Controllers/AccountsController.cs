@@ -93,9 +93,9 @@ namespace Aig.Auditoria.Controllers
 
 		private JwtSecurityToken GenerateTokenOptions(SigningCredentials signingCredentials, List<Claim> claims)
 		{
-			var tokenOptions = new JwtSecurityToken(
-				issuer: _jwtSettings.GetSection("validIssuer").Value,
-				audience: _jwtSettings.GetSection("validAudience").Value,
+			var tokenOptions = new JwtSecurityToken(				
+				//issuer: _jwtSettings.GetSection("validIssuer").Value,
+				//audience: _jwtSettings.GetSection("validAudience").Value,
 				claims: claims,
 				expires: DateTime.UtcNow.AddYears(5),//DateTime.Now.AddMinutes(Convert.ToDouble(_jwtSettings.GetSection("expiryInMinutes").Value)),
                 signingCredentials: signingCredentials);

@@ -44,7 +44,7 @@ namespace AuditoriaApp.Services
                 var authContent = await authResult.Content.ReadAsStringAsync();
                 if(authResult.IsSuccessStatusCode)
                 {
-                    lastUpdate.InspectionsUpdate = DateTime.Now;
+                    lastUpdate.InspectionsUpdate = DateTime.Now.AddDays(-1);
                     await accountDataService.SaveLastUpdate(lastUpdate);
 
                     var result = JsonSerializer.Deserialize<List<AUD_InspeccionTB>>(authContent, _options);
@@ -52,14 +52,18 @@ namespace AuditoriaApp.Services
                     {
                         foreach( var item in result )
                         {
-                            var appItem = dalService.Find<APP_Inspeccion>(x => x.InspeccionId == item.Id);
-                            appItem = appItem!= null? appItem: new APP_Inspeccion() { InspeccionId = item.Id};
-                            if (!appItem.PendingUpdate)
-                            {
-                                appItem.NumActa = item.NumActa;
-                                appItem.Inspeccion = item;
-                                dalService.Save(appItem);
+                            try {
+                                var appItem = dalService.Find<APP_Inspeccion>(x => x.InspeccionId == item.Id);
+                                appItem = appItem != null ? appItem : new APP_Inspeccion() { InspeccionId = item.Id };
+                                if (!appItem.PendingUpdate)
+                                {
+                                    appItem.NumActa = item.NumActa;
+                                    appItem.Inspeccion = item;
+                                    appItem.CreatedDate = item.FechaInicio;
+                                    dalService.Save(appItem);
+                                }
                             }
+                            catch { }
                         }
                     }
                 }

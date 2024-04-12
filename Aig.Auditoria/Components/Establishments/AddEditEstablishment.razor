@@ -323,7 +323,7 @@
                                         <label for="password">@languageContainerService.Keys["Actividad"]</label>
                                         <div class="form-group">
                                             <div class="form-line">
-                                                <InputText class="form-control" @bind-Value="Establecimiento.Actividad" />
+                                                <InputTextArea rows="4" class="form-control" @bind-Value="Establecimiento.Actividad" />
                                                 <ValidationMessage For=@(() => Establecimiento.Actividad) />
                                             </div>
                                         </div>
@@ -672,16 +672,21 @@
                         </div>
 
                         <br>
-                        <div class="modal-footer">
-                            <button type="submit"
-                                class="btn btn-info waves-effect">
-                                @languageContainerService.Keys["Save"]
-                            </button>
+                        <AuthorizeView Policy="NonStablishment" Context="authContext">
+                                 <div class="modal-footer">
+                            
+                             <button type="submit"
+                                    class="btn btn-info waves-effect">
+                                    @languageContainerService.Keys["Save"]
+                                </button>
+                           
                             <button type="button" class="btn btn-danger waves-effect"
                                 @onclick="(e)=>{Cancel();}">
                                 @languageContainerService.Keys["Cancel"]
                             </button>
                         </div>
+                        </AuthorizeView>
+                       
 
 
                     </EditForm>

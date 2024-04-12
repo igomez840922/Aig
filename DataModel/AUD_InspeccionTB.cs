@@ -183,10 +183,10 @@ namespace DataModel
 
         //Establecimiento
         private long? establecimientoId;
-        [Required(ErrorMessage = "requerido")]
+        //[Required(ErrorMessage = "requerido")]
         public long? EstablecimientoId { get => establecimientoId; set => SetProperty(ref establecimientoId, value); }
         private AUD_EstablecimientoTB establecimiento;
-        public virtual AUD_EstablecimientoTB Establecimiento { get => establecimiento; set => SetProperty(ref establecimiento, value); }
+        public virtual AUD_EstablecimientoTB? Establecimiento { get => establecimiento; set => SetProperty(ref establecimiento, value); }
 
         //Datos del Representante Legal
         private string nombreEstablecimiento;

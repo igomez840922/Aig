@@ -335,7 +335,7 @@ namespace Aig.Auditoria.Helper
                 {
                     PaisTB pais = dalService.Find<PaisTB>(x => x.Codigo == "PA");
 
-                    using (Stream stream = Assembly.GetExecutingAssembly().GetManifestResourceStream("Aig.Auditoria.Resources.Establecimientos.xlsx"))
+                    using (Stream stream = Assembly.GetExecutingAssembly().GetManifestResourceStream("Aig.Auditoria.Resources.Establecimientos1.xlsx"))
                     {
                         try
                         {
@@ -369,6 +369,8 @@ namespace Aig.Auditoria.Helper
                                     estab.NombreSociedad = data.Cell(6).GetValue<string>();//NombreSociedad
                                     estab.RepLegalNombre = data.Cell(5).GetValue<string>();//NombreSociedad
                                     estab.RepLegalCedula = data.Cell(34).GetValue<string>();//NombreSociedad
+                                    var regIdoneidad = data.Cell(59).GetValue<string>();//IDONEIDAD DEL REGENTE
+                                    var regente = data.Cell(60).GetValue<string>();//NOMBRE REGENTE
 
                                     try {
                                         estab.RepresentanteLegal = estab.RepresentanteLegal != null ? estab.RepresentanteLegal : new PersonaDatos();
@@ -376,6 +378,16 @@ namespace Aig.Auditoria.Helper
                                         estab.RepresentanteLegal.PrimerApellido = estab.RepLegalNombre.Split(" ").Length > 1 ? estab.RepLegalNombre.Split(" ")[1] : "";
                                         estab.RepresentanteLegal.SegundoApellido = estab.RepLegalNombre.Split(" ").Length > 2 ? estab.RepLegalNombre.Split(" ")[2] : "";
                                         estab.RepresentanteLegal.Identificacion = estab.RepLegalCedula;
+                                        //estab.RepresentanteLegal.Correo = estab.RepLegalCedula;
+                                    }
+                                    catch { }
+                                    try
+                                    {
+                                        estab.Regente = estab.Regente != null ? estab.Regente : new PersonaDatos();
+                                        estab.Regente.PrimerNombre = regente.Split(" ").Length > 0 ? regente.Split(" ")[0] : "";
+                                        estab.Regente.PrimerApellido = regente.Split(" ").Length > 1 ? regente.Split(" ")[1] : "";
+                                        estab.Regente.SegundoApellido = regente.Split(" ").Length > 2 ? regente.Split(" ")[2] : "";
+                                        estab.Regente.NumIdoneidad = regIdoneidad;
                                         //estab.RepresentanteLegal.Correo = estab.RepLegalCedula;
                                     }
                                     catch { }
@@ -770,185 +782,38 @@ namespace Aig.Auditoria.Helper
                 }
                 else //esto es para actualizar
                 {
-                    using (Stream stream = Assembly.GetExecutingAssembly().GetManifestResourceStream("Aig.Auditoria.Resources.FechaExpiracion.xlsx"))
-                    {
-                        try
-                        {
-                            using var wbook = new XLWorkbook(stream);
-                            var ws1 = wbook.Worksheet(1);
-                            var count = ws1.RowCount();
-                            for (int row = 2; row < count; row++)
-                            {
-                                try {
-                                    var data = ws1.Row(row);
-                                    var NumLicencia = data.Cell(1).GetValue<string>();
-                                    var fechaExpira = data.Cell(2).GetValue<DateTime?>();
-                                    if(fechaExpira != null)
-                                    {
-                                        var tmpEstab = dalService.Find<AUD_EstablecimientoTB>(x => x.NumLicencia.Contains(NumLicencia));
-                                        if(tmpEstab != null)
-                                        {
-                                            tmpEstab.FechaExpiracion = fechaExpira != null ? fechaExpira : tmpEstab.FechaExpiracion;
-                                            dalService.Save(tmpEstab);
-                                        }
-                                    }
-                                }
-                                catch { }
-                            }
-                        }
-                        catch { }
-                    }
-                    //    using (Stream stream = Assembly.GetExecutingAssembly().GetManifestResourceStream("Aig.Auditoria.Resources.Establecimientos.xlsx"))
+                    //using (Stream stream = Assembly.GetExecutingAssembly().GetManifestResourceStream("Aig.Auditoria.Resources.FechaExpiracion.xlsx"))
+                    //{
+                    //    try
                     //    {
-                    //        try
+                    //        using var wbook = new XLWorkbook(stream);
+                    //        var ws1 = wbook.Worksheet(1);
+                    //        var count = ws1.RowCount();
+                    //        for (int row = 2; row < count; row++)
                     //        {
-                    //            using var wbook = new XLWorkbook(stream);
-                    //            var ws1 = wbook.Worksheet(1);
-                    //            var count = ws1.RowCount();
-                    //            for (int row = 2; row < count; row++)
+                    //            try
                     //            {
-                    //                AUD_EstablecimientoTB estab = new AUD_EstablecimientoTB();
                     //                var data = ws1.Row(row);
+                    //                var NumLicencia = data.Cell(1).GetValue<string>();
+                    //                var fechaExpira = data.Cell(2).GetValue<DateTime?>();
+                    //                if (fechaExpira != null)
+                    //                {
+                    //                    var tmpEstab = dalService.Find<AUD_EstablecimientoTB>(x => x.NumLicencia.Contains(NumLicencia));
+                    //                    if (tmpEstab != null)
+                    //                    {
+                    //                        tmpEstab.FechaExpiracion = fechaExpira != null ? fechaExpira : tmpEstab.FechaExpiracion;
+                    //                        dalService.Save(tmpEstab);
+                    //                    }
+                    //                }
+                    //            }
+                    //            catch { }
+                    //        }
+                    //    }
+                    //    catch { }
+                    //}
 
-                        //                estab.NumLicencia = data.Cell(1).GetValue<string>();
-                        //                estab.Nombre = data.Cell(3).GetValue<string>();
+                    
 
-                        //                if (!string.IsNullOrEmpty(estab.Nombre) && !string.IsNullOrEmpty(estab.NumLicencia))
-                        //                {
-                        //                    estab.Periodo = data.Cell(2).GetValue<int?>();
-                        //                    estab.Ubicacion = data.Cell(4).GetValue<string>();
-                        //                    estab.RepLegalNombre = data.Cell(5).GetValue<string>();
-                        //                    estab.NombreSociedad = data.Cell(6).GetValue<string>();
-                        //                    switch (data.Cell(7).GetValue<string>())//Tipo Establecimiento
-                        //                    {
-                        //                        case "AGENCIA":
-                        //                            {
-                        //                                estab.TipoEstablecimiento = DataModel.Helper.enumAUD_TipoEstablecimiento.A;
-                        //                                break;
-                        //                            }
-                        //                        case "BOTIQU═N DE PUEBLO":
-                        //                            {
-                        //                                estab.TipoEstablecimiento = DataModel.Helper.enumAUD_TipoEstablecimiento.B;
-                        //                                break;
-                        //                            }
-                        //                        case "DROGUER═A":
-                        //                            {
-                        //                                estab.TipoEstablecimiento = DataModel.Helper.enumAUD_TipoEstablecimiento.D;
-                        //                                break;
-                        //                            }
-                        //                        case "ESTABLECIMIENTO NO FARMAC+UTICO":
-                        //                        case "ESTABLECIMIENTO NO FARMAC╔UTICO":
-                        //                        case "ESTABLECIMIENTO NO FARMACEUTICO":
-                        //                        case "ESTABLECIMIENTO NO FARMACÉUTICO":
-                        //                        case "NO FARMAC╔UTICO":
-                        //                        case "NO FARMAC+UTICO":
-                        //                            {
-                        //                                estab.TipoEstablecimiento = DataModel.Helper.enumAUD_TipoEstablecimiento.ENF;
-                        //                                break;
-                        //                            }
-                        //                        case "FARMACIA":
-                        //                            {
-                        //                                estab.TipoEstablecimiento = DataModel.Helper.enumAUD_TipoEstablecimiento.F;
-                        //                                break;
-                        //                            }
-                        //                        case "LABORATORIO":
-                        //                            {
-                        //                                estab.TipoEstablecimiento = DataModel.Helper.enumAUD_TipoEstablecimiento.LF;
-                        //                                break;
-                        //                            }
-                        //                    }
-                        //                    estab.HorariosEstablecimiento = data.Cell(12).GetValue<string>();
-                        //                    estab.FechaExpedida = data.Cell(19).GetValue<DateTime?>();
-                        //                    estab.FechaExpiracion = data.Cell(20).GetValue<DateTime?>();
-                        //                    switch (data.Cell(26).GetValue<string>()) //Clasificacion
-                        //                    {
-                        //                        case "APERTURA":
-                        //                            {
-                        //                                estab.Clasificacion = DataModel.Helper.enumAUD_ClasifEstablecimiento.Apertura;
-                        //                                break;
-                        //                            }
-                        //                        case "MODIF.":
-                        //                            {
-                        //                                estab.Clasificacion = DataModel.Helper.enumAUD_ClasifEstablecimiento.Modificacion;
-                        //                                break;
-                        //                            }
-                        //                        case "RENOVACIËN":
-                        //                            {
-                        //                                estab.Clasificacion = DataModel.Helper.enumAUD_ClasifEstablecimiento.Renovacion;
-                        //                                break;
-                        //                            }
-                        //                    }
-                        //                    switch (data.Cell(27).GetValue<string>()) //Sector
-                        //                    {
-                        //                        case "ESTATAL":
-                        //                            {
-                        //                                estab.Sector = DataModel.Helper.enumAUD_TipoSector.Estatal;
-                        //                                break;
-                        //                            }
-                        //                        case "PRIVADO":
-                        //                            {
-                        //                                estab.Sector = DataModel.Helper.enumAUD_TipoSector.Privado;
-                        //                                break;
-                        //                            }
-                        //                    }
-                        //                    switch (data.Cell(28).GetValue<string>()) //Estatus
-                        //                    {
-                        //                        case "CANCELADA":
-                        //                            {
-                        //                                estab.Status = DataModel.Helper.enumAUD_StatusEstablecimiento.Cancelado;
-                        //                                break;
-                        //                            }
-                        //                        case "CERRADO":
-                        //                            {
-                        //                                estab.Status = DataModel.Helper.enumAUD_StatusEstablecimiento.Cancelado;
-                        //                                break;
-                        //                            }
-                        //                        case "Cierre T.":
-                        //                            {
-                        //                                estab.Status = DataModel.Helper.enumAUD_StatusEstablecimiento.CerradoTemp;
-                        //                                break;
-                        //                            }
-                        //                        case "INACTIVO":
-                        //                            {
-                        //                                estab.Status = DataModel.Helper.enumAUD_StatusEstablecimiento.Inactivo;
-                        //                                break;
-                        //                            }
-                        //                        case "OPERANDO":
-                        //                        case "vOPERANDO":
-                        //                            {
-                        //                                estab.Status = DataModel.Helper.enumAUD_StatusEstablecimiento.Operando;
-                        //                                break;
-                        //                            }
-                        //                        case "RESOLUCIËN":
-                        //                            {
-                        //                                estab.Status = DataModel.Helper.enumAUD_StatusEstablecimiento.Resolucion;
-                        //                                break;
-                        //                            }
-                        //                        case "VENCIDA":
-                        //                            {
-                        //                                estab.Status = DataModel.Helper.enumAUD_StatusEstablecimiento.Vencido;
-                        //                                break;
-                        //                            }
-                        //                    }
-                        //                    estab.Email = data.Cell(47).GetValue<string>();
-                        //                    if (!string.IsNullOrEmpty(estab.Email))
-                        //                    {
-                        //                        if (!Regex.IsMatch(estab.Email, @"^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$"))
-                        //                            estab.Email = null;
-                        //                    }
-                        //                    else { estab.Email = null; }
-
-                        //                    var tmpEstab = dalService.Find<AUD_EstablecimientoTB>(x => x.NumLicencia == estab.NumLicencia);
-
-                        //                    estab.Id = tmpEstab?.Id ?? estab.Id;
-
-                        //                    dalService.Save(estab);
-                        //                }
-                        //            }
-                        //        }
-                        //        catch { }
-
-                        //    }
                 }
 
 

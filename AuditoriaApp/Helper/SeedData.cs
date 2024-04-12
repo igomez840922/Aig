@@ -47,12 +47,9 @@ namespace AuditoriaApp.Helper
                 var accountDataService = serviceScope.ServiceProvider.GetService<IAccountDataService>();
                 var lastUpdate = await accountDataService.FirstLastUpdate();
                 lastUpdate = lastUpdate != null ? lastUpdate : new APP_Updates() { InspectionsUpdate = DateTime.Now.AddDays(-5),  SettingsUpdate = DateTime.Now.AddYears(-5) };
+                lastUpdate.SettingsUpdate = DateTime.Now.AddYears(-2);
                 await accountDataService.SaveLastUpdate(lastUpdate);
-
-                var inspectionService = serviceScope.ServiceProvider.GetService<IInspectionService>();
-                await inspectionService.InspectionsUpload();
-                await inspectionService.InspectionsSync();
-
+                                
                 var paisService = serviceScope.ServiceProvider.GetService<IPaisService>();
                 await paisService.Syncronization();
 
@@ -65,7 +62,11 @@ namespace AuditoriaApp.Helper
                 var corregimientoService = serviceScope.ServiceProvider.GetService<ICorregimientoService>();
                 await corregimientoService.Syncronization();
 
-                lastUpdate.SettingsUpdate = DateTime.Now;
+                var inspectionService = serviceScope.ServiceProvider.GetService<IInspectionService>();
+                await inspectionService.InspectionsUpload();
+                await inspectionService.InspectionsSync();
+
+                lastUpdate.SettingsUpdate = DateTime.Now.AddDays(-1);
                 await accountDataService.SaveLastUpdate(lastUpdate);
 
             }

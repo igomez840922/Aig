@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace DataModel
 {
@@ -22,6 +23,9 @@ namespace DataModel
         public long? ProvinciaId { get => provinciaId; set => SetProperty(ref provinciaId, value); }
         private ProvinciaTB? provincia;
         public virtual ProvinciaTB? Provincia { get => provincia; set => SetProperty(ref provincia, value); }
+
+        [System.ComponentModel.DataAnnotations.Schema.NotMapped]
+        public string ProvCode { get => Provincia?.Codigo??""; set {} }
 
         //nombre de establecimiento
         private string nombre;
