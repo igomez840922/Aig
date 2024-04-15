@@ -607,12 +607,15 @@
                              <div class="tab-pane" id="cap2" role="tabpanel">
                                 <h5>@languageContainerService.Keys["Farmacéuticos"]</h5>
                                 <div class="row clearfix">
-                                    <div class="col-12" style="text-align:right;">
+                                    <AuthorizeView Policy="NonStablishment" Context="authContext">
+                                        <div class="col-12" style="text-align:right;">
                                         <button type="button" @onclick="(e)=>{OpenFarmaceutico();}"
                                                 class="btn btn-sm btn-outline-primary waves-effect">
                                             @languageContainerService.Keys["Add"]
                                         </button>
                                     </div>
+                                    </AuthorizeView>
+                                    
                                 </div>
                                 <!--begin::Section-->
                                 <div class="kt-section">
@@ -630,7 +633,10 @@
                                                     <th>@languageContainerService.Keys["Dirección"]</th>
                                                     <th>@languageContainerService.Keys["Telefono"]</th>
                                                     <th>@languageContainerService.Keys["Horario"]</th>
-                                                    <th></th>
+                                                    <AuthorizeView Policy="NonStablishment" Context="authContext">
+                                                         <th></th>
+                                                    </AuthorizeView>
+                                                   
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -649,7 +655,8 @@
                                                             <td>@dt.Direccion</td>
                                                             <td>@dt.Telefono</td>
                                                             <td>@dt.Horario</td>
-                                                            <td style="text-align:right">
+                                                            <AuthorizeView Policy="NonStablishment" Context="authContext">
+                                                                 <td style="text-align:right">
                                                                         <div class="btn-group">
                                                                             <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">@languageContainerService.Keys["Actions"]</button>
                                                                             <div class="dropdown-menu">
@@ -659,6 +666,8 @@
                                                                         </div>
                                                                         <!-- /btn-group -->
                                                                     </td>
+                                                            </AuthorizeView>
+                                                           
                                                         </tr>
                                                     }
                                                 }

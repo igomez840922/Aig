@@ -30,7 +30,7 @@ namespace Aig.Auditoria.Components.Inspections._1_AperturaUbicacionFarmacia
         protected async override Task OnInitializedAsync()
         {
             //Subscribe Component to Language Change Event
-            bus.Subscribe<LanguageChangeEvent>(LanguageChangeEventHandler);
+            //bus.Subscribe<LanguageChangeEvent>(LanguageChangeEventHandler);
             bus.Subscribe<Aig.Auditoria.Events.Inspections.ChapterChangeEvent>(ChapterChange_EventHandler);
             bus.Subscribe<Aig.Auditoria.Events.SeleccionarEstablecimiento.AddEditEvent>(SelectEstablecimiento_EventHandler);
             base.OnInitialized();
@@ -38,7 +38,7 @@ namespace Aig.Auditoria.Components.Inspections._1_AperturaUbicacionFarmacia
 
         public void Dispose()
         {
-            bus.UnSubscribe<LanguageChangeEvent>(LanguageChangeEventHandler);
+            //bus.UnSubscribe<LanguageChangeEvent>(LanguageChangeEventHandler);
             bus.UnSubscribe<Aig.Auditoria.Events.Inspections.ChapterChangeEvent>(ChapterChange_EventHandler);
             bus.UnSubscribe<Aig.Auditoria.Events.SeleccionarEstablecimiento.AddEditEvent>(SelectEstablecimiento_EventHandler);
         }
