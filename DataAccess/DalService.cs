@@ -122,6 +122,8 @@ namespace DataAccess
             //lock (objLock)
             try
             {
+                //DBContext.ChangeTracker.AutoDetectChangesEnabled = false;
+                
                 _Data.UpdatedDate = DateTime.Now;
                 //var _OldData = DBContext.Set<T>().Find(_Data.Id);
                 //if (_OldData != null)
@@ -141,10 +143,13 @@ namespace DataAccess
                     DBContext.Set<T>().Attach(_Data);
                     DBContext.Set<T>().Add(_Data);
                 }
+                //DBContext.ChangeTracker.DetectChanges();
 
                 DBContext.SaveChanges();
 
-                return Get<T>(_Data.Id); ;
+                //DBContext.ChangeTracker.AutoDetectChangesEnabled = true;
+
+                return _Data;
             }
             catch (Exception ex)
             { }
@@ -239,6 +244,10 @@ namespace DataAccess
             try { DBContext.ChangeTracker.Clear(); }
             catch { }            
         }
-
+        public void Dispose()
+        {
+            try { DBContext.ChangeTracker.Clear(); DBContext.Dispose(); }
+            catch { }
+        }
     }
 }

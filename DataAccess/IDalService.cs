@@ -24,5 +24,6 @@ namespace DataAccess
         int Count<T>() where T : class;
         int Count<T>(Expression<Func<T, bool>> match) where T : class;
         T First<T>() where T : class;
+        void Dispose();
     }
 }

@@ -25,6 +25,7 @@ namespace DataAccess
             DbContextOptions options,
             IOptions<OperationalStoreOptions> operationalStoreOptions) : base(options, operationalStoreOptions)
         {
+            this.Database.SetCommandTimeout(240); // 4 minutos
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

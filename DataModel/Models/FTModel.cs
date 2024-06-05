@@ -96,8 +96,8 @@ namespace DataModel.Models
         public string? Diagnostigo { get; set; }
         public string? DosisPosologiaIndicada { get; set; }
         public string? DosisPosologiaPrescrita { get; set; }
-        public DateTime? FechaIni { get; set; }
-        public DateTime? FechaFin { get; set; }
+        public string? FechaIni { get; set; }
+        public string? FechaFin { get; set; }
 
         public List<LoteMedicamento> LotesMed { get; set; }
 
@@ -112,7 +112,7 @@ namespace DataModel.Models
         }
 
         public string Razones { get; set; }
-        public DateTime? FechaFalla { get; set; }
+        public string? FechaFalla { get; set; }
 
         public bool AmentoDosisMedSospechoso { get; set; }
         public string AmentoDosisMedSospechosoDesc { get; set; }
@@ -134,11 +134,11 @@ namespace DataModel.Models
         public string? DosisAdministracion { get; set; }
         public string? ViaAdministracion { get; set; }
         public string? FrecuenciaAdministracion { get; set; }
-        public DateTime? FechaIni { get; set; }
-        public DateTime? FechaFin { get; set; }
+        public string? FechaIni { get; set; }
+        public string? FechaFin { get; set; }
         public string? Diagnostico { get; set; }
 
-        public DateTime? FechaRecibo { get; set; }
+        public string? FechaRecibo { get; set; }
         public string CodExt { get; set; }
         public string PrincActivo { get; set; }
         public LaboratorioTB? Laboratorio { get; set; }

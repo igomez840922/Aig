@@ -1,6 +1,4 @@
-﻿using Aig.Auditoria.Pages.Inspections;
-using Aig.Auditoria.Services;
-using DataAccess;
+﻿using DataAccess;
 using DataModel;
 using DataModel.DTO;
 using DataModel.Models;
@@ -10,9 +8,9 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.IdentityModel.Tokens.Jwt;
 using System.Net;
-using static SkiaSharp.HarfBuzz.SKShaper;
+using AigAuditoriaApi.Services;
 
-namespace Aig.Auditoria.Controllers
+namespace AigAuditoriaApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
@@ -195,35 +193,35 @@ namespace Aig.Auditoria.Controllers
                         //Inspeccion.Inspeccion.DatosConclusiones.LAttachments
                         if (inspeccion.DatosConclusiones?.LAttachments?.Count > 0)
                         {
-                            foreach (var attach in inspeccion.DatosConclusiones.LAttachments)
-                            {
-                                try
-                                {
-                                    if (!string.IsNullOrEmpty(attach.Base64) && string.IsNullOrEmpty(attach.Url))
-                                    {
-                                        var fileBytes = Helper.Helper.ReturnByteArrayFromBase64(attach.Base64);
-                                        if (fileBytes?.Length > 0)
-                                        {
-                                            var dir = Path.Combine(env.WebRootPath, "files");//Path.GetRandomFileName()
-                                            if (!Directory.Exists(dir))
-                                            {
-                                                Directory.CreateDirectory(dir);
-                                            }
+                            //foreach (var attach in inspeccion.DatosConclusiones.LAttachments)
+                            //{
+                            //    try
+                            //    {
+                            //        if (!string.IsNullOrEmpty(attach.Base64) && string.IsNullOrEmpty(attach.Url))
+                            //        {
+                            //            var fileBytes = Helper.Helper.ReturnByteArrayFromBase64(attach.Base64);
+                            //            if (fileBytes?.Length > 0)
+                            //            {
+                            //                var dir = Path.Combine(env.WebRootPath, "files");//Path.GetRandomFileName()
+                            //                if (!Directory.Exists(dir))
+                            //                {
+                            //                    Directory.CreateDirectory(dir);
+                            //                }
 
-                                            var fileName = string.Format("{0}.{1}", Guid.NewGuid().ToString(), attach.FileName.Split(".").LastOrDefault());
-                                            var path = System.IO.Path.Combine(dir, fileName);
+                            //                var fileName = string.Format("{0}.{1}", Guid.NewGuid().ToString(), attach.FileName.Split(".").LastOrDefault());
+                            //                var path = System.IO.Path.Combine(dir, fileName);
 
-                                            System.IO.File.WriteAllBytes(path, fileBytes);
+                            //                System.IO.File.WriteAllBytes(path, fileBytes);
 
-                                            attach.AbsolutePath = path;
-                                            attach.Url = string.Format("./files/{0}", fileName);
-                                            attach.FileName = fileName;
-                                            //attach.Base64 = null;                                           
-                                        }
-                                    }
-                                }
-                                catch (Exception ex) { }
-                            }
+                            //                attach.AbsolutePath = path;
+                            //                attach.Url = string.Format("./files/{0}", fileName);
+                            //                attach.FileName = fileName;
+                            //                //attach.Base64 = null;                                           
+                            //            }
+                            //        }
+                            //    }
+                            //    catch (Exception ex) { }
+                            //}
                         }
 
                         data.DatosConclusiones = inspeccion.DatosConclusiones;
@@ -1597,15 +1595,13 @@ namespace Aig.Auditoria.Controllers
                     data.PendingUpdate = false;
 
                     data = dalService.Save<AUD_InspeccionTB>(data);
-
-                    return BadRequest(new InspectionApiResponse { Result = false, Message = "No existe Establecimiento", Id = data.Id });
-
-
+                                        
                     if (data!=null)
                         return Ok(new InspectionApiResponse { Result = true , Id= data.Id});
                 }
             }
             catch (Exception ex) { return BadRequest(new InspectionApiResponse { Result=false, Message = ex.Message }); }
+            finally { dalService.Dispose(); }
             return BadRequest(new InspectionApiResponse { Result = false, Message = "dato no encontrado" });
         }
 

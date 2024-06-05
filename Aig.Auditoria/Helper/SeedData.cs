@@ -333,6 +333,7 @@ namespace Aig.Auditoria.Helper
 
                 if (dalService.Count<AUD_EstablecimientoTB>() <= 0)
                 {
+                    /*
                     PaisTB pais = dalService.Find<PaisTB>(x => x.Codigo == "PA");
 
                     using (Stream stream = Assembly.GetExecutingAssembly().GetManifestResourceStream("Aig.Auditoria.Resources.Establecimientos1.xlsx"))
@@ -586,6 +587,7 @@ namespace Aig.Auditoria.Helper
                         }
                         catch { }
                     }
+                    */
                     try
                     {
 
@@ -703,77 +705,90 @@ namespace Aig.Auditoria.Helper
                         {
                             foreach (var est in lEstablecimientos)
                             {
-                                est.FarmaceuticoTablas = est.FarmaceuticoTablas != null ? est.FarmaceuticoTablas : new AUD_FarmaceuticoTablas();
-                                foreach (var horaio in lHorarios?.Where(x => x.NumLic?.Replace(" ", "") == est.NumLicencia?.Replace(" ", "")))
+                                try
                                 {
-                                    List<string> registros = new List<string>();
-                                    if(!string.IsNullOrEmpty(horaio.NumRe1))
-                                        registros.Add(horaio.NumRe1);
-                                    if (!string.IsNullOrEmpty(horaio.NumRe2))
-                                        registros.Add(horaio.NumRe2);
-                                    if (!string.IsNullOrEmpty(horaio.NumRe3))
-                                        registros.Add(horaio.NumRe3);
-                                    if (!string.IsNullOrEmpty(horaio.NumRe4))
-                                        registros.Add(horaio.NumRe4);
-                                    if (!string.IsNullOrEmpty(horaio.NumRe5))
-                                        registros.Add(horaio.NumRe5);
-                                    if (!string.IsNullOrEmpty(horaio.NumRe6))
-                                        registros.Add(horaio.NumRe6);
-                                    if (!string.IsNullOrEmpty(horaio.NumRe7))
-                                        registros.Add(horaio.NumRe7);
-                                    if (!string.IsNullOrEmpty(horaio.NumRe8))
-                                        registros.Add(horaio.NumRe8);
-                                    if (!string.IsNullOrEmpty(horaio.NumRe9))
-                                        registros.Add(horaio.NumRe9);
-                                    if (!string.IsNullOrEmpty(horaio.NumRe10))
-                                        registros.Add(horaio.NumRe10);
-                                    if (!string.IsNullOrEmpty(horaio.NumRe11))
-                                        registros.Add(horaio.NumRe11);
-                                    if (!string.IsNullOrEmpty(horaio.NumRe12))
-                                        registros.Add(horaio.NumRe12);
-                                    if (!string.IsNullOrEmpty(horaio.NumRe13))
-                                        registros.Add(horaio.NumRe13);
-                                    if (!string.IsNullOrEmpty(horaio.NumRe14))
-                                        registros.Add(horaio.NumRe14);
-                                    if (!string.IsNullOrEmpty(horaio.NumRe15))
-                                        registros.Add(horaio.NumRe15);
-
-                                    if (registros?.Count > 0)
+                                    est.FarmaceuticoTablas = est.FarmaceuticoTablas != null ? est.FarmaceuticoTablas : new AUD_FarmaceuticoTablas();
+                                    foreach (var horaio in lHorarios?.Where(x => x.NumLic?.Replace(" ", "") == est.NumLicencia?.Replace(" ", "")))
                                     {
-                                        foreach (var registro in registros)
+                                        try
                                         {
-                                            var farm = lFarmaceuticos.Where(x => x.NumReg?.Replace(" ", "") == registro.Replace(" ", "")).FirstOrDefault();
-                                            if (farm != null)
+                                            List<string> registros = new List<string>();
+                                            if (!string.IsNullOrEmpty(horaio.NumRe1))
+                                                registros.Add(horaio.NumRe1);
+                                            if (!string.IsNullOrEmpty(horaio.NumRe2))
+                                                registros.Add(horaio.NumRe2);
+                                            if (!string.IsNullOrEmpty(horaio.NumRe3))
+                                                registros.Add(horaio.NumRe3);
+                                            if (!string.IsNullOrEmpty(horaio.NumRe4))
+                                                registros.Add(horaio.NumRe4);
+                                            if (!string.IsNullOrEmpty(horaio.NumRe5))
+                                                registros.Add(horaio.NumRe5);
+                                            if (!string.IsNullOrEmpty(horaio.NumRe6))
+                                                registros.Add(horaio.NumRe6);
+                                            if (!string.IsNullOrEmpty(horaio.NumRe7))
+                                                registros.Add(horaio.NumRe7);
+                                            if (!string.IsNullOrEmpty(horaio.NumRe8))
+                                                registros.Add(horaio.NumRe8);
+                                            if (!string.IsNullOrEmpty(horaio.NumRe9))
+                                                registros.Add(horaio.NumRe9);
+                                            if (!string.IsNullOrEmpty(horaio.NumRe10))
+                                                registros.Add(horaio.NumRe10);
+                                            if (!string.IsNullOrEmpty(horaio.NumRe11))
+                                                registros.Add(horaio.NumRe11);
+                                            if (!string.IsNullOrEmpty(horaio.NumRe12))
+                                                registros.Add(horaio.NumRe12);
+                                            if (!string.IsNullOrEmpty(horaio.NumRe13))
+                                                registros.Add(horaio.NumRe13);
+                                            if (!string.IsNullOrEmpty(horaio.NumRe14))
+                                                registros.Add(horaio.NumRe14);
+                                            if (!string.IsNullOrEmpty(horaio.NumRe15))
+                                                registros.Add(horaio.NumRe15);
+
+                                            if (registros?.Count > 0)
                                             {
-                                                if (est.FarmaceuticoTablas.LFarmaceuticos.Find(x => x.NumReg?.Replace(" ", "") == farm.NumReg?.Replace(" ", "")) == null)
+                                                foreach (var registro in registros)
                                                 {
-                                                    est.FarmaceuticoTablas.LFarmaceuticos.Add(
-                                                        new AUD_Farmaceutico()
+                                                    try
+                                                    {
+                                                        var farm = lFarmaceuticos.Where(x => x.NumReg?.Replace(" ", "") == registro.Replace(" ", "")).FirstOrDefault();
+                                                        if (farm != null)
                                                         {
-                                                            Direccion = farm.Direccion,
-                                                            NumReg = farm.NumReg,
-                                                            NombreCompleto = farm.NombreCompleto,
-                                                            Telefono = farm.Telefono,
-                                                            Folio = farm.Folio,
-                                                            Cedula = farm.Cedula,
-                                                            Sector = farm.Sector,
-                                                            TelefonoTrabajo = farm.TelefonoTrabajo,
-                                                            DireccionTrabajo = farm.DireccionTrabajo,
-                                                            Distrito = farm.Distrito,
-                                                            Provincia = farm.Provincia,
-                                                            Corregimiento = farm.Corregimiento,
-                                                            Observaciones = farm.Observaciones,
-                                                            Historial = farm.Historial,
-                                                            VisitadorMed = farm.VisitadorMed,
+                                                            var farmaceutico = est.FarmaceuticoTablas.LFarmaceuticos.Find(x => x.NumReg?.Replace(" ", "") == farm.NumReg?.Replace(" ", ""));
+                                                            if (farmaceutico == null)
+                                                            {
+                                                                farmaceutico = new AUD_Farmaceutico();
+                                                                est.FarmaceuticoTablas.LFarmaceuticos.Add(farmaceutico);
+                                                            }
+
+                                                            farmaceutico.Direccion = farm.Direccion;
+                                                            farmaceutico.NumReg = farm.NumReg;
+                                                            farmaceutico.NombreCompleto = farm.NombreCompleto;
+                                                            farmaceutico.Telefono = farm.Telefono;
+                                                            farmaceutico.Folio = farm.Folio;
+                                                            farmaceutico.Cedula = farm.Cedula;
+                                                            farmaceutico.Sector = farm.Sector;
+                                                            farmaceutico.TelefonoTrabajo = farm.TelefonoTrabajo;
+                                                            farmaceutico.DireccionTrabajo = farm.DireccionTrabajo;
+                                                            farmaceutico.Distrito = farm.Distrito;
+                                                            farmaceutico.Provincia = farm.Provincia;
+                                                            farmaceutico.Corregimiento = farm.Corregimiento;
+                                                            farmaceutico.Observaciones = farm.Observaciones;
+                                                            farmaceutico.Historial = farm.Historial;
+                                                            farmaceutico.VisitadorMed = farm.VisitadorMed;
+
                                                         }
-                                                        );
+                                                    }
+                                                    catch { }
                                                 }
                                             }
-                                        }   
+                                        }
+                                        catch { }
                                     }
-                                }
 
-                                dalService.Save(est);
+                                    dalService.Save(est);
+
+                                }
+                                catch { }
                             }
                         }
                     }

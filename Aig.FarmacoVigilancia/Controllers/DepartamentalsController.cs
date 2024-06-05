@@ -118,6 +118,22 @@ namespace Aig.FarmacoVigilancia.Controllers
         }
 
         [AllowAnonymous]
+        [HttpGet("GetAllProvincias")]
+        public async Task<IActionResult> GetAllProvincias()
+        {
+            try
+            {
+                var data = dalService.GetAll<ProvinciaTB>();
+                return Ok(data);
+
+            }
+            catch (Exception ex) { return BadRequest(new { message = ex.Message }); }
+
+            return BadRequest(new { message = "resultados no encontrados" });
+        }
+
+
+        [AllowAnonymous]
         [HttpGet("GetAllTipoInstituciones")]
         public async Task<IActionResult> GetAllTipoInstituciones()
         {
@@ -518,9 +534,9 @@ namespace Aig.FarmacoVigilancia.Controllers
                         ft.DatosPaciente.HistClinica += "\r\n" + (model.DatosPaciente.Neurologico ? ("Neurológico: si " + model.DatosPaciente.NeurologicoDesc) : "Neurológico: no");
                         ft.DatosPaciente.HistClinica += "\r\n" + (model.DatosPaciente.Otros ? ("Otros: si " + model.DatosPaciente.OtrosDesc) : "Otros: no");
                     }
-                    ft.DatosPaciente.FechaTratInicial = model.DatosMedicamento?.FechaIni?.ToString("dd/MM/yyyy") ?? "";
-                    ft.DatosPaciente.FechaTratFinal = model.DatosMedicamento?.FechaFin?.ToString("dd/MM/yyyy") ?? "";
-                    ft.DatosPaciente.FechaFT = model.SospechaFallaTerapeutica?.FechaFalla?.ToString("dd/MM/yyyy") ?? "";
+                    ft.DatosPaciente.FechaTratInicial = model.DatosMedicamento?.FechaIni;
+                    ft.DatosPaciente.FechaTratFinal = model.DatosMedicamento?.FechaFin;
+                    ft.DatosPaciente.FechaFT = model.SospechaFallaTerapeutica?.FechaFalla;
                     ft.DatosPaciente.Indicacion = model.DatosMedicamento?.Diagnostigo??"";
                     ft.DatosPaciente.ViaAdministracion = model.DatosMedicamento?.DosisPosologiaPrescrita ?? "";
                     if(model.SospechaFallaTerapeutica?.LMedicamentoSospechoso?.Count > 0)
@@ -535,7 +551,7 @@ namespace Aig.FarmacoVigilancia.Controllers
                                 Nombre = prd.NomComercial,
                                 ViaAdministracion = string.Format("Dosis: {0}\r\nVía: {1}\r\nFrecuencia: {2}", prd.DosisAdministracion, prd.ViaAdministracion, prd.FrecuenciaAdministracion),
                                 //prd.ViaAdministracion,
-                                FechaTratamiento = prd.FechaIni?.ToString("dd/MM/yyyy") ?? "",
+                                FechaTratamiento = prd.FechaIni,
                                 Indicacion = prd.Diagnostico,                                 
                             });
                         }

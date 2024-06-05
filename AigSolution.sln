@@ -23,6 +23,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AuditoriaApp", "AuditoriaAp
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SignaturePad", "SigPad\SignaturePad\SignaturePad\SignaturePad.csproj", "{DDC80E6A-7596-4105-9CFF-1F3FA9136ACD}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AigAuditoriaApi", "AigAuditoriaApi\AigAuditoriaApi.csproj", "{815D5E37-163A-4258-AC36-6D325E04937D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -71,6 +73,10 @@ Global
 		{DDC80E6A-7596-4105-9CFF-1F3FA9136ACD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DDC80E6A-7596-4105-9CFF-1F3FA9136ACD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DDC80E6A-7596-4105-9CFF-1F3FA9136ACD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{815D5E37-163A-4258-AC36-6D325E04937D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{815D5E37-163A-4258-AC36-6D325E04937D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{815D5E37-163A-4258-AC36-6D325E04937D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{815D5E37-163A-4258-AC36-6D325E04937D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
