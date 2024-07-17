@@ -116,7 +116,7 @@ namespace Aig.Auditoria.Components.Inspections
             if (message.Data != null)
             {
                 Data.EstablecimientoId = message.Data.Id;
-                Data.Establecimiento = message.Data;
+                //Data.Establecimiento = message.Data;
                 Data.Direccion = message.Data.Ubicacion;
                 Data.Telefono = message.Data.Telefono1 ?? "";
                 Data.Correo = message.Data.Email;

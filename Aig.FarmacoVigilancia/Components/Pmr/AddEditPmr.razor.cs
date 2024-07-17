@@ -112,6 +112,8 @@ namespace Aig.FarmacoVigilancia.Components.Pmr
                 await jsRuntime.InvokeVoidAsync("ShowMessage", languageContainerService.Keys["DataSaveSuccessfully"]);
                 Pmr = result;
 
+                await pmrService.SendEmailEvaluator(result.Id);
+
                 await bus.Publish(new PmrAddEdit_CloseEvent { Data = null });
             }
             else

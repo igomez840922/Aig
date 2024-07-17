@@ -15,6 +15,7 @@ namespace Aig.FarmacoVigilancia.Services
         Task<FMV_EsaviTB> Save(FMV_EsaviTB data);
         Task<FMV_EsaviTB> Delete(long id);
         Task<int> Count();
+        Task SendEmailEvaluator(long Id);
     }
 
    

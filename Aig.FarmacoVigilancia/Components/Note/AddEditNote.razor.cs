@@ -116,6 +116,8 @@ namespace Aig.FarmacoVigilancia.Components.Note
                 await jsRuntime.InvokeVoidAsync("ShowMessage", languageContainerService.Keys["DataSaveSuccessfully"]);
                 Nota = result;
 
+                await noteService.SendEmailEvaluator(result.Id);
+
                 await bus.Publish(new NotaAddEdit_CloseEvent { Data = null });
             }
             else

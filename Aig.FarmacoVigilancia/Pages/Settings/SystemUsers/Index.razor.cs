@@ -157,9 +157,11 @@ namespace Aig.FarmacoVigilancia.Pages.Settings.SystemUsers
         private async Task OnDelete(ApplicationUser data)
         {
             OpenDeleteDialog = true;
+
             //bus.Subscribe<DeleteConfirmationCloseEvent>(DeleteConfirmationCloseEventHandler);
             model.Data = data;
             await bus.Publish(new DeleteConfirmationOpenEvent());
+            //await this.InvokeAsync(StateHasChanged);
         }
         protected void DeleteConfirmationCloseEventHandler(MessageArgs args)
         {

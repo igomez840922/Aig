@@ -4865,7 +4865,7 @@ namespace AigAuditoriaApi.Services
                             column.Item().AlignLeft().Text(string.Format("Fecha: {0}", inspection.FechaInicio.ToString("dd/MM/yyyy")));
 
                             column.Item().AlignLeft().Text(string.Format("Tipo de Inspección: {0}", DataModel.Helper.Helper.GetDescription(inspection.TipoActa)));
-                            column.Item().AlignLeft().Text(string.Format("Tipo de Establecimiento: {0}", DataModel.Helper.Helper.GetDescription(inspection?.DatosEstablecimiento?.Establecimiento?.TipoEstablecimiento ?? DataModel.Helper.enumAUD_TipoEstablecimiento.None)));
+                            column.Item().AlignLeft().Text(string.Format("Tipo de Establecimiento: {0}", DataModel.Helper.Helper.GetDescription(inspection?.Establecimiento?.TipoEstablecimiento ?? DataModel.Helper.enumAUD_TipoEstablecimiento.None)));
 
                             column.Item().PaddingVertical(5).AlignLeft().Text(" ");
                             column.Item().AlignLeft().Text(string.Format("Siendo las {0} del {1} de {2} de {3}, los suscritos:",

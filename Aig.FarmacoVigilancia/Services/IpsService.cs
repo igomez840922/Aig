@@ -7,15 +7,18 @@ using DataModel.Helper;
 using DocumentFormat.OpenXml.Drawing.Charts;
 using Aig.FarmacoVigilancia.Pages.Settings.Laboratory;
 using System.Linq.Expressions;
+using MimeKit;
 
 namespace Aig.FarmacoVigilancia.Services
 {    
     public class IpsService : IIpsService
     {
         private readonly IDalService DalService;
-        public IpsService(IDalService dalService)
+        private readonly IEmailService emailService;
+        public IpsService(IDalService dalService, IEmailService emailService)
         {
             DalService = dalService;
+            this.emailService = emailService;   
         }
         public async Task<List<FMV_IpsTB>> FindAll(Expression<Func<FMV_IpsTB, bool>> match)
         {
@@ -301,6 +304,36 @@ namespace Aig.FarmacoVigilancia.Services
             try { return DalService.Count<FMV_IpsTB>(); }
             catch { }return 0;
         }
+
+        public async Task SendEmailEvaluator(long Id)
+        {
+            try
+            {
+                var data = await Get(Id);
+                if (data?.Evaluador != null)
+                {
+                    var subject = "Asignación a trámite de IPS en Sistema de Farmacovigilancia";
+
+                    var builder = new BodyBuilder();
+
+                    //builder.TextBody = "Nota #: " + data.NumNota + "\r\n" + data.Descripcion;
+                    builder.TextBody = string.Format("Por este medio se le notifica que usted ha sido asignado a un trámite de IPS en el Sistema de Farmacovigilancia\r\n\r\n" +
+                        "Principio Activo: {0}\r\n" +
+                        //"Reg. Sanitario: {1}\r\n" +
+                        "\r\n\r\nSaludos Cordiales\r\n\r\nCentro Nacional de Farmacovigilancia\r\nDepartamento de Farmacovigilancia\r\nDirección Nacional de Farmacia y Drogas\r\nMinisterio de Salud\r\n\r\n\r\n",
+                        data.PrincActivo);
+
+                    List<string> lEmails = new List<string>() { data.Evaluador.Correo };
+                    //lEmails = new List<string>() { "igomez@soaint.com" };
+
+                    await emailService.SendEmailAsync(lEmails, subject, builder, "CNFV");
+
+                }
+            }
+            catch (Exception ex)
+            { }
+        }
+
 
         ////// REPORTES ///////////////
         ///

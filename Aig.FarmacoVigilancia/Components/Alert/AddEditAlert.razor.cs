@@ -107,6 +107,8 @@ namespace Aig.FarmacoVigilancia.Components.Alert
                 await jsRuntime.InvokeVoidAsync("ShowMessage", languageContainerService.Keys["DataSaveSuccessfully"]);
                 Alerta = result;
 
+                await alertaService.SendEmailEvaluator(result.Id);
+
                 await bus.Publish(new AlertAddEdit_CloseEvent { Data = null });
             }
             else

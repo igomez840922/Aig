@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace DataAccess
 {
-    public class DalService: IDalService
+    public class DalService: IDalService, IDisposable
     {
 
         public ApplicationDbContext DBContext { get; set; }
@@ -246,8 +246,9 @@ namespace DataAccess
         }
         public void Dispose()
         {
-            try { DBContext.ChangeTracker.Clear(); DBContext.Dispose(); }
+            try { DBContext.ChangeTracker.Clear(); }
             catch { }
+            finally { DBContext?.Dispose(); }
         }
     }
 }

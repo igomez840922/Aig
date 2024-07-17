@@ -18,6 +18,7 @@ namespace Aig.FarmacoVigilancia.Services
 
         Task<string> SendEmailNote(long id);
         Task NotifyNoteReaded(long Id);
+        Task SendEmailEvaluator(long Id);
     }
 
    

@@ -171,7 +171,7 @@ namespace Aig.Auditoria.Components.Inspections._17_AperturaUbicacionBotiquin
             {
                 Inspeccion.DatosEstablecimiento = Inspeccion.DatosEstablecimiento != null ? Inspeccion.DatosEstablecimiento : new AUD_DatosEstablecimientoTB();
                 Inspeccion.DatosEstablecimiento.EstablecimientoId = message.Data.Id;
-                Inspeccion.DatosEstablecimiento.Establecimiento = message.Data;
+                //Inspeccion.DatosEstablecimiento.Establecimiento = message.Data;
                 Inspeccion.DatosEstablecimiento.Direccion = message.Data.Ubicacion;
                 Inspeccion.DatosEstablecimiento.Telefono = message.Data.Telefono1 ?? "";
                 Inspeccion.DatosEstablecimiento.Correo = message.Data.Email;

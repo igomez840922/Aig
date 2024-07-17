@@ -129,6 +129,8 @@ namespace Aig.FarmacoVigilancia.Components.FT
                     await jsRuntime.InvokeVoidAsync("ShowMessage", languageContainerService.Keys["DataSaveSuccessfully"]);
                     Data = result;
 
+                    await ftService.SendEmailEvaluator(result.Id);
+
                     if (Exit) 
                         await bus.Publish(new Aig.FarmacoVigilancia.Events.FT.AddEdit_CloseEvent { Data = Data });
                 }

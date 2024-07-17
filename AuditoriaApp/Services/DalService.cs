@@ -4,7 +4,7 @@ using AuditoriaApp.Helper;
 
 namespace AuditoriaApp.Services
 {
-    public class DalService : IDalService
+    public class DalService : IDalService, IDisposable
     {
 
         public ApplicationDbContext DBContext { get; set; }
@@ -243,7 +243,12 @@ namespace AuditoriaApp.Services
             try { DBContext.ChangeTracker.Clear(); }
             catch { }
         }
-
+        public void Dispose()
+        {
+            try { DBContext.ChangeTracker.Clear(); }
+            catch { }
+            finally { DBContext?.Dispose(); }
+        }
     }
 
 }

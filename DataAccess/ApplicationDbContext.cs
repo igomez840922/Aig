@@ -25,7 +25,7 @@ namespace DataAccess
             DbContextOptions options,
             IOptions<OperationalStoreOptions> operationalStoreOptions) : base(options, operationalStoreOptions)
         {
-            this.Database.SetCommandTimeout(240); // 4 minutos
+            //this.Database.SetCommandTimeout(240); // 4 minutos
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -181,10 +181,10 @@ namespace DataAccess
 .HasConversion(x => JsonConvert.SerializeObject(x, Formatting.None, new JsonSerializerSettings() { ReferenceLoopHandling = ReferenceLoopHandling.Ignore }), x => x == null ? null : JsonConvert.DeserializeObject<AUD_DatosConclusiones>(x));
 
 
-            //JSON
-            modelBuilder.Entity<AUD_DatosEstablecimientoTB>()
-.Property(e => e.Establecimiento)
-.HasConversion(x => JsonConvert.SerializeObject(x, Formatting.None, new JsonSerializerSettings() { ReferenceLoopHandling = ReferenceLoopHandling.Ignore }), x => x == null ? null : JsonConvert.DeserializeObject<AUD_EstablecimientoTB>(x));
+//            //JSON
+//            modelBuilder.Entity<AUD_DatosEstablecimientoTB>()
+//.Property(e => e.Establecimiento)
+//.HasConversion(x => JsonConvert.SerializeObject(x, Formatting.None, new JsonSerializerSettings() { ReferenceLoopHandling = ReferenceLoopHandling.Ignore }), x => x == null ? null : JsonConvert.DeserializeObject<AUD_EstablecimientoTB>(x));
             //JSON
             modelBuilder.Entity<AUD_DatosEstablecimientoTB>()
 .Property(e => e.Provincia)

@@ -13,6 +13,7 @@ namespace Aig.FarmacoVigilancia.Services
         Task<FMV_PmrTB> Save(FMV_PmrTB data);
         Task<FMV_PmrTB> Delete(long id);
         Task<int> Count();
+        Task SendEmailEvaluator(long Id);
     }
 
    

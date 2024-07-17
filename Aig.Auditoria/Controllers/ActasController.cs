@@ -149,8 +149,8 @@ namespace Aig.Auditoria.Controllers
                     
                     //Establecimiento?.LInspections?.Clear();
                     inspeccion.EstablecimientoId = Establecimiento?.Id;
-                    inspeccion.DatosEstablecimiento.Establecimiento = Establecimiento;
-                    inspeccion.DatosEstablecimiento.EstablecimientoId = inspeccion.EstablecimientoId;
+                    //inspeccion.DatosEstablecimiento.Establecimiento = Establecimiento;
+                    inspeccion.DatosEstablecimiento.EstablecimientoId = Establecimiento?.Id;
 
                     inspeccion.DatosEstablecimiento.Direccion = !string.IsNullOrEmpty(Establecimiento.Ubicacion) ? Establecimiento.Ubicacion : inspeccion.DatosEstablecimiento.Direccion;
                     inspeccion.DatosEstablecimiento.Telefono = !string.IsNullOrEmpty(Establecimiento.Telefono1) ? Establecimiento.Telefono1 : inspeccion.DatosEstablecimiento.Telefono;
@@ -1598,7 +1598,7 @@ namespace Aig.Auditoria.Controllers
 
                     data = dalService.Save<AUD_InspeccionTB>(data);
 
-                    return BadRequest(new InspectionApiResponse { Result = false, Message = "No existe Establecimiento", Id = data.Id });
+                    //return BadRequest(new InspectionApiResponse { Result = false, Message = "No existe Establecimiento", Id = data.Id });
 
 
                     if (data!=null)

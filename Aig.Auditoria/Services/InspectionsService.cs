@@ -190,8 +190,8 @@ namespace Aig.Auditoria.Services
             if(data.Id <=0)
             {
                 data.Establecimiento = null;
-                if(data.DatosEstablecimiento!=null)
-                    data.DatosEstablecimiento.Establecimiento = null;
+                //if(data.DatosEstablecimiento!=null)
+                    //data.DatosEstablecimiento.Establecimiento = null;
             }
 
             var result = DalService.Save(data);
@@ -496,7 +496,7 @@ namespace Aig.Auditoria.Services
 
                 if (result.DatosEstablecimiento != null)
                 {
-                    DalService.DBContext.Entry(result.DatosEstablecimiento).Property(b => b.Establecimiento).IsModified = true;
+                    //DalService.DBContext.Entry(result.DatosEstablecimiento).Property(b => b.Establecimiento).IsModified = true;
                     DalService.DBContext.Entry(result.DatosEstablecimiento).Property(b => b.Provincia).IsModified = true;
                     DalService.DBContext.Entry(result.DatosEstablecimiento).Property(b => b.Distrito).IsModified = true;
                     DalService.DBContext.Entry(result.DatosEstablecimiento).Property(b => b.Corregimiento).IsModified = true;
@@ -6319,7 +6319,7 @@ namespace Aig.Auditoria.Services
 
             data.IntNumActa = data.IntNumActa>0? data.IntNumActa : (GetMaxInspectionActNumber() + 1);
 
-            string tipoEstablecimiento = data.DatosEstablecimiento?.Establecimiento?.TipoEstablecimiento.ToString() ?? "";
+            string tipoEstablecimiento = data.Establecimiento?.TipoEstablecimiento.ToString() ?? "";
             string provincia = data.DatosEstablecimiento?.Provincia?.Codigo ?? "";
 
             var numActa = string.Format("{0}-{1}/{2}/{3}({4})", data.IntNumActa.ToString("000"), DateTime.Now.ToString("yyyy"), tipoActa, tipoEstablecimiento, provincia ?? "0"); //DateTime.Now.ToString("yyMMdd") + "-" + data.IntNumActa.ToString("000");

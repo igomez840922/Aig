@@ -130,6 +130,8 @@ namespace Aig.FarmacoVigilancia.Components.FF
                     await jsRuntime.InvokeVoidAsync("ShowMessage", languageContainerService.Keys["DataSaveSuccessfully"]);
                     Data = result;
 
+                    await ffService.SendEmailEvaluator(result.Id);
+
                     if (Exit)
                         await bus.Publish(new Aig.FarmacoVigilancia.Events.FF.AddEdit_CloseEvent { Data = Data });
                 }

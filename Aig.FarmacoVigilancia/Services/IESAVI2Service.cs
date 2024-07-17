@@ -15,7 +15,7 @@ namespace Aig.FarmacoVigilancia.Services
         Task<FMV_Esavi2TB> Save(FMV_Esavi2TB data);
         Task<FMV_Esavi2TB> Delete(long id);
         Task<int> Count();
-
+        Task SendEmailEvaluator(long Id);
         //Reports
 
         //1.	ESAVI según vacuna 

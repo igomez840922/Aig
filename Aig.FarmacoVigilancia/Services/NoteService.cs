@@ -240,6 +240,35 @@ namespace Aig.FarmacoVigilancia.Services
             return "el correo no pudo ser enviado";
         }
 
+        public async Task SendEmailEvaluator(long Id)
+        {
+            try
+            {
+                var data = await Get(Id);
+                if (data?.Evaluador != null)
+                {
+                    var subject = "Asignación a trámite de NOTAS en Sistema de Farmacovigilancia";
+
+                    var builder = new BodyBuilder();
+
+                    //builder.TextBody = "Nota #: " + data.NumNota + "\r\n" + data.Descripcion;
+                    builder.TextBody = string.Format("Por este medio se le notifica que usted ha sido asignado a un trámite de NOTAS en el Sistema de Farmacovigilancia\r\n\r\n" +
+                        "No. Nota: {0}\r\n" +
+                        "Asunto: {1}\r\n" +
+                        "\r\n\r\nSaludos Cordiales\r\n\r\nCentro Nacional de Farmacovigilancia\r\nDepartamento de Farmacovigilancia\r\nDirección Nacional de Farmacia y Drogas\r\nMinisterio de Salud\r\n\r\n\r\n",
+                        data.NumNota, data.Asunto);
+
+                    List<string> lEmails = new List<string>() { data.Evaluador.Correo };
+                    //lEmails = new List<string>() { "igomez@soaint.com" };
+
+                    await emailService.SendEmailAsync(lEmails, subject, builder, "CNFV");
+
+                }
+            }
+            catch (Exception ex)
+            { }
+        }
+
         public async Task NotifyNoteReaded(long Id)
         {
             var result = DalService.Get<FMV_NotaTB>(Id);

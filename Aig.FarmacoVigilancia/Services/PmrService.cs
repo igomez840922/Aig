@@ -3,15 +3,18 @@ using DataModel.Models;
 using DataModel;
 using Microsoft.AspNetCore.Identity;
 using ClosedXML.Excel;
+using MimeKit;
 
 namespace Aig.FarmacoVigilancia.Services
 {    
     public class PmrService : IPmrService
     {
         private readonly IDalService DalService;
-        public PmrService(IDalService dalService)
+        private readonly IEmailService emailService;
+        public PmrService(IDalService dalService, IEmailService emailService)
         {
             DalService = dalService;
+            this.emailService = emailService;   
         }
 
         public async Task<GenericModel<FMV_PmrTB>> FindAll(GenericModel<FMV_PmrTB> model)
@@ -154,6 +157,36 @@ namespace Aig.FarmacoVigilancia.Services
             }
             return result;           
         }
+
+        public async Task SendEmailEvaluator(long Id)
+        {
+            try
+            {
+                var data = await Get(Id);
+                if (data?.Evaluador != null)
+                {
+                    var subject = "Asignación a trámite de PMR en Sistema de Farmacovigilancia";
+
+                    var builder = new BodyBuilder();
+
+                    //builder.TextBody = "Nota #: " + data.NumNota + "\r\n" + data.Descripcion;
+                    builder.TextBody = string.Format("Por este medio se le notifica que usted ha sido asignado a un trámite de PMR en el Sistema de Farmacovigilancia\r\n\r\n" +
+                        "Principio Activo: {0}\r\n" +
+                        "Reg. Sanitario: {1}\r\n" +
+                        "\r\n\r\nSaludos Cordiales\r\n\r\nCentro Nacional de Farmacovigilancia\r\nDepartamento de Farmacovigilancia\r\nDirección Nacional de Farmacia y Drogas\r\nMinisterio de Salud\r\n\r\n\r\n",
+                        data.PrincActivo, data.PmrProducto?.RegSanitario ?? "");
+
+                    List<string> lEmails = new List<string>() { data.Evaluador.Correo };
+                    //lEmails = new List<string>() { "igomez@soaint.com" };
+
+                    await emailService.SendEmailAsync(lEmails, subject, builder, "CNFV");
+
+                }
+            }
+            catch (Exception ex)
+            { }            
+        }
+
 
         public async Task<FMV_PmrTB> Delete(long Id)
         {

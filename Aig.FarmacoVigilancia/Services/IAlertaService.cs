@@ -15,7 +15,7 @@ namespace Aig.FarmacoVigilancia.Services
         Task<FMV_AlertaTB> Save(FMV_AlertaTB data);
         Task<FMV_AlertaTB> Delete(long id);
         Task<int> Count();
-
+        Task SendEmailEvaluator(long Id);
         //Año de Recepción
         Task<ReportModel<ReportModelResponse>> Report1(ReportModel<ReportModelResponse> model);
 

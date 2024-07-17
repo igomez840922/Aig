@@ -147,7 +147,7 @@ namespace AigAuditoriaApi.Controllers
                     
                     //Establecimiento?.LInspections?.Clear();
                     inspeccion.EstablecimientoId = Establecimiento?.Id;
-                    inspeccion.DatosEstablecimiento.Establecimiento = Establecimiento;
+                    //inspeccion.DatosEstablecimiento.Establecimiento = Establecimiento;
                     inspeccion.DatosEstablecimiento.EstablecimientoId = inspeccion.EstablecimientoId;
 
                     inspeccion.DatosEstablecimiento.Direccion = !string.IsNullOrEmpty(Establecimiento.Ubicacion) ? Establecimiento.Ubicacion : inspeccion.DatosEstablecimiento.Direccion;
@@ -1601,7 +1601,7 @@ namespace AigAuditoriaApi.Controllers
                 }
             }
             catch (Exception ex) { return BadRequest(new InspectionApiResponse { Result=false, Message = ex.Message }); }
-            finally { dalService.Dispose(); }
+            //finally { dalService.Dispose(); }
             return BadRequest(new InspectionApiResponse { Result = false, Message = "dato no encontrado" });
         }
 
@@ -1675,6 +1675,17 @@ namespace AigAuditoriaApi.Controllers
             return BadRequest(new { message = "dato no encontrado" });
         }
 
+        //protected override void Dispose(bool disposing)
+        //{
+        //    if (disposing)
+        //    {
+        //        if (_myService is IDisposable disposableService)
+        //        {
+        //            disposableService.Dispose();
+        //        }
+        //    }
 
+        //    base.Dispose(disposing);
+        //}
     }
 }

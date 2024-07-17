@@ -16,6 +16,8 @@ namespace Aig.FarmacoVigilancia.Services
         Task<FMV_Ram2TB> Delete(long id);
         Task<int> Count();
 
+        Task SendEmailEvaluator(long Id);
+
         //Reports
 
         //Farmacos Sospechosos

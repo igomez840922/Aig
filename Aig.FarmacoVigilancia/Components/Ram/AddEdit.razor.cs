@@ -476,6 +476,8 @@ namespace Aig.FarmacoVigilancia.Components.Ram
                 await jsRuntime.InvokeVoidAsync("ShowMessage", languageContainerService.Keys["DataSaveSuccessfully"]);
                 Data = result;
 
+                await ramService.SendEmailEvaluator(result.Id);
+
                 await bus.Publish(new Aig.FarmacoVigilancia.Events.Ram.AddEdit_CloseEvent { Data = Data });
             }
             else

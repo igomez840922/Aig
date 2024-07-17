@@ -61,7 +61,7 @@ namespace Aig.FarmacoVigilancia.Helper
             {
                 var userManager = serviceScope.ServiceProvider.GetService<UserManager<ApplicationUser>>();
 
-                if (userManager.FindByNameAsync("admin").Result == null)
+                if (!userManager.Users?.Any()??false)
                 {
                     ApplicationUser user = new ApplicationUser() { UserProfile = new UserProfileTB() { Languanje = "en-US" } };
                     user.UserRoleType = enumUserRoleType.Admin;
@@ -82,10 +82,7 @@ namespace Aig.FarmacoVigilancia.Helper
                     {
                         await userManager.AddToRoleAsync(user, DataModel.Helper.Helper.GetDescription<enumUserRoleType>(enumUserRoleType.Admin));
                     }
-                }
-
-                
-
+                }   
             }
         }
 

@@ -138,6 +138,8 @@ namespace Aig.FarmacoVigilancia.Components.IPS
                     await jsRuntime.InvokeVoidAsync("ShowMessage", languageContainerService.Keys["DataSaveSuccessfully"]);
                     Ips = result;
 
+                    await ipsService.SendEmailEvaluator(result.Id);
+
                     if (Exit)
                         await bus.Publish(new IpsAddEdit_CloseEvent { Data = null });
                 }

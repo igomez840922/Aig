@@ -101,7 +101,7 @@ namespace Aig.Auditoria.Controllers
             }
 
             var data = dalService.Get<AUD_EstablecimientoTB>(establecimiento.Id);
-            if(data == null )
+            if(data == null && !string.IsNullOrEmpty(establecimiento.NumLicencia) && !string.IsNullOrWhiteSpace(establecimiento.NumLicencia))
             {
                 data = dalService.Find<AUD_EstablecimientoTB>(x => x.NumLicencia == establecimiento.NumLicencia);
             }

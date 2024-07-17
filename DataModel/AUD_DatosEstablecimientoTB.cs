@@ -19,10 +19,10 @@ namespace DataModel
         [Required(ErrorMessage = "requerido")]
         public long? EstablecimientoId { get => establecimientoId; set => SetProperty(ref establecimientoId, value); }
 
-        private AUD_EstablecimientoTB? establecimiento;
-        [System.Text.Json.Serialization.JsonIgnore]
-        [System.ComponentModel.DataAnnotations.Schema.NotMapped]
-        public virtual AUD_EstablecimientoTB? Establecimiento { get => establecimiento; set => SetProperty(ref establecimiento, value); }
+        //private AUD_EstablecimientoTB? establecimiento;
+        //[System.Text.Json.Serialization.JsonIgnore]
+        //[System.ComponentModel.DataAnnotations.Schema.NotMapped]
+        //public virtual AUD_EstablecimientoTB? Establecimiento { get => establecimiento; set => SetProperty(ref establecimiento, value); }
 
         //ubicacion
         private string nombre;

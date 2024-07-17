@@ -7,15 +7,18 @@ using DataModel.Helper;
 using DocumentFormat.OpenXml.Drawing.Charts;
 using System.Linq.Expressions;
 using Aig.FarmacoVigilancia.Pages.Settings.OrigenAlerta;
+using MimeKit;
 
 namespace Aig.FarmacoVigilancia.Services
 {    
     public class AlertaService : IAlertaService
     {
         private readonly IDalService DalService;
-        public AlertaService(IDalService dalService)
+        private readonly IEmailService emailService;
+        public AlertaService(IDalService dalService, IEmailService emailService)
         {
             DalService = dalService;
+            this.emailService = emailService;   
         }
         public async Task<List<FMV_AlertaTB>> FindAll(Expression<Func<FMV_AlertaTB, bool>> match)
         {
@@ -173,6 +176,34 @@ namespace Aig.FarmacoVigilancia.Services
             catch { }return 0;
         }
 
+        public async Task SendEmailEvaluator(long Id)
+        {
+            try
+            {
+                var data = await Get(Id);
+                if (data?.Evaluador != null)
+                {
+                    var subject = "Asignación a trámite de ALERTA en Sistema de Farmacovigilancia";
+
+                    var builder = new BodyBuilder();
+
+                    //builder.TextBody = "Nota #: " + data.NumNota + "\r\n" + data.Descripcion;
+                    builder.TextBody = string.Format("Por este medio se le notifica que usted ha sido asignado a un trámite de ALERTA en el Sistema de Farmacovigilancia\r\n\r\n" +
+                        "No. Nota: {0}\r\n" +
+                        "DCI: {1}\r\n" +
+                        "\r\n\r\nSaludos Cordiales\r\n\r\nCentro Nacional de Farmacovigilancia\r\nDepartamento de Farmacovigilancia\r\nDirección Nacional de Farmacia y Drogas\r\nMinisterio de Salud\r\n\r\n\r\n",
+                        data.NumNota, data.DCI);
+
+                    List<string> lEmails = new List<string>() { data.Evaluador.Correo };
+                    //lEmails = new List<string>() { "igomez@soaint.com" };
+
+                    await emailService.SendEmailAsync(lEmails, subject, builder, "CNFV");
+
+                }
+            }
+            catch (Exception ex)
+            { }
+        }
 
         ////// REPORTES ///////////////
         ///

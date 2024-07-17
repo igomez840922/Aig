@@ -146,6 +146,8 @@ namespace Aig.FarmacoVigilancia.Components.ESAVI
             {
                 await jsRuntime.InvokeVoidAsync("ShowMessage", languageContainerService.Keys["DataSaveSuccessfully"]);
                 Data = result;
+                
+                await esaviService.SendEmailEvaluator(result.Id);
 
                 await bus.Publish(new Aig.FarmacoVigilancia.Events.ESAVI.AddEdit_CloseEvent { Data = Data });
             }

@@ -226,7 +226,7 @@ namespace Aig.FarmacoVigilancia.Services
         {
             ApplicationUser user = await UserManager.FindByIdAsync(Id);
 
-            if (user != null) //&& user.FromSystem
+            if (user == null)
                 return IdentityResult.Failed(new IdentityError[] { new IdentityError() { Code = "", Description = "los datos no pudieron ser eliminados" } });
 
             var result = await UserManager.DeleteAsync(user);

@@ -6,15 +6,18 @@ using ClosedXML.Excel;
 using DataModel.Helper;
 using DocumentFormat.OpenXml.Drawing.Charts;
 using System.Linq.Expressions;
+using MimeKit;
 
 namespace Aig.FarmacoVigilancia.Services
 {    
     public class RamService : IRamService
     {
         private readonly IDalService DalService;
-        public RamService(IDalService dalService)
+        private readonly IEmailService emailService;
+        public RamService(IDalService dalService, IEmailService emailService)
         {
             DalService = dalService;
+            this.emailService = emailService;   
         }
         public async Task<List<FMV_RamTB>> FindAll(Expression<Func<FMV_RamTB, bool>> match)
         {
@@ -373,6 +376,36 @@ namespace Aig.FarmacoVigilancia.Services
             try { return DalService.Count<FMV_RamTB>(); }
             catch { }return 0;
         }
+
+        public async Task SendEmailEvaluator(long Id)
+        {
+            try
+            {
+                var data = await Get(Id);
+                if (data?.Evaluador != null)
+                {
+                    var subject = "Asignación a trámite de RAM en Sistema de Farmacovigilancia";
+
+                    var builder = new BodyBuilder();
+
+                    //builder.TextBody = "Nota #: " + data.NumNota + "\r\n" + data.Descripcion;
+                    builder.TextBody = string.Format("Por este medio se le notifica que usted ha sido asignado a un trámite de RAM en el Sistema de Farmacovigilancia\r\n\r\n" +
+                        "Código del CNFV: {0}\r\n" +
+                        "Código Noti-Facedra: {1}\r\n" +
+                        "\r\n\r\nSaludos Cordiales\r\n\r\nCentro Nacional de Farmacovigilancia\r\nDepartamento de Farmacovigilancia\r\nDirección Nacional de Farmacia y Drogas\r\nMinisterio de Salud\r\n\r\n\r\n",
+                        data.CodigoCNFV, data.CodigoNotiFacedra);
+
+                    List<string> lEmails = new List<string>() { data.Evaluador.Correo };
+                    //lEmails = new List<string>() { "igomez@soaint.com" };
+
+                    await emailService.SendEmailAsync(lEmails, subject, builder, "CNFV");
+
+                }
+            }
+            catch (Exception ex)
+            { }
+        }
+
     }
 
 }
