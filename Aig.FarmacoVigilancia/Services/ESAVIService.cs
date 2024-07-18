@@ -254,12 +254,12 @@ namespace Aig.FarmacoVigilancia.Services
                 var data = await Get(Id);
                 if (data?.Evaluador != null)
                 {
-                    var subject = "Asignación a trámite de Sospecha FT en Sistema de Farmacovigilancia";
+                    var subject = "Asignación a trámite ESAVI en Sistema de Farmacovigilancia";
 
                     var builder = new BodyBuilder();
 
                     //builder.TextBody = "Nota #: " + data.NumNota + "\r\n" + data.Descripcion;
-                    builder.TextBody = string.Format("Por este medio se le notifica que usted ha sido asignado a un trámite de Sospecha FT en el Sistema de Farmacovigilancia\r\n\r\n" +
+                    builder.TextBody = string.Format("Por este medio se le notifica que usted ha sido asignado a un trámite de ESAVI en el Sistema de Farmacovigilancia\r\n\r\n" +
                         "Código del CNFV: {0}\r\n" +
                         "Código Noti-Facedra: {1}\r\n" +
                         //"Fármaco Sospechoso: {2}\r\n" +
