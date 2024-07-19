@@ -38,8 +38,11 @@ namespace Aig.FarmacoVigilancia.Components.IPS
 
         bool Exit { get; set; } = false;
 
+        long? evaluadorId { get; set; } = null;
         protected async override Task OnInitializedAsync()
         {
+            evaluadorId = Ips?.EvaluadorId;
+
             //Subscribe Component to Language Change Event
             bus.Subscribe<LanguageChangeEvent>(LanguageChangeEventHandler);
 
@@ -138,7 +141,8 @@ namespace Aig.FarmacoVigilancia.Components.IPS
                     await jsRuntime.InvokeVoidAsync("ShowMessage", languageContainerService.Keys["DataSaveSuccessfully"]);
                     Ips = result;
 
-                    await ipsService.SendEmailEvaluator(result.Id);
+                    if (result.Evaluador != null && result.EvaluadorId != evaluadorId)
+                        await ipsService.SendEmailEvaluator(result.Id);
 
                     if (Exit)
                         await bus.Publish(new IpsAddEdit_CloseEvent { Data = null });

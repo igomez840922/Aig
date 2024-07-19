@@ -45,11 +45,14 @@ namespace Aig.FarmacoVigilancia.Components.Ram
         List<ProvinciaTB> lProvincias { get; set; } = new List<ProvinciaTB>();
         List<InstitucionDestinoTB> lInstitucionDestino { get; set; } = new List<InstitucionDestinoTB>();
 
+        long? evaluadorId { get; set; } = null;
         protected async override Task OnInitializedAsync()
         {
-          
+            evaluadorId = Data?.EvaluadorId;
+
             //Subscribe Component to Language Change Event
             bus.Subscribe<LanguageChangeEvent>(LanguageChangeEventHandler);
+
             base.OnInitialized();
         }
 
@@ -476,7 +479,8 @@ namespace Aig.FarmacoVigilancia.Components.Ram
                 await jsRuntime.InvokeVoidAsync("ShowMessage", languageContainerService.Keys["DataSaveSuccessfully"]);
                 Data = result;
 
-                await ramService.SendEmailEvaluator(result.Id);
+                if (result.Evaluador != null && result.EvaluadorId != evaluadorId)
+                    await ramService.SendEmailEvaluator(result.Id);
 
                 await bus.Publish(new Aig.FarmacoVigilancia.Events.Ram.AddEdit_CloseEvent { Data = Data });
             }

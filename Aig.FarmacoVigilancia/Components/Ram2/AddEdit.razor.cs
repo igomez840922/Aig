@@ -57,11 +57,14 @@ namespace Aig.FarmacoVigilancia.Components.Ram2
         bool openAttachment { get; set; } = false;
         AttachmentTB attachment { get; set; } = null;
 
+        long? evaluadorId { get; set; } = null;
         protected async override Task OnInitializedAsync()
         {
+            evaluadorId = Data?.EvaluadorId;
 
             //Subscribe Component to Language Change Event
             bus.Subscribe<LanguageChangeEvent>(LanguageChangeEventHandler);
+
             base.OnInitialized();
         }
 
@@ -499,7 +502,8 @@ namespace Aig.FarmacoVigilancia.Components.Ram2
                     await jsRuntime.InvokeVoidAsync("ShowMessage", languageContainerService.Keys["DataSaveSuccessfully"]);
                     Data = result;
 
-                    await ramService.SendEmailEvaluator(result.Id);
+                    if (result.Evaluador != null && result.EvaluadorId != evaluadorId)
+                        await ramService.SendEmailEvaluator(result.Id);
 
                     if (Exit)
                         await bus.Publish(new Aig.FarmacoVigilancia.Events.Ram2.AddEdit_Event { Data = Data });                   

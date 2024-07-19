@@ -30,9 +30,12 @@ namespace Aig.FarmacoVigilancia.Components.Alert
 
         bool showSearchMedicine { get; set; } = false;
         bool showSearchFarmaco { get; set; } = false;
-
+        
+        long? evaluadorId { get; set; } = null;
         protected async override Task OnInitializedAsync()
         {
+            evaluadorId = Alerta?.EvaluadorId;
+
             //Subscribe Component to Language Change Event
             bus.Subscribe<LanguageChangeEvent>(LanguageChangeEventHandler);
 
@@ -107,7 +110,8 @@ namespace Aig.FarmacoVigilancia.Components.Alert
                 await jsRuntime.InvokeVoidAsync("ShowMessage", languageContainerService.Keys["DataSaveSuccessfully"]);
                 Alerta = result;
 
-                await alertaService.SendEmailEvaluator(result.Id);
+                if(result.Evaluador!=null && result.EvaluadorId != evaluadorId)
+                    await alertaService.SendEmailEvaluator(result.Id);
 
                 await bus.Publish(new AlertAddEdit_CloseEvent { Data = null });
             }

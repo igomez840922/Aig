@@ -1,4 +1,5 @@
 ﻿using Aig.FarmacoVigilancia.Events.Language;
+using Aig.FarmacoVigilancia.Pages.Alert;
 using Aig.FarmacoVigilancia.Pages.IPS;
 using Aig.FarmacoVigilancia.Services;
 using BlazorComponentBus;
@@ -47,8 +48,11 @@ namespace Aig.FarmacoVigilancia.Components.FF
         bool openLote { get; set; } = false;
         FMV_LoteTB lote { get; set; } = null;
 
+        long? evaluadorId { get; set; } = null;
         protected async override Task OnInitializedAsync()
         {
+            evaluadorId = Data?.EvaluadorId;
+
             //Subscribe Component to Language Change Event
             bus.Subscribe<LanguageChangeEvent>(LanguageChangeEventHandler);
 
@@ -130,7 +134,8 @@ namespace Aig.FarmacoVigilancia.Components.FF
                     await jsRuntime.InvokeVoidAsync("ShowMessage", languageContainerService.Keys["DataSaveSuccessfully"]);
                     Data = result;
 
-                    await ffService.SendEmailEvaluator(result.Id);
+                    if (result.Evaluador != null && result.EvaluadorId != evaluadorId)
+                        await ffService.SendEmailEvaluator(result.Id);
 
                     if (Exit)
                         await bus.Publish(new Aig.FarmacoVigilancia.Events.FF.AddEdit_CloseEvent { Data = Data });

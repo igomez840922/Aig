@@ -2,6 +2,7 @@
 using Aig.FarmacoVigilancia.Events.Language;
 using Aig.FarmacoVigilancia.Events.Nota;
 using Aig.FarmacoVigilancia.Pages.Alert;
+using Aig.FarmacoVigilancia.Pages.IPS;
 using Aig.FarmacoVigilancia.Pages.Note;
 using Aig.FarmacoVigilancia.Services;
 using AKSoftware.Localization.MultiLanguages;
@@ -37,8 +38,11 @@ namespace Aig.FarmacoVigilancia.Components.Note
         bool OpenSearchContacto { get; set; } = false;
         DataModel.FMV_ContactosTB datoContacto { get; set; } = null;
 
+        long? evaluadorId { get; set; } = null;
         protected async override Task OnInitializedAsync()
         {
+            evaluadorId = Nota?.EvaluadorId;
+
             //Subscribe Component to Language Change Event
             bus.Subscribe<LanguageChangeEvent>(LanguageChangeEventHandler);
 
@@ -116,7 +120,8 @@ namespace Aig.FarmacoVigilancia.Components.Note
                 await jsRuntime.InvokeVoidAsync("ShowMessage", languageContainerService.Keys["DataSaveSuccessfully"]);
                 Nota = result;
 
-                await noteService.SendEmailEvaluator(result.Id);
+                if (result.Evaluador != null && result.EvaluadorId != evaluadorId)
+                    await noteService.SendEmailEvaluator(result.Id);
 
                 await bus.Publish(new NotaAddEdit_CloseEvent { Data = null });
             }

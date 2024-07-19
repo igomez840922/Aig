@@ -1,5 +1,6 @@
 ﻿using Aig.FarmacoVigilancia.Components.Ram2;
 using Aig.FarmacoVigilancia.Events.Language;
+using Aig.FarmacoVigilancia.Pages.Alert;
 using Aig.FarmacoVigilancia.Services;
 using BlazorComponentBus;
 using DataModel;
@@ -45,8 +46,11 @@ namespace Aig.FarmacoVigilancia.Components.ESAVI2
         bool openAttachment { get; set; } = false;
         AttachmentTB attachment { get; set; } = null;
 
+        long? evaluadorId { get; set; } = null;
         protected async override Task OnInitializedAsync()
         {
+            evaluadorId = Data?.EvaluadorId;
+
             //Subscribe Component to Language Change Event
             bus.Subscribe<LanguageChangeEvent>(LanguageChangeEventHandler);
 
@@ -169,7 +173,8 @@ namespace Aig.FarmacoVigilancia.Components.ESAVI2
                     await jsRuntime.InvokeVoidAsync("ShowMessage", languageContainerService.Keys["DataSaveSuccessfully"]);
                     Data = result;
 
-                    await esaviService.SendEmailEvaluator(result.Id);
+                    if (result.Evaluador != null && result.EvaluadorId != evaluadorId)
+                        await esaviService.SendEmailEvaluator(result.Id);
 
                     if (Exit)
                         await bus.Publish(new Aig.FarmacoVigilancia.Events.ESAVI2.AddEditEvent { Data = Data });

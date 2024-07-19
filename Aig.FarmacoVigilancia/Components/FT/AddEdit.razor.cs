@@ -49,8 +49,11 @@ namespace Aig.FarmacoVigilancia.Components.FT
         bool openLote { get; set; } = false;
         FMV_LoteTB lote { get; set; } = null;
 
+        long? evaluadorId { get; set; } = null;
         protected async override Task OnInitializedAsync()
         {
+            evaluadorId = Data?.EvaluadorId;
+
             //Subscribe Component to Language Change Event
             bus.Subscribe<LanguageChangeEvent>(LanguageChangeEventHandler);
 
@@ -129,7 +132,8 @@ namespace Aig.FarmacoVigilancia.Components.FT
                     await jsRuntime.InvokeVoidAsync("ShowMessage", languageContainerService.Keys["DataSaveSuccessfully"]);
                     Data = result;
 
-                    await ftService.SendEmailEvaluator(result.Id);
+                    if (result.Evaluador != null && result.EvaluadorId != evaluadorId)
+                        await ftService.SendEmailEvaluator(result.Id);
 
                     if (Exit) 
                         await bus.Publish(new Aig.FarmacoVigilancia.Events.FT.AddEdit_CloseEvent { Data = Data });

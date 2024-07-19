@@ -40,8 +40,11 @@ namespace Aig.FarmacoVigilancia.Components.Pmr
         bool showSearchMedicine { get; set; } = false;
 
 
+        long? evaluadorId { get; set; } = null;
         protected async override Task OnInitializedAsync()
         {
+            evaluadorId = Pmr?.EvaluadorId;
+
             //Subscribe Component to Language Change Event
             bus.Subscribe<LanguageChangeEvent>(LanguageChangeEventHandler);
 
@@ -112,7 +115,8 @@ namespace Aig.FarmacoVigilancia.Components.Pmr
                 await jsRuntime.InvokeVoidAsync("ShowMessage", languageContainerService.Keys["DataSaveSuccessfully"]);
                 Pmr = result;
 
-                await pmrService.SendEmailEvaluator(result.Id);
+                if (result.Evaluador != null && result.EvaluadorId != evaluadorId)
+                    await pmrService.SendEmailEvaluator(result.Id);
 
                 await bus.Publish(new PmrAddEdit_CloseEvent { Data = null });
             }
