@@ -333,8 +333,36 @@ namespace Aig.FarmacoVigilancia.Services
             catch (Exception ex)
             { }
         }
+        public async Task SendEmailRegistrador(long Id)
+        {
+            try
+            {
+                var data = await Get(Id);
+                if (data?.Registrador != null)
+                {
+                    var subject = "Asignación a trámite de IPS en Sistema de Farmacovigilancia";
 
+                    var builder = new BodyBuilder();
 
+                    //builder.TextBody = "Nota #: " + data.NumNota + "\r\n" + data.Descripcion;
+                    builder.TextBody = string.Format("Por este medio se le notifica que usted ha sido asignado a un trámite de IPS en el Sistema de Farmacovigilancia\r\n\r\n" +
+                        "Principio Activo: {0}\r\n" +
+                        //"Reg. Sanitario: {1}\r\n" +
+                        "\r\n\r\nSaludos Cordiales\r\n\r\nCentro Nacional de Farmacovigilancia\r\nDepartamento de Farmacovigilancia\r\nDirección Nacional de Farmacia y Drogas\r\nMinisterio de Salud\r\n\r\n\r\n",
+                        data.PrincActivo);
+
+                    List<string> lEmails = new List<string>() { data.Registrador.Correo };
+                    //lEmails = new List<string>() { "igomez@soaint.com" };
+
+                    await emailService.SendEmailAsync(lEmails, subject, builder, "CNFV");
+
+                }
+            }
+            catch (Exception ex)
+            { }
+        }
+
+        //
         ////// REPORTES ///////////////
         ///
 

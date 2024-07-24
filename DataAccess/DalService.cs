@@ -196,7 +196,9 @@ namespace DataAccess
 
                 return _Data;
             }
-            catch (Exception ex) { }
+            catch (Exception ex)
+            { 
+            }
             return null;
         }
 

@@ -17,6 +17,7 @@ namespace Aig.FarmacoVigilancia.Services
         Task<FMV_IpsTB> Delete(long id);
         Task<int> Count();
         Task SendEmailEvaluator(long Id);
+        Task SendEmailRegistrador(long Id);
 
         //Nombre Comercial
         Task<ReportModel<ReportModelResponse>> Report1(ReportModel<ReportModelResponse> model);
