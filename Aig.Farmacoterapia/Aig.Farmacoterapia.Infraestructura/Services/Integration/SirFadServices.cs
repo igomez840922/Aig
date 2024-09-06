@@ -236,7 +236,8 @@ namespace Aig.Farmacoterapia.Infrastructure.Services.Integration.SirFad
                         result = await GetAllRecords(cancellationToke);
                     else {
                         var date = service.LastRun?.ToString("yyyy-MM-dd");
-                        var request = CreateRequest("sirfadwebapi/api/dnfdaig/GetRegistrosFarmacovigilancia", Method.GET, new Dictionary<string, string> { { "fechaConsulta", date } });
+                        //var request = CreateRequest("sirfadwebapi/api/dnfdaig/GetRegistrosFarmacovigilancia", Method.GET, new Dictionary<string, string> { { "fechaConsulta", date } });
+                        var request = CreateRequest(string.Empty, Method.GET, new Dictionary<string, string> { { "fechaConsulta", date } });
                         var response = await _requester.ExecuteAsync<Root>(request, cancellationToke);
                         if (!response.IsSuccessful || string.IsNullOrEmpty(response.Content) || response.Data == null)
                             throw new Exception(response.Content);
@@ -298,7 +299,8 @@ namespace Aig.Farmacoterapia.Infrastructure.Services.Integration.SirFad
         {
             try
             {
-                var request = CreateRequest("sirfadwebapi/api/dnfdaig/GetRegistrosFarmacovigilancia", Method.GET);
+                //var request = CreateRequest("sirfadwebapi/api/dnfdaig/GetRegistrosFarmacovigilancia", Method.GET);
+                var request = CreateRequest(string.Empty, Method.GET);
                 var response = await _requester.ExecuteAsync<Root>(request, cancellationToke);
                 if (!response.IsSuccessful || string.IsNullOrEmpty(response.Content) || response.Data == null)
                     throw new Exception(response.Content);

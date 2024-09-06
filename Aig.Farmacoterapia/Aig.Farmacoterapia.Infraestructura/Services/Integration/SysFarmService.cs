@@ -217,7 +217,8 @@ namespace Aig.Farmacoterapia.Infrastructure.Services.Integration.SysFarm
                     else
                     {
                         var date = service.LastRun?.ToString("yyyy-MM-dd");
-                        var request = CreateRequest("api/registros", Method.GET, new Dictionary<string, string> { { "fechaConsulta", date } });
+                        //var request = CreateRequest("api/registros", Method.GET, new Dictionary<string, string> { { "fechaConsulta", date } });
+                        var request = CreateRequest(string.Empty, Method.GET, new Dictionary<string, string> { { "fechaConsulta", date } });
                         var response = await _requester.ExecuteAsync<Root>(request, cancellationToke);
                         if (!response.IsSuccessful || string.IsNullOrEmpty(response.Content) || response.Data == null)
                             throw new Exception(response.Content);
@@ -290,7 +291,8 @@ namespace Aig.Farmacoterapia.Infrastructure.Services.Integration.SysFarm
         {
             try
             {
-                var request = CreateRequest("api/registros", Method.GET);
+                //var request = CreateRequest("api/registros", Method.GET);
+                var request = CreateRequest(string.Empty, Method.GET);
                 var response = await _requester.ExecuteAsync<Root>(request, cancellationToke);
                 if (!response.IsSuccessful || string.IsNullOrEmpty(response.Content) || response.Data == null)
                     throw new Exception(response.Content);
