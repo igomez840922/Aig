@@ -827,7 +827,70 @@ namespace Aig.Auditoria.Helper
                     //    catch { }
                     //}
 
-                    
+                    //Actualizar Observaciones
+
+                    /*
+                    using (Stream stream = Assembly.GetExecutingAssembly().GetManifestResourceStream("Aig.Auditoria.Resources.Observaciones1.xlsx"))
+                    {
+                        try
+                        {
+                            using var wbook = new XLWorkbook(stream);
+                            var ws1 = wbook.Worksheet(1);
+                            var count = ws1.RowCount();
+                            for (int row = 2; row < count; row++)
+                            {
+                                try
+                                {
+                                    var data = ws1.Row(row);
+                                    var NumLicencia = data.Cell(1).GetValue<string>();
+                                    var Observaciones = data.Cell(2).GetValue<string?>();
+                                    if (!string.IsNullOrEmpty(NumLicencia) && !string.IsNullOrWhiteSpace(NumLicencia)
+                                        && !string.IsNullOrEmpty(Observaciones) && !string.IsNullOrWhiteSpace(Observaciones))
+                                    {
+                                        var tmpEstab = dalService.Find<AUD_EstablecimientoTB>(x => x.NumLicencia.Contains(NumLicencia));
+                                        if (tmpEstab != null)
+                                        {
+                                            tmpEstab.Observaciones = Observaciones;
+                                            dalService.Save(tmpEstab);
+                                        }
+                                    }
+                                }
+                                catch { }
+                            }
+                        }
+                        catch { }
+                    }
+                   using (Stream stream = Assembly.GetExecutingAssembly().GetManifestResourceStream("Aig.Auditoria.Resources.Observaciones2.xlsx"))
+                   {
+                       try
+                       {
+                           using var wbook = new XLWorkbook(stream);
+                           var ws1 = wbook.Worksheet(1);
+                           var count = ws1.RowCount();
+                           for (int row = 2; row < count; row++)
+                           {
+                               try
+                               {
+                                   var data = ws1.Row(row);
+                                   var NumLicencia = data.Cell(1).GetValue<string>();
+                                   var Observaciones = data.Cell(2).GetValue<string?>();
+                                   if (!string.IsNullOrEmpty(NumLicencia) && !string.IsNullOrWhiteSpace(NumLicencia)
+                                       && !string.IsNullOrEmpty(Observaciones) && !string.IsNullOrWhiteSpace(Observaciones))
+                                   {
+                                       var tmpEstab = dalService.Find<AUD_EstablecimientoTB>(x => x.NumLicencia.Contains(NumLicencia));
+                                       if (tmpEstab != null)
+                                       {
+                                           tmpEstab.Observaciones = Observaciones;
+                                           dalService.Save(tmpEstab);
+                                       }
+                                   }
+                               }
+                               catch { }
+                           }
+                       }
+                       catch { }
+                   }
+                   */
 
                 }
 

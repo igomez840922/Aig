@@ -33,6 +33,8 @@
     <None Remove="Resources\FechaExpiracion.xlsx" />
     <None Remove="Resources\Horariosfarmaceuticos.xlsx" />
     <None Remove="Resources\Horariosfarmaceuticos1.xlsx" />
+    <None Remove="Resources\Observaciones1.xlsx" />
+    <None Remove="Resources\Observaciones2.xlsx" />
   </ItemGroup>
 
   <ItemGroup>
@@ -44,6 +46,8 @@
     <EmbeddedResource Include="Resources\Farmaceuticos1.xlsx" />
     <EmbeddedResource Include="Resources\FechaExpiracion.xlsx" />
     <EmbeddedResource Include="Resources\Horariosfarmaceuticos.xlsx" />
+    <EmbeddedResource Include="Resources\Observaciones1.xlsx" />
+    <EmbeddedResource Include="Resources\Observaciones2.xlsx" />
     <EmbeddedResource Include="Resources\paises.json" />
     <EmbeddedResource Include="Resources\provincias.json" />
   </ItemGroup>

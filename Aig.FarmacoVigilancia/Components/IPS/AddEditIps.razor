@@ -59,7 +59,8 @@
                                         <label>@languageContainerService.Keys["DeliveryDateRegister"]</label>
                                         <div class="form-group">
                                             <div class="form-line">
-                                                <RadzenDatePicker Max="DateTime.Today" Min="Ips.FechaRecepcion" TValue="DateTime?" @bind-Value="Ips.FechaRegistrador" ShowTime="false" DateFormat="dd/MM/yyyy" />
+                                               @*  <RadzenDatePicker Max="DateTime.Today" Min="Ips.FechaRecepcion" TValue="DateTime?" @bind-Value="Ips.FechaRegistrador" ShowTime="false" DateFormat="dd/MM/yyyy" /> *@
+                                                <RadzenDatePicker Min="Ips.FechaRecepcion" TValue="DateTime?" @bind-Value="Ips.FechaRegistrador" ShowTime="false" DateFormat="dd/MM/yyyy" />
                                                 <ValidationMessage For=@(() => Ips.FechaRegistrador) />
                                             </div>
                                         </div>
