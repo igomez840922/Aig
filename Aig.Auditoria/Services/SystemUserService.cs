@@ -263,8 +263,42 @@ namespace Aig.Auditoria.Services
             }
             return false;
         }
+        public async Task<ApiResponse> ChangePswPIN(ChangePswPinModel data)
+        {
+            var user = await GetUser(data.UserName);
+            if (user != null)
+            {
+                if (string.Compare(user.pinNum, data.PinNumber, true) != 0)
+                {
+                    return new ApiResponse() { Result = false, Message = "Número PIN inválido" };
+                }
 
+                if (user.pinDateValid < DateTime.Now)
+                {
+                    return new ApiResponse() { Result = false, Message = "El número PIN ha caducado" };
+                }
 
+                await UserManager.RemovePasswordAsync(user);
+
+                var response = await UserManager.AddPasswordAsync(user, data.Password);
+                if (response.Succeeded)
+                {
+                    return new ApiResponse() { Result = true, Message = "contraseña actualizada satisfactoriamente" };
+
+                }
+            }
+
+            return new ApiResponse() { Result = false, Message = "error al cambiar su contraseña" };
+        }
+        public async Task<ApplicationUser> GetUser(string name)
+        {
+            var result = DalService.DBContext.Set<ApplicationUser>().Where(x => x.UserName == name).FirstOrDefault();
+            if (result == null)
+            {
+                result = DalService.DBContext.Set<ApplicationUser>().Where(x => x.Email == name).FirstOrDefault();
+            }
+            return result;
+        }
     }
 
 }

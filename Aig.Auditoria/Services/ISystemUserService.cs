@@ -22,6 +22,8 @@ namespace Aig.Auditoria.Services
         Task<IdentityResult> Update(ApplicationUser data);
         Task<IdentityResult> Delete(string id);
         Task<IdentityResult> ChangePsw(ChangePswModel data);
-        Task<bool> SetUserLanguaje(string id, string languaje);
+        Task<bool> SetUserLanguaje(string id, string languaje);       
+        Task<ApiResponse> ChangePswPIN(ChangePswPinModel data);
+        Task<ApplicationUser> GetUser(string name);
     }
 }
