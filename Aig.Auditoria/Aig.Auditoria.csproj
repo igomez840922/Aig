@@ -1788,6 +1788,7 @@
     <PackageReference Include="Blazored.LocalStorage" Version="4.2.0" />
     <PackageReference Include="BlazorPagination" Version="0.2.16" />
     <PackageReference Include="ClosedXML" Version="0.97.0" />
+    <PackageReference Include="Dapper" Version="2.1.66" />
     <PackageReference Include="MailKit" Version="3.4.1" />
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="6.0.9" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.9" />

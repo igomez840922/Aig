@@ -1,10 +1,12 @@
-﻿using DataAccess;
-using DataModel.Models;
+﻿using Dapper;
+using DataAccess;
 using DataModel;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
+using DataModel.DTO;
+using DataModel.Models;
 using DocumentFormat.OpenXml.InkML;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.SignalR;
+using Microsoft.EntityFrameworkCore;
 using System.Linq;
 
 namespace Aig.Auditoria.Services
@@ -128,6 +130,303 @@ JSON_VALUE(Regente, '$.NumIdoneidad') like '%{model.Filter}%'").ToList();
             try { return DalService.Count<AUD_EstablecimientoTB>(); }
             catch { }return 0;
         }
+
+
+        public async Task<GenericModel<FarmaceuticoEstablecimientoDto>> RptFarmaceuticos(GenericModel<FarmaceuticoEstablecimientoDto> model)
+        {
+            try
+            {
+                //var dataRes = DalService.DBContext.AUD_Establecimiento.Where(d => ApplicationDbContext.JsonValue(nameof(d.Nombre), "$.PrimerNombre").Contains(model.Filter)).ToList();
+                model.Ldata = null; model.Total = 0;
+
+                var connection = DalService.DBContext.Database.GetDbConnection();
+                // Abre la conexión desde el DbContext
+                ///using (var connection = DalService.DBContext.Database.GetDbConnection())
+                {
+                   //connection.Open();
+
+                    try {
+                        string query = null;
+                        if (!string.IsNullOrEmpty(model.Filter))
+                        {
+                            query = @"
+                        SELECT DISTINCT 
+                            t.Nombre, 
+                            t.NumLicencia,
+                            t.TipoEstablecimiento,
+                            t.Status,
+                            jsonFarma.NombreCompleto, 
+                            jsonFarma.NumReg, 
+                            jsonFarma.Cedula, 
+                            jsonFarma.Horario
+                        FROM AUD_Establecimiento AS t
+                        CROSS APPLY OPENJSON(t.FarmaceuticoTablas, '$.LFarmaceuticos')
+                        WITH (
+                            NumReg NVARCHAR(MAX) '$.NumReg',
+                            NombreCompleto NVARCHAR(MAX) '$.NombreCompleto',
+                            Cedula NVARCHAR(MAX) '$.Cedula',
+                            Horario NVARCHAR(MAX) '$.Horario'
+                        ) AS jsonFarma                            
+                        WHERE jsonFarma.NumReg LIKE @Filter
+                           OR jsonFarma.NombreCompleto LIKE @Filter
+                           OR jsonFarma.Cedula LIKE @Filter
+                        ORDER BY jsonFarma.NombreCompleto
+                        OFFSET @Offset ROWS FETCH NEXT @PageAmt ROWS ONLY;";
+                        }
+                        else
+                        {
+                            query = @"
+                        SELECT DISTINCT 
+                            t.Nombre, 
+                            t.NumLicencia,
+                            t.TipoEstablecimiento,
+                            t.Status,
+                            jsonFarma.NombreCompleto, 
+                            jsonFarma.NumReg, 
+                            jsonFarma.Cedula, 
+                            jsonFarma.Horario
+                        FROM AUD_Establecimiento AS t
+                        CROSS APPLY OPENJSON(t.FarmaceuticoTablas, '$.LFarmaceuticos')
+                        WITH (
+                            NumReg NVARCHAR(MAX) '$.NumReg',
+                            NombreCompleto NVARCHAR(MAX) '$.NombreCompleto',
+                            Cedula NVARCHAR(MAX) '$.Cedula',
+                            Horario NVARCHAR(MAX) '$.Horario'
+                        ) AS jsonFarma                            
+                        WHERE jsonFarma.NumReg is not null
+                           OR jsonFarma.NombreCompleto is not null
+                           OR jsonFarma.Cedula is not null
+                        ORDER BY jsonFarma.NombreCompleto
+                        OFFSET @Offset ROWS FETCH NEXT @PageAmt ROWS ONLY;";
+                        }
+                        var parameters = new
+                        {
+                            Filter = "%" + model.Filter + "%",
+                            Offset = model.PagIdx * model.PagAmt,
+                            PageAmt = model.PagAmt
+                        };
+
+                        // La consulta devolverá una lista de objetos dinámicos (ExpandoObject)
+                        var result = connection.Query<FarmaceuticoEstablecimientoDto>(query, parameters).ToList();
+                        model.Ldata = result;
+
+                        if (!string.IsNullOrEmpty(model.Filter))
+                        {
+                            query = @"
+                        SELECT COUNT(*) 
+                        FROM (
+                            SELECT DISTINCT 
+                            t.Nombre, 
+                            t.NumLicencia,
+                            t.TipoEstablecimiento,
+                            t.Status,
+                            jsonFarma.NombreCompleto, 
+                            jsonFarma.NumReg, 
+                            jsonFarma.Cedula, 
+                            jsonFarma.Horario
+                        FROM AUD_Establecimiento AS t
+                        CROSS APPLY OPENJSON(t.FarmaceuticoTablas, '$.LFarmaceuticos')
+                        WITH (
+                            NumReg NVARCHAR(MAX) '$.NumReg',
+                            NombreCompleto NVARCHAR(MAX) '$.NombreCompleto',
+                            Cedula NVARCHAR(MAX) '$.Cedula',
+                            Horario NVARCHAR(MAX) '$.Horario'
+                        ) AS jsonFarma                            
+                        WHERE jsonFarma.NumReg is not null
+                           OR jsonFarma.NombreCompleto is not null
+                           OR jsonFarma.Cedula is not null
+                        ) AS CountQuery;
+                    ";
+                        }
+                        else
+                        {
+                            query = @"
+                        SELECT COUNT(*) 
+                        FROM (
+                            SELECT DISTINCT 
+                            t.Nombre, 
+                            t.NumLicencia,
+                            t.TipoEstablecimiento,
+                            t.Status,
+                            jsonFarma.NombreCompleto, 
+                            jsonFarma.NumReg, 
+                            jsonFarma.Cedula, 
+                            jsonFarma.Horario
+                        FROM AUD_Establecimiento AS t
+                        CROSS APPLY OPENJSON(t.FarmaceuticoTablas, '$.LFarmaceuticos')
+                        WITH (
+                            NumReg NVARCHAR(MAX) '$.NumReg',
+                            NombreCompleto NVARCHAR(MAX) '$.NombreCompleto',
+                            Cedula NVARCHAR(MAX) '$.Cedula',
+                            Horario NVARCHAR(MAX) '$.Horario'
+                        ) AS jsonFarma                            
+                        WHERE jsonFarma.NumReg is not null
+                           OR jsonFarma.NombreCompleto is not null
+                           OR jsonFarma.Cedula is not null
+                        ) AS CountQuery;
+                    ";
+                        }
+
+                        model.Total = connection.ExecuteScalar<int>(query, parameters);
+                    }
+                    catch { }
+                    //finally { connection.Close(); }
+                }
+                //MyDbContext.JsonValue(e.ColumnaJson, "MiClave") == "MiValor")
+                
+            }
+            catch (Exception ex)
+            { }
+
+            return model;
+        }
+
+        public async Task<GenericModel<RegenteEstablecimientoDto>> RptRegentes(GenericModel<RegenteEstablecimientoDto> model)
+        {
+            try
+            {
+                //var dataRes = DalService.DBContext.AUD_Establecimiento.Where(d => ApplicationDbContext.JsonValue(nameof(d.Nombre), "$.PrimerNombre").Contains(model.Filter)).ToList();
+                model.Ldata = null; model.Total = 0;
+
+                var connection = DalService.DBContext.Database.GetDbConnection();
+                // Abre la conexión desde el DbContext
+                ///using (var connection = DalService.DBContext.Database.GetDbConnection())
+                {
+                    //connection.Open();
+
+                    try
+                    {
+                        string query = null;
+                        if (!string.IsNullOrEmpty(model.Filter))
+                        {
+                            query = @"
+                        SELECT DISTINCT 
+                            t.Nombre, 
+                            t.NumLicencia,
+                            t.TipoEstablecimiento,
+                            t.Status,
+                            JSON_VALUE(Regente, '$.PrimerNombre') AS PrimerNombre,
+                            JSON_VALUE(Regente, '$.SegundoNombre') AS SegundoNombre,
+                            JSON_VALUE(Regente, '$.PrimerApellido') AS PrimerApellido,
+                            JSON_VALUE(Regente, '$.SegundoApellido') AS SegundoApellido,
+                            JSON_VALUE(Regente, '$.Identificacion') AS Identificacion,
+                            JSON_VALUE(Regente, '$.Observaciones') AS Observaciones,
+                            JSON_VALUE(Regente, '$.NumIdoneidad') AS NumIdoneidad
+                        FROM AUD_Establecimiento AS t
+                        WHERE JSON_VALUE(Regente, '$.PrimerNombre') LIKE @Filter
+                            OR JSON_VALUE(Regente, '$.SegundoNombre') LIKE @Filter
+                            OR JSON_VALUE(Regente, '$.PrimerApellido') LIKE @Filter
+                            OR JSON_VALUE(Regente, '$.SegundoApellido') LIKE @Filter
+                            OR JSON_VALUE(Regente, '$.Identificacion') LIKE @Filter
+                            OR JSON_VALUE(Regente, '$.NumIdoneidad') LIKE @Filter
+                        ORDER BY PrimerNombre
+                        OFFSET @Offset ROWS FETCH NEXT @PageAmt ROWS ONLY;";
+                        }
+                        else
+                        {
+                            query = @"
+                        SELECT DISTINCT 
+                            t.Nombre, 
+                            t.NumLicencia,
+                            t.TipoEstablecimiento,
+                            t.Status,
+                            JSON_VALUE(Regente, '$.PrimerNombre') AS PrimerNombre,
+                            JSON_VALUE(Regente, '$.SegundoNombre') AS SegundoNombre,
+                            JSON_VALUE(Regente, '$.PrimerApellido') AS PrimerApellido,
+                            JSON_VALUE(Regente, '$.SegundoApellido') AS SegundoApellido,
+                            JSON_VALUE(Regente, '$.Identificacion') AS Identificacion,
+                            JSON_VALUE(Regente, '$.Observaciones') AS Observaciones,
+                            JSON_VALUE(Regente, '$.NumIdoneidad') AS NumIdoneidad
+                        FROM AUD_Establecimiento AS t
+                         WHERE JSON_VALUE(Regente, '$.PrimerNombre') is not null
+                            OR JSON_VALUE(Regente, '$.SegundoNombre') is not null
+                            OR JSON_VALUE(Regente, '$.PrimerApellido') is not null
+                            OR JSON_VALUE(Regente, '$.SegundoApellido') is not null
+                            OR JSON_VALUE(Regente, '$.Identificacion') is not null
+                            OR JSON_VALUE(Regente, '$.NumIdoneidad') is not null
+                        ORDER BY PrimerNombre
+                        OFFSET @Offset ROWS FETCH NEXT @PageAmt ROWS ONLY;";
+                        }
+                        var parameters = new
+                        {
+                            Filter = "%" + model.Filter + "%",
+                            Offset = model.PagIdx * model.PagAmt,
+                            PageAmt = model.PagAmt
+                        };
+
+                        // La consulta devolverá una lista de objetos dinámicos (ExpandoObject)
+                        var result = connection.Query<RegenteEstablecimientoDto>(query, parameters).ToList();
+                        model.Ldata = result;
+
+                        if (!string.IsNullOrEmpty(model.Filter))
+                        {
+                            query = @"
+                        SELECT COUNT(*) 
+                        FROM (
+                            SELECT DISTINCT 
+                            t.Nombre, 
+                            t.NumLicencia,
+                            t.TipoEstablecimiento,
+                            t.Status,
+                            JSON_VALUE(Regente, '$.PrimerNombre') AS PrimerNombre,
+                            JSON_VALUE(Regente, '$.SegundoNombre') AS SegundoNombre,
+                            JSON_VALUE(Regente, '$.PrimerApellido') AS PrimerApellido,
+                            JSON_VALUE(Regente, '$.SegundoApellido') AS SegundoApellido,
+                            JSON_VALUE(Regente, '$.Identificacion') AS Identificacion,
+                            JSON_VALUE(Regente, '$.Observaciones') AS Observaciones,
+                            JSON_VALUE(Regente, '$.NumIdoneidad') AS NumIdoneidad
+                        FROM AUD_Establecimiento AS t
+                        WHERE JSON_VALUE(Regente, '$.PrimerNombre') LIKE @Filter
+                            OR JSON_VALUE(Regente, '$.SegundoNombre') LIKE @Filter
+                            OR JSON_VALUE(Regente, '$.PrimerApellido') LIKE @Filter
+                            OR JSON_VALUE(Regente, '$.SegundoApellido') LIKE @Filter
+                            OR JSON_VALUE(Regente, '$.Identificacion') LIKE @Filter
+                            OR JSON_VALUE(Regente, '$.NumIdoneidad') LIKE @Filter
+                        ) AS CountQuery;
+                    ";
+                        }
+                        else
+                        {
+                            query = @"
+                        SELECT COUNT(*) 
+                        FROM (
+                            SELECT DISTINCT 
+                            t.Nombre, 
+                            t.NumLicencia,
+                            t.TipoEstablecimiento,
+                            t.Status,
+                            JSON_VALUE(Regente, '$.PrimerNombre') AS PrimerNombre,
+                            JSON_VALUE(Regente, '$.SegundoNombre') AS SegundoNombre,
+                            JSON_VALUE(Regente, '$.PrimerApellido') AS PrimerApellido,
+                            JSON_VALUE(Regente, '$.SegundoApellido') AS SegundoApellido,
+                            JSON_VALUE(Regente, '$.Identificacion') AS Identificacion,
+                            JSON_VALUE(Regente, '$.Observaciones') AS Observaciones,
+                            JSON_VALUE(Regente, '$.NumIdoneidad') AS NumIdoneidad
+                        FROM AUD_Establecimiento AS t
+                         WHERE JSON_VALUE(Regente, '$.PrimerNombre') is not null
+                            OR JSON_VALUE(Regente, '$.SegundoNombre') is not null
+                            OR JSON_VALUE(Regente, '$.PrimerApellido') is not null
+                            OR JSON_VALUE(Regente, '$.SegundoApellido') is not null
+                            OR JSON_VALUE(Regente, '$.Identificacion') is not null
+                            OR JSON_VALUE(Regente, '$.NumIdoneidad') is not null
+                        ) AS CountQuery;
+                    ";
+                        }
+
+                        model.Total = connection.ExecuteScalar<int>(query, parameters);
+                    }
+                    catch { }
+                    //finally { connection.Close(); }
+                }
+                //MyDbContext.JsonValue(e.ColumnaJson, "MiClave") == "MiValor")
+
+            }
+            catch (Exception ex)
+            { }
+
+            return model;
+        }
+
     }
 
 }

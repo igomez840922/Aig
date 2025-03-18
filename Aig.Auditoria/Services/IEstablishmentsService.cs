@@ -1,5 +1,6 @@
-﻿using DataModel.Models;
-using DataModel;
+﻿using DataModel;
+using DataModel.DTO;
+using DataModel.Models;
 using Microsoft.AspNetCore.Identity;
 
 namespace Aig.Auditoria.Services
@@ -12,5 +13,8 @@ namespace Aig.Auditoria.Services
         Task<AUD_EstablecimientoTB> Save(AUD_EstablecimientoTB data);
         Task<AUD_EstablecimientoTB> Delete(long id);
         Task<int> Count();
+
+        Task<GenericModel<FarmaceuticoEstablecimientoDto>> RptFarmaceuticos(GenericModel<FarmaceuticoEstablecimientoDto> model);
+        Task<GenericModel<RegenteEstablecimientoDto>> RptRegentes(GenericModel<RegenteEstablecimientoDto> model);
     }
 }
