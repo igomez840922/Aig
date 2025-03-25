@@ -1,6 +1,7 @@
 ﻿using Aig.Auditoria.Events.Language;
 using Aig.Auditoria.Services;
 using BlazorComponentBus;
+using BlazorDownloadFile;
 using DataModel;
 using DataModel.DTO;
 using DataModel.Models;
@@ -15,7 +16,8 @@ namespace Aig.Auditoria.Pages.Establishments
         IProfileService profileService { get; set; }
         [Inject]
         IEstablishmentsService establishmentsService { get; set; }
-
+        [Inject]
+        IBlazorDownloadFileService blazorDownloadFileService { get; set; }
         GenericModel<FarmaceuticoEstablecimientoDto> dataModel { get; set; } = new GenericModel<FarmaceuticoEstablecimientoDto>()
         { Data = new FarmaceuticoEstablecimientoDto() };
 
@@ -107,7 +109,14 @@ namespace Aig.Auditoria.Pages.Establishments
             FetchData();
         }
 
-
+        protected async Task ExportToExcel()
+        {
+            Stream stream = await establishmentsService.RptFarmaceuticosExportToExcel(dataModel);
+            if (stream != null)
+            {
+                await blazorDownloadFileService.DownloadFile("RptFarmaceuticos.xlsx", stream, "application/actet-stream");
+            }
+        }
 
 
     }

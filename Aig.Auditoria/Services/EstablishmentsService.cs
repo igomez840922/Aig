@@ -1,4 +1,5 @@
-﻿using Dapper;
+﻿using ClosedXML.Excel;
+using Dapper;
 using DataAccess;
 using DataModel;
 using DataModel.DTO;
@@ -425,6 +426,109 @@ JSON_VALUE(Regente, '$.NumIdoneidad') like '%{model.Filter}%'").ToList();
             { }
 
             return model;
+        }
+
+        public async Task<Stream> RptFarmaceuticosExportToExcel(GenericModel<FarmaceuticoEstablecimientoDto> model)
+        {
+            try
+            {
+                model.PagIdx = 0; model.PagAmt = int.MaxValue;
+                model = await RptFarmaceuticos(model);
+
+                if (model.Ldata != null && model.Ldata.Count > 0)
+                {
+                    var wb = new XLWorkbook();
+                    wb.Properties.Author = "RptFarmaceuticos".ToUpper();
+                    wb.Properties.Title = "RptFarmaceuticos".ToUpper();
+                    wb.Properties.Subject = "RptFarmaceuticos".ToUpper();
+
+                    var ws = wb.Worksheets.Add("RptFarmaceuticos".ToUpper());
+
+                    ws.Cell(1, 1).Value = "Farmaceutico";
+                    ws.Cell(1, 2).Value = "Identificación";
+                    ws.Cell(1, 3).Value = "Num. Registro";
+                    ws.Cell(1, 4).Value = "Horario";
+                    ws.Cell(1, 5).Value = "Establecimiento";
+                    ws.Cell(1, 6).Value = "Num. Licencia";
+                    ws.Cell(1, 7).Value = "Tipo de Establecimiento";
+                    ws.Cell(1, 8).Value = "Estado";
+
+                    var row = 1;
+                    foreach (var data in model.Ldata)
+                    {                        
+                        ws.Cell(row + 1, 1).Value = data.NombreCompleto;
+                        ws.Cell(row + 1, 2).Value = data.Cedula;
+                        ws.Cell(row + 1, 3).Value = data.NumReg;
+                        ws.Cell(row + 1, 4).Value = data.Horario;
+                        ws.Cell(row + 1, 5).Value = data.Nombre;
+                        ws.Cell(row + 1, 6).Value = data.NumLicencia;
+                        ws.Cell(row + 1, 7).Value = DataModel.Helper.Helper.GetDescription(data.TipoEstablecimiento);
+                        ws.Cell(row + 1, 8).Value = DataModel.Helper.Helper.GetDescription(data.Status);
+
+                        row++;
+                    }
+
+                    MemoryStream XLSStream = new();
+                    wb.SaveAs(XLSStream);
+
+                    return XLSStream;
+                }
+            }
+            catch (Exception ex)
+            { }
+
+            return null;
+        }
+        public async Task<Stream> RptRegentesExportToExcel(GenericModel<RegenteEstablecimientoDto> model)
+        {
+            try
+            {
+                model.PagIdx = 0; model.PagAmt = int.MaxValue;
+                model = await RptRegentes(model);
+
+                if (model.Ldata != null && model.Ldata.Count > 0)
+                {
+                    var wb = new XLWorkbook();
+                    wb.Properties.Author = "RptRegentes".ToUpper();
+                    wb.Properties.Title = "RptRegentes".ToUpper();
+                    wb.Properties.Subject = "RptRegentes".ToUpper();
+
+                    var ws = wb.Worksheets.Add("RptRegentes".ToUpper());
+
+                    ws.Cell(1, 1).Value = "Regente";
+                    ws.Cell(1, 2).Value = "Identificación";
+                    ws.Cell(1, 3).Value = "Num. Idoneidad";
+                    ws.Cell(1, 4).Value = "Observaciones";
+                    ws.Cell(1, 5).Value = "Establecimiento";
+                    ws.Cell(1, 6).Value = "Num. Licencia";
+                    ws.Cell(1, 7).Value = "Tipo de Establecimiento";
+                    ws.Cell(1, 8).Value = "Estado";
+
+                    var row = 1;
+                    foreach (var data in model.Ldata)
+                    {
+                        ws.Cell(row + 1, 1).Value = data.NombreCompleto;
+                        ws.Cell(row + 1, 2).Value = data.Identificacion;
+                        ws.Cell(row + 1, 3).Value = data.NumIdoneidad;
+                        ws.Cell(row + 1, 4).Value = data.Observaciones;
+                        ws.Cell(row + 1, 5).Value = data.Nombre;
+                        ws.Cell(row + 1, 6).Value = data.NumLicencia;
+                        ws.Cell(row + 1, 7).Value = DataModel.Helper.Helper.GetDescription(data.TipoEstablecimiento);
+                        ws.Cell(row + 1, 8).Value = DataModel.Helper.Helper.GetDescription(data.Status);
+
+                        row++;
+                    }
+
+                    MemoryStream XLSStream = new();
+                    wb.SaveAs(XLSStream);
+
+                    return XLSStream;
+                }
+            }
+            catch (Exception ex)
+            { }
+
+            return null;
         }
 
     }

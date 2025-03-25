@@ -1,6 +1,7 @@
 ﻿using Aig.Auditoria.Events.Language;
 using Aig.Auditoria.Services;
 using BlazorComponentBus;
+using BlazorDownloadFile;
 using DataModel;
 using DataModel.DTO;
 using DataModel.Models;
@@ -14,6 +15,8 @@ namespace Aig.Auditoria.Pages.Establishments
         IProfileService profileService { get; set; }
         [Inject]
         IEstablishmentsService establishmentsService { get; set; }
+        [Inject]
+        IBlazorDownloadFileService blazorDownloadFileService { get; set; }
 
         GenericModel<RegenteEstablecimientoDto> dataModel { get; set; } = new GenericModel<RegenteEstablecimientoDto>()
         { Data = new RegenteEstablecimientoDto() };
@@ -107,7 +110,14 @@ namespace Aig.Auditoria.Pages.Establishments
         }
 
 
-
+        protected async Task ExportToExcel()
+        {
+            Stream stream = await establishmentsService.RptRegentesExportToExcel(dataModel);
+            if (stream != null)
+            {
+                await blazorDownloadFileService.DownloadFile("RptRegentes.xlsx", stream, "application/actet-stream");
+            }
+        }
 
     }
 

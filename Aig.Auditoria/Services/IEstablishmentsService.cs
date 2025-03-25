@@ -16,5 +16,7 @@ namespace Aig.Auditoria.Services
 
         Task<GenericModel<FarmaceuticoEstablecimientoDto>> RptFarmaceuticos(GenericModel<FarmaceuticoEstablecimientoDto> model);
         Task<GenericModel<RegenteEstablecimientoDto>> RptRegentes(GenericModel<RegenteEstablecimientoDto> model);
+        Task<Stream> RptFarmaceuticosExportToExcel(GenericModel<FarmaceuticoEstablecimientoDto> model);
+        Task<Stream> RptRegentesExportToExcel(GenericModel<RegenteEstablecimientoDto> model);
     }
 }
